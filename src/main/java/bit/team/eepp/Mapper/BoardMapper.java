@@ -1,10 +1,10 @@
-package bit.team.eepp.boardMapper;
+package bit.team.eepp.Mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import bit.team.eepp.boardVO.BoardVO;
+import bit.team.eepp.VO.BoardVO;
 
 public interface BoardMapper {
 	

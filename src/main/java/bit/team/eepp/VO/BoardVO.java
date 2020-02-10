@@ -1,4 +1,4 @@
-package bit.team.eepp.boardVO;
+package bit.team.eepp.VO;
 
 import java.sql.Timestamp;
 

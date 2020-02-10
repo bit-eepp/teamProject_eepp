@@ -1,12 +1,12 @@
-package bit.team.eepp.boardService;
+package bit.team.eepp.Service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bit.team.eepp.boardMapper.BoardMapper;
-import bit.team.eepp.boardVO.BoardVO;
+import bit.team.eepp.Mapper.BoardMapper;
+import bit.team.eepp.VO.BoardVO;
 
 @Service
 public class BoardService {

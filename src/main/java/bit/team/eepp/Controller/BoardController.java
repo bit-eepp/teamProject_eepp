@@ -1,4 +1,4 @@
-package bit.team.eepp.boardController;
+package bit.team.eepp.Controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import bit.team.eepp.boardService.BoardService;
-import bit.team.eepp.boardVO.BoardVO;
+import bit.team.eepp.Service.BoardService;
+import bit.team.eepp.VO.BoardVO;
 
 @RequestMapping("/board")
 @Controller
