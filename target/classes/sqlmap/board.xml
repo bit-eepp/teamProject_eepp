@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.bit.board.service.BoardService">
+	<select id="selectAll" resultType="edu.bit.board.vo.BoardVO">
+		SELECT bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent FROM BOARD ORDER BY bGroup DESC, bStep ASC	
+	</select>
+	
+	<insert id="insert" parameterType="edu.bit.board.vo.BoardVO">
+		INSERT INTO Board (bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent) VALUES (Board_seq.NEXTVAL, #{boardVO.bName}, #{boardVO.bTitle}, #{boardVO.bContent}, SYSDATE, 0, Board_seq.CURRVAL, 0, 0)	
+	</insert>
+	
+	<select id="selectOne" resultType="edu.bit.board.vo.BoardVO">
+		SELECT * FROM Board WHERE bId = #{bId}	
+	</select>
+	
+	<select id="modifyView" resultType="edu.bit.board.vo.BoardVO">
+		SELECT * FROM Board WHERE bId = #{bId}	
+	</select>
+	
+	<update id="modifyContent" parameterType="edu.bit.board.vo.BoardVO">
+		UPDATE BOARD SET bTitle = #{boardVO.bTitle}, bContent = #{boardVO.bContent}, bDate = SYSDATE WHERE bId = #{boardVO.bId} 
+	</update>
+	
+	<select id="replyView" resultType="edu.bit.board.vo.BoardVO">
+		SELECT * FROM Board WHERE bId = #{bId}	
+	</select>
+	
+	<insert id="replyContent" parameterType="edu.bit.board.vo.BoardVO">
+		INSERT INTO Board (bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent) VALUES (Board_seq.NEXTVAL, #{boardVO.bName}, #{boardVO.bTitle}, #{boardVO.bContent}, SYSDATE, 0, #{boardVO.bGroup}, #{boardVO.bStep} + 1, #{boardVO.bIndent} + 1)
+	</insert>
+	
+</mapper>
