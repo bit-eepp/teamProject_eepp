@@ -13,6 +13,9 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/css/**" location="/resources/css/" />
+	<resources mapping="/img/**" location="/resources/img/" />
+	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -20,6 +23,49 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<!-- google Bean -->
+	<beans:bean class="org.springframework.social.google.connect.GoogleConnectionFactory"
+		id="googleConnectionFactory">
+		<beans:constructor-arg value="823913639609-dkmgg136teigjfaism7k5u9prdl0rs2m.apps.googleusercontent.com" />
+		<beans:constructor-arg value="E7N7aiiEaVngRdPgbrP5_OZy" />
+	</beans:bean>
+
+	<!-- 승인된 리디렉션 URI -->
+	<beans:bean class="org.springframework.social.oauth2.OAuth2Parameters" id="googleOAuth2Parameters">
+		<beans:property name="scope" value="email profile" />
+		<beans:property value="http://localhost:8282/eepp/sns/googleLogin" name="redirectUri"/>
+	</beans:bean>
+	
+	<beans:bean id="authInfo" class="bit.team.eepp.API.GoogleOAuthInfo">
+        <beans:constructor-arg value="823913639609-dkmgg136teigjfaism7k5u9prdl0rs2m.apps.googleusercontent.com" />
+        <beans:constructor-arg value="E7N7aiiEaVngRdPgbrP5_OZy" />
+    </beans:bean>
+	
+	<!-- NaverLogin Controller Beans-->
+	<beans:bean id="naverController" class="bit.team.eepp.Controller.NaverController" />
+	
+	<!-- 자동로그인 식별 interceptor -->
+	<beans:bean id="rememberMeInterceptor" class="bit.team.eepp.Interceptor.rememberMeInterceptor" />
+	<!-- interceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/*/**" />
+			<exclude-mapping path="/logout.do" />
+			<beans:ref bean="rememberMeInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<!-- 자동로그인 처리를위한 interceptor -->
+	<beans:bean id="loginInterceptor" class="bit.team.eepp.Interceptor.loginInterceptor" />
+	<!-- interceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/login/login.do" />
+			<mapping path="/nomal_login.do" />
+			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+	</interceptors>
 	
 	<context:component-scan base-package="bit.team.eepp" />
 	
