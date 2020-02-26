@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.DeclarationMapper">
+	<insert id="doDeclaration" parameterType="bit.team.eepp.VO.DeclarationVO">
+		INSERT INTO DECLARATION(dId, reporter_id, board_id, dDate, dReason) 
+		VALUES(DECLARATION_SEQ.nextval, #{declarationVO.reporter_id}, #{declarationVO.board_id}, SYSDATE, #{declarationVO.dReason})
+	</insert>
+	
+	<insert id="doRpDeclaration" parameterType="bit.team.eepp.VO.DeclarationVO">
+		INSERT INTO DECLARATION(dId, reporter_id, reply_id, dDate, dReason) 
+		VALUES(DECLARATION_SEQ.nextval, #{declarationVO.reporter_id}, #{declarationVO.reply_id}, SYSDATE, #{declarationVO.dReason})
+	</insert>
+</mapper>

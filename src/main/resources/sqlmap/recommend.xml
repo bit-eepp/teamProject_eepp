@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.RecommendMapper">
+	<select id="blikeCount" resultType="int">
+		SELECT bLike FROM BOARD WHERE bId = #{bId}
+	</select>
+	
+	<update id="blikeUp" parameterType="bit.team.eepp.VO.BoardVO">
+		UPDATE BOARD SET bLike = bLike + 1 WHERE bId = #{bId}
+	</update>
+	
+	<select id="bUnlikeCount" resultType="int">
+		SELECT bUnlike FROM BOARD WHERE bId = #{bId}
+	</select>
+	
+	<update id="bUnlikeUp" parameterType="bit.team.eepp.VO.BoardVO">
+		UPDATE BOARD SET bUnlike = bUnlike + 1 WHERE bId = #{bId}
+	</update>
+	
+	<select id="rplikeCount" resultType="int">
+		SELECT rpLike FROM REPLY WHERE rpId = #{rpId}
+	</select>
+	
+	<update id="rplikeUp" parameterType="bit.team.eepp.VO.ReplyVO">
+		UPDATE REPLY SET rpLike = rpLike + 1 WHERE rpId = #{rpId}
+	</update>
+	
+	<select id="rpUnlikeCount" resultType="int">
+		SELECT rpUnlike FROM REPLY WHERE rpId = #{rpId}
+	</select>
+	
+	<update id="rpUnlikeUp" parameterType="bit.team.eepp.VO.ReplyVO">
+		UPDATE REPLY SET rpUnlike = rpUnlike + 1 WHERE rpId = #{rpId}
+	</update>
+</mapper>

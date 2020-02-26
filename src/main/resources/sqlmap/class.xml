@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.ClassMapper">
+	<select id="classListCount" resultType="int" parameterType="map">
+		<![CDATA[
+			SELECT COUNT(cId) FROM CLASS c, USERS u WHERE c.USER_ID = u.USER_ID AND cId > 0
+		]]>
+		<if test="cCategory != null">
+			<choose>
+	            <when test="cCategory == 'it_dev'">
+	               AND c.cCategory = 'it_dev'
+	            </when>
+	            <when test="cCategory == 'workSkill'">
+	               AND c.cCategory = 'workSkill'
+	            </when>
+	            <when test="cCategory == 'daily'">
+	               AND c.cCategory = 'daily'
+	            </when>
+	            <when test="cCategory == 'financialTechnology'">
+	               AND c.cCategory = 'financialTechnology'
+	            </when>
+	            <when test="cCategory == 'etc'">
+	               AND c.cCategory = 'etc'
+	            </when>
+	        </choose>
+		</if>
+		
+		<if test="cscri != null">
+			<choose>
+				<when test='cscri.searchType == "w"'>
+					AND uNickname LIKE '%' || #{cscri.keyword} || '%'
+				</when>
+				<when test='cscri.searchType == "t"'>
+					AND cTitle LIKE '%' || #{cscri.keyword} || '%'
+				</when>
+				<when test='cscri.searchType == "c"'>
+					AND cContent LIKE '%' || #{cscri.keyword} || '%'
+				</when>
+				<when test='cscri.searchType == "tc"'>
+					AND (cTitle LIKE '%' || #{cscri.keyword} || '%') OR (cContent LIKE '%' || #{cscri.keyword} || '%')
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="classList" resultType="bit.team.eepp.VO.ClassVO" parameterType="map">
+		SELECT * FROM
+		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
+		(SELECT c.cId, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cCurrentPeopleCount, c.cDifficulty, c.cMaterials, c.cSummary, u.uNickname,
+		(SELECT COUNT(*) FROM REPLY WHERE class_id = c.cId) AS questionCount 
+		FROM USERS u, CLASS c WHERE c.user_id = u.user_id
+		
+		<if test="cCategory != null">
+			<choose>
+	            <when test="cCategory == 'it_dev'">
+	               AND c.cCategory = 'it_dev'
+	            </when>
+	            <when test="cCategory == 'workSkill'">
+	               AND c.cCategory = 'workSkill'
+	            </when>
+	            <when test="cCategory == 'daily'">
+	               AND c.cCategory = 'daily'
+	            </when>
+	            <when test="cCategory == 'financialTechnology'">
+	               AND c.cCategory = 'financialTechnology'
+	            </when>
+	            <when test="cCategory == 'etc'">
+	               AND c.cCategory = 'etc'
+	            </when>
+	        </choose>
+		</if>
+		
+		<if test="cscri != null">
+			<choose>
+				<when test='cscri.searchType == "w"'>
+					AND uNickname LIKE '%' || #{cscri.keyword} || '%'
+				</when>
+				<when test='cscri.searchType == "t"'>
+					AND cTitle LIKE '%' || #{cscri.keyword} || '%'
+				</when>
+				<when test='cscri.searchType == "c"'>
+					AND cContent LIKE '%' || #{cscri.keyword} || '%'
+				</when>
+				<when test='cscri.searchType == "tc"'>
+					AND (cTitle LIKE '%' || #{cscri.keyword} || '%') OR (cContent LIKE '%' || #{cscri.keyword} || '%')
+				</when>
+			</choose>
+		</if>
+		
+		ORDER BY cOpenDate DESC) A)
+		WHERE RNUM BETWEEN #{cscri.rowStart} AND #{cscri.rowEnd}	
+	</select>
+	
+	<insert id="classOpen" parameterType="bit.team.eepp.VO.ClassVO">
+		<selectKey keyProperty="classVO.cId" resultType="int" order="BEFORE">
+    		SELECT CLASS_SEQ.nextval FROM DUAL
+  		</selectKey>
+  		
+		INSERT INTO CLASS (cId, user_id, cTitle, cContent, cOpenDate, cEndDate, cTerm, cPrice, cCategory, cTotalPeopleCount, cDifficulty, cSummary) 
+		VALUES(#{classVO.cId}, #{classVO.user_id}, #{classVO.cTitle}, #{classVO.cContent}, SYSDATE, SYSDATE + #{classVO.cTerm}, #{classVO.cTerm}, #{classVO.cPrice}, #{classVO.cCategory}, #{classVO.cTotalPeopleCount}, #{classVO.cDifficulty}, #{classVO.cSummary})
+	</insert>
+	
+	<select id="classView" resultType="bit.team.eepp.VO.ClassVO">
+		SELECT c.cId, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cCurrentPeopleCount, c.cDifficulty, c.cMaterials, c.cSummary, u.uNickname,
+		(SELECT COUNT(*) FROM REPLY WHERE class_id = c.cId) AS questionCount 
+		FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cId = #{cId}
+	</select>
+	
+	<delete id="deleteClass" parameterType="bit.team.eepp.VO.ClassVO">
+		DELETE FROM CLASS WHERE cId = #{cId}
+	</delete>
+	
+	<select id="classModifyView" resultType="bit.team.eepp.VO.ClassVO">
+		SELECT c.cId, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cCurrentPeopleCount, c.cDifficulty, c.cMaterials, c.cSummary, u.uNickname 
+		FROM USERS u, CLASS c WHERE u.USER_ID = c.USER_ID AND cId = #{cId}
+	</select>
+	
+	<update id="modifyClass" parameterType="bit.team.eepp.VO.ClassVO">
+		UPDATE CLASS SET cTitle = #{classVO.cTitle}, cContent = #{classVO.cContent}, cOpenDate = SYSDATE, cEndDate = SYSDATE + #{classVO.cTerm}, cTerm = #{classVO.cTerm}, cPrice = #{classVO.cPrice}, cCategory = #{classVO.cCategory}, cTotalPeopleCount = #{classVO.cTotalPeopleCount}, cDifficulty = #{classVO.cDifficulty}, cSummary = #{classVO.cSummary}
+		WHERE cId = #{classVO.cId}
+	</update>
+	
+	<insert id="classJoin" parameterType="bit.team.eepp.VO.ClassJoinVO">
+		INSERT INTO CLASSJOIN (cjId, class_id, user_id, cjJoinDate, cjIntroduce) 
+		VALUES(CLASSJOIN_SEQ.nextval, #{classJoinVO.class_id}, #{classJoinVO.user_id}, SYSDATE, #{classJoinVO.cjIntroduce})
+	</insert>
+</mapper>
