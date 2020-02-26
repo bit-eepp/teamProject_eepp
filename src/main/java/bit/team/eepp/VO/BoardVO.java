@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class BoardVO {
 	private int bId;
 	private int user_id;
+	private String uNickname;
 	private String bTitle;
 	private String bContent;
 	private String bSubject;
@@ -15,14 +16,18 @@ public class BoardVO {
 	private int bLike;
 	private int bUnlike;
 	private String bBlind;
+	private int rpCount;
+	private int dCount;
 
 	public BoardVO() {
 	}
 
-	public BoardVO(int bId, int user_id, String bTitle, String bContent, String bSubject, String bCategory,
-			Timestamp bWrittenDate, Timestamp bModifyDate, int bHit, int bLike, int bUnlike, String bBlind) {
+	public BoardVO(int bId, int user_id, String uNickname, String bTitle, String bContent, String bSubject,
+			String bCategory, Timestamp bWrittenDate, Timestamp bModifyDate, int bHit, int bLike, int bUnlike,
+			String bBlind, int rpCount, int dCount) {
 		this.bId = bId;
 		this.user_id = user_id;
+		this.uNickname = uNickname;
 		this.bTitle = bTitle;
 		this.bContent = bContent;
 		this.bSubject = bSubject;
@@ -33,6 +38,24 @@ public class BoardVO {
 		this.bLike = bLike;
 		this.bUnlike = bUnlike;
 		this.bBlind = bBlind;
+		this.rpCount = rpCount;
+		this.dCount = dCount;
+	}
+
+	public int getdCount() {
+		return dCount;
+	}
+
+	public void setdCount(int dCount) {
+		this.dCount = dCount;
+	}
+
+	public int getRpCount() {
+		return rpCount;
+	}
+
+	public void setRpCount(int rpCount) {
+		this.rpCount = rpCount;
 	}
 
 	public int getbId() {
@@ -49,6 +72,14 @@ public class BoardVO {
 
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getuNickname() {
+		return uNickname;
+	}
+
+	public void setuNickname(String uNickname) {
+		this.uNickname = uNickname;
 	}
 
 	public String getbTitle() {
@@ -130,5 +161,4 @@ public class BoardVO {
 	public void setbBlind(String bBlind) {
 		this.bBlind = bBlind;
 	}
-
 }
