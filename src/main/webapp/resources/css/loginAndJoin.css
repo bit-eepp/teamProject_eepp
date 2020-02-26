@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/* login / Join 공통 */
+section{margin:40px 0;}
+.input-title{font-weight:bold; font-size:16px; color:#59bfbf; width:150px}
+.required{color:#e7438b;margin-right: 10px;}
+.sc-title{text-align: center;font-size: 22px;position: relative;margin-bottom:40px;}
+.sc-title:before{
+	content: "";
+    position: absolute;
+    width: 40%;
+    height: 2px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    }
+.sc-title:after{
+	content: "";
+    position: absolute;
+    width: 40%;
+    height: 2px;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+}
+input{width: 280px;}
+/* login / Join 여기까지 */
+
+/* login */
+.custom-select{
+	height: calc(2rem)!important;padding: 0 1.75rem 0 .75rem!important;
+	vertical-align: initial!important;font-size: 14px;
+	}
+	
+.uPhone_2, .uPhone_3{
+	width:120px;
+	}
+.infoText{padding: 15px 0;margin: 45px auto;width: 55%;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1);}
+button{border: none;cursor: pointer;width:80px;}
+.btn-select{background:#59bfbf; color:#fff;}
+#selectView {margin: 30px 0;}
+#selectView button {width:25%;}
+.sns_login_button{display: flex;align-items: center;justify-content: center;}
+.sns_login_button span{margin:0 15px;}
+button{border: none;cursor: pointer;width:80px;}
+	
+/* login 여기까지 */
+
+/* join */
+#MainTxt {text-align: center;margin: 80px 0 0;}
+#MainTxt .logoImg{width: 22%; margin: 0 auto}
+#MainTxt .logoImg img {max-width: 100%}
+#MainTxt .subTxt{color:#59bfbf;}
+.agree_content{border: 1px solid #000;
+    padding: 10px;
+    height: 150px;
+    overflow: overlay;
+    margin: 0 20px;
+    font-size:12px;}
+.agreeCheck{display: inline-block;margin: 10px 20px 40px;}
+.joinForm-wrapper table td {padding: 10px 0;}
+.email_input_01{width:100px;}
+.email_input_02, #emailAuth{width:150px;}
+checkEmailAuth {padding: 0 0 10px;}
+#emailBtn, #emailAuthBtn, #nickNameCheck{padding: 5px 10px!important;
+    font-size: 14px!important;
+    vertical-align: initial!important;
+    cursor: pointer!important;
+    margin: 0 10px;}
+.btn-submit{
+	width: 280px!important;
+    border-radius: 15px!important;
+    margin: 40px auto!important;
+    display: block!important;
+    color:#fff;
+    background-color:#59bfbf;
+    cursor: pointer!important;;
+}
+.company-box{margin-bottom:60px;}
+.sns_login_button{display: flex;align-items: center;justify-content: center;}
+.sns_login_button span{margin:0 15px;}
+button{border: none;cursor: pointer;width:80px;}
+.btn-normalJoin{width: 380px;font-weight: bold;color: #fff;background-color:#59bfbf}
+.btn-normalJoin:hover{opacity:0.6;}
+.snsJoin{margin-top:30px;}
+/* join 여기까지 */
