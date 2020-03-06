@@ -183,3 +183,28 @@ function checkEmailAuth() {
 			
 	});
 };
+
+/* 닉네임 중복확인 */
+function phoneCheck() {
+	$.ajax({
+		url : getContextPath()+"/phoneNumCheck",
+		type : "post",
+		dataType : "json",
+		data : {"uPhone" : $("#uPhone").val()+ "-" +$(".uPhone_2").val() + "-" + $(".uPhone_3").val()},
+		success : function(data) {
+			if (data == 0) {
+				alert("사용가능한 핸드폰번호 입니다.");
+				$('#phoneNumCheck').attr("value", "Y");
+				return;
+			} else if (data != 0) {
+				alert("이미 등록된 핸드폰번호 입니다.")
+				$('#phoneNumCheck').attr("value", "N");
+				$(".uPhone_2").focus();
+			}
+		},
+		error : function(data) {
+			alert("에러가 발생했습니다.");
+			return false;
+		}
+	})
+};

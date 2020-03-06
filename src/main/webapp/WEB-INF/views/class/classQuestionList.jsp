@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 
 		<script>
+		var uNickname = $("#userNickname").val();
+		var userId = $("#userId").val();
+		
 			// 해당 class강좌의 문의수를 불러오는 JS메서드(Ajax-Json)
 			function questionCnt() {
 				$.ajax({
@@ -126,13 +128,21 @@
 								b += '<h6>' +value.rpWrittenDate +'</h6>';
 								b += '</td>';
 								
+								if(uNickname != value.uNickname){
+									
+								}else{
 								b += '<td width="100">';
 								b += '<a onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');" style="color : blue">[수정] </a>';
 								b += '<br>';
 								b += '<a onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
+								
+								if(uNickname == $("#classUserNickname").val()){
 								b += '<br>';
-								b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[문의]</a><br>';
+								b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[답변]</a><br>';
+								}
+								
 								b += '</td>';
+								}
 
 								b += '</tr>';
 								b += '</table>';
@@ -141,6 +151,7 @@
 							$(".questionList").append(b);	
 				        });
 					},
+					
 					error : function(request, status, error) {
 						console.log(request.responseText);
 						console.log(error);
@@ -155,7 +166,8 @@
 					a += '<table border="1">';
 					a += '<tr>';
 					a += '<td>';
-					a += '<input type="text" name="q_user_id" placeholder="작성자">&nbsp;&nbsp;&nbsp;&nbsp;';
+					a += '<input type="hidden" name="q_user_id" value='+userId+'>&nbsp;&nbsp;&nbsp;&nbsp;';
+					a += uNickname;
 					a += '<input type="button" value="등록" onclick="reQuestionWrite('+rpGroup +','+rpStep +','+rpIndent +')">&nbsp;&nbsp;';
 					a += '<button type="button" onclick="questionList();">취소</button>';
 					a += '</td>';
@@ -181,8 +193,6 @@
 					return false;
 				} else{
 					var rpContent = $('[name=reQuestion]').val();
-					var a = $('[name=q_user_id]').val();
-					var user_id = Number(a);
 					
 					$.ajax({
 						url: 'http://localhost:8282/eepp/question/reQuestionWrite',
@@ -192,7 +202,7 @@
 								'rpStep' : rpStep,
 								'rpIndent' : rpIndent,
 								'class_id' : cId, 
-								'user_id' : user_id},	
+								'user_id' : $("#userId").val()},	
 						success: function(data){
 							alert("댓글이 등록되었습니다.")
 							questionCnt();
@@ -298,6 +308,8 @@
 			}
 		</script>
 	</head>
-	<body>	
+	<body>
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+	<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
 	</body>
 </html>

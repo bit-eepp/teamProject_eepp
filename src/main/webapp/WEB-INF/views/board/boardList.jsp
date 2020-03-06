@@ -2,14 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>직무별 Community</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script>
+		var uNickname = $("#userNickname").val();
+		
 			$(document).ready(function(){
 				// 게시물 검색
 				$('#searchBtn').click(function() {
@@ -45,6 +46,11 @@
 				
 				var title = '${bCategory}';
 				boardTitle(title);
+				
+				//로그인 하지않은 경우, 새글쓰기 버튼 삭제
+				if(!$("#userNickname").val()){
+					$('.writeBtn').remove();
+				}
 			});
 			
 			// 게시판 타이틀 
@@ -71,6 +77,8 @@
 	</head>
 	
 	<body>
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+	
 		<h1 class="boardTitle"></h1>
 		<button type="button" onclick="location.href='/eepp/scrap/myScrapList'">스크랩 확인</button>
 		<button type="button" onclick="location.href='/eepp/class/classList'">CLASS</button>

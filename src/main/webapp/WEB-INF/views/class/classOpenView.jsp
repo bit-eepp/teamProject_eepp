@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
@@ -159,14 +158,10 @@
 				<div class="form-group row">
 					<label for="text" class="col-4 col-form-label">Class 개설자</label>
 					<div class="col-8">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text"></div>
+							<!-- <input id="text" name="uNickname" type="text" aria-describedby="textHelpBlock" class="form-control"> -->
+							<p>${loginUser.uNickname}</p>
+							<input type="hidden" name="user_id" value="${loginUser.user_id}" />
 							</div>
-							<input id="text" name="user_id" type="text" aria-describedby="textHelpBlock" class="form-control">
-						</div>
-						<span id="textHelpBlock" class="form-text text-muted">로그인 붙이면 없어질 예정.</span>
-					</div>
 				</div>
 				<br>
 	
