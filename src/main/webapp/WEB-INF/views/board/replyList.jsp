@@ -383,9 +383,10 @@
 				if(!uNickname){
 					alert("로그인 해주세요.");
 					return false;
-				}
+				}else{
 				var insertData = $('[name=rpform]').serialize();				
 				replyWrite(insertData);
+				}
 			});
 			
 			// 해당 게시물에 대해 댓글을 작성하는 JS메서드(Ajax-Json) 

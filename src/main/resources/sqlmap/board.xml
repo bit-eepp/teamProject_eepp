@@ -95,7 +95,7 @@
 					AND bContent LIKE '%' || #{scri.keyword} || '%'
 				</when>
 				<when test='scri.searchType == "tc"'>
-					AND (bTitle LIKE '%' || #{scri.keyword} || '%') OR (bContent LIKE '%' || #{scri.keyword} || '%')
+					AND (bTitle LIKE '%' || #{scri.keyword} || '%' OR bContent LIKE '%' || #{scri.keyword} || '%')
 				</when>
 			</choose>
 		</if>

@@ -83,7 +83,7 @@
 					AND cContent LIKE '%' || #{cscri.keyword} || '%'
 				</when>
 				<when test='cscri.searchType == "tc"'>
-					AND (cTitle LIKE '%' || #{cscri.keyword} || '%') OR (cContent LIKE '%' || #{cscri.keyword} || '%')
+					AND (cTitle LIKE '%' || #{cscri.keyword} || '%' OR cContent LIKE '%' || #{cscri.keyword} || '%')
 				</when>
 			</choose>
 		</if>

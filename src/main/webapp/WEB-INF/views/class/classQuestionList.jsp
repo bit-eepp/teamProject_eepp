@@ -218,8 +218,13 @@
 			
 			// class강좌문의 버튼눌렀을때 이벤트 JS메서드
 			$('[name=qBtn]').click(function(){
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					return false;
+				}else{
 				var insertData = $('[name=qForm]').serialize();				
 				questionWrite(insertData);
+				}
 			});
 			
 			// 해당 class강좌에 대해 문의를 작성하는 JS메서드(Ajax-Json) 
