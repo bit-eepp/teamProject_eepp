@@ -26,4 +26,8 @@ public interface JoinMapper {
 	// 닉네임 중복확인
 	@Select("select count(*) from users where uNickname = #{uNickname}")
 	public int nickNameCheck(UserVO userVO);
+	
+	// 핸드폰번호 중복확인
+	@Select("select count(*) from users where uPhone = #{uPhone}")
+	public int phoneNumCheck(@Param("uPhone") String uPhone);
 }

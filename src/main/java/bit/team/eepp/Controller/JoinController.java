@@ -114,7 +114,7 @@ public class JoinController {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('회원가입 완료'); location.href='/ex/main.ma' ;</script>");
+		out.println("<script>alert('회원가입 완료'); location.href='/eepp/main.ma' ;</script>");
 		out.close();
 
 }
@@ -216,6 +216,23 @@ public class JoinController {
 		}
 		else {
 			logger.info("DB에 등록되지않은 닉네임.");
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="phoneNumCheck", method= {RequestMethod.GET, RequestMethod.POST})
+	public int phoneNumCheck(UserVO userVO, HttpServletRequest request) throws IOException{
+		
+		int result = js.phoneNumCheck(request.getParameter("uPhone"));
+		logger.info(request.getParameter("uPhone"));
+
+		if(result != 0) {
+			logger.info("DB에 등록되어있는 핸드폰번호.");
+			return 1;
+		}
+		else {
+			logger.info("DB에 등록되지않은 핸드폰번호.");
 			return 0;
 		}
 	}

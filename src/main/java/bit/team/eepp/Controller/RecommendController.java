@@ -1,18 +1,28 @@
 package bit.team.eepp.Controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bit.team.eepp.Service.RecommendService;
+import bit.team.eepp.Service.UserService;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.ReplyVO;
+import bit.team.eepp.VO.UserActiveVO;
 
 @RequestMapping("/recommend")
 @RestController
 public class RecommendController {
 	@Autowired
 	private RecommendService recommendService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping("/blikeCount")
 	public int blikeCount(BoardVO boardVO) {
@@ -21,9 +31,19 @@ public class RecommendController {
 	}
 
 	@RequestMapping("/blikeUp")
-	public void blikeUp(BoardVO boardVO) {
+	public int blikeUp(BoardVO boardVO, UserActiveVO activeVO, HttpSession session) {
 		System.out.println("likeUp() method");
-		recommendService.blikeUp(boardVO.getbId());
+		
+		activeVO.setActive_type("blike");
+		int haveLike = userService.haveBoardActive(activeVO);
+		if(haveLike != 0){
+			// 추천이력이 있을경우
+			return 1;
+		} else {
+			recommendService.blikeUp(boardVO.getbId());
+			userService.boardActive(activeVO);
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/bUnlikeCount")
@@ -33,9 +53,19 @@ public class RecommendController {
 	}
 
 	@RequestMapping("/bUnlikeUp")
-	public void bUnlikeUp(BoardVO boardVO) {
+	public int bUnlikeUp(BoardVO boardVO, UserActiveVO activeVO) {
 		System.out.println("unlikeUp() method");
-		recommendService.bUnlikeUp(boardVO.getbId());
+		
+		activeVO.setActive_type("bUnlike");
+		int haveLike = userService.haveBoardActive(activeVO);
+		if(haveLike != 0){
+			// 비추천이력이 있을경우
+			return 1;
+		} else {
+			recommendService.bUnlikeUp(boardVO.getbId());
+			userService.boardActive(activeVO);
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/rplikeCount")
@@ -45,9 +75,19 @@ public class RecommendController {
 	}
 	
 	@RequestMapping("/rplikeUp")
-	public void rplikeUp(ReplyVO replyVO) {
+	public int rplikeUp(ReplyVO replyVO, UserActiveVO activeVO) {
 		System.out.println("rplikeUp() method");
-		recommendService.rplikeUp(replyVO.getRpId());
+		
+		activeVO.setActive_type("rplike");
+		int haveLike = userService.haveReplyActive(activeVO);
+		if(haveLike != 0){
+			// 비추천이력이 있을경우
+			return 1;
+		} else {
+			recommendService.rplikeUp(replyVO.getRpId());
+			userService.replyActive(activeVO);
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/rpUnlikeCount")
@@ -57,9 +97,19 @@ public class RecommendController {
 	}
 	
 	@RequestMapping("/rpUnlikeUp")
-	public void rpUnlikeUp(ReplyVO replyVO) {
+	public int rpUnlikeUp(ReplyVO replyVO, UserActiveVO activeVO) {
 		System.out.println("rplikeUp() method");
-		recommendService.rpUnlikeUp(replyVO.getRpId());
+		
+		activeVO.setActive_type("rpUnlike");
+		int haveLike = userService.haveReplyActive(activeVO);
+		if(haveLike != 0){
+			// 비추천이력이 있을경우
+			return 1;
+		} else {
+			recommendService.rpUnlikeUp(replyVO.getRpId());
+			userService.replyActive(activeVO);
+			return 0;
+		}
 	}
 
 }

@@ -110,7 +110,7 @@ public class LoginController {
 	
 	// 일반 로그인
 	@RequestMapping(value = "nomal_login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String nomal_login(Model model, HttpSession session, HttpServletResponse response, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+	public void nomal_login(Model model, HttpSession session, HttpServletResponse response, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
 
 		// DB에 등록된 이메일인지 확인
 		int checkEmail = js.checkDuplicate(userVO.getuEmail());
@@ -142,8 +142,19 @@ public class LoginController {
 					user.setSession_key(session.getId());
 					user.setSession_limit(sessionLimit);
 					ls.keepLogin(user);
+					
+					logger.info("rememberMe Cookie 생성");
+					// 쿠키 생성
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					loginCookie.setMaxAge(60*60*24*7);
+					loginCookie.setPath("/");
+					//전송
+					response.addCookie(loginCookie);
+					
+					logger.info("자동 로그인 정보 저장 완료");
 				}
-				return "redirect:/main.ma";
+				
+				response.sendRedirect("main.ma");
 				
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
@@ -152,7 +163,6 @@ public class LoginController {
 				out.close();
 			}
 		}
-		return "login/login";
 	}
 	
 	
@@ -433,7 +443,6 @@ public class LoginController {
 				loginCookie.setMaxAge(0);
 				loginCookie.setPath("/");
 				response.addCookie(loginCookie);
-				logger.info("자동 로그인 정보 삭제");
 				user.setSession_key("none");
 				SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
 				Calendar cal = Calendar.getInstance();
@@ -441,6 +450,7 @@ public class LoginController {
 				today = formatter.format(cal.getTime());
 				user.setSession_limit(Timestamp.valueOf(today));
 				ls.keepLogin(user);
+				logger.info("자동 로그인 정보 삭제");
 			}
 		}
 		return "redirect:/main.ma";
