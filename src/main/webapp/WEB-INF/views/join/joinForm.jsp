@@ -216,7 +216,9 @@
 						<option value="080">080</option>
 					</select> 
 					- <input type="text" name="uPhone_2" maxlength="4" size="6"class="uPhone_2">
-					- <input type="text" name="uPhone_3" maxlength="4" size="6" class="uPhone_3"></td>
+					- <input type="text" name="uPhone_3" maxlength="4" size="6" class="uPhone_3">
+					<button type="button" class="btn btn-info" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
+					</td>
 					</tr>
 					
 				</tbody>

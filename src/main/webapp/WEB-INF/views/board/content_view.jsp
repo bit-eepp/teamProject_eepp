@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +14,7 @@
 		<script>
 			var bId = ${content.bId};	// 게시글 번호
 			var rpCount;				// 해당 게시글의 댓글 수 
+			var uNickname = $("#userNickname").val();
 			
 			$(document).ready(function() {
 				replyCount(bId);
@@ -46,6 +46,15 @@
 				if(bSubject == '공지') {
 					$('.declarationForm').remove();
 				}
+				//로그인 하지않은 경우, 새글쓰기 버튼 삭제
+				if(!uNickname){
+					$('.writeBtn').remove();
+				}
+				// 자기가 작성한 게시글일 경우 게시물 신고버튼 표시안됨
+				if(uNickname == $("#content_uNickname").val()){
+					$('.declarationForm').remove();
+				}
+				
 			});
 
 			// 해당 댓글 신고 메서드
@@ -159,19 +168,29 @@
 				
 			// 해당 게시글의 추천수를 올려주는  JS메서드(Ajax-Json)
 			function like(bId) {
-				$.ajax({
-					url: 'http://localhost:8282/eepp/recommend/blikeUp',
-					type: 'get',
-					data: {'bId' : bId},
-					success: function(data){
-						console.log(data)
-						likeCount(bId);
-					},
-					error : function(request, status, error) {
-						console.log(request.responseText);
-						console.log(error);
-					}
-				});
+				if(!uNickname){
+					alert("로그인 해주세요.");
+				}else{
+					$.ajax({
+						url: 'http://localhost:8282/eepp/recommend/blikeUp',
+						type: 'get',
+						data: {'bId' : bId,
+							'user_id' : $("#userId").val()
+							},
+						success: function(data){
+							if (data == 0) {
+								alert(bId + "번 글을 추천하셨습니다.");
+							} else if (data != 0) {
+								alert("추천은 한번만 가능합니다.");
+							}
+								likeCount(bId);
+						},
+						error : function(request, status, error) {
+							console.log(request.responseText);
+							console.log(error);
+						}
+					});
+				}
 			}
 				
 			// 해당 게시글의 비추천수를 불러오는  JS메서드(Ajax-Json)
@@ -196,12 +215,21 @@
 			
 			// 해당 게시글의 비추천수를 올려주는  JS메서드(Ajax-Json)
 			function unlike(bId) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+				}else{
 				$.ajax({
 					url: 'http://localhost:8282/eepp/recommend/bUnlikeUp',
 					type: 'get',
-					data: {'bId' : bId},
+					data: {'bId' : bId,
+						'user_id' : $("#userId").val()
+						},
 					success: function(data){
-						console.log(data)
+						if (data == 0) {
+							alert(bId + "번 글을 비추천하셨습니다.");
+						} else if (data != 0) {
+							alert("비추천은 한번만 가능합니다.");
+						}
 						unlikeCount(bId);
 					},
 					error : function(request, status, error) {
@@ -209,10 +237,15 @@
 						console.log(error);
 					}
 				});
+				}
 			}
 			
 			// 해당 게시글 스크랩  JS메서드(Ajax-Json)
 			function bScrap(bId) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					return false;
+				}else{
 				$.ajax({
 					url: 'http://localhost:8282/eepp/scrap/doBoardScrap',
 					type: 'post',
@@ -226,21 +259,27 @@
 						console.log(error);
 					}
 				});
+				}
 			}
 		</script>
 	</head>
 
 	<body>
+
+	<input type="hidden" id="userNickname" name="uNickname" value="${loginUser.uNickname}">
+	<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
+	<input type="hidden" id="content_uNickname" value="${content.uNickname}" />
+	
 		<div>
 			<h1>#${content.bId}번 게시글</h1>
 			<br>
-			<button type="button" onclick="location.href='writeView?page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}'">새 글 쓰기</button><br>
+			<button type="button" class="writeBtn" onclick="location.href='writeView?page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}'">새 글 쓰기</button><br>
 		</div>
 		<hr>
 		
 		<!-- 게시글 신고 -->
 		<div class="declarationForm">
-			<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false">게시글 신고</button>
+			<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false" id="modalFormBtn">게시글 신고</button>
 			
 			<div class="modal fade" id="modalForm" role="dialog">
 				<div class="modal-dialog">
@@ -258,6 +297,8 @@
 			            <!-- Modal Body -->
 			            <div class="modal-body">
 			                <p class="statusMsg"></p>
+			                <c:choose>
+			                <c:when test="${not empty loginUser.uNickname}">
 			                <form id="declaration" role="formDeclaration" name="dform">
 			                    <input type="hidden" name="reporter_id" value=121>
 			                    <input type="hidden" name="board_id" value="${content.bId}">
@@ -270,6 +311,12 @@
 									<textarea cols="30" rows="10" class="form-control" id="etc" name="dReason" disabled></textarea>
 			                    </div>
 			                </form>
+			                </c:when>
+			                
+			                <c:otherwise>
+			                <h3>해당 게시글 신고를 원하시면 로그인 해주세요.</h3>
+			                </c:otherwise>
+			                </c:choose>
 			            </div>
             
 			            <!-- Modal Footer -->
@@ -310,6 +357,7 @@
 					<td>최종수정일</td>
 					<td>${content.bModifyDate} 수정됨</td>
 				</tr>
+				
 				<tr>
 					<td>작성자</td>
 					<td>${content.uNickname}</td>
@@ -324,16 +372,30 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button type="button" onclick="like(${content.bId})">추천</button>&nbsp;&nbsp;
+					<c:choose>
+						<c:when test="${loginUser.uNickname == content.uNickname}">
+						<button type="button" onclick="bScrap(${content.bId})">스크랩</button>&nbsp;&nbsp;
+						</c:when>
+						<c:otherwise>
+							<button type="button" onclick="like(${content.bId})">추천</button>&nbsp;&nbsp;
 						<button type="button" onclick="unlike(${content.bId})">비추천</button>&nbsp;&nbsp;
 						<button type="button" onclick="bScrap(${content.bId})">스크랩</button>&nbsp;&nbsp;
+						</c:otherwise>
+					</c:choose>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button class="modify" type="button">수정</button>&nbsp;&nbsp;
-						<button class="list" type="button">글목록</button>&nbsp;&nbsp;
-						<button class="delete" type="button">글삭제</button>
+					<c:choose>
+						<c:when test="${loginUser.uNickname == content.uNickname}">
+							<button class="modify" type="button">수정</button>&nbsp;&nbsp;
+							<button class="list" type="button">글목록</button>&nbsp;&nbsp;
+							<button class="delete" type="button">삭제</button>
+						</c:when>
+						<c:otherwise>
+							<button class="list" type="button">글목록</button>
+						</c:otherwise>
+					</c:choose>
 					</td>
 				</tr>
 			</table>
@@ -354,12 +416,21 @@
 		<div>
 			<h2>댓글(<b class="replyCount"></b>)</h2>
 			<form name="rpform">
-				<input type="hidden" name="board_id" value="${content.bId}" /> 
+				<input type="hidden" name="board_id" value="${content.bId}" />
+				<input type="hidden" name="user_id" value="${loginUser.user_id}">
 				<table border="1">
 					<tr>
 						<td>
-							<input type="text" name="user_id" placeholder="작성자">&nbsp;&nbsp;&nbsp;&nbsp;
+						<c:choose>
+						<c:when test="${not empty loginUser.uNickname}">
+						${loginUser.uNickname}
 							<button type="button" name="replyBtn">등록</button>
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="user_id" value="GUEST" disabled>
+							<button type="button" name="replyBtn">등록</button>
+						</c:otherwise>
+					</c:choose>
 						</td>
 					<tr>
 						<td>

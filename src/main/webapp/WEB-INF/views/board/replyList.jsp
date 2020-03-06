@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 
 		<script>
+		var uNickname = $("#userNickname").val();
+		var userId = $("#userId").val();
+		
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function replyCount(bId) {
 				$.ajax({
@@ -143,56 +145,72 @@
 									b += '</td>';
 									
 									b += '<td width="100">';
+									if(uNickname == value.uNickname){
+										//자기가 쓴 댓글일 경우 추천, 비추천 불가능
+									}else{
 									b += '<a onclick="rpLike(' +value.rpId +');" style="color : blue">[추천]</a>';
 									b += '<br>';
 									b += '<a onclick="rpUnlike('+value.rpId +');" style="color : blue">[비추천] </a>';
 									b += '<br>';
+									}
 									b += '</td>';
-
+									
 									b += '<td width="100">';
+									if(uNickname != value.uNickname){
+									b += '<a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a><br>';
+									}else{
 									b += '<a onclick="replyModify('+value.rpId +',\''+value.rpContent+'\');" style="color : blue">[수정] </a>';
 									b += '<br>';
 									b += '<a onclick="replyDelete(' +value.rpId +',' +value.gCount +',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
-									b += '<br>';
-									b += '<a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a><br>';
+									}
 									b += '</td>';
 									
-									// 댓글 신고 부분								
-									b += '<td td width="100">';
-									b += '<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#rpModalForm_' +value.rpId +'" data-backdrop="static" data-keyboard="false">';
-									b += '댓글 신고';
-									b += '</button>';
-									b += '<div class="modal fade" id="rpModalForm_' +value.rpId +'" role="RPdialog">';
-									b += '<div class="modal-dialog">';
-									b += '<div class="modal-content">';
-									b += '<div class="modal-header">';
-									b += '<button type="button" class="close" data-dismiss="modal">';
-									b += '<span aria-hidden="true">&times;</span>';
-									b += '<span class="sr-only">Close</span>';
-									b += '</button>';
-									b += '<h4 class="modal-title" id="RpMyModalLabel_' +value.rpId +'">#' +value.rpId +'번 댓글 신고</h4>';
-									b += '</div>';
-									b += '<div class="modal-body">';
-									b += '<p class="statusMsg"></p>';
-									b += '<form id="rpDeclaration_' +value.rpId +'" role="formRpDeclaration_' +value.rpId +'" name="rpDform_' +value.rpId +'">';
-									b += '<input type="hidden" name="reporter_id" value=121>';
-									b += '<input type="hidden" name="reply_id" value=' +value.rpId +'>';
-									b += '<div class="form-group">';
-									b += '<label for="inputMessage">신고사유</label><br>';
-									b += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  부적절한 홍보 게시글<br>';
-									b += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>';
-									b += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>';
-									b += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_' +value.rpId +'.disabled=false">  기타<br>';
-									b += '<textarea cols="30" rows="10" class="form-control" id="etcRp_' +value.rpId +'" name="dReason" disabled></textarea>';
-									b += '</div>';
-									b += '</form>';
-									b += '</div>';
-									b += '<div class="modal-footer">';
-									b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="rpResetForm(' +value.rpId +')">취소</button>';
-									b += '<button type="button" class="btn btn-primary submitBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
-									b += '</div></div></div></div>';
-									b += '</td>';
-									// 댓글 신고 부분 끝
+									// 댓글 신고 부분
+										b += '<td width="100" id="rpModalFormBtn">';
+										if(uNickname == value.uNickname){
+											//자기가 쓴 댓글일경우 신고버튼 안보임
+										}else{
+										b += '<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#rpModalForm_' +value.rpId +'" data-backdrop="static" data-keyboard="false">';
+										b += '댓글 신고';
+										b += '</button>';
+										b += '<div class="modal fade" id="rpModalForm_' +value.rpId +'" role="RPdialog">';
+										b += '<div class="modal-dialog">';
+										b += '<div class="modal-content">';
+										b += '<div class="modal-header">';
+										b += '<button type="button" class="close" data-dismiss="modal">';
+										b += '<span aria-hidden="true">&times;</span>';
+										b += '<span class="sr-only">Close</span>';
+										b += '</button>';
+										b += '<h4 class="modal-title" id="RpMyModalLabel_' +value.rpId +'">#' +value.rpId +'번 댓글 신고</h4>';
+										b += '</div>';
+										b += '<div class="modal-body">';
+										b += '<p class="statusMsg"></p>';
+										
+										if(!$("#userNickname").val()){
+											b += '<h3>해당 댓글 신고를 원하시면 로그인 해주세요.</h3>'
+										}else{
+											b += '<form id="rpDeclaration_' +value.rpId +'" role="formRpDeclaration_' +value.rpId +'" name="rpDform_' +value.rpId +'">';
+											b += '<input type="hidden" name="reporter_id" value=121>';
+											b += '<input type="hidden" name="reply_id" value=' +value.rpId +'>';
+											b += '<div class="form-group">';
+											b += '<label for="inputMessage">신고사유</label><br>';
+											b += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  부적절한 홍보 게시글<br>';
+											b += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>';
+											b += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>';
+											b += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_' +value.rpId +'.disabled=false">  기타<br>';
+											b += '<textarea cols="30" rows="10" class="form-control" id="etcRp_' +value.rpId +'" name="dReason" disabled></textarea>';
+											b += '</div>';
+											b += '</form>';
+										}
+										
+										b += '</div>';
+										b += '<div class="modal-footer">';
+										b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="rpResetForm(' +value.rpId +')">취소</button>';
+										b += '<button type="button" class="btn btn-primary submitBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
+										b += '</div></div></div></div>';
+										}
+										b += '</td>';
+										// 댓글 신고 부분 끝
 									
 									b += '</tr>';
 									b += '</table>';
@@ -229,12 +247,21 @@
 			
 			// 해당 댓글의 추천수 올리는 JS메서드(Ajax-Json)
 			function rpLike(rpId) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+				}else{
 				$.ajax({
 					url: 'http://localhost:8282/eepp/recommend/rplikeUp',
 					type: 'get',
-					data: {'rpId' : rpId},
+					data: {'rpId' : rpId,
+						'user_id' : $("#userId").val()
+						},
 					success: function(data){
-						console.log(data)
+						if (data == 0) {
+							alert(rpId + "번 댓글을 추천하셨습니다.");
+						} else if (data != 0) {
+							alert("추천은 한번만 가능합니다.");
+						}
 						rplikeCount(rpId);
 					},
 					error : function(request, status, error) {
@@ -242,6 +269,7 @@
 						console.log(error);
 					}
 				});
+				}
 			}
 			
 			// 해당 댓글의 비추천수 불러오는 JS메서드(Ajax-Json)
@@ -264,12 +292,21 @@
 			
 			// 해당댓글의 비추천수를 올리는 JS메서드(Ajax-Json)
 			function rpUnlike(rpId) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+				}else{
 				$.ajax({
 					url: 'http://localhost:8282/eepp/recommend/rpUnlikeUp',
 					type: 'get',
-					data: {'rpId' : rpId},
+					data: {'rpId' : rpId,
+						'user_id' : $("#userId").val()
+						},
 					success: function(data){
-						console.log(data)
+						if (data == 0) {
+							alert(rpId + "번 댓글을 비추천하셨습니다.");
+						} else if (data != 0) {
+							alert("비추천은 한번만 가능합니다.");
+						}
 						rpUnlikeCount(rpId);
 					},
 					error : function(request, status, error) {
@@ -277,16 +314,21 @@
 						console.log(error);
 					}
 				});
+				}
 			}
 			
 			// 대댓글을 작성하기 위한  view 화면 불러오는 JS메서드
 			function reReplyView(rpId, rpGroup, rpStep, rpIndent) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+				}else{
 				var a = '<div>';
 					a += '<form name="Rrpform">'
 					a += '<table border="1">';
 					a += '<tr>';
 					a += '<td>';
-					a += '<input type="text" name="rp_user_id" placeholder="작성자">&nbsp;&nbsp;&nbsp;&nbsp;';
+					a += '<input type="hidden" name="rp_user_id" value='+userId+'>';
+					a += uNickname;
 					a += '<input type="button" value="등록" onclick="reReplyWrite('+rpGroup +','+rpStep +','+rpIndent +')">&nbsp;&nbsp;';
 					a += '<button type="button" onclick="replyList();">취소</button>';
 					a += '</td>';
@@ -301,6 +343,7 @@
 					a += '</div>';
 				$('.rp_'+rpId).append(a);
 			}
+			}
 			
 			// 대댓글 작성 JS메서드(Ajax-Json)
 			function reReplyWrite(rpGroup, rpStep, rpIndent) {
@@ -312,8 +355,6 @@
 					return false;
 				} else{
 					var rpContent = $('[name=rRpContent]').val();
-					var a = $('[name=rp_user_id]').val();
-					var user_id = Number(a);
 					
 					$.ajax({
 						url: 'http://localhost:8282/eepp/reply/reReplyWrite',
@@ -323,7 +364,7 @@
 								'rpStep' : rpStep,
 								'rpIndent' : rpIndent,
 								'board_id' : bId, 
-								'user_id' : user_id},	
+								'user_id' : $("#userId").val()},	
 						success: function(data){
 							alert("댓글이 등록되었습니다.")
 							replyCount(bId);
@@ -339,6 +380,10 @@
 
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
 			$('[name=replyBtn]').click(function(){
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					return false;
+				}
 				var insertData = $('[name=rpform]').serialize();				
 				replyWrite(insertData);
 			});
@@ -429,6 +474,8 @@
 			}
 		</script>
 	</head>
-	<body>	
+	<body>
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+	<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
 	</body>
 </html>

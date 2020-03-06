@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -16,6 +15,7 @@
 		<script>
 			var cId = ${clView.cId};
 			var questionCount;
+			var uNickname = $("#userNickname").val();
 			
 			$(document).ready(function() {
 				questionCnt();
@@ -122,6 +122,10 @@
 	</head>
 
 	<body>
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
+	<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}" />
+	<input type="hidden" id="classUserNickname" value="${clView.uNickname}" />
+	
 		<h1>#${clView.cId}번 Class강좌</h1>
 		<hr>
 		<br>
@@ -146,13 +150,21 @@
 			            <!-- Modal Body -->
 			            <div class="modal-body">
 			                <p class="statusMsg"></p>
+			                <c:choose>
+			                <c:when test="${empty loginUser.uNickname}">
+			                <h3>강좌 신청을 원하시면 로그인 해주세요.</h3>
+			                </c:when>
+			                <c:otherwise>
 			                <form id="classJoin" role="classJoinRole" name="cjform">
 			      				<input type="hidden" name="class_id" value="${clView.cId}">
-			                    <label>신청자 id</label><br>  <!-- 로그인합치면 없어질예정 -->
-			                    <input type="text" name="user_id"><br><br> <!-- 로그인합치면 없어질예정 -->
-			                    <label>간단한 자기소개</label><br>  <!-- 로그인합치면 없어질예정 -->
+			                    <label>신청자 id</label><br>
+			                    <input type="hidden" name="user_id" value="${loginUser.user_id}">
+			                    ${loginUser.uNickname}<br><br>
+			                    <label>간단한 자기소개</label><br>
 			                    <textarea cols="40" rows="2" name="cjIntroduce"></textarea>
 			                </form>
+			                </c:otherwise>
+			                </c:choose>
 			            </div>
             
 			            <!-- Modal Footer -->
@@ -183,6 +195,10 @@
 			<tr>
 				<td>Class 강좌명</td>
 				<td>${clView.cTitle}</td>
+			</tr>
+			<tr>
+				<td>Class 개설자</td>
+				<td>${clView.uNickname}</td>
 			</tr>
 			<tr>
 				<td>강좌 개설일</td>
@@ -217,10 +233,17 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button class="classModify" type="button">class강좌 수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
-					<button class="classDelete" type="button">class강좌 삭제</button>&nbsp;&nbsp;&nbsp;&nbsp;
-					<button class="classList" type="button" >class강좌 목록</button>&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" onclick="cScrap(${clView.cId})">class 스크랩</button>
+				<c:choose>
+						<c:when test="${loginUser.uNickname == clView.uNickname}">
+						<button class="classModify" type="button">class강좌 수정</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="classDelete" type="button">class강좌 삭제</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button class="classList" type="button" >class강좌 목록</button>
+						</c:when>
+						<c:otherwise>
+						<button class="classList" type="button" >class강좌 목록</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="cScrap(${clView.cId})">class 스크랩</button>
+						</c:otherwise>
+						</c:choose>
 				</td>
 			</tr>
 		</table>
@@ -237,12 +260,20 @@
 		<!-- 수업문의 작성 -->
 		<div>
 			<h2>Class강좌 문의(<b class="qCount"></b>)</h2>
+			
+		<!-- 개설자일경우 안보임-->
+		<c:choose>
+		<c:when test="${loginUser.uNickname == clView.uNickname}">
+		</c:when>
+		
+		<c:otherwise>
 			<form name="qForm">
 				<input type="hidden" name="class_id" value="${clView.cId}" /> 
 				<table border="1">
 					<tr>
 						<td>
-							<input type="text" name="user_id" placeholder="작성자">&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="hidden" name="user_id" value="${loginUser.user_id}">
+							${loginUser.uNickname}&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="button" name="qBtn">등록</button>
 						</td>
 					<tr>
@@ -250,8 +281,12 @@
 							<textarea type="text" name="rpContent" placeholder="내용을 입력하세요." rows="5" cols="100"></textarea>
 						</td>
 					</tr>
+					
 				</table>
 			</form>
+		</c:otherwise>
+		</c:choose>
+		
 		</div>
 		<hr>
 		

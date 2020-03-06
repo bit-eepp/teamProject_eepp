@@ -16,6 +16,7 @@
 	<div class="container text-center">
 		<h1 style="text-align: center; width: 15%; margin: 0 auto">
 			<img style="max-width: 100%" src="${pageContext.request.contextPath}/img/EE_logo.png" />
+			
 		</h1>
 		<p style="text-align: center; font-weight:bold; margin:0;">Community EE</p>
 		<p style="text-align: center; font-weight:bold;">로 그 인</p>
