@@ -8,7 +8,6 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 		/WEB-INF/spring/root-context.xml
-		/WEB-INF/spring/security-context.xml
 		/WEB-INF/spring/email-context.xml
 		</param-value>
 	</context-param>
@@ -47,7 +46,6 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>

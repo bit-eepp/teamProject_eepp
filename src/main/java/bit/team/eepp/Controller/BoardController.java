@@ -3,6 +3,8 @@ package bit.team.eepp.Controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import bit.team.eepp.Page.PageMaker;
 import bit.team.eepp.Search.SearchCriteria;
 import bit.team.eepp.Service.BoardService;
 import bit.team.eepp.VO.BoardVO;
+import bit.team.eepp.VO.UserVO;
 
 @RequestMapping("/board")
 @Controller
@@ -61,7 +64,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/contentView")
-	public String contentView(BoardVO boardVO, Model model, @ModelAttribute("scri") SearchCriteria scri,
+	public String contentView(BoardVO boardVO, Model model,HttpSession session, @ModelAttribute("scri") SearchCriteria scri,
 			@RequestParam(value = "sortType") String sortType, @RequestParam(value = "bCategory") String bCategory) {
 		System.out.println("contentView() method");
 		model.addAttribute("content", boardService.selectOne(boardVO));

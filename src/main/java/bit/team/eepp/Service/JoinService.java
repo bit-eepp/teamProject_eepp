@@ -3,6 +3,8 @@ package bit.team.eepp.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -66,5 +68,9 @@ public class JoinService{
 		return joinMapper.nickNameCheck(userVO);
 	}
 	
+	// 핸드폰번호 중복확인
+	public int phoneNumCheck(String uPhone) {
+		return joinMapper.phoneNumCheck(uPhone);
+	}
 	
 }

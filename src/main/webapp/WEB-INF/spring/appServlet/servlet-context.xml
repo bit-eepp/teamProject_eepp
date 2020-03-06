@@ -45,6 +45,9 @@
 	<!-- NaverLogin Controller Beans-->
 	<beans:bean id="naverController" class="bit.team.eepp.Controller.NaverController" />
 	
+	<!-- 비밀번호 암호화 -->
+	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
 	<!-- 자동로그인 식별 interceptor -->
 	<beans:bean id="rememberMeInterceptor" class="bit.team.eepp.Interceptor.rememberMeInterceptor" />
 	<!-- interceptor 설정 -->

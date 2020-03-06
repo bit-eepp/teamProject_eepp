@@ -43,23 +43,7 @@ public class loginInterceptor extends HandlerInterceptorAdapter{
 			ModelAndView modelAndView) throws Exception {
 		
 		logger.info("postHandler Method Active");
-		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("loginUser");
-		
-		if(user != null) {
-			logger.info("login 성공");
-			if(request.getParameter("rememberMe") != null) {
-				logger.info("rememberMe");
-				// 쿠키 생성
-				Cookie loginCookie = new Cookie("loginCookie", session.getId());
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(60*60*24*7);
-				
-				//전송
-				response.addCookie(loginCookie);
-			}
-			
-		}
+
 	}
 
 

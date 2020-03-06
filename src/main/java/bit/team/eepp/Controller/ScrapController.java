@@ -23,14 +23,14 @@ public class ScrapController {
 		return "/board/scrapTest/myScrap";
 	}
 
-	@RequestMapping("/doBoardScrap")
+	@RequestMapping("edit/doBoardScrap")
 	@ResponseBody
 	public void doBoardScrap(ScrapVO scrapVO) {
 		System.out.println("doBoardScrap() method");
 		scrapService.doBoardScrap(scrapVO);
 	}
 
-	@RequestMapping("/doClassScrap")
+	@RequestMapping("edit/doClassScrap")
 	@ResponseBody
 	public void doClassScrap(ScrapVO scrapVO) {
 		System.out.println("doClassScrap() method");

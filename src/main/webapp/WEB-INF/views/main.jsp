@@ -13,15 +13,35 @@
 
 		<c:when test="${loginUser.uNickname != null}">
 			<!-- 로그인 성공 -->
+			<div>
 			<h3>'${loginUser.uNickname}' 님 하이루~!</h3>
 			<br>
 			<button type="button" onclick="location.href='logout.do'">로그아웃</button>
+			</div>
+			
+			<div>
+			<p><a href="${pageContext.request.contextPath}/board/boardList">직무게시판</a></p>
+			<p><a href="${pageContext.request.contextPath}/class/classList">클래스</a></p>
+			<p><a href="${pageContext.request.contextPath}/class/eatingMain">오늘뭐먹지</a></p>
+			<p><a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a></p>
+			</div>
+			
 		</c:when>
 
 		<c:otherwise>
 			<!-- 로그인 전 -->
+			<div>
 			<h3>* Main Page *</h3>
-			<button type="button" onclick="location.href='login/login.do'">로그인 </button>
+			<button type="button" onclick="location.href='login/login.do'">로그인</button>
+			<br>
+			<button type="button" onclick="location.href='join/register'">회원가입</button>
+			</div>
+			
+			<div>
+			<p><a href="${pageContext.request.contextPath}/board/boardList">직무게시판</a></p>
+			<p><a href="${pageContext.request.contextPath}/class/classList">클래스</a></p>
+			<p><a href="${pageContext.request.contextPath}/class/eatingMain">오늘뭐먹지</a></p>
+			</div>
 
 		</c:otherwise>
 	</c:choose>
