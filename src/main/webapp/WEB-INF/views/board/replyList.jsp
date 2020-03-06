@@ -319,9 +319,6 @@
 			
 			// 대댓글을 작성하기 위한  view 화면 불러오는 JS메서드
 			function reReplyView(rpId, rpGroup, rpStep, rpIndent) {
-				if(!uNickname){
-					alert("로그인 해주세요.");
-				}else{
 				var a = '<div>';
 					a += '<form name="Rrpform">'
 					a += '<table border="1">';
@@ -342,7 +339,6 @@
 					a += '</form>';
 					a += '</div>';
 				$('.rp_'+rpId).append(a);
-			}
 			}
 			
 			// 대댓글 작성 JS메서드(Ajax-Json)

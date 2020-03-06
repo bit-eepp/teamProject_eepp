@@ -427,7 +427,7 @@
 							<button type="button" name="replyBtn">등록</button>
 						</c:when>
 						<c:otherwise>
-							<input type="text" name="user_id" value="GUEST" disabled>
+							<input type="text" value="GUEST" disabled>
 							<button type="button" name="replyBtn">등록</button>
 						</c:otherwise>
 					</c:choose>

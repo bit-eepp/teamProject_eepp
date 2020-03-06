@@ -280,11 +280,11 @@
 							<c:choose>
 						<c:when test="${not empty loginUser.uNickname}">
 						${loginUser.uNickname}
-							<button type="button" name="replyBtn">등록</button>
+							<button type="button" name="qBtn">등록</button>
 						</c:when>
 						<c:otherwise>
-							<input type="text" name="user_id" value="GUEST" disabled>
-							<button type="button" name="replyBtn">등록</button>
+							<input type="text" value="GUEST" disabled>
+							<button type="button" name="qBtn">등록</button>
 						</c:otherwise>
 					</c:choose>
 						</td>

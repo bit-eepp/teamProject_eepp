@@ -166,7 +166,7 @@
 					a += '<table border="1">';
 					a += '<tr>';
 					a += '<td>';
-					a += '<input type="hidden" name="q_user_id" value='+userId+'>&nbsp;&nbsp;&nbsp;&nbsp;';
+					a += '<input type="hidden" name="q_user_id" value='+userId+'>';
 					a += uNickname;
 					a += '<input type="button" value="등록" onclick="reQuestionWrite('+rpGroup +','+rpStep +','+rpIndent +')">&nbsp;&nbsp;';
 					a += '<button type="button" onclick="questionList();">취소</button>';
@@ -221,10 +221,9 @@
 				if(!uNickname){
 					alert("로그인 해주세요.");
 					return false;
-				}else{
+				}
 				var insertData = $('[name=qForm]').serialize();				
 				questionWrite(insertData);
-				}
 			});
 			
 			// 해당 class강좌에 대해 문의를 작성하는 JS메서드(Ajax-Json) 
