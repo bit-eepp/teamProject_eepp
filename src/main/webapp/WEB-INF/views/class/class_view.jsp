@@ -104,6 +104,10 @@
 			
 			// 해당 class강좌 스크랩  JS메서드(Ajax-Json)
 			function cScrap(cId) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					return false;
+				}else{
 				$.ajax({
 					url: 'http://localhost:8282/eepp/scrap/doClassScrap',
 					type: 'post',
@@ -117,6 +121,7 @@
 						console.log(error);
 					}
 				});
+				}
 			}
 		</script>
 	</head>
@@ -272,9 +277,16 @@
 				<table border="1">
 					<tr>
 						<td>
-							<input type="hidden" name="user_id" value="${loginUser.user_id}">
-							${loginUser.uNickname}&nbsp;&nbsp;&nbsp;&nbsp;
-							<button type="button" name="qBtn">등록</button>
+							<c:choose>
+						<c:when test="${not empty loginUser.uNickname}">
+						${loginUser.uNickname}
+							<button type="button" name="replyBtn">등록</button>
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="user_id" value="GUEST" disabled>
+							<button type="button" name="replyBtn">등록</button>
+						</c:otherwise>
+					</c:choose>
 						</td>
 					<tr>
 						<td>
