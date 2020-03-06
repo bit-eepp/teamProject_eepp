@@ -5,12 +5,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>새 글 쓰기</title>
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
-	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
-		
-		<script language="javascript" type="text/javascript">
+		<!-- <script language="javascript" type="text/javascript">
 			$(document).ready(function() {
 				$('#summernote').summernote({
 					height: 500,   // set editor height
@@ -67,12 +64,12 @@
 					return true;
 				}
 			}
-		</script>
+		</script> -->
 	</head>
 	
 	<body>
 		<h1>새 글 쓰기</h1>
-		<form name="wform" action="writeContent" method="post" onsubmit="return checkForm();">
+		<form name="wform" action="writeContent" method="post" onsubmit="return writeCheckForm();">
 			<input type="hidden" name="page" value="${scri.page}" />
 			<input type="hidden" name="perPageNum" value="${scri.perPageNum}" />
 			<input type="hidden" name="searchType" value="${scri.searchType}" />
@@ -139,5 +136,7 @@
 			<input type="hidden" name="sortType" value="${sortType}" />
 			<input type="hidden" name="bCategory" value="${bCategory}" />
 		</form>
+		
+		<script src="${pageContext.request.contextPath}/js/board/boardWrite.js"></script>
 	</body>
 </html>

@@ -5,13 +5,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>게시글보기</title>
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-		<script>
+		<!-- <script>
 			var bId = ${content.bId};	// 게시글 번호
 			var rpCount;				// 해당 게시글의 댓글 수 
 			var uNickname = $("#userNickname").val();
@@ -261,7 +257,7 @@
 				});
 				}
 			}
-		</script>
+		</script> -->
 	</head>
 
 	<body>
@@ -269,6 +265,7 @@
 	<input type="hidden" id="userNickname" name="uNickname" value="${loginUser.uNickname}">
 	<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
 	<input type="hidden" id="content_uNickname" value="${content.uNickname}" />
+	<input type="hidden" id="content_bSubject" value="${content.bSubject}" />
 	
 		<div>
 			<h1>#${content.bId}번 게시글</h1>
@@ -401,13 +398,13 @@
 			</table>
 			
 			<form name="form1" role="form" method="post">
-				<input type='hidden' name='bId' value="${content.bId}">
-				<input type="hidden" name="page" value="${scri.page}" />
-				<input type="hidden" name="perPageNum" value="${scri.perPageNum}" />
-				<input type="hidden" name="searchType" value="${scri.searchType}" />
-				<input type="hidden" name="keyword" value="${scri.keyword}" />
-				<input type="hidden" name="sortType" value="${sortType}" />
-				<input type="hidden" name="bCategory" value="${bCategory}" />
+				<input type='hidden' name='bId' id="contentBid" value="${content.bId}">
+				<input type="hidden" name="page" id="scriPage" value="${scri.page}" />
+				<input type="hidden" name="perPageNum" id="scriPageNum" value="${scri.perPageNum}" />
+				<input type="hidden" name="searchType" id="scriPSearchType" value="${scri.searchType}" />
+				<input type="hidden" name="keyword" id="scriKeyword" value="${scri.keyword}" />
+				<input type="hidden" name="sortType" id="boardSortType" value="${sortType}" />
+				<input type="hidden" name="bCategory" id="bCategory" value="${bCategory}" />
 			</form>
 		</div>
 		<hr>
@@ -427,7 +424,7 @@
 							<button type="button" name="replyBtn">등록</button>
 						</c:when>
 						<c:otherwise>
-							<input type="text" value="GUEST" disabled>
+							<input type="text" name="user_id" value="GUEST" disabled>
 							<button type="button" name="replyBtn">등록</button>
 						</c:otherwise>
 					</c:choose>
@@ -448,6 +445,6 @@
 		</div>
 	
 		<%@ include file="/WEB-INF/views/board/replyList.jsp"%>
-	
+	<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
 	</body>
 </html>

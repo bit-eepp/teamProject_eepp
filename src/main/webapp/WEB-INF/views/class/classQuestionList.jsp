@@ -10,6 +10,7 @@
 		<script>
 		var uNickname = $("#userNickname").val();
 		var userId = $("#userId").val();
+		var cId = $("#class_cid").val();
 		
 			// 해당 class강좌의 문의수를 불러오는 JS메서드(Ajax-Json)
 			function questionCnt() {
@@ -128,21 +129,19 @@
 								b += '<h6>' +value.rpWrittenDate +'</h6>';
 								b += '</td>';
 								
-								if(uNickname != value.uNickname){
-									
-								}else{
 								b += '<td width="100">';
+								if(uNickname != value.uNickname){
+									if(uNickname == $("#classUserNickname").val()){
+										b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[답변]</a><br>';
+									}
+								}else{
 								b += '<a onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');" style="color : blue">[수정] </a>';
 								b += '<br>';
-								b += '<a onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
-								
-								if(uNickname == $("#classUserNickname").val()){
+								b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a>';
 								b += '<br>';
-								b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[답변]</a><br>';
+								b += '<a onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
 								}
-								
 								b += '</td>';
-								}
 
 								b += '</tr>';
 								b += '</table>';
@@ -166,7 +165,7 @@
 					a += '<table border="1">';
 					a += '<tr>';
 					a += '<td>';
-					a += '<input type="hidden" name="q_user_id" value='+userId+'>';
+					a += '<input type="hidden" name="q_user_id" value='+userId+'>&nbsp;&nbsp;&nbsp;&nbsp;';
 					a += uNickname;
 					a += '<input type="button" value="등록" onclick="reQuestionWrite('+rpGroup +','+rpStep +','+rpIndent +')">&nbsp;&nbsp;';
 					a += '<button type="button" onclick="questionList();">취소</button>';
@@ -218,10 +217,6 @@
 			
 			// class강좌문의 버튼눌렀을때 이벤트 JS메서드
 			$('[name=qBtn]').click(function(){
-				if(!uNickname){
-					alert("로그인 해주세요.");
-					return false;
-				}
 				var insertData = $('[name=qForm]').serialize();				
 				questionWrite(insertData);
 			});

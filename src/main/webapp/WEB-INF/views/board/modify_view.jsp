@@ -1,16 +1,13 @@
-!loginUser<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>게시글 수정 페이지</title>
-		
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-	    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
-	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	    
-	    <script>
+	    <!-- <script>
 			$(document).ready(function() {
 				$('#summernote').summernote({
 					height: 500,   // set editor height
@@ -47,7 +44,7 @@
 					return true;
 				}
 			}
-		</script>
+		</script> -->
 	</head>
 	<body>
 		<h1>#${modify.bId}번 게시글 수정 페이지</h1>
@@ -91,6 +88,7 @@
 					</td>
 				</tr>
 			</table>
-		</form>	
+		</form>
+		<script src="${pageContext.request.contextPath}/js/board/boardModify.js"></script>
 	</body>
 </html>

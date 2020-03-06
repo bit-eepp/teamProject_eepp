@@ -10,6 +10,7 @@
 		<script>
 		var uNickname = $("#userNickname").val();
 		var userId = $("#userId").val();
+		var bId = $("#contentBid").val();
 		
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function replyCount(bId) {
@@ -160,6 +161,8 @@
 									b += '<a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a><br>';
 									}else{
 									b += '<a onclick="replyModify('+value.rpId +',\''+value.rpContent+'\');" style="color : blue">[수정] </a>';
+									b += '<br>';
+									b += '<a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a>'
 									b += '<br>';
 									b += '<a onclick="replyDelete(' +value.rpId +',' +value.gCount +',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
 									}
@@ -319,6 +322,9 @@
 			
 			// 대댓글을 작성하기 위한  view 화면 불러오는 JS메서드
 			function reReplyView(rpId, rpGroup, rpStep, rpIndent) {
+				if(!uNickname){
+					alert("로그인 해주세요.");
+				}else{
 				var a = '<div>';
 					a += '<form name="Rrpform">'
 					a += '<table border="1">';
@@ -339,6 +345,7 @@
 					a += '</form>';
 					a += '</div>';
 				$('.rp_'+rpId).append(a);
+			}
 			}
 			
 			// 대댓글 작성 JS메서드(Ajax-Json)
@@ -379,10 +386,9 @@
 				if(!uNickname){
 					alert("로그인 해주세요.");
 					return false;
-				}else{
+				}
 				var insertData = $('[name=rpform]').serialize();				
 				replyWrite(insertData);
-				}
 			});
 			
 			// 해당 게시물에 대해 댓글을 작성하는 JS메서드(Ajax-Json) 

@@ -6,124 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Class 상세 페이지</title>
-		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-		<script>
-			var cId = ${clView.cId};
-			var questionCount;
-			var uNickname = $("#userNickname").val();
-			
-			$(document).ready(function() {
-				questionCnt();
-				questionList();
-				
-				var formObj = $('form[role="form"]');
-				
-				$('.classList').on('click', function(){
-				    formObj.attr('method','post');
-				    formObj.attr('action','classList');
-				    formObj.submit();
-			    });
-				
-				$('.classModify').on('click', function(){
-				    formObj.attr('method','post');
-				    formObj.attr('action','classModifyView');
-				    formObj.submit();
-			    });
-				
-				$('.classDelete').on('click', function(){
-					deleteConfirm();
-			    });
-			});
-			
-			// 해당 class강좌 신청 JS메서드
-			function classJoinForm(){
-				var cjIntroduce = document.cjform.cjIntroduce;
-					
-				if(cjIntroduce.value == "") {
-					alert("Class강좌 가입을 위한 간단한 본인소개를 작성해주세요");
-					document.cjform.cjIntroduce.focus();
-					return false;
-				} else {
-					$.ajax({
-						type:'POST',
-						url:'http://localhost:8282/eepp/class/classJoin',
-						data:$('#classJoin[role=classJoinRole]').serialize(),
-						success:function(msg){
-							alert(cId +'번 클래스 수강신청이 완료되었습니다.');
-							$('#modalForm').modal('hide');
-							resetForm();
-						}
-			        });
-				}
-			}
-			
-			function resetForm() {
-				$('#modalForm').on('hidden.bs.modal', function (e) {
-				  $(this).find('form')[0].reset()
-				});
-			}
-			
-			// 해당 class 강좌 삭제 확인 JS메서드(댓글이 있는 강좌의 경우 삭제 불가)
-			function deleteConfirm() {
-				if(questionCount > 0){
-					alert("문의가 있는 class강좌는 삭제 할 수 없습니다.");	
-					return;
-				} else {
-					if(confirm("Class 강좌를 정말 삭제 하시겠습니까?")){
-						deleteContent(cId);
-					}
-				}
-			}
-			
-			// 해당  class 강좌 삭제하는  JS메서드(Ajax-Json)
-			function deleteContent(cId) {
-				$.ajax({
-					url: 'http://localhost:8282/eepp/class/deleteClass',
-					type: 'get',
-					data: {'cId' : cId},
-					success: function(data){
-						console.log(data)
-						reset();
-					},
-					error : function(request, status, error) {
-						console.log(request.responseText);
-						console.log(error);
-					}
-				});
-			}
-			
-			// 해당 class강좌 삭제 후 class강좌목록으로 전환
-			function reset() {
-				location.href='classList?page=${cscri.page}&perPageNum=${cscri.perPageNum}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}';
-			}
-			
-			// 해당 class강좌 스크랩  JS메서드(Ajax-Json)
-			function cScrap(cId) {
-				if(!uNickname){
-					alert("로그인 해주세요.");
-					return false;
-				}else{
-				$.ajax({
-					url: 'http://localhost:8282/eepp/scrap/doClassScrap',
-					type: 'post',
-					data: {'class_id' : cId},
-					success: function(data){
-						console.log(data)
-						alert(cId +"번 class강좌가 스크랩 되었습니다.");
-					},
-					error : function(request, status, error) {
-						console.log(request.responseText);
-						console.log(error);
-					}
-				});
-				}
-			}
-		</script>
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	</head>
 
 	<body>
@@ -161,7 +44,7 @@
 			                </c:when>
 			                <c:otherwise>
 			                <form id="classJoin" role="classJoinRole" name="cjform">
-			      				<input type="hidden" name="class_id" value="${clView.cId}">
+			      				<input type="hidden" name="class_id" id="class_cid" value="${clView.cId}">
 			                    <label>신청자 id</label><br>
 			                    <input type="hidden" name="user_id" value="${loginUser.user_id}">
 			                    ${loginUser.uNickname}<br><br>
@@ -255,11 +138,11 @@
 		
 		<form name="form1" role="form" method="post">
 			<input type='hidden' name='cId' value="${clView.cId}">
-			<input type="hidden" name="page" value="${cscri.page}" />
-			<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" />
-			<input type="hidden" name="searchType" value="${cscri.searchType}" />
-			<input type="hidden" name="keyword" value="${cscri.keyword}" />
-			<input type="hidden" name="cCategory" value="${cCategory}" />
+			<input type="hidden" name="page" id="cscriPage" value="${cscri.page}" />
+			<input type="hidden" name="perPageNum" id="cscriPageNum" value="${cscri.perPageNum}" />
+			<input type="hidden" name="searchType" id="cscriSearchType" value="${cscri.searchType}" />
+			<input type="hidden" name="keyword" id="cscriKeyword" value="${cscri.keyword}" />
+			<input type="hidden" name="cCategory" id="cCategory" value="${cCategory}" />
 		</form>
 		
 		<!-- 수업문의 작성 -->
@@ -277,16 +160,9 @@
 				<table border="1">
 					<tr>
 						<td>
-							<c:choose>
-						<c:when test="${not empty loginUser.uNickname}">
-						${loginUser.uNickname}
+							<input type="hidden" name="user_id" value="${loginUser.user_id}">
+							${loginUser.uNickname}&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="button" name="qBtn">등록</button>
-						</c:when>
-						<c:otherwise>
-							<input type="text" value="GUEST" disabled>
-							<button type="button" name="qBtn">등록</button>
-						</c:otherwise>
-					</c:choose>
 						</td>
 					<tr>
 						<td>
@@ -308,5 +184,6 @@
 		</div>
 		
 		<%@ include file="/WEB-INF/views/class/classQuestionList.jsp"%>
+		<script src="${pageContext.request.contextPath}/js/class/classContent.js"></script>
 	</body>
 </html>

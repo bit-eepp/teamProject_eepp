@@ -7,77 +7,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>직무별 Community</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script>
-		var uNickname = $("#userNickname").val();
-		
-			$(document).ready(function(){
-				// 게시물 검색
-				$('#searchBtn').click(function() {
-					if($('select[name=searchType]').val() == 'n') {
-						alert('검색조건을 지정해주세요');
-						return;
-					} else {
-						self.location = "boardList" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) +"&sortType=${sortType}" +"&bCategory=${bCategory}";
-					}
-				});
-				
-				// 게시글 n개씩 보기
-				$('#cntPerPage').change(function() {
-					var totalCount = ${pageMaker.totalCount};
-					var perPageNum = this.value;
-					var page = ${pageMaker.cri.page};
-					
-					if(perPageNum * page > totalCount) {
-						alert('정렬이 불가합니다.');
-						return;
-					} else {
-						location.href="boardList?page=${pageMaker.cri.page}&perPageNum=" +perPageNum +"&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}";
-					}
-				});
-				
-				var formObj = $('form[role="form"]');
-				
-				$('.writeBtn').on('click', function(){
-				    formObj.attr('method','post');
-				    formObj.attr('action','writeView');
-				    formObj.submit();
-			    });				
-				
-				var title = '${bCategory}';
-				boardTitle(title);
-				
-				//로그인 하지않은 경우, 새글쓰기 버튼 삭제
-				if(!$("#userNickname").val()){
-					$('.writeBtn').remove();
-				}
-			});
-			
-			// 게시판 타이틀 
-			function boardTitle(title) {
-				if(title == '') {
-					$('.boardTitle').append('<h2>직장인 커뮤니티</h2>');
-				} else if(title == 'notice') {
-					$('.boardTitle').append('<h2>공지사항</h2>');
-				} else if(title == 'it_dev') {
-					$('.boardTitle').append('<h2>IT/개발 직군 커뮤니티</h2>');
-				} else if(title == 'service') {
-					$('.boardTitle').append('<h2>서비스 직군 커뮤니티</h2>');
-				} else if(title == 'finance') {
-					$('.boardTitle').append('<h2>금융 직군 커뮤니티</h2>');
-				} else if(title == 'design') {
-					$('.boardTitle').append('<h2>디자인 직군 커뮤니티</h2>');
-				} else if(title == 'official') {
-					$('.boardTitle').append('<h2>공무원 직군 커뮤니티</h2>');
-				} else if(title == 'etc') {
-					$('.boardTitle').append('<h2>기타 직군 커뮤니티</h2>');
-				} 
-			}
-		</script>
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	</head>
 	
 	<body>
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+	<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
+	<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">
+	<input type="hidden" id="pageMakeQuery" value="${pageMaker.makeQuery(1)}">
 	
 		<h1 class="boardTitle"></h1>
 		<button type="button" onclick="location.href='/eepp/scrap/myScrapList'">스크랩 확인</button>
@@ -126,10 +63,10 @@
 			<form name="form1" role="form" method="post">
 				<input type="hidden" name="page" value="${scri.page}" />
 				<input type="hidden" name="perPageNum" value="${scri.perPageNum}" />
-				<input type="hidden" name="searchType" value="${scri.searchType}" />
-				<input type="hidden" name="keyword" value="${scri.keyword}" />
-				<input type="hidden" name="sortType" value="${sortType}" />
-				<input type="hidden" name="bCategory" value="${bCategory}" />
+				<input type="hidden" name="searchType" id="scriSearchType" value="${scri.searchType}" />
+				<input type="hidden" name="keyword" id="scriKeyword" value="${scri.keyword}" />
+				<input type="hidden" name="sortType" id="sortType" value="${sortType}" />
+				<input type="hidden" name="bCategory" id="bCategory" value="${bCategory}" />
 			</form>
 		</div>
 		<hr>
@@ -265,5 +202,7 @@
 				<a style="text-decoration: none" href="boardList${pageMaker.makeSearch(pageMaker.endPage + 1)}&sortType=${sortType}&bCategory=${bCategory}"> » </a>&nbsp;&nbsp;
 			</c:if>
 		</div>
+
+		<script src="${pageContext.request.contextPath}/js/board/boardMain.js"></script>
 	</body>
 </html>

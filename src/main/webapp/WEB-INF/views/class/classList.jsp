@@ -7,198 +7,19 @@
 	<head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<title>Class Main</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
-	
-		$(document).ready(function(){
-			// 게시물 검색
-			$('#classSearchBtn').click(function() {
-				if($('select[name=searchType]').val() == 'n') {
-					alert('검색조건을 지정해주세요');
-					return;
-				} else {
-					self.location = "classList" + '${classPageMaker.makeQuery(1)}' + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) +"&cCategory=${cCategory}";
-				}
-			});
-			
-			// 게시글 n개씩 보기
-			$('#cntPerPage').change(function() {
-				var totalCount = ${classPageMaker.totalCount};
-				var perPageNum = this.value;
-				var page = ${classPageMaker.cri.page};
-				 
-				if(perPageNum * page > totalCount) {
-					alert('정렬이 불가합니다.');
-					return;
-				} else {
-					location.href="classList?page=${classPageMaker.cri.page}&perPageNum=" +perPageNum +"&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}";
-				}
-			});
-			
-			var title = '${cCategory}';
-			classTitle(title);
-			
-			//로그인 하지않은 경우, 강좌개설 버튼 삭제
-			if(!$("#userNickname").val()){
-				$('#openNewClass').remove();
-			}
-		});
-		
-		// 게시판 타이틀 
-		function classTitle(title) {
-			if(title == '') {
-				$('.classTitle').append('<h2>전체 CLASS 강좌</h2>');
-			} else if(title == 'it_dev') {
-				$('.classTitle').append('<h2>IT/개발 관련 CLASS 강좌</h2>');
-			} else if(title == 'workSkill') {
-				$('.classTitle').append('<h2>업무스킬 관련 CLASS 강좌</h2>');
-			} else if(title == 'daily') {
-				$('.classTitle').append('<h2>일상관련 CLASS 강좌</h2>');
-			} else if(title == 'financialTechnology') {
-				$('.classTitle').append('<h2>재테크 관련 CLASS 강좌</h2>');
-			} else if(title == 'etc') {
-				$('.classTitle').append('<h2>기타 CLASS 강좌</h2>');
-			} 
-		}
-	</script>	
-				
-		<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$("ul.sub").hide();
-				$("ul.menu li").hover(function() {
-					$("ul:not(:animated)", this).slideDown("fast");
-				}, function() {
-					$("ul", this).slideUp("fast");
-				});
-			});
-		</script>
-
-		<style type="text/css">
-			/* ~ 리스트 모양 숨김~ */
-			* {
-				margin: 0;
-				padding: 0;
-				list-style-type: none;
-			}
-			
-			/* ~ 최상단 기본 메뉴 바 ~ */
-			#container {
-				margin: 100px auto;
-				width: 537px;
-			}
-			
-			ul.menu li {
-				float: left;
-				width: 179px;
-				height: 48px;
-				background-color: #555;
-				position: relative;
-			}
-			
-			ul.menu li a {
-				display: block;
-				align: center;
-				width: 100%;
-				height: 100%;
-				line-height: 48px;
-				text-indent: 30px;
-				font-weight: bold;
-				color: #eee;
-				text-decoration: none;
-			}
-			
-			ul.menu li a:hover {
-				background-color: #333;
-			}
-			
-			ul.menu li ul.sub {
-				position: absolute;
-			}
-			
-			ul.menu {
-				zoom: 1;
-			}
-			
-			ul.menu:after {
-				height: 0;
-				visibility: hidden;
-				content: ".";
-				display: block;
-				clear: both;
-			}
-			
-			ul.menu li a {
-				display: block;
-				align: center;
-				width: 100%;
-				height: 100%;
-				line-height: 48px;
-				text-indent: 30px;
-				font-weight: bold;
-				color: #eee;
-				text-decoration: none;
-			}
-			
-			ul.menu li a:hover {
-				background-color: #333;
-			}
-		</style>
-	
-		상단 버튼 메뉴
-		<style type="text/css">
-			.btnmenu {
-				margin: 80px auto;
-				border: 1;
-				font-size: 15px;
-				position: relative;
-				top: 0;
-				margin-top: 75px;
-				margin-left: -6px;
-				width: 25%;
-				height: 48px;
-				text-align: center;
-				box-sizing: border-box;
-				-webkit-box-sizing: border-box;
-				-moz-box-sizing: border-box;
-				-webkit-user-select: none;
-				cursor: default;
-			}
-		</style> -->
+	<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	</head>
 
 
 	<body>
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
-		<!-- 최상단 기본 메뉴 바<br>
-		<div id="container">
-			<ul class="menu">
-				<li><a href="#" align="center">JOB</a>
-					<ul class="sub">
-						<li><a onclick="location.href='#'">IT</a></li>
-						<li><a onclick="location.href='#'">SERVICE</a></li>
-						<li><a onclick="location.href='#'">DESIGN</a></li>
-						<li><a onclick="location.href='#'">OFFICIAL</a></li>
-						<li><a onclick="location.href='#'">ETC</a></li>
-					</ul>
-				<li><a href="#">ENTERTAINMENT</a>
-					<ul class="sub">
-						<li><a onclick="location.href='#'">WHAT TO EAT?</a></li>
-						<li><a onclick="location.href='#'">MINI GAME</a></li>
-						<li><a onclick="location.href='#'">Today's Lucky</a></li>
-					</ul>
-				<li><a href="#" align="center">CLASS</a>
-					<ul class="sub">
-						<li><a onclick="location.href='#'">IT</a></li>
-						<li><a onclick="location.href='#'">업무스킬</a></li>
-						<li><a onclick="location.href='#'">재태크</a></li>
-						<li><a onclick="location.href='#'">디자인</a></li>
-					</ul></li>
-			</ul>
-		</div>
-		<br>
-		<br> -->
-
+	<input type="hidden" id="classPageMaker" value="${classPageMaker.makeQuery(1)}" />
+	<input type="hidden" id="cCategory" value="${cCategory}" />
+	<input type="hidden" id="classTotalCount" value="${classPageMaker.totalCount}" />
+	<input type="hidden" id="classCriPage" value="${classPageMaker.cri.page}" />
+	<input type="hidden" id="classSearchType" value="${cscri.searchType}" />
+	<input type="hidden" id="classCriPage" value="${classPageMaker.cri.page}" />
+	
 		<h1 class="classTitle"></h1>
 		<button type="button" onclick="location.href='/eepp/board/boardList'">직무 Community</button>
 		<button type="button" id="openNewClass" onclick="location.href='classOpenView${classPageMaker.makeQuery(classPageMaker.cri.page)}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'">강좌개설</button>
@@ -315,5 +136,7 @@
 			</c:choose>
 		</div>
 		<hr>
+		
+		<script src="${pageContext.request.contextPath}/js/class/classMain.js"></script>
 	</body>
 </html>
