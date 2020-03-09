@@ -554,7 +554,7 @@ public class LoginController {
 	
 	/* 비밀번호 재설정 */
 	@RequestMapping(value = "login/resetPassword.me", method = { RequestMethod.GET, RequestMethod.POST })
-		public String resetPassword(HttpServletResponse response, UserVO userVO) throws IOException{
+		public void resetPassword(HttpServletResponse response, UserVO userVO) throws IOException{
 		
 		String inputPass = userVO.getuPassword();
 		String encodingPW = pwEncoder.encode(inputPass);
@@ -562,16 +562,13 @@ public class LoginController {
 		System.out.println("비밀번호 암호화 완료");
 		
 		int result = ls.resetPassword(userVO);
-		
+		System.out.println(result);
 		if(result == 1) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('비밀번호가 재설정되었습니다. \n 로그인해주세요.'); history.go(-1);</script>");
+			out.println("<script>alert('비밀번호가 재설정되었습니다. 로그인해주세요.'); location.href='/eepp/login/login.do';</script>");
 			out.close();
-			return "login.do";
 		}
-		
-		return "redirect:login";
 	}
 	
 	
