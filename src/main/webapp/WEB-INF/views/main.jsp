@@ -24,7 +24,7 @@
 			<p><a href="${pageContext.request.contextPath}/board/boardList">직무게시판</a></p>
 			<p><a href="${pageContext.request.contextPath}/class/classList">클래스</a></p>
 			<p><a href="${pageContext.request.contextPath}/class/eatingMain">오늘뭐먹지</a></p>
-			<p><a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a></p>
+			<p><a href="${pageContext.request.contextPath}/mypage">MyPage</a></p>
 			<p><a href="${pageContext.request.contextPath}/class/eatingMain">오늘뭐먹지</a></p>
 			</div>
 			

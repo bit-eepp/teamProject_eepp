@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/include/header.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/loginAndJoin.css">
+<style>
+	
+
+</style>
 </head>
 <body>
 
@@ -153,7 +157,7 @@
 			</c:when>
 
 			<c:otherwise>
-			<form method="POST" id="joinNormalForm" name="joinNormalForm" action="join.me" class="px-4 py-3">
+			<form method="POST" id="joinNormalForm" name="joinNormalForm" action="join.me" class="px-4 py-3" enctype="multipart/form-data">
 			
 				<div class="form-group">
 					<table>
@@ -220,19 +224,30 @@
 					<button type="button" class="btn btn-info" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
 					</td>
 					</tr>
-					
+					<tr>
+					<th class="input-title"><span class="required">&#8226;</span>프로필 설정</th>
+					<td>
+					<div class= "profile">
+						<img src="${pageContext.request.contextPath}/img/basic_img.png" class="basic_img"/>
+								<div class="inputArea"><br>
+									<input type="file" name="file" id="showImg"/>
+								</div>
+								<br>
+					</div><!-- profile -->
+					<p class="info_profile">이미지 설정이 없을 시 기본 프로필 사진으로 설정 됩니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;프로필은 마이페이지에서도 변경이 가능합니다.</p>
+					</td>
+					</tr>
 				</tbody>
 				</table>
 			</div>
-			
-				<button type="submit" class="btn btn-submit" id="submit">회원가입</button>
 				
+	<button type="submit" class="btn btn-submit" id="submit">회원가입</button>
 		</form>
 		</c:otherwise>
 	</c:choose>
 	</div>
 	</section>
-</div>
 <script src="${pageContext.request.contextPath}/js/join.js"></script>
+</div>
 </body>
 </html>
