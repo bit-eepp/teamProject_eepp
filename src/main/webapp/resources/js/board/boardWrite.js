@@ -4,7 +4,6 @@
 
 
 $(document).ready(function(){
-
 	// 게시판 리스트로 다시 돌아가기
 	var formObj = $('form[role="form"]');
 	
@@ -37,27 +36,26 @@ $(document).ready(function(){
 		fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
 		fontNamesIgnoreCheck : [ '맑은고딕' ]
 	}); 
-	
-	function writeCheckForm() {
-		var bCategory = document.wform.bCategory;
-		var bSubject = document.wform.bSubject;
-		var bTitle = document.wform.bTitle;
-		
-		if(bCategory.value == '') {
-			alert("게시판 카테고리를 선택 해주세요.");
-			document.wform.bCategory.focus();
-			return false;
-		} else if(bSubject.value == '') {
-			alert("주제를 선택해주세요.");
-			document.wform.bSubject.focus();
-			return false;
-		} else if(bTitle.value == '') {
-			alert("제목을 입력해주세요");
-			document.wform.bTitle.focus();
-			return false;
-		} else {
-			return true;
-		}
-	}
-	
 });
+
+function writeCheckForm() {
+	var bCategory = document.wform.bCategory;
+	var bSubject = document.wform.bSubject;
+	var bTitle = document.wform.bTitle;
+	
+	if(bCategory.value == '') {
+		alert("게시판 카테고리를 선택 해주세요.");
+		document.wform.bCategory.focus();
+		return false;
+	} else if(bSubject.value == '') {
+		alert("주제를 선택해주세요.");
+		document.wform.bSubject.focus();
+		return false;
+	} else if(bTitle.value == '') {
+		alert("제목을 입력해주세요");
+		document.wform.bTitle.focus();
+		return false;
+	} else {
+		return true;
+	}
+}
