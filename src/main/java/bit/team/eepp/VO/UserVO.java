@@ -17,11 +17,15 @@ public class UserVO {
 	private String snsType;
 	private String session_key;
 	private Timestamp session_limit;
+	private String uprofile;
 	
+
 	public UserVO() {}
 
 	public UserVO(int user_id, int grade_Id, String uEmail, String uPassword, String uNickname, Timestamp uJoinDate,
-			Timestamp uModifyDate, String uaccessToken, String urefrechToken, String uPhone, String snsType, String session_key, Timestamp session_limit) {
+			Timestamp uModifyDate, String uaccessToken, String urefrechToken, String uPhone, String snsType,
+			String session_key, Timestamp session_limit, String uprofile) {
+		super();
 		this.user_id = user_id;
 		this.grade_Id = grade_Id;
 		this.uEmail = uEmail;
@@ -35,8 +39,17 @@ public class UserVO {
 		this.snsType = snsType;
 		this.session_key = session_key;
 		this.session_limit = session_limit;
+		this.uprofile = uprofile;
 	}
 
+	public String getUprofile() {
+		return uprofile;
+	}
+	
+	public void setUprofile(String uprofile) {
+		this.uprofile = uprofile;
+	}
+	
 	public String getSession_key() {
 		return session_key;
 	}

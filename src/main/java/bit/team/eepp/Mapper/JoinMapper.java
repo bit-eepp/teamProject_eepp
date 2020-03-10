@@ -13,7 +13,7 @@ public interface JoinMapper {
 	public void JoinWithSNS(UserVO userVO);
 	
 	// 보통 회원가입
-	@Insert("insert into users (user_id, grade_id, uEmail, uPassword, uNickname, uJoinDate, uPhone) values (users_seq.nextval, 2, #{uEmail}, #{uPassword}, #{uNickname}, SYSDATE, #{uPhone})")
+	@Insert("insert into users (user_id, grade_id, uEmail, uPassword, uNickname, uJoinDate, uPhone,uprofile) values (users_seq.nextval, 2, #{uEmail}, #{uPassword}, #{uNickname}, SYSDATE, #{uPhone},'${uprofile}')")
 	public void joinNormal(UserVO userVO);
 	
 	// 이메일 중복확인
