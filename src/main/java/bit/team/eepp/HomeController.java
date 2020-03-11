@@ -36,7 +36,6 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("main");
 		
-		
 		return mv;
 	}
 	
