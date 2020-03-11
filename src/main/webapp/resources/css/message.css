@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* message페이지 */
+.messageForm {padding: 20px 20px 30px;}
+.messageForm .nav-tabs{border-bottom: 1px solid #59bfbf;}
+.messageForm .tablist-li{border-right: 1px solid #ddd; padding: 0 15px;}
+.messageForm .nav-item .nav-link{color: #26274c;}
+.messageForm .nav-item a.active{color: #59bfbf!important;background-color: #fff!important;border-color:#59bfbf #59bfbf #fff!important;}
+.messageForm .notelist .notelist_head{
+	list-style: none;
+    padding: 10px 15px 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 0;
+}
+.messageForm .tab-content{
+	height: 300px;
+    border-right: 1px solid #59bfbf;
+    border-left: 1px solid #59bfbf;
+    border-bottom: 1px solid #59bfbf;
+ }
+ .messageForm .tab-content .note_title{border-bottom: 1px solid #ddd; padding: 10px 15px;}
+.messageForm .notelist .notelist_head .note_check{width:3%;}
+.messageForm .notelist .notelist_head .note_sender,.notelist .notelist_head .note_receiver{width:18%;}
+.messageForm .notelist .notelist_head .note_content{width:45%;}
+.messageForm .notelist .notelist_head .note_mdate{width:17%;}
+.messageForm .notelist .notelist_head .note_mstatus{width:10%;}
+/* message 여기까지 */
