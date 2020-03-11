@@ -1,5 +1,7 @@
 package bit.team.eepp.Service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.annotations.Insert;
@@ -7,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import bit.team.eepp.Mapper.UserMapper;
+import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
 
@@ -42,6 +45,14 @@ public class UserService{
 	
 	public int haveReplyActive(UserActiveVO activeVO) {
 		return userMapper.haveReplyActive(activeVO);
+	}
+	
+	public List<MessageVO> myReceiveMessage(MessageVO messageVO) {
+		return userMapper.myReceiveMessage(messageVO);
+	}
+	
+	public List<MessageVO> mySendMessage(MessageVO messageVO) {
+		return userMapper.mySendMessage(messageVO);
 	}
 
 }
