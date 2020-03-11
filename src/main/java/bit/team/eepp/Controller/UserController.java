@@ -48,10 +48,10 @@ public class UserController{
     @RequestMapping("/mypage")
     public String mypage(Model model) throws Exception{
     	logger.info("head to mypage");
-    	return "myPage/myPage";
+    	return "user/myPage/myPage";
     }
     
-    @RequestMapping(value = ( "user/mypage" ), method = RequestMethod.POST )
+    @RequestMapping(value = ( "/mypage" ), method = RequestMethod.POST )
     public String postGoodsRegister(BoardVO boardvo,ScrapVO scrapvo,HttpSession session,UserVO userVO, MultipartFile file,Model model) throws Exception {
     	//유저 세션 받아오기
     	Object loginSession = session.getAttribute("loginUser");
@@ -86,24 +86,16 @@ public class UserController{
         System.out.println("img = " + userVO.getUprofile());
         System.out.println("=================");
         
-        
-        
-        
-        //다시 업데이트한 정보를 userVO2 객체에 넣은다음에 그 객체를 session.setAttribute("loginUser", userVO2); 로 해주면되지않을까여
-        //안들어있으묜 userMapper에 유저정보불러오는거있는데 그거 한번 하고 session.set하면 될거가튼데
-        //UserVO user2 = us.UserInfo(userVO.getuEmail());
-        //session.setAttribute("loginUser", user2);
-        
         fs.profileUpdate(userVO);
         
-        return "redirect:user/mypage";
+        return "redirect:/mypage";
     }
     
     @RequestMapping("/message")
 	public String message(Model model, MessageVO messageVO){
 		logger.info("Message Method Active");
 
-		return "user/message";
+		return "user/message/message";
 	}
 	
     /* 쪽지 */
@@ -112,7 +104,7 @@ public class UserController{
 	public String messageView(Model model, MessageVO messageVO, HttpServletRequest request){
 		logger.info("MessageView Method Active");
 
-		return "user/messageView";
+		return "user/message/messageView";
 	}
 	
 	@ResponseBody

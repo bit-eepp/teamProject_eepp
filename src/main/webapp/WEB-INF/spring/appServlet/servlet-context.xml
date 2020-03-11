@@ -53,7 +53,7 @@
 	<!-- interceptor 설정 -->
 	<interceptors>
 		<interceptor>
-			<mapping path="/*/**" />
+			<mapping path="/*" />
 			<exclude-mapping path="/logout.do" />
 			<beans:ref bean="rememberMeInterceptor" />
 		</interceptor>
@@ -74,7 +74,7 @@
 	
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="/Applications/apache-tomcat-9.0.30/webapps/ROOT" />
+		<beans:constructor-arg value="/Users/dohxxzun/Documents/apache-tomcat-9.0.30/webapps/ROOT" />
 	</beans:bean>
 
 
