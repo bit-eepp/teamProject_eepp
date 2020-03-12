@@ -1,9 +1,11 @@
 package bit.team.eepp.Controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,17 +24,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import bit.team.eepp.Service.JoinService;
 import bit.team.eepp.Service.UserService;
+import bit.team.eepp.Utils.UploadFileUtils;
 import bit.team.eepp.VO.UserVO;
 
 @Controller
 public class JoinController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
+	
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 	
 	@Inject
 	UserService us;
@@ -85,9 +92,14 @@ public class JoinController {
 		
 		return "join/joinForm";
 	}
+	
+	@RequestMapping("join/join")
+	public void join1() throws Exception{
+		logger.info("head to joinpage");
+	}
 
 	@RequestMapping("join/join.me")
-	public void join(HttpServletRequest request, HttpSession session, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException{
+	public void join(HttpServletRequest request, HttpSession session, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletResponse response,MultipartFile file) throws Exception{
 		
 		System.out.println("회원 등록 페이지");
 		
@@ -97,6 +109,23 @@ public class JoinController {
 		String uEmail = request.getParameter("email_01") + "@" + request.getParameter("email_02");
 		userVO.setuEmail(uEmail);
 		userVO.setuPhone(uPhone1 + "-" + uPhone2 + "-" + uPhone3);
+		
+		//프로필 업로드
+		String imgUploadPath = uploadPath;
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		if (file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			userVO.setUprofile(ymdPath + File.separator + fileName);
+		} else {
+			fileName = "/eepp"+File.separator + "img" + File.separator + "basic_img.png";
+			userVO.setUprofile(fileName);
+		}
+		System.out.println("=================");
+		System.out.println("img = " + userVO.getUprofile());
+		System.out.println("=================");
+		//프로필 업로드 끝
+		
 		
 		String inputPass = userVO.getuPassword();
 		String encodingPW = pwEncoder.encode(inputPass);
@@ -136,7 +165,7 @@ public class JoinController {
 		
 		System.out.println("회원등록 완료");
 		
-		//등록된 회원 정보를 /에 전달
+		//등록된 회원 정보를 m/에 전달
 		UserVO user = new UserVO();
 		user = us.UserInfo(request.getParameter("uEmail")); // 이미 등록된 이메일이면 DB에서 정보 가져오기
 		session.setAttribute("loginUser", user);
@@ -239,3 +268,4 @@ public class JoinController {
 
 	
 }
+
