@@ -2,7 +2,6 @@ package bit.team.eepp.Controller;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,9 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import bit.team.eepp.Page.MessageCriteria;
+import bit.team.eepp.Page.MessagePageMaker;
 import bit.team.eepp.Service.FileService;
 import bit.team.eepp.Service.ScrapService;
 import bit.team.eepp.Service.UserService;
@@ -37,7 +39,6 @@ public class UserController{
     
     @Inject
 	UserService us;
-   
     
     @Autowired
     FileService fs;
@@ -91,48 +92,98 @@ public class UserController{
         return "redirect:/mypage";
     }
     
-    @RequestMapping("/message")
-	public String message(Model model, MessageVO messageVO){
+    /* 쪽지 */
+    @RequestMapping(value="/message",method = { RequestMethod.GET, RequestMethod.POST })
+	public String message(MessageCriteria msgCri, Model model, HttpSession session, MessageVO messageVO, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
 		logger.info("Message Method Active");
+		
+		Object loginSession = session.getAttribute("loginUser");
+		UserVO user = (UserVO)loginSession;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("messageType", messageType);
+		map.put("user_id", user.getUser_id());
+		
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put("msgCri", msgCri);
+		map2.put("messageType", messageType);
+		map2.put("user_id", user.getUser_id());
+		
+		MessagePageMaker pageMaker = new MessagePageMaker();
+		int total = us.messageListCount(map);
+		pageMaker.setCri(msgCri);
+		pageMaker.setTotalCount(total);
+		
+		model.addAttribute("messageList", us.messageList(map2));
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("messageType", messageType);
 
 		return "user/message/message";
 	}
-	
-    /* 쪽지 */
     
 	@RequestMapping(value = "/message/messageView", method = { RequestMethod.GET, RequestMethod.POST })
-	public String messageView(Model model, MessageVO messageVO, HttpServletRequest request){
+	public String messageView(Model model, MessageVO messageVO, HttpServletRequest request, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
 		logger.info("MessageView Method Active");
-
+		
+		if(request.getParameter("changeStatus") != null) {
+			us.changeMessageStatus(messageVO);
+			logger.info("쪽지 확인 상태 변경 완료");
+		}
+		
+		if(request.getParameter("sender_id") != null) {
+			model.addAttribute("receiveMsg", us.showMyReceiveMessage(messageVO));
+			model.addAttribute("messageType", messageType);
+		}else if(request.getParameter("receiver_id") != null) {
+			model.addAttribute("sendMsg",us.showMySendMessage(messageVO));
+			model.addAttribute("messageType", messageType);
+		}
+		
 		return "user/message/messageView";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/sendMessage")
-	public Map<String, Object> sendMessage(Model model, MessageVO messageVO){
-		logger.info("sendMessage Method Active");
+	@RequestMapping(value="/deleteMessage",method = { RequestMethod.GET, RequestMethod.POST })
+	public String deleteMessage(Model model, MessageVO messageVO, HttpServletRequest request, RedirectAttributes rttr) {
 		
-		List<MessageVO> message = us.mySendMessage(messageVO);
-	    Map<String, Object> messageList = new HashMap<String, Object>();
-	    
-	   System.out.println(message.toString());
-	    messageList.put("messageList", message);
+		logger.info("deleteMessage Method Active");
+		System.out.println("mid는"+request.getParameter("checkRow"));
+		System.out.println(request.getParameter("messageType"));
+		if(request.getParameter("checkRow") != null) {
+			String[] checkIdx = request.getParameter("checkRow").toString().split(",");
+			for (int i=0; i<checkIdx.length; i++) {
+				System.out.println("mid는"+Integer.parseInt(checkIdx[i]));
+				messageVO.setMid(Integer.parseInt(checkIdx[i]));
+			    us.deleteMessage(messageVO);
+			    logger.info("쪽지 선택 삭제 완료");
+			}
+			rttr.addAttribute("messageType", request.getParameter("messageType"));
+		}else {
+			us.deleteMessage(messageVO);
+			logger.info("쪽지 삭제 완료");
+		}
 
-		return messageList;
+		return "redirect:/message";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/receiveMessage")
-	public Map<String, Object> receiveMessage(Model model, MessageVO messageVO) {
+	@RequestMapping(value="message/sendMessage",method = { RequestMethod.GET, RequestMethod.POST })
+	public String sendMessage(Model model, MessageVO messageVO, HttpServletRequest request,@RequestParam(value = "messageType", required = false, defaultValue = "") String messageType) {
+		logger.info("sendMessage Method Active");
 		
-		logger.info("receiveMessage Method Active");
+		messageVO.setUnickname(request.getParameter("uNickname"));
+		model.addAttribute("sendMessage",messageVO);
+		model.addAttribute("messageType", messageType);
 		
-		List<MessageVO> message = us.myReceiveMessage(messageVO);
-	    Map<String, Object> messageList = new HashMap<String, Object>();
-	    
-	   System.out.println(message.toString());
-	    messageList.put("messageList", message);
-
-		return messageList;
+		return "user/message/sendMessage";
 	}
+	
+	@RequestMapping(value="/messageSuccess",method = { RequestMethod.POST,RequestMethod.POST})
+	public String messageSuccess(Model model, MessageVO messageVO, HttpServletRequest request, RedirectAttributes rttr) {
+		logger.info("messageSuccess Method Active");
+		
+		us.replyMessage(messageVO);
+		logger.info("쪽지 답장 완료");
+		rttr.addAttribute("messageType", "myReceiveMsg");
+		
+		return "redirect:/message";
+	}
+	
 }

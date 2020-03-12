@@ -10,13 +10,12 @@ public class MessageVO {
 	private int receiver_id;
 	private String mcontent;
 	private String status;
-	@JsonFormat(pattern = "yy-MM-dd HH:mm", timezone = "Asia/Seoul")
-	private Timestamp mdate;
+	private String mdate;
 	private String uNickname;
 	
 	public MessageVO() {}
 	
-	public MessageVO(int mid, int sender_id, int receiver_id, String mcontent, String status, Timestamp mdate,
+	public MessageVO(int mid, int sender_id, int receiver_id, String mcontent, String status, String mdate,
 			String uNickname) {
 		this.mid = mid;
 		this.sender_id = sender_id;
@@ -65,10 +64,10 @@ public class MessageVO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Timestamp getMdate() {
+	public String getMdate() {
 		return mdate;
 	}
-	public void setMdate(Timestamp mdate) {
+	public void setMdate(String mdate) {
 		this.mdate = mdate;
 	}
 	
