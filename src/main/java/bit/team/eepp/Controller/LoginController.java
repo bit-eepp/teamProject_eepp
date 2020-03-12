@@ -154,7 +154,7 @@ public class LoginController {
 					logger.info("자동 로그인 정보 저장 완료");
 				}
 				
-				response.sendRedirect("main.ma");
+				response.sendRedirect("/eepp/");
 				
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
@@ -219,20 +219,20 @@ public class LoginController {
   				if(user.getSnsType() == null) {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('잘못된 로그인 방식입니다.'); history.go(-1);</script>");
+				out.println("<script>alert('이미 가입된 이메일입니다.'); history.go(-1);</script>");
 				out.close();
-				return "/main";
+				return "/";
 			}
-  				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검
+  				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
   				if(user.getSnsType().equals("kakao")) {
 					session.setAttribute("loginUser", user);
 				}// 다른 sns로 가입한 이메일일 경우
   				else{
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('잘못된 로그인 방식입니다.'); history.go(-1);</script>");
+					out.println("<script>alert('다른 SNS계정으로 가입된 이메일입니다.'); history.go(-1);</script>");
 					out.close();
-					return "/main";
+					return "/";
 				}
 				
 			}
@@ -240,7 +240,7 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/main.ma";
+		return "redirect:/";
 	}
 	
 	/* 네이버 로그인 성공시 callback호출 메소드 */
@@ -250,7 +250,7 @@ public class LoginController {
 		
 		//정보동의 취소시 이전페이지로 이동
 		if(code.equals("0")) {
-			return "main";
+			return "/";
 		}
 		
 		OAuth2AccessToken oauthToken;
@@ -301,20 +301,20 @@ public class LoginController {
 	      				if(user.getSnsType() == null) {
 						response.setContentType("text/html; charset=UTF-8");
 						PrintWriter out = response.getWriter();
-						out.println("<script>alert('잘못된 로그인 방식입니다.'); history.go(-1);</script>");
+						out.println("<script>alert('이미 가입된 이메일입니다.'); history.go(-1);</script>");
 						out.close();
-						return "/main";
+						return "/";
 					}
-	      				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검
+	      				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
 	      				if(user.getSnsType().equals("naver")) {
 	    					session.setAttribute("loginUser", user);
 	    				}// 다른 sns로 가입한 이메일일 경우
 	      				else{
 	    					response.setContentType("text/html; charset=UTF-8");
 	    					PrintWriter out = response.getWriter();
-	    					out.println("<script>alert('잘못된 로그인 방식입니다.'); history.go(-1);</script>");
+	    					out.println("<script>alert('다른 SNS계정으로 가입된 이메일입니다.'); history.go(-1);</script>");
 	    					out.close();
-	    					return "/main";
+	    					return "/";
 	    				}
 						
 					}
@@ -322,7 +322,7 @@ public class LoginController {
 					e.printStackTrace();
 				}
 				
-				return "redirect:/main.ma";
+				return "redirect:/";
 			}
 	
 	
@@ -402,9 +402,9 @@ public class LoginController {
       				if(user.getSnsType() == null) {
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('잘못된 로그인 방식입니다.'); history.go(-1);</script>");
+					out.println("<script>alert('이미 가입된 이메일입니다.'); history.go(-1);</script>");
 					out.close();
-					return "/main";
+					return "/";
 				}
       				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검
       				if(user.getSnsType().equals("google")) {
@@ -413,9 +413,9 @@ public class LoginController {
       				else{
     					response.setContentType("text/html; charset=UTF-8");
     					PrintWriter out = response.getWriter();
-    					out.println("<script>alert('잘못된 로그인 방식입니다.'); history.go(-1);</script>");
+    					out.println("<script>alert('다른 SNS계정으로 가입된 이메일입니다.'); history.go(-1);</script>");
     					out.close();
-    					return "/main";
+    					return "/";
     				}
       				
       			}
@@ -423,7 +423,7 @@ public class LoginController {
       			e.printStackTrace();
       		}
       		
-      		return "redirect:/main.ma";
+      		return "redirect:/";
       	}
 	
 	/* 로그아웃 */
@@ -453,7 +453,7 @@ public class LoginController {
 				logger.info("자동 로그인 정보 삭제");
 			}
 		}
-		return "redirect:/main.ma";
+		return "redirect:/";
 	}
 	
 	/* 비밀번호 재설정 */
