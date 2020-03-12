@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/*
+* 마이페이지 css 부
+*/
+
+#showImg {
+	margin-left:25px;
+}
+
+#register_Btn {
+	width: 250px;
+}
+.info tr {
+	pading : 10px 0;
+}
+
+.table {
+	text-align: center;
+	height : 250px;
+}
+
+.thead-color {
+	background-color: #59bfbf;
+	color: white;
+	
+}
+
+.thead-color th {
+	font-size:20px;
+	height: 50px;
+	text-align : center;
+}
+
+
+.trColor {
+	color: #e7438b;
+	font-weight: bold;
+	font-size: 15px;
+	
+	height: 130px;
+}
+
+.trColor td{
+	font-size : 16px;
+	line-height: 60px;
+}
+
+.input-title {
+	font-weight: bold;
+	font-size: 16px;
+	color: #59bfbf;
+	width: 150px
+}
+
+.required {
+	color: #e7438b;
+	margin-right: 10px;
+}
+
+.sc-title {
+	text-align: center;
+	font-size: 22px;
+	color : #59bfbf;
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.sc-title:before {
+	content: "";
+	position: absolute;
+	width: 20%;
+	height: 2px;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background: #59bfbf;
+}
+
+.sc-title:after {
+	content: "";
+	position: absolute;
+	width: 20%;
+	height: 2px;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: #59bfbf;
+}
+
+input {
+	width: 280px;
+}
+.drop{
+	font-size:13px;
+}
