@@ -1,11 +1,13 @@
 package bit.team.eepp.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import bit.team.eepp.Mapper.UserMapper;
@@ -35,10 +37,6 @@ public class UserService{
 		return userMapper.haveBoardActive(activeVO);
 	}
 	
-//	public void classActive(UserActiveVO activeVO) {
-//		userMapper.classActive(activeVO);
-//	}
-	
 	public void replyActive(UserActiveVO activeVO) {
 		userMapper.replyActive(activeVO);
 	}
@@ -47,12 +45,32 @@ public class UserService{
 		return userMapper.haveReplyActive(activeVO);
 	}
 	
-	public List<MessageVO> myReceiveMessage(MessageVO messageVO) {
-		return userMapper.myReceiveMessage(messageVO);
+	public int messageListCount(Map<String, Object> map) {
+		return userMapper.messageListCount(map);
 	}
 	
-	public List<MessageVO> mySendMessage(MessageVO messageVO) {
-		return userMapper.mySendMessage(messageVO);
+	public List<MessageVO> messageList(Map<String, Object> map) {
+		return userMapper.messageList(map);
+	}
+	
+	public MessageVO showMyReceiveMessage(MessageVO messageVO) {
+		return userMapper.showMyReceiveMessage(messageVO);
+	}
+	
+	public MessageVO showMySendMessage(MessageVO messageVO) {
+		return userMapper.showMySendMessage(messageVO);
+	}
+	
+	public void deleteMessage(MessageVO messageVO) {
+		userMapper.deleteMessage(messageVO);
+	}
+	
+	public void changeMessageStatus(MessageVO messageVO) {
+		userMapper.changeMessageStatus(messageVO);
+	}
+	
+	public void replyMessage(MessageVO messageVO) {
+		userMapper.replyMessage(messageVO);
 	}
 
 }
