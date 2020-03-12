@@ -12,8 +12,9 @@
 <body>
 <script type="text/javascript">
 function openMsg(){
- var tw = window.open("http://localhost:8282/eepp/message", "message", "width=700,height=440" );
-}
+	 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
+			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
+	}
 </script>
 <input type="hidden" id="user_id" value="${loginUser.user_id}" />
 <input type="hidden" id="uNickname" value="${loginUser.uNickname}" />

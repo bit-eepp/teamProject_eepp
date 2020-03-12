@@ -18,8 +18,9 @@ function getContextPath() {
 $(document).ready(function() {
 	
 	$(".closeBtn").click(function() {
+		var msgType = $(".messageType").val();
 		window.open('about:blank', '_self').close();
-		openMsg();
+		openMsg(msgType);
 	});
 	
 	$(".deleteBtn").click(function() {
@@ -34,10 +35,12 @@ function deleteMsg(){
 		type: "get",
 		data : {
 			"mid" : $(".mid").val(),
+			"messageType" : $(".messageType").val()
 		},
 		success : function(data) {
 			alert("쪽지가 삭제되었습니다.");
-			reset();
+			var msgType = $(".messageType").val();
+			reset(msgType);
 		},
 		error : function(request, status, error) {
 			alert("에러가 발생했습니다.");
@@ -47,14 +50,14 @@ function deleteMsg(){
 	})
 }
 
-function openMsg(){
-	 var tw = window.open("http://localhost:8282/eepp/message?messageType="+$(".messageType").val(),"message","left="+(screen.availWidth-700)/2
+function openMsg(msgType){
+	 var tw = window.open("http://localhost:8282/eepp/message?messageType="+msgType,"message","left="+(screen.availWidth-700)/2
 			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 }
 
-function reset(){
+function reset(msgType){
 	window.open('about:blank', '_self').close();
-	openMsg();
+	openMsg(msgType);
 }
 
 </script>

@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+/* message페이지 */
+.messageForm {padding: 20px 20px 0;}
+.messageForm .nav-tabs{border-bottom: 2px solid #59bfbf;}
+.messageForm .tablist-li{border-right: 1px solid #ddd; padding: 0 15px;}
+.messageForm .nav-item .nav-link{color: #26274c;}
+.messageForm .nav-item a.active{color: #59bfbf!important;background-color: #fff!important;border-color:#59bfbf #59bfbf #fff!important;}
+.messageForm .notelist .notelist_head{
+	list-style: none;
+    padding: 10px 15px 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 0;
+}
+.messageForm .tab-content{
+	height: 300px;
+    border-right: 2px solid #59bfbf;
+    border-left: 2px solid #59bfbf;
+    border-bottom: 2px solid #59bfbf;
+ }
+ .messageForm .nav-tabs .nav-item {margin-bottom:-2px!important;}
+ .messageForm .nav-tabs .nav-link{border: 2px solid transparent!important;}
+ .messageForm .tab-content .note_title{border-bottom: 1px solid #ddd; padding: 10px 15px;}
+.messageForm .notelist .notelist_head .note_check{width:3%;}
+.messageForm .notelist .notelist_head .note_type{width:18%;}
+.messageForm .notelist .notelist_head .note_content{width:45%;}
+.messageForm .notelist .notelist_head .messageType_mdate, .messageForm .notelist .notelist_head .messageType_mdate{width:17%;}
+.messageForm .notelist .notelist_head .note_mstatus{width:10%;}
+.selectDeleteBtn {font-size: 14px;margin-right: 8px;color:#59bfbf;border:1px solid #59bfbf;margin: 10px 20px;padding: 5px 15px;}
+/* message 여기까지 */
+
+/* messageView */
+.messageView_body{background-color: #e8f8f8;}
+#receiveMessageForm, #sendMessageForm, #replyMessage{overflow: hidden;}
+.sc-messageView .sc-title{font-size:26px; margin:20px 0;}
+.sc-messageView .container {padding: 0 20px;}
+.sc-messageView form {font-size:14px;}
+.sc-messageView form .form-group {margin-bottom:15px!important;padding: 0 10px 20px 10px;background-color: #fff;height: 280px;}
+.sc-messageView form .form-group table {width:100%;}
+.sc-messageView form .form-group table .form-title {border-bottom: 1px solid #a3e1e1;}
+.sc-messageView form .form-group table tr th.input-title{color: #59bfbf;}
+.sc-messageView form .form-group table tr td{padding: 10px 0 10px 5px;}
+.sc-messageView form .btn{font-size: 14px;margin-right: 8px;color:#59bfbf;}
+/* messageView 여기까지 */

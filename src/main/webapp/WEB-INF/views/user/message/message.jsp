@@ -150,7 +150,7 @@ function reset(msgType){
 						
 							<ul class="notelist_head">
 								<li class="note_cont note_check">
-									<input type="checkbox" class="pickCheck" value="${msg.mid}" />
+									<input type="checkbox" name="pickCheck" class="pickCheck" value="${msg.mid}" />
 								</li>
 								<li class="note_cont note_type">${msg.uNickname}</li>
 								<li class="note_cont note_content">

@@ -145,8 +145,7 @@ public class UserController{
 	public String deleteMessage(Model model, MessageVO messageVO, HttpServletRequest request, RedirectAttributes rttr) {
 		
 		logger.info("deleteMessage Method Active");
-		System.out.println("mid는"+request.getParameter("checkRow"));
-		System.out.println(request.getParameter("messageType"));
+
 		if(request.getParameter("checkRow") != null) {
 			String[] checkIdx = request.getParameter("checkRow").toString().split(",");
 			for (int i=0; i<checkIdx.length; i++) {
@@ -158,6 +157,7 @@ public class UserController{
 			rttr.addAttribute("messageType", request.getParameter("messageType"));
 		}else {
 			us.deleteMessage(messageVO);
+			rttr.addAttribute("messageType", request.getParameter("messageType"));
 			logger.info("쪽지 삭제 완료");
 		}
 
