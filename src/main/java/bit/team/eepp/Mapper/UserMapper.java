@@ -6,8 +6,11 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.MessageVO;
+import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
 
@@ -60,4 +63,38 @@ public interface UserMapper {
 	// 쪽지 답장
 	@Select("insert into message (mid, sender_id, receiver_id, mcontent, mdate) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate)")
 	public void replyMessage(MessageVO messageVO);
+	
+	/*
+	 * 마이페이지
+	 */
+
+	// 프로필 넣기
+	@Update("UPDATE users SET uprofile = '${uprofile}' WHERE user_id = ${user_id}")
+	public void profileUpdate(UserVO userVO) throws Exception;
+
+	// 닉네임 중복체크
+	@Select("select count(*) from users where uNickname = #{uNickname}")
+	public int mypagenickNameCheck(UserVO userVO);
+
+	// 닉네임 변경
+	@Update("UPDATE users SET uNickname = '${uNickname}' WHERE user_id = ${user_id}")
+	public void myNickNameUpdate(UserVO userVO);
+
+	// 내가 쓴 게시물 총 개수
+	public abstract int listCount(Map<String, Object> map);
+
+	// 내가 쓴 댓글 총 개수
+	public abstract int replyCount(Map<String, Object> map);
+
+	// 내가 내 스크랩 개수
+	public abstract int scrapCount(Map<String, Object> map);
+
+	// 내가 쓴 게시물 리스트 + paging, 정렬 : 시간순
+	public abstract List<BoardVO> myBoardList(Map<String, Object> map);
+
+	// 회원탈퇴
+	public abstract void withdrawal(UserVO userVO);
+	
+	// 내 스크랩 리스트
+	public List<ScrapVO> scrapList(UserVO userVO);
 }

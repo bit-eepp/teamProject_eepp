@@ -11,7 +11,9 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import bit.team.eepp.Mapper.UserMapper;
+import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.MessageVO;
+import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
 
@@ -71,6 +73,52 @@ public class UserService{
 	
 	public void replyMessage(MessageVO messageVO) {
 		userMapper.replyMessage(messageVO);
+	}
+	
+	/*
+	 * 마이페이지
+	 */
+
+	// (마이페이지)프로필 업로드
+	public void profileUpdate(UserVO userVO) throws Exception {
+		userMapper.profileUpdate(userVO);
+	}
+
+	// (마이페이지)내 게시글 갯수
+	public int listCount(Map<String, Object> map) {
+		return userMapper.listCount(map);
+	}
+
+	// (마이페이지)내 댓글 갯수
+	public int replyCount(Map<String, Object> map) {
+		return userMapper.replyCount(map);
+	}
+
+	// (마이페이지)내 댓글 갯수
+	public int scrapCount(Map<String, Object> map) {
+		return userMapper.scrapCount(map);
+	}
+
+	// (마이페이지)내 게시글 리스트
+	public List<BoardVO> myBoardList(Map<String, Object> map) {
+		return userMapper.myBoardList(map);
+	}
+	//(마이페이지) 회원탈퇴
+	public void withdrawal(UserVO userVO) {
+		userMapper.withdrawal(userVO);
+	}
+
+	public int mypagenickNameCheck(UserVO userVO) {
+		
+		return userMapper.mypagenickNameCheck(userVO);
+	}
+	
+	public void myNickNameUpdate(UserVO userVO) {
+		userMapper.myNickNameUpdate(userVO);
+	}
+
+	public List<ScrapVO> scrapList(UserVO userVO) {
+		return userMapper.scrapList(userVO);
 	}
 
 }
