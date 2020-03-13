@@ -84,7 +84,7 @@ function openMsg(msgType){
 		<section id="sendMessage" class="sc-messageView">
 			<div class="container">
 			<h1 class="sc-title">쪽지보내기</h1>
-			<form method="POST" id="sendMessage" action="SuccessMessage">
+			<form method="POST" id="sendMessage" action="messageSuccess">
 				<input type="hidden" name="sender_id" class="sender_id" value="${loginUser.user_id}">
 				<input type="hidden" name="receiver_id" class="receiver_id" value="${sendMessage.receiver_id}">
 				<input type="hidden" name="messageType" class="messageType" value="${messageType}">

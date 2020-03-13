@@ -20,12 +20,12 @@
 	</head>
 	
 	<body>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 function sendMessage(uNickname, receiver_id){
 	 var tw = window.open("http://localhost:8282/eepp/message/sendMessage?receiver="+uNickname+"&receiver_id="+receiver_id+"&from=out", "sendmessage","left="+(screen.availWidth-370)/2
 			 +",top="+(screen.availHeight-425)/2+",width=370,height=425");
 }
-</script> -->
+</script>
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 	<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
 	<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">

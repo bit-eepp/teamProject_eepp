@@ -40,27 +40,27 @@ public interface UserMapper {
 	
 	// 쪽지 수 count
 	public int messageListCount(Map<String, Object> map);
-	
+		
 	// 받은 쪽지 출력
 	public List<MessageVO> messageList(Map<String, Object> map);
-	
+		
 	// 받은 쪽지 상세 출력
 	@Select("select * from message inner join users on sender_id = user_id AND sender_id = #{sender_id} where mid = #{mid}")
 	public MessageVO showMyReceiveMessage(MessageVO messageVO);
-	
+		
 	// 보낸 쪽지 상세 출력
 	@Select("select * from message inner join users on receiver_id = user_id AND receiver_id = #{receiver_id} where mid = #{mid}")
 	public MessageVO showMySendMessage(MessageVO messageVO);
-	
+		
 	// 쪽지 삭제
 	@Select("delete message where mid = #{mid}")
 	public void deleteMessage(MessageVO messageVO);
-	
+		
 	// 쪽지 확인 상태 변경
 	@Select("update message set status = '확인' where mid = #{mid}")
 	public void changeMessageStatus(MessageVO messageVO);
-	
-	// 쪽지 답장
+		
+	// 쪽지 보내기
 	@Select("insert into message (mid, sender_id, receiver_id, mcontent, mdate) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate)")
 	public void replyMessage(MessageVO messageVO);
 	

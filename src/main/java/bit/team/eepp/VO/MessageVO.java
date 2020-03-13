@@ -1,9 +1,5 @@
 package bit.team.eepp.VO;
 
-import java.sql.Timestamp;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class MessageVO {
 	private int mid;
 	private int sender_id;

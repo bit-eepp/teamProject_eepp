@@ -254,6 +254,7 @@ public class UserController{
 	/*
 	 * ------- message part -------
 	 */
+	
 	/* 쪽지 */
     @RequestMapping(value="/message",method = { RequestMethod.GET, RequestMethod.POST })
 	public String message(MessageCriteria msgCri, Model model, HttpSession session, MessageVO messageVO, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
@@ -345,7 +346,7 @@ public class UserController{
 		return "user/message/sendMessage";
 	}
 	
-	@RequestMapping(value="/messageSuccess",method = { RequestMethod.POST,RequestMethod.POST})
+	@RequestMapping(value="/messageSuccess",method = { RequestMethod.POST,RequestMethod.GET})
 	public String messageSuccess(Model model, MessageVO messageVO, HttpServletRequest request, RedirectAttributes rttr) {
 		logger.info("messageSuccess Method Active");
 		

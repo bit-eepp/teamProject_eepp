@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 /* message페이지 */
-.messageForm {padding: 20px 20px 0;}
+.message_body{overflow:hidden;}
+.messageForm {padding: 25px 20px 0;}
 .messageForm .nav-tabs{border-bottom: 2px solid #59bfbf;}
 .messageForm .tablist-li{border-right: 1px solid #ddd; padding: 0 15px;}
 .messageForm .nav-item .nav-link{color: #26274c;}
@@ -27,9 +28,31 @@
 .messageForm .notelist .notelist_head .note_check{width:3%;}
 .messageForm .notelist .notelist_head .note_type{width:18%;}
 .messageForm .notelist .notelist_head .note_content{width:45%;}
-.messageForm .notelist .notelist_head .messageType_mdate, .messageForm .notelist .notelist_head .messageType_mdate{width:17%;}
+.messageForm .notelist .notelist_head .note_mdate{width:17%;}
 .messageForm .notelist .notelist_head .note_mstatus{width:10%;}
-.selectDeleteBtn {font-size: 14px;margin-right: 8px;color:#59bfbf;border:1px solid #59bfbf;margin: 10px 20px;padding: 5px 15px;}
+.messageForm .openMsgView {cursor:pointer;}
+.messageForm .openMsgView:hover{text-decoration: underline;color:#59bfbf!important;}
+.selectDeleteBtn {
+	width:80px;
+	order:2;
+	font-size: 14px;
+	color:#59bfbf;
+	border:1px solid #59bfbf;
+	margin:0;
+	padding: 5px 15px;}
+.message_footer{
+	padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;}
+    .userBtn{color: #3e3e3e;
+    font-weight: bold;}
+    .userBtn:hover{color:#59bfbf!important;}
+    .dropdown-menu{
+    height: 80px;
+    padding: 10px!important;}
+    .dropdown-menu li{margin:5px 0;}
+    .dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
 /* message 여기까지 */
 
 /* messageView */
