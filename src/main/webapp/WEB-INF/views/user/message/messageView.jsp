@@ -24,18 +24,19 @@ $(document).ready(function() {
 	});
 	
 	$(".deleteBtn").click(function() {
-		deleteMsg();
+		var msgType = $(".messageType").val();
+		deleteMsg(msgType);
 	});
 	
 });
 
-function deleteMsg(){
+function deleteMsg(msgType){
 	$.ajax({
 		url : getContextPath()+"/deleteMessage",
 		type: "get",
 		data : {
 			"mid" : $(".mid").val(),
-			"messageType" : $(".messageType").val()
+			"messageType" : msgType
 		},
 		success : function(data) {
 			alert("쪽지가 삭제되었습니다.");

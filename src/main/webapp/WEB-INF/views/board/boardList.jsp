@@ -8,9 +8,24 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>직무별 Community</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
+	<style type="text/css">
+.userBtn{color: #3e3e3e;
+    font-weight: bold;}
+    .dropdown-menu{
+    height: 80px;
+    padding: 10px!important;}
+    .dropdown-menu li{margin:5px 0;}
+    .dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
+		</style>
 	</head>
 	
 	<body>
+<!-- <script type="text/javascript">
+function sendMessage(uNickname, receiver_id){
+	 var tw = window.open("http://localhost:8282/eepp/message/sendMessage?receiver="+uNickname+"&receiver_id="+receiver_id+"&from=out", "sendmessage","left="+(screen.availWidth-370)/2
+			 +",top="+(screen.availHeight-425)/2+",width=370,height=425");
+}
+</script> -->
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 	<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
 	<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">
@@ -95,7 +110,14 @@
 						<td>
 							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
 						</td>
-						<td><b>${notice.uNickname}</b><br>
+						<td>
+						<div class="dropdown">
+						<a href="#" class="userBtn" id="user_${notice.uNickname}${btn.index}" data-toggle="dropdown">${notice.uNickname}</a>
+           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${notice.uNickname}${btn.index}">
+                			<li><a href="#">회원정보</a></li>
+                			<li><a onclick="sendMessage('${notice.uNickname}',${notice.user_id});">쪽지 보내기</a></li>
+                			</ul>
+						</div>
 							${notice.bWrittenDate}
 						</td>
 						<td>${notice.bHit}</td>
@@ -113,7 +135,14 @@
 						<td>
 							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
 						</td>
-						<td><b>${hot.uNickname}</b><br>
+						<td>
+						<div class="dropdown">
+						<a href="#" class="userBtn" id="user_${hot.uNickname}${btn.index}" data-toggle="dropdown">${hot.uNickname}</a>
+           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${hot.uNickname}${btn.index}">
+                			<li><a href="#">회원정보</a></li>
+                			<li><a onclick="sendMessage('${hot.uNickname}',${hot.user_id});">쪽지 보내기</a></li>
+                			</ul>
+						</div>
 							${hot.bWrittenDate}
 						</td>
 						<td>${hot.bHit}</td>
@@ -153,7 +182,14 @@
 										</c:otherwise>
 									</c:choose>
 								</td>
-								<td><b>${vo.uNickname}</b><br>
+								<td>
+								<div class="dropdown">
+						<a href="#" class="userBtn" id="user_${vo.uNickname}${btn.index}" data-toggle="dropdown">${vo.uNickname}</a>
+           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${vo.uNickname}${btn.index}">
+                			<li><a href="#">회원정보</a></li>
+                			<li><a onclick="sendMessage('${vo.uNickname}',${vo.user_id});">쪽지 보내기</a></li>
+                			</ul>
+						</div>
 									${vo.bWrittenDate}
 								</td>
 								<td>${vo.bHit}</td>

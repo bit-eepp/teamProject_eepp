@@ -135,16 +135,18 @@
 					</tr>
 					
 					<tr>
-						<th class="input-title"><span class="required">&#8226;</span>핸드폰 번호</th>
-						<td>
-						<select name="uPhone_1" class="custom-select" id="uPhone">
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="019">019</option>
-							<option value="080">080</option>
-						</select> 
-						- <input type="text" name="uPhone_2" maxlength="4" size="6"class="uPhone_2">
-						- <input type="text" name="uPhone_3" maxlength="4" size="6" class="uPhone_3"></td>
+					<th class="input-title"><span class="required">&#8226;</span>핸드폰 번호</th>
+					<td>
+					<select name="uPhone_1" class="custom-select" id="uPhone">
+						<option value="010">010</option>
+						<option value="011">011</option>
+						<option value="019">019</option>
+						<option value="080">080</option>
+					</select> 
+					- <input type="text" name="uPhone_2" maxlength="4" size="6"class="uPhone_2">
+					- <input type="text" name="uPhone_3" maxlength="4" size="6" class="uPhone_3">
+					<button type="button" class="btn btn-info" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
+					</td>
 					</tr>
 					</tbody>
 					</table>
@@ -223,6 +225,7 @@
 					<button type="button" class="btn btn-info" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
 					</td>
 					</tr>
+					
 					<tr>
 					<th class="input-title"><span class="required">&#8226;</span>프로필 설정</th>
 					<td>
