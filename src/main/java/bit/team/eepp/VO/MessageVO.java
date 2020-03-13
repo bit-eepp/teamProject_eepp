@@ -12,11 +12,12 @@ public class MessageVO {
 	private String status;
 	private String mdate;
 	private String uNickname;
+	private int user_id;
 	
 	public MessageVO() {}
 	
 	public MessageVO(int mid, int sender_id, int receiver_id, String mcontent, String status, String mdate,
-			String uNickname) {
+			String uNickname, int user_id) {
 		this.mid = mid;
 		this.sender_id = sender_id;
 		this.receiver_id = receiver_id;
@@ -24,13 +25,23 @@ public class MessageVO {
 		this.status = status;
 		this.mdate = mdate;
 		this.uNickname = uNickname;
+		this.user_id = user_id;
+	}
+	
+	
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getuNickname() {
 		return uNickname;
 	}
 
-	public void setUnickname(String uNickname) {
+	public void setuNickname(String uNickname) {
 		this.uNickname = uNickname;
 	}
 

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/msg.css">
 </head>
-<body>
+<body class="message_body">
 	<script type="text/javascript">
 	//ContextPath
 	function getContextPath() {
@@ -22,7 +23,7 @@ $(document).ready(function(){
 	var title = $(".messageType").val();
 		messageTypeTitle(title);
 		
-	$(".deleteBtn").click(function() {
+	$(".selectDeleteBtn").click(function() {
 		deleteMsg();
 	});
 });
@@ -100,6 +101,11 @@ function reset(msgType){
 			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 }
 
+function sendMessage(uNickname, receiver_id, msgType){
+	 var tw = window.open("http://localhost:8282/eepp/message/sendMessage?receiver="+uNickname+"&receiver_id="+receiver_id+"&messageType="+msgType+"&from=in", "sendmessage","left="+(screen.availWidth-370)/2
+			 +",top="+(screen.availHeight-425)/2+",width=370,height=425");
+}
+
 </script>
 	<input type="hidden" id="user_id" value="${loginUser.user_id}" />
 	<input type="hidden" id="uNickname" value="${loginUser.uNickname}" />
@@ -144,7 +150,7 @@ function reset(msgType){
 				</div>
 				<div id="showMyMessage" class="notelist">
 					<form>
-						<c:forEach items="${messageList}" var="msg">
+						<c:forEach items="${messageList}" var="msg" varStatus="btn">
 						<input type="hidden" class="messageType" value="${messageType}">
 						<input type="hidden" class="mid" name="mid" value="${msg.mid}">
 						
@@ -152,20 +158,42 @@ function reset(msgType){
 								<li class="note_cont note_check">
 									<input type="checkbox" name="pickCheck" class="pickCheck" value="${msg.mid}" />
 								</li>
-								<li class="note_cont note_type">${msg.uNickname}</li>
+								<li class="note_cont note_type">
+									<div class="dropdown">
+									<a href="#" class="userBtn" id="user_${msg.uNickname}${btn.index}" data-toggle="dropdown">${msg.uNickname}</a>
+           							 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${msg.uNickname}${btn.index}">
+                					<li><a href="#">회원정보</a></li>
+                					<li><a onclick="sendMessage('${msg.uNickname}',${msg.user_id},'mySendMsg');">쪽지 보내기</a></li>
+                					</ul>
+									</div>
+								</li>
 								<li class="note_cont note_content">
 									<!-- 받은 메세지를 확인할경우 status 변경을 위해 parameter생성 -->
 									<c:choose>
 										<c:when test="${messageType eq 'myReceiveMsg'}">
 											<input type="hidden" name="changeStatus" value="${msg.receiver_id}">
 											<a class="openMsgView" onclick="openReceiveMsg(${msg.mid},${msg.sender_id});">
-												${msg.mcontent}
+											<c:choose>
+											<c:when test="${fn:length(msg.mcontent) >= 22}">
+											${fn:substring(msg.mcontent, 0, 22)}...
+											</c:when>
+											<c:otherwise>
+											${msg.mcontent}
+											</c:otherwise>
+											</c:choose>
 											</a>
 										</c:when>
 										
 										<c:when test="${messageType eq 'mySendMsg'}">
 											<a class="openMsgView" onclick="openSendMsg(${msg.mid},${msg.receiver_id});">
-												${msg.mcontent}
+												<c:choose>
+											<c:when test="${fn:length(msg.mcontent) >= 22}">
+											${fn:substring(msg.mcontent, 0, 22)}...
+											</c:when>
+											<c:otherwise>
+											${msg.mcontent}
+											</c:otherwise>
+											</c:choose>
 											</a>
 										</c:when>
 									</c:choose>
@@ -179,7 +207,8 @@ function reset(msgType){
 			</div>
 		</div>
 	</div>
-
+	
+	<div class="message_footer">
 	<button type="button" class="selectDeleteBtn">삭제</button>
 
 	<!-- 페이징 -->
@@ -202,6 +231,7 @@ function reset(msgType){
 				» 
 			</a>&nbsp;&nbsp;
 		</c:if>
+	</div>
 	</div>
 
 </body>

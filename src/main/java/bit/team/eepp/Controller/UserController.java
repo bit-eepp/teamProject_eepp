@@ -254,9 +254,7 @@ public class UserController{
 	/*
 	 * ------- message part -------
 	 */
-	
-    
-    /* 쪽지 */
+	/* 쪽지 */
     @RequestMapping(value="/message",method = { RequestMethod.GET, RequestMethod.POST })
 	public String message(MessageCriteria msgCri, Model model, HttpSession session, MessageVO messageVO, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
 		logger.info("Message Method Active");
@@ -331,8 +329,16 @@ public class UserController{
 	@RequestMapping(value="message/sendMessage",method = { RequestMethod.GET, RequestMethod.POST })
 	public String sendMessage(Model model, MessageVO messageVO, HttpServletRequest request,@RequestParam(value = "messageType", required = false, defaultValue = "") String messageType) {
 		logger.info("sendMessage Method Active");
-		
-		messageVO.setUnickname(request.getParameter("uNickname"));
+
+		if(request.getParameter("receiver") != null) {	
+			messageVO.setuNickname(request.getParameter("receiver"));
+				if(request.getParameter("from").equals("out")) {
+					model.addAttribute("from_message", "out");
+					System.out.println("다른 페이지에서 쪽지보내기");
+				}
+		}else {
+			messageVO.setuNickname(request.getParameter("uNickname"));
+		}
 		model.addAttribute("sendMessage",messageVO);
 		model.addAttribute("messageType", messageType);
 		
@@ -345,8 +351,12 @@ public class UserController{
 		
 		us.replyMessage(messageVO);
 		logger.info("쪽지 답장 완료");
-		rttr.addAttribute("messageType", "myReceiveMsg");
-		
+		System.out.println("메세지가 오는곳은..."+request.getParameter("messageType"));
+		if(request.getParameter("messageType").equals("out")) {
+			return "redirect:/";
+		}
+		System.out.println("messageType is : " + request.getParameter("messageType"));
+		rttr.addAttribute("messageType", request.getParameter("messageType"));
 		return "redirect:/message";
 	}
 	
