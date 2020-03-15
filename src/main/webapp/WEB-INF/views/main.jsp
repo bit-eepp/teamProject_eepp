@@ -74,5 +74,7 @@ $(function(){
 })
 
 </script>
+
+<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 </body>
 </html>

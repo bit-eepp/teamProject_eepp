@@ -1,0 +1,141 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+#main {
+	position:absolute;
+	right:0;
+	top:0;
+	transition: margin-right .5s;
+	margin-top: 50px;
+	margin-right: 5px;
+}
+
+#main button {
+	font-size: 1.0rem;
+	width: 60px;
+	height: 70px;
+	background-color: #59bfbf;
+	color: white;
+	border: none;
+}
+
+#main button:hover {
+	background-color: #e7438b;
+}
+
+.sidebar {
+	font-family: 'Jeju Gothic', sans-serif;
+	font-size: 0.8rem;
+	height: 100%;
+	width: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: rgba(226, 226, 226, 0.5);
+	overflow-x: hidden;
+	transition: 0.5s;
+}
+
+.sidebar .closebtn {
+	padding: 8px 8px 8px 20px;
+	text-decoration: none;
+	color: #59bfbf;
+	display: block;
+	transition: 0.5s;
+}
+
+#chatRoomMakeForm>.btn {
+	color: #59bfbf;
+}
+
+#chatHead img {
+	max-width: 55%;
+	height: auto;
+}
+
+.modal-dialog {
+	max-width: 40%;
+	width: auto;
+	display: table;
+}
+
+.modal-header>.logo {
+	max-width: 8%;
+	height: auto;
+}
+
+.modal-header b {
+	color: #e7438b;
+}
+
+.modal-body h5 {
+	text-align: center;
+}
+
+.modal-content {
+	color: #26274c;
+	font-size: 20px;
+}
+
+.modal-footer .btn {
+	background-color: #59bfbf;
+	color: #ffffff;
+	min-width: 100px;
+}
+
+.modal-footer .btn:hover {
+	background-color: #e7438b;
+}
+
+.input-group-prepend .btn-default {
+	background-color: #59bfbf;
+	color: #ffffff;
+	min-width: 120px;
+}
+
+#chatList {
+	width: 325px;
+	font-size: 0.9rem;
+}
+
+#chatList>div {
+	margin-left: 25px;
+}
+
+ul>.list-group-item {
+	background-color: #59bfbf;
+	color: #ffffff;
+}
+
+.list-group #ct {
+	color: #26274c;
+}
+
+.list-group-item span {
+	float: right;
+}
+
+.list-group-item button {
+	color: #e7438b;
+}
+
+#moreBtn_div #moreBtn_a {
+	color: #59bfbf;
+}
+
+.scrolltop {
+	display: none;
+	position: fixed;
+	right: 30px;
+	bottom: 60px;
+	z-index: 1030;
+	font-size: 2rem;
+	color: #e7438b;
+	transition: all 0.5s ease-in-out;
+	opacity: 0.5;
+}
+
+.scrolltop:hover, .scrolltop:focus {
+	color: #9c0e4c;
+	transition: all 0.5s ease-in-out;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.ChattingMapper" >
+	<insert id="addMember">
+		INSERT INTO CHATTINGMEMBER (cmId, chatting_id, user_id) VALUES(CHATTINGMEMBER_SEQ.nextval, #{chId}, #{user_id})
+	</insert>
+	
+	<delete id="removeMember">
+		DELETE FROM CHATTINGMEMBER WHERE user_id = #{user_id}
+	</delete>
+	
+	<select id="getMemberList" resultType="bit.team.eepp.VO.ChattingMemberVO">
+		SELECT u.uNickname FROM USERS u, CHATTINGMEMBER c WHERE u.user_id = c.user_id AND c.chatting_id = #{chatting_id}
+	</select>
+	
+	<select id="getUserIdList" resultType="bit.team.eepp.VO.ChattingMemberVO">
+		SELECT user_id FROM CHATTINGMEMBER WHERE chatting_id = #{chId}
+	</select>
+	
+	<select id="getPeopleCount" resultType="int">
+		SELECT count(user_id) FROM CHATTINGMEMBER WHERE chatting_id = #{chatting_id}
+	</select>
+</mapper>

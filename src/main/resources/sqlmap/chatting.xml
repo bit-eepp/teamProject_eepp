@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.ChattingMapper" >
+	<select id="getTotalChatCount" resultType="int">
+		SELECT COUNT(chId) FROM CHATTING c, USERS u WHERE c.user_id = u.user_id AND chId > 0
+	</select>
+	
+	<select id="getChatRoomList" resultType="bit.team.eepp.VO.ChattingVO">
+		SELECT * FROM
+		(SELECT A.*, ROWNUM AS RNUM FROM
+		(SELECT c.chId, c.user_id, c.chTitle, c.chDate, c.chTotalPeopleCount, c.chPlace, c.chMeetTime,(SELECT COUNT(user_id) FROM CHATTINGMEMBER WHERE chatting_id = chId) AS pCount, u.uNickname 
+		FROM CHATTING c, USERS u WHERE c.user_id = u.user_id ORDER BY chDate DESC) A)
+		WHERE RNUM BETWEEN 1 AND 4
+	</select>
+	
+	<select id="getMoreChatList" resultType="bit.team.eepp.VO.ChattingVO">
+		SELECT * FROM
+		(SELECT A.*, ROWNUM AS RNUM FROM
+		(SELECT c.chId, c.user_id, c.chTitle, c.chDate, c.chTotalPeopleCount, c.chPlace, c.chMeetTime,(SELECT COUNT(user_id) FROM CHATTINGMEMBER WHERE chatting_id = chId) AS pCount, u.uNickname 
+		FROM CHATTING c, USERS u WHERE c.user_id = u.user_id ORDER BY chDate DESC) A)
+		WHERE RNUM BETWEEN #{startNum} AND #{endNum}
+	</select>
+	
+	<select id="chatRoomSelect" resultType="bit.team.eepp.VO.ChattingVO">
+		SELECT c.chId, c.user_id, c.chTitle, c.chDate, c.chTotalPeopleCount, c.chPlace, c.chMeetTime, u.uNickname FROM CHATTING c, USERS u WHERE c.user_id = u.user_id AND c.chId = #{chId}
+	</select>
+	
+	<insert id="chatRoomMake" parameterType="bit.team.eepp.VO.ChattingVO">
+		<selectKey keyProperty="chattingVO.chId" resultType="int" order="BEFORE">
+    		SELECT CHATTING_SEQ.nextval FROM DUAL
+  		</selectKey>
+
+		INSERT INTO CHATTING (chId, user_id, chTitle, chDate, chTotalPeopleCount, chPlace, chMeetTime)
+		VALUES(#{chattingVO.chId}, #{chattingVO.user_id}, #{chattingVO.chTitle}, SYSDATE, #{chattingVO.chTotalPeopleCount}, #{chattingVO.chPlace}, #{chattingVO.chMeetTime})
+	</insert>
+	
+	<delete id="chatRoomDelete">
+		DELETE FROM CHATTING WHERE chId = #{chId}
+	</delete>
+	
+</mapper>

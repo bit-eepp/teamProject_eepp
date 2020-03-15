@@ -1,0 +1,157 @@
+@charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+body {
+	font-family: 'Jeju Gothic', sans-serif;
+}
+
+.chat-list {
+	padding: 0;
+	font-size: .8rem;
+}
+
+.chat-list li {
+	margin-bottom: 10px;
+	overflow: auto;
+	color: #ffffff;
+}
+
+.chat-list .chat-img {
+	float: left;
+	width: 48px;
+}
+
+.chat-list .chat-img img {
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	width: 100%;
+}
+
+.chat-list .chat-message {
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	background: #9e9e9e;
+	display: inline-block;
+	padding: 10px 20px;
+	position: relative;
+}
+
+.chat-list .chat-message:before {
+	content: "";
+	position: absolute;
+	top: 15px;
+	width: 0;
+	height: 0;
+}
+
+.chat-list .chat-message h5 {
+	margin: 0 0 5px 0;
+	font-weight: 600;
+	line-height: 100%;
+	font-size: .9rem;
+}
+
+.chat-list .chat-message p {
+	line-height: 18px;
+	margin: 0;
+	padding: 0;
+}
+
+.chat-list .chat-body {
+	margin-left: 20px;
+	float: left;
+	width: 70%;
+}
+
+.chat-list .in .chat-message:before {
+	left: -12px;
+	border-bottom: 30px solid transparent;
+	border-right: 30px solid #9e9e9e;
+}
+
+.chat-list .out .chat-img {
+	float: right;
+}
+
+.chat-list .out .chat-body {
+	float: right;
+	margin-right: 20px;
+	text-align: right;
+}
+
+.notice .notice-body {
+	float: center;
+	margin: auto;
+	text-align: center;
+}
+
+.notice .chat-message {
+	background: white;
+}
+
+.chat-list .out .chat-message {
+	background: #e7438b;
+}
+
+.chat-list .out .chat-message:before {
+	right: -12px;
+	border-bottom: 30px solid transparent;
+	border-left: 30px solid #e7438b;
+}
+
+.card .card-header:first-child {
+	-webkit-border-radius: 0.3rem 0.3rem 0 0;
+	-moz-border-radius: 0.3rem 0.3rem 0 0;
+	border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.card .card-header {
+	background: #59bfbf;
+	border: 0;
+	font-size: 1rem;
+	padding: .65rem 1rem;
+	position: relative;
+	color: #ffffff;
+}
+
+.content {
+	margin-top: 40px;
+}
+
+.chatMessageArea {
+	height: 400px;
+	overflow-y: auto;
+}
+
+.btn-default {
+	color: #333;
+	background-color: #59bfbf;
+}
+
+.card-header .chatTitle {
+	font-weight: bold;
+	color: #26274c;
+	font-size: 1.5rem;
+}
+
+.card-header .noticeMsg {
+	float: right;
+}
+
+.card-header .chMenu {
+	float: right;
+}
+
+.card-header #deleteBtn, #exitBtn {
+	color: #e7438b;
+}
+
+.card-header .meetInfo {
+	color: #e7438b;
+}
+
+.input-group-btn #sendBtn {
+	color: #ffffff;
+}

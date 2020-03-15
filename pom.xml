@@ -22,7 +22,14 @@
 		</repository>
 	</repositories>
 	
-	<dependencies>	
+	<dependencies>
+		<!-- spring websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+			
 		<!-- 오라클 JDBC 드라이버 -->
 		<dependency>
 		    <groupId>oracle</groupId>
