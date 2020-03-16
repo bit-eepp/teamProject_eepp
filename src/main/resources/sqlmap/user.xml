@@ -21,7 +21,7 @@
        <select id="messageList" resultType="bit.team.eepp.VO.MessageVO" parameterType="map">
        <![CDATA[
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
-	        FROM (SELECT mid, sender_id, receiver_id, mcontent, status, to_char(mdate, 'YY/MM/DD HH24:MI') as mdate, uNickname, user_id
+	        FROM (SELECT mid, sender_id, receiver_id, mcontent, status, to_char(mdate, 'YY/MM/DD HH24:MI') as mdate, mblind, uNickname, user_id
 	        FROM message m, users u where
 	   ]]>
 		<if test="messageType != null">

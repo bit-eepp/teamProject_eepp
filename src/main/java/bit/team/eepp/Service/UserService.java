@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import bit.team.eepp.Mapper.UserMapper;
 import bit.team.eepp.VO.BoardVO;
+import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
@@ -67,8 +68,20 @@ public class UserService{
 		userMapper.deleteMessage(messageVO);
 	}
 	
+	public String cancleMessage(MessageVO messageVO) {
+		return userMapper.cancleMessage(messageVO);
+	}
+	
 	public void changeMessageStatus(MessageVO messageVO) {
 		userMapper.changeMessageStatus(messageVO);
+	}
+	
+	public void reportMessage(MessageVO messageVO) {
+		userMapper.reportMessage(messageVO);
+	}
+	
+	public DeclarationVO reportMessageInfo(DeclarationVO declarationVO) {
+		return userMapper.reportMessageInfo(declarationVO);
 	}
 	
 	public void replyMessage(MessageVO messageVO) {

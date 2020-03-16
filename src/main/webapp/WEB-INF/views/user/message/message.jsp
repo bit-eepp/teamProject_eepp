@@ -22,7 +22,6 @@
 $(document).ready(function(){			
 	var title = $(".messageType").val();
 		messageTypeTitle(title);
-		
 	$(".selectDeleteBtn").click(function() {
 		deleteMsg();
 	});
@@ -75,15 +74,110 @@ function deleteMsg(){
 	  }
 }
 
+//발송취소
+function sendCancle(mid, uNickname){
+		  if(confirm(uNickname+"님에게 보낸쪽지를 발송취소 하시겠습니까? \n발송취소 전에 " 
+				  + uNickname + "님이 받은쪽지함에 접속하였다면, 읽지않음 상태라도 목록에서 일부 내용을 확인했을 수 있습니다.") == true){
+		  $.ajax({
+				url : getContextPath()+"/cancleMessage",
+				type: "post",
+				data : {
+					"mid" : $(".mid").val()
+				},
+				success : function(data) {
+					if(data == 1){
+						alert(uNickname+"님에게 보낸 쪽지가 발송취소되었습니다.");
+						var msgType = $(".messageType").val();
+						reset(msgType);
+					}else{
+						alert("수신상태가 읽음인 경우에는 발송취소 할 수 없습니다.");
+						var msgType = $(".messageType").val();
+						reset(msgType);
+					}
+				},
+				error : function(request, status, error) {
+					alert("에러가 발생했습니다.");
+					console.log(request.responseText);
+					console.log(error);
+				}
+			})
+		  }else{
+			  return false;
+		  }
+	  }
+	  
+//쪽지 신고
+function submitDeclarationForm(mid, uNickname){
+	var reporter_id = $(".reporterId").val();
+	var reported_id = $(".reportedId").val();
+	var dReason = $("input[name='dReason_msg']:checked").val();
+			
+	if(dReason.value == "") {
+		alert("신고사유를 선택 해주세요.");
+		return false;
+	} else {
+		$.ajax({
+			type:'POST',
+			url: getContextPath() + '/declaration/doMsgDeclaration',
+			data:{
+				"reporter_id": reporter_id,
+				"reported_id" : reported_id,
+				"mid" : mid,
+				"dReason" : dReason
+			},
+			success:function(msg){
+				alert(uNickname +'님의 쪽지가 신고되었습니다.');
+				$('#modalForm_user_'+mid).modal('hide');
+				var msgType = $(".messageType").val();
+				reset(msgType);
+			}
+	       });
+	}
+}
+
+//유저 신고
+function reportUser(uNickname){
+	var reporter_id = $(".reporterId").val();
+	var reported_id = $(".reportedId").val();
+	var dReason = $("input[name='dReason']:checked").val();
+
+	if(dReason.value == "") {
+		alert("신고사유를 선택 해주세요.");
+		return false;
+	} else {
+		$.ajax({
+			type:'POST',
+			url: getContextPath() + '/declaration/doUserDeclaration',
+			data:{
+				"reporter_id": reporter_id,
+				"reported_id" : reported_id,
+				"dReason" : dReason
+			},
+			success:function(msg){
+				alert(uNickname +'님을 신고했습니다.');
+				$('#modalForm_msg'+reported_id).modal('hide');
+				var msgType = $(".messageType").val();
+				reset(msgType);
+			}
+	       });
+	}
+}
+
 // 타이틀
 function messageTypeTitle(title) {
 	
 	if(title == 'myReceiveMsg') {
+		$(".linkToreceive").addClass("active");
 		$('#messageType_title').append('보낸사람');
-		$('#messageType_date').append('수신일');
+		$('#messageType_date').append('받은날짜');
+		$('#messageType_active').append('신고');
+		$(".messageIsEmpty li").append("받은 쪽지가 없습니다.");
 	}else if(title == 'mySendMsg'){
+		$(".linkTosend").addClass("active");
 		$('#messageType_title').append('받는사람');
-		$('#messageType_date').append('송신일');
+		$('#messageType_date').append('보낸날짜');
+		$('#messageType_active').append('발송취소');
+		$(".massageIsEmpty li").append("보낸 쪽지가 없습니다.");
 	}
 }
 
@@ -107,106 +201,204 @@ function sendMessage(uNickname, receiver_id, msgType){
 }
 
 </script>
-	<input type="hidden" id="user_id" value="${loginUser.user_id}" />
-	<input type="hidden" id="uNickname" value="${loginUser.uNickname}" />
+
+<input type="hidden" id="user_id" value="${loginUser.user_id}" />
+<input type="hidden" id="uNickname" value="${loginUser.uNickname}" />
+
 	<div class="messageForm">
 		<ul class="nav nav-tabs">
-			<c:choose>
-				<c:when test="${messageType eq 'myReceiveMsg'}">
-					<li class="nav-item">
-						<a class="nav-link active" href="message?messageType=myReceiveMsg">받은쪽지</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="message?messageType=mySendMsg">보낸쪽지</a>
-					</li>
-				</c:when>
-
-				<c:when test="${messageType eq 'mySendMsg'}">
-					<li class="nav-item">
-						<a class="nav-link" href="message?messageType=myReceiveMsg">받은쪽지</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="message?messageType=mySendMsg">보낸쪽지</a>
-					</li>
-				</c:when>
-
-			</c:choose>
-
+			<li class="nav-item">
+				<a class="nav-link linkToreceive" href="message?messageType=myReceiveMsg">받은쪽지</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link linkTosend" href="message?messageType=mySendMsg">보낸쪽지</a>
+			</li>
 		</ul>
 
-		<div class="tab-content">
-			<div class="tab-pane fade show active">
-				<div class="notelist">
-					<ul class="notelist_head note_title">
-						<li class="note_cont note_check">
-							<!--  전체선택 -->
-							<input type="checkbox" class="allCheck">
-						</li>
-						<li class="note_cont note_type" id="messageType_title"></li>
-						<li class="note_cont note_content">내용</li>
-						<li class="note_cont note_mdate" id="messageType_date"></li>
-						<li class="note_cont note_mstatus">확인</li>
-					</ul>
-				</div>
-				<div id="showMyMessage" class="notelist">
-					<form>
-						<c:forEach items="${messageList}" var="msg" varStatus="btn">
-						<input type="hidden" class="messageType" value="${messageType}">
-						<input type="hidden" class="mid" name="mid" value="${msg.mid}">
+	<div class="tab-content">
+		<div class="tab-pane fade show active">
+		
+			<div class="notelist">
+				<ul class="notelist_head note_title" id="m-title">
+					<li class="note_cont note_check">
+						<!--  전체선택 -->
+						<input type="checkbox" class="allCheck">
+					</li>
+					<li class="note_cont note_type" id="messageType_title"></li>
+					<li class="note_cont note_content">내용</li>
+					<li class="note_cont note_mdate" id="messageType_date"></li>
+					<li class="note_cont note_mstatus">확인</li>
+					<li class="note_cont note_active" id="messageType_active"></li>
+				</ul>
+			</div>
+			
+			<div id="showMyMessage" class="notelist">
+				<c:choose>
+				<c:when test="${empty messageList}">
+					<input type="hidden" class="messageType" value="${messageType}">
+					<ul class="massageIsEmpty"><li class="note_cont"></li></ul>
+				</c:when>
 						
-							<ul class="notelist_head">
-								<li class="note_cont note_check">
-									<input type="checkbox" name="pickCheck" class="pickCheck" value="${msg.mid}" />
-								</li>
-								<li class="note_cont note_type">
-									<div class="dropdown">
-									<a href="#" class="userBtn" id="user_${msg.uNickname}${btn.index}" data-toggle="dropdown">${msg.uNickname}</a>
-           							 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${msg.uNickname}${btn.index}">
-                					<li><a href="#">회원정보</a></li>
-                					<li><a onclick="sendMessage('${msg.uNickname}',${msg.user_id},'mySendMsg');">쪽지 보내기</a></li>
+				<c:otherwise>
+					<c:forEach items="${messageList}" var="msg" varStatus="btn">
+					<form>
+					<input type="hidden" class="messageType" value="${messageType}">
+					<input type="hidden" class="mid" name="mid" value="${msg.mid}">
+					<input type="hidden" class="uNickname" name="uNickname" value="${msg.uNickname}">
+						
+						<ul class="notelist_head">
+							<li class="note_cont note_check">
+								<input type="checkbox" name="pickCheck" class="pickCheck" value="${msg.mid}" />
+							</li>
+							<li class="note_cont note_type">
+								<div class="dropdown">
+								<a href="#" class="userBtn" id="user_${msg.uNickname}${btn.index}" data-toggle="dropdown">${msg.uNickname}</a>
+           							<ul class="dropdown-menu" role="menu" aria-labelledby="user_${msg.uNickname}${btn.index}">
+                						<li><a href="#">회원정보</a></li>
+                						<li><a onclick="sendMessage('${msg.uNickname}',${msg.user_id},'mySendMsg');">쪽지 보내기</a></li>
+                						<li><a data-toggle="modal" data-target="#userForm_user_${msg.user_id}${btn.index}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
                 					</ul>
-									</div>
-								</li>
+								</div>
+								
+                						<div class="modal fade" id="userForm_user_${msg.user_id}${btn.index}" role="dialog">
+                						<div class="modal-dialog">
+                						<div class="modal-content">
+                						
+                						<!-- Modal Header -->
+                						<div class="modal-header">
+                							<button type="button" class="close" data-dismiss="modal">
+                							<span aria-hidden="true">&times;</span>
+			                    			<span class="sr-only">Close</span>
+			                				</button>
+			               					<h4 class="modal-title">${msg.uNickname}님 신고</h4>
+			            				</div>
+			            				
+			            				<!-- Modal Body -->
+			            				<div class="modal-body">
+			            				<div class="declaration">
+			            				<input type="hidden" name="reporter_id" value="${lgoinUser.user_id}">
+			            				<input type="hidden" name="reportec_id" value="${msg.user_id}">
+			            				
+			            				<div class="form-group">
+			            				<label for="inputMessage">신고사유</label><br>
+			            				<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${msg.user_id}${btn.index}.disabled=true">  부적절한 홍보 게시글<br>
+			            				<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${msg.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+			            				<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${msg.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
+			            				<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${msg.user_id}${btn.index}.disabled=false">  기타<br>
+			            				<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${msg.user_id}${btn.index}" name="dReason" disabled></textarea>
+			            				</div>
+			                	</div>
+			           		 </div>
+            
+			            				<!-- Modal Footer -->
+			            				<div class="modal-footer">
+			                			<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+			                			<button type="button" class="btn btn-primary submitBtn" onclick="reportUser('${msg.user_id}')">신고</button>
+			            				</div>
+			        		</div>
+    						</div>
+							</div>
+							</li>
+							
+							<c:choose>
+							<c:when test="${messageType eq 'myReceiveMsg'}">
 								<li class="note_cont note_content">
-									<!-- 받은 메세지를 확인할경우 status 변경을 위해 parameter생성 -->
-									<c:choose>
-										<c:when test="${messageType eq 'myReceiveMsg'}">
-											<input type="hidden" name="changeStatus" value="${msg.receiver_id}">
-											<a class="openMsgView" onclick="openReceiveMsg(${msg.mid},${msg.sender_id});">
-											<c:choose>
+									<a class="openMsgView" onclick="openReceiveMsg(${msg.mid},${msg.sender_id});">
+										<c:choose>
+											<c:when test="${msg.mblind eq 1}">
+											신고된 쪽지입니다.
+											</c:when>
 											<c:when test="${fn:length(msg.mcontent) >= 22}">
 											${fn:substring(msg.mcontent, 0, 22)}...
 											</c:when>
 											<c:otherwise>
 											${msg.mcontent}
 											</c:otherwise>
-											</c:choose>
-											</a>
-										</c:when>
-										
-										<c:when test="${messageType eq 'mySendMsg'}">
-											<a class="openMsgView" onclick="openSendMsg(${msg.mid},${msg.receiver_id});">
-												<c:choose>
-											<c:when test="${fn:length(msg.mcontent) >= 22}">
-											${fn:substring(msg.mcontent, 0, 22)}...
-											</c:when>
-											<c:otherwise>
-											${msg.mcontent}
-											</c:otherwise>
-											</c:choose>
-											</a>
-										</c:when>
-									</c:choose>
+										</c:choose>
+									</a>
 								</li>
 								<li class="note_cont note_mdate">${msg.mdate}</li>
 								<li class="note_cont note_mstatus">${msg.status}</li>
-							</ul>
-						</c:forEach>
+								<li class="note_cont note_active">
+									<a class="reportMsg" data-toggle="modal" data-target="#modalForm_msg_${msg.mid}${btn.index}" data-backdrop="static" data-keyboard="false">신고</a>
+									<!-- 쪽지 신고 폼 -->
+									<div class="modal fade" id="modalForm_msg_${msg.mid}${btn.index}" role="dialog">
+									<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- Modal Header -->
+										<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">
+										<span aria-hidden="true">&times;</span>
+										<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">${msg.uNickname}님의 쪽지 신고</h4>
+									</div>
+									<!-- Modal Body -->
+									<div class="modal-body">
+										<div id="messageDeclaration_${msg.mid}" role="formMsgDeclaration_${msg.mid}">
+										<input type="hidden" name="reporter_id" class="reporterId" value="${loginUser.user_id}">
+										<input type="hidden" name="reported_id" class="reportedId" value="${msg.user_id}">
+											 
+											<div class="form-group">
+											<label for="inputMessage">신고사유</label><br>
+											<input type="radio" name="dReason_msg" value="부적절한 홍보 내용" onclick="this.form.etc_msg_${msg.mid}.disabled=true">  부적절한 홍보 내용<br>
+											<input type="radio" name="dReason_msg" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_msg_${msg.mid}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+											<input type="radio" name="dReason_msg" value="명예훼손/사생활 침해 등" onclick="this.form.etc_msg_${msg.mid}.disabled=true">  명예훼손/사생활 침해 등<br>
+											<input type="radio" name="dReason_msg" value="etc" onclick="this.form.etc_msg_${msg.mid}.disabled=false">  기타<br>
+											<textarea style="resize:none;height:80px;width:100%;" class="form-control" id="etc_msg_${msg.mid}" name="dReason_msg" disabled></textarea>
+										</div>
+									</div> 
+								</div>
+											 
+									<!-- Modal Footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+										<button type="button" class="btn btn-primary submitBtn" onclick="submitDeclarationForm(${msg.mid},'${msg.uNickname}')">신고</button>
+									</div>
+								</div>
+							</div>
+							</div>
+								</li>
+							</c:when>
+	
+							<c:when test="${messageType eq 'mySendMsg'}">
+								<li class="note_cont note_content">
+									<a class="openMsgView" onclick="openSendMsg(${msg.mid},${msg.receiver_id});">
+										<c:choose>
+										<c:when test="${msg.mblind eq 1}">
+										신고된 쪽지입니다.
+										</c:when>
+										<c:when test="${fn:length(msg.mcontent) >= 22}">
+										${fn:substring(msg.mcontent, 0, 22)}...
+										</c:when>
+										<c:otherwise>
+										${msg.mcontent}
+										</c:otherwise>
+										</c:choose>
+									</a>
+								</li>
+								<li class="note_cont note_mdate">${msg.mdate}</li>
+								<li class="note_cont note_mstatus">${msg.status}</li>
+								<li class="note_cont note_active">
+									<c:choose>
+									<c:when test="${msg.status eq '읽음'}"></c:when>
+									<c:otherwise>
+										<a class="send_cancle" onclick="sendCancle(${msg.mid},'${msg.uNickname}');">발송취소</a>
+									</c:otherwise>
+									</c:choose>
+								</li>
+							</c:when>
+						</c:choose>
+					</ul>
 					</form>
-				</div>
-			</div>
+					
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		</div>
 		</div>
 	</div>
+</div>
 	
 	<div class="message_footer">
 	<button type="button" class="selectDeleteBtn">삭제</button>

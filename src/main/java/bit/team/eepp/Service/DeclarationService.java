@@ -18,5 +18,13 @@ public class DeclarationService {
 	public void doRpDeclaration(DeclarationVO declarationVO) {
 		declarationMapper.doRpDeclaration(declarationVO);
 	}
+	
+	public void doMsgDeclaration(DeclarationVO declarationVO) {
+		declarationMapper.doMsgDeclaration(declarationVO);
+	}
+	
+	public void doUserDeclaration(DeclarationVO declarationVO) {
+		declarationMapper.doUserDeclaration(declarationVO);
+	}
 
 }

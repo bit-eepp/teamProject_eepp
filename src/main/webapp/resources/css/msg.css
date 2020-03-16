@@ -9,29 +9,41 @@
 .messageForm .nav-item a.active{color: #59bfbf!important;background-color: #fff!important;border-color:#59bfbf #59bfbf #fff!important;}
 .messageForm .notelist .notelist_head{
 	list-style: none;
-    padding: 10px 15px 0;
+    padding: 5px 10px;
     display: flex;
     width: 100%;
     justify-content: space-between;
     font-size: 14px;
     margin: 0;
 }
+.massageIsEmpty{
+	list-style: none;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 14px;
+    margin: 0;
+    text-align:center;
+    }
 .messageForm .tab-content{
 	height: 300px;
     border-right: 2px solid #59bfbf;
     border-left: 2px solid #59bfbf;
     border-bottom: 2px solid #59bfbf;
  }
+ #showMyMessage{margin-top: 5px;}
  .messageForm .nav-tabs .nav-item {margin-bottom:-2px!important;}
  .messageForm .nav-tabs .nav-link{border: 2px solid transparent!important;}
- .messageForm .tab-content .note_title{border-bottom: 1px solid #ddd; padding: 10px 15px;}
+ .messageForm .tab-content .note_title{border-bottom: 1px solid #ddd; padding: 5px 10px;}
 .messageForm .notelist .notelist_head .note_check{width:3%;}
-.messageForm .notelist .notelist_head .note_type{width:18%;}
-.messageForm .notelist .notelist_head .note_content{width:45%;}
+.messageForm .notelist .notelist_head .note_type{width:17%;}
+.messageForm .notelist .notelist_head .note_content{width:35%;}
 .messageForm .notelist .notelist_head .note_mdate{width:17%;}
 .messageForm .notelist .notelist_head .note_mstatus{width:10%;}
-.messageForm .openMsgView {cursor:pointer;}
+.messageForm .notelist .notelist_head .note_active{width:10%;}
+.messageForm .openMsgView,{cursor:pointer;}
 .messageForm .openMsgView:hover{text-decoration: underline;color:#59bfbf!important;}
+.send_cancle, .reportMsg{text-decoration: underline;cursor:pointer;}
+.send_cancle:hover, .reportMsg:hover{color:#59bfbf!important;}
 .selectDeleteBtn {
 	width:80px;
 	order:2;
@@ -49,10 +61,14 @@
     font-weight: bold;}
     .userBtn:hover{color:#59bfbf!important;}
     .dropdown-menu{
-    height: 80px;
+    height: 115px;
     padding: 10px!important;}
     .dropdown-menu li{margin:5px 0;}
     .dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
+.messageForm .modal-title{font-size:18px;}
+.messageForm .modal-body{padding: 20px!important;font-size: 14px!important;}
+.messageForm .form-group{margin-bottom:0!important;}
+.messageForm .modal-footer button{font-size:14px;}
 /* message 여기까지 */
 
 /* messageView */

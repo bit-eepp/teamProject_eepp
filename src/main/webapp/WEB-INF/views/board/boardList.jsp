@@ -9,13 +9,10 @@
 		<title>직무별 Community</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	<style type="text/css">
-.userBtn{color: #3e3e3e;
-    font-weight: bold;}
-    .dropdown-menu{
-    height: 80px;
-    padding: 10px!important;}
-    .dropdown-menu li{margin:5px 0;}
-    .dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
+.userBtn{color: #3e3e3e;font-weight: bold;display: block;}
+.dropdown-menu{height: 80px;padding: 10px!important;}
+.dropdown-menu li{margin:5px 0;}
+.dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
 		</style>
 	</head>
 	
@@ -110,16 +107,12 @@ function sendMessage(uNickname, receiver_id){
 						<td>
 							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
 						</td>
+						
 						<td>
-						<div class="dropdown">
-						<a href="#" class="userBtn" id="user_${notice.uNickname}${btn.index}" data-toggle="dropdown">${notice.uNickname}</a>
-           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${notice.uNickname}${btn.index}">
-                			<li><a href="#">회원정보</a></li>
-                			<li><a onclick="sendMessage('${notice.uNickname}',${notice.user_id});">쪽지 보내기</a></li>
-                			</ul>
-						</div>
+						<a class="userBtn">${notice.uNickname}</a>
 							${notice.bWrittenDate}
 						</td>
+						
 						<td>${notice.bHit}</td>
 						<td>${notice.bLike} // ${notice.bUnlike}</td>
 					</tr>
@@ -136,6 +129,13 @@ function sendMessage(uNickname, receiver_id){
 							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
 						</td>
 						<td>
+						
+						<c:choose>
+						<c:when test="${hot.uNickname eq loginUser.uNickname}">
+						<a class="userBtn">${hot.uNickname}</a>
+						</c:when>
+						
+						<c:otherwise>
 						<div class="dropdown">
 						<a href="#" class="userBtn" id="user_${hot.uNickname}${btn.index}" data-toggle="dropdown">${hot.uNickname}</a>
            				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${hot.uNickname}${btn.index}">
@@ -143,6 +143,8 @@ function sendMessage(uNickname, receiver_id){
                 			<li><a onclick="sendMessage('${hot.uNickname}',${hot.user_id});">쪽지 보내기</a></li>
                 			</ul>
 						</div>
+						</c:otherwise>
+						</c:choose>
 							${hot.bWrittenDate}
 						</td>
 						<td>${hot.bHit}</td>
@@ -182,14 +184,23 @@ function sendMessage(uNickname, receiver_id){
 										</c:otherwise>
 									</c:choose>
 								</td>
+								
 								<td>
+								<c:choose>
+								<c:when test="${vo.uNickname eq loginUser.uNickname}">
+								<a class="userBtn">${vo.uNickname}</a>
+								</c:when>
+								
+								<c:otherwise>
 								<div class="dropdown">
-						<a href="#" class="userBtn" id="user_${vo.uNickname}${btn.index}" data-toggle="dropdown">${vo.uNickname}</a>
-           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${vo.uNickname}${btn.index}">
-                			<li><a href="#">회원정보</a></li>
-                			<li><a onclick="sendMessage('${vo.uNickname}',${vo.user_id});">쪽지 보내기</a></li>
-                			</ul>
-						</div>
+									<a href="#" class="userBtn" id="user_${vo.uNickname}${btn.index}" data-toggle="dropdown">${vo.uNickname}</a>
+           				 			<ul class="dropdown-menu" role="menu" aria-labelledby="user_${vo.uNickname}${btn.index}">
+                					<li><a href="#">회원정보</a></li>
+                					<li><a onclick="sendMessage('${vo.uNickname}',${vo.user_id});">쪽지 보내기</a></li>
+                					</ul>
+								</div>
+								</c:otherwise>
+								</c:choose>
 									${vo.bWrittenDate}
 								</td>
 								<td>${vo.bHit}</td>

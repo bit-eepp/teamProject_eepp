@@ -35,6 +35,7 @@ import bit.team.eepp.Service.ScrapService;
 import bit.team.eepp.Service.UserService;
 import bit.team.eepp.Utils.UploadFileUtils;
 import bit.team.eepp.VO.BoardVO;
+import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserVO;
@@ -285,20 +286,25 @@ public class UserController{
 	}
     
 	@RequestMapping(value = "/message/messageView", method = { RequestMethod.GET, RequestMethod.POST })
-	public String messageView(Model model, MessageVO messageVO, HttpServletRequest request, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
+	public String messageView(Model model, MessageVO messageVO,DeclarationVO declarationVO, HttpServletRequest request, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
 		logger.info("MessageView Method Active");
-		
-		if(request.getParameter("changeStatus") != null) {
-			us.changeMessageStatus(messageVO);
-			logger.info("쪽지 확인 상태 변경 완료");
-		}
 		
 		if(request.getParameter("sender_id") != null) {
 			model.addAttribute("receiveMsg", us.showMyReceiveMessage(messageVO));
+			// 받은쪽지 클릭했을경우, 확인상태 변경
+			us.changeMessageStatus(messageVO);
+			logger.info("쪽지 확인 상태 변경 완료");
+			
 			model.addAttribute("messageType", messageType);
 		}else if(request.getParameter("receiver_id") != null) {
 			model.addAttribute("sendMsg",us.showMySendMessage(messageVO));
 			model.addAttribute("messageType", messageType);
+		}
+		
+		DeclarationVO report = us.reportMessageInfo(declarationVO);
+		if(report != null) {
+			model.addAttribute("isReported", report);
+			System.out.println("신고된 쪽지 정보를 표시합니다.");
 		}
 		
 		return "user/message/messageView";
@@ -325,6 +331,21 @@ public class UserController{
 		}
 
 		return "redirect:/message";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/cancleMessage",method = { RequestMethod.GET, RequestMethod.POST })
+	public int cancleMessage(Model model, MessageVO messageVO) {
+		
+		logger.info("cancleMessage Method Active");
+
+		String result = us.cancleMessage(messageVO);
+		if(result == null) {
+			return 1;
+		} else {
+			return 0;
+		}
+
 	}
 	
 	@RequestMapping(value="message/sendMessage",method = { RequestMethod.GET, RequestMethod.POST })
