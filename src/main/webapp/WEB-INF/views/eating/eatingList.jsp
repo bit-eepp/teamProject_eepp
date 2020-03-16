@@ -10,7 +10,6 @@
 	<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	</head>
 
-
 	<body>
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
 	<input type="hidden" id="eatingPageMaker" value="${eatingPageMaker.makeQuery(1)}" />
@@ -23,18 +22,6 @@
 		<h1 type="text" class="eatingTitle" onclick="location.href='eatingList'">오늘 뭐 먹지?</h1>
 		<hr>
 		<br>
-		<!-- 맛집 n개씩 보기 
-		<div>
-			<select id="cntPerPage" name="perPageNum">
-				<option value="3"  <c:out value="${eatingPageMaker.cri.perPageNum eq '3' ? 'selected' : ''}"/>>3개씩 보기</option>
-				<option value="6" <c:out value="${eatingPageMaker.cri.perPageNum eq '6' ? 'selected' : ''}"/>>6개씩 보기</option>
-				<option value="9" <c:out value="${eatingPageMaker.cri.perPageNum eq '9' ? 'selected' : ''}"/>>9개씩 보기</option>
-				<option value="12" <c:out value="${eatingPageMaker.cri.perPageNum eq '12' ? 'selected' : ''}"/>>12개씩 보기</option>
-				<option value="15" <c:out value="${eatingPageMaker.cri.perPageNum eq '15' ? 'selected' : ''}"/>>15개씩보기</option>
-				<option value="18" <c:out value="${eatingPageMaker.cri.perPageNum eq '18' ? 'selected' : ''}"/>>18개씩 보기</option>
-			</select>&nbsp;&nbsp;&nbsp;
-		</div> -->
-
 		
 		<!-- 검색 부분  -->
 		<div class="search">
@@ -122,7 +109,7 @@
 				
 				<c:otherwise>
 					<tr>
-						<td colspan="9">조회된 결과가 없습니다.</td>
+						<td colspan="9">해당하는 곳이 없습니다!</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
