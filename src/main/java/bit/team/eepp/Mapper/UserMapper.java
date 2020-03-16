@@ -3,12 +3,14 @@ package bit.team.eepp.Mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import bit.team.eepp.VO.BoardVO;
+import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
@@ -53,15 +55,27 @@ public interface UserMapper {
 	public MessageVO showMySendMessage(MessageVO messageVO);
 		
 	// 쪽지 삭제
-	@Select("delete message where mid = #{mid}")
+	@Delete("delete message where mid = #{mid}")
 	public void deleteMessage(MessageVO messageVO);
+	
+	// 쪽지 발송 취소
+	@Delete("delete message where mid = #{mid} AND status = '읽지않음'")
+	public String cancleMessage(MessageVO messageVO);
 		
 	// 쪽지 확인 상태 변경
-	@Select("update message set status = '확인' where mid = #{mid}")
+	@Update("update message set status = '읽음' where mid = #{mid}")
 	public void changeMessageStatus(MessageVO messageVO);
+	
+	// 쪽지 신고
+	@Update("update message set mblind = 1 where mid = #{mid}")
+	public void reportMessage(MessageVO messageVO);
+	
+	// 쪽지 신고 내용
+	@Select("select m.mid,d.dreason,d.did,u.uNickname from message m, declaration d,users u where m.mid = d.mid AND m.mid = #{mid} AND u.user_id = d.reporter_id")
+	public DeclarationVO reportMessageInfo(DeclarationVO declarationVO);
 		
 	// 쪽지 보내기
-	@Select("insert into message (mid, sender_id, receiver_id, mcontent, mdate) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate)")
+	@Insert("insert into message (mid, sender_id, receiver_id, mcontent, mdate) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate)")
 	public void replyMessage(MessageVO messageVO);
 	
 	/*

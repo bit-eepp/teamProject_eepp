@@ -8,17 +8,19 @@ public class DeclarationVO {
 	private int reported_id;
 	private int board_id;
 	private int reply_id;
+	private int mid;
 	private Timestamp dDate;
 	private String dReason;
 	
 	public DeclarationVO() {}
 	
-	public DeclarationVO(int dId, int reporter_id, int reported_id, int board_id, int reply_id, Timestamp dDate, String dReason) {
+	public DeclarationVO(int dId, int reporter_id, int reported_id, int board_id, int reply_id, int mid, Timestamp dDate, String dReason) {
 		this.dId = dId;
 		this.reporter_id = reporter_id;
 		this.reported_id = reported_id;
 		this.board_id = board_id;
 		this.reply_id = reply_id;
+		this.mid = mid;
 		this.dDate = dDate;
 		this.dReason = dReason;
 	}
@@ -45,6 +47,14 @@ public class DeclarationVO {
 
 	public void setReported_id(int reported_id) {
 		this.reported_id = reported_id;
+	}
+
+	public int getMid() {
+		return mid;
+	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
 	}
 
 	public int getBoard_id() {

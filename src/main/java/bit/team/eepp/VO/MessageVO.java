@@ -9,11 +9,12 @@ public class MessageVO {
 	private String mdate;
 	private String uNickname;
 	private int user_id;
+	private int mblind;
 	
 	public MessageVO() {}
 	
 	public MessageVO(int mid, int sender_id, int receiver_id, String mcontent, String status, String mdate,
-			String uNickname, int user_id) {
+			String uNickname, int user_id, int mblind) {
 		this.mid = mid;
 		this.sender_id = sender_id;
 		this.receiver_id = receiver_id;
@@ -22,9 +23,17 @@ public class MessageVO {
 		this.mdate = mdate;
 		this.uNickname = uNickname;
 		this.user_id = user_id;
+		this.mblind = mblind;
 	}
 	
-	
+	public int getMblind() {
+		return mblind;
+	}
+
+	public void setMblind(int mblind) {
+		this.mblind = mblind;
+	}
+
 	public int getUser_id() {
 		return user_id;
 	}

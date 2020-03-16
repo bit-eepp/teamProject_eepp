@@ -11,5 +11,9 @@ public interface DeclarationMapper {
 	public abstract void doDeclaration(@Param("declarationVO") DeclarationVO declarationVO);
 
 	public abstract void doRpDeclaration(@Param("declarationVO") DeclarationVO declarationVO);
+	
+	public abstract void doMsgDeclaration(@Param("declarationVO") DeclarationVO declarationVO);
+	
+	public abstract void doUserDeclaration(@Param("declarationVO") DeclarationVO declarationVO);
 
 }

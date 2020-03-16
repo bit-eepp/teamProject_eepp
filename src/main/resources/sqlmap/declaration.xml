@@ -11,4 +11,14 @@
 		INSERT INTO DECLARATION(dId, reporter_id, reply_id, dDate, dReason) 
 		VALUES(DECLARATION_SEQ.nextval, #{declarationVO.reporter_id}, #{declarationVO.reply_id}, SYSDATE, #{declarationVO.dReason})
 	</insert>
+	
+	<insert id="doMsgDeclaration" parameterType="bit.team.eepp.VO.DeclarationVO">
+		INSERT INTO DECLARATION(dId, reporter_id, reported_id, mid, dDate, dReason) 
+		VALUES(DECLARATION_SEQ.nextval, #{declarationVO.reporter_id}, #{declarationVO.reported_id}, #{declarationVO.mid}, SYSDATE, #{declarationVO.dReason})
+	</insert>
+	
+	<insert id="doUserDeclaration" parameterType="bit.team.eepp.VO.DeclarationVO">
+		INSERT INTO DECLARATION(dId, reporter_id, reported_id, dDate, dReason) 
+		VALUES(DECLARATION_SEQ.nextval, #{declarationVO.reporter_id}, #{declarationVO.reported_id}, SYSDATE, #{declarationVO.dReason})
+	</insert>
 </mapper>

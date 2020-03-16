@@ -95,7 +95,16 @@ function reset(msgType){
 					
 					<tr>
 						<th class="input-title">내용</th>
-						<td>${receiveMsg.mcontent}</td>
+						<td>
+						<c:choose>
+							<c:when test="${not empty report}">
+							${report.dreason} 사유로 인해 신고된 쪽지입니다.
+							</c:when>
+							<c:otherwise>
+							${receiveMsg.mcontent}
+							</c:otherwise>
+						</c:choose>
+						</td>
 					</tr>
 					</tbody>
 					</table>
@@ -124,19 +133,26 @@ function reset(msgType){
 					<input type="hidden" name="receiver_id" class="receiver_id" value="${sendMsg.receiver_id}">
 					<table>
 					<tbody>
-					<tr>
+					<tr class="form-title">
 						<th class="input-title">받은사람</th>
 						<td>${sendMsg.uNickname}</td>
 					</tr>
 					
-					<tr>
+					<tr class="form-title">
 						<th class="input-title">송신일</th>
 						<td>${sendMsg.mdate}</td>
 					</tr>
 					
 					<tr>
 						<th class="input-title">내용</th>
-						<td>${sendMsg.mcontent}</td>
+						<c:choose>
+							<c:when test="${not empty report}">
+							${report.dreason} 사유로 인해 신고된 쪽지입니다.
+							</c:when>
+							<c:otherwise>
+							${sendMsg.mcontent}
+							</c:otherwise>
+						</c:choose>
 					</tr>
 					</tbody>
 					</table>
