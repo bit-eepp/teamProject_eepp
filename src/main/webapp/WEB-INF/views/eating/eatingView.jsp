@@ -21,10 +21,10 @@
 		</tr>
 		<tr>
 			<!-- 상호, 평점, 카테고리 -->
-			<td>store information <br> ${elView.eTitle},
-				${elView.eGrade}, ${elView.eCategory}, ${elView.eTel},
-				${elView.eAddress_new}
-				<button type="button">지번</button>(${elView.eAddress_new})
+			<td>store information <br> ${eContentView.eTitle},
+				${eContentView.eGrade}, ${eContentView.eCategory}, ${eContentView.eTel},
+				${eContentView.eAddress_new}
+				<button type="button">지번</button>(${eContentView.eAddress_old})
 			</td>
 		</tr>
 		<tr>
