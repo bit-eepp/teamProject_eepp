@@ -48,7 +48,7 @@ public class EatingController {
 		
 		System.out.println("store information print");
 		
-		model.addAttribute("eContent", eatingService.selectOne(eatingVO));
+		model.addAttribute("eContentView", eatingService.selectOne(eatingVO));
 		model.addAttribute("escri", escri);
 		model.addAttribute("sortType", sortType);
 		model.addAttribute("eCategory", eCategory);
