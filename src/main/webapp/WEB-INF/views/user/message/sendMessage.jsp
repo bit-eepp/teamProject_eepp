@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쪽지</title>
+<title>쪽지 보내기</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/msg.css">
 </head>
