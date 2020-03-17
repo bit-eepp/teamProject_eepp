@@ -57,14 +57,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;}
-    .userBtn{color: #3e3e3e;
-    font-weight: bold;}
-    .userBtn:hover{color:#59bfbf!important;}
-    .dropdown-menu{
-    height: 115px;
-    padding: 10px!important;}
-    .dropdown-menu li{margin:5px 0;}
-    .dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
 .messageForm .modal-title{font-size:18px;}
 .messageForm .modal-body{padding: 20px!important;font-size: 14px!important;}
 .messageForm .form-group{margin-bottom:0!important;}
