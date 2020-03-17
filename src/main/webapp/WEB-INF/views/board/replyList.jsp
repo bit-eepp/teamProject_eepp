@@ -11,6 +11,7 @@
 		var uNickname = $("#userNickname").val();
 		var userId = $("#userId").val();
 		var bId = $("#contentBid").val();
+		var isAdmin = '운영자';
 		
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function replyCount(bId) {
@@ -146,7 +147,7 @@
 									b += '</td>';
 									
 									b += '<td width="100">';
-									if(uNickname == value.uNickname){
+									if(uNickname == value.uNickname || value.uNickname == isAdmin){
 										//자기가 쓴 댓글일 경우 추천, 비추천 불가능
 									}else{
 									b += '<a onclick="rpLike(' +value.rpId +');" style="color : blue">[추천]</a>';
@@ -170,7 +171,7 @@
 									
 									// 댓글 신고 부분
 										b += '<td width="100" id="rpModalFormBtn">';
-										if(uNickname == value.uNickname){
+										if(uNickname == value.uNickname || value.uNickname == isAdmin){
 											//자기가 쓴 댓글일경우 신고버튼 안보임
 										}else{
 										b += '<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#rpModalForm_' +value.rpId +'" data-backdrop="static" data-keyboard="false">';
