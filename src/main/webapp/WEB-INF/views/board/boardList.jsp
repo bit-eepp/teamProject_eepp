@@ -8,21 +8,10 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>직무별 Community</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
-	<style type="text/css">
-.userBtn{color: #3e3e3e;font-weight: bold;display: block;}
-.dropdown-menu{height: 80px;padding: 10px!important;}
-.dropdown-menu li{margin:5px 0;}
-.dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
-		</style>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 	</head>
 	
 	<body>
-<script type="text/javascript">
-function sendMessage(uNickname, receiver_id){
-	 var tw = window.open("http://localhost:8282/eepp/message/sendMessage?receiver="+uNickname+"&receiver_id="+receiver_id+"&from=out", "sendmessage","left="+(screen.availWidth-370)/2
-			 +",top="+(screen.availHeight-425)/2+",width=370,height=425");
-}
-</script>
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 	<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
 	<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">
@@ -119,7 +108,7 @@ function sendMessage(uNickname, receiver_id){
 				</c:forEach>
 				
 				<!-- 인기글 상위노출 3개 -->
-				<c:forEach items="${hotArticle}" var="hot">
+				<c:forEach items="${hotArticle}" var="hot" varStatus="btn">
 					<tr>
 						<td><img src="${pageContext.request.contextPath}/resources/img/boardIcon/hot3.png" width="50" height="50"></td>
 						<td>${hot.bId}</td>
@@ -137,12 +126,60 @@ function sendMessage(uNickname, receiver_id){
 						
 						<c:otherwise>
 						<div class="dropdown">
-						<a href="#" class="userBtn" id="user_${hot.uNickname}${btn.index}" data-toggle="dropdown">${hot.uNickname}</a>
-           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_${hot.uNickname}${btn.index}">
+						<a href="#" class="userBtn" id="user_hot_${hot.user_id}${btn.index}" data-toggle="dropdown">${hot.uNickname}</a>
+           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_hot_${hot.user_id}${btn.index}">
                 			<li><a href="#">회원정보</a></li>
                 			<li><a onclick="sendMessage('${hot.uNickname}',${hot.user_id});">쪽지 보내기</a></li>
-                			</ul>
+                			<li><a data-toggle="modal" data-target="#report_user_${hot.user_id}${btn.index}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
+                		</ul>
 						</div>
+						<!-- 유저 신고 modal -->	
+                			<div class="modal fade" id="report_user_${hot.user_id}${btn.index}" role="dialog">
+                				<div class="modal-dialog">
+                				<div class="modal-content">
+                						
+                				<!-- Modal Header -->
+                				<div class="modal-header">
+                					<button type="button" class="close" data-dismiss="modal">
+                					<span aria-hidden="true">&times;</span>
+			                    	<span class="sr-only">Close</span>
+			                		</button>
+			               			<h4 class="modal-title">${hot.uNickname}님 신고</h4>
+			            		</div>
+			            		<!-- Header -->
+			            				
+			            		<!-- Modal Body -->
+			            		<div class="modal-body">
+			            			<form id="declaration_${hot.user_id}${btn.index}" role="formDeclaration_${hot.user_id}${btn.index}" name="dform">
+			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
+			            			<input type="hidden" name="reported_id" value="${hot.user_id}">
+			            				
+			            			<div class="form-group">
+			            			<label for="inputMessage">신고사유</label><br>
+			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  부적절한 홍보 게시글<br>
+			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
+			            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=false">  기타<br>
+			            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${hot.user_id}${btn.index}" name="dReason" disabled></textarea>
+			            			</div>
+			                		</form>
+			                		<!-- declaration -->
+			           		 	</div>
+			           		 	<!-- modal-body -->
+            
+			            		<!-- Modal Footer -->
+			            		<div class="modal-footer">
+			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+			                		<button type="button" class="btn reportBtn" onclick="submitDeclarationForm(${hot.user_id}${btn.index},'${hot.uNickname}');">신고</button>
+			            		</div>
+			            		<!-- Footer -->
+			            		
+			        			</div>
+			        			<!-- modal-content -->
+    							</div>
+    							<!-- modal-dialog -->
+							</div>
+							<!-- modal -->
 						</c:otherwise>
 						</c:choose>
 							${hot.bWrittenDate}
@@ -158,7 +195,7 @@ function sendMessage(uNickname, receiver_id){
 				
 				<c:choose>
 					<c:when test="${fn:length(boardList) > 0 }">
-						<c:forEach items="${boardList}" var="vo">
+						<c:forEach items="${boardList}" var="vo" varStatus="btn">
 							<tr>
 								<td>
 									<c:choose>
@@ -193,12 +230,61 @@ function sendMessage(uNickname, receiver_id){
 								
 								<c:otherwise>
 								<div class="dropdown">
-									<a href="#" class="userBtn" id="user_${vo.uNickname}${btn.index}" data-toggle="dropdown">${vo.uNickname}</a>
-           				 			<ul class="dropdown-menu" role="menu" aria-labelledby="user_${vo.uNickname}${btn.index}">
+									<a href="#" class="userBtn" id="user_${vo.user_id}${btn.index}" data-toggle="dropdown">${vo.uNickname}</a>
+           				 			<ul class="dropdown-menu" role="menu" aria-labelledby="user_${vo.user_id}${btn.index}">
                 					<li><a href="#">회원정보</a></li>
                 					<li><a onclick="sendMessage('${vo.uNickname}',${vo.user_id});">쪽지 보내기</a></li>
+                					<li><a data-toggle="modal" data-target="#report_user_${vo.user_id}${btn.index}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
                 					</ul>
 								</div>
+								<!-- 유저 신고 modal -->	
+                			<div class="modal fade" id="report_user_${vo.user_id}${btn.index}" role="dialog">
+                				<div class="modal-dialog">
+                				<div class="modal-content">
+                						
+                				<!-- Modal Header -->
+                				<div class="modal-header">
+                					<button type="button" class="close" data-dismiss="modal">
+                					<span aria-hidden="true">&times;</span>
+			                    	<span class="sr-only">Close</span>
+			                		</button>
+			               			<h4 class="modal-title">${vo.uNickname}님 신고</h4>
+			            		</div>
+			            		<!-- Header -->
+			            				
+			            		<!-- Modal Body -->
+			            		<div class="modal-body">
+			            			<form id="declaration_${vo.user_id}${btn.index}" role="formDeclaration_${vo.user_id}${btn.index}" name="dform">
+			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
+			            			<input type="hidden" name="reported_id" value="${vo.user_id}">
+			            			<input type="hidden" class="reported_nickname" value="${vo.uNickname}">
+			            				
+			            			<div class="form-group">
+			            			<label for="inputMessage">신고사유</label><br>
+			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  부적절한 홍보 게시글<br>
+			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
+			            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=false">  기타<br>
+			            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${vo.user_id}${btn.index}" name="dReason" disabled></textarea>
+			            			</div>
+			                		</form>
+			                		<!-- declaration -->
+			           		 	</div>
+			           		 	<!-- modal-body -->
+            
+			            		<!-- Modal Footer -->
+			            		<div class="modal-footer">
+			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+			                		<button type="button" class="btn reportBtn" onclick="submitDeclarationForm(${vo.user_id}${btn.index},'${vo.uNickname}');">신고</button>
+			            		</div>
+			            		<!-- Footer -->
+			            		
+			        			</div>
+			        			<!-- modal-content -->
+    							</div>
+    							<!-- modal-dialog -->
+							</div>
+							<!-- modal -->
 								</c:otherwise>
 								</c:choose>
 									${vo.bWrittenDate}
