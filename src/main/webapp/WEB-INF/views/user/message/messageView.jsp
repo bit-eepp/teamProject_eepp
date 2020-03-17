@@ -8,7 +8,7 @@
 <title>쪽지</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/msg.css">
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 //ContextPath
 function getContextPath() {
 	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
@@ -61,7 +61,7 @@ function reset(msgType){
 	openMsg(msgType);
 }
 
-</script>
+</script> -->
 </head>
 <body class="messageView_body">
 	<c:choose>
@@ -97,8 +97,8 @@ function reset(msgType){
 						<th class="input-title">내용</th>
 						<td>
 						<c:choose>
-							<c:when test="${not empty report}">
-							${report.dreason} 사유로 인해 신고된 쪽지입니다.
+							<c:when test="${not empty isReported}">
+							${isReported.dReason} 사유로 인해 신고된 쪽지입니다.
 							</c:when>
 							<c:otherwise>
 							${receiveMsg.mcontent}
@@ -145,14 +145,16 @@ function reset(msgType){
 					
 					<tr>
 						<th class="input-title">내용</th>
+						<td>
 						<c:choose>
-							<c:when test="${not empty report}">
-							${report.dreason} 사유로 인해 신고된 쪽지입니다.
+							<c:when test="${not empty isReported}">
+							${isReported.dReason} 사유로 인해 신고된 쪽지입니다.
 							</c:when>
 							<c:otherwise>
 							${sendMsg.mcontent}
 							</c:otherwise>
 						</c:choose>
+						</td>
 					</tr>
 					</tbody>
 					</table>
@@ -164,5 +166,6 @@ function reset(msgType){
 		</section>
 </c:when>
 </c:choose>
+<script src="${pageContext.request.contextPath}/js/user/message/messageView.js"></script>
 </body>
 </html>

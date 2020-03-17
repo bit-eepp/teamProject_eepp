@@ -68,7 +68,7 @@ public class UserService{
 		userMapper.deleteMessage(messageVO);
 	}
 	
-	public String cancleMessage(MessageVO messageVO) {
+	public int cancleMessage(MessageVO messageVO) {
 		return userMapper.cancleMessage(messageVO);
 	}
 	

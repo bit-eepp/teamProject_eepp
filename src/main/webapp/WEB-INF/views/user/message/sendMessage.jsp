@@ -8,7 +8,7 @@
 <title>쪽지</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/msg.css">
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 //ContextPath
 function getContextPath() {
 	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
@@ -77,7 +77,7 @@ function openMsg(msgType){
 }
 
 
-</script>
+</script> -->
 </head>
 <body class="messageView_body">
 
@@ -111,6 +111,6 @@ function openMsg(msgType){
 				</form>
 			</div>
 		</section>
-
+<script src="${pageContext.request.contextPath}/js/user/message/sendMessage.js"></script>
 </body>
 </html>

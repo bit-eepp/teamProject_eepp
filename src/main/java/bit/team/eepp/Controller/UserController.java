@@ -339,8 +339,8 @@ public class UserController{
 		
 		logger.info("cancleMessage Method Active");
 
-		String result = us.cancleMessage(messageVO);
-		if(result == null) {
+		int result = us.cancleMessage(messageVO);
+		if(result == 1) {
 			return 1;
 		} else {
 			return 0;

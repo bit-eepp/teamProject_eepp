@@ -42,7 +42,7 @@
 .messageForm .notelist .notelist_head .note_active{width:10%;}
 .messageForm .openMsgView,{cursor:pointer;}
 .messageForm .openMsgView:hover{text-decoration: underline;color:#59bfbf!important;}
-.send_cancle, .reportMsg{text-decoration: underline;cursor:pointer;}
+.send_cancle, .reportMsg{text-decoration: underline!important;cursor:pointer;}
 .send_cancle:hover, .reportMsg:hover{color:#59bfbf!important;}
 .selectDeleteBtn {
 	width:80px;
@@ -80,7 +80,7 @@
 .sc-messageView form .form-group {margin-bottom:15px!important;padding: 0 10px 20px 10px;background-color: #fff;height: 280px;}
 .sc-messageView form .form-group table {width:100%;}
 .sc-messageView form .form-group table .form-title {border-bottom: 1px solid #a3e1e1;}
-.sc-messageView form .form-group table tr th.input-title{color: #59bfbf;}
-.sc-messageView form .form-group table tr td{padding: 10px 0 10px 5px;}
+.sc-messageView form .form-group table tr th.input-title{color: #59bfbf;width:20%;}
+.sc-messageView form .form-group table tr td{padding: 10px 0 10px 5px;width:80%;}
 .sc-messageView form .btn{font-size: 14px;margin-right: 8px;color:#59bfbf;}
 /* messageView 여기까지 */
