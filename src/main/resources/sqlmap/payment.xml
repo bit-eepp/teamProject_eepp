@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.UserMapper" >
+	<insert id="addPointPayment">
+		insert into payment (paid, point_id, paDate, paInfo)
+		 values (payment_seq.nextval, (select poid from point where user_id = #{user_id}), SYSDATE, '포인트 충전')
+	</insert>
+</mapper>

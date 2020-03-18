@@ -96,3 +96,47 @@ input {
 .drop{
 	font-size:13px;
 }
+
+	/*
+	포인트
+	*/
+#charge_point .modal-header .close{font-size: 32px!important;font-weight: 500!important;}
+#charge_point .modal-body{padding: 0!important;}
+#charge_point .modal-footer{border-top:initial!important;}
+.tit_wrap{
+	overflow:hidden;
+	background: #4acccc;
+    padding: 10px 20px;
+    color: #fff;
+    border-top: 1px solid #000;
+    font-size: 18px;
+}
+.tit_wrap span{float:left;}
+.tit_wrap .tit_cost{float: right;}
+.point_wrap label{
+	overflow: hidden;
+    display: block;
+    padding: 15px;
+    border-bottom: 1px solid #e6e6e6;
+}
+.point_wrap label input{
+	margin-top: 3px;
+    margin-right: 5px;
+    float: left;
+    width: initial;
+}
+.point_wrap label span{
+	float: left;
+}
+.point_wrap label .cost{
+	float: right;
+}
+#charge_point .chargeBtn{
+	display: block;
+    width: 280px;
+    margin: 10px auto;
+    background: #4acccc;
+    color: #fff;
+    padding: 10px 0;
+    cursor: pointer;
+}
