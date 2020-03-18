@@ -77,6 +77,14 @@
 									<td>' ${scrapCount} '개</td>
 								</tr>
 						</table>
+						
+						<!--  포인트 -->
+						<div class="charge_point">
+							<button type="button" data-toggle="modal" data-target="#charge_point" data-backdrop="static" data-keyboard="false">포인트 충전</button>
+							<%@ include file="/WEB-INF/views/user/payment/chargePoint.jsp"%>
+						</div>
+						<!--  포인트 -->
+						
 						<br>
 							<h1 class="sc-title">회원 정보 수정</h1>
 

@@ -37,6 +37,7 @@ import bit.team.eepp.Utils.UploadFileUtils;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
+import bit.team.eepp.VO.PointVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserVO;
 
@@ -249,6 +250,37 @@ public class UserController{
 
 			return "redirect:/";
 		}
+	}
+	
+	/*
+	 * ------- point part -------
+	 */
+	
+	/* 포인트 충전 */
+	@RequestMapping("/chargePoint")
+	public String chargePoint(PointVO pointVO) {
+		
+		logger.info("charge method Active");
+		
+		return "user/payment/chargePoint";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/changeToPoint")
+	public void changeToPoint(PointVO pointVO) {
+		
+		PointVO havePoint = us.haveChargePoint(pointVO);
+		
+		if(havePoint == null) {
+			us.firstChargePoint(pointVO);
+			us.addPointPayment(pointVO);
+			System.out.println("포인트 첫 충전 + 충전 내역 추가 완료");
+		}else {
+			us.chargePoint(pointVO);
+			us.addPointPayment(pointVO);
+			System.out.println("포인트 충전 + 충전 내역 추가 완료");
+		}
+		
 	}
 	
 	

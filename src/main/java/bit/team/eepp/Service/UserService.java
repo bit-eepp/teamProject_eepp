@@ -14,6 +14,7 @@ import bit.team.eepp.Mapper.UserMapper;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
+import bit.team.eepp.VO.PointVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
@@ -132,6 +133,23 @@ public class UserService{
 
 	public List<ScrapVO> scrapList(UserVO userVO) {
 		return userMapper.scrapList(userVO);
+	}
+	
+	/* 포인트 */
+	public PointVO haveChargePoint(PointVO pointVO) {
+		return userMapper.haveChargePoint(pointVO);
+	}
+
+	public int firstChargePoint(PointVO pointVO) {
+		return userMapper.firstChargePoint(pointVO);
+	}
+		
+	public int chargePoint(PointVO pointVO) {
+		return userMapper.chargePoint(pointVO);
+	}
+	
+	public int addPointPayment(PointVO pointVO) {
+		return userMapper.addPointPayment(pointVO);
 	}
 
 }
