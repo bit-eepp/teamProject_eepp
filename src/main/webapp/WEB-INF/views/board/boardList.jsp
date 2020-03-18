@@ -120,7 +120,7 @@
 						<td>
 						
 						<c:choose>
-						<c:when test="${hot.uNickname eq loginUser.uNickname}">
+						<c:when test="${hot.uNickname eq loginUser.uNickname or hot.uNickname eq '운영자' or hot.uNickname eq 'admin2'}">
 						<a class="userBtn">${hot.uNickname}</a>
 						</c:when>
 						
@@ -224,7 +224,7 @@
 								
 								<td>
 								<c:choose>
-								<c:when test="${vo.uNickname eq loginUser.uNickname}">
+								<c:when test="${vo.uNickname eq loginUser.uNickname or vo.uNickname eq '운영자' or vo.uNickname eq 'admin2'}">
 								<a class="userBtn">${vo.uNickname}</a>
 								</c:when>
 								
