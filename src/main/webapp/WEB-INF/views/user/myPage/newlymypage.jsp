@@ -78,7 +78,7 @@
 						</tr>
 						<tr class="bordered">
 							<td>
-							${loginUser.point}
+							${loginUser.point} P
 									</td>
 							
 							</tr>
@@ -89,7 +89,7 @@
 							
 							<tr class="bordered">
 							<td class="liwrap" value="open_message" onclick="openMsg();">받은
-								쪽지 ${messageRes} / 보낸 쪽지 ${messageSen}</td>
+								쪽지 ${messageRes} <br> 보낸 쪽지 ${messageSen}</td>
 							</tr>
 							
 							<tr>
@@ -97,7 +97,7 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td>개설 0 / 참여 0</td>
+							<td>개설 0 <br> 참여 0</td>
 							</tr>
 							
 							<tr>
@@ -106,7 +106,7 @@
 							
 							<tr class="bordered">
 							<td><div class="content_count">게시물
-									${listCount} / 댓글 ${replyCount}</div></td>
+									${listCount} <br>  댓글 ${replyCount}</div></td>
 							
 							</tr>
 							
@@ -182,9 +182,7 @@
 								<tr>
 									<th class="input-title"><span class="required">&#8226;</span>비밀번호</th>
 									<td>
-										<form
-											action="${pageContext.request.contextPath}/login/forgotMyInfo"
-											method="post">
+										<form action="${pageContext.request.contextPath}/login/forgotMyInfo" method="post">
 											<button class="btn btn-submit" id="submit">비밀번호 변경</button>
 										</form>
 									</td>

@@ -9,11 +9,11 @@ import bit.team.eepp.VO.UserVO;
 public interface JoinMapper {
 
 	// SNS회원가입
-	@Insert("insert into users (user_id, grade_id, uEmail, uNickname, uJoinDate, uPhone, snsType) values (users_seq.nextval, 2, #{uEmail}, #{uNickname}, SYSDATE, #{uPhone}, #{snsType})")
+	@Insert("insert into users (user_id, grade_id, uEmail, uNickname, uJoinDate, uPhone, snsType,uprofile) values (users_seq.nextval, 2, #{uEmail}, #{uNickname}, SYSDATE, #{uPhone}, #{snsType},#{uprofile})")
 	public void JoinWithSNS(UserVO userVO);
 	
 	// 보통 회원가입
-	@Insert("insert into users (user_id, grade_id, uEmail, uPassword, uNickname, uJoinDate, uPhone,uprofile) values (users_seq.nextval, 2, #{uEmail}, #{uPassword}, #{uNickname}, SYSDATE, #{uPhone},'${uprofile}')")
+	@Insert("insert into users (user_id, grade_id, uEmail, uPassword, uNickname, uJoinDate, uPhone,uprofile) values (users_seq.nextval, 2, #{uEmail}, #{uPassword}, #{uNickname}, SYSDATE, #{uPhone},#{uprofile})")
 	public void joinNormal(UserVO userVO);
 	
 	// 이메일 중복확인

@@ -118,7 +118,7 @@ public class JoinController {
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 			userVO.setUprofile(ymdPath + File.separator + fileName);
 		} else {
-			fileName = "/eepp"+File.separator + "img" + File.separator + "basic_img.png";
+			fileName = "/eepp"+File.separator + "img" + File.separator + "headerLogin.png";
 			userVO.setUprofile(fileName);
 		}
 		System.out.println("=================");
@@ -149,7 +149,7 @@ public class JoinController {
 }
 	
 	@RequestMapping("join/joinWithSns.me")
-	public String joinWithSns(MultipartFile file,HttpServletRequest request, Model model,HttpSession session, UserVO userVO) throws IOException, Exception{
+	public String joinWithSns(HttpServletRequest request, Model model,HttpSession session, UserVO userVO, MultipartFile file) throws Exception{
 		
 		System.out.println("회원 등록 페이지");
 		

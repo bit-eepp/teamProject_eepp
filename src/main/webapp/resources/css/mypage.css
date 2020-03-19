@@ -141,7 +141,7 @@
 	background-color: #59bfbf;
 }
 
-#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn {
+#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn{
 	margin-right: 20px;
 	width: 10%;
 	background-color: #59bfbf;
@@ -153,8 +153,30 @@
 tr.bordered {
     border-bottom: 1px solid #f3f3f3;
 }
-.charge_point{
-display:inline-block;
+tr.bordered td {
+    padding-left:20%;
+}
+
+/*
+
+회원탈퇴 css
+
+*/
+.required {
+	color: #e7438b;
+	margin-right: 10px;
+}
+.form-group{
+	margin : 0 auto;
+	width : 80%;
+	text-align:center;
+}
+#dropBtn{
+background-color: #59bfbf;
+width:31%;
+}
+.drop_form{
+	text-align:center;
 }
 
 	/*
@@ -162,6 +184,11 @@ display:inline-block;
 	포인트
 	
 	*/
+	
+.charge_point{
+	display:inline-block;
+}
+
 #charge_point .modal-header .close{font-size: 32px!important;font-weight: 500!important;}
 #charge_point .modal-body{padding: 0!important;}
 #charge_point .modal-footer{border-top:initial!important;}
