@@ -53,7 +53,6 @@ import bit.team.eepp.API.GoogleOAuthInfo;
 import bit.team.eepp.Service.JoinService;
 import bit.team.eepp.Service.LoginService;
 import bit.team.eepp.Service.UserService;
-import bit.team.eepp.VO.PointVO;
 import bit.team.eepp.VO.UserVO;
 
 @Controller
@@ -132,14 +131,6 @@ public class LoginController {
 			if(login != null & checkPW == true){
 				UserVO user = new UserVO();
 				user = us.UserInfo(userVO.getuEmail());
-				session.setAttribute("loginUser", user);
-				
-				/* 포인트 정보가 있으면 session에 정보 추가 */
-				PointVO point = us.haveChargePoint(Integer.toString(userVO.getUser_id()));
-				if(point != null) {
-					session.setAttribute("userPoint", point);
-					System.out.println("로그인한 유저의 포인트정보 session 추가");
-				}
 				
 				// 로그인할때 rememberMe를 체크한 경우, session정보 DB에 저장
 				if(request.getParameter("rememberMe") != null) {
@@ -235,13 +226,6 @@ public class LoginController {
   				if(user.getSnsType().equals("kakao")) {
 					session.setAttribute("loginUser", user);
 					
-					/* 포인트 정보가 있으면 session에 정보 추가 */
-					PointVO point = us.haveChargePoint(Integer.toString(user.getUser_id()));
-					if(point != null) {
-						session.setAttribute("userPoint", point);
-						System.out.println("로그인한 유저의 포인트정보 session 추가");
-					}
-					
 				}// 다른 sns로 가입한 이메일일 경우
   				else{
 					response.setContentType("text/html; charset=UTF-8");
@@ -324,13 +308,6 @@ public class LoginController {
 	      				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
 	      				if(user.getSnsType().equals("naver")) {
 	    					session.setAttribute("loginUser", user);
-	    					
-	    					/* 포인트 정보가 있으면 session에 정보 추가 */
-	    					PointVO point = us.haveChargePoint(Integer.toString(user.getUser_id()));
-	    					if(point != null) {
-	    						session.setAttribute("userPoint", point);
-	    						System.out.println("로그인한 유저의 포인트정보 session 추가");
-	    					}
 	    					
 	    				}// 다른 sns로 가입한 이메일일 경우
 	      				else{
@@ -433,13 +410,6 @@ public class LoginController {
       				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검
       				if(user.getSnsType().equals("google")) {
     					session.setAttribute("loginUser", user);
-    					
-    					/* 포인트 정보가 있으면 session에 정보 추가 */
-    					PointVO point = us.haveChargePoint(Integer.toString(user.getUser_id()));
-    					if(point != null) {
-    						session.setAttribute("userPoint", point);
-    						System.out.println("로그인한 유저의 포인트정보 session 추가");
-    					}
     					
     				}// 다른 sns로 가입한 이메일일 경우
       				else{

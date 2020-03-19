@@ -4,7 +4,12 @@
 body {
 	overflow-x:hidden; 
 }
-
+#chatRoomListWrap{
+	right:-350px!important;
+}
+.side_show{
+	left: 0!important;
+}
 #main {
 	position:absolute;
 	right:0;
@@ -24,7 +29,7 @@ body {
     color:#fff;
     border: initial;
 }
-.fas{margin-left: 8px!important;}
+.thiunder_icon{margin-left: 8px!important;}
 .sidebar {
 	position: fixed;
 	width: 350px;
@@ -60,37 +65,37 @@ body {
 	height: auto;
 }
 
-.modal-dialog {
+#mySidebar .modal-dialog {
 	max-width: 40%;
 	width: auto;
 	display: table;
 }
 
-.modal-header>.logo {
+#mySidebar .modal-header>.logo {
 	max-width: 8%;
 	height: auto;
 }
 
-.modal-header b {
+#mySidebar .modal-header b {
 	color: #e7438b;
 }
 
-.modal-body h5 {
+#mySidebar .modal-body h5 {
 	text-align: center;
 }
 
-.modal-content {
+#mySidebar .modal-content {
 	color: #26274c;
 	font-size: 20px;
 }
 
-.modal-footer .btn {
+#mySidebar .modal-footer .btn {
 	background-color: #59bfbf;
 	color: #ffffff;
 	min-width: 100px;
 }
 
-.modal-footer .btn:hover {
+#mySidebar .modal-footer .btn:hover {
 	background-color: #e7438b;
 }
 

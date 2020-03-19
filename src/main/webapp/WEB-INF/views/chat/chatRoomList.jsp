@@ -300,33 +300,36 @@
 		    } */
 		    $('.chatBtn').on('click', function () {
 		        $('#mySidebar').addClass('side_show');
+		        $('#chatRoomListWrap').addClass('side_show');
 		        $('.side_bar_overlay').fadeIn();
 		    });
 
 		    $('.side_bar_overlay').on('click', function () {
 		        $('#mySidebar').removeClass('side_show');
+		        $('#chatRoomListWrap').removeClass('side_show');
 		        $('.side_bar_overlay').fadeOut();
 		    });
 
 		    $('.closebtn').on('click', function () {
 		        $('#mySidenav').removeClass('side_show');
+		        $('#chatRoomListWrap').removeClass('side_show');
 		        $('.side_bar_overlay').fadeOut();
 		    });
 	    </script>
 	</head>
 
 	<body>
-		<div class="float" style="position:absolute; top:0px; right:0px; height:100%;">
+		<div class="float" id="chatRoomListWrap" style="position:absolute; top:0px; right:0px; height:100%;">
 			<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 			<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
 			
 			<div class="sidebar_wrap">
 			<div id="main">
-				<button title="Thunder" class="chatBtn">Thunder<i class="fas fa-bolt"></i></button>
+				<button title="Thunder" class="chatBtn">Thunder<i class="fas thiunder_icon fa-bolt"></i></button>
 			</div>
 			
 			<div id="mySidebar" class="sidebar">
-				<a title="close" href="javascript:void(0)" class="closebtn"><i class="fas fa-times fa-2x"></i></a>
+				<a title="close" href="javascript:void(0)" class="closebtn"><i class="fas chat_icon fa-times fa-2x"></i></a>
 				
 				<div id="chatHead" align="center">
 					<img alt="" src="${pageContext.request.contextPath}/img/eechatLogo.png">

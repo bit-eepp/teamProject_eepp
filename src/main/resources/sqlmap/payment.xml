@@ -3,7 +3,7 @@
 
 <mapper namespace="bit.team.eepp.Mapper.UserMapper" >
 	<insert id="addPointPayment">
-		insert into payment (paid, point_id, paDate, paInfo)
-		 values (payment_seq.nextval, (select poid from point where user_id = #{user_id}), SYSDATE, '포인트 충전')
+		insert into payment (paid, paDate, paInfo, user_id, point_io)
+		 values (payment_seq.nextval, SYSDATE, '포인트 충전', #{user_id}, #{point_io})
 	</insert>
 </mapper>

@@ -77,14 +77,7 @@
 						</tr>
 						<tr class="bordered">
 							<td>
-							<%-- session에 저장된 포인트 정보가 있는경우 --%>
-									<c:choose>
-										<c:when test="${not empty userPoint}">
-											${userPoint.poBalance}
-										</c:when>
-							<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
-										<c:otherwise> 0P </c:otherwise>
-									</c:choose>
+							${loginUser.point}
 									</td>
 							
 							</tr>

@@ -25,14 +25,14 @@ function getContextPath() {
 	IMP.init('imp85104859'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
 	/* 충전 포인트가 30000포인트 이하일시 결제금액 10퍼센트 추가시킴 */
-	var selValue = $('input:radio[name="poCharge"]:checked').val();
+	var selValue = $('input:radio[name="chPoint"]:checked').val();
 	var result = Number(selValue)
 	if(result <= 30000){
 		result += (result * (10 / 100))
 		selValue = result.toString()
 	}
 	/* 충전되는 포인트 */
-	var realPoint = $('input:radio[name="poCharge"]:checked').val();
+	var realPoint = $('input:radio[name="chPoint"]:checked').val();
 	
 	//포인트 충전금액
 		IMP.request_pay({
@@ -58,7 +58,7 @@ function getContextPath() {
 						type : "post",
 						data : {
 							"user_id": $(".userID").val(),
-							"poCharge" : realPoint
+							"point" : realPoint
 						},
 						success : function(result) {
 							$('#charge_point').modal('hide');
@@ -79,6 +79,7 @@ function getContextPath() {
 		$('#charge_point').on('hidden.bs.modal', function (e) {
 			$(this).find('form')[0].reset()
 		});
+		location.href=getContextPath()+"/myPage";
 	}
 </script>
 
@@ -115,37 +116,37 @@ function getContextPath() {
 								</div>
 								<div class="point_wrap">
 								<label>
-									<input type="radio" name="poCharge" value="1000" checked>
+									<input type="radio" name="chPoint" value="1000" checked>
 									<span>1,000포인트</span>
 									<span class="cost">1,100원</span>
 								</label>
 								<label>
-									<input type="radio" name="poCharge" value="3000">
+									<input type="radio" name="chPoint" value="3000">
 									<span>3,000포인트</span>
 									<span class="cost">3,300원</span>
 								</label>
 								<label>
-									<input type="radio" name="poCharge" value="5000">
+									<input type="radio" name="chPoint" value="5000">
 									<span>5,000포인트</span>
 									<span class="cost">5,500원</span>
 								</label>
 								<label>
-									<input type="radio" name="poCharge" value="10000">
+									<input type="radio" name="chPoint" value="10000">
 									<span>1,0000포인트</span>
 									<span class="cost">1,1000원</span>
 								</label>
 								<label>
-									<input type="radio" name="poCharge" value="30000">
+									<input type="radio" name="chPoint" value="30000">
 									<span>3,0000포인트</span>
 									<span class="cost">3,3000원</span>
 								</label>
 								<label>
-									<input type="radio" name="poCharge" value="55000">
+									<input type="radio" name="chPoint" value="55000">
 									<span>55,000포인트(5000p 보너스)</span>
 									<span class="cost">55,000원</span>
 								</label>
 								<label>
-									<input type="radio" name="poCharge" value="77000">
+									<input type="radio" name="chPoint" value="77000">
 									<span>77,000포인트(7000p 보너스)</span>
 									<span class="cost">77,000원</span>
 								</label>
