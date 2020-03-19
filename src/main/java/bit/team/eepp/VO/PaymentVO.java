@@ -5,19 +5,40 @@ import java.sql.Date;
 public class PaymentVO {
 	private int paId;
 	private int class_id;
-	private int point_id;
 	private Date paDate;
 	private String paInfo;
+	private int user_id;
+	private int point_io;
 	
+	public PaymentVO() {}
 	
-	public PaymentVO(int paId, int class_id, int point_id, Date paDate, String paInfo) {
+	public PaymentVO(int paId, int class_id, Date paDate, String paInfo, int user_id, int point_io) {
 		this.paId = paId;
 		this.class_id = class_id;
-		this.point_id = point_id;
 		this.paDate = paDate;
 		this.paInfo = paInfo;
+		this.user_id = user_id;
+		this.point_io = point_io;
 	}
 	
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public int getPoint_io() {
+		return point_io;
+	}
+
+	public void setPoint_io(int point_io) {
+		this.point_io = point_io;
+	}
+
+
+
 	public String getPaInfo() {
 		return paInfo;
 	}
@@ -37,12 +58,6 @@ public class PaymentVO {
 	}
 	public void setClass_id(int class_id) {
 		this.class_id = class_id;
-	}
-	public int getPoint_id() {
-		return point_id;
-	}
-	public void setPoint_id(int point_id) {
-		this.point_id = point_id;
 	}
 	public Date getPaDate() {
 		return paDate;

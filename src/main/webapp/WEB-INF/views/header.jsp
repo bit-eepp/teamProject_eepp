@@ -52,14 +52,7 @@
 							<div id="userInfo">
 								<h5>${loginUser.uNickname}님</h5>
 								<h6>EE Point : <i class="fab fa-product-hunt"></i>
-									<c:choose>
-										<c:when test="${not empty userPoint}">
-										${userPoint.poBalance}
-										</c:when>
-										<c:otherwise>
-										0
-										</c:otherwise>
-									</c:choose>
+									${loginUser.point}
 								</h6>
 							</div>
 							
