@@ -39,7 +39,7 @@ import bit.team.eepp.Utils.UploadFileUtils;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
-import bit.team.eepp.VO.PointVO;
+import bit.team.eepp.VO.PaymentVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserVO;
 
@@ -286,7 +286,7 @@ public class UserController{
 	
 	/* 포인트 충전 */
 	@RequestMapping("/chargePoint")
-	public String chargePoint(PointVO pointVO) {
+	public String chargePoint(UserVO userVO) {
 		
 		logger.info("charge method Active");
 		
@@ -295,23 +295,14 @@ public class UserController{
 	
 	@ResponseBody
 	@RequestMapping("/changeToPoint")
-	public void changeToPoint(PointVO pointVO, HttpSession session) {
-		
-//		PointVO havePoint = us.haveChargePoint(Integer.toString(pointVO.getUser_id()));
-//		session.getAttribute("userPoint");
-		
-		//포인트 정보가 없으면 첫 포인트 충전로직을 수행
-		if(session.getAttribute("userPoint") == null) {
-			us.firstChargePoint(pointVO);
-			us.addPointPayment(pointVO);
-			System.out.println("포인트 첫 충전 + 충전 내역 추가 완료");
-		}else {
-			us.chargePoint(pointVO);
-			us.addPointPayment(pointVO);
+	public void changeToPoint(UserVO userVO, PaymentVO paymentVO,HttpSession session) {
+
+			us.chargePoint(userVO);
+			paymentVO.setPoint_io(userVO.getPoint());
+			us.addPointPayment(paymentVO);
 			System.out.println("포인트 충전 + 충전 내역 추가 완료");
+			
 		}
-		
-	}
 	
 	
 	/*

@@ -20,7 +20,6 @@ public class UserVO {
 	private String uprofile;
 	private int point;
 	
-
 	public UserVO() {}
 
 	public UserVO(int user_id, int grade_Id, String uEmail, String uPassword, String uNickname, Timestamp uJoinDate,
