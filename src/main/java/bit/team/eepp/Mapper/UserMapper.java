@@ -41,6 +41,10 @@ public interface UserMapper {
 	@Select("select count(*) from useractive where user_id = #{user_id} and active_type = #{active_type} and rpId = #{rpId}")
 	public int haveReplyActive(UserActiveVO activeVO);
 	
+	/*
+	 * 쪽지
+	 */
+	
 	// 쪽지 수 count
 	public int messageListCount(Map<String, Object> map);
 		
