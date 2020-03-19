@@ -8,7 +8,7 @@
 		<link rel="icon" href="${pageContext.request.contextPath}/img/EE_logo.png" sizes="16x16">
 		
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatRoomPage.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatRoomPage.css?v=2">
 		
 		<script type="text/javascript">
 			var chId= ${chatRoomSelect.chId};
@@ -124,9 +124,9 @@
 			    		tag += '</div>';
 			    		tag += '<div class="chat-body">';
 			    		tag += '<div class="chat-message">';
-			    		tag += '<p><b style="color:#26274c;">' +msg.text +'</b></p>' ;
-			    		tag += '<p>' +msg.uNickname +'</p>';
-			    		tag += '<p>' +timeStr +'</p>' ;
+			    		tag += '<h6 style="color:#ffffff">' +msg.text +'</h6>';
+			    		tag += '<p style="color:#26274c;">' +msg.uNickname +'</p>';
+			    		tag += '<p style="color:#26274c;">' +timeStr +'</p>' ;
 			    		tag += '</div>';
 			    		tag += '</div>';
 			    		tag += '</li>';
@@ -138,9 +138,9 @@
 			    		tag += '</div>';
 			    		tag += '<div class="chat-body">';
 			    		tag += '<div class="chat-message">';
-			    		tag += '<p><b style="color:#26274c;">' +msg.text +'</b></p>' ;
-			    		tag += '<p>' +msg.uNickname +'</p>';
-			    		tag += '<p>' +timeStr +'</p>' ;
+			    		tag += '<h6 style="color:#ffffff">' +msg.text +'</h6>';
+			    		tag += '<p style="color:#26274c;">' +msg.uNickname +'</p>';
+			    		tag += '<p style="color:#26274c;">' +timeStr +'</p>' ;
 			    		tag += '</div>';
 			    		tag += '</div>';
 			    		tag += '</li>';

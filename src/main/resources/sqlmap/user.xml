@@ -16,6 +16,10 @@
 	            </when>
 	        </choose>
 		</if>
+		
+		<if test="fromMain != null">
+			WHERE u.USER_ID = m.sender_ID AND receiver_id = #{user_id} AND status = '읽지않음'
+		</if>
 	</select>
         	
        <select id="messageList" resultType="bit.team.eepp.VO.MessageVO" parameterType="map">
