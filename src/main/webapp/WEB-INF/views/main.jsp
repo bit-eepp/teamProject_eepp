@@ -15,7 +15,16 @@ function openMsg(){
 	 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
 			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 	}
+	
+$(function(){  
+	var currentPosition = parseInt($(".float").css("top")); 
+	$(window).scroll(function() { 
+		var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환
+		$(".float").stop().animate({"top":position+currentPosition+"px"},500); 
+	});
+});
 </script>
+<%@ include file="/WEB-INF/views/header.jsp"%>
 <input type="hidden" id="user_id" value="${loginUser.user_id}" />
 <input type="hidden" id="uNickname" value="${loginUser.uNickname}" />
 
@@ -76,5 +85,6 @@ $(function(){
 </script>
 
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+<%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>
 </html>

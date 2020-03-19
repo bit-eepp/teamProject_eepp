@@ -9,7 +9,7 @@
 	    <title>EE Chat List</title>
 	    <link rel="icon" href="${pageContext.request.contextPath}/img/EE_logo.png" sizes="16x16">
 	    <%@ include file="/WEB-INF/include/forImport.jspf"%>
-	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatList.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatList.css?v=1">
 	    
 	    <script type="text/javascript">
 		    var uNickname = $("#userNickname").val();
@@ -302,7 +302,7 @@
 	</head>
 
 	<body>
-		<div class="floating" style="position:absolute; top:0px; right:0px; height:100%; width:500px;">
+		<div class="float" style="position:absolute; top:0px; right:0px; height:100%;">
 			<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 			<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
 			
