@@ -3,13 +3,78 @@
 
 <mapper namespace="bit.team.eepp.Mapper.UserMapper">
 
-<select id = "scrapList" parameterType="int" resultType="bit.team.eepp.VO.ScrapVO">
+	<!-- 댓글 신고 -->
+	<select id="rep_Declaration"
+		resultType="bit.team.eepp.VO.DeclarationVO" parameterType="int">
 	<![CDATA[
-		SELECT s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname FROM SCRAP s, BOARD b, USERS u
-		WHERE b.bId = s.board_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
-		ORDER BY s.sDate DESC
+	select d.did, d.reporter_id, d.reported_id, d.dreason, d.ddate, d.reply_id
+from reply r,declaration d, users u
+where d.reply_id = r.rpid and d.reporter_id = u.user_id
+	]]>
+	</select>
+
+	<!-- 게시물 신고 -->
+	<select id="declaration"
+		resultType="bit.team.eepp.VO.DeclarationVO" parameterType="int">
+	<![CDATA[
+	select d.did, d.reporter_id, d.reported_id, d.dreason, d.ddate,
+	d.board_id, b.btitle, d.reply_id from board b,declaration d, users u
+	where d.board_id = b.bid and d.reporter_id = u.user_id
+	]]>
+	</select>
+
+	<!-- 메세지 받은 목록 -->
+	<select id="receiveCount" resultType="int" parameterType="map">
+		<![CDATA[
+			SELECT COUNT(*) FROM message m, users u WHERE u.USER_ID = m.sender_ID AND receiver_id = #{user_id}
 		]]>
-</select>
+	</select>
+
+	<!-- 메세지 보낸 목록 -->
+	<select id="sendCount" resultType="int" parameterType="map">
+		<![CDATA[
+			SELECT COUNT(*) FROM message m, users u WHERE u.USER_ID = m.receiver_ID AND sender_id = #{user_id}
+		]]>
+	</select>
+	<!-- 스크랩 목록 -->
+	<select id="scrapList" parameterType="int"
+		resultType="bit.team.eepp.VO.ScrapVO">
+		
+			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as tester FROM SCRAP s, BOARD b, USERS u
+			WHERE b.bId = s.board_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
+			<!-- ORDER BY s.sDate DESC -->
+			<if test="bCategory != null">
+			<choose>
+				<when test="bCategory == 'notice'">
+					AND b.bCategory = 'notice'
+				</when>
+				<when test="bCategory == 'it_dev'">
+					AND b.bCategory = 'it_dev'
+				</when>
+				<when test="bCategory == 'service'">
+					AND b.bCategory = 'service'
+				</when>
+				<when test="bCategory == 'finance'">
+					AND b.bCategory = 'finance'
+				</when>
+				<when test="bCategory == 'design'">
+					AND b.bCategory = 'design'
+				</when>
+				<when test="bCategory == 'official'">
+					AND b.bCategory = 'official'
+				</when>
+				<when test="bCategory == 'etc'">
+					AND b.bCategory = 'etc'
+				</when>
+			</choose>
+		</if>
+
+		ORDER BY s.sDate DESC) A)
+		WHERE RNUM BETWEEN #{scrapcri.rowStart}
+		AND #{scrapcri.rowEnd}
+		
+	</select>
 
 	<!-- 회원 탈퇴 -->
 	<delete id="withdrawal">
@@ -22,8 +87,34 @@
 		<![CDATA[
 			SELECT COUNT(sId) FROM scrap s, USERS u WHERE u.user_id = #{user_id} and s.user_id = #{user_id} AND sId > 0
 		]]>
+		<if test="bCategory != null">
+			<choose>
+				<when test="bCategory == 'notice'">
+					AND b.bCategory = 'notice'
+				</when>
+				<when test="bCategory == 'it_dev'">
+					AND b.bCategory = 'it_dev'
+				</when>
+				<when test="bCategory == 'service'">
+					AND b.bCategory = 'service'
+				</when>
+				<when test="bCategory == 'finance'">
+					AND b.bCategory = 'finance'
+				</when>
+				<when test="bCategory == 'design'">
+					AND b.bCategory = 'design'
+				</when>
+				<when test="bCategory == 'official'">
+					AND b.bCategory = 'official'
+				</when>
+				<when test="bCategory == 'etc'">
+					AND b.bCategory = 'etc'
+				</when>
+			</choose>
+		</if>
+
 	</select>
-	<!--  댓글 개수 -->
+	<!-- 댓글 개수 -->
 	<select id="replyCount" resultType="int" parameterType="map">
 		<![CDATA[
 			SELECT COUNT(rpid) FROM reply r, USERS u WHERE u.USER_ID = #{user_id} and r.USER_ID = #{user_id} AND rpid > 0
@@ -79,7 +170,8 @@
 		</if>
 	</select>
 
-	<select id="myBoardList" resultType="bit.team.eepp.VO.BoardVO" parameterType="map">
+	<select id="myBoardList" resultType="bit.team.eepp.VO.BoardVO"
+		parameterType="map">
 		SELECT * FROM
 		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 		FROM
@@ -137,53 +229,7 @@
 		</if>
 
 		ORDER BY b.bwrittendate DESC) A)
-		WHERE RNUM BETWEEN #{mscri.rowStart} AND #{mscri.rowEnd}
+		WHERE RNUM BETWEEN #{mscri.rowStart}
+		AND #{mscri.rowEnd}
 	</select>
-
-	<!-- <select id="selectOne" resultType="bit.team.eepp.VO.BoardVO">
-		SELECT b.bId, b.bCategory,
-		b.bSubject, b.bTitle, bContent, u.uNickname, b.bWrittenDate,
-		b.bModifyDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY
-		WHERE board_id = b.bId) AS rpCount
-		FROM USERS u, BOARD b WHERE
-		u.USER_ID = b.USER_ID AND bId = #{bId}
-	</select>
-
-	<update id="hitUp" parameterType="bit.team.eepp.VO.BoardVO">
-		UPDATE BOARD SET bHit = bHit +
-		1 WHERE bId = #{bId}
-	</update>
-
-	<insert id="write" parameterType="bit.team.eepp.VO.BoardVO">
-		<selectKey keyProperty="boardVO.bId" resultType="int"
-			order="BEFORE">
-			SELECT BOARD_SEQ.nextval FROM DUAL
-		</selectKey>
-
-		INSERT INTO BOARD (bId, user_id, bTitle, bContent, bSubject,
-		bCategory, bWrittenDate, bModifyDate, bHit, bLike, bUnlike, bBlind)
-		VALUES(#{boardVO.bId}, #{boardVO.user_id}, #{boardVO.bTitle},
-		#{boardVO.bContent}, #{boardVO.bSubject}, #{boardVO.bCategory},
-		SYSDATE, SYSDATE, 0, 0, 0,'no')
-	</insert>
-
-	<delete id="delete" parameterType="bit.team.eepp.VO.BoardVO">
-		DELETE FROM BOARD WHERE bId =
-		#{bId}
-	</delete>
-
-	<select id="modifyView" resultType="bit.team.eepp.VO.BoardVO">
-		SELECT b.bId, b.bCategory,
-		b.bSubject, b.bTitle, b.bContent, u.uNickname, b.bWrittenDate,
-		b.bModifyDate, b.bHit, b.bLike, b.bUnlike FROM USERS u, BOARD b WHERE
-		u.USER_ID = b.USER_ID AND bId = #{bId}
-	</select>
-
-	<update id="modify" parameterType="bit.team.eepp.VO.BoardVO">
-		UPDATE BOARD SET bTitle =
-		#{boardVO.bTitle}, bContent = #{boardVO.bContent}, bModifyDate =
-		SYSDATE WHERE bId = #{boardVO.bId}
-	</update>
-
- -->
 </mapper>
