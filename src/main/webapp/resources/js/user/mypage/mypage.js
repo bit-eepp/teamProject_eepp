@@ -104,7 +104,7 @@ $('#changeImg').click(function() {
 
 // 회원정보 수정 보여주고 닫기
 $(document).ready(function() {
-	if (!$('#myInfo').val()) {
+	if (!$('#showInfo').val()) {
 		$(".info").hide();
 	} else {
 		$(".info").show();

@@ -75,7 +75,7 @@ function getContextPath() {
 		 	}
 		 	alert(msg);
 		 	resetForm();
-		 	location.href= getContextPath()+"/mypage?myInfo=myInfo"
+		 	location.href= getContextPath()+"/mypage?showInfo=showInfo"
 		 });
 	}
 	function resetForm() {
