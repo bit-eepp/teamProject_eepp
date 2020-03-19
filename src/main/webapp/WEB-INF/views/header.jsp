@@ -18,7 +18,7 @@
 					<header id="headerMain">
 						<div class="main_box">
 						    <div class="menu common" align="left">
-						    	<button class="navbar-toggle" onclick="openHeaderNav()">
+						    	<button class="navbar-toggle">
 						    		<span class="icon-bar"></span>
 							        <span id="mid" class="icon-bar"></span>
 							        <span class="icon-bar"></span>
@@ -39,10 +39,11 @@
 						</div>
 					</header>
 					
+					<div class="sidenav_wrap">
 					<div id="mySidenav" class="sidenav" align="center">
 				
 						<div id="myInfo">
-							<a href="javascript:void(0)" class="closebtn" onclick="closeHeaderNav()"><i class="fas fa-times"></i></a>
+							<a href="javascript:void(0)" class="closebtn"><i class="fas fa-times"></i></a>
 							
 							<div class="box">
 								<img class="profile" src="${loginUser.uprofile}">
@@ -50,14 +51,38 @@
 							
 							<div id="userInfo">
 								<h5>${loginUser.uNickname}님</h5>
-								<h6>EE Point : 15000 <i class="fab fa-product-hunt"></i></h6>
+								<h6>EE Point : <i class="fab fa-product-hunt"></i>
+									<c:choose>
+										<c:when test="${not empty userPoint}">
+										${userPoint.poBalance}
+										</c:when>
+										<c:otherwise>
+										0
+										</c:otherwise>
+									</c:choose>
+								</h6>
 							</div>
 							
 							<div id="myMenu" class="btn-group btn-group-sm">
-								<button type="button" class="btn btn-light"><i class="fas fa-envelope-square"></i><strong> Message</strong></button>&nbsp;
-								<button type="button" class="btn btn-light"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+							<div class="menuBtn-wrap">
+								<button type="button" class="btn btn-light" onclick="openMsg();"><i class="fas fa-envelope-square"></i><strong> Message</strong></button>&nbsp;
+								<c:choose>
+									<c:when test="${not empty notReadMessage}">
+										<div class="msgAlert">
+										<p>${notReadMessage}</p>
+										</div>
+									</c:when>
+								</c:choose>
+							</div>
+							<div class="menuBtn-wrap">
+								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+							</div>
+							<div class="menuBtn-wrap">
 								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
-								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/logout.do'"><i class="fas fa-power-off"></i><strong> Logout</strong></button>		
+							</div>
+							<div class="menuBtn-wrap">
+								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/logout.do'"><i class="fas fa-power-off"></i><strong> Logout</strong></button>
+							</div>		
 							</div>
 						</div>
 				
@@ -96,6 +121,8 @@
 								<a title="ABOUT US" href="${pageContext.request.contextPath}"><strong>ABOUT US</strong></a>
 							</div>		
 						</div>
+					</div>
+					<div class="side_overlay"></div>
 					</div>
 					<hr>
 				</div>
