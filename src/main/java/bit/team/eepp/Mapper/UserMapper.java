@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
-import bit.team.eepp.VO.PointVO;
+import bit.team.eepp.VO.PaymentVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
@@ -126,19 +126,11 @@ public interface UserMapper {
 	/*
 	 * 포인트
 	 */
-
-	// 포인트내역이 있는지 검사
-	@Select("select * from point where user_id = #{user_id}")
-	public PointVO haveChargePoint(@Param("user_id") String user_id);
-
-	// 첫 포인트 충전
-	@Insert("insert into point (poid, user_id, pocharge, pobalance, poDate) values (point_seq.nextval, #{user_id}, #{poCharge}, #{poCharge}, SYSDATE)")
-	public int firstChargePoint(PointVO pointVO);
-
+	
 	// 포인트 충전
-	@Update("update point set pobalance = pobalance + #{poCharge} where user_id = #{user_id}")
-	public int chargePoint(PointVO pointVO);
+	@Update("update users set point = point + #{point} where user_id = #{user_id}")
+	public int chargePoint(UserVO userVO);
 
 	// 충전시 결제내역에 추가
-	public int addPointPayment(PointVO pointVO);
+	public int addPointPayment(PaymentVO paymentVO);
 }

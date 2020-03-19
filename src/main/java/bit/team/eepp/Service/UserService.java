@@ -5,16 +5,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import bit.team.eepp.Mapper.UserMapper;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
-import bit.team.eepp.VO.PointVO;
+import bit.team.eepp.VO.PaymentVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
@@ -149,20 +146,12 @@ public class UserService {
 	}
 
 	/* 포인트 */
-	public PointVO haveChargePoint(String user_id) {
-		return userMapper.haveChargePoint(user_id);
+	public int chargePoint(UserVO userVO) {
+		return userMapper.chargePoint(userVO);
 	}
 
-	public int firstChargePoint(PointVO pointVO) {
-		return userMapper.firstChargePoint(pointVO);
-	}
-
-	public int chargePoint(PointVO pointVO) {
-		return userMapper.chargePoint(pointVO);
-	}
-
-	public int addPointPayment(PointVO pointVO) {
-		return userMapper.addPointPayment(pointVO);
+	public int addPointPayment(PaymentVO paymentVO) {
+		return userMapper.addPointPayment(paymentVO);
 	}
 
 }
