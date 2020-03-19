@@ -149,7 +149,7 @@ public class JoinController {
 }
 	
 	@RequestMapping("join/joinWithSns.me")
-	public String joinWithSns(HttpServletRequest request, Model model,HttpSession session, UserVO userVO){
+	public String joinWithSns(MultipartFile file,HttpServletRequest request, Model model,HttpSession session, UserVO userVO) throws IOException, Exception{
 		
 		System.out.println("회원 등록 페이지");
 		
@@ -160,6 +160,23 @@ public class JoinController {
 		userVO.setuPhone(uPhone1 + "-" + uPhone2 + "-" + uPhone3);
 		userVO.setuEmail(request.getParameter("uEmail"));
 		System.out.println(userVO.getuPhone() + userVO.getuEmail() + userVO.getuNickname());
+		
+		//프로필 업로드
+		String imgUploadPath = uploadPath;
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		if (file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+			userVO.setUprofile(ymdPath + File.separator + fileName);
+		} else {
+			fileName = "/eepp"+File.separator + "img" + File.separator + "headerLogin.png";
+			userVO.setUprofile(fileName);
+		}
+		System.out.println("=================");
+		System.out.println("img = " + userVO.getUprofile());
+		System.out.println("=================");
+		//프로필 업로드 끝
+		
 		//회원정보 DB에 등록
 		js.JoinWithSNS(userVO);
 		

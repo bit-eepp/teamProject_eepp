@@ -5,31 +5,21 @@
 */
 
 #showImg {
-	margin-left:25px;
+	margin-left: 20%;
 }
 
-#register_Btn {
-	width: 250px;
-}
-.info tr {
-	pading : 10px 0;
+.info {
+	margin: 0 auto;
 }
 
-.table {
+#table {
 	text-align: center;
-	height : 250px;
+	height: 337px;
+	width : 100%;
 }
 
-.thead-color {
-	background-color: #59bfbf;
-	color: white;
-	
-}
-
-.thead-color th {
-	font-size:20px;
-	height: 50px;
-	text-align : center;
+.info td {
+	padding: 10px 0;
 }
 
 
@@ -37,12 +27,11 @@
 	color: #e7438b;
 	font-weight: bold;
 	font-size: 15px;
-	
 	height: 130px;
 }
 
-.trColor td{
-	font-size : 16px;
+.trColor td {
+	font-size: 20px;
 	line-height: 60px;
 }
 
@@ -58,47 +47,120 @@
 	margin-right: 10px;
 }
 
-.sc-title {
+
+.drop {
+	font-size: 12px;
+	margin-left:30px;
+}
+
+#changeImg, #register_Btn {
+	margin-top: 5px;
+	width: 100%;
+	background: #59bfbf;
+	
+	/* font-size: 1.2rem; */
+}
+
+#mypagenickNameCheck, #charge,#pointBtn{
+	font-size: 0.8rem;
+	border-radius: 7px;
+	padding: 5px 10px;
+	background: #59bfbf;
+	color:white;
+	border:none;
+}
+
+#submit {
+	font-size: 0.7rem;
+	border-color: gray;
+	border-radius: 7px;
+}
+
+.content_tr th {
+	font-size: 14px;
+}
+
+#searchBtn {
+	font-size: 0.7rem;
+	border-color: gray;
+	border-radius: 7px;
+}
+.img-circle{
+	width:60%;
+	height:60%;
+	border-radius:50%;
+	overflow:hidden;
+	
+}
+#table th {
+	font-size: 16px;
+	height: 40px;
 	text-align: center;
-	font-size: 22px;
-	color : #59bfbf;
-	position: relative;
-	margin-bottom: 40px;
+	background-color: #59bfbf;
+	color: white;
 }
 
-.sc-title:before {
-	content: "";
-	position: absolute;
-	width: 20%;
-	height: 2px;
-	margin: auto;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	background: #59bfbf;
+#table {
+	width: 80%;
+	margin: 0 auto;
 }
 
-.sc-title:after {
-	content: "";
-	position: absolute;
-	width: 20%;
-	height: 2px;
-	margin: auto;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	background: #59bfbf;
+#table td {
+	font-size: 2rem;
+	height: 110px;
+	color: #e7438b;
 }
 
-input {
-	width: 280px;
+#changeImg, #register_Btn {
+	margin-top: 10px;
+	width: 85%;
+	/* font-weight:bold; */
+	/* font-size: 1.2rem; */
 }
-.drop{
-	font-size:13px;
+
+.myinfoHeader {
+	text-align: center;
+	color: #59bfbf;
+}
+
+.text_bold {
+	color: #59bfbf;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.text-wrap td {
+	height:50px;
+}
+
+.myinfo-wrap h3 {
+	color: #59bfbf;
+}
+
+.infoUpdate {
+	background-color: #59bfbf;
+}
+
+#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn {
+	margin-right: 20px;
+	width: 10%;
+	background-color: #59bfbf;
+}
+
+.btn-info {
+	border: none;
+}
+tr.bordered {
+    border-bottom: 1px solid #f3f3f3;
+}
+.charge_point{
+display:inline-block;
 }
 
 	/*
+	
 	포인트
+	
 	*/
 #charge_point .modal-header .close{font-size: 32px!important;font-weight: 500!important;}
 #charge_point .modal-body{padding: 0!important;}

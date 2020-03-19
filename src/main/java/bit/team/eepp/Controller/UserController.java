@@ -28,8 +28,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import bit.team.eepp.Page.MessageCriteria;
 import bit.team.eepp.Page.MessagePageMaker;
+import bit.team.eepp.Page.ScrapPageMaker;
 import bit.team.eepp.Page.myPagePageMaker;
 import bit.team.eepp.Search.MypageSearchCriteria;
+import bit.team.eepp.Search.ScrapSearchCriteria;
 import bit.team.eepp.Service.FileService;
 import bit.team.eepp.Service.ScrapService;
 import bit.team.eepp.Service.UserService;
@@ -85,8 +87,13 @@ public class UserController{
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 			userVO.setUprofile(ymdPath + File.separator + fileName);
 		} else {
-			fileName = File.separator + "img" + File.separator + "basic_img.png";
+			if(user.getuEmail().equals("bit.eepp@gmail.com")){
+				fileName = "/eepp" + File.separator + "img" + File.separator + "admin.jpg";
+				userVO.setUprofile(fileName);
+			}else {
+			fileName = "/eepp" + File.separator + "img" + File.separator + "headerLogin.png";
 			userVO.setUprofile(fileName);
+			}
 		}
 		System.out.println("=================");
 		System.out.println("img = " + userVO.getUprofile());
@@ -102,54 +109,75 @@ public class UserController{
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypageList(HttpSession session, UserVO userVO, Model model,
+	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session, UserVO userVO,Model model,
 			@ModelAttribute("mscri") MypageSearchCriteria mscri,
+			@ModelAttribute("scrapcri") ScrapSearchCriteria scrapcri,
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
-			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory) {
+			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
+			@RequestParam(value = "board", required = false, defaultValue = "") String board,
+			@RequestParam(value = "point", required = false, defaultValue = "") String point,
+			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap) throws IOException {
 		logger.info("my contents List");
 
 		// 유저 세션 받아오기
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
+		System.out.println("loginsession : " + loginSession);
+		
+		if (loginSession == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 해주세요'); location.href='/eepp/login/login.do';</script>");
+			out.flush();
+			
+		}else {
+		
 		userVO.setUser_id(user.getUser_id());
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("scrapcri", scrapcri);
 		map.put("mscri", mscri);
 		map.put("sortType", sortType);
 		map.put("bCategory", bCategory);
 		map.put("user_id", userVO.getUser_id());
 		map.put("listCount", us.listCount(map));
 		map.put("replyCount", us.replyCount(map));
-		map.put("scrapCount", us.scrapCount(map));
+		map.put("messageRes", us.receiveCount(map));
+		map.put("messageSen", us.sendCount(map));
 
 		myPagePageMaker myPagePageMaker = new myPagePageMaker();
 		myPagePageMaker.setCri(mscri);
 		myPagePageMaker.setTotalCount(us.listCount(map));
 		
-		model.addAttribute("scrapList", us.scrapList(userVO));
+		
+		ScrapPageMaker ScrapPageMaker = new ScrapPageMaker();
+		ScrapPageMaker.setCri(scrapcri);
+		ScrapPageMaker.setTotalCount(us.scrapCount(map));
+		
+		if(board !=null) {
+			model.addAttribute("board", board);
+		}
+		if(scrap !=null) {
+			model.addAttribute("scrap", scrap);
+		}
+		if(point !=null) {
+			model.addAttribute("point", point);
+		}
+		model.addAttribute("messageRes", us.receiveCount(map));
+		model.addAttribute("messageSen", us.sendCount(map));
+		model.addAttribute("scrapList", us.scrapList(map));
 		model.addAttribute("scrapCount", us.scrapCount(map));
 		model.addAttribute("replyCount", us.replyCount(map));
 		model.addAttribute("listCount", us.listCount(map));
 		model.addAttribute("myBoardList", us.myBoardList(map));
 		model.addAttribute("myPagePageMaker", myPagePageMaker);
+		model.addAttribute("ScrapPageMaker", ScrapPageMaker);
 		model.addAttribute("sortType", sortType);
 		model.addAttribute("bCategory", bCategory);
+		}
+		return "user/myPage/newlymypage";
 
-		return "user/myPage/myPage";
 	}
-	
-//	@RequestMapping("scrapList")
-//	public String scrapList(HttpSession session, Model model, UserVO userVO) {
-//		logger.info("내가 스크랩한 목록");
-//		// 유저 세션 받아오기
-//		Object loginSession = session.getAttribute("loginUser");
-//		UserVO user = (UserVO) loginSession;
-//		userVO.setUser_id(user.getUser_id());
-//		
-//		model.addAttribute("scrapList", us.scrapList(userVO));
-//				
-//		return "user/myPage/myPage";
-//	}
 
 	// 닉네임 중복 체크
 	@ResponseBody

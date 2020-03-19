@@ -82,8 +82,9 @@ checkEmailAuth {padding: 0 0 10px;}
     cursor: pointer!important;;
 }
 .basic_img{
-	width:150px;
-	height:150px;
+	width:60%;
+	height:60%;
+	border-radius:50%;
 }
 #register_Btn{
 	margin : 0 40px!important;

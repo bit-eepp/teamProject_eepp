@@ -1,24 +1,25 @@
-/**
+/*
+ * 
  * mypage javascript
+ *
  */
 
-//프로필 업로드 사진 미리보기
+// 프로필 업로드 사진 미리보기
 $("#showImg").change(function() {
 	if (this.files && this.files[0]) {
 		var reader = new FileReader;
 		reader.onload = function(data) {
-			$(".img").attr("src", data.target.result);
+			$(".img-circle").attr("src", data.target.result);
 		}
 		reader.readAsDataURL(this.files[0]);
 	}
 });
 
-//ContextPath
+// ContextPath
 function getContextPath() {
-	var hostIndex = location.href.indexOf(location.host)
-			+ location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf(
-			'/', hostIndex + 1));
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/',
+			hostIndex + 1));
 };
 
 function nickCheck() {
@@ -46,6 +47,7 @@ function nickCheck() {
 		}
 	})
 };
+
 $('#submit').click(function(event) {
 
 	if ($("#uNickname").val() == "") {
@@ -64,17 +66,82 @@ $('#submit').click(function(event) {
 
 });
 
-//게시물 검색
-$('#searchBtn').click(function() {
-	if($('select[name=searchType]').val() == 'n') {
-		alert('검색조건을 지정해주세요');
-		return;
-	} else {
-		self.location = "mypage" + $("#mypageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) 
-		+ "&sortType=" + $("#sortType").val() + "&bCategory=" + $("#bCategory").val();
-		}
-	});
-//회원탈퇴 알림
-function drop(){
+// 게시물 검색
+$('#searchBtn').click(
+		function() {
+			if ($('select[name=searchType]').val() == 'n') {
+				alert('검색조건을 지정해주세요');
+				return;
+			} else {
+				self.location = "mypage" + $("#mypageMakeQuery").val()
+						+ "&searchType=" + $("select[name=searchType]").val()
+						+ "&keyword="
+						+ encodeURIComponent($('#keywordInput').val())
+						+ "&sortType=" + $("#sortType").val() + "&bCategory="
+						+ $("#bCategory").val();
+			}
+		});
+// 회원탈퇴 알림
+function drop() {
 	alert("회원탈퇴 페이지 입니다. 계속 하시겠습니까?")
 };
+
+// 프로필 사진 있는지 확인 - 있으면 변경
+$('#register_Btn').click(function() {
+	var fileCheck = document.getElementById("showImg").value;
+	if (!fileCheck) {
+		alert("프로필 사진 첨부해 주세요");
+		return false;
+	} else {
+		alert("프로필 변경 완료");
+	}
+});
+;
+// 기본 이미지로 변경 alert
+$('#changeImg').click(function() {
+	alert("기본 이미지로 변경됩니다.")
+});
+
+// 회원정보 수정 보여주고 닫기
+$(document).ready(function() {
+	$(".info").hide();
+	$("#myinfobtn").click(function() {
+		$(".info").slideToggle();
+	});
+})
+
+// 게시글 보여주고 닫기
+$(document).ready(function() {
+	if (!$('#board').val()) {
+		$(".content_list").hide();
+	} else {
+		$(".content_list").show();
+	}
+})
+$("#mycontentbtn").click(function() {
+	$(".content_list").slideToggle();
+});
+
+//스크랩 보여주고 닫기
+$(document).ready(function() {
+	if (!$('#scrap').val()) {
+		$(".scrap_list").hide();
+	} else {
+		$(".scrap_list").show();
+	}
+})
+$("#myscrapbtn").click(function() {
+	$(".scrap_list").slideToggle();
+});
+
+//포인트 사용내역 보여주고 닫기
+$(document).ready(function() {
+	if (!$('#point').val()) {
+		$("#point_list").hide();
+	} else {
+		$("#point_list").show();
+	}
+})
+$("#mypointbtn").click(function() {
+	$("#point_list").slideToggle();
+});
