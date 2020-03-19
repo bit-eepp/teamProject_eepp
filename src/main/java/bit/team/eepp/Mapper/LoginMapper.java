@@ -9,11 +9,11 @@ import bit.team.eepp.VO.UserVO;
 public interface LoginMapper {
 	
 	// 일반 로그인
-	@Select("select uEmail,uPassword from users where uEmail = #{uEmail}")
+	@Select("select * from users where uEmail = #{uEmail}")
 	public UserVO normalLogin(UserVO userVO);
 	
 	// SNS로그인 (가입한 소셜까지 확인)
-	@Select("select uEmail, snsType from users where uEmail = #{uEmail}")
+	@Select("select * from users where uEmail = #{uEmail}")
 	public UserVO snsLogin(UserVO userVO);
 	
 	// 자동 로그인 = 로그인 유지

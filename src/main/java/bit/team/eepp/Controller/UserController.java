@@ -267,11 +267,13 @@ public class UserController{
 	
 	@ResponseBody
 	@RequestMapping("/changeToPoint")
-	public void changeToPoint(PointVO pointVO) {
+	public void changeToPoint(PointVO pointVO, HttpSession session) {
 		
-		PointVO havePoint = us.haveChargePoint(pointVO);
+//		PointVO havePoint = us.haveChargePoint(Integer.toString(pointVO.getUser_id()));
+//		session.getAttribute("userPoint");
 		
-		if(havePoint == null) {
+		//포인트 정보가 없으면 첫 포인트 충전로직을 수행
+		if(session.getAttribute("userPoint") == null) {
 			us.firstChargePoint(pointVO);
 			us.addPointPayment(pointVO);
 			System.out.println("포인트 첫 충전 + 충전 내역 추가 완료");

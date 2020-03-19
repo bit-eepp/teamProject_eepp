@@ -119,7 +119,7 @@ public interface UserMapper {
 	
 	// 포인트내역이 있는지 검사
 	@Select("select * from point where user_id = #{user_id}")
-	public PointVO haveChargePoint(PointVO pointVO);
+	public PointVO haveChargePoint(@Param("user_id") String user_id);
 	
 	// 첫 포인트 충전
 	@Insert("insert into point (poid, user_id, pocharge, pobalance, poDate) values (point_seq.nextval, #{user_id}, #{poCharge}, #{poCharge}, SYSDATE)")

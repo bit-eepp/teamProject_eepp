@@ -4,10 +4,10 @@ import java.sql.Timestamp;
 
 public class PointVO {
 	
-	private int poId;//����Ʈ�ѹ����̵�
-	private int user_id;//�������̵�
-	private int poCharge;//�����ݾ�
-	private int poBalance;//�����ݾ�
+	private int poId;
+	private int user_id;
+	private int poCharge;
+	private int poBalance;
 	private Timestamp poDate;
 	
 	public PointVO() {}

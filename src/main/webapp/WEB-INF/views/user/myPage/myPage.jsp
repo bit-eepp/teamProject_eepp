@@ -64,7 +64,7 @@
 								</tr>
 							</thead>
 								<tr class="trColor">
-									<td>10000P</td>
+									<td>${userPoint.poBalance}</td>
 									<td>보낸 쪽지 : <br>
 										받은 쪽지 : 
 									</td>
