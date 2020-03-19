@@ -43,15 +43,17 @@ public class HomeController {
 		
 		/* 읽지않은 쪽지 알람 띄우기 */
 		Object loginSession = session.getAttribute("loginUser");
-		UserVO user = (UserVO)loginSession;
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("fromMain", "fromMain");
-		map.put("user_id", user.getUser_id());
-		
-		int notReadMessage = us.messageListCount(map);
-		if(notReadMessage != 0) {
-			mv.addObject("notReadMessage", notReadMessage);
+		if(loginSession != null) {
+			UserVO user = (UserVO)loginSession;
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("fromMain", "fromMain");
+			map.put("user_id", user.getUser_id());
+			
+			int notReadMessage = us.messageListCount(map);
+			if(notReadMessage != 0) {
+				mv.addObject("notReadMessage", notReadMessage);
+			}
 		}
 		/* 읽지않은 쪽지 알람 띄우기 */
 		
