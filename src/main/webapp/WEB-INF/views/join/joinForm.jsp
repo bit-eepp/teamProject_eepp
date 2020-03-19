@@ -114,7 +114,7 @@
 			
 		<c:choose>
 			<c:when test="${not empty user.uEmail}">
-			<form method="POST" id="joinSnsForm" name="JoinSnsForm" action="joinWithSns.me" enctype="multipart/form-data" class="px-4 py-3">
+			<form method="POST" id="joinSnsForm" name="JoinSnsForm" action="joinWithSns.me" class="px-4 py-3" enctype="multipart/form-data">
 				<input type="hidden" name="uEmail" value="${user.uEmail}">
 				<input type="hidden" name="snsType" value="${user.snsType}">
 				

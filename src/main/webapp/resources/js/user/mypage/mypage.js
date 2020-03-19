@@ -81,10 +81,16 @@ $('#searchBtn').click(
 						+ $("#bCategory").val();
 			}
 		});
+
 // 회원탈퇴 알림
 function drop() {
-	alert("회원탈퇴 페이지 입니다. 계속 하시겠습니까?")
-};
+	alert("회원탈퇴 페이지로 이동합니다.");
+//	if (confirm("회원탈퇴 페이지 입니다. 계속 하시겠습니까?") == true) {
+//		document.form.submit();
+//	} else {
+//		return;
+//	}
+}
 
 // 프로필 사진 있는지 확인 - 있으면 변경
 $('#register_Btn').click(function() {
@@ -126,7 +132,7 @@ $("#mycontentbtn").click(function() {
 	$(".content_list").slideToggle();
 });
 
-//스크랩 보여주고 닫기
+// 스크랩 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#scrap').val()) {
 		$(".scrap_list").hide();
@@ -138,7 +144,7 @@ $("#myscrapbtn").click(function() {
 	$(".scrap_list").slideToggle();
 });
 
-//포인트 사용내역 보여주고 닫기
+// 포인트 사용내역 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#point').val()) {
 		$("#point_list").hide();
@@ -149,3 +155,14 @@ $(document).ready(function() {
 $("#mypointbtn").click(function() {
 	$("#point_list").slideToggle();
 });
+
+//// 회원탈퇴 질문
+//function confirm_event() {
+//	if (confirm("지금 탈퇴하시면 60일 동안 재가입 하실 수 없습니다. 정말 삭제하시겠습니까??")== true) {
+//		alert("탈퇴되었습니다.");
+//		// 삭제페이지나 submit처리를 해준다 //
+//		document.form.submit();
+//	} else {
+//		return;
+//	}
+//}
