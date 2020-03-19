@@ -37,6 +37,7 @@
 	 <input type="hidden" id="board" value="${board}">
 	 <input type="hidden" id="scrap" value="${scrap}">
 	 <input type="hidden" id="point" value="${point}">
+	 <input type="hidden" id="myInfo" value="${myInfo}">
 	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
 			<!-- 로그인 성공 -->
@@ -148,7 +149,7 @@
 											${userPoint.poBalance}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:when>
 							<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
-										<c:otherwise> 0P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
+										<c:otherwise> ${loginUser.point}P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
 									</c:choose> 
 										<!--  포인트 -->
 						<div class="charge_point">

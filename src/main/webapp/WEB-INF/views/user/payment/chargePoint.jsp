@@ -58,10 +58,12 @@ function getContextPath() {
 						type : "post",
 						data : {
 							"user_id": $(".userID").val(),
+							"uEmail": $(".userEmail").val(),
 							"point" : realPoint
 						},
 						success : function(result) {
 							$('#charge_point').modal('hide');
+							$('.modal-backdrop').remove();
 						},
 						error : function(xhr, status, error) {
 						alert("포인트 충전에 실패했습니다.")
@@ -73,13 +75,13 @@ function getContextPath() {
 		 	}
 		 	alert(msg);
 		 	resetForm();
+		 	location.href= getContextPath()+"/mypage?myInfo=myInfo"
 		 });
 	}
 	function resetForm() {
 		$('#charge_point').on('hidden.bs.modal', function (e) {
 			$(this).find('form')[0].reset()
 		});
-		location.href=getContextPath()+"/myPage";
 	}
 </script>
 

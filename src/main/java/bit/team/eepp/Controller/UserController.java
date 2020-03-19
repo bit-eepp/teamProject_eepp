@@ -116,6 +116,7 @@ public class UserController{
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
 			@RequestParam(value = "point", required = false, defaultValue = "") String point,
+			@RequestParam(value = "myInfo", required = false, defaultValue = "") String myInfo,
 			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap) throws IOException {
 		logger.info("my contents List");
 
@@ -162,6 +163,9 @@ public class UserController{
 		}
 		if(point !=null) {
 			model.addAttribute("point", point);
+		}
+		if(myInfo !=null) {
+			model.addAttribute("myInfo", myInfo);
 		}
 		model.addAttribute("messageRes", us.receiveCount(map));
 		model.addAttribute("messageSen", us.sendCount(map));

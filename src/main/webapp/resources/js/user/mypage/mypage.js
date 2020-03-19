@@ -104,11 +104,15 @@ $('#changeImg').click(function() {
 
 // 회원정보 수정 보여주고 닫기
 $(document).ready(function() {
-	$(".info").hide();
-	$("#myinfobtn").click(function() {
-		$(".info").slideToggle();
-	});
+	if (!$('#myInfo').val()) {
+		$(".info").hide();
+	} else {
+		$(".info").show();
+	}
 })
+$("#myinfobtn").click(function() {
+	$(".info").slideToggle();
+});
 
 // 게시글 보여주고 닫기
 $(document).ready(function() {
