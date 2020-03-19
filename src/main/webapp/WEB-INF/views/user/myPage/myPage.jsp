@@ -64,7 +64,16 @@
 								</tr>
 							</thead>
 								<tr class="trColor">
-									<td>${userPoint.poBalance}</td>
+									<td>
+									<c:choose>
+									<%-- session에 저장된 포인트 정보가 있는경우 --%>
+									<c:when test="${not empty userPoint}">
+										${userPoint.poBalance}
+									</c:when>
+									<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
+									<c:otherwise> 0 </c:otherwise>
+									</c:choose>
+									</td>
 									<td>보낸 쪽지 : <br>
 										받은 쪽지 : 
 									</td>
