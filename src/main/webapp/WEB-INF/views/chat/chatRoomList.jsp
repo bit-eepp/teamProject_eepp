@@ -316,7 +316,7 @@
 				</div>
 				
 				<div id="chatRoomMakeForm" align="right">
-					<button title="EE Chat 개설" class="btn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false"><i class="fas fa-comment-dots fa-2x"></i></button>
+					<button id="mkChatBtn" title="EE Chat 개설" class="btn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false"><i class="fas fa-comment-dots fa-2x"></i></button>
 				</div>
 				
 				<div class="modal fade" id="modalForm" role="dialog">
