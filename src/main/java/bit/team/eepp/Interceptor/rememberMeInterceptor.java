@@ -13,6 +13,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import bit.team.eepp.Service.LoginService;
+import bit.team.eepp.Service.UserService;
+import bit.team.eepp.VO.PointVO;
 import bit.team.eepp.VO.UserVO;
 
 public class rememberMeInterceptor extends HandlerInterceptorAdapter{
@@ -20,6 +22,8 @@ public class rememberMeInterceptor extends HandlerInterceptorAdapter{
 	private static final Logger logger = LoggerFactory.getLogger(rememberMeInterceptor.class);
 	@Inject
 	LoginService ls;
+	@Inject
+	UserService us;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -36,6 +40,13 @@ public class rememberMeInterceptor extends HandlerInterceptorAdapter{
 			if(user != null) {
 				session.setAttribute("loginUser", user);
 				System.out.println("session에 유저 정보 저장 완료");
+				
+				/* 포인트 정보가 있으면 session에 정보 추가 */
+				PointVO point = us.haveChargePoint(Integer.toString(user.getUser_id()));
+				if(point != null) {
+					session.setAttribute("userPoint", point);
+					System.out.println("로그인한 유저의 포인트정보 session 추가");
+				}
 			}
 		}
 		

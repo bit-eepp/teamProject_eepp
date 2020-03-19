@@ -136,8 +136,8 @@ public class UserService{
 	}
 	
 	/* 포인트 */
-	public PointVO haveChargePoint(PointVO pointVO) {
-		return userMapper.haveChargePoint(pointVO);
+	public PointVO haveChargePoint(String user_id) {
+		return userMapper.haveChargePoint(user_id);
 	}
 
 	public int firstChargePoint(PointVO pointVO) {
