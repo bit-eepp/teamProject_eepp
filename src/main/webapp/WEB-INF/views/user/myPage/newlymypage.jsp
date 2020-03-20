@@ -36,8 +36,8 @@
 		
 	 <input type="hidden" id="board" value="${board}">
 	 <input type="hidden" id="scrap" value="${scrap}">
-	 <input type="hidden" id="point" value="${point}">
-	 <input type="hidden" id="showInfo" value="${showInfo}">
+	 <input type="hidden" id="mpPoint" value="${mpPoint}">
+	 <input type="hidden" id="mpInfo" value="${mpInfo}">
 	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
 			<!-- 로그인 성공 -->

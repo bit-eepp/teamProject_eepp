@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Community EE</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 <script type="text/javascript">
 function openMsg(){
 	 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
@@ -30,6 +31,12 @@ $(function(){
 
 <input type="hidden" id="user_id" value="${loginUser.user_id}" />
 <input type="hidden" id="uNickname" value="${loginUser.uNickname}" />
+
+<!-- Main Page Contents -->
+<section id="sc-mainPage">
+
+</section>
+<!-- Main Page Contents -->
 
 <!-- chat -->
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>

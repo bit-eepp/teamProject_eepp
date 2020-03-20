@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 /* 모든 게시판 공통 스타일 */
+section{padding:40px 0;}
+
 
 /* 유저버튼 */
 .userBtn{color: #3e3e3e;font-weight: bold;display: block;}
