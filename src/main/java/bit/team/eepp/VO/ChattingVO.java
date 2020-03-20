@@ -8,7 +8,7 @@ public class ChattingVO {
 	private int chId;
 	private int user_id;
 	private String chTitle;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "YYYY.MM.dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp chDate;
 	private String uNickname;
 	private int chTotalPeopleCount;

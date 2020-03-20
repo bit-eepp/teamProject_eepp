@@ -8,8 +8,7 @@
 	    <meta charset="UTF-8">
 	    <title>EE Chat List</title>
 	    <link rel="icon" href="${pageContext.request.contextPath}/img/EE_logo.png" sizes="16x16">
-	    <%@ include file="/WEB-INF/include/forImport.jspf"%>
-	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatList.css?v=1">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatList.css">
 	    
 	    <script type="text/javascript">
 		    var uNickname = $("#userNickname").val();
@@ -77,24 +76,30 @@
 		    			
 		    			$.each(data, function(key, value) {
 	    					var tag = '';
-	    						tag += '<div id="chatNo_' +value.chId +'">';
+	    						tag += '<div class="chatRoomView" id="chatNo_' +value.chId +'">';
 	    						tag += '<ul class="list-group">';
-	    						tag += '<li id="ct" class="list-group-item">';
+	    						tag += '<li id="ct" class="list-group-item chatRoomTitle">';
 	    						tag += '<b>' +value.chTitle +'</b>';
-	    						tag += '<span>';
+	    						tag += '<span class="f-right">';
 	    						tag += '<i class="fas fa-users">  <b class="count_' +value.chId +'">' +value.pCount +'</b> / <b>' +value.chTotalPeopleCount +'</b></i>';
 	    						tag += '</span>';
 	    						tag += '</li>';
-	    						tag += '<li class="list-group-item">';
+	    						tag += '<li class="list-group-item chatRoomInfo">';
 	    						tag += '<p>';
-	    						tag += '<i title="모임장" class="fas fa-user-circle" aria-hidden="true"></i> ' +value.uNickname;
-	    						tag += '<span>' +value.chDate; +'</span>';
+	    						tag += '<i title="모임장" class="fas fa-user-circle" aria-hidden="true"></i>' +value.uNickname;
+	    						tag += '<span class="f-right">' +value.chDate; +'</span>';
 	    						tag += '</p>';
-	    						tag += '<i title="약속장소" class="fas fa-map-marker-alt" aria-hidden="true"></i> ' +value.chPlace +'<br>';
-	    						tag += '<i title="약속시간" class="far fa-clock" aria-hidden="true"></i> '  +value.chMeetTime;
-	    						tag += '<span>';
-	    						tag += '<button class="btn btn-light" type="button" onclick="chatRoomSelect(' +value.chId +', ' +value.chTotalPeopleCount +')"><b>참여하기</b></button>';
-	    						tag += '</span>';
+	    						tag += '<p>';
+	    						tag += '<i title="약속장소" class="fas fa-map-marker-alt" aria-hidden="true"></i>';
+	    						tag += value.chPlace;
+	    						tag += '</p>';
+	    						tag += '<p>';
+	    						tag += '<i title="약속시간" class="far fa-clock" aria-hidden="true"></i>';
+	    						tag += value.chMeetTime;
+	    						tag += '</p>';
+	    						tag += '<div>';
+	    						tag += '<button class="btn joinChatroom" type="button" onclick="chatRoomSelect(' +value.chId +', ' +value.chTotalPeopleCount +')"><b>참여하기</b></button>';
+	    						tag += '</div>';
 	    						tag += '</li>';
 	    						tag += '</ul>';
 	    						tag += '</div>';
@@ -128,24 +133,30 @@
 		    				console.log(data);
 		    				$.each(data, function(key, value) {
 		    					var tag = '';
-		    						tag += '<div id="chatNo_' +value.chId +'">';
+		    						tag += '<div class="chatRoomView" id="chatNo_' +value.chId +'">';
 		    						tag += '<ul class="list-group">';
-		    						tag += '<li id="ct" class="list-group-item">';
+		    						tag += '<li id="ct" class="list-group-item chatRoomTitle">';
 		    						tag += '<b>' +value.chTitle +'</b>';
-		    						tag += '<span>';
+		    						tag += '<span class="f-right">';
 		    						tag += '<i class="fas fa-users">  <b class="count_' +value.chId +'">' +value.pCount +'</b> / <b>' +value.chTotalPeopleCount +'</b></i>';
 		    						tag += '</span>';
 		    						tag += '</li>';
-		    						tag += '<li class="list-group-item">';
+		    						tag += '<li class="list-group-item chatRoomInfo">';
 		    						tag += '<p>';
 		    						tag += '<i title="모임장" class="fas fa-user-circle" aria-hidden="true"></i> ' +value.uNickname;
-		    						tag += '<span>' +value.chDate; +'</span>';
+		    						tag += '<span class="f-right">' +value.chDate; +'</span>';
 		    						tag += '</p>';
-		    						tag += '<i title="약속장소" class="fas fa-map-marker-alt" aria-hidden="true"></i> ' +value.chPlace +'<br>';
-		    						tag += '<i title="약속시간" class="far fa-clock" aria-hidden="true"></i> '  +value.chMeetTime;
-		    						tag += '<span>';
-		    						tag += '<button class="btn btn-light" type="button" onclick="chatRoomSelect(' +value.chId +', ' +value.chTotalPeopleCount +')"><b>참여하기</b></button>';
-		    						tag += '</span>';
+		    						tag += '<p>';
+		    						tag += '<i title="약속장소" class="fas fa-map-marker-alt" aria-hidden="true"></i>';
+		    						tag += value.chPlace;
+		    						tag += '</p>';
+		    						tag += '<p>';
+		    						tag += '<i title="약속시간" class="far fa-clock" aria-hidden="true"></i> ';
+		    						tag += value.chMeetTime;
+		    						tag += '</p>';
+		    						tag += '<div>';
+		    						tag += '<button class="btn joinChatroom" type="button" onclick="chatRoomSelect(' +value.chId +', ' +value.chTotalPeopleCount +')"><b>참여하기</b></button>';
+		    						tag += '</div>';
 		    						tag += '</li>';
 		    						tag += '</ul>';
 		    						tag += '</div>';
@@ -287,56 +298,36 @@
 		    			$('.count_' +chId).html(data);
 		    		}
 		        });
-		    }/* 
-	
-		    function openNav() {
-		    	document.getElementById("mySidebar").style.width = "350px";
-		    	document.getElementById("main").style.marginRight = "355px";
 		    }
-	
-		    function closeNav() {
-		    	document.getElementById("mySidebar").style.width = "0";
-		    	document.getElementById("main").style.marginRight= "5px";
-		    } */
-		    $('.chatBtn').on('click', function () {
-		        $('#mySidebar').addClass('side_show');
-		        $('#chatRoomListWrap').addClass('side_show');
-		        $('.side_bar_overlay').fadeIn();
-		    });
-
-		    $('.side_bar_overlay').on('click', function () {
-		        $('#mySidebar').removeClass('side_show');
-		        $('#chatRoomListWrap').removeClass('side_show');
-		        $('.side_bar_overlay').fadeOut();
-		    });
-
-		    $('.closebtn').on('click', function () {
-		        $('#mySidenav').removeClass('side_show');
-		        $('#chatRoomListWrap').removeClass('side_show');
-		        $('.side_bar_overlay').fadeOut();
-		    });
 	    </script>
 	</head>
 
 	<body>
-		<div class="float" id="chatRoomListWrap" style="position:absolute; top:0px; right:0px; height:100%;">
-			<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-			<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
-			
-			<div class="sidebar_wrap">
-			<div id="main">
-				<button title="Thunder" class="chatBtn">Thunder<i class="fas thiunder_icon fa-bolt"></i></button>
-			</div>
-			
+	
+	<!-- 채팅방 버튼 -->
+	<div id="ThunderBtn">
+		<button type="button" class="chatBtn">Thunder<i class="fas thiunder_icon fa-bolt"></i></button>
+	</div>
+	<!-- 채팅방 버튼 -->
+	
+	<!-- 채팅방 -->
+	<div id="chatRoomListWrap">
+		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
+		
 			<div id="mySidebar" class="sidebar">
-				<a title="close" href="javascript:void(0)" class="closebtn"><i class="fas chat_icon fa-times fa-2x"></i></a>
+				<a title="close" href="javascript:void(0)" class="closeChatbtn"><i class="fas chat_icon fa-times fa-2x"></i></a>
 				
+				<div class="chatTitileWrap">
 				<div id="chatHead" align="center">
 					<img alt="" src="${pageContext.request.contextPath}/img/eechatLogo.png">
 				</div>
+				<!-- chatHead -->
 				
 				<div id="chatRoomMakeForm" align="right">
 					<button id="mkChatBtn" title="EE Chat 개설" class="btn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false"><i class="fas fa-comment-dots fa-2x"></i></button>
+				</div>
+				<!-- chatRoomMakeForm -->
 				</div>
 				
 				<div class="modal fade" id="modalForm" role="dialog">
@@ -400,15 +391,15 @@
 								<button type="button" class="btn" data-dismiss="modal" onclick="resetForm()">개설 취소</button>
 								<button type="button" class="btn submitBtn" onclick="chatRoomMake(${loginUser.user_id})">채팅방 개설</button>
 							</div>
+							<!-- Modal Footer -->
 							
 						</div>
+						<!-- modal-content -->
 					</div>
+					<!-- modal-dialog -->
 				</div>
 				<!-- modal -->
-			</div>
-			<!-- sidebar -->
 				
-	
 				<form id="moreListFrom">
 					<input type="hidden" name="endNum" id="endNum" value="0">
 					<input type="hidden" name="startNum" id="startNum" value="1">
@@ -424,8 +415,11 @@
 					<a id="backToTop" class="scrolltop" href="#"><i class="fas fa-caret-up fa-3x" aria-hidden="true"></i></a>
 				</div>
 				
-				<div class="side_bar_overlay"></div>
 			</div>
+			<!-- #mySidebar-->
 		</div>
+		<!-- chatListRoomWrap -->
+		<div class="side_bar_overlay"></div>
+		<script src="${pageContext.request.contextPath}/js/chatting.js"></script>
 	</body>
 </html>
