@@ -7,11 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/loginAndJoin.css">
-<%@ include file="/WEB-INF/include/header.jspf"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+<%@ include file="/WEB-INF/include/forImport.jspf"%>
 </head>
 <body>
-	<br>
-	<br>
+<!-- header -->
+<%@ include file="/WEB-INF/views/header.jsp"%>
+<!-- header -->
 
 	<div class="container text-center">
 		<h1 style="text-align: center; width: 15%; margin: 0 auto">
@@ -85,6 +87,14 @@
 		<a class="dropdown-item" href="${pageContext.request.contextPath}/login/forgotMyInfo">가입이메일 / 비밀번호 찾기</a>
 
 	</div>
+	
+<!-- chat -->
+<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+<!-- chat -->
+
+<!-- footer -->
+<%@ include file="/WEB-INF/views/footer.jsp"%>
+<!-- footer -->
 <script type="text/javascript">
 $(function(){
     var responseMessage = "<c:out value="${loginInfo.message}" />";

@@ -125,7 +125,7 @@
 					<header id="headerMain">
 						<div class="main_box">
 						    <div class="menu common" align="left">
-						    	<button class="navbar-toggle" onclick="openHeaderNav()">
+						    	<button class="navbar-toggle">
 						    		<span class="icon-bar"></span>
 							        <span id="mid" class="icon-bar"></span>
 							        <span class="icon-bar"></span>
@@ -147,14 +147,15 @@
 					<div id="mySidenav" class="sidenav" align="center">
 				
 						<div id="myInfo">
-							<a href="javascript:void(0)" class="closebtn" onclick="closeHeaderNav()"><i class="fas fa-times"></i></a>
+							<a href="javascript:void(0)" class="closebtn"><i class="fas fa-times"></i></a>
 							
 							<div class="box">
 								<img class="profile" src="${pageContext.request.contextPath}/img/headerLogin.png">
 							</div>
 							
 							<div id="userInfo">
-								<a href="${pageContext.request.contextPath}/login/login.do"><h2><strong>LOGIN</strong></h2></a>  
+								<a href="${pageContext.request.contextPath}/login/login.do">
+								<h2><strong>LOGIN</strong></h2></a>  
 							</div>
 						</div>
 				
@@ -194,7 +195,6 @@
 							</div>		
 						</div>
 					</div>
-					<hr>
 				</div>
 			</c:otherwise>
 		</c:choose>

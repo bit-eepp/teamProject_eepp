@@ -4,42 +4,47 @@
 body {
 	overflow-x:hidden; 
 }
-#chatRoomListWrap{
-	right:-350px!important;
-}
-.side_show{
-	left: 0!important;
-}
-#main {
-	position:absolute;
-	right:0;
-	top:0;
-	transition: margin-right .5s;
-	margin-top: 100px;
-	margin-right: 5px;
-	transform: rotate(-90deg);
-}
-.sidebar_wrap{position: relative;}
 .chatBtn{
-	border-radius: .25rem .25rem 0 0;
-    padding: 10px;
+    padding: 15px;
     box-shadow: initial;
     height: 50px;
     background-color: #e7438b;
-    color:#fff;
+    color: #fff;
     border: initial;
+    width: 120px;
+    position: fixed;
+    right: -35px;
+    top: 230px;
+    transition: .5s;
+    z-index: 9998;
+    transform: rotate(-90deg);
+    border-radius: 10px 10px 0 0;
+    letter-spacing: 0.08rem;
+    outline: initial!important;
+    cursor: pointer;
+}
 }
 .thiunder_icon{margin-left: 8px!important;}
-.sidebar {
-	position: fixed;
-	width: 350px;
+.side_chat_btn{
+	right:324px!important;
+}
+
+#chatRoomListWrap{
+	overflow-y: scroll;
+    position: fixed;
+    width: 360px;
     top: 0;
-    left: -350px;
+    right: -360px;
     height: 100%;
     z-index: 9999;
-	transition: all 0.5s;
-	background-color: #F0F0F0;
-	overflow-x: hidden;
+    overflow-x: hidden;
+    padding-top: 1px;
+    transition: all 0.5s;
+    background-color: #fff;
+    border-left: 1px solid #bfbfbf;
+}
+.side_chat_show{
+	right: 0!important;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -55,91 +60,100 @@ body {
     z-index: 998;
     display: none;
 }
-
-#chatRoomMakeForm>.btn {
-	color: #59bfbf;
+#mySidebar{
+	padding:10px;
 }
-
-#chatHead img {
-	max-width: 55%;
-	height: auto;
+#mySidebar .closeChatbtn{
+	width: 10%;
+    display: block;
+    margin-left: auto;
+    color: #59bfbf;
 }
-
-#mySidebar .modal-dialog {
-	max-width: 40%;
-	width: auto;
-	display: table;
+.chatTitileWrap{
+	padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 30px;
 }
-
-#mySidebar .modal-header>.logo {
-	max-width: 8%;
-	height: auto;
+.chatTitileWrap #chatHead{
+	width:60%;
+	margin-right:10px;
 }
-
-#mySidebar .modal-header b {
-	color: #e7438b;
+.chatTitileWrap #chatHead img{
+	max-width:100%;
 }
-
-#mySidebar .modal-body h5 {
-	text-align: center;
-}
-
-#mySidebar .modal-content {
-	color: #26274c;
-	font-size: 20px;
-}
-
-#mySidebar .modal-footer .btn {
-	background-color: #59bfbf;
-	color: #ffffff;
-	min-width: 100px;
-}
-
-#mySidebar .modal-footer .btn:hover {
-	background-color: #e7438b;
-}
-
-.input-group-prepend .btn-default {
-	background-color: #59bfbf;
-	color: #ffffff;
-	min-width: 120px;
-}
-
-#mkChatBtn {
-	cursor:pointer; 
-	
-}
-
-#chatList {
-	width: 325px;
-	font-size: 0.9rem;
-}
-
-#chatList>div {
-	margin-left: 25px;
-}
-
-ul>.list-group-item {
-	background-color: #59bfbf;
-	color: #ffffff;
-}
-
-.list-group #ct {
-	color: #26274c;
-}
-
-.list-group-item span {
-	float: right;
-}
-
-.list-group-item button {
-	color: #e7438b;
-}
-
 #moreBtn_div #moreBtn_a {
 	color: #59bfbf;
 }
+.chatTitileWrap #chatRoomMakeForm{
+	width:20%;
+	text-align:center;
+}
+.chatTitileWrap #chatRoomMakeForm #mkChatBtn{
+	color: #fff;
+    border-radius: 15px;
+    background: #e7438b;
+    padding: 8px 12px;
+}
+.chatTitileWrap #chatRoomMakeForm #mkChatBtn i{
+	font-size:20px;
+}
 
+#mySidebar #chatList{width:100%; padding:0 15px;}
+#mySidebar #chatList .chatRoomView ul{letter-spacing: 0.09rem;}
+#mySidebar #chatList .chatRoomView .chatRoomTitle{
+	color: #fff;
+    font-weight: normal;
+    border-bottom: 3px solid #fff!important;
+    padding: 15px;
+    border-top: initial!important;
+    border-left: initial!important;
+    border-right: initial!important;
+    background: #59bfbf;
+    border-radius: 10px 10px 0 0;
+}
+#mySidebar #chatList .chatRoomView .list-group-item b{
+	font-size:16px; font-weight:normal;
+}
+#mySidebar #chatList .chatRoomView .f-right{
+	float:right;
+}
+#mySidebar #chatList .chatRoomView .chatRoomInfo span.chDate{
+	border-right: 1px solid #fff;
+    margin-right: 5px;
+}
+#mySidebar #chatList .chatRoomView .chatRoomInfo{
+	color: #fff;
+    font-weight: normal;
+	padding: 15px 10px;
+    font-size: 13px;
+    position: relative;
+    overflow: hidden;
+    border: initial!important;
+    background: #59bfbf;
+    border-radius: 0 0 10px 10px;
+}
+#mySidebar #chatList .chatRoomView .chatRoomInfo p{
+	margin-bottom:10px;
+}
+#mySidebar #chatList .chatRoomView .chatRoomInfo p i{
+	vertical-align: middle;
+    font-size: 16px;
+    margin-right: 5px;
+    width: 16px;
+    text-align: center;
+}
+#mySidebar #chatList .chatRoomView .chatRoomInfo .joinChatroom{
+	position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+#mySidebar #chatList .chatRoomView .chatRoomInfo .joinChatroom b{
+	color: #e7438b;
+    font-weight: bold;
+    font-size: 14px;
+}
 .scrolltop {
 	display: none;
 	position: fixed;
