@@ -110,7 +110,7 @@ $('#changeImg').click(function() {
 
 // 회원정보 수정 보여주고 닫기
 $(document).ready(function() {
-	if (!$('#showInfo').val()) {
+	if (!$('#mpInfo').val()) {
 		$(".info").hide();
 	} else {
 		$(".info").show();
@@ -146,7 +146,7 @@ $("#myscrapbtn").click(function() {
 
 // 포인트 사용내역 보여주고 닫기
 $(document).ready(function() {
-	if (!$('#point').val()) {
+	if (!$('#mpPoint').val()) {
 		$("#point_list").hide();
 	} else {
 		$("#point_list").show();
