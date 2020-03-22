@@ -13,7 +13,6 @@
 	</head>
 
 	<body>
-	
 		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
 		<input type="hidden" id="classPageMaker" value="${classPageMaker.makeQuery(1)}" />
 		<input type="hidden" id="cCategory" value="${cCategory}" />
@@ -23,9 +22,7 @@
 		<input type="hidden" id="classCriPage" value="${classPageMaker.cri.page}" />
 	
 		<h1 class="classTitle"></h1>
-		<button type="button" onclick="location.href='/eepp/board/boardList'">직무 Community</button>
 		<button type="button" id="openNewClass" onclick="location.href='classOpenView${classPageMaker.makeQuery(classPageMaker.cri.page)}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'">강좌개설</button>
-		<button type="button" onclick="location.href='/eepp/scrap/myScrapList'">스크랩 확인</button>
 		<hr>
 		<br>
 		
@@ -91,9 +88,9 @@
 			<c:choose>
 				<c:when test="${fn:length(classList) > 0 }">
 					<c:forEach items="${classList}" var="cl">
-						<table border="1">
+						<table align="center" style="float: left; width: 33%; padding: 10px;" cellspacing="2" cellpadding="1" border="1">
 							<tr>
-								<td colspan="2"><img src="${cl.cThumnail}" style="width:300px; height: auto;">
+								<td colspan="2"><img src="${cl.cThumnail}" style="width:350px; height: 200px;">
 								</td>
 							</tr>
 							<tr>
@@ -125,11 +122,14 @@
 								<td>남은신청기간</td>
 								<td>
 									<c:choose>
-										<c:when test="${endDate - nowDate <= 0}">
-											수강신청기간 종료
+										<c:when test="${endDate - nowDate < 0}">
+											<strong style="color: red;">수강신청기간 종료</strong>
+										</c:when>
+										<c:when test="${endDate - nowDate == 0}">
+											<strong style="color: red;">금일 신청마감 예정</strong>
 										</c:when>
 										<c:otherwise>
-											${endDate - nowDate}일
+											<strong style="color: red;">${endDate - nowDate}일</strong>
 										</c:otherwise>
 									</c:choose>
 								
@@ -155,6 +155,7 @@
 			</c:choose>
 		</div>
 		<hr>
+		
 		<script src="${pageContext.request.contextPath}/js/class/classMain.js"></script>
 	</body>
 </html>

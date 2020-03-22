@@ -33,7 +33,7 @@
 			}
 			
 			function replyPagePrint(rpPageMaker) {
-				console.log(rpPageMaker);
+				/* console.log(rpPageMaker);
 				console.log('totalCount : ' +rpPageMaker[0]);
 				console.log('startPage : ' +rpPageMaker[1]);
 				console.log('endPage : ' +rpPageMaker[2]);
@@ -45,7 +45,7 @@
 				console.log('perPageNum : ' +rpPageMaker[7].perPageNum);
 				console.log('startNum : ' +rpPageMaker[7].startNum);
 				console.log('endNum : ' +rpPageMaker[7].endNum);
-				console.log('pageStart : ' +rpPageMaker[7].pageStart);
+				console.log('pageStart : ' +rpPageMaker[7].pageStart); */
 				
 				// 댓글 페이징 처리를 위한 변수
 				var startPage = rpPageMaker[1];
@@ -108,7 +108,7 @@
 						$.each(rpList, function(key, value){
 							var rpDcount = value.rpDcount;
 							
-							if(rpDcount > 10) {
+							if(rpDcount >= 10) {
 								
 							} else {
 								var indent = value.rpIndent;
@@ -194,7 +194,7 @@
 											b += '<h3>해당 댓글 신고를 원하시면 로그인 해주세요.</h3>'
 										}else{
 											b += '<form id="rpDeclaration_' +value.rpId +'" role="formRpDeclaration_' +value.rpId +'" name="rpDform_' +value.rpId +'">';
-											b += '<input type="hidden" name="reporter_id" value=121>';
+											b += '<input type="hidden" name="reporter_id" value=' +userId +'>';
 											b += '<input type="hidden" name="reply_id" value=' +value.rpId +'>';
 											b += '<div class="form-group">';
 											b += '<label for="inputMessage">신고사유</label><br>';

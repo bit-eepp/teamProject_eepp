@@ -12,15 +12,13 @@
 	</head>
 	
 	<body>
-	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-	<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
-	<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">
-	<input type="hidden" id="pageMakeQuery" value="${pageMaker.makeQuery(1)}">
+
+		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+		<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
+		<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">
+		<input type="hidden" id="pageMakeQuery" value="${pageMaker.makeQuery(1)}">
 	
 		<h1 class="boardTitle"></h1>
-		<button type="button" onclick="location.href='/eepp/scrap/myScrapList'">스크랩 확인</button>
-		<button type="button" onclick="location.href='/eepp/class/classList'">CLASS</button>
-		<hr>
 		
 		<!-- 직무 게시판 카테고리 -->
 		<div>
@@ -199,7 +197,7 @@
 							<tr>
 								<td>
 									<c:choose>
-										<c:when test="${vo.dCount > 10}">
+										<c:when test="${vo.dCount >= 10}">
 											<b style="color: red">[BLIND]</b>
 										</c:when>
 										<c:otherwise>

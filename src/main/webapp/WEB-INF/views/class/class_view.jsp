@@ -201,7 +201,7 @@
 				$.ajax({
 					url: getContextPath() + '/scrap/doClassScrap',
 					type: 'post',
-					data: {'class_id' : cId},
+					data: {'class_id' : cId, 'user_id' : userId},
 					success: function(data){
 						console.log(data)
 						alert(cId +"번 class강좌가 스크랩 되었습니다.");

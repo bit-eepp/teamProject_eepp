@@ -100,7 +100,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text"></div>
 						</div>
-						<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control" value="${modifyClass.cTitle}">
+						<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control" value="${modifyClass.cTitle}" maxlength="40">
 					</div>
 					<span id="textHelpBlock" class="form-text text-muted">40자 이내로 입력해 주세요.</span>
 				</div>
@@ -110,7 +110,7 @@
 			<div class="form-group row">
 				<label for="transport_instructions" class="col-4 col-form-label">Class강좌 한 줄 소개</label>
 				<div class="col-8">
-					<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control">${modifyClass.cSummary}</textarea>
+					<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" maxlength="100">${modifyClass.cSummary}</textarea>
 					<span id="transport_instructionsHelpBlock" class="form-text text-muted">100자 이내로 입력해 주세요.</span>
 				</div>
 			</div>
