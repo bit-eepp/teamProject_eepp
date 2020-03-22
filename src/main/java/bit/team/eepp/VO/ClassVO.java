@@ -13,19 +13,19 @@ public class ClassVO {
 	private String cCategory;
 	private String uNickname;
 	private int cTotalPeopleCount;
-	private int cCurrentPeopleCount;
 	private String cDifficulty;
 	private String cMaterials;
 	private String cSummary;
 	private int cTerm;
 	private int questionCount;
+	private String cThumnail;
 
 	public ClassVO() {
 	}
 
 	public ClassVO(int cId, int user_id, String cTitle, String cContent, Timestamp cOpenDate, Timestamp cEndDate,
-			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount, int cCurrentPeopleCount,
-			String cDifficulty, String cMaterials, String cSummary, int cTerm, int questionCount) {
+			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount,
+			String cDifficulty, String cMaterials, String cSummary, int cTerm, int questionCount, String cThumnail) {
 		this.cId = cId;
 		this.user_id = user_id;
 		this.cTitle = cTitle;
@@ -36,12 +36,20 @@ public class ClassVO {
 		this.cCategory = cCategory;
 		this.uNickname = uNickname;
 		this.cTotalPeopleCount = cTotalPeopleCount;
-		this.cCurrentPeopleCount = cCurrentPeopleCount;
 		this.cDifficulty = cDifficulty;
 		this.cMaterials = cMaterials;
 		this.cSummary = cSummary;
 		this.cTerm = cTerm;
 		this.questionCount = questionCount;
+		this.cThumnail = cThumnail;
+	}
+
+	public String getcThumnail() {
+		return cThumnail;
+	}
+
+	public void setcThumnail(String cThumnail) {
+		this.cThumnail = cThumnail;
 	}
 
 	public int getQuestionCount() {
@@ -138,14 +146,6 @@ public class ClassVO {
 
 	public void setcTotalPeopleCount(int cTotalPeopleCount) {
 		this.cTotalPeopleCount = cTotalPeopleCount;
-	}
-
-	public int getcCurrentPeopleCount() {
-		return cCurrentPeopleCount;
-	}
-
-	public void setcCurrentPeopleCount(int cCurrentPeopleCount) {
-		this.cCurrentPeopleCount = cCurrentPeopleCount;
 	}
 
 	public String getcDifficulty() {

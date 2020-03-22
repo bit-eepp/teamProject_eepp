@@ -26,6 +26,13 @@ public interface ClassMapper {
 
 	public abstract void modifyClass(@Param("classVO") ClassVO classVO);
 
+	public abstract String getFilePath(@Param("cId") int cId);
+
+	public abstract List<ClassJoinVO> getUserIdList(@Param("class_id") int class_id);
+	
+	public abstract int getCurrentUserCount(@Param("class_id") int class_id);
+	
 	public abstract void classJoin(@Param("classJoinVO") ClassJoinVO classJoinVO);
+
 
 }

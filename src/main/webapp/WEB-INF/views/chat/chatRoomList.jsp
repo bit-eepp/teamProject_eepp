@@ -7,7 +7,6 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>EE Chat List</title>
-	    <link rel="icon" href="${pageContext.request.contextPath}/img/EE_logo.png" sizes="16x16">
 	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatList.css">
 	    
 	    <script type="text/javascript">
@@ -336,7 +335,7 @@
 		
 							<!-- Modal Header -->
 							<div class="modal-header" >
-								<img class="logo" alt="" src="${pageContext.request.contextPath}/img/EE_logo.png">
+								<%-- <img class="logo" alt="" src="${pageContext.request.contextPath}/img/EE_logo.png"> --%>
 								<h5>퇴근 후  <b>EE Chat</b>을 통해 모여봐요</h5>
 							</div>
 		

@@ -44,12 +44,12 @@ import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserVO;
 
 @Controller
-public class UserController{
-	
-    @Resource(name = "uploadPath")
-    private String uploadPath;
-    
-    @Inject
+public class UserController {
+
+	@Resource(name = "uploadPath")
+	private String uploadPath;
+
+	@Inject
 	UserService us;
 	@Inject
 	BCryptPasswordEncoder pwEncoder;
@@ -57,14 +57,14 @@ public class UserController{
 	FileService fs;
 	@Autowired
 	ScrapService sc;
-    
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    
-    /*
+
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+	/*
 	 * ------- mypage part -------
 	 */
-    
-    @RequestMapping("/profileUpdate")
+
+	@RequestMapping("/profileUpdate")
 	public String mypage(Model model) throws Exception {
 		logger.info("head to mypage");
 		return "user/myPage/myPage";
@@ -87,12 +87,12 @@ public class UserController{
 			fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 			userVO.setUprofile(ymdPath + File.separator + fileName);
 		} else {
-			if(user.getuEmail().equals("bit.eepp@gmail.com")){
+			if (user.getuEmail().equals("bit.eepp@gmail.com")) {
 				fileName = "/eepp" + File.separator + "img" + File.separator + "admin.jpg";
 				userVO.setUprofile(fileName);
-			}else {
-			fileName = "/eepp" + File.separator + "img" + File.separator + "headerLogin.png";
-			userVO.setUprofile(fileName);
+			} else {
+				fileName = "/eepp" + File.separator + "img" + File.separator + "headerLogin.png";
+				userVO.setUprofile(fileName);
 			}
 		}
 		System.out.println("=================");
@@ -107,10 +107,10 @@ public class UserController{
 
 		return "redirect:/mypage";
 	}
-	
+
 	@RequestMapping("/mypage")
-	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session, UserVO userVO,Model model,
-			@ModelAttribute("mscri") MypageSearchCriteria mscri,
+	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri,
 			@ModelAttribute("scrapcri") ScrapSearchCriteria scrapcri,
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
@@ -124,60 +124,59 @@ public class UserController{
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
 		System.out.println("loginsession : " + loginSession);
-		
+
 		if (loginSession == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('로그인 해주세요'); location.href='/eepp/login/login.do';</script>");
 			out.flush();
-			
-		}else {
-		
-		userVO.setUser_id(user.getUser_id());
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("scrapcri", scrapcri);
-		map.put("mscri", mscri);
-		map.put("sortType", sortType);
-		map.put("bCategory", bCategory);
-		map.put("user_id", userVO.getUser_id());
-		map.put("listCount", us.listCount(map));
-		map.put("replyCount", us.replyCount(map));
-		map.put("messageRes", us.receiveCount(map));
-		map.put("messageSen", us.sendCount(map));
+		} else {
 
-		myPagePageMaker myPagePageMaker = new myPagePageMaker();
-		myPagePageMaker.setCri(mscri);
-		myPagePageMaker.setTotalCount(us.listCount(map));
-		
-		
-		ScrapPageMaker ScrapPageMaker = new ScrapPageMaker();
-		ScrapPageMaker.setCri(scrapcri);
-		ScrapPageMaker.setTotalCount(us.scrapCount(map));
-		
-		if(board !=null) {
-			model.addAttribute("board", board);
-		}
-		if(scrap !=null) {
-			model.addAttribute("scrap", scrap);
-		}
-		if(mpPoint !=null) {
-			model.addAttribute("mpPoint", mpPoint);
-		}
-		if(mpInfo !=null) {
-			model.addAttribute("mpInfo", mpInfo);
-		}
-		model.addAttribute("messageRes", us.receiveCount(map));
-		model.addAttribute("messageSen", us.sendCount(map));
-		model.addAttribute("scrapList", us.scrapList(map));
-		model.addAttribute("scrapCount", us.scrapCount(map));
-		model.addAttribute("replyCount", us.replyCount(map));
-		model.addAttribute("listCount", us.listCount(map));
-		model.addAttribute("myBoardList", us.myBoardList(map));
-		model.addAttribute("myPagePageMaker", myPagePageMaker);
-		model.addAttribute("ScrapPageMaker", ScrapPageMaker);
-		model.addAttribute("sortType", sortType);
-		model.addAttribute("bCategory", bCategory);
+			userVO.setUser_id(user.getUser_id());
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("scrapcri", scrapcri);
+			map.put("mscri", mscri);
+			map.put("sortType", sortType);
+			map.put("bCategory", bCategory);
+			map.put("user_id", userVO.getUser_id());
+			map.put("listCount", us.listCount(map));
+			map.put("replyCount", us.replyCount(map));
+			map.put("messageRes", us.receiveCount(map));
+			map.put("messageSen", us.sendCount(map));
+
+			myPagePageMaker myPagePageMaker = new myPagePageMaker();
+			myPagePageMaker.setCri(mscri);
+			myPagePageMaker.setTotalCount(us.listCount(map));
+
+			ScrapPageMaker ScrapPageMaker = new ScrapPageMaker();
+			ScrapPageMaker.setCri(scrapcri);
+			ScrapPageMaker.setTotalCount(us.scrapCount(map));
+
+			if (board != null) {
+				model.addAttribute("board", board);
+			}
+			if (scrap != null) {
+				model.addAttribute("scrap", scrap);
+			}
+			if (mpPoint != null) {
+				model.addAttribute("mpPoint", mpPoint);
+			}
+			if (mpInfo != null) {
+				model.addAttribute("mpInfo", mpInfo);
+			}
+			model.addAttribute("messageRes", us.receiveCount(map));
+			model.addAttribute("messageSen", us.sendCount(map));
+			model.addAttribute("scrapList", us.scrapList(map));
+			model.addAttribute("scrapCount", us.scrapCount(map));
+			model.addAttribute("replyCount", us.replyCount(map));
+			model.addAttribute("listCount", us.listCount(map));
+			model.addAttribute("myBoardList", us.myBoardList(map));
+			model.addAttribute("myPagePageMaker", myPagePageMaker);
+			model.addAttribute("ScrapPageMaker", ScrapPageMaker);
+			model.addAttribute("sortType", sortType);
+			model.addAttribute("bCategory", bCategory);
 		}
 		return "user/myPage/newlymypage";
 
@@ -283,105 +282,108 @@ public class UserController{
 			return "redirect:/";
 		}
 	}
-	
+
 	/*
 	 * ------- point part -------
 	 */
-	
+
 	/* 포인트 충전 */
 	@RequestMapping("/chargePoint")
 	public String chargePoint(UserVO userVO) {
-		
 		logger.info("charge method Active");
-		
 		return "user/payment/chargePoint";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/changeToPoint")
-	public void changeToPoint(UserVO userVO, PaymentVO paymentVO,HttpSession session) {
+	public void changeToPoint(UserVO userVO, PaymentVO paymentVO, HttpSession session) {
 
-			us.chargePoint(userVO);
-			paymentVO.setPoint_io(userVO.getPoint());
-			us.addPointPayment(paymentVO);
-			System.out.println("포인트 충전 + 충전 내역 추가 완료");
-			
-		}
-	
-	
+		us.chargePoint(userVO); // USERS table에 POINT 컬럼 update : point = point + 충전금액
+
+		paymentVO.setPoint_io(userVO.getPoint()); // payment table : point_io()(충전금액)
+
+		int totalPoint = us.getTotalPoint(userVO.getUser_id());
+		paymentVO.setTotalPoint(totalPoint);
+
+		us.addPointPayment(paymentVO);
+		System.out.println("포인트 충전 + 충전 내역 추가 완료");
+	}
+
 	/*
 	 * ------- message part -------
 	 */
-	
+
 	/* 쪽지 */
-    @RequestMapping(value="/message",method = { RequestMethod.GET, RequestMethod.POST })
-	public String message(MessageCriteria msgCri, Model model, HttpSession session, MessageVO messageVO, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
+	@RequestMapping(value = "/message", method = { RequestMethod.GET, RequestMethod.POST })
+	public String message(MessageCriteria msgCri, Model model, HttpSession session, MessageVO messageVO,
+			@RequestParam(value = "messageType", required = false, defaultValue = "") String messageType) {
 		logger.info("Message Method Active");
-		
+
 		Object loginSession = session.getAttribute("loginUser");
-		UserVO user = (UserVO)loginSession;
-		
+		UserVO user = (UserVO) loginSession;
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("messageType", messageType);
 		map.put("user_id", user.getUser_id());
-		
+
 		Map<String, Object> map2 = new HashMap<String, Object>();
 		map2.put("msgCri", msgCri);
 		map2.put("messageType", messageType);
 		map2.put("user_id", user.getUser_id());
-		
+
 		MessagePageMaker pageMaker = new MessagePageMaker();
 		int total = us.messageListCount(map);
 		pageMaker.setCri(msgCri);
 		pageMaker.setTotalCount(total);
-		
+
 		model.addAttribute("messageList", us.messageList(map2));
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("messageType", messageType);
 
 		return "user/message/message";
 	}
-    
+
 	@RequestMapping(value = "/message/messageView", method = { RequestMethod.GET, RequestMethod.POST })
-	public String messageView(Model model, MessageVO messageVO,DeclarationVO declarationVO, HttpServletRequest request, @RequestParam(value = "messageType", required = false, defaultValue = "") String messageType){
+	public String messageView(Model model, MessageVO messageVO, DeclarationVO declarationVO, HttpServletRequest request,
+			@RequestParam(value = "messageType", required = false, defaultValue = "") String messageType) {
 		logger.info("MessageView Method Active");
-		
-		if(request.getParameter("sender_id") != null) {
+
+		if (request.getParameter("sender_id") != null) {
 			model.addAttribute("receiveMsg", us.showMyReceiveMessage(messageVO));
 			// 받은쪽지 클릭했을경우, 확인상태 변경
 			us.changeMessageStatus(messageVO);
 			logger.info("쪽지 확인 상태 변경 완료");
-			
+
 			model.addAttribute("messageType", messageType);
-		}else if(request.getParameter("receiver_id") != null) {
-			model.addAttribute("sendMsg",us.showMySendMessage(messageVO));
+		} else if (request.getParameter("receiver_id") != null) {
+			model.addAttribute("sendMsg", us.showMySendMessage(messageVO));
 			model.addAttribute("messageType", messageType);
 		}
-		
+
 		DeclarationVO report = us.reportMessageInfo(declarationVO);
-		if(report != null) {
+		if (report != null) {
 			model.addAttribute("isReported", report);
 			System.out.println("신고된 쪽지 정보를 표시합니다.");
 		}
-		
+
 		return "user/message/messageView";
 	}
-	
-	@RequestMapping(value="/deleteMessage",method = { RequestMethod.GET, RequestMethod.POST })
+
+	@RequestMapping(value = "/deleteMessage", method = { RequestMethod.GET, RequestMethod.POST })
 	public String deleteMessage(Model model, MessageVO messageVO, HttpServletRequest request, RedirectAttributes rttr) {
-		
+
 		logger.info("deleteMessage Method Active");
 
-		if(request.getParameter("checkRow") != null) {
+		if (request.getParameter("checkRow") != null) {
 			String[] checkIdx = request.getParameter("checkRow").toString().split(",");
-			for (int i=0; i<checkIdx.length; i++) {
-				System.out.println("mid는"+Integer.parseInt(checkIdx[i]));
+			for (int i = 0; i < checkIdx.length; i++) {
+				System.out.println("mid는" + Integer.parseInt(checkIdx[i]));
 				messageVO.setMid(Integer.parseInt(checkIdx[i]));
-			    us.deleteMessage(messageVO);
-			    logger.info("쪽지 선택 삭제 완료");
+				us.deleteMessage(messageVO);
+				logger.info("쪽지 선택 삭제 완료");
 			}
 			rttr.addAttribute("messageType", request.getParameter("messageType"));
-		}else {
+		} else {
 			us.deleteMessage(messageVO);
 			rttr.addAttribute("messageType", request.getParameter("messageType"));
 			logger.info("쪽지 삭제 완료");
@@ -389,54 +391,56 @@ public class UserController{
 
 		return "redirect:/message";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="/cancleMessage",method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/cancleMessage", method = { RequestMethod.GET, RequestMethod.POST })
 	public int cancleMessage(Model model, MessageVO messageVO) {
-		
+
 		logger.info("cancleMessage Method Active");
 
 		int result = us.cancleMessage(messageVO);
-		if(result == 1) {
+		if (result == 1) {
 			return 1;
 		} else {
 			return 0;
 		}
 
 	}
-	
-	@RequestMapping(value="message/sendMessage",method = { RequestMethod.GET, RequestMethod.POST })
-	public String sendMessage(Model model, MessageVO messageVO, HttpServletRequest request,@RequestParam(value = "messageType", required = false, defaultValue = "") String messageType) {
+
+	@RequestMapping(value = "message/sendMessage", method = { RequestMethod.GET, RequestMethod.POST })
+	public String sendMessage(Model model, MessageVO messageVO, HttpServletRequest request,
+			@RequestParam(value = "messageType", required = false, defaultValue = "") String messageType) {
 		logger.info("sendMessage Method Active");
 
-		if(request.getParameter("receiver") != null) {	
+		if (request.getParameter("receiver") != null) {
 			messageVO.setuNickname(request.getParameter("receiver"));
-				if(request.getParameter("from").equals("out")) {
-					model.addAttribute("from_message", "out");
-					System.out.println("다른 페이지에서 쪽지보내기");
-				}
-		}else {
+			if (request.getParameter("from").equals("out")) {
+				model.addAttribute("from_message", "out");
+				System.out.println("다른 페이지에서 쪽지보내기");
+			}
+		} else {
 			messageVO.setuNickname(request.getParameter("uNickname"));
 		}
-		model.addAttribute("sendMessage",messageVO);
+		model.addAttribute("sendMessage", messageVO);
 		model.addAttribute("messageType", messageType);
-		
+
 		return "user/message/sendMessage";
 	}
-	
-	@RequestMapping(value="/messageSuccess",method = { RequestMethod.POST,RequestMethod.GET})
-	public String messageSuccess(Model model, MessageVO messageVO, HttpServletRequest request, RedirectAttributes rttr) {
+
+	@RequestMapping(value = "/messageSuccess", method = { RequestMethod.POST, RequestMethod.GET })
+	public String messageSuccess(Model model, MessageVO messageVO, HttpServletRequest request,
+			RedirectAttributes rttr) {
 		logger.info("messageSuccess Method Active");
-		
+
 		us.replyMessage(messageVO);
 		logger.info("쪽지 답장 완료");
-		System.out.println("메세지가 오는곳은..."+request.getParameter("messageType"));
-		if(request.getParameter("messageType").equals("out")) {
+		System.out.println("메세지가 오는곳은..." + request.getParameter("messageType"));
+		if (request.getParameter("messageType").equals("out")) {
 			return "redirect:/";
 		}
 		System.out.println("messageType is : " + request.getParameter("messageType"));
 		rttr.addAttribute("messageType", request.getParameter("messageType"));
 		return "redirect:/message";
 	}
-	
+
 }
