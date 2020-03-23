@@ -12,7 +12,7 @@
 	    <script type="text/javascript">
 		    var uNickname = $("#userNickname").val();
 		    var user_id = $("#userId").val();
-			
+
 		    $(document).ready(function(){
 		    	//로그인 하지않은 경우, 채팅방 개설 버튼 삭제
 		    	if(!$("#userNickname").val()){
@@ -20,9 +20,6 @@
 		    	}
 		    	
 		    	var totalChatCount = getTotalChatCount();
-		    	
-		    	//var tag = '<button title="Thunder" class="btn"><i class="fas fa-bolt"></i><br>(' +totalChatCount +')</button>';		
-    			//$('#main').append(tag);
 		    	
 		    	if(totalChatCount == 0) {
 		    		$('#moreBtn_div').remove();
@@ -36,17 +33,17 @@
 		    		$('#mySidebar').append(tag);	
 		    	}
 		    	
-		    	$('#mySidebar').scroll(function () { 
-		    		if ($(this).scrollTop() > 100) { 
-		    			$('#backToTop').fadeIn(500);
-		    		} else { 
-		    			$('#backToTop').fadeOut('slow'); 
-		    		} 
-		    	}); 
+		    	var floatPosition = parseInt($("#goToTop").css("top"));
 		    	
-		    	$('#backToTop').click(function (e) { 
+		    	$('#chatRoomListWrap').scroll(function () { 	
+	    			var scrollTop = $("#chatRoomListWrap").scrollTop();
+		    		var newPosition = scrollTop + floatPosition + "px";
+		    		$("#goToTop").css('top', newPosition);
+		    	});
+
+		    	$('#goToTop').click(function (e) { 
 		    		e.preventDefault(); 
-		    		$('#mySidebar').animate({scrollTop: 0}, 300); 
+		    		$('#chatRoomListWrap').animate({scrollTop: 0}, 200); 
 		    	});
 		    	
 		    	getChatRoomList();
@@ -198,7 +195,7 @@
 		    				chatRoomSelect(data, chTotalPeopleCount);
 		    			}	
 		            });
-		    		$('#modalForm').modal('hide');
+		    		$('#chatModalForm').modal('hide');
 		    		$('.modal-backdrop').remove();
 		    		resetForm();
 		    	}
@@ -324,24 +321,24 @@
 				<!-- chatHead -->
 				
 				<div id="chatRoomMakeForm" align="right">
-					<button id="mkChatBtn" title="EE Chat 개설" class="btn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false"><i class="fas fa-comment-dots fa-2x"></i></button>
+					<button id="mkChatBtn" title="EE Chat 개설" class="btn" data-toggle="modal" data-target="#chatModalForm" data-backdrop="static" data-keyboard="false"><i class="fas fa-comment-dots fa-2x"></i></button>
 				</div>
 				<!-- chatRoomMakeForm -->
 				</div>
 				
-				<div class="modal fade" id="modalForm" role="dialog">
+				<div class="modal fade" id="chatModalForm" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
 		
 							<!-- Modal Header -->
 							<div class="modal-header" >
-								<%-- <img class="logo" alt="" src="${pageContext.request.contextPath}/img/EE_logo.png"> --%>
-								<h5>퇴근 후  <b>EE Chat</b>을 통해 모여봐요</h5>
+								<img class="chatMklogo" alt="" src="${pageContext.request.contextPath}/img/EE_logo.png">
+								<h5>퇴근 후  <strong>EE Chat</strong>을 통해 모여봐요</h5>
 							</div>
 		
 							<!-- Modal Body -->
-							<div class="modal-body">
-								<h5>EE chat 개설을 위해 정보를 입력해주세요.</h5>
+							<div class="modal-body" align="center">
+								<h5><strong>EE chat 개설을 위해 정보를 입력해주세요.</strong></h5>
 								<br>
 								
 								<form id="chatRoomMake" name="chForm">
@@ -358,21 +355,21 @@
 										<div class="input-group-prepend">
 											<button class="btn btn-default" type="button"><i class="fas fa-heading"></i> 모  임  명</button>
 										</div>
-										<input type="text" class="form-control" name="chTitle" placeholder="모임을 위한 제목을 입력해주세요(최대 30자)" maxlength="30">
+										<input type="text" class="form-control" name="chTitle" placeholder="모임명을 입력해주세요(최대 30자)" maxlength="30">
 									</div>
 								
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<button class="btn btn-default" type="button"><i class="fas fa-map-marker-alt"></i> 모임장소</button>
 										</div>
-										<input type="text" class="form-control" name="chPlace" placeholder="EE Chat을 통해 결정하시려면 입력하지 마세요." maxlength="30">
+										<input type="text" class="form-control" name="chPlace" placeholder="모임장소을 입력해주세요(최대 20자)" maxlength="20">
 									</div>
 
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
 											<button class="btn btn-default" type="button"><i class="far fa-clock"></i> 모임시간</button>
 										</div>
-										<input type="datetime-local" class="form-control" name="chMeetTime" placeholder="EE Chat을 통해 결정하시려면 입력하지 마세요.">
+										<input type="datetime-local" class="form-control" name="chMeetTime">
 									</div>
 									
 									<div class="input-group mb-3">
@@ -388,7 +385,7 @@
 							<!-- Modal Footer -->
 							<div class="modal-footer">
 								<button type="button" class="btn" data-dismiss="modal" onclick="resetForm()">개설 취소</button>
-								<button type="button" class="btn submitBtn" onclick="chatRoomMake(${loginUser.user_id})">채팅방 개설</button>
+								<button type="button" class="btn submitBtn" onclick="chatRoomMake(${loginUser.user_id})">EE Chat 개설</button>
 							</div>
 							<!-- Modal Footer -->
 							
@@ -407,11 +404,11 @@
 				<div id="chatList"></div>
 				
 				<div id="moreBtn_div" align="center">
-					<a id="moreBtn_a" href="javascript:moreChatList();"><i class="fas fa-angle-double-down fa-3x"></i></a>
+					<a id="moreBtn_a" href="javascript:moreChatList();"><i class="fas fa-chevron-down fa-3x"></i></a>
 				</div>
 				
 				<div id="upBtn_div" align="right">
-					<a id="backToTop" class="scrolltop" href="#"><i class="fas fa-caret-up fa-3x" aria-hidden="true"></i></a>
+					<a id="goToTop" class="scrolltop" href="#"><i class="fas fa-caret-up fa-3x"></i></a>
 				</div>
 				
 			</div>

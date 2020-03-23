@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.ReviewMapper">
+	<select id="reviewCount" resultType="int">
+		SELECT COUNT(*) AS reviewCount FROM REVIEW e WHERE e.eId = #{eId}	
+	</select>
+	
+	<select id="reviewList" resultType="bit.team.eepp.VO.ReviewVO" parameterType="bit.team.eepp.Page.ReviewCriteria">
+		<![CDATA[
+			SELECT * FROM 
+			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
+			(SELECT rv.rvId, rv.eId, rv.user_id, rv.rvComment, rv.rvScore, rv.rvWrittenDate, rv.rvModifyDate, u.uNickname 
+			FROM REVIEW rv, USERS u  
+			WHERE rv.user_id = u.user_id AND rv.eId = #{eId}
+			ORDER BY rv.rvmodifydate DESC) A)
+            WHERE RNUM >= #{rvCriteria.startNum} AND RNUM <= #{rvCriteria.endNum}
+		]]>
+	</select>
+	
+	<insert id="reviewWrite" parameterType="bit.team.eepp.VO.ReviewVO">
+		INSERT INTO REVIEW(rvId, rvComment, rvScore, rvWrittenDate, rvModifyDate, eId, user_id) 
+		VALUES(REVIEW_SEQ.nextval, #{reviewVO.rvComment}, #{reviewVO.rvScore}, SYSDATE, SYSDATE, 0, 0, REVIEW_SEQ.currval, 0, 0, #{reviewVO.eId}, #{reviewVO.user_id})
+	</insert>
+	
+	<delete id="reviewDelete" parameterType="bit.team.eepp.VO.ReviewVO">
+		DELETE FROM REPLY WHERE rpId = #{rpId}
+	</delete>
+
+	<update id="reviewModify" parameterType="bit.team.eepp.VO.ReviewVO">
+		UPDATE REVIEW SET rvComment = #{reviewVO.rvComment}, rvScore = #{reviewVO.rvScore}, rvModifyDate = SYSDATE WHERE rvId = #{reviewVO.rvId}
+	</update>
+</mapper>
