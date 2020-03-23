@@ -114,7 +114,7 @@ function getContextPath() {
 
 						<div class="point_list">
 								<div class="tit_wrap">
-									<span>충전 포인트</span> <span class="tit_cost">결제금액(Vat포함)</span>
+									<span>충전 포인트</span> <span class="tit_cost">결제금액(VAT포함)</span>
 								</div>
 								<div class="point_wrap">
 								<label>
@@ -134,22 +134,22 @@ function getContextPath() {
 								</label>
 								<label>
 									<input type="radio" name="chPoint" value="10000">
-									<span>1,0000포인트</span>
-									<span class="cost">1,1000원</span>
+									<span>10,000포인트</span>
+									<span class="cost">11,000원</span>
 								</label>
 								<label>
 									<input type="radio" name="chPoint" value="30000">
-									<span>3,0000포인트</span>
-									<span class="cost">3,3000원</span>
+									<span>30,000포인트</span>
+									<span class="cost">33,000원</span>
 								</label>
 								<label>
 									<input type="radio" name="chPoint" value="55000">
-									<span>55,000포인트(5000p 보너스)</span>
+									<span>55,000포인트(5,000p 보너스)</span>
 									<span class="cost">55,000원</span>
 								</label>
 								<label>
 									<input type="radio" name="chPoint" value="77000">
-									<span>77,000포인트(7000p 보너스)</span>
+									<span>77,000포인트(7,000p 보너스)</span>
 									<span class="cost">77,000원</span>
 								</label>
 									

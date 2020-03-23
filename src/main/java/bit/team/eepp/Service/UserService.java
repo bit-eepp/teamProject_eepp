@@ -149,9 +149,31 @@ public class UserService {
 	public int chargePoint(UserVO userVO) {
 		return userMapper.chargePoint(userVO);
 	}
-
+	
+	public int getTotalPoint(int user_id) {
+		return userMapper.getTotalPoint(user_id);
+	}
+	
 	public int addPointPayment(PaymentVO paymentVO) {
 		return userMapper.addPointPayment(paymentVO);
 	}
+
+	public void updateOpennerPoint(int opennerUser_id, int classPrice) {
+		userMapper.updateOpennerPoint(opennerUser_id, classPrice);
+	}
+
+	public void updateParticipantPoint(int user_id, int classPrice) {
+		userMapper.updateParticipantPoint(user_id, classPrice);
+	}
+
+	public void opennerPayment(PaymentVO paymentVO) {
+		userMapper.opennerPayment(paymentVO);
+	}
+
+	public void participantPayment(PaymentVO paymentVO) {
+		userMapper.participantPayment(paymentVO);		
+	}
+
+	
 
 }

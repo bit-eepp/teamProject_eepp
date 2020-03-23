@@ -9,6 +9,19 @@
 		<title>Class 수정 페이지</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		
+		<script>
+			//프로필 사진 업로드시 미리보기
+			function LoadImg(value) {
+				if(value.files && value.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#loadImg').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(value.files[0]);
+				}
+			}
+		</script>
+		
 		<style type="text/css">
 			main {
 				display: flex;
@@ -59,6 +72,11 @@
 				opacity: 1;
 				font-weight: bold;
 			}
+			
+			#loadImg {
+				height: 400px;
+				widows: 350px;
+			}
 		</style>
 	</head>
 
@@ -67,11 +85,8 @@
 		<hr>
 		<br>
 		
-		<!-- partial:index.partial.html -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 			
-		<form name="mform" action="modifyClass" method="post" onsubmit="return checkForm();">
+		<form name="mform" action="modifyClass" enctype="multipart/form-data" method="post" onsubmit="return checkForm();">
 			<input type="hidden" name="cId" value="${modifyClass.cId}">
 			<input type="hidden" name="page" value="${cscri.page}">
 			<input type="hidden" name="perPageNum" value="${cscri.perPageNum}">
@@ -85,7 +100,7 @@
 						<div class="input-group-prepend">
 							<div class="input-group-text"></div>
 						</div>
-						<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control" value="${modifyClass.cTitle}">
+						<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control" value="${modifyClass.cTitle}" maxlength="40">
 					</div>
 					<span id="textHelpBlock" class="form-text text-muted">40자 이내로 입력해 주세요.</span>
 				</div>
@@ -95,18 +110,18 @@
 			<div class="form-group row">
 				<label for="transport_instructions" class="col-4 col-form-label">Class강좌 한 줄 소개</label>
 				<div class="col-8">
-					<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control">${modifyClass.cSummary}</textarea>
+					<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" maxlength="100">${modifyClass.cSummary}</textarea>
 					<span id="transport_instructionsHelpBlock" class="form-text text-muted">100자 이내로 입력해 주세요.</span>
 				</div>
 			</div>
 			<br>
 			
-			<!-- 첨부파일이 완료되면 수정 -->
 			<div class="form-group row">
 				<label for="text" class="col-4 col-form-label">Class강좌 대표 이미지</label>
-				<div class="form-group row">
+				<div class="form-group row" align="center">
 					<div class="offset-2 col-9">
-						<button onclick="#" class="btn btn-info">사진업로드</button>
+						<img id="loadImg" src="${modifyClass.cThumnail}"/>
+						<input type="file" name="file" id="classImg" onchange="LoadImg(this);"/>
 					</div>
 				</div>
 			</div>

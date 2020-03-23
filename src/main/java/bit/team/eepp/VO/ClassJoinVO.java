@@ -2,22 +2,23 @@ package bit.team.eepp.VO;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ClassJoinVO {
 	private int cjId;
 	private int class_id;
 	private int user_id;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp cjJoinDate;
-	private String cjIntroduce;
 
 	public ClassJoinVO() {
 	}
 
-	public ClassJoinVO(int cjId, int class_id, int user_id, Timestamp cjJoinDate, String cjIntroduce) {
+	public ClassJoinVO(int cjId, int class_id, int user_id, Timestamp cjJoinDate) {
 		this.cjId = cjId;
 		this.class_id = class_id;
 		this.user_id = user_id;
 		this.cjJoinDate = cjJoinDate;
-		this.cjIntroduce = cjIntroduce;
 	}
 
 	public int getCjId() {
@@ -50,14 +51,6 @@ public class ClassJoinVO {
 
 	public void setCjJoinDate(Timestamp cjJoinDate) {
 		this.cjJoinDate = cjJoinDate;
-	}
-
-	public String getCjIntroduce() {
-		return cjIntroduce;
-	}
-
-	public void setCjIntroduce(String cjIntroduce) {
-		this.cjIntroduce = cjIntroduce;
 	}
 
 }

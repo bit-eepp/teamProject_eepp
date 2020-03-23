@@ -3,9 +3,23 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="UTF-8">
-	<title>Class Open Page</title>
+		<meta charset="UTF-8">
+		<title>Class Open Page</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
+		
+		<script>
+			//프로필 사진 업로드시 미리보기
+			function LoadImg(value) {
+				if (value.files && value.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#loadImg').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(value.files[0]);
+				}
+			}
+		</script>
+		
 		<style type="text/css">
 			main {
 				display: flex;
@@ -42,19 +56,28 @@
 				color: #59bfbf;
 				background-color: transparent;
 				border: 2px solid #59bfbf; &:
-				hover {opacity: .65}
+				hover {opacity: .65
 			}
 			
-			input[name="cCategory"]+label:active, input[name="cDifficulty"]+label:active {
+			}
+			input[name="cCategory"]+label:active, input[name="cDifficulty"]+label:active
+				{
 				transition: none;
 				transform: scale(.925);
 			}
 			
-			input[name="cCategory"]:checked+label, input[name="cCategory"]:checked+label:hover, input[name="cDifficulty"]:checked+label, input[name="cDifficulty"]:checked+label:hover {
+			input[name="cCategory"]:checked+label, input[name="cCategory"]:checked+label:hover,
+				input[name="cDifficulty"]:checked+label, input[name="cDifficulty"]:checked+label:hover
+				{
 				background-color: #FFF;
 				color: #ff578f;
 				opacity: 1;
 				font-weight: bold;
+			}
+			
+			#loadImg {
+				height: 400px;
+				widows: 350px;
 			}
 		</style>
 	</head>
@@ -62,26 +85,22 @@
 	<body>
 		<h1 align="center">CLASS Open Page</h1>
 		<br>
-		<br>
-		
-		<!-- partial:index.partial.html -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 		<div class="container mt-5">
-			<form action="classOpen" name="cform" method="post" onsubmit="return classCheckForm();">
-				<input type="hidden" name="page" value="${cscri.page}" />
-				<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" />
-				<input type="hidden" name="searchType" value="${cscri.searchType}" />
-				<input type="hidden" name="keyword" value="${cscri.keyword}" />
-			
+			<form action="classOpen" name="cform" method="post"
+				enctype="multipart/form-data" onsubmit="return classCheckForm();">
+				<input type="hidden" name="page" value="${cscri.page}" /> <input
+					type="hidden" name="perPageNum" value="${cscri.perPageNum}" /> <input
+					type="hidden" name="searchType" value="${cscri.searchType}" /> <input
+					type="hidden" name="keyword" value="${cscri.keyword}" />
+	
 				<div class="form-group row">
 					<label for="text" class="col-4 col-form-label">Class 개설자</label>
 					<div class="col-8">
-							<!-- <input id="text" name="uNickname" type="text" aria-describedby="textHelpBlock" class="form-control"> -->
-							<p>${loginUser.uNickname}</p>
-							<input type="hidden" name="user_id" value="${loginUser.user_id}" />
-							</div>
+	
+						<p>${loginUser.uNickname}</p>
+						<input type="hidden" name="user_id" value="${loginUser.user_id}" />
+					</div>
 				</div>
 				<br>
 	
@@ -92,7 +111,7 @@
 							<div class="input-group-prepend">
 								<div class="input-group-text"></div>
 							</div>
-							<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control">
+							<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control" maxlength="40">
 						</div>
 						<span id="textHelpBlock" class="form-text text-muted">40자 이내로 입력해 주세요.</span>
 					</div>
@@ -102,7 +121,7 @@
 				<div class="form-group row">
 					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 한 줄 소개</label>
 					<div class="col-8">
-						<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control"></textarea>
+						<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" maxlength="100"></textarea>
 						<span id="transport_instructionsHelpBlock" class="form-text text-muted">100자 이내로 입력해 주세요.</span>
 					</div>
 				</div>
@@ -110,9 +129,9 @@
 	
 				<div class="form-group row">
 					<label for="text" class="col-4 col-form-label">Class강좌 대표 이미지</label>
-					<div class="form-group row">
+					<div class="form-group row" align="center">
 						<div class="offset-2 col-9">
-							<button onclick="#" class="btn btn-info">사진업로드</button>
+							<img id="loadImg" /> <input type="file" name="file" id="classImg" onchange="LoadImg(this);" />
 						</div>
 					</div>
 				</div>
@@ -121,7 +140,7 @@
 				<div class="form-group row">
 					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 참여 인원</label>
 					<div class="col-8">
-						<input style="width:300px; height:30px;" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" type="number" name="cTotalPeopleCount" min="1" max="50" step="1">
+						<input style="width: 300px; height: 30px;" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" type="number" name="cTotalPeopleCount" min="1" max="50" step="1">
 					</div>
 				</div>
 				<br>
@@ -130,14 +149,14 @@
 					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 카테고리</label>
 					<div class="col-8">
 						<div class="container">
-				   		    <div class="radio-box">
-								<input id="radio-1" type="radio" name="cCategory" value="it_dev"/>
-								<label for="radio-1">IT/개발</label>
+							<div class="radio-box">
+								<input id="radio-1" type="radio" name="cCategory" value="it_dev" />
+								<label for="radio-1">IT/개발</label> 
 								<input id="radio-2" type="radio" name="cCategory" value="workSkill"> 
-								<label for="radio-2">업무스킬</label>
-								<input id="radio-3" type="radio" name="cCategory" value="daily">
+								<label for="radio-2">업무스킬</label> 
+								<input id="radio-3" type="radio" name="cCategory" value="daily"> 
 								<label for="radio-3">일상</label>
-								<input id="radio-4" type="radio" name="cCategory" value="financialTechnology">
+								<input id="radio-4" type="radio" name="cCategory" value="financialTechnology"> 
 								<label for="radio-4">재테크</label>
 								<input id="radio-5" type="radio" name="cCategory" value="etc">
 								<label for="radio-5">기타</label>
@@ -162,12 +181,13 @@
 				<br>
 	
 				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 난이도</label>
+					<label for="transport_instructions" class="col-4 col-form-label">Class강좌
+						난이도</label>
 					<div class="col-8">
 						<div class="radio-box">
 							<input id="radio-6" type="radio" name="cDifficulty" value="easy">
-							<label for="radio-6">쉬움</label>
-							<input id="radio-7" type="radio" name="cDifficulty" value="normal">
+							<label for="radio-6">쉬움</label> 
+							<input id="radio-7" type="radio" name="cDifficulty" value="normal"> 
 							<label for="radio-7">보통</label>
 							<input id="radio-8" type="radio" name="cDifficulty" value="hard">
 							<label for="radio-8">어려움</label>
@@ -209,16 +229,16 @@
 					</div>
 				</div>
 			</form>
-			
+	
 			<form name="form1" role="form" method="post">
-				<input type="hidden" name="page" value="${cscri.page}" />
-				<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" />
-				<input type="hidden" name="searchType" value="${cscri.searchType}" />
-				<input type="hidden" name="keyword" value="${cscri.keyword}" />
+				<input type="hidden" name="page" value="${cscri.page}" /> 
+				<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" /> 
+				<input type="hidden" name="searchType" value="${cscri.searchType}" /> 
+				<input type="hidden" name="keyword" value="${cscri.keyword}" /> 
 				<input type="hidden" name="cCategory" value="${cCategory}" />
 			</form>
 		</div>
-		
+	
 		<script src="${pageContext.request.contextPath}/js/class/classOpen.js"></script>
 	</body>
 </html>

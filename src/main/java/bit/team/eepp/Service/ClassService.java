@@ -48,4 +48,16 @@ public class ClassService {
 		classMapper.classJoin(classJoinVO);
 	}
 
+	public String getFilePath(int cId) {
+		return classMapper.getFilePath(cId);
+	}
+
+	public List<ClassJoinVO> getUserIdList(int class_id) {
+		return classMapper.getUserIdList(class_id);
+	}
+
+	public int getCurrentUserCount(int class_id) {
+		return classMapper.getCurrentUserCount(class_id);
+	}
+
 }

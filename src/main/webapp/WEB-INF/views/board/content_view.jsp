@@ -9,11 +9,10 @@
 	</head>
 
 	<body>
-
-	<input type="hidden" id="userNickname" name="uNickname" value="${loginUser.uNickname}">
-	<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
-	<input type="hidden" id="content_uNickname" value="${content.uNickname}" />
-	<input type="hidden" id="content_bSubject" value="${content.bSubject}" />
+		<input type="hidden" id="userNickname" name="uNickname" value="${loginUser.uNickname}">
+		<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
+		<input type="hidden" id="content_uNickname" value="${content.uNickname}" />
+		<input type="hidden" id="content_bSubject" value="${content.bSubject}" />
 	
 		<div>
 			<h1>#${content.bId}번 게시글</h1>
@@ -45,7 +44,7 @@
 			                <c:choose>
 			                <c:when test="${not empty loginUser.uNickname}">
 			                <form id="declaration" role="formDeclaration" name="dform">
-			                    <input type="hidden" name="reporter_id" value=121>
+			                    <input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 			                    <input type="hidden" name="board_id" value="${content.bId}">
 			                    <div class="form-group">
 			                        <label for="inputMessage">신고사유</label><br>
@@ -119,12 +118,12 @@
 					<td colspan="2">
 					<c:choose>
 						<c:when test="${loginUser.uNickname == content.uNickname}">
-						<button type="button" onclick="bScrap(${content.bId})">스크랩</button>&nbsp;&nbsp;
+							<button type="button" onclick="bScrap(${content.bId}">스크랩</button>&nbsp;&nbsp;
 						</c:when>
 						<c:otherwise>
 							<button type="button" onclick="like(${content.bId})">추천</button>&nbsp;&nbsp;
-						<button type="button" onclick="unlike(${content.bId})">비추천</button>&nbsp;&nbsp;
-						<button type="button" onclick="bScrap(${content.bId})">스크랩</button>&nbsp;&nbsp;
+							<button type="button" onclick="unlike(${content.bId})">비추천</button>&nbsp;&nbsp;
+							<button type="button" onclick="bScrap(${content.bId})">스크랩</button>&nbsp;&nbsp;
 						</c:otherwise>
 					</c:choose>
 					</td>
@@ -193,6 +192,6 @@
 		</div>
 	
 		<%@ include file="/WEB-INF/views/board/replyList.jsp"%>
-	<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
+		<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
 	</body>
 </html>

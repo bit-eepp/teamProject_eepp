@@ -8,14 +8,10 @@
 		<title>Insert title here</title>
 
 		<script>
-		var uNickname = $("#userNickname").val();
-		var userId = $("#userId").val();
-		var cId = $("#class_cid").val();
-		
 			// 해당 class강좌의 문의수를 불러오는 JS메서드(Ajax-Json)
 			function questionCnt() {
 				$.ajax({
-					url: 'http://localhost:8282/eepp/question/questionCount',
+					url: getContextPath() + '/question/questionCount',
 					type: 'post',
 					data: {'class_id' : cId},
 					success: function(data){
@@ -31,7 +27,7 @@
 			}
 			
 			function questionPagePrint(rpPageMaker) {
-				console.log(rpPageMaker);
+				/* console.log(rpPageMaker);
 				console.log('totalCount : ' +rpPageMaker[0]);
 				console.log('startPage : ' +rpPageMaker[1]);
 				console.log('endPage : ' +rpPageMaker[2]);
@@ -43,7 +39,7 @@
 				console.log('perPageNum : ' +rpPageMaker[7].perPageNum);
 				console.log('startNum : ' +rpPageMaker[7].startNum);
 				console.log('endNum : ' +rpPageMaker[7].endNum);
-				console.log('pageStart : ' +rpPageMaker[7].pageStart);
+				console.log('pageStart : ' +rpPageMaker[7].pageStart); */
 				
 				// 댓글 페이징 처리를 위한 변수
 				var startPage = rpPageMaker[1];
@@ -86,7 +82,7 @@
 				}
 				
 				$.ajax({
-					url: 'http://localhost:8282/eepp/question/questionList',
+					url: getContextPath() + '/question/questionList',
 					type: 'post',
 					dataType:'json',
 					data: {'class_id' : cId,
@@ -194,7 +190,7 @@
 					var rpContent = $('[name=reQuestion]').val();
 					
 					$.ajax({
-						url: 'http://localhost:8282/eepp/question/reQuestionWrite',
+						url: getContextPath() + '/question/reQuestionWrite',
 						type: 'POST',
 						data: {'rpContent' : rpContent,
 								'rpGroup' : rpGroup,
@@ -231,7 +227,7 @@
 					return false;
 				} else {
 					$.ajax({
-						url: 'http://localhost:8282/eepp/question/questionWrite',
+						url: getContextPath() + '/question/questionWrite',
 						type: 'POST',
 						data: insertData,	
 						success: function(insertData){
@@ -290,7 +286,7 @@
 				} else {
 					if(confirm("정말 삭제 하시겠습니까?")){
 						$.ajax({
-							url: 'http://localhost:8282/eepp/question/questionDelete',
+							url: getContextPath() + '/question/questionDelete',
 							type: 'post',
 							data: {'rpId' : rpId},
 							success: function(data){

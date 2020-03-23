@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bit.team.eepp.Mapper.ClassMapper">
+	<select id="getCurrentUserCount" resultType="int">
+		SELECT COUNT(user_id) FROM CLASSJOIN WHERE class_id = #{class_id}
+	</select>
+	
+	
+	<select id="getUserIdList" resultType="bit.team.eepp.VO.ClassJoinVO">
+		SELECT user_id FROM CLASSJOIN WHERE class_id = #{class_id}
+	</select>
+</mapper>

@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Con tent-Type" content="text/html; charset=UTF-8">
 		<title> No.${chatRoomSelect.chId} EE Chat</title>
-		<link rel="icon" href="${pageContext.request.contextPath}/img/EE_logo.png" sizes="16x16">
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/chat/chatRoomPage.css">
 		
 		<script type="text/javascript">

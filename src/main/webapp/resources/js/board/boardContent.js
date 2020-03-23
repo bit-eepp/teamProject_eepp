@@ -242,7 +242,7 @@ function bScrap(bId) {
 		$.ajax({
 			url: getContextPath()+'/scrap/doBoardScrap',
 			type: 'post',
-			data: {'board_id' : bId},
+			data: {'board_id' : bId, 'user_id' : $("#userId").val()},
 			success: function(data){
 				console.log(data)
 				alert(bId +"번 게시글이 스크랩 되었습니다.");

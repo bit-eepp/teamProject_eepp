@@ -4,24 +4,11 @@
 <mapper namespace="bit.team.eepp.Mapper.ScrapMapper">
 	<insert id="doBoardScrap" parameterType="bit.team.eepp.VO.ScrapVO">
 		INSERT INTO SCRAP(sId, user_id, board_id, sDate) 
-		VALUES(SCRAP_SEQ.nextval, 22, #{scrapVO.board_id}, SYSDATE)
+		VALUES(SCRAP_SEQ.nextval, #{scrapVO.user_id}, #{scrapVO.board_id}, SYSDATE)
 	</insert>
-	
-	<select id="myScrapListB" parameterType="int" resultType="bit.team.eepp.VO.ScrapVO">
-		SELECT s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname FROM SCRAP s, BOARD b, USERS u
-		WHERE b.bId = s.board_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
-		ORDER BY s.sDate DESC
-	</select>
 	
 	<insert id="doClassScrap" parameterType="bit.team.eepp.VO.ScrapVO">
 		INSERT INTO SCRAP(sId, user_id, class_id, sDate) 
-		VALUES(SCRAP_SEQ.nextval, 22, #{scrapVO.class_id}, SYSDATE)
+		VALUES(SCRAP_SEQ.nextval, #{scrapVO.user_id}, #{scrapVO.class_id}, SYSDATE)
 	</insert>
-	
-	<select id="myScrapListC" parameterType="int" resultType="bit.team.eepp.VO.ScrapVO">
-		SELECT s.sId, s.sDate, s.user_id, s.class_id, c.cTitle, u.uNickname FROM SCRAP s, CLASS c, USERS u
-		WHERE c.cId = s.class_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
-		ORDER BY s.sDate DESC
-	</select>
-
 </mapper>

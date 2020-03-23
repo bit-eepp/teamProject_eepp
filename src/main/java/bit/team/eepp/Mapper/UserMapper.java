@@ -44,7 +44,7 @@ public interface UserMapper {
 	/*
 	 * 쪽지
 	 */
-  
+
 	// 쪽지 수 count
 	public int messageListCount(Map<String, Object> map);
 
@@ -126,11 +126,32 @@ public interface UserMapper {
 	/*
 	 * 포인트
 	 */
-	
+
 	// 포인트 충전
 	@Update("update users set point = point + #{point} where user_id = #{user_id}")
 	public int chargePoint(UserVO userVO);
 
+	// 해당유저의 총 포인트 가져오기
+	@Select("SELECT point FROM USERS WHERE user_id = #{user_id}")
+	public int getTotalPoint(int user_id);
+
 	// 충전시 결제내역에 추가
-	public int addPointPayment(PaymentVO paymentVO);
+	public int addPointPayment(@Param("paymentVO") PaymentVO paymentVO);
+
+	// 개설자의 총 포인트 금액 update, 참여자가 보낸 포인트만큼 추가
+	@Update("update users set point = point + #{classPrice} where user_id = #{opennerUser_id}")
+	public void updateOpennerPoint(@Param("opennerUser_id") int opennerUser_id, @Param("classPrice") int classPrice);
+	
+	// 개설자 포인트 입금내역 추가
+	public void opennerPayment(@Param("paymentVO") PaymentVO paymentVO);
+	
+	// 참가자의 총 포인트 금액 update, 클래스 금액만큼 차감
+	@Update("update users set point = point - #{classPrice} where user_id = #{user_id}")
+	public void updateParticipantPoint(@Param("user_id") int user_id, @Param("classPrice") int classPrice);
+	
+	// 참가자 포인트 사용내역 추가
+	public void participantPayment(@Param("paymentVO") PaymentVO paymentVO);
+	
+	
+
 }

@@ -3,7 +3,18 @@
 
 <mapper namespace="bit.team.eepp.Mapper.UserMapper" >
 	<insert id="addPointPayment">
-		insert into payment (paid, paDate, paInfo, user_id, point_io)
-		 values (payment_seq.nextval, SYSDATE, '포인트 충전', #{user_id}, #{point_io})
+		insert into payment (paid, paDate, paInfo, user_id, point_io, totalPoint)
+		values (payment_seq.nextval, SYSDATE, '포인트 충전', #{paymentVO.user_id}, #{paymentVO.point_io}, #{paymentVO.totalPoint})
 	</insert>
+	
+	<insert id="opennerPayment" parameterType="bit.team.eepp.VO.PaymentVO">
+		insert into payment (paid, class_id, paDate, paInfo, user_id, point_io, totalPoint)
+		values (payment_seq.nextval, #{paymentVO.class_id}, SYSDATE, '포인트 입금', #{paymentVO.user_id}, #{paymentVO.point_io}, #{paymentVO.totalPoint})
+	</insert>
+	
+	<insert id="participantPayment" parameterType="bit.team.eepp.VO.PaymentVO">
+		insert into payment (paid, class_id, paDate, paInfo, user_id, point_io, totalPoint)
+		values (payment_seq.nextval, #{paymentVO.class_id}, SYSDATE, '포인트 사용', #{paymentVO.user_id}, #{paymentVO.point_io}, #{paymentVO.totalPoint})
+	</insert>
+	
 </mapper>
