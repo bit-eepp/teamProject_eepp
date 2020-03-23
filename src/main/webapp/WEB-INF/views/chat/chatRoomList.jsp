@@ -306,7 +306,7 @@
 	
 	<!-- 채팅방 버튼 -->
 	<div id="ThunderBtn">
-		<button type="button" class="chatBtn">Thunder<i class="fas thiunder_icon fa-bolt"></i></button>
+		<button type="button" class="chatBtn">Thunder<i class="fas thunder_icon fa-bolt"></i></button>
 	</div>
 	<!-- 채팅방 버튼 -->
 	

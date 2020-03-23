@@ -23,8 +23,7 @@ body {
     outline: initial!important;
     cursor: pointer;
 }
-}
-.thiunder_icon{margin-left: 8px!important;}
+.thunder_icon{margin-left: 8px!important;}
 .side_chat_btn{
 	right:324px!important;
 }
@@ -34,7 +33,7 @@ body {
     position: fixed;
     width: 360px;
     top: 0;
-    right: -360px;
+    right: -400px;
     height: 100%;
     z-index: 9999;
     overflow-x: hidden;
