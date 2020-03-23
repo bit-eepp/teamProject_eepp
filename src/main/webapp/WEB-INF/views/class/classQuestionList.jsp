@@ -8,6 +8,9 @@
 		<title>Insert title here</title>
 
 		<script>
+		var uNickname = $("#userNickname").val();
+		var userId = $("#userId").val();
+		
 			// 해당 class강좌의 문의수를 불러오는 JS메서드(Ajax-Json)
 			function questionCnt() {
 				$.ajax({
@@ -121,7 +124,37 @@
 								b += '</td>';
 								
 								b += '<td width="150">';
-								b += '<h4>' +value.uNickname +'</h4>';
+								if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2'){
+									b += '<a class="userBtn">'+value.uNickname+'</a>';
+								} else{
+									b += '<div class="dropdown">';
+									b += '<a href="#" class="userBtn" id="user_btn_'+value.rpId+value.user_id+'" data-toggle="dropdown">'+value.uNickname+'</a>';
+									b += '<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_'+value.rpId+value.user_id+'">';
+									b += '<li><a href="#">회원정보</a></li>';
+									b += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
+			                		b += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
+			                		b += '</ul></div>';
+			                		b += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
+			                		b += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
+			               			b += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
+			               			b += '<div class="modal-body">';
+			               			b += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
+						            b += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
+						            b += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
+						            b += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
+						            b += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
+						            b += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
+						            b += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
+						            b += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_'+value.rpId+'.disabled=false">기타<br>';
+						            b += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
+						            b += '</div></form></div>';
+						            b += '<div class="modal-footer">';
+						            b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>';
+						            b += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
+						            b += '</div>';
+						            b += '</div></div></div>';	
+								}
+								/* b += '<h4>' +value.uNickname +'</h4>'; */
 								b += '<h6>' +value.rpWrittenDate +'</h6>';
 								b += '</td>';
 								

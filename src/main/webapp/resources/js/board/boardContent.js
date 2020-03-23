@@ -257,30 +257,3 @@ function bScrap(bId) {
 		});
 	}
 }
-
-// 댓글 유저 신고 메서드
-function reportRpUser(userId,reportedNickname) {
-	var dReasonRpUser = document.getElementById("declaration_rp_user_"+userId).dReason;
-	
-		if(dReasonRpUser.value == "") {
-			alert("신고사유를 선택 해주세요.");
-			return false;
-		} else {
-			$.ajax({
-				type:'POST',
-				url:getContextPath()+'/declaration/doUserDeclaration',
-				data:$('#declaration_rp_user_'+ userId +'[role=formDeclaration_rp_user_' + userId +']').serialize(),
-				success:function(msg){
-					alert(reportedNickname +'님을 신고했습니다.');
-					$('#report_rp_user_' + userId).modal('hide');
-					ResetRpForm(userId);
-				}
-			});
-		}
-	
-}
-function ResetForm(userId) {
-	$('#report_rp_user_' + userId).on('hidden.bs.modal', function (e) {
-		$(this).find('form')[0].reset()
-	});
-}
