@@ -10,7 +10,7 @@ public class ScrapVO {
 	private int class_id;
 	private int user_id;
 	private int eating_id;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp sDate;
 	private String bTitle;
 	private String cTitle;

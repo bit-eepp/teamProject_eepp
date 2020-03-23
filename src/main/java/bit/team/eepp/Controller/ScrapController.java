@@ -17,16 +17,50 @@ public class ScrapController {
 
 	@RequestMapping("/doBoardScrap")
 	@ResponseBody
-	public void doBoardScrap(ScrapVO scrapVO) {
+	public int doBoardScrap(ScrapVO scrapVO) {
 		System.out.println("doBoardScrap() method");
-		scrapService.doBoardScrap(scrapVO);
+		
+		int haveScrap = scrapService.haveScrapActive(scrapVO);
+		if(haveScrap != 0){
+			// 스크랩 이력이 있을경우
+			return 1;
+		} else {
+			scrapService.doBoardScrap(scrapVO);
+			return 0;
+		}
+		
 	}
 
 	@RequestMapping("/doClassScrap")
 	@ResponseBody
-	public void doClassScrap(ScrapVO scrapVO) {
+	public int doClassScrap(ScrapVO scrapVO) {
 		System.out.println("doClassScrap() method");
-		scrapService.doClassScrap(scrapVO);
+		
+		int haveScrap = scrapService.haveScrapActive(scrapVO);
+		if(haveScrap != 0){
+			// 스크랩 이력이 있을경우
+			return 1;
+		} else {
+			scrapService.doClassScrap(scrapVO);
+			return 0;
+		}
+		
+	}
+	
+	@RequestMapping("/doEatingScrap")
+	@ResponseBody
+	public int doEatingScrap(ScrapVO scrapVO) {
+		System.out.println("doEatingScrap() method");
+		
+		int haveScrap = scrapService.haveScrapActive(scrapVO);
+		if(haveScrap != 0){
+			// 스크랩 이력이 있을경우
+			return 1;
+		} else {
+			scrapService.doEatingScrap(scrapVO);
+			return 0;
+		}
+		
 	}
 
 }

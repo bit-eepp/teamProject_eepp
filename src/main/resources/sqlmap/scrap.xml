@@ -11,4 +11,25 @@
 		INSERT INTO SCRAP(sId, user_id, class_id, sDate) 
 		VALUES(SCRAP_SEQ.nextval, #{scrapVO.user_id}, #{scrapVO.class_id}, SYSDATE)
 	</insert>
+	
+	<insert id="doEatingScrap" parameterType="bit.team.eepp.VO.ScrapVO">
+		INSERT INTO SCRAP(sId, user_id, eating_id, sDate) 
+		VALUES(SCRAP_SEQ.nextval, #{scrapVO.user_id}, #{scrapVO.eating_id}, SYSDATE)
+	</insert>
+	
+	<select id="haveScrapActive" resultType="int" parameterType="bit.team.eepp.VO.ScrapVO">
+		select count(*) from scrap where user_id = #{scrapVO.user_id}
+		<if test="scrapVO.board_id != 0">
+			AND board_id = #{scrapVO.board_id}
+		</if>
+		
+		<if test="scrapVO.class_id != 0">
+			AND class_id = #{scrapVO.class_id}
+		</if>
+		
+		<if test="scrapVO.eating_id != 0">
+			AND eating_id = #{scrapVO.eating_id}
+		</if>
+	</select>
+	
 </mapper>

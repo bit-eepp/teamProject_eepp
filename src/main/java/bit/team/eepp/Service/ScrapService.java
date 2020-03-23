@@ -18,5 +18,13 @@ public class ScrapService {
 	public void doClassScrap(ScrapVO scrapVO) {
 		scrapMapper.doClassScrap(scrapVO);
 	}
+	
+	public void doEatingScrap(ScrapVO scrapVO) {
+		scrapMapper.doEatingScrap(scrapVO);
+	}
+	
+	public int haveScrapActive(ScrapVO scrapVO) {
+		return scrapMapper.haveScrapActive(scrapVO);
+	}
 
 }

@@ -244,8 +244,11 @@ function bScrap(bId) {
 			type: 'post',
 			data: {'board_id' : bId, 'user_id' : $("#userId").val()},
 			success: function(data){
-				console.log(data)
-				alert(bId +"번 게시글이 스크랩 되었습니다.");
+				if(data == 1){
+					alert("이미 스크랩한 게시글입니다.");
+				}else{
+					alert(bId +"번 게시글이 스크랩 되었습니다.");
+				}
 			},
 			error : function(request, status, error) {
 				console.log(request.responseText);

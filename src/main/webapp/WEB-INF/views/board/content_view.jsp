@@ -118,7 +118,7 @@
 					<td colspan="2">
 					<c:choose>
 						<c:when test="${loginUser.uNickname == content.uNickname}">
-							<button type="button" onclick="bScrap(${content.bId}">스크랩</button>&nbsp;&nbsp;
+							<button type="button" onclick="bScrap(${content.bId})">스크랩</button>&nbsp;&nbsp;
 						</c:when>
 						<c:otherwise>
 							<button type="button" onclick="like(${content.bId})">추천</button>&nbsp;&nbsp;

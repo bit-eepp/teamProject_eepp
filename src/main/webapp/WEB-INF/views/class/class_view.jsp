@@ -203,8 +203,11 @@
 					type: 'post',
 					data: {'class_id' : cId, 'user_id' : userId},
 					success: function(data){
-						console.log(data)
-						alert(cId +"번 class강좌가 스크랩 되었습니다.");
+						if(data == 1){
+							alert("이미 스크랩한 게시글입니다.");
+						}else{
+							alert(cId +"번 게시글이 스크랩 되었습니다.");
+						}
 					},
 					error : function(request, status, error) {
 						console.log(request.responseText);
