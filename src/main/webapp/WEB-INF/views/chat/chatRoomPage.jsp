@@ -269,7 +269,7 @@
 							<br>
 							
 							<div class="chatMaster">모 임 장 : ${chatRoomSelect.uNickname}</div>
-							<div class="openTime" >개설시간 : <fmt:formatDate value="${chatRoomSelect.chDate}" pattern="yyyy-MM-dd HH:mm:ss" /></div>
+							<div class="openTime" >개설시간 : <fmt:formatDate value="${chatRoomSelect.chDate}" pattern="yyyy.MM.dd HH:mm" /></div>
 							<div class="count"></div>
 							
 							<div>
@@ -283,8 +283,8 @@
 							</span>
 							
 							<div class="meetInfo">
-								<p><i title="모임장소" class="fas fa-map-marker-alt"><b>&nbsp;${chatRoomSelect.chPlace}</b></i></p>
-								<p><i title="모임시간" class="far fa-clock"><b>&nbsp;${chatRoomSelect.chMeetTime}</b></i></p>
+								<p><i title="모임장소" class="fas fa-map-marker-alt">&nbsp;<b>${chatRoomSelect.chPlace}</b></i></p>
+								<p><i title="모임시간" class="far fa-clock">&nbsp;<b>${chatRoomSelect.chMeetTime}</b></i></p>
 							</div>
 							
 						</div>

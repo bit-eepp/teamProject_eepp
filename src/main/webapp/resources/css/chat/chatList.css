@@ -1,8 +1,10 @@
 @charset "UTF-8";
-@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 body {
 	overflow-x:hidden; 
+}
+body button{
+	cursor: pointer; 
 }
 .chatBtn{
     padding: 15px;
@@ -153,19 +155,39 @@ body {
     font-weight: bold;
     font-size: 14px;
 }
-.scrolltop {
-	display: none;
-	position: fixed;
+#chatModalForm .modal-dialog .modal-content .modal-header .chatMklogo {
+	width: 10%;
+	height: auto;	
+}
+#chatModalForm .modal-dialog .modal-content .modal-header strong {
+	color: #e7438b;
+}
+#chatModalForm .modal-dialog .modal-content .modal-body button {
+	min-width: 130px;
+	background-color: #59bfbf;
+	color:#ffffff;
+}
+#chatModalForm .modal-dialog .modal-content .modal-footer button {
+	min-width: 120px;
+	background-color: #59bfbf;
+	color:#ffffff;
+	font-weight: 600;
+}
+#chatModalForm .modal-dialog .modal-content .modal-footer button:hover {
+	background-color: #e7438b;
+	color:#26274c;
+}
+#goToTop {
+	position: absolute;
 	right: 30px;
-	bottom: 60px;
-	z-index: 1030;
+	bottom: 10px;
 	font-size: 2rem;
 	color: #e7438b;
 	transition: all 0.5s ease-in-out;
-	opacity: 0.5;
+	opacity: 0.6;
 }
 
-.scrolltop:hover, .scrolltop:focus {
+#goToTop:hover, #goToTop:focus {
 	color: #9c0e4c;
 	transition: all 0.5s ease-in-out;
 }
