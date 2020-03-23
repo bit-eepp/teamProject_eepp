@@ -10,6 +10,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>Class Main</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 	</head>
 
 	<body>
@@ -107,7 +108,71 @@
 							</tr>
 							<tr>
 								<td>개설자</td>
-								<td>${cl.uNickname}</td>
+								<td>
+								<c:choose>
+						<c:when test="${cl.uNickname eq loginUser.uNickname or cl.uNickname eq '운영자' or cl.uNickname eq 'admin2'}">
+						<a class="userBtn">${cl.uNickname}</a>
+						</c:when>
+						
+						<c:otherwise>
+						<div class="dropdown">
+						<a href="#" class="userBtn" id="user_btn_${cl.user_id}${cl.cId}" data-toggle="dropdown">${cl.uNickname}</a>
+           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${cl.uNickname}${cl.cId}">
+                			<li><a href="#">회원정보</a></li>
+                			<li><a onclick="sendMessage('${cl.uNickname}',${cl.user_id});">쪽지 보내기</a></li>
+                			<li><a data-toggle="modal" data-target="#report_user_${cl.user_id}${cl.cId}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
+                		</ul>
+						</div>
+						<!-- 유저 신고 modal -->	
+                			<div class="modal fade" id="report_user_${cl.user_id}${cl.cId}" role="dialog">
+                				<div class="modal-dialog">
+                				<div class="modal-content">
+                						
+                				<!-- Modal Header -->
+                				<div class="modal-header">
+                					<button type="button" class="close" data-dismiss="modal">
+                					<span aria-hidden="true">&times;</span>
+			                    	<span class="sr-only">Close</span>
+			                		</button>
+			               			<h4 class="modal-title">${cl.uNickname}님 신고</h4>
+			            		</div>
+			            		<!-- Header -->
+			            				
+			            		<!-- Modal Body -->
+			            		<div class="modal-body">
+			            			<form id="declaration_user_${cl.user_id}${cl.cId}" role="formDeclaration_user_${cl.user_id}${cl.cId}" name="dform">
+			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
+			            			<input type="hidden" name="reported_id" value="${cl.user_id}">
+			            				
+			            			<div class="form-group">
+			            			<label for="inputMessage">신고사유</label><br>
+			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${cl.cId}.disabled=true">  부적절한 홍보 게시글<br>
+			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${cl.cId}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${cl.cId}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
+			            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${cl.cId}.disabled=false">  기타<br>
+			            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${cl.cId}" name="dReason" disabled></textarea>
+			            			</div>
+			                		</form>
+			                		<!-- declaration -->
+			           		 	</div>
+			           		 	<!-- modal-body -->
+            
+			            		<!-- Modal Footer -->
+			            		<div class="modal-footer">
+			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+			                		<button type="button" class="btn reportBtn" onclick="reportUser(${cl.user_id}${cl.cId},'${cl.uNickname}');">신고</button>
+			            		</div>
+			            		<!-- Footer -->
+			            		
+			        			</div>
+			        			<!-- modal-content -->
+    							</div>
+    							<!-- modal-dialog -->
+							</div>
+							<!-- modal -->
+						</c:otherwise>
+						</c:choose>
+								</td>
 							</tr>
 							
 							<tr>
@@ -157,5 +222,6 @@
 		<hr>
 		
 		<script src="${pageContext.request.contextPath}/js/class/classMain.js"></script>
+		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
 </html>

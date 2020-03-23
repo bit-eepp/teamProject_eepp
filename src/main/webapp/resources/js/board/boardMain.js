@@ -69,35 +69,3 @@
 			$('.boardTitle').append('<h2>기타 직군 커뮤니티</h2>');
 		} 
 	}
-	
-function sendMessage(uNickname, receiver_id){
-	var tw = window.open("http://localhost:8282/eepp/message/sendMessage?receiver="+uNickname+"&receiver_id="+receiver_id+"&from=out", "sendmessage","left="+(screen.availWidth-370)/2
-			+",top="+(screen.availHeight-425)/2+",width=370,height=425");
-}
-
-//유저 댓글 신고 메서드
-function submitDeclarationForm(formId,reportedNickname) {
-	var dReasonUser =  document.getElementById("declaration_"+formId).dReason;
-		
-	if(dReasonUser.value == "") {
-		alert("신고사유를 선택 해주세요.");
-		return false;
-	} else {
-		$.ajax({
-			type:'POST',
-			url:getContextPath()+'/declaration/doUserDeclaration',
-			data:$('#declaration_'+ formId +'[role=formDeclaration_' + formId +']').serialize(),
-			success:function(msg){
-				alert(reportedNickname +'님을 신고했습니다.');
-				$('#report_user_' + formId).modal('hide');
-				ResetForm(formId);
-			}
-		});
-	}
-}
-
-function ResetForm(formId) {
-	$('#report_user_' + formId).on('hidden.bs.modal', function (e) {
-		$(this).find('form')[0].reset()
-	});
-}

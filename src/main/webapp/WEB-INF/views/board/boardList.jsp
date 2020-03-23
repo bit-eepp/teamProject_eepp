@@ -148,7 +148,7 @@
 			            				
 			            		<!-- Modal Body -->
 			            		<div class="modal-body">
-			            			<form id="declaration_${hot.user_id}${btn.index}" role="formDeclaration_${hot.user_id}${btn.index}" name="dform">
+			            			<form id="declaration_user_${hot.user_id}${btn.index}" role="formDeclaration_user_${hot.user_id}${btn.index}" name="dform">
 			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 			            			<input type="hidden" name="reported_id" value="${hot.user_id}">
 			            				
@@ -168,7 +168,7 @@
 			            		<!-- Modal Footer -->
 			            		<div class="modal-footer">
 			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
-			                		<button type="button" class="btn reportBtn" onclick="submitDeclarationForm(${hot.user_id}${btn.index},'${hot.uNickname}');">신고</button>
+			                		<button type="button" class="btn reportBtn" onclick="reportUser(${hot.user_id}${btn.index},'${hot.uNickname}');">신고</button>
 			            		</div>
 			            		<!-- Footer -->
 			            		
@@ -252,7 +252,7 @@
 			            				
 			            		<!-- Modal Body -->
 			            		<div class="modal-body">
-			            			<form id="declaration_${vo.user_id}${btn.index}" role="formDeclaration_${vo.user_id}${btn.index}" name="dform">
+			            			<form id="declaration_user_${vo.user_id}${btn.index}" role="formDeclaration_user_${vo.user_id}${btn.index}" name="dform">
 			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 			            			<input type="hidden" name="reported_id" value="${vo.user_id}">
 			            			<input type="hidden" class="reported_nickname" value="${vo.uNickname}">
@@ -273,7 +273,7 @@
 			            		<!-- Modal Footer -->
 			            		<div class="modal-footer">
 			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
-			                		<button type="button" class="btn reportBtn" onclick="submitDeclarationForm(${vo.user_id}${btn.index},'${vo.uNickname}');">신고</button>
+			                		<button type="button" class="btn reportBtn" onclick="reportUser(${vo.user_id}${btn.index},'${vo.uNickname}');">신고</button>
 			            		</div>
 			            		<!-- Footer -->
 			            		
@@ -335,5 +335,6 @@
 		</div>
 
 		<script src="${pageContext.request.contextPath}/js/board/boardMain.js"></script>
+		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
 </html>
