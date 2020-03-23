@@ -103,7 +103,7 @@
 		SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new,
 		eAddress_old, eGrade, eMap_1, eMap_2, eSearch_1, eSearch_2, eSearch_3,
 		eReview,
-		(SELECT COUNT(*)FROM REVIEW WHERE eating_id = eId) AS rvCount
+		(SELECT COUNT(*)FROM REVIEW WHERE eId = eId) AS rvCount
 		FROM EATING WHERE eId = #{eId}
 	</select>
 	

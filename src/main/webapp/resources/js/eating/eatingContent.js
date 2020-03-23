@@ -9,7 +9,6 @@ function getContextPath() {
 
 $(document).ready(function(){
 
-var eId = $("#contentEid").val();	// 게시글 번호
 var rvCount;				// 해당 게시글의 댓글 수 
 var uNickname = $("#userNickname").val();
 
@@ -55,8 +54,8 @@ var uNickname = $("#userNickname").val();
 });
 
 // 해당 댓글 신고 메서드
-function submitRpDeclarationForm(rpId) {
-	var dReasonRp =  document.getElementById("rpDeclaration_"+rpId).dReason;
+function submitRpDeclarationForm(rvId) {
+	var dReasonRp =  document.getElementById("rvDeclaration_"+rvId).dReason;
 		
 	if(dReasonRp.value == "") {
 		alert("신고사유를 선택 해주세요.");
