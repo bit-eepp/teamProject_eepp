@@ -131,6 +131,7 @@ public class LoginController {
 			if(login != null & checkPW == true){
 				UserVO user = new UserVO();
 				user = us.UserInfo(userVO.getuEmail());
+				session.setAttribute("loginUser", user);
 				
 				// 로그인할때 rememberMe를 체크한 경우, session정보 DB에 저장
 				if(request.getParameter("rememberMe") != null) {
