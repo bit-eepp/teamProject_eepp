@@ -8,33 +8,11 @@ $(".cancle").click(function(event) {
 	location.href = getContextPath()+"/login/login.do";
 })
 
-/* 아이디 or 비밀번호 찾기 선택 */
 $(document).ready(function() {
-	$("#findEmailBox").hide();
-	$("#resetPasswordBox").hide();
-});
-$("#showPasswordBox").click(function(){
-	$("#selectView").css("display", "none");
-    $("#resetPasswordBox").show();
-    $("#pw_step02").hide();
-    $("#pw_step03").hide();
-  });
-$("#showEmailBox").click(function(){
-	$("#selectView").css("display", "none");
-    $("#findEmailBox").show();
-    $("#email_step02").hide();
-});
-/*  */
+	$("#findMyPW02").hide();
+	$("#findMyPW03").hide();
+})
 
-/* 이메일 찾기 view */
-$("#showPasswordBox02").click(function(){
-    $("#showPasswordBox").show(500);
-    $("#showEmailBox").hide();
-  });
-/* */
- 
-
-  
 // 유효성검사
 $("#registerInfo").click(function(event) {
 	if ($(".uEmail").val() == "") {
@@ -45,8 +23,22 @@ $("#registerInfo").click(function(event) {
 	return true;
 });
 
+$("#findRegisterEmail").click(function(event) {
+	if ($(".uPhone_2").val() == "") {
+		alert("핸드폰 번호를 입력해주세요.");
+		$(".uPhone_2").focus();
+		return false;
+	}else if($(".uPhone_3").val() == ""){
+		alert("핸드폰 번호를 입력해주세요.");
+		$(".uPhone_3").focus();
+		return false;
+	}
+	findRegisterEmail();
+});
+
 // 가입 이메일 찾기
 function findRegisterEmail() {
+
 	var uPhone = $(".uPhone_1").val() +"-"+$(".uPhone_2").val() +"-"+ $(".uPhone_3").val()
 	$.ajax({
 		url : getContextPath()+"/findRegisterEmail",
@@ -57,10 +49,15 @@ function findRegisterEmail() {
 		},
 		success : function(data) {
 			if (data != "") {
-				 $("#email_step01").hide();
 				var userEmail = JSON.stringify(data.uEmail);
-				$("#showMyEmail").append('<p>' + "귀하의 가입 이메일 정보입니다." + '</p><p>'+userEmail+'</p>');
-			    $("#email_step02").show();
+				$(".inputUserInfo").hide();
+				var show = "";
+				show += '<p class="isYourEmail">귀하의 가입 이메일 정보입니다.</p>';
+				show += '<p>'+userEmail+'</p>';
+				show += '<div class="loginBtnWrap">';
+				show += '<a class="loginBtn" href="'+getContextPath()+'/login/login.do">로그인 하러가기</a>';
+				show += '</div>';
+				$("#showMyEmail").append(show);
 				return;
 			} else if (data == "") {
 				alert("존재하지않는 핸드폰번호입니다.");
@@ -88,8 +85,9 @@ function sendPasswordAuth() {
 		},
 		success : function(data) {
 			if (data != 0) {
-				alert("인증번호가 발송되었습니다. \n 인증번호를 입력해주세요");
-				$("#pw_step02").show();
+				alert("인증번호가 발송되었습니다. \n인증번호를 입력해주세요");
+				$(".sendAuthBtnWrap").hide();
+				$("#findMyPW02").show();
 				return;
 		} else if (data == 0) {
 			alert("등록되지 않은 이메일입니다.")
@@ -112,13 +110,15 @@ function checkPasswordAuth() {
 		type : "post",
 		dataType : "json",
 		data : {
-			"authCode" : $(".forgotAuthCode").val(),
+			"authCode" : $(".findAuthCode").val(),
 			"random" : $(".random").val()
 		},
 		success : function(data) {
 			if (data != 0) {
 				alert("인증이 완료되었습니다.");
-				$("#pw_step03").show();
+				$("#findMyPW01").hide();
+				$("#findMyPW02").hide();
+				$("#findMyPW03").show();
 			} else if (data == 0) {
 			alert("인증번호를 잘못 입력하셨습니다.")
 			}

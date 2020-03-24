@@ -30,7 +30,9 @@
 button:focus{outline: initial!important;}
 /* login / Join 여기까지 */
 
-/* login */
+	/*
+	* 로그인페이지
+	*/
 .loginMainTitle{
 	text-align: center;
     margin-bottom: 20px;
@@ -118,17 +120,13 @@ button:focus{outline: initial!important;}
 span img{
 	max-width:100%;
 }
-.custom-select{
-	height: calc(2rem)!important;padding: 0 1.75rem 0 .75rem!important;
-	vertical-align: initial!important;font-size: 14px;
-	}
 	
-.uPhone_2, .uPhone_3{
-	width:120px;
-	}
 /* login 여기까지 */
 
-/* join */
+
+	/*
+	* 회원가입 유형 선택 페이지
+	*/
 .sc-chooseJoin{
 	padding: 80px 0!important;
 }
@@ -169,6 +167,156 @@ span img{
 .sc-chooseJoin .isMember a{
 	color: #1f1f1f;
 }
+
+	/*
+	* 아이디 비밀번호 찾기 페이지
+	*/
+.sc-forgot{
+	padding:80px 0!important;
+}
+.sc-forgot .forgot-wrapper{
+	margin-top: 40px;
+}
+.sc-forgot .infoText{
+	margin:15px 0;
+}
+.forgot-wrapper .tab-content{
+	margin:40px 0;
+}
+.forgot-wrapper .forgot-nav .nav-item{
+	width:50%!important;
+}
+.forgot-wrapper .forgot-nav .nav-item a{
+	color:#26274c!important;
+}
+.forgot-wrapper .forgot-nav .nav-item a.active{
+	color:#59bfbf!important;
+}
+#findMyEmail .title-phone{
+	display:block;
+	margin: 10px 0;
+}
+.custom-select{
+	height: calc(2rem)!important;
+	padding: 0 1.75rem 0 .75rem!important;
+	vertical-align: initial!important;
+	font-size: 14px;
+	}
+#findMyEmail .uPhone_2.custom-select, #findMyEmail .uPhone_3.custom-select{
+	background: initial!important;
+    width: 70px!important;
+    padding: 0 0.75em!important;
+}
+#findMyEmail .findEmailBtnWrap{
+	width: 180px;
+    margin: 20px auto;
+}
+#findMyEmail .findEmailBtn{
+	display: block;
+    border: 1px solid #59bfbf;
+    border-radius: 20px;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #59bfbf;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+}
+#findMyEmail .isYourEmail{
+	font-size: 18px;
+	font-weight: bold;
+    color: #59bfbf;
+    margin: 20px 0 10px;
+}
+#findMyEmail .loginBtnWrap{
+	width:280px;
+	margin: 20px auto;
+}
+#findMyEmail .loginBtn{
+	display: block;
+    border: 1px solid #59bfbf;
+    border-radius: 20px;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #59bfbf;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+	text-decoration: none;
+    padding: 10px 0;
+}
+
+#findMyPW .title-uEmail{
+	margin: 10px 0;
+}
+#findMyPW .form-control.uEmail{
+	width: 320px!important;
+    margin: 0 auto!important;
+}
+#findMyPW .sendAuthBtnWrap{
+	width:280px;
+	margin: 20px auto;
+}
+#findMyPW .sendAuthBtn{
+	display: block;
+    border: 1px solid #59bfbf;
+    border-radius: 20px;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #59bfbf;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+	text-decoration: none;
+    padding: 10px 0;
+}
+#findMyPW02{
+	width: 320px;
+    margin: 0 auto;
+}
+#findMyPW02 .form-control.findAuthCode{
+	width: 180px;
+    font-size: 13px;
+    display: inline-block;
+}
+#findMyPW02 .authCheckBtnWrap{
+	width: 80px;
+    margin-left: 20px;
+    display: inline-block;
+}
+#findMyPW02 .authCheckBtn{
+	display: block;
+    border: 1px solid #59bfbf;
+    border-radius: 20px;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #59bfbf;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+}
+#findMyPW03 .form-control.uPassword, #findMyPW03 .form-control.uPasswordCheck {
+	width: 240px;
+    margin: 0 auto 20px;
+}
+#findMyPW03 .changePwBtn{
+	width:280px;
+	margin: 20px auto;
+}
+#findMyPW03 .changePwBtn{
+	display: block;
+    border: 1px solid #59bfbf;
+    border-radius: 20px;
+    padding: 5px 0;
+    font-size: 14px;
+    color: #59bfbf;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+	text-decoration: none;
+    padding: 10px 0;
+}
+
 #MainTxt {text-align: center;margin: 80px 0 0;}
 #MainTxt .logoImg{width: 22%; margin: 0 auto}
 #MainTxt .logoImg img {max-width: 100%}
