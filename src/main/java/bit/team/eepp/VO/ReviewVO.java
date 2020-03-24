@@ -13,14 +13,14 @@ public class ReviewVO {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp rvModifyDate;
 	private String rvComment;
-	private int rvScore;
+	private float rvScore;
 	private String uNickname;
 
 	public ReviewVO() {
 	}
 
 	public ReviewVO(int rvId, int eId, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
-			int rvScore, String uNickname) {
+			float rvScore, String uNickname) {
 		this.rvId = rvId;
 		this.eId = eId;
 		this.user_id = user_id;
@@ -79,11 +79,11 @@ public class ReviewVO {
 		this.rvComment = rvComment;
 	}
 
-	public int getRvScore() {
+	public float getRvScore() {
 		return rvScore;
 	}
 
-	public void setRvScore(int rvScore) {
+	public void setRvScore(float rvScore) {
 		this.rvScore = rvScore;
 	}
 

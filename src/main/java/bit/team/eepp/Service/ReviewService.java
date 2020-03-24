@@ -18,6 +18,10 @@ public class ReviewService {
 	public int reviewCount(int eId) {
 		return reviewMapper.reviewCount(eId);
 	}
+	
+	public float reviewAVG(float rvScore) {
+		return reviewMapper.reviewAVG(rvScore);
+	}
 
 	public List<ReviewVO> reviewList(ReviewCriteria rvCriteria, int eId) {
 		return reviewMapper.reviewList(rvCriteria, eId);

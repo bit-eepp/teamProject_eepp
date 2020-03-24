@@ -11,6 +11,7 @@
 		var uNickname = $("#userNickname").val();
 		var userId = $("#userId").val();
 		var eId = ${eContentView.eId};
+
 		
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function reviewCount(eId) {
@@ -64,7 +65,7 @@
 				
 				for(var i = startPage; i <= endPage; i++){
 					var strClass = page == i ? 'class="active"' : '';
-				 	paging += '<a style="text-decoration: none"'+strClass +'href="javascript:replyList(' +i +')">' +i +'</a>&nbsp;&nbsp;';
+				 	paging += '<a style="text-decoration: none"'+strClass +'href="javascript:reviewList(' +i +')">' +i +'</a>&nbsp;&nbsp;';
 				}
 					paging += ']';
 				 
@@ -114,6 +115,10 @@
 									b += value.rvId;
 									b += '</td>';
 									
+									b += '<td width="100">';	
+									b += value.rvScore;
+									b += '</td>';
+									
 									b += '<td width="300" class="rvComment_'+value.rvId +'">';
 									b += value.rvComment;
 									b += '</td>';
@@ -140,7 +145,7 @@
 			
 			
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
-			$('[name=replyBtn]').click(function(){
+			$('[name=reviewBtn]').click(function(){
 				/*
 				if(!uNickname){
 					alert("로그인 해주세요.");
@@ -159,6 +164,7 @@
 					alert("내용을 작성해주세요");
 					document.rvform.rvComment.focus();
 					return false;
+					
 				} else {
 					$.ajax({
 						url: 'http://localhost:8282/eepp/review/reviewWrite',
@@ -200,7 +206,7 @@
 					$.ajax({
 						url: 'http://localhost:8282/eepp/review/reviewModify',
 						type: 'post',
-						data: {'rvComment' : modify_rvComment, 'rvId' : rpId},
+						data: {'rvComment' : modify_rvComment, 'rvId' : rvId},
 						success: function(data){
 							reviewList();
 						},

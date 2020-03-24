@@ -15,6 +15,8 @@ public interface ReviewMapper {
 
 	public abstract List<ReviewVO> reviewList(@Param("rvCriteria") ReviewCriteria rvCriteria,
 			@Param("eId") int eId);
+	
+	public abstract float reviewAVG(@Param("rvScore") float rvScore);
 
 	public abstract void reviewWrite(@Param("reviewVO") ReviewVO reviewVO);
 

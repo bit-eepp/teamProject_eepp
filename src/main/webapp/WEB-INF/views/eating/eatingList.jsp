@@ -23,70 +23,45 @@
 		<h1 type="text" class="eatingTitle" onclick="location.href='eatingList'">오늘 뭐 먹지?</h1>
 		<hr>
 		<br>
-		<!-- 맛집 n개씩 보기 
-		<div>
-			<select id="cntPerPage" name="perPageNum">
-				<option value="3"  <c:out value="${eatingPageMaker.cri.perPageNum eq '3' ? 'selected' : ''}"/>>3개씩 보기</option>
-				<option value="6" <c:out value="${eatingPageMaker.cri.perPageNum eq '6' ? 'selected' : ''}"/>>6개씩 보기</option>
-				<option value="9" <c:out value="${eatingPageMaker.cri.perPageNum eq '9' ? 'selected' : ''}"/>>9개씩 보기</option>
-				<option value="12" <c:out value="${eatingPageMaker.cri.perPageNum eq '12' ? 'selected' : ''}"/>>12개씩 보기</option>
-				<option value="15" <c:out value="${eatingPageMaker.cri.perPageNum eq '15' ? 'selected' : ''}"/>>15개씩보기</option>
-				<option value="18" <c:out value="${eatingPageMaker.cri.perPageNum eq '18' ? 'selected' : ''}"/>>18개씩 보기</option>
-			</select>&nbsp;&nbsp;&nbsp;
-		</div> -->
 
-		
 		<!-- 검색 부분  -->
+	<section class="storeSearch_view">
 		<div class="search">
 			<select name="searchType">
-				<option value="n" <c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
-				<option value="w" <c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>지역</option>
-				<option value="t" <c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>상호</option>
-				<option value="c" <c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>카테고리</option>
-				<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>가게 이름/카테고리</option>
+				<option value="n" <c:out value="${escri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
+				<option value="w" <c:out value="${escri.searchType eq 'w' ? 'selected' : ''}"/>>지역</option>
+				<option value="t" <c:out value="${escri.searchType eq 't' ? 'selected' : ''}"/>>상호</option>
+				<option value="c" <c:out value="${escri.searchType eq 'c' ? 'selected' : ''}"/>>카테고리</option>
+				<option value="tc"<c:out value="${escri.searchType eq 'tc' ? 'selected' : ''}"/>>가게 이름/카테고리</option>
 			</select> 
 			
 			<input type="text" name="keyword" id="keywordInput" value="${escri.keyword}" />
 			<button id="eatingSearchBtn" type="button">검색</button>
 		</div>
+		</section>
 		<!-- 검색 부분 끝  -->
 		<hr>
 
 	<!-- 테마 리스트 -->
-	<div class="temaList">
-		<!--맛집 카테고리 -->
-		<div>
-			<button onclick="location.href='eatingList'">All</button>
+	<section class="theamList_view">
+		<div class="themaList" style="font-size : 2.4em;" >
+			<button class="thema1" onclick="location.href='themaList?&eCategory=thema_1'"> 신촌/홍대 </button>
 			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList?&eCategory=american_food'">양식</button>
+			<button class="thema2" onclick="location.href='themaList?&eCategory=thema_2'"> 여의도 </button>
 			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList?&eCategory=korean_food'">한식</button>
+			<button class="thema3" onclick="location.href='themaList?&eCategory=thema_3'"> 용산/이태원 </button>
 			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList?&eCategory=japanese_food'">일식</button>
+			<br>
+			<button class="thema4" onclick="location.href='themaList?&eCategory=thema_4'"> 강남/논현 </button>
 			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList?&eCategory=chinese_food'">중식</button>
+			<button class="thema5" onclick="location.href='themaList?&eCategory=thema_5'"> 건대입구 </button>
 			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList?&eCategory=asian_food'">아시안</button>
-			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList?&eCategory=etc'">기타</button>
-		</div>
-		<br>
-		<!-- 지역 카테고리 -->
-		<div>
-			<button onclick="location.href='eatingList'">All</button>
-			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList'">서울 동쪽</button>
-			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList'">서울 남쪽</button>
-			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList'">서울 북쪽</button>
-			&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='eatingList'">서울 서쪽</button>  
+			<button class="thema6" onclick="location.href='themaList?&eCategory=thema_6'"> 합정/망원 </button>
+			
 
 		</div>
-		<hr>
+	</section>
 		<br>
-	</div>
 	<hr>
 		<!-- 맛집 리스트 -->
 		<div class="storeList">
