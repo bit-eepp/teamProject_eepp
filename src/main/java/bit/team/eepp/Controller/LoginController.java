@@ -110,17 +110,15 @@ public class LoginController {
 	
 	// 일반 로그인
 	@RequestMapping(value = "nomal_login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public void nomal_login(Model model, HttpSession session, HttpServletResponse response, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+	public String nomal_login(HttpSession session, HttpServletResponse response, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
 
 		// DB에 등록된 이메일인지 확인
 		int checkEmail = js.checkDuplicate(userVO.getuEmail());
 		
 		if(checkEmail == 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('등록되지않은 이메일입니다.'); history.go(-1);</script>");
-			out.close();
-			
+			redirectAttributes.addFlashAttribute("failedLogin", "failed");
+			return "redirect:/login/login.do";
+		
 		}else {
 			UserVO login = ls.normalLogin(userVO);
 			logger.info("로그인 정보 조회 uEmail, uPassword");
@@ -153,14 +151,12 @@ public class LoginController {
 					
 					logger.info("자동 로그인 정보 저장 완료");
 				}
-				
-				response.sendRedirect("/eepp/");
+
+				return "redirect:/";
 				
 			} else {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('로그인 정보를 확인해주세요.'); history.go(-1);</script>");
-				out.close();
+				redirectAttributes.addFlashAttribute("failedLogin", "failed");
+				return "redirect:/login/login.do";
 			}
 		}
 	}

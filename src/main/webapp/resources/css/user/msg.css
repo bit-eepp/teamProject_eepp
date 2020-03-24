@@ -40,7 +40,7 @@
 .messageForm .notelist .notelist_head .note_mdate{width:17%;}
 .messageForm .notelist .notelist_head .note_mstatus{width:10%;}
 .messageForm .notelist .notelist_head .note_active{width:10%;}
-.messageForm .openMsgView,{cursor:pointer;}
+.messageForm .openMsgView{cursor:pointer;}
 .messageForm .openMsgView:hover{text-decoration: underline;color:#59bfbf!important;}
 .send_cancle, .reportMsg{text-decoration: underline!important;cursor:pointer;}
 .send_cancle:hover, .reportMsg:hover{color:#59bfbf!important;}

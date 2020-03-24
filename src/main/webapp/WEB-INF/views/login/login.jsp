@@ -26,13 +26,6 @@
 	<div class="container col-md-4">
 
 		<form:form name="f" class="px-4" action="${pageContext.request.contextPath}/nomal_login.do" method="post">
-			<c:if test="${param.error != null}">
-				<p>아이디와 비밀번호가 잘못되었습니다.</p>
-			</c:if>
-
-			<c:if test="${param.logout != null}">
-				<p>로그아웃 하였습니다.</p>
-			</c:if>
 
 			<div class="form-group">
 				<input type="text" class="form-control" name="uEmail" placeholder="아이디">
@@ -40,6 +33,10 @@
 			<div class="form-group">
 				<input type="password" class="form-control" name="uPassword" placeholder="비밀번호">
 			</div>
+			
+			<c:if test="${failedLogin != null}">
+				<p class="faildLogin">아이디 또는 비밀번호가 잘못되었습니다.</p>
+			</c:if>
 			
 			<div class="form-check">
 	              <label class="form-check-label rememberMeCheck">
