@@ -30,7 +30,7 @@
 	</insert>
 	
 	<delete id="reviewDelete" parameterType="bit.team.eepp.VO.ReviewVO">
-		DELETE FROM REPLY WHERE rpId = #{rpId}
+		DELETE FROM REPLY WHERE rvId = #{rvId}
 	</delete>
 
 	<update id="reviewModify" parameterType="bit.team.eepp.VO.ReviewVO">
