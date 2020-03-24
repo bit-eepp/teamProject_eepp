@@ -12,9 +12,34 @@
 <title>MyPage</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/mypage.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<%@ include file="/WEB-INF/include/forImport.jspf"%>
+<%@ include file="/WEB-INF/include/forImport.jspf"%> 
 <%@ include file="/WEB-INF/views/header.jsp"%>
+<style>
+	.page-link {
+	border:none;
+	margin-left: 20px;
+	color: #26274c;
+	background: #ffffff;
+	font-weight: 700;
+}
+
+.page-link:hover {
+	background: #59bfbf;
+	color: #ffffff;
+}
+.text-wrap{
+	
+}
+.text_bold {
+	color: #59bfbf;
+	font-weight: bold;
+	font-size: 1.25rem;
+}
+tr.bordered {
+	border-bottom: 1px solid #BDBDBD;
+}
+
+</style>
 </head>
 <body>
 	<input type="hidden" id="userNickname" name="loginUser"
@@ -37,6 +62,7 @@
 	 <input type="hidden" id="board" value="${board}">
 	 <input type="hidden" id="scrap" value="${scrap}">
 	 <input type="hidden" id="mpPoint" value="${mpPoint}">
+	 <input type="hidden" id="mpclass" value="${mpclass}">
 	 <%-- <input type="hidden" id="mpInfo" value="${mpInfo}"> --%>
 	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
@@ -101,13 +127,11 @@
 							<br>
 							<h3>회원 정보</h3>
 							<hr>
-							<!-- <div align="right">
-								<button type="button" class="btn btn-info" id="myinfobtn">수정</button>
-							</div> --><br>
 							<p>닉네임, 비밀번호 변경 등 회원 정보 수정이 가능합니다.</p>
+							<div align="right">
+								<button type="button" class="btn btn-info" id="myinfobtn">수정</button>
+							</div><br>
 							<table class="info">
-								
-									
 								<tr>
 									<th class="input-title"><span class="required">•</span>이메일</th>
 									<td>${loginUser.uEmail}</td>
@@ -274,27 +298,26 @@
 									<!-- </div> -->
 								</table>
 								<br>
-								<div>
 									<!-- 페이징 시작 -->
-									<nav aria-label="Page navigation">
+									
+								<div class="boardpaging">
 										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if
-													test="${myPagePageMaker.prev}">
-													<a class="page-link"
-														href="mypage${myPagePageMaker.makeSearch(myPagePageMaker.startPage - 1)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">Previous</a>
-												</c:if></li>
-											<c:forEach begin="${myPagePageMaker.startPage}"
-												end="${myPagePageMaker.endPage}" var="idx">
-												<li class="page-item"><a class="page-link"
-													href="mypage${myPagePageMaker.makeSearch(idx)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">${idx}</a></li>
+											<li class="page-item">
+													<a class="page-link" href="mypage${myPagePageMaker.makeSearch(myPagePageMaker.startPage - 1)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+												</li>
+											<c:forEach begin="${myPagePageMaker.startPage}" end="${myPagePageMaker.endPage}" var="idx">
+												<li class="page-item">
+												<a id ="boardpaging_${idx}" class="page-link" href="mypage${myPagePageMaker.makeSearch(idx)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">${idx}</a></li>
 											</c:forEach>
-											<li class="page-item"><c:if
-													test="${myPagePageMaker.next && myPagePageMaker.endPage > 0}">
-													<a class="page-link"
-														href="mypage${myPagePageMaker.makeSearch(myPagePageMaker.endPage + 1)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">Next</a>
-												</c:if></li>
+											<li class="page-item">
+													<a class="page-link" href="mypage${myPagePageMaker.makeSearch(myPagePageMaker.endPage + 1)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+												</li>
 										</ul>
-									</nav>
+									
 									<br>
 								</div>
 																<!-- paging -->
@@ -357,25 +380,26 @@
 								</table>
 
 								<!-- 페이징 -->
-								<nav aria-label="Page navigation">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if
-													test="${pointpageMaker.prev}">
-													<a class="page-link"
-														href="mypage${pointpageMaker.makeQuery(pointpageMaker.startPage - 1)}&mpPoint=yes">Previous</a>
-												</c:if></li>
+								<div class = "pointpage">
+									<ul class="pagination justify-content-center">
+      									<li class="page-item">
+													<a class="page-link" href="mypage${pointpageMaker.makeQuery(pointpageMaker.startPage - 1)}&mpPoint=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+												</li>
 											<c:forEach begin="${pointpageMaker.startPage}" end="${pointpageMaker.endPage}" var="idx">
-												<li class="page-item"><a class="page-link"
-													href="mypage${pointpageMaker.makeQuery(idx)}&mpPoint=yes">${idx}</a></li>
+												<li class="page-item">
+												<a id="pointpage_${idx}" class="page-link" href="mypage${pointpageMaker.makeQuery(idx)}&mpPoint=yes">${idx}</a>
+												</li>
 											</c:forEach>
-											<li class="page-item"><c:if
-													test="${pointpageMaker.next && pointpageMaker.endPage > 0}">
-													<a class="page-link"
-														href="mypage${pointpageMaker.makeQuery(pageMaker.endPage + 1)}&mpPoint=yes">Next</a>
-												</c:if></li>
+											<li class="page-item">
+													<a class="page-link"href="mypage${pointpageMaker.makeQuery(pageMaker.endPage + 1)}&mpPoint=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+												</li>
 										</ul>
-									</nav>
-							</div>
+								</div>
+							</div><!-- Point List -->
 						</div>
 						<br>
 						<!-- -------- 스크랩 목록 ------------- -->
@@ -427,26 +451,23 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								<div>
-									<nav aria-label="Page navigation">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if
-													test="${ScrapboardPageMaker.prev}">
-													<a class="page-link"
-														href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.startPage - 1)}&sortType=${sortType}&scrap=yes">Previous</a>
-												</c:if></li>
-											<c:forEach begin="${ScrapboardPageMaker.startPage}"
-												end="${ScrapboardPageMaker.endPage}" var="idx">
-												<li class="page-item"><a class="page-link"
-													href="mypage${ScrapboardPageMaker.makeQuery(idx)}&sortType=${sortType}&scrap=yes">${idx}</a></li>
+								<div class="scrapBoardPage">
+										   <ul class="pagination justify-content-center">
+										      <li class="page-item">
+													<a class="page-link"href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.startPage - 1)}&cCategory=${cCategory}&scrap=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+												</li>
+											<c:forEach begin="${ScrapboardPageMaker.startPage}" end="${ScrapboardPageMaker.endPage}" var="idx">
+												<li class="page-item">
+												<a id="scrapBoardPage_${idx}" class="page-link" href="mypage${ScrapboardPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
 											</c:forEach>
-											<li class="page-item"><c:if
-													test="${ScrapboardPageMaker.next && ScrapboardPageMaker.endPage > 0}">
-													<a class="page-link"
-														href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.endPage + 1)}&sortType=${sortType}&scrap=yes">Next</a>
-												</c:if></li>
+											<li class="page-item">
+													<a class="page-link" href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.endPage + 1)}&cCategory=${cCategory}&scrap=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+											</li>
 										</ul>
-									</nav>
 									<br>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
@@ -467,7 +488,7 @@
 												<tr>
 													<td>${ClassscrapList.class_id}</td>
 													<td><a style="text-decoration: none"
-														href="/eepp/class/classView?cId=${ClassscrapList.class_id}">${ClassscrapList.cTitle}</a></td>
+														href="/eepp/class/classView?cId=${ClassscrapList.class_id}&cCategory=${cCategory}">${ClassscrapList.cTitle}</a></td>
 													<td>${ClassscrapList.sDate}</td>
 												</tr>
 											</c:forEach>
@@ -480,26 +501,23 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-									<div>
-									<nav aria-label="Page navigation">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if
-													test="${ScrapClassPageMaker.prev}">
-													<a class="page-link"
-														href="mypage${ScrapClassPageMaker.makeQuery(ScrapClassPageMaker.startPage - 1)}&scrap=yes">Previous</a>
-												</c:if></li>
-											<c:forEach begin="${ScrapClassPageMaker.startPage}"
-												end="${ScrapClassPageMaker.endPage}" var="idx">
-												<li class="page-item"><a class="page-link"
-													href="mypage${ScrapClassPageMaker.makeQuery(idx)}&scrap=yes">${idx}</a></li>
+									<div class="scrapClassPage">
+										   <ul class="pagination justify-content-center">
+										      <li class="page-item">
+													<a class="page-link"href="mypage${ScrapClassPageMaker.makeQuery(ScrapClassPageMaker.startPage - 1)}&cCategory=${cCategory}&scrap=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+												</li>
+											<c:forEach begin="${ScrapClassPageMaker.startPage}" end="${ScrapClassPageMaker.endPage}" var="idx">
+												<li class="page-item">
+												<a id="scrapClassPage_${idx}" class="page-link" href="mypage${ScrapClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
 											</c:forEach>
-											<li class="page-item"><c:if
-													test="${ScrapClassPageMaker.next && ScrapClassPageMaker.endPage > 0}">
-													<a class="page-link"
-														href="mypage${ScrapClassPageMaker.makeQuery(ScrapClassPageMaker.endPage + 1)}&scrap=yes">Next</a>
-												</c:if></li>
+											<li class="page-item">
+													<a class="page-link" href="mypage${ScrapClassPageMaker.makeQuery(ScrapClassPageMaker.endPage + 1)}&cCategory=${cCategory}&scrap=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+											</li>
 										</ul>
-									</nav>
 									<br>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
@@ -533,26 +551,23 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-									<div>
-									<nav aria-label="Page navigation">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if
-													test="${ScrapboardPageMaker.prev}">
-													<a class="page-link"
-														href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.startPage - 1)}&sortType=${sortType}&scrap=yes">Previous</a>
-												</c:if></li>
-											<c:forEach begin="${ScrapboardPageMaker.startPage}"
-												end="${ScrapboardPageMaker.endPage}" var="idx">
-												<li class="page-item"><a class="page-link"
-													href="mypage${ScrapboardPageMaker.makeQuery(idx)}&sortType=${sortType}&scrap=yes">${idx}</a></li>
+									<div class="scrapBoardPage">
+										   <ul class="pagination justify-content-center">
+										      <li class="page-item">
+													<a class="page-link"href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.startPage - 1)}&cCategory=${cCategory}&scrap=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+												</li>
+											<c:forEach begin="${ScrapboardPageMaker.startPage}" end="${ScrapboardPageMaker.endPage}" var="idx">
+												<li class="page-item">
+												<a id="scrapBoardPage_${idx}" class="page-link" href="mypage${ScrapboardPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
 											</c:forEach>
-											<li class="page-item"><c:if
-													test="${ScrapboardPageMaker.next && ScrapboardPageMaker.endPage > 0}">
-													<a class="page-link"
-														href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.endPage + 1)}&sortType=${sortType}&scrap=yes">Next</a>
-												</c:if></li>
+											<li class="page-item">
+													<a class="page-link" href="mypage${ScrapboardPageMaker.makeQuery(ScrapboardPageMaker.endPage + 1)}&cCategory=${cCategory}&scrap=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+											</li>
 										</ul>
-									</nav>
 									<br>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
@@ -563,33 +578,46 @@
   					</div><!-- scrap_list -->
 							
 						</div>
-						<%-- <!-- -------- 클래스 목록 ------------- -->
+						<!-- -------- 클래스 목록 ------------- -->
 						<div class="myclass-wrap">
 							<h3>클래스 목록</h3>
 							<hr>
 							<div align="right">
-								<button type="button" class="btn btn-info" id="myscrapbtn">확인</button>
+								<button type="button" class="btn btn-info" id="myclassbtn">확인</button>
 							</div>
-							<p>'EE'에서 구매 / 개설하신 클래스를 확인 할 수 있습니다.</p>
+							<p>'EE'에서 구매 / 개설 하신 클래스를 확인 할 수 있습니다.</p>
 							<br>
 							<br>
-							<div class="class_list">
+							<div class="myclass_list">
+<nav>
+	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+	    <a class="nav-item nav-link active" id="nav-class-join-tab" data-toggle="tab" href="#class_join" role="tab" aria-controls="nav-board" aria-selected="true">가입한 클래스</a>
+	    <a class="nav-item nav-link" id="nav-class-open-tab" data-toggle="tab" href="#class_open" role="tab" aria-controls="nav-class" aria-selected="false">개설한 클래스</a>
+	  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="class_join" role="tabpanel" aria-labelledby="nav-class-join-tab">
+		<!--  게시판 스크랩 -->
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
 											<th>클래스 번호</th>
 											<th>클래스 제목</th>
-											<th>클래스 결제일</th>
+											<th>클래스 카테고리</th>
+											<th>클래스 가격</th>
+											<th>클래스 구매일</th>
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(scrapList) > 0 }">
-											<c:forEach items="${scrapList}" var="scrapList">
+										<c:when test="${fn:length(joinClass) > 0 }">
+											<c:forEach items="${joinClass}" var="joinClass">
 												<tr>
-													<td>${scrapList.sId}</td>
+													<td>${joinClass.class_id}</td>
 													<td><a style="text-decoration: none"
-														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
-													<td>${scrapList.sDate}</td>
+														href="/eepp/class/classView?cId=${joinClass.class_id}&cCategory=${cCategory}">${joinClass.cTitle}</a></td>
+													<td>${joinClass.cCategory}</td>
+													<td>${joinClass.cPrice}</td>
+													<td>${joinClass.cjJoinDate}</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -601,40 +629,89 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-
-								<!-- scrap_list -->
-								<div>
-								<!-- 페이징 시작 -->
-									<nav aria-label="Page navigation">
-										<ul class="pagination justify-content-center">
-											<li class="page-item"><c:if
-													test="${ScrapPageMaker.prev}">
-													<a class="page-link"
-														href="mypage${ScrapPageMaker.makeSearch(ScrapPageMaker.startPage - 1)}&sortType=${sortType}&bCategory=${bCategory}&scrap=yes">Previous</a>
-												</c:if></li>
-											<c:forEach begin="${ScrapPageMaker.startPage}"
-												end="${ScrapPageMaker.endPage}" var="idx">
-												<li class="page-item"><a class="page-link"
-													href="mypage${ScrapPageMaker.makeSearch(idx)}&sortType=${sortType}&bCategory=${bCategory}&scrap=yes">${idx}</a></li>
+								<div class="clJoinPage">
+									   <ul class="pagination justify-content-center">
+									      <li class="page-item">
+													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.startPage - 1)}&cCategory=${cCategory}&mpclass=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+										</li>
+											<c:forEach begin="${JoinClassPageMaker.startPage}" end="${JoinClassPageMaker.endPage}" var="idx">
+												<li class="page-item">
+													<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
 											</c:forEach>
-											<li class="page-item"><c:if
-													test="${ScrapPageMaker.next && ScrapPageMaker.endPage > 0}">
-													<a class="page-link"
-														href="mypage${ScrapPageMaker.makeSearch(ScrapPageMaker.endPage + 1)}&sortType=${sortType}&bCategory=${bCategory}&scrap=yes">Next</a>
-												</c:if></li>
+											<li class="page-item">
+													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+												</li>
 										</ul>
-									</nav>
 									<br>
-								</div>
-								<!-- paging -->
+								</div><!-- paging -->
+  						</div><!-- class="tab-pane fade show active" -->
+  						
+<!--  class 스크랩 -->
+  	<div class="tab-pane fade" id="class_open" role="tabpanel" aria-labelledby="nav-class-open-tab">
+								<table class="table table-bordered">
+									<thead class="thead-color">
+										<tr class="content_tr">
+											<th>클래스 번호</th>
+											<th width="25%">클래스 제목</th>
+											<th width="15%">참여인원</th>
+											<th>클래스 개강일</th>
+											<th>클래스 종강일</th>
+										</tr>
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(openClass) > 0 }">
+											<c:forEach items="${openClass}" var="openClass">
+												<tr>
+													<td>${openClass.cId}</td>
+													<td><a style="text-decoration: none"
+														href="/eepp/class/classView?cId=${openClass.cId}&cCategory=${cCategory}">${openClass.cTitle}</a></td>
+													<td>${openClass.cTotalPeopleCount}</td>
+													<td>${openClass.cOpenDate}</td>
+													<td>${openClass.cEndDate}</td>
+												</tr>
+											</c:forEach>
+										</c:when>
+
+										<c:otherwise>
+											<tr>
+												<td colspan="9">조회된 결과가 없습니다.</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
+								</table>
+								
+									<div class="clOpenPage">
+									   <ul class="pagination justify-content-center">
+									      <li class="page-item">
+													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.startPage - 1)}&cCategory=${cCategory}&mpclass=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+										</li>
+											<c:forEach begin="${OpenClassPageMaker.startPage}" end="${OpenClassPageMaker.endPage}" var="idx">
+												<li class="page-item">
+													<a id="clOpenPage_${idx}" class="page-link" href="mypage${OpenClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
+											</c:forEach>
+											<li class="page-item">
+													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+												</li>
+										</ul>
+									<br>
+								</div><!-- paging -->
+  						</div><!-- class="tab-pane fade show active" -->
 							</div>
-						</div> --%>
+						</div>
 					</div>
 					<!-- col-sm-8 -->
 				</div>
 				<!-- row -->
 			</div>
-			<!-- container -->
+			</div><!-- container -->
 	<br>
 		</c:when>
 		<c:otherwise>

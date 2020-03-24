@@ -10,15 +10,23 @@ public class ClassJoinVO {
 	private int user_id;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp cjJoinDate;
+	private String cTitle;
+	private String cCategory;
+	private String cPrice;
 
 	public ClassJoinVO() {
+		
 	}
-
-	public ClassJoinVO(int cjId, int class_id, int user_id, Timestamp cjJoinDate) {
+	
+	public ClassJoinVO(int cjId, int class_id, int user_id, Timestamp cjJoinDate, String cTitle, String cCategory,
+			String cPrice) {
 		this.cjId = cjId;
 		this.class_id = class_id;
 		this.user_id = user_id;
 		this.cjJoinDate = cjJoinDate;
+		this.cTitle = cTitle;
+		this.cCategory = cCategory;
+		this.cPrice = cPrice;
 	}
 
 	public int getCjId() {
@@ -52,5 +60,31 @@ public class ClassJoinVO {
 	public void setCjJoinDate(Timestamp cjJoinDate) {
 		this.cjJoinDate = cjJoinDate;
 	}
+
+	public String getcTitle() {
+		return cTitle;
+	}
+
+	public void setcTitle(String cTitle) {
+		this.cTitle = cTitle;
+	}
+
+	public String getcCategory() {
+		return cCategory;
+	}
+
+	public void setcCategory(String cCategory) {
+		this.cCategory = cCategory;
+	}
+
+	public String getcPrice() {
+		return cPrice;
+	}
+
+	public void setcPrice(String cPrice) {
+		this.cPrice = cPrice;
+	}
+
+	
 
 }

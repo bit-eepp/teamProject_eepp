@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import bit.team.eepp.VO.BoardVO;
+import bit.team.eepp.VO.ClassJoinVO;
+import bit.team.eepp.VO.ClassVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.PaymentVO;
@@ -88,54 +90,70 @@ public interface UserMapper {
 	 */
 
 	// 프로필 넣기
-		@Update("UPDATE users SET uprofile = '${uprofile}' WHERE user_id = ${user_id}")
-		public void profileUpdate(UserVO userVO) throws Exception;
+	@Update("UPDATE users SET uprofile = '${uprofile}' WHERE user_id = ${user_id}")
+	public void profileUpdate(UserVO userVO) throws Exception;
 
-		// 닉네임 중복체크
-		@Select("select count(*) from users where uNickname = #{uNickname}")
-		public int mypagenickNameCheck(UserVO userVO);
+	// 닉네임 중복체크
+	@Select("select count(*) from users where uNickname = #{uNickname}")
+	public int mypagenickNameCheck(UserVO userVO);
 
-		// 닉네임 변경
-		@Update("UPDATE users SET uNickname = '${uNickname}' WHERE user_id = ${user_id}")
-		public void myNickNameUpdate(UserVO userVO);
+	// 닉네임 변경
+	@Update("UPDATE users SET uNickname = '${uNickname}' WHERE user_id = ${user_id}")
+	public void myNickNameUpdate(UserVO userVO);
 
-		// 포인트 가져오기
-		@Select("select * from payment where user_id = #{user_id}")
-		public List<PaymentVO> pointList(Map<String, Object> map);
+	// 포인트 가져오기
+	@Select("select * from payment where user_id = #{user_id}")
+	public List<PaymentVO> pointList(Map<String, Object> map);
 
-		// 포인트 사용 내역 개수
-		@Select("select count(*) from payment where user_id = #{user_id}")
-		public int pointCount(Map<String, Object> map);
+	// 포인트 사용 내역 개수
+	@Select("select count(*) from payment where user_id = #{user_id}")
+	public int pointCount(Map<String, Object> map);
 
-		// 받은 쪽지 개수
-		public abstract int receiveCount(Map<String, Object> map);
+	// 구매한 클래스
+	@Select("select cj.class_id, c.ccategory,c.cTitle,c.cprice, cj.cjJoinDate from classjoin cj, class c where c.cId = cj.class_id and cj.user_id = #{user_id}")
+	public List<ClassJoinVO> joinClass(Map<String, Object> map);
 
-		// 보낸 쪽지 개수
-		public abstract int sendCount(Map<String, Object> map);
+	// 구매한 클래스 개수
+	@Select("select count(*) from classjoin where user_id = #{user_id}")
+	public int joinClassCount(Map<String, Object> map);
 
-		// 내가 쓴 게시물 총 개수
-		public abstract int listCount(Map<String, Object> map);
+	// 개설한 클래스
+	@Select("select * from class where user_id = #{user_id}")
+	public List<ClassVO> openClass(Map<String, Object> map);
 
-		// 내가 쓴 댓글 총 개수
-		public abstract int replyCount(Map<String, Object> map);
+	// 개설한 클래스 개수
+	@Select("select count(*) from class where user_id = #{user_id}")
+	public int openClassCount(Map<String, Object> map);
 
-		// 내가 내 게시글 스크랩 개수
-		public abstract int scrapBoardCount(Map<String, Object> map);
+	// 받은 쪽지 개수
+	public abstract int receiveCount(Map<String, Object> map);
 
-		// 내가 쓴 게시물 리스트 + paging, 정렬 : 시간순
-		public abstract List<BoardVO> myBoardList(Map<String, Object> map);
+	// 보낸 쪽지 개수
+	public abstract int sendCount(Map<String, Object> map);
 
-		// 회원탈퇴
-		public abstract void withdrawal(UserVO userVO);
+	// 내가 쓴 게시물 총 개수
+	public abstract int listCount(Map<String, Object> map);
 
-		// 내 게시물 스크랩 리스트
-		public List<ScrapVO> scrapList(Map<String, Object> map);
+	// 내가 쓴 댓글 총 개수
+	public abstract int replyCount(Map<String, Object> map);
 
-		// 내 클래스 스크랩 개수
-		public abstract int scrapClassCount(Map<String, Object> map);
+	// 내가 내 게시글 스크랩 개수
+	public abstract int scrapBoardCount(Map<String, Object> map);
 
-		// 내 클래스 스크랩 리스트
-		public List<ScrapVO> ClassscrapList(Map<String, Object> map);
+	// 내가 쓴 게시물 리스트 + paging, 정렬 : 시간순
+	public abstract List<BoardVO> myBoardList(Map<String, Object> map);
+
+	// 회원탈퇴
+	public abstract void withdrawal(UserVO userVO);
+
+	// 내 게시물 스크랩 리스트
+	public List<ScrapVO> scrapList(Map<String, Object> map);
+
+	// 내 클래스 스크랩 개수
+	public abstract int scrapClassCount(Map<String, Object> map);
+
+	// 내 클래스 스크랩 리스트
+	public List<ScrapVO> ClassscrapList(Map<String, Object> map);
 
 	/*
 	 * 포인트
@@ -155,17 +173,15 @@ public interface UserMapper {
 	// 개설자의 총 포인트 금액 update, 참여자가 보낸 포인트만큼 추가
 	@Update("update users set point = point + #{classPrice} where user_id = #{opennerUser_id}")
 	public void updateOpennerPoint(@Param("opennerUser_id") int opennerUser_id, @Param("classPrice") int classPrice);
-	
+
 	// 개설자 포인트 입금내역 추가
 	public void opennerPayment(@Param("paymentVO") PaymentVO paymentVO);
-	
+
 	// 참가자의 총 포인트 금액 update, 클래스 금액만큼 차감
 	@Update("update users set point = point - #{classPrice} where user_id = #{user_id}")
 	public void updateParticipantPoint(@Param("user_id") int user_id, @Param("classPrice") int classPrice);
-	
+
 	// 참가자 포인트 사용내역 추가
 	public void participantPayment(@Param("paymentVO") PaymentVO paymentVO);
-	
-	
 
 }
