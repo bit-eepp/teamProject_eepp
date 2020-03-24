@@ -30,11 +30,17 @@
 						    </div>
 						    
 						    <div class="login common" align="right">
-						    	<strong id="loginNickname">${loginUser.uNickname}</strong>&nbsp;
-						    	
-						    	<button title="LogOut" class="headerMenu1" type="button" onclick="location.href='${pageContext.request.contextPath}/logout.do'">
-						    		<img id="headerLogin" src="${pageContext.request.contextPath}/img/headerLogin.png">
-						    	</button>
+						    	<div class="dropdown">
+								<a href="#" class="userBtn" id="header_user_btn" data-toggle="dropdown">
+								<strong id="loginNickname">${loginUser.uNickname}</strong>
+									<img id="headerLogin" src="${pageContext.request.contextPath}/img/headerLogin.png">
+								</a>
+           						 <ul class="dropdown-menu" role="menu" aria-labelledby="header_user_btn">
+                					<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+                					<%-- <li><a onclick="sendMessage('${hot.uNickname}',${hot.user_id});">쪽지 보내기</a></li> --%>
+                					<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
+                				</ul>
+								</div>
 						    </div>
 						</div>
 					</header>
