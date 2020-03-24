@@ -459,9 +459,9 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	/* 비밀번호 재설정 */
+	/* 아이디 비밀번호 찾기 */
 	@RequestMapping(value = "login/forgotMyInfo", method = { RequestMethod.GET, RequestMethod.POST })
-		public String forgotPassword(Model model){
+		public String forgotMyEmail(Model model){
 		
 		// 이메일 인증 검증을 위한 랜덤숫자 생성
 		int ran = new Random().nextInt(900000) + 100000;
