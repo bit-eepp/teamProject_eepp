@@ -12,6 +12,9 @@
 	</head>
 	
 	<body>
+<!-- header -->
+<%@ include file="/WEB-INF/views/header.jsp"%>
+<!-- header -->
 
 		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 		<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
@@ -333,6 +336,14 @@
 				<a style="text-decoration: none" href="boardList${pageMaker.makeSearch(pageMaker.endPage + 1)}&sortType=${sortType}&bCategory=${bCategory}"> » </a>&nbsp;&nbsp;
 			</c:if>
 		</div>
+
+<!-- chat -->
+<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+<!-- chat -->
+
+<!-- footer -->
+<%@ include file="/WEB-INF/views/footer.jsp"%>
+<!-- footer -->
 
 		<script src="${pageContext.request.contextPath}/js/board/boardMain.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>

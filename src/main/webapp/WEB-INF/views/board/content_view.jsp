@@ -10,6 +10,10 @@
 	</head>
 
 	<body>
+<!-- header -->
+<%@ include file="/WEB-INF/views/header.jsp"%>
+<!-- header -->
+
 		<input type="hidden" id="userNickname" name="uNickname" value="${loginUser.uNickname}">
 		<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
 		<input type="hidden" id="content_uNickname" value="${content.uNickname}" />
@@ -257,6 +261,15 @@
 		</div>
 	
 		<%@ include file="/WEB-INF/views/board/replyList.jsp"%>
+
+<!-- chat -->
+<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+<!-- chat -->
+
+<!-- footer -->
+<%@ include file="/WEB-INF/views/footer.jsp"%>
+<!-- footer -->
+
 		<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
