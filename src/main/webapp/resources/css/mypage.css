@@ -4,8 +4,12 @@
 * 마이페이지 css 부
 */
 
-#showImg {
-	margin-left: 20%;
+.bordered a {
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 .info {
@@ -15,13 +19,12 @@
 #table {
 	text-align: center;
 	height: 337px;
-	width : 100%;
+	width: 100%;
 }
 
 .info td {
 	padding: 10px 0;
 }
-
 
 .trColor {
 	color: #e7438b;
@@ -47,27 +50,38 @@
 	margin-right: 10px;
 }
 
-
 .drop {
 	font-size: 12px;
-	margin-left:30px;
+	margin-left: 30px;
 }
 
-#changeImg, #register_Btn {
-	margin-top: 5px;
-	width: 100%;
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.img-circle {
+	width: 30%;
+	margin-left:20%;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+#register_Btn, #changeImg {
+	width: 35%;
+	font-size: 0.9rem;
+	border-radius: 7px;
 	background: #59bfbf;
-	
-	/* font-size: 1.2rem; */
+	border: none;
 }
 
-#mypagenickNameCheck, #charge,#pointBtn{
+#mypagenickNameCheck, #charge, #pointBtn {
 	font-size: 0.8rem;
 	border-radius: 7px;
 	padding: 5px 10px;
 	background: #59bfbf;
-	color:white;
-	border:none;
+	color: white;
+	border: none;
 }
 
 #submit {
@@ -85,13 +99,7 @@
 	border-color: gray;
 	border-radius: 7px;
 }
-.img-circle{
-	width:60%;
-	height:60%;
-	border-radius:50%;
-	overflow:hidden;
-	
-}
+
 #table th {
 	font-size: 16px;
 	height: 40px;
@@ -111,13 +119,6 @@
 	color: #e7438b;
 }
 
-#changeImg, #register_Btn {
-	margin-top: 10px;
-	width: 85%;
-	/* font-weight:bold; */
-	/* font-size: 1.2rem; */
-}
-
 .myinfoHeader {
 	text-align: center;
 	color: #59bfbf;
@@ -130,7 +131,7 @@
 }
 
 .text-wrap td {
-	height:50px;
+	height: 50px;
 }
 
 .myinfo-wrap h3 {
@@ -141,7 +142,7 @@
 	background-color: #59bfbf;
 }
 
-#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn{
+#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn {
 	margin-right: 20px;
 	width: 10%;
 	background-color: #59bfbf;
@@ -150,11 +151,13 @@
 .btn-info {
 	border: none;
 }
+
 tr.bordered {
-    border-bottom: 1px solid #f3f3f3;
+	border-bottom: 1px solid #f3f3f3;
 }
+
 tr.bordered td {
-    padding-left:20%;
+	padding-left: 20%;
 }
 
 /*

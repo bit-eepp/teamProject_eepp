@@ -91,59 +91,79 @@ public class UserService {
 	 */
 
 	// (마이페이지)프로필 업로드
-	public void profileUpdate(UserVO userVO) throws Exception {
-		userMapper.profileUpdate(userVO);
-	}
+		public void profileUpdate(UserVO userVO) throws Exception {
+			userMapper.profileUpdate(userVO);
+		}
 
-	// (마이페이지)내 게시글 갯수
-	public int listCount(Map<String, Object> map) {
-		return userMapper.listCount(map);
-	}
+		// (마이페이지)내 게시글 갯수
+		public int listCount(Map<String, Object> map) {
+			return userMapper.listCount(map);
+		}
 
-	// (마이페이지)내 댓글 갯수
-	public int replyCount(Map<String, Object> map) {
-		return userMapper.replyCount(map);
-	}
+		// (마이페이지)내 댓글 갯수
+		public int replyCount(Map<String, Object> map) {
+			return userMapper.replyCount(map);
+		}
 
-	// (마이페이지)내 댓글 갯수
-	public int scrapCount(Map<String, Object> map) {
-		return userMapper.scrapCount(map);
-	}
+		// (마이페이지)내 댓글 갯수
+		public int scrapBoardCount(Map<String, Object> map) {
+			return userMapper.scrapBoardCount(map);
+		}
 
-	// (마이페이지)내 게시글 리스트
-	public List<BoardVO> myBoardList(Map<String, Object> map) {
-		return userMapper.myBoardList(map);
-	}
+		// (마이페이지)내 게시글 리스트
+		public List<BoardVO> myBoardList(Map<String, Object> map) {
+			return userMapper.myBoardList(map);
+		}
 
-	// (마이페이지) 회원탈퇴
-	public void withdrawal(UserVO userVO) {
-		userMapper.withdrawal(userVO);
-	}
+		// (마이페이지) 회원탈퇴
+		public void withdrawal(UserVO userVO) {
+			userMapper.withdrawal(userVO);
+		}
 
-	// (마이페이지) 닉네임 중복체크
-	public int mypagenickNameCheck(UserVO userVO) {
-		return userMapper.mypagenickNameCheck(userVO);
-	}
+		// (마이페이지) 닉네임 중복체크
+		public int mypagenickNameCheck(UserVO userVO) {
+			return userMapper.mypagenickNameCheck(userVO);
+		}
 
-	// (마이페이지) 닉네임 변경
-	public void myNickNameUpdate(UserVO userVO) {
-		userMapper.myNickNameUpdate(userVO);
-	}
+		// (마이페이지) 닉네임 변경
+		public void myNickNameUpdate(UserVO userVO) {
+			userMapper.myNickNameUpdate(userVO);
+		}
 
-	// (마이페이지) 내 스크랩 리스트
-	public List<ScrapVO> scrapList(Map<String, Object> map) {
-		return userMapper.scrapList(map);
-	}
+		// (마이페이지) 내 스크랩 리스트
+		public List<ScrapVO> scrapList(Map<String, Object> map) {
+			return userMapper.scrapList(map);
+		}
 
-	// (마이페이지) 받은 쪽지
-	public int receiveCount(Map<String, Object> map) {
-		return userMapper.receiveCount(map);
-	}
+		// (마이페이지) 받은 쪽지
+		public int receiveCount(Map<String, Object> map) {
+			return userMapper.receiveCount(map);
+		}
 
-	// (마이페이지) 보낸 쪽지
-	public int sendCount(Map<String, Object> map) {
-		return userMapper.sendCount(map);
-	}
+		// (마이페이지) 보낸 쪽지
+		public int sendCount(Map<String, Object> map) {
+			return userMapper.sendCount(map);
+		}
+
+		// (마이페이지) 포인트 리스트
+		public List<PaymentVO> pointList(Map<String, Object> map) {
+			return userMapper.pointList(map);
+		}
+
+		// (마이페이지) 포인트 개수
+		public int pointCount(Map<String, Object> map) {
+			return userMapper.pointCount(map);
+		}
+
+		// (마이페이지) 클래스 스크랩 개수
+		public int scrapClassCount(Map<String, Object> map) {
+			return userMapper.scrapClassCount(map);
+		}
+
+		// (마이페이지) 클래스 스크랩 리스트
+		public List<ScrapVO> ClassscrapList(Map<String, Object> map) {
+			return userMapper.ClassscrapList(map);
+		}
 
 	/* 포인트 */
 	public int chargePoint(UserVO userVO) {
