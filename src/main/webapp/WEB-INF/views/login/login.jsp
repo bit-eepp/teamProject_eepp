@@ -50,7 +50,7 @@
 	        
 	        <div class="loginOrRegister">
 	        	<div class="loginBtn"><button type="submit">로그인</button></div>
-	        	<div class="registerBtn"><a href="href.location='${pageContext.request.contextPath}/join/register'">회원가입</a></div>
+	        	<div class="registerBtn"><a href="${pageContext.request.contextPath}/join/register">회원가입</a></div>
 	        	<div class="forgotBtn"><a href="${pageContext.request.contextPath}/login/forgotMyInfo">가입이메일 / 비밀번호 찾기</a></div>
 	        </div>
 		</form:form>
