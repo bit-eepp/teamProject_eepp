@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>쪽지</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/msg.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/msg.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 

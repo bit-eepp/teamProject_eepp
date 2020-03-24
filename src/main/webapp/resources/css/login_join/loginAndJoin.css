@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 /* login / Join 공통 */
-section{margin:40px 0;}
 .input-title{font-weight:bold; font-size:16px; color:#59bfbf; width:150px}
 .required{color:#e7438b;margin-right: 10px;}
 .sc-title{text-align: center;font-size: 22px;position: relative;margin-bottom:40px;}
@@ -27,10 +26,88 @@ section{margin:40px 0;}
     bottom: 0;
     background: #000;
 }
-input{width: 280px;}
+.lg-inputBox{width: 280px;}
+button:focus{outline: initial!important;}
 /* login / Join 여기까지 */
 
 /* login */
+.sc-login .loginMainTitle{
+	text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    letter-spacing: 0.08rem;
+}
+.sc-login .loginMainTitle img{
+	vertical-align: top;
+    margin: 0 6px 0 3px;
+    max-width: 5%;
+}
+
+.rememberMeCheck{
+	font-size:13px;
+}
+.rememberMeCheck input{
+	font-size:16px;
+}
+.sc-login .loginOrRegister{
+	margin-top: 30px;
+}
+.sc-login .loginBtn button{
+	background: #000;
+    color: #fff;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 0;
+    letter-spacing: 0.5rem;
+    border-radius: 10px;
+}
+.sc-login .registerBtn{
+	margin-top:10px;
+}
+.sc-login .registerBtn a{
+	background: transparent;
+    border: 1px solid #000;
+    color: #000;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px 0;
+    letter-spacing: 0.5rem;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+}
+.sc-login .registerBtn a:hover{text-decoration: none;}
+.sc-login .forgotBtn{
+	margin:10px 0;
+}
+.sc-login .forgotBtn a{
+	text-decoration: none;
+    color: #000;
+}
+.sc-snsLogin{
+	padding: 0 0 80px!important;
+}
+.sc-snsLogin .snsBtnWrap{
+	border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+}
+.sc-snsLogin .snsLoginTitle{
+	text-align:center;
+	margin-top:15px;
+	letter-spacing: 0.5rem;
+}
+.sc-snsLogin .sns_login_button{
+	margin: 15px 0;
+}
+.sc-snsLogin .naverBtn{
+	width:45px;
+}
+.sc-snsLogin .kakaoBtn, .sc-snsLogin .googleBtn{
+	width:50px;
+}
+.sc-snsLogin span img{
+	max-width:100%;
+}
 .custom-select{
 	height: calc(2rem)!important;padding: 0 1.75rem 0 .75rem!important;
 	vertical-align: initial!important;font-size: 14px;
