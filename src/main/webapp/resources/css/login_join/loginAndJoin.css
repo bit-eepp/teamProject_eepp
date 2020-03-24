@@ -30,6 +30,7 @@
 button:focus{outline: initial!important;}
 /* login / Join 여기까지 */
 
+
 	/*
 	* 로그인페이지
 	*/
@@ -43,6 +44,10 @@ button:focus{outline: initial!important;}
 	vertical-align: top;
     margin: 0 6px 0 3px;
     max-width: 5%;
+}
+.sc-login .faildLogin{
+	color: #ea0909;
+    font-size: 14px;
 }
 
 .rememberMeCheck{
