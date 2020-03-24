@@ -11,3 +11,18 @@ section{padding:40px 0;}
 .dropdown-menu li{margin:5px 0;}
 .dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
 /* 유저버튼 */
+
+/* 페이징 CSS */
+.page-link {
+	border:none;
+	margin-left: 20px;
+	color: #26274c;
+	background: #ffffff;
+	font-weight: 700;
+}
+
+.page-link:hover {
+	background: #59bfbf;
+	color: #ffffff;
+}
+/* 페이징 CSS */
