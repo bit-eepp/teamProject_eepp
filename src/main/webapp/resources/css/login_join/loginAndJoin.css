@@ -3,29 +3,6 @@
 /* login / Join 공통 */
 .input-title{font-weight:bold; font-size:16px; color:#59bfbf; width:150px}
 .required{color:#e7438b;margin-right: 10px;}
-.sc-title{text-align: center;font-size: 22px;position: relative;margin-bottom:40px;}
-.sc-title:before{
-	content: "";
-    position: absolute;
-    width: 40%;
-    height: 2px;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    background: #000;
-    }
-.sc-title:after{
-	content: "";
-    position: absolute;
-    width: 40%;
-    height: 2px;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: #000;
-}
 .lg-inputBox{width: 280px;}
 button:focus{outline: initial!important;}
 /* login / Join 여기까지 */
@@ -322,17 +299,65 @@ span img{
     padding: 10px 0;
 }
 
-#MainTxt {text-align: center;margin: 80px 0 0;}
-#MainTxt .logoImg{width: 22%; margin: 0 auto}
-#MainTxt .logoImg img {max-width: 100%}
-#MainTxt .subTxt{color:#59bfbf;}
+
+	/*
+	* 회원가입
+	*/
+.sc-welcome{
+	text-align: center;
+    margin: 40px 0 0;
+}
+.sc-welcome .welcomeEE{
+	color: #59bfbf;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0;
+}
+.sc-welcome .subTitle{
+	line-height: 32px;
+}
+.sc-title{
+	text-align: center;
+	font-size: 18px;
+	position: relative;
+	margin-bottom:40px;;
+}
+.sc-title:before{
+	content: "";
+    position: absolute;
+    width: 40%;
+    height: 2px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    }
+.sc-title:after{
+	content: "";
+    position: absolute;
+    width: 40%;
+    height: 2px;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+}
+.agreement-wrap, .registerForm-wrap{
+	padding: 0 40px;
+}
 .agree_content{border: 1px solid #000;
     padding: 10px;
     height: 150px;
     overflow: overlay;
-    margin: 0 20px;
-    font-size:12px;}
-.agreeCheck{display: inline-block;margin: 10px 20px 40px;}
+    font-size:12px;
+}
+.agreeCheck{
+	display: inline-block;
+	margin: 10px 0 20px;
+}
 .joinForm-wrapper table td {padding: 10px 0;}
 .email_input_01{width:100px;}
 .email_input_02, #emailAuth{width:150px;}
