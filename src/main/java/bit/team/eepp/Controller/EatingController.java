@@ -60,14 +60,14 @@ public class EatingController {
 	public String themaList(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
 			@RequestParam(value = "sortType", required = false) String sortType, @RequestParam(value = "eCategory") String eCategory) {
 		
-		System.out.println("store information print");
+		System.out.println("thema list print");
 		
 		model.addAttribute("eContentView", eatingService.selectOne(eatingVO));
 		model.addAttribute("escri", escri);
 		model.addAttribute("sortType", sortType);
 		model.addAttribute("eCategory", eCategory);
 		
-		return "/eating/eatingView";
+		return "/eating/themaList";
 	}
 	
 	@RequestMapping("/eatingDelete")
