@@ -31,13 +31,13 @@ button:focus{outline: initial!important;}
 /* login / Join 여기까지 */
 
 /* login */
-.sc-login .loginMainTitle{
+.loginMainTitle{
 	text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
     letter-spacing: 0.08rem;
 }
-.sc-login .loginMainTitle img{
+.loginMainTitle img{
 	vertical-align: top;
     margin: 0 6px 0 3px;
     max-width: 5%;
@@ -49,10 +49,10 @@ button:focus{outline: initial!important;}
 .rememberMeCheck input{
 	font-size:16px;
 }
-.sc-login .loginOrRegister{
+.loginOrRegister{
 	margin-top: 30px;
 }
-.sc-login .loginBtn button{
+.loginBtn button{
 	background: #000;
     color: #fff;
     font-weight: bold;
@@ -61,10 +61,10 @@ button:focus{outline: initial!important;}
     letter-spacing: 0.5rem;
     border-radius: 10px;
 }
-.sc-login .registerBtn{
+.registerBtn{
 	margin-top:10px;
 }
-.sc-login .registerBtn a{
+.registerBtn a{
 	background: transparent;
     border: 1px solid #000;
     color: #000;
@@ -76,36 +76,46 @@ button:focus{outline: initial!important;}
     text-align: center;
     border-radius: 10px;
 }
-.sc-login .registerBtn a:hover{text-decoration: none;}
-.sc-login .forgotBtn{
+.registerBtn a:hover{text-decoration: none;color:#000;}
+.forgotBtn{
 	margin:10px 0;
 }
-.sc-login .forgotBtn a{
+.forgotBtn a{
 	text-decoration: none;
     color: #000;
 }
 .sc-snsLogin{
 	padding: 0 0 80px!important;
 }
-.sc-snsLogin .snsBtnWrap{
+.snsBtnWrap{
 	border-top: 1px solid #dfdfdf;
     border-bottom: 1px solid #dfdfdf;
 }
-.sc-snsLogin .snsLoginTitle{
+.snsLoginTitle{
 	text-align:center;
 	margin-top:15px;
 	letter-spacing: 0.5rem;
 }
-.sc-snsLogin .sns_login_button{
+.sns_login_button{
 	margin: 15px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
-.sc-snsLogin .naverBtn{
+.sns_login_button span{
+	margin:0 15px;
+}
+.naverBtn{
 	width:45px;
+	border: none;
+	cursor: pointer;
 }
-.sc-snsLogin .kakaoBtn, .sc-snsLogin .googleBtn{
+.kakaoBtn, .googleBtn{
 	width:50px;
+	border: none;
+	cursor: pointer;
 }
-.sc-snsLogin span img{
+span img{
 	max-width:100%;
 }
 .custom-select{
@@ -116,18 +126,49 @@ button:focus{outline: initial!important;}
 .uPhone_2, .uPhone_3{
 	width:120px;
 	}
-.infoText{padding: 15px 0;margin: 45px auto;width: 55%;border-top:1px solid rgba(0,0,0,.1);border-bottom:1px solid rgba(0,0,0,.1);}
-button{border: none;cursor: pointer;width:80px;}
-.btn-select{background:#59bfbf; color:#fff;}
-#selectView {margin: 30px 0;}
-#selectView button {width:25%;}
-.sns_login_button{display: flex;align-items: center;justify-content: center;}
-.sns_login_button span{margin:0 15px;}
-button{border: none;cursor: pointer;width:80px;}
-	
 /* login 여기까지 */
 
 /* join */
+.sc-chooseJoin{
+	padding: 80px 0!important;
+}
+.sc-chooseJoin .welcomeEE{
+	text-align: center;
+    font-weight: bold;
+    color: #59bfbf;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.08rem;
+    line-height: 42px;
+}
+.sc-chooseJoin .welcomeEE span{
+	color: #e7438b;
+    font-size: 40px;
+}
+.sc-chooseJoin .subTitle{
+	text-align: center;
+    font-size: 14px;
+}
+.sc-chooseJoin .subTitle img{
+	max-width: 2%;
+    vertical-align: top;
+    margin: 0 5px 0 3px;
+}
+.sc-chooseJoin .normalBtnWrap{
+	margin-top:40px;
+}
+.sc-chooseJoin .snsBtnWrap{
+	margin-top:30px;
+}
+.sc-chooseJoin .isMember{
+	font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+    margin: 30px 0 0 0;
+}
+.sc-chooseJoin .isMember a{
+	color: #1f1f1f;
+}
 #MainTxt {text-align: center;margin: 80px 0 0;}
 #MainTxt .logoImg{width: 22%; margin: 0 auto}
 #MainTxt .logoImg img {max-width: 100%}
