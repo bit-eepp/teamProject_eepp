@@ -21,6 +21,7 @@ function getContextPath() {
 	return location.href.substring(hostIndex, location.href.indexOf('/',
 			hostIndex + 1));
 };
+/* 닉네임 중복확인 */
 
 function nickCheck() {
 	$.ajax({
@@ -28,13 +29,18 @@ function nickCheck() {
 		type : "post",
 		dataType : "json",
 		data : {
-			"uNickname" : $("#uNickname").val()
+			"uNickname" : $("#changeNickname").val()
 		},
 		success : function(data) {
-			if (data == 0) {
+			if ($("#changeNickname").val() == "") {
+				alert("닉네임을 입력해주세요.");
+				$("#changeNickname").focus();
+				return false;
+			} else if (data == 0) {
 				alert("사용가능한 닉네임입니다.");
 				$('#mypagenickNameCheck').attr("value", "Y");
 				return;
+
 			} else if (data != 0) {
 				alert("사용중인 닉네임입니다.")
 				$('#mypagenickNameCheck').attr("value", "N");
@@ -50,9 +56,9 @@ function nickCheck() {
 
 $('#submit').click(function(event) {
 
-	if ($("#uNickname").val() == "") {
+	if ($("#changeNickname").val() == "") {
 		alert("닉네임을 입력해주세요.");
-		$("#uNickname").focus();
+		$("#changeNickname").focus();
 		return false;
 	}
 
@@ -85,11 +91,11 @@ $('#searchBtn').click(
 // 회원탈퇴 알림
 function drop() {
 	alert("회원탈퇴 페이지로 이동합니다.");
-//	if (confirm("회원탈퇴 페이지 입니다. 계속 하시겠습니까?") == true) {
-//		document.form.submit();
-//	} else {
-//		return;
-//	}
+	// if (confirm("회원탈퇴 페이지 입니다. 계속 하시겠습니까?") == true) {
+	// document.form.submit();
+	// } else {
+	// return;
+	// }
 }
 
 // 프로필 사진 있는지 확인 - 있으면 변경
@@ -108,17 +114,17 @@ $('#changeImg').click(function() {
 	alert("기본 이미지로 변경됩니다.")
 });
 
-// 회원정보 수정 보여주고 닫기
-$(document).ready(function() {
-	if (!$('#mpInfo').val()) {
-		$(".info").hide();
-	} else {
-		$(".info").show();
-	}
-})
-$("#myinfobtn").click(function() {
-	$(".info").slideToggle();
-});
+// // 회원정보 수정 보여주고 닫기
+// $(document).ready(function() {
+// if (!$('#mpInfo').val()) {
+// $(".info").hide();
+// } else {
+// $(".info").show();
+// }
+// })
+// $("#myinfobtn").click(function() {
+// $(".info").slideToggle();
+// });
 
 // 게시글 보여주고 닫기
 $(document).ready(function() {
@@ -156,13 +162,13 @@ $("#mypointbtn").click(function() {
 	$("#point_list").slideToggle();
 });
 
-//// 회원탈퇴 질문
-//function confirm_event() {
-//	if (confirm("지금 탈퇴하시면 60일 동안 재가입 하실 수 없습니다. 정말 삭제하시겠습니까??")== true) {
-//		alert("탈퇴되었습니다.");
-//		// 삭제페이지나 submit처리를 해준다 //
-//		document.form.submit();
-//	} else {
-//		return;
-//	}
-//}
+// // 회원탈퇴 질문
+// function confirm_event() {
+// if (confirm("지금 탈퇴하시면 60일 동안 재가입 하실 수 없습니다. 정말 삭제하시겠습니까??")== true) {
+// alert("탈퇴되었습니다.");
+// // 삭제페이지나 submit처리를 해준다 //
+// document.form.submit();
+// } else {
+// return;
+// }
+// }

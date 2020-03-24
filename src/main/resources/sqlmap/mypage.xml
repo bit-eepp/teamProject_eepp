@@ -36,7 +36,20 @@ where d.reply_id = r.rpid and d.reporter_id = u.user_id
 			SELECT COUNT(*) FROM message m, users u WHERE u.USER_ID = m.receiver_ID AND sender_id = #{user_id}
 		]]>
 	</select>
-	<!-- 스크랩 목록 -->
+	<!-- 클래스 스크랩 목록 -->
+	<select id="ClassscrapList" parameterType="int"
+		resultType="bit.team.eepp.VO.ScrapVO">
+		
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+from(select s.sId, s.sDate, s.user_id, s.class_id, c.cTitle, u.uNickname as tester FROM SCRAP s, CLASS c, USERS u
+			WHERE c.cId = s.class_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
+		ORDER BY s.sDate DESC) A)
+		WHERE RNUM BETWEEN #{scrapcri.rowStart}
+		AND #{scrapcri.rowEnd}
+		
+	</select>
+	
+	<!-- 게시글 스크랩 목록 -->
 	<select id="scrapList" parameterType="int"
 		resultType="bit.team.eepp.VO.ScrapVO">
 		
@@ -82,44 +95,27 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 		delete from users where USER_ID = #{user_id}
 		]]>
 	</delete>
-	<!-- 스크랩 개수 -->
-	<select id="scrapCount" resultType="int" parameterType="map">
+	<!-- 게시판 스크랩 개수 -->
+	<select id="scrapBoardCount" resultType="int" parameterType="map">
 		<![CDATA[
-			SELECT COUNT(sId) FROM scrap s, USERS u WHERE u.user_id = #{user_id} and s.user_id = #{user_id} AND sId > 0
+			SELECT COUNT(sId) FROM scrap s, USERS u WHERE NOT board_id is NULL AND u.user_id = #{user_id} and s.user_id = #{user_id} AND sId > 0
 		]]>
-		<if test="bCategory != null">
-			<choose>
-				<when test="bCategory == 'notice'">
-					AND b.bCategory = 'notice'
-				</when>
-				<when test="bCategory == 'it_dev'">
-					AND b.bCategory = 'it_dev'
-				</when>
-				<when test="bCategory == 'service'">
-					AND b.bCategory = 'service'
-				</when>
-				<when test="bCategory == 'finance'">
-					AND b.bCategory = 'finance'
-				</when>
-				<when test="bCategory == 'design'">
-					AND b.bCategory = 'design'
-				</when>
-				<when test="bCategory == 'official'">
-					AND b.bCategory = 'official'
-				</when>
-				<when test="bCategory == 'etc'">
-					AND b.bCategory = 'etc'
-				</when>
-			</choose>
-		</if>
-
 	</select>
+	
+	<!-- 클래스 스크랩 개수 -->
+	<select id="scrapClassCount" resultType="int" parameterType="map">
+		<![CDATA[
+			SELECT COUNT(sId) FROM scrap s, USERS u WHERE NOT class_id is NULL AND u.user_id = #{user_id} and s.user_id = #{user_id} AND sId > 0
+		]]>
+	</select>
+	
 	<!-- 댓글 개수 -->
 	<select id="replyCount" resultType="int" parameterType="map">
 		<![CDATA[
 			SELECT COUNT(rpid) FROM reply r, USERS u WHERE u.USER_ID = #{user_id} and r.USER_ID = #{user_id} AND rpid > 0
 		]]>
 	</select>
+	
 	<!-- 게시글 총 개수 -->
 	<select id="listCount" resultType="int" parameterType="map">
 		<![CDATA[

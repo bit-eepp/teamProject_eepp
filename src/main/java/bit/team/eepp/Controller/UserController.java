@@ -28,7 +28,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import bit.team.eepp.Page.MessageCriteria;
 import bit.team.eepp.Page.MessagePageMaker;
+import bit.team.eepp.Page.PointCriteria;
+import bit.team.eepp.Page.PointPageMaker;
+import bit.team.eepp.Page.ScrapClassCriteria;
+import bit.team.eepp.Page.ScrapClassPageMaker;
 import bit.team.eepp.Page.ScrapPageMaker;
+import bit.team.eepp.Page.ScrapboardCriteria;
+import bit.team.eepp.Page.ScrapboardPageMaker;
 import bit.team.eepp.Page.myPagePageMaker;
 import bit.team.eepp.Search.MypageSearchCriteria;
 import bit.team.eepp.Search.ScrapSearchCriteria;
@@ -111,12 +117,12 @@ public class UserController {
 	@RequestMapping("/mypage")
 	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri,
-			@ModelAttribute("scrapcri") ScrapSearchCriteria scrapcri,
+			@ModelAttribute("scrapcri") ScrapboardCriteria scrapcri, ScrapClassCriteria scrapclasscri, PointCriteria poCri,
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
 			@RequestParam(value = "mpPoint", required = false, defaultValue = "") String mpPoint,
-			@RequestParam(value = "mpInfo", required = false, defaultValue = "") String mpInfo,
+//			@RequestParam(value = "mpInfo", required = false, defaultValue = "") String mpInfo,
 			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap) throws IOException {
 		logger.info("my contents List");
 
@@ -145,14 +151,29 @@ public class UserController {
 			map.put("replyCount", us.replyCount(map));
 			map.put("messageRes", us.receiveCount(map));
 			map.put("messageSen", us.sendCount(map));
+			map.put("pointList", us.pointList(map));
+			map.put("poCri", poCri);
+			map.put("scrapclasscri", scrapclasscri);
 
+			PointPageMaker pointpageMaker = new PointPageMaker();
+			int poTotal = us.pointCount(map);
+			pointpageMaker.setCri(poCri);
+			pointpageMaker.setTotalCount(poTotal);
+			
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
 			myPagePageMaker.setCri(mscri);
 			myPagePageMaker.setTotalCount(us.listCount(map));
-
-			ScrapPageMaker ScrapPageMaker = new ScrapPageMaker();
-			ScrapPageMaker.setCri(scrapcri);
-			ScrapPageMaker.setTotalCount(us.scrapCount(map));
+			
+			// 게시판 스크랩
+			ScrapboardPageMaker ScrapboardPageMaker = new ScrapboardPageMaker();
+			ScrapboardPageMaker.setCri(scrapcri);
+			ScrapboardPageMaker.setTotalCount(us.scrapBoardCount(map));
+			
+			// 클래스 스크랩
+			ScrapClassPageMaker ScrapClassPageMaker = new ScrapClassPageMaker();
+			ScrapClassPageMaker.setCri(scrapclasscri);
+			ScrapClassPageMaker.setTotalCount(us.scrapClassCount(map));
+			
 
 			if (board != null) {
 				model.addAttribute("board", board);
@@ -163,18 +184,22 @@ public class UserController {
 			if (mpPoint != null) {
 				model.addAttribute("mpPoint", mpPoint);
 			}
-			if (mpInfo != null) {
-				model.addAttribute("mpInfo", mpInfo);
-			}
+//			if (mpInfo != null) {
+//				model.addAttribute("mpInfo", mpInfo);
+//			}
+			model.addAttribute("ClassscrapList",us.ClassscrapList(map));
+			model.addAttribute("pointList",us.pointList(map));
 			model.addAttribute("messageRes", us.receiveCount(map));
 			model.addAttribute("messageSen", us.sendCount(map));
 			model.addAttribute("scrapList", us.scrapList(map));
-			model.addAttribute("scrapCount", us.scrapCount(map));
+			model.addAttribute("scrapCount", us.scrapBoardCount(map));
 			model.addAttribute("replyCount", us.replyCount(map));
 			model.addAttribute("listCount", us.listCount(map));
 			model.addAttribute("myBoardList", us.myBoardList(map));
 			model.addAttribute("myPagePageMaker", myPagePageMaker);
-			model.addAttribute("ScrapPageMaker", ScrapPageMaker);
+			model.addAttribute("ScrapboardPageMaker", ScrapboardPageMaker);
+			model.addAttribute("ScrapClassPageMaker", ScrapClassPageMaker);
+			model.addAttribute("pointpageMaker", pointpageMaker);
 			model.addAttribute("sortType", sortType);
 			model.addAttribute("bCategory", bCategory);
 		}
