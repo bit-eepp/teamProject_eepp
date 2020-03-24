@@ -14,8 +14,8 @@
 <!-- header -->
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- header -->
-
-	<div class="container text-center">
+<section class="sc-login">
+<div class="container text-center">
 		<h1 style="text-align: center; width: 15%; margin: 0 auto">
 			<img style="max-width: 100%" src="${pageContext.request.contextPath}/img/EE_logo.png" />
 			
@@ -54,9 +54,12 @@
 	              Remember me
 	              </label>
 	          </div>
-			
-			<hr>
-			
+	          
+		</form:form>
+		</div>
+</section>
+<section class="sc-snsLogin">
+				<div class="container col-md-4">
 			<h6 style="text-align:center; margin-bottom:20px;">S N S 간 편 로 그 인</h6>
 			<div class="sns_login_button">
 				<span>
@@ -80,13 +83,12 @@
 					</button>
 				</span>
 			</div>
-		</form:form>
 
 		<div class="dropdown-divider"></div>
 		<a class="dropdown-item" href="${pageContext.request.contextPath}/join/register">회원가입</a>
 		<a class="dropdown-item" href="${pageContext.request.contextPath}/login/forgotMyInfo">가입이메일 / 비밀번호 찾기</a>
-
-	</div>
+</div>
+</section>
 	
 <!-- chat -->
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>

@@ -16,7 +16,7 @@
 		    $(document).ready(function(){
 		    	//로그인 하지않은 경우, 채팅방 개설 버튼 삭제
 		    	if(!$("#userNickname").val()){
-		    		$('#chatRoomMakeForm').html('<br><br>');
+		    		$('#chatRoomMakeForm').css("display", "none");
 		    	}
 		    	
 		    	var totalChatCount = getTotalChatCount();
