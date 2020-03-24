@@ -189,7 +189,8 @@ function likeCount(bId) {
 	
 	<!-- 댓글처리 -->
 		<div>
-			<h2>리뷰(<b class="reviewCount"></b>)</h2>
+			<h2>리뷰(<b class="reviewCount"></b>) </h2>
+			<h2>평점 : (<b class="reviewAVG"></b>) </h2>
 			<form name="rvform">
 				<input type="hidden" name="eId" value="${eContentView.eId}" />
 				<input type="hidden" name="user_id" value="${loginUser.user_id}">

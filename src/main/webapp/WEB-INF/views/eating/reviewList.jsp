@@ -96,7 +96,9 @@
 							},
 					success: function(data){
 						console.log(data);
+						console.log(data.reviewAVG);
 						
+						$('.reviewAVG').append(data.reviewAVG);
 						// 댓글 페이징
 						var rvPageMaker = Object.values(data["rvPageMaker"]);
 						reviewPagePrint(rvPageMaker);

@@ -18,11 +18,11 @@
 		]]>
 	</select>
 	
-	<select id="reviewAVG" resultType="_float">
+	<!-- <select id="reviewAVG" resultType="_float">
 		<![CDATA[
 			SELECT rv.eId, TRUNC(AVG(rv.rvScore), 1) FROM REVIEW rv, EATING e where e.eId = rv.eId GROUP BY rv.eId
 		]]>
-	</select>
+	</select> -->
 	
 	<insert id="reviewWrite" parameterType="bit.team.eepp.VO.ReviewVO">
 		INSERT INTO REVIEW(rvId, rvComment, rvScore, rvWrittenDate, rvModifyDate, eId, user_id) 
