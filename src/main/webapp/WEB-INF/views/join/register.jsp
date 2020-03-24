@@ -4,65 +4,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login_join/loginAndJoin.css">
-<%@ include file="/WEB-INF/include/header.jspf"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+<%@ include file="/WEB-INF/include/forImport.jspf"%>
 </head>
 <body>
-	<br>
-	<br>
+<!-- header -->
+<%@ include file="/WEB-INF/views/header.jsp"%>
+<!-- header -->
 
-	<div class="container text-center">
-		<div class="company-box">
-		<h1 style="text-align: center; width: 15%; margin: 0 auto">
-			<img style="max-width: 100%" src="${pageContext.request.contextPath}/img/EE_logo.png" />
-		</h1>
-		<p style="text-align: center; font-weight:bold; margin:0;">Community EE</p>
-		</div>
-	</div>
-
-	<div class="container col-md-4">
-
-		<form:form name="f" class="px-4 py-3" action="${pageContext.request.contextPath}/join/joinForm" method="post">
-		<button class="btn btn-normalJoin">일 반 회 원 가 입</button>
-		</form:form>
-		
-		<hr>
-		
-		<div class="snsJoin" class="px-4 py-3">
-		<h6 style="text-align:center; margin-bottom:20px;">S N S 간 편 회 원 가 입</h6>
-			<div class="sns_login_button">
-			
-			<form:form name="f" class="px-4 py-3" action="${naver_url}">
-			<input type="hidden" name="naver_join" value="naverjoin">
-					<button style="">
-						<img style="max-width:100%"
-							src="${pageContext.request.contextPath}/img/naver_account_login_small.PNG"/>
-					</button>
-			</form:form>
-			
-			<form:form name="f" class="px-4 py-3" action="${kakao_url}">
-			<input type="hidden" name="kakao_join" value="kakaojoin">
-					<button style="">
-						<img style="max-width:100%"
-							src="${pageContext.request.contextPath}/img/kakao_account_login_small.png"/>
-					</button>
-			</form:form>
-			
-			<form:form name="f" class="px-4 py-3" action="${google_url}">
-			<input type="hidden" name="google_join" value="googlejoin">
-					<button style="">
-						<img style="max-width:100%"
-							src="${pageContext.request.contextPath}/img/google_account_login_small.png"/>
-					</button>
-			</form:form>
-			
+<section class="sc-chooseJoin">
+<h2 class="welcomeEE"><span>e</span>mployees<span>,</span><br><span>e</span>scape from work</h2>
+<p class="subTitle">EE는 대한민국 직장인을 위한 커뮤니티입니다.<br>
+계정 생성 후<img src="${pageContext.request.contextPath}/img/EE_logo.png">의 모든 기능을 이용하실 수 있습니다.</p>
+	
+	<div class="container col-md-4 normalBtnWrap">
+		<div class="normal_join">
+			<div class="registerBtn">
+				<a href="${pageContext.request.contextPath}/join/joinForm">일반회원가입</a>
 			</div>
-		</div>
-
+	    </div>
 	</div>
+	
+	<div class="container col-md-4 snsBtnWrap">
+		<h6 class="snsLoginTitle">SNS회원가입</h6>
+			<div class="sns_login_button">
+				<span>
+					<button class="naverBtn" type="button" onclick="location.href='${naver_url}'">
+						<img src="${pageContext.request.contextPath}/img/naver_account_login_small.PNG"/>
+					</button>
+				</span>
+				
+				<span>
+					<button class="kakaoBtn" type="button" onclick="location.href='${kakao_url}'">
+						<img src="${pageContext.request.contextPath}/img/kakao_account_login_small.png"/>
+					</button>
+				</span>
+				
+				<span>
+					<button class="googleBtn" type="button" onclick="location.href='${google_url}'">
+						<img src="${pageContext.request.contextPath}/img/google_account_login_small.png"/>
+					</button>
+				</span>
+			</div>
+</div>
+<p class="isMember"><a href="${pageContext.request.contextPath}/login/login.do">이미 계정이 있으신가요?</a></p>
+</section>
+<!-- chat -->
+<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+<!-- chat -->
+
+<!-- footer -->
+<%@ include file="/WEB-INF/views/footer.jsp"%>
+<!-- footer -->
 
 </body>
 </html>
