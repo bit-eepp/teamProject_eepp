@@ -32,7 +32,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/reviewList")
-	public Map<String, Object> reviewList(ReviewVO reviewVO, ReviewCriteria rvCriteria) {
+	public Map<String, Object> reviewList(Model model,ReviewVO reviewVO, ReviewCriteria rvCriteria) {
 		System.out.println("store review list print");
 		
 		ReviewPageMaker rvPageMaker = new ReviewPageMaker();
@@ -52,7 +52,11 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rvPageMaker", rvPageMaker);
 		map.put("reviewList", reviewList);
-
+		map.put("reviewAVG", reviewService.reviewAVG(reviewVO));
+		
+//		model.addAttribute("reviewAVG", reviewService.reviewAVG(reviewVO));
+//		System.out.println(reviewService.reviewAVG(reviewVO));
+		
 		return map;
 	}
 	

@@ -14,14 +14,24 @@ public class ReviewVO {
 	private Timestamp rvModifyDate;
 	private String rvComment;
 	private float rvScore;
+	private float reviewAVG;
+	public float getReviewAVG() {
+		return reviewAVG;
+	}
+
+	public void setReviewAVG(float reviewAVG) {
+		this.reviewAVG = reviewAVG;
+	}
+
 	private String uNickname;
 
 	public ReviewVO() {
 	}
 
-	public ReviewVO(int rvId, int eId, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
+	public ReviewVO(float reviewAVG,int rvId, int eId, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
 			float rvScore, String uNickname) {
 		this.rvId = rvId;
+		this.reviewAVG = reviewAVG;
 		this.eId = eId;
 		this.user_id = user_id;
 		this.rvWrittenDate = rvWrittenDate;
