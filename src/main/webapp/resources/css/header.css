@@ -27,6 +27,24 @@
 #headerMain .common {font-size: 20px;}
 #headerMain .menu, #headerMain .logo, #headerMain .login{width:30%;}
 #headerMain .login{padding: 8px 30px;}
+#headerMain .userBtn{
+	display: inline!important;
+}
+#headerMain .beforeLoginHeaderIcon{
+	display:block;
+}
+#headerMain .dropdown-menu{
+	height: 100px!important;
+    padding: 10px!important;
+    min-width: 100px!important;
+}
+#headerMain .dropdown-menu li a{
+	color:#26274c!important;
+}
+#headerMain .userBtn:hover{
+	color: initial!important;
+    text-decoration: none;
+}
 #headerlogo {
 	max-width: 22%;
     height: auto;
@@ -34,7 +52,7 @@
 }
 
 #headerLogin {
-	max-width: 10%;
+	max-width: 11%;
 }
 #loginNickname {
 	font-size: 80%;

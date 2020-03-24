@@ -5,23 +5,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<%@ include file="/WEB-INF/include/header.jspf"%>
+<title>EE 회원가입</title>
+<%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login_join/loginAndJoin.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 <style>
 	
 </style>
 </head>
 <body>
+<!-- header -->
+<%@ include file="/WEB-INF/views/header.jsp"%>
+<!-- header -->
+
 
 	<div class="joinForm-wrapper container col-md-8">
 	
-		<section id="MainTxt">
-			<p class="logoImg"><img src="${pageContext.request.contextPath}/img/EE_logo.png" /></p>
-			<p class="subTxt">welcome to EE !</p>
+		<section class="sc-welcome">
+			<p class="welcomeEE">WELCOME TO EE!</p>
+			<p class="subTitle">Community EE에 오신것을 환영합니다.<br>
+			회원가입하신 후 EE의 다양한 서비스를 이용해보세요.</p>
 		</section>
 
-		<section id="agreement">
+		<section class="sc-agreement">
+			<div class="agreement-wrap">
 			<h1 class="sc-title">약관동의</h1>
 			
 			<div id="ermsOfuse" class="agree_content">
@@ -105,9 +112,11 @@
 			</div>
 			<p class="agreeCheck">개인정보수집 및 이용에대한 안내(필수)</p>
 			<input id="isAgree_02" type="checkbox" name="agreement_2"/>
+			</div>
 		</section>
 
-		<section id="registerForm">
+		<section class="sc-registerForm">
+		<div class="registerForm-wrap">
 			<h1 class="sc-title">회원가입</h1>
 
 			<div class="container col-md-10">
@@ -261,8 +270,18 @@
 		</c:otherwise>
 	</c:choose>
 	</div>
+	</div>
 	</section>
-<script src="${pageContext.request.contextPath}/js/join.js"></script>
+	
 </div>
+<!-- chat -->
+<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+<!-- chat -->
+
+<!-- footer -->
+<%@ include file="/WEB-INF/views/footer.jsp"%>
+<!-- footer -->
+
+<script src="${pageContext.request.contextPath}/js/join.js"></script>
 </body>
 </html>

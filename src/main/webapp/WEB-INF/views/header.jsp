@@ -143,9 +143,9 @@
 						    </div>
 						    
 						    <div class="login common" align="right">
-						    	<button title="LogIn" class="headerMenu1" type="button" onclick="location.href='${pageContext.request.contextPath}/login/login.do'">
+						    	<a class="beforeLoginHeaderIcon" href="${pageContext.request.contextPath}/login/login.do">
 						    		<img id="headerLogin" src="${pageContext.request.contextPath}/img/headerLogin.png">
-						    	</button>
+						    	</a>
 						    </div>
 						</div>
 					</header>
