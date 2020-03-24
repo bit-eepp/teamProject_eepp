@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/include/header.jspf"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/loginAndJoin.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login_join/loginAndJoin.css">
 <style>
 	
 </style>
@@ -208,18 +208,18 @@
 					
 					<tr>
 					<th class="input-title"><span class="required">&#8226;</span>비밀번호</th>
-					<td><input type="password" name="uPassword" id="uPassword"></td>
+					<td><input type="password" name="uPassword" id="uPassword" class="lg-inputBox"></td>
 					</tr>
 					
 					<tr>
 					<th class="input-title"><span class="required">&#8226;</span>비밀번호 재입력</th>
-					<td><input type="password" name="uPasswordCheck" id="uPasswordCheck"></td>
+					<td><input type="password" name="uPasswordCheck" id="uPasswordCheck" class="lg-inputBox"></td>
 					</tr>
 					
 					<tr>
 					<th class="input-title"><span class="required">&#8226;</span>닉네임</th>
 					<td>
-					<input name="uNickname" id="uNickname" maxlength="8">
+					<input name="uNickname" id="uNickname" maxlength="8" class="lg-inputBox">
 					<button type="button" class="btn btn-info" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
 					</td>
 					</tr>

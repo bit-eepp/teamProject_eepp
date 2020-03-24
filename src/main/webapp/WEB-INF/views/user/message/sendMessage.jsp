@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>쪽지 보내기</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/msg.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/msg.css">
 </head>
 
 <body class="messageView_body">
