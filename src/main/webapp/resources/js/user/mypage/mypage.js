@@ -114,17 +114,17 @@ $('#changeImg').click(function() {
 	alert("기본 이미지로 변경됩니다.")
 });
 
-// // 회원정보 수정 보여주고 닫기
-// $(document).ready(function() {
-// if (!$('#mpInfo').val()) {
-// $(".info").hide();
-// } else {
-// $(".info").show();
-// }
-// })
-// $("#myinfobtn").click(function() {
-// $(".info").slideToggle();
-// });
+// 회원정보 수정 보여주고 닫기
+ $(document).ready(function() {
+ if (!$('#mpInfo').val()) {
+ $(".info").hide();
+ } else {
+ $(".info").show();
+ }
+ })
+ $("#myinfobtn").click(function() {
+ $(".info").slideToggle();
+ });
 
 // 게시글 보여주고 닫기
 $(document).ready(function() {
@@ -160,6 +160,18 @@ $(document).ready(function() {
 })
 $("#mypointbtn").click(function() {
 	$("#point_list").slideToggle();
+});
+
+//클래스 내역 보여주고 닫기
+$(document).ready(function() {
+	if (!$('#mpclass').val()) {
+		$(".myclass_list").hide();
+	} else {
+		$(".myclass_list").show();
+	}
+})
+$("#myclassbtn").click(function() {
+	$(".myclass_list").slideToggle();
 });
 
 // // 회원탈퇴 질문

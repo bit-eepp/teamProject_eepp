@@ -3,7 +3,6 @@
 /*
 * 마이페이지 css 부
 */
-
 .bordered a {
 	color: inherit;
 }
@@ -62,7 +61,7 @@ p {
 
 .img-circle {
 	width: 30%;
-	margin-left:20%;
+	margin-left: 20%;
 	overflow: hidden;
 	border-radius: 50%;
 }
@@ -124,17 +123,11 @@ p {
 	color: #59bfbf;
 }
 
-.text_bold {
-	color: #59bfbf;
-	font-weight: bold;
-	font-size: 18px;
-}
-
 .text-wrap td {
 	height: 50px;
 }
 
-.myinfo-wrap h3 {
+.myinfo-wrap h3, .myclass-wrap h3 {
 	color: #59bfbf;
 }
 
@@ -142,7 +135,7 @@ p {
 	background-color: #59bfbf;
 }
 
-#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn {
+#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn, #myclassbtn {
 	margin-right: 20px;
 	width: 10%;
 	background-color: #59bfbf;
@@ -153,13 +146,25 @@ p {
 }
 
 tr.bordered {
-	border-bottom: 1px solid #f3f3f3;
+	border-bottom: 1px solid #BDBDBD;
 }
 
 tr.bordered td {
 	padding-left: 20%;
 }
 
+.page-link {
+	border: none;
+	margin-left: 20px;
+	color: #26274c;
+	background: #ffffff;
+	font-weight: 700;
+}
+
+.page-link:hover {
+	background: #59bfbf;
+	color: #ffffff;
+}
 /*
 
 회원탈퇴 css
@@ -169,66 +174,89 @@ tr.bordered td {
 	color: #e7438b;
 	margin-right: 10px;
 }
-.form-group{
-	margin : 0 auto;
-	width : 80%;
-	text-align:center;
-}
-#dropBtn{
-background-color: #59bfbf;
-width:31%;
-}
-.drop_form{
-	text-align:center;
+
+.form-group {
+	margin: 0 auto;
+	width: 80%;
+	text-align: center;
 }
 
-	/*
+#dropBtn {
+	background-color: #59bfbf;
+	width: 31%;
+}
+
+.drop_form {
+	text-align: center;
+}
+
+/*
 	
 	포인트
 	
 	*/
-	
-.charge_point{
-	display:inline-block;
+.charge_point {
+	display: inline-block;
 }
 
-#charge_point .modal-header .close{font-size: 32px!important;font-weight: 500!important;}
-#charge_point .modal-body{padding: 0!important;}
-#charge_point .modal-footer{border-top:initial!important;}
-.tit_wrap{
-	overflow:hidden;
-	background: #4acccc;
-    padding: 10px 20px;
-    color: #fff;
-    border-top: 1px solid #000;
-    font-size: 18px;
+#charge_point .modal-header .close {
+	font-size: 32px !important;
+	font-weight: 500 !important;
 }
-.tit_wrap span{float:left;}
-.tit_wrap .tit_cost{float: right;}
-.point_wrap label{
+
+#charge_point .modal-body {
+	padding: 0 !important;
+}
+
+#charge_point .modal-footer {
+	border-top: initial !important;
+}
+
+.tit_wrap {
 	overflow: hidden;
-    display: block;
-    padding: 15px;
-    border-bottom: 1px solid #e6e6e6;
+	background: #4acccc;
+	padding: 10px 20px;
+	color: #fff;
+	border-top: 1px solid #000;
+	font-size: 18px;
 }
-.point_wrap label input{
-	margin-top: 3px;
-    margin-right: 5px;
-    float: left;
-    width: initial;
-}
-.point_wrap label span{
+
+.tit_wrap span {
 	float: left;
 }
-.point_wrap label .cost{
+
+.tit_wrap .tit_cost {
 	float: right;
 }
-#charge_point .chargeBtn{
+
+.point_wrap label {
+	overflow: hidden;
 	display: block;
-    width: 280px;
-    margin: 10px auto;
-    background: #4acccc;
-    color: #fff;
-    padding: 10px 0;
-    cursor: pointer;
+	padding: 15px;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.point_wrap label input {
+	margin-top: 3px;
+	margin-right: 5px;
+	float: left;
+	width: initial;
+}
+
+.point_wrap label span {
+	float: left;
+}
+
+.point_wrap label .cost {
+	float: right;
+}
+
+#charge_point .chargeBtn {
+	display: block;
+	width: 280px;
+	margin: 10px auto;
+	background: #4acccc;
+	color: #fff;
+	padding: 10px 0;
+	cursor: pointer;
 }
