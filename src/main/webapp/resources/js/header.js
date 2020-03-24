@@ -1,3 +1,7 @@
+function openMsg(){
+	 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
+			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
+	}
 
 $('.navbar-toggle').on('click', function () {
     $('#mySidenav').addClass('side_show');

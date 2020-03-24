@@ -26,7 +26,7 @@
 
 #headerMain .common {font-size: 20px;}
 #headerMain .menu, #headerMain .logo, #headerMain .login{width:30%;}
-#headerMain .login{padding: 8px 15px;}
+#headerMain .login{padding: 8px 30px;}
 #headerlogo {
 	max-width: 22%;
     height: auto;
@@ -34,11 +34,12 @@
 }
 
 #headerLogin {
-	max-width: 80%;
+	max-width: 10%;
 }
 #loginNickname {
 	font-size: 80%;
 	color: #26274c;
+	margin-right:15px;
 }
 
 .side_show{
@@ -47,7 +48,7 @@
 .navbar-toggle {
 	position: relative;
 	padding: 10px;
-	margin: 8px 15px;
+	margin: 8px 30px;
 	background-color: white;
 	background-image: none;
 	border: 1px solid transparent;

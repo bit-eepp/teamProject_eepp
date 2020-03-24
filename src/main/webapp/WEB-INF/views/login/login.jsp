@@ -35,7 +35,7 @@
 			</div>
 			
 			<c:if test="${failedLogin != null}">
-				<p class="faildLogin">아이디 또는 비밀번호가 잘못되었습니다.</p>
+				<p class=" ">아이디 또는 비밀번호가 잘못되었습니다.</p>
 			</c:if>
 			
 			<div class="form-check">

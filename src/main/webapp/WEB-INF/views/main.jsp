@@ -9,11 +9,6 @@
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 <script type="text/javascript">
-function openMsg(){
-	 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
-			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
-	}
-	
 $(function(){  
 	var currentPosition = parseInt($(".float").css("top")); 
 	$(window).scroll(function() { 
