@@ -85,7 +85,7 @@
     left: -360px;
     height: 100%;
     z-index: 9999;
-	background-color: rgba(226, 226, 226, 0.8);
+	background-color: rgba(255, 255, 255, 0.6);
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 1px; /* Place content 60px from the top */
 	transition: all 0.5s;
