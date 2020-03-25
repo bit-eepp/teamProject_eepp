@@ -26,8 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import bit.team.eepp.Page.JoinClassCriteria;
+import bit.team.eepp.Page.JoinClassPageMaker;
 import bit.team.eepp.Page.MessageCriteria;
 import bit.team.eepp.Page.MessagePageMaker;
+import bit.team.eepp.Page.OpenClassCriteria;
+import bit.team.eepp.Page.OpenClassPageMaker;
 import bit.team.eepp.Page.PointCriteria;
 import bit.team.eepp.Page.PointPageMaker;
 import bit.team.eepp.Page.ScrapClassCriteria;
@@ -116,14 +120,15 @@ public class UserController {
 
 	@RequestMapping("/mypage")
 	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri,
+			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri, JoinClassCriteria joclcri, OpenClassCriteria opclcri,
 			@ModelAttribute("scrapcri") ScrapboardCriteria scrapcri, ScrapClassCriteria scrapclasscri, PointCriteria poCri,
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
 			@RequestParam(value = "mpPoint", required = false, defaultValue = "") String mpPoint,
 //			@RequestParam(value = "mpInfo", required = false, defaultValue = "") String mpInfo,
-			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap) throws IOException {
+			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap,
+			@RequestParam(value = "mpclass", required = false, defaultValue = "") String mpclass) throws IOException {
 		logger.info("my contents List");
 
 		// 유저 세션 받아오기
@@ -154,12 +159,26 @@ public class UserController {
 			map.put("pointList", us.pointList(map));
 			map.put("poCri", poCri);
 			map.put("scrapclasscri", scrapclasscri);
-
+			map.put("joclcri",joclcri);
+			map.put("opclcri", opclcri);
+			
+			//개설한 클래스
+			OpenClassPageMaker OpenClassPageMaker = new OpenClassPageMaker();
+			OpenClassPageMaker.setCri(opclcri);
+			OpenClassPageMaker.setTotalCount(us.openClassCount(map));
+			
+			//가입한 클래스
+			JoinClassPageMaker JoinClassPageMaker = new JoinClassPageMaker();
+			JoinClassPageMaker.setCri(joclcri);
+			JoinClassPageMaker.setTotalCount(us.joinClassCount(map));
+			
+			// 포인트
 			PointPageMaker pointpageMaker = new PointPageMaker();
 			int poTotal = us.pointCount(map);
 			pointpageMaker.setCri(poCri);
 			pointpageMaker.setTotalCount(poTotal);
 			
+			// 게시글 스크랩
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
 			myPagePageMaker.setCri(mscri);
 			myPagePageMaker.setTotalCount(us.listCount(map));
@@ -187,6 +206,8 @@ public class UserController {
 //			if (mpInfo != null) {
 //				model.addAttribute("mpInfo", mpInfo);
 //			}
+			model.addAttribute("joinClass",us.joinClass(map));
+			model.addAttribute("openClass",us.openClass(map));
 			model.addAttribute("ClassscrapList",us.ClassscrapList(map));
 			model.addAttribute("pointList",us.pointList(map));
 			model.addAttribute("messageRes", us.receiveCount(map));
@@ -200,6 +221,8 @@ public class UserController {
 			model.addAttribute("ScrapboardPageMaker", ScrapboardPageMaker);
 			model.addAttribute("ScrapClassPageMaker", ScrapClassPageMaker);
 			model.addAttribute("pointpageMaker", pointpageMaker);
+			model.addAttribute("JoinClassPageMaker", JoinClassPageMaker);
+			model.addAttribute("OpenClassPageMaker", OpenClassPageMaker);
 			model.addAttribute("sortType", sortType);
 			model.addAttribute("bCategory", bCategory);
 		}
