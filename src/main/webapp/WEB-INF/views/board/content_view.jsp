@@ -260,7 +260,7 @@
 			<div class="replyList"></div>
 		</div>
 	
-		<%@ include file="/WEB-INF/views/board/replyList.jsp"%>
+		<%-- <%@ include file="/WEB-INF/views/board/replyList.jsp"%> --%>
 
 <!-- chat -->
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
@@ -269,8 +269,8 @@
 <!-- footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 <!-- footer -->
-
-		<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
-		<script src="${pageContext.request.contextPath}/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/js/reply/reply.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
+	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
 </html>
