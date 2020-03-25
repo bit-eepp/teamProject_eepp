@@ -1,15 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-
-<!-- 		<script>
-		var uNickname = $("#userNickname").val();
-		var userId = $("#userId").val();
+var uNickname = $("#userNickname").val();
+var userId = $("#userId").val();
 		
 			// 해당 class강좌의 문의수를 불러오는 JS메서드(Ajax-Json)
 			function questionCnt() {
@@ -334,10 +324,3 @@
 					}
 				}	
 			}
-		</script> -->
-	</head>
-	<body>
-	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-	<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
-	</body>
-</html>

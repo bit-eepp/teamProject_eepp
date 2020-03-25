@@ -469,7 +469,8 @@
 			<div class="questionList"></div>
 		</div>
 		
-		<%@ include file="/WEB-INF/views/class/classQuestionList.jsp"%>
+		<%-- <%@ include file="/WEB-INF/views/class/classQuestionList.jsp"%> --%>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
+		<script src="${pageContext.request.contextPath}/js/class/reply/reply.js"></script>
 	</body>
 </html>

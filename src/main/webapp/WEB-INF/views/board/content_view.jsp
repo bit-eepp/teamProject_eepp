@@ -269,7 +269,7 @@
 <!-- footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 <!-- footer -->
-	<script src="${pageContext.request.contextPath}/js/reply/reply.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/reply/reply.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
