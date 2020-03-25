@@ -122,7 +122,7 @@ $('#emailSelection').change(function() {
 	});
 });
 
-$("#emailBtn").click(function() {
+$(".emailBtn").click(function() {
 	$("#afterSendEmailAuth").show(500);
 });
 

@@ -18,17 +18,16 @@
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- header -->
 
-
-	<div class="joinForm-wrapper container col-md-8">
-	
-		<section class="sc-welcome">
-			<p class="welcomeEE">WELCOME TO EE!</p>
-			<p class="subTitle">Community EE에 오신것을 환영합니다.<br>
+<div class="joinForm-wrapper container col-md-8">
+	<section class="sc-welcome">
+		<p class="welcomeEE">WELCOME TO EE!</p>
+		<p class="subTitle">Community EE에 오신것을 환영합니다.<br>
 			회원가입하신 후 EE의 다양한 서비스를 이용해보세요.</p>
-		</section>
-
-		<section class="sc-agreement">
-			<div class="agreement-wrap">
+	</section>
+	
+	<section class="sc-agreement">
+		<div class="agreement-wrap">
+		
 			<h1 class="sc-title">약관동의</h1>
 			
 			<div id="ermsOfuse" class="agree_content">
@@ -112,38 +111,39 @@
 			</div>
 			<p class="agreeCheck">개인정보수집 및 이용에대한 안내(필수)</p>
 			<input id="isAgree_02" type="checkbox" name="agreement_2"/>
-			</div>
-		</section>
+			
+		</div>
+	</section>
 
-		<section class="sc-registerForm">
+	<section class="sc-registerForm">
 		<div class="registerForm-wrap">
 			<h1 class="sc-title">회원가입</h1>
-
-			<div class="container col-md-10">
 			
-		<c:choose>
+			<div class="container">
+			<c:choose>
+			
 			<c:when test="${not empty user.uEmail}">
-			<form method="POST" id="joinSnsForm" name="JoinSnsForm" action="joinWithSns.me" class="px-4 py-3" enctype="multipart/form-data">
+			<form method="POST" id="joinSnsForm" name="JoinSnsForm" action="joinWithSns.me" class="py-3" enctype="multipart/form-data">
 				<input type="hidden" name="uEmail" value="${user.uEmail}">
 				<input type="hidden" name="snsType" value="${user.snsType}">
 				
 				<div class="form-group">
-					<table>
+					<table class="joinTable">
 					<tbody>
-					<tr>
-						<th class="input-title"><span class="required">&#8226;</span>이메일</th>
-						<td>${user.uEmail}<br><span>※이메일은 로그인시 사용됩니다.</span></td>
+					<tr class="idInputBox">
+						<th class="input-title"><span class="required">&#8226;</span>아이디</th>
+						<td>${user.uEmail}</td>
 					</tr>
 					
-					<tr>
+					<tr class="nickInputBox">
 						<th class="input-title"><span class="required">&#8226;</span>닉네임</th>
 						<td>
 							<input name="uNickname" id="uNickname" maxlength="8">
-							<button type="button" class="btn btn-info" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
+							<button type="button" class="nickCheckBtn joinBtn" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
 						</td>
 					</tr>
 					
-					<tr>
+					<tr class="phoneInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>핸드폰 번호</th>
 					<td>
 					<select name="uPhone_1" class="custom-select" id="uPhone">
@@ -152,22 +152,28 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select> 
-					- <input type="text" name="uPhone_2" maxlength="4" size="6"class="uPhone_2">
-					- <input type="text" name="uPhone_3" maxlength="4" size="6" class="uPhone_3">
-					<button type="button" class="btn btn-info" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
+					- <input type="text" class="uPhone_2"  name="uPhone_2" maxlength="4" size="6">
+					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6">
+					<button type="button" class="phoneCheckBtn joinBtn" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
 					</td>
 					</tr>
-					<tr>
+					<tr class="profileInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>프로필 설정</th>
 					<td>
 					<div class= "profile">
 						<img src="${pageContext.request.contextPath}/img/headerLogin.png" class="basic_img"/>
-								<div class="inputArea"><br>
+								<!-- div class="inputArea">
 									<input type="file" name="file" id="showImg"/>
-								</div>
-								<br>
-					</div><!-- profile -->
-					<p class="info_profile">이미지 설정이 없을 시 기본 프로필 사진으로 설정 됩니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;프로필은 마이페이지에서도 변경이 가능합니다.</p>
+								</div> -->
+								<div class="choosePick">
+								 <input type="text" readonly="readonly" id="file_route">
+								 <label>이미지 선택
+								 <input type="file" id="showImg" onchange="javascript:document.getElementById('file_route').value=this.value">
+								 </label>
+						<p class="info_profile">이미지 설정이 없을 시 기본 프로필 사진으로 설정 됩니다.<br>프로필은 마이페이지에서도 변경이 가능합니다.</p>
+						</div>
+					</div>
+					<!-- profile -->
 					</td>
 					</tr>
 					</tbody>
@@ -180,19 +186,18 @@
 			</c:when>
 
 			<c:otherwise>
-			<form method="POST" id="joinNormalForm" name="joinNormalForm" action="join.me" class="px-4 py-3" enctype="multipart/form-data">
+			<form method="POST" id="joinNormalForm" name="joinNormalForm" action="join.me" class="py-3" enctype="multipart/form-data">
 			
 				<div class="form-group">
-					<table>
+					<table class="joinTable">
 					<tbody>
-					<tr>
-						<th class="input-title"><span class="required">•</span>이메일</th>
-						
+					<tr class="idInputBox">
+						<th class="input-title"><span class="required">•</span>아이디</th>
 						<td>
 						<input type="text" name="email_01" id="email_01" class="email_input_01">&nbsp;@&nbsp;
 						<input type="text" name="email_02" id="email_02" class="email_input_02">
 						<select class="custom-select" name="selectEmail" id="emailSelection">
-							<option value="" selected="">직접입력</option>
+							<option value="" selected>직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="yahoo.co.kr">yahoo.co.kr</option>
@@ -200,7 +205,7 @@
 							<option value="gmail.com">gmail.com</option>
 						</select>
 						
-						<button type="button" class="btn btn-info" id="emailBtn" onclick="sendEmailAuth();" value="N">이메일 인증</button>
+						<button type="button" class="emailBtn joinBtn" onclick="sendEmailAuth();" value="N">이메일 인증</button>
 						</td>
 					</tr>
 					
@@ -210,30 +215,30 @@
 					<div>
 						<input type="text" name="emailAuth" id="emailAuth">
 						<input type="hidden" name="random" id="random">
-						<button type="button" class="btn btn-info" id="emailAuthBtn" onclick="checkEmailAuth();" value="N">확인</button>
+						<button type="button" class="emailCheckBtn joinBtn" id="emailAuthBtn" onclick="checkEmailAuth();" value="N">확인</button>
 					</div>
 					</td>
 					</tr>
 					
-					<tr>
+					<tr class="pwInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>비밀번호</th>
 					<td><input type="password" name="uPassword" id="uPassword" class="lg-inputBox"></td>
 					</tr>
 					
-					<tr>
+					<tr class="pwInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>비밀번호 재입력</th>
 					<td><input type="password" name="uPasswordCheck" id="uPasswordCheck" class="lg-inputBox"></td>
 					</tr>
 					
-					<tr>
+					<tr class="nickInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>닉네임</th>
 					<td>
 					<input name="uNickname" id="uNickname" maxlength="8" class="lg-inputBox">
-					<button type="button" class="btn btn-info" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
+					<button type="button" class="nickCheckBtn joinBtn" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
 					</td>
 					</tr>
 					
-					<tr>
+					<tr class="phoneInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>핸드폰 번호</th>
 					<td>
 					<select name="uPhone_1" class="custom-select" id="uPhone">
@@ -242,38 +247,45 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select> 
-					- <input type="text" name="uPhone_2" maxlength="4" size="6"class="uPhone_2">
-					- <input type="text" name="uPhone_3" maxlength="4" size="6" class="uPhone_3">
-					<button type="button" class="btn btn-info" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
+					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6">
+					- <input type="text" class="uPhone_2"  name="uPhone_3" maxlength="4" size="6">
+					<button type="button" class="phoneCheckBtn joinBtn" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
 					</td>
 					</tr>
 					
-					<tr>
+					<tr class="profileInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>프로필 설정</th>
 					<td>
 					<div class= "profile">
 						<img src="${pageContext.request.contextPath}/img/headerLogin.png" class="basic_img"/>
-								<div class="inputArea"><br>
+								<!-- div class="inputArea">
 									<input type="file" name="file" id="showImg"/>
-								</div>
-								<br>
-					</div><!-- profile -->
-					<p class="info_profile">이미지 설정이 없을 시 기본 프로필 사진으로 설정 됩니다.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;프로필은 마이페이지에서도 변경이 가능합니다.</p>
+								</div> -->
+								<div class="choosePick">
+								 <input type="text" readonly="readonly" id="file_route">
+								 <label>이미지 선택
+								 <input type="file" id="showImg" onchange="javascript:document.getElementById('file_route').value=this.value">
+								 </label>
+						<p class="info_profile">이미지 설정이 없을 시 기본 프로필 사진으로 설정 됩니다.<br>프로필은 마이페이지에서도 변경이 가능합니다.</p>
+						</div>
+					</div>
+					<!-- profile -->
 					</td>
 					</tr>
 				</tbody>
 				</table>
 			</div>
-				
-	<button type="submit" class="btn btn-submit" id="submit">회원가입</button>
+			
+			<button type="submit" class="btn btn-submit" id="submit">회원가입</button>
 		</form>
 		</c:otherwise>
 	</c:choose>
 	</div>
 	</div>
-	</section>
 	
+</section>
 </div>
+
 <!-- chat -->
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 <!-- chat -->
