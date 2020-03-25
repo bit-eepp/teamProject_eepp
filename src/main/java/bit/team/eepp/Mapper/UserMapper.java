@@ -102,7 +102,7 @@ public interface UserMapper {
 	public void myNickNameUpdate(UserVO userVO);
 
 	// 포인트 가져오기
-	@Select("select * from payment where user_id = #{user_id}")
+	@Select("select * from payment where user_id = #{user_id} order by paDate desc")
 	public List<PaymentVO> pointList(Map<String, Object> map);
 
 	// 포인트 사용 내역 개수
