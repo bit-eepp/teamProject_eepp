@@ -10,21 +10,22 @@ public class BoardVO {
 	private String bContent;
 	private String bSubject;
 	private String bCategory;
-	private Timestamp bWrittenDate;
-	private Timestamp bModifyDate;
+	private String bWrittenDate;
+	private String bModifyDate;
 	private int bHit;
 	private int bLike;
 	private int bUnlike;
 	private String bBlind;
 	private int rpCount;
 	private int dCount;
+	private Timestamp isNew;
 
 	public BoardVO() {
 	}
 
 	public BoardVO(int bId, int user_id, String uNickname, String bTitle, String bContent, String bSubject,
-			String bCategory, Timestamp bWrittenDate, Timestamp bModifyDate, int bHit, int bLike, int bUnlike,
-			String bBlind, int rpCount, int dCount) {
+			String bCategory, String bWrittenDate, String bModifyDate, int bHit, int bLike, int bUnlike,
+			String bBlind, int rpCount, int dCount,Timestamp isNew) {
 		this.bId = bId;
 		this.user_id = user_id;
 		this.uNickname = uNickname;
@@ -40,6 +41,16 @@ public class BoardVO {
 		this.bBlind = bBlind;
 		this.rpCount = rpCount;
 		this.dCount = dCount;
+		this.isNew = isNew;
+	}
+	
+	
+	public Timestamp getIsNew() {
+		return isNew;
+	}
+
+	public void setIsNew(Timestamp isNew) {
+		this.isNew = isNew;
 	}
 
 	public int getdCount() {
@@ -114,19 +125,19 @@ public class BoardVO {
 		this.bCategory = bCategory;
 	}
 
-	public Timestamp getbWrittenDate() {
+	public String getbWrittenDate() {
 		return bWrittenDate;
 	}
 
-	public void setbWrittenDate(Timestamp bWrittenDate) {
+	public void setbWrittenDate(String bWrittenDate) {
 		this.bWrittenDate = bWrittenDate;
 	}
 
-	public Timestamp getbModifyDate() {
+	public String getbModifyDate() {
 		return bModifyDate;
 	}
 
-	public void setbModifyDate(Timestamp bModifyDate) {
+	public void setbModifyDate(String bModifyDate) {
 		this.bModifyDate = bModifyDate;
 	}
 

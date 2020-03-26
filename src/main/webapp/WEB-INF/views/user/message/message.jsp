@@ -129,7 +129,6 @@
 						<!-- li.note_type -->
 							
 						<c:choose>
-						<%-- 보낸 쪽지함 --%>
 						<c:when test="${messageType eq 'myReceiveMsg'}">
 						<li class="note_cont note_content">
 							<a class="openMsgView" onclick="openReceiveMsg(${msg.mid},${msg.sender_id});">
@@ -202,9 +201,6 @@
 						</li>
 						<!-- li.note_active -->
 						</c:when>
-						<%-- 받은 쪽지함 --%>
-						
-						<%-- 보낸 쪽지함 --%>
 						<c:when test="${messageType eq 'mySendMsg'}">
 						<li class="note_cont note_content">
 							<a class="openMsgView" onclick="openSendMsg(${msg.mid},${msg.receiver_id});">
@@ -235,7 +231,6 @@
 							</c:choose>
 						</li>
 						</c:when>
-						<%-- 보낸 쪽지함 --%>
 						</c:choose>
 					</ul>
 					<!-- notelist_head -->

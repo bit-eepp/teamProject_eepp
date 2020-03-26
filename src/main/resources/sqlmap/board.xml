@@ -9,25 +9,25 @@
 		<if test="bCategory != null">
 			<choose>
 				<when test="bCategory == 'notice'">
-	               AND b.bCategory = 'notice'
+	               AND b.bCategory = '공지'
 	            </when>
 	            <when test="bCategory == 'it_dev'">
-	               AND b.bCategory = 'it_dev'
+	               AND b.bCategory = 'IT/개발'
 	            </when>
 	            <when test="bCategory == 'service'">
-	               AND b.bCategory = 'service'
+	               AND b.bCategory = '서비스'
 	            </when>
 	            <when test="bCategory == 'finance'">
-	               AND b.bCategory = 'finance'
+	               AND b.bCategory = '금융'
 	            </when>
 	            <when test="bCategory == 'design'">
-	               AND b.bCategory = 'design'
+	               AND b.bCategory = '디자인'
 	            </when>
 	            <when test="bCategory == 'official'">
-	               AND b.bCategory = 'official'
+	               AND b.bCategory = '공무원'
 	            </when>
 	            <when test="bCategory == 'etc'">
-	               AND b.bCategory = 'etc'
+	               AND b.bCategory = '기타'
 	            </when>
 	        </choose>
 		</if>
@@ -53,32 +53,32 @@
 	<select id="boardList" resultType="bit.team.eepp.VO.BoardVO" parameterType="map">
 		SELECT * FROM
 		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
-		(SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, b.bWrittenDate, b.bModifyDate, b.bHit, b.bLike, b.bUnlike,
+		(SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 		(SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
 		FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID
 		
 		<if test="bCategory != null">
 			<choose>
 				<when test="bCategory == 'notice'">
-	               AND b.bCategory = 'notice'
+	               AND b.bCategory = '공지'
 	            </when>
 	            <when test="bCategory == 'it_dev'">
-	               AND b.bCategory = 'it_dev'
+	               AND b.bCategory = 'IT/개발'
 	            </when>
 	            <when test="bCategory == 'service'">
-	               AND b.bCategory = 'service'
+	               AND b.bCategory = '서비스'
 	            </when>
 	            <when test="bCategory == 'finance'">
-	               AND b.bCategory = 'finance'
+	               AND b.bCategory = '금융'
 	            </when>
 	            <when test="bCategory == 'design'">
-	               AND b.bCategory = 'design'
+	               AND b.bCategory = '디자인'
 	            </when>
 	            <when test="bCategory == 'official'">
-	               AND b.bCategory = 'official'
+	               AND b.bCategory = '공무원'
 	            </when>
 	            <when test="bCategory == 'etc'">
-	               AND b.bCategory = 'etc'
+	               AND b.bCategory = '기타'
 	            </when>
 	        </choose>
 		</if>
@@ -121,7 +121,7 @@
 	</select>
 	
 	<select id="selectOne" resultType="bit.team.eepp.VO.BoardVO">
-		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, b.bWrittenDate, b.bModifyDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount
+		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount
 		FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bId = #{bId}
 	</select>
 	
@@ -143,7 +143,7 @@
 	</delete>	
 		
 	<select id="modifyView" resultType="bit.team.eepp.VO.BoardVO">
-		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, b.bContent, u.uNickname, b.bWrittenDate, b.bModifyDate, b.bHit, b.bLike, b.bUnlike FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bId = #{bId}
+		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, b.bContent, u.uNickname, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bHit, b.bLike, b.bUnlike FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bId = #{bId}
 	</select>
 	
 	<update id="modify" parameterType="bit.team.eepp.VO.BoardVO">
@@ -153,9 +153,9 @@
 	<select id="noticeList" resultType="bit.team.eepp.VO.BoardVO">
 		<![CDATA[
 			SELECT * FROM (
-			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, b.bWrittenDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount 
+			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount 
 			FROM USERS u, BOARD b
-			WHERE u.USER_ID = b.USER_ID AND b.bCategory = 'notice' ORDER BY bWrittenDate DESC)
+			WHERE u.USER_ID = b.USER_ID AND b.bCategory = '공지' ORDER BY bWrittenDate DESC)
 			WHERE ROWNUM <= 2
 		]]>
 	</select>
@@ -163,7 +163,7 @@
 	<select id="hotList" resultType="bit.team.eepp.VO.BoardVO">
 		<![CDATA[ 
 			SELECT * FROM (
-			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, b.bWrittenDate, b.bHit, b.bLike, b.bUnlike, 
+			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, b.bHit, b.bLike, b.bUnlike, 
 			(SELECT COUNT(*) FROM REPLY WHERE board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
 			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND TO_CHAR(b.bWrittenDate,'YYYYMMDD') >= TO_CHAR(SYSDATE-7,'YYYYMMDD') ORDER BY rpCount DESC)
 			WHERE dCount <= 10 AND ROWNUM <= 3
