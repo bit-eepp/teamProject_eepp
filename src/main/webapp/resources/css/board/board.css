@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+	/*
+	* boardList
+	*/
+#boardWrapper{
+	padding: 40px 40px;
+    display: flex;
+}
+.boardSideWrap{
+	padding : 15px;
+}
+.boardSideWrap .category{
+	display: block;
+    border-bottom: 0.15rem solid #59bfbf;
+    color: #59bfbf;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.boardList-Wrap{
+	padding: 0 40px;
+}
+.boardTitle h2{
+	font-size:32px;
+	font-weight: normal;
+}
+.selectSortType{
+	margin: 5px 0;
+}
+.selectSortType a{
+	color: #5a5a5a;
+	font-size: 14px;
+}
+.selectSortType a.active{
+	color: #000!important;
+    text-decoration: underline;
+}
+.sortCountAndWrite{
+	display:flex;
+	justify-content: space-between;
+	margin: 5px 0 15px;
+	align-items: flex-end;
+}
+.sortCountAndWrite select{
+	font-size:13px;
+	height: calc(1.8rem)!important;
+    padding: 0 1.5rem 0 0.5rem!important;
+}
+.sortCountAndWrite .writeBtnWrap{
+	width: 120px;
+}
+.sortCountAndWrite .writeBtnWrap a{
+	display: block;
+    background: #59bfbf;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:14px;
+}
+.sortCountAndWrite .writeBtnWrap a:hover{
+	background: #41a0a0!important;
+}
+
+.listTable table{
+	width:100%;
+	font-size:14px;
+}
+.isNoticeContent{
+    color: #59bfbf!important;
+    text-align: center;
+    font-size: 18px;
+}
+.isHotContent{
+	text-align: center;
+    color: #e7438b!important;
+    font-size: 20px;
+}
+.isNewContent{
+	text-align: center;
+}
+.isNewContent img{
+	max-width:65%;
+}
+.isNoticeList td.bTitle a{
+    color: #59bfbf!important;
+    font-weight:bold;
+}
+.isHotList td.bTitle a{
+	color: #e7438b!important;
+}
+.listTable .listTable-title:first-child{
+	background-color: #76d2d2;
+    border: 1px solid #76d2d2;
+}
+.listTable .listTable-title:first-child td{
+	padding: 5px 5px;
+    border-right: 2px solid #fff;
+    border-bottom: initial;
+    color: #fff!important;
+}
+.listTable-title{
+	border-bottom: 1px solid #bdbdbd;
+    width: 100%;
+    font-size: 14px;
+}
+.listTable-list td{
+	border-bottom: 1px solid #d8d8d8;
+    width: 5%;
+    padding: 5px 5px;
+}
+.listWidth td.bId{
+	text-align: center;
+	width:7%;
+	color:#6d6d6d;
+}
+.listWidth td.bHit{
+	text-align:center;
+	color:#6d6d6d;
+}
+.listWidth td.bTitle{
+	width:40%;
+}
+.listWidth td.bTitle a{
+	color:#000;
+}
+.listTable .listTable-list.isNoticeList td.bTitle a:hover{
+	color:#000!important;
+}
+.listTable .listTable-list td.bTitle a:hover{
+	color:#59bfbf!important;
+}
+.listWidth td.bTitle span{
+	color:#6d6d6d;
+}
+.listWidth td.bWriter{
+	width:15%;
+}
+.listWidth td.bLike{
+	width:10%;
+	text-align: center;
+	color:#6d6d6d;
+}
+.listWidth td.bCategory, .listWidth td.bSubject{
+	width:6%;
+	text-align:center;
+	color:#6d6d6d;
+}
+.isBlind{
+	color:#757272!important;
+}
+.listTable-list.blindContent{
+	color: #757474!important;
+    background: #efefef;
+}
+/*
+* 페이징
+*/
+.page-link.boardPaging{
+	margin-left:initial!important;
+}

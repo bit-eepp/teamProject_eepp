@@ -4,6 +4,7 @@
 	};
 	
 	var uNickname = $("#userNickname").val();
+	var boardbId = $("#boardbId").val();
 	
 	$(document).ready(function() {
 		// 게시물 검색
@@ -41,10 +42,21 @@
 		
 		var title = $("#bCategory").val();
 		boardTitle(title);
-			
+		
+		var sortType = $("#sortType").val();
+		sortTypeTitle(sortType);
+
 		//로그인 하지않은 경우, 새글쓰기 버튼 삭제
 		if(!$("#userNickname").val()){
 			$('.writeBtn').remove();
+		}
+		
+		var newArticle = Number($("#newArticle").val());
+		var bWrittenDate = Number($("#bWrittenDate_"+boardbId).val());
+		console.log(newArticle)
+		console.log(bWrittenDate)
+		if(newArticle >= bWrittenDate){
+			$(".isNew_"+boardbId).addClass("newArticle");
 		}
 	});
 
@@ -52,20 +64,37 @@
 	function boardTitle(title) {
 		
 		if(title == '') {
-			$('.boardTitle').append('<h2>직장인 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>ALL</h2>');
 		} else if(title == 'notice') {
 			$('.boardTitle').append('<h2>공지사항</h2>');
 		} else if(title == 'it_dev') {
-			$('.boardTitle').append('<h2>IT/개발 직군 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>IT / 개발</h2>');
 		} else if(title == 'service') {
-			$('.boardTitle').append('<h2>서비스 직군 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>서비스</h2>');
 		} else if(title == 'finance') {
-			$('.boardTitle').append('<h2>금융 직군 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>금융</h2>');
 		} else if(title == 'design') {
-			$('.boardTitle').append('<h2>디자인 직군 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>디자인</h2>');
 		} else if(title == 'official') {
-			$('.boardTitle').append('<h2>공무원 직군 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>공무원</h2>');
 		} else if(title == 'etc') {
-			$('.boardTitle').append('<h2>기타 직군 커뮤니티</h2>');
+			$('.boardTitle').append('<h2>기타</h2>');
 		} 
+	}
+	
+	// 정렬 타이틀 
+	function sortTypeTitle(sortType) {
+		if(sortType == 'bWrittenDate'){
+			$(".selectSortType a").removeClass("active");
+			$(".sort-Date").addClass("active");
+		} else if(sortType == 'bHit'){
+			$(".selectSortType a").removeClass("active");
+			$(".sort-Hit").addClass("active");
+		} else if(sortType == 'bLike'){
+			$(".selectSortType a").removeClass("active");
+			$(".sort-Like").addClass("active");
+		} else if(sortType == 'rpCount'){
+			$(".selectSortType a").removeClass("active");
+			$(".sort-Reply").addClass("active");
+		}
 	}
