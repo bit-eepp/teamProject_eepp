@@ -118,7 +118,7 @@
 						
 						<td class="bWriter">
 						<c:choose>
-						<c:when test="${hot.uNickname eq loginUser.uNickname or hot.uNickname eq '운영자' or hot.uNickname eq 'admin2'}">
+						<c:when test="${hot.uNickname eq loginUser.uNickname or hot.uNickname eq '운영자' or hot.uNickname eq 'admin2' or loginUser.uNickname == null}">
 						<a class="userBtn">${hot.uNickname}</a>
 						</c:when>
 						
@@ -126,7 +126,7 @@
 						<div class="dropdown">
 						<a href="#" class="userBtn" id="user_hot_${hot.user_id}${btn.index}" data-toggle="dropdown">${hot.uNickname}</a>
            				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_hot_${hot.user_id}${btn.index}">
-                			<li><a href="#">회원정보</a></li>
+                			<li><a onclick="memberInfo('${hot.uNickname}',${hot.user_id});">회원정보</a></li>
                 			<li><a onclick="sendMessage('${hot.uNickname}',${hot.user_id});">쪽지 보내기</a></li>
                 			<li><a data-toggle="modal" data-target="#report_user_${hot.user_id}${btn.index}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
                 		</ul>
@@ -236,7 +236,7 @@
 								
 								<td class="bWriter">
 								<c:choose>
-								<c:when test="${vo.uNickname eq loginUser.uNickname or vo.uNickname eq '운영자' or vo.uNickname eq 'admin2'}">
+								<c:when test="${vo.uNickname eq loginUser.uNickname or vo.uNickname eq '운영자' or vo.uNickname eq 'admin2' or loginUser.uNickname == null}">
 								<a class="userBtn">${vo.uNickname}</a>
 								</c:when>
 								
@@ -244,7 +244,7 @@
 								<div class="dropdown">
 									<a href="#" class="userBtn" id="user_${vo.user_id}${btn.index}" data-toggle="dropdown">${vo.uNickname}</a>
            				 			<ul class="dropdown-menu" role="menu" aria-labelledby="user_${vo.user_id}${btn.index}">
-                					<li><a href="#">회원정보</a></li>
+                					<li><a onclick="memberInfo('${vo.uNickname}',${vo.user_id});">회원정보</a></li>
                 					<li><a onclick="sendMessage('${vo.uNickname}',${vo.user_id});">쪽지 보내기</a></li>
                 					<li><a data-toggle="modal" data-target="#report_user_${vo.user_id}${btn.index}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
                 					</ul>

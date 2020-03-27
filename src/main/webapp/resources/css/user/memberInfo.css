@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+/* memberInfo page CSS*/
+
+*{
+	font-size:14px;
+}
+.container {
+	text-align:center;
+}
+
+#logo {
+	width: 20%;
+}
+.table a{
+	color : inherit;
+}
+
+th{
+	text-align:center;
+	color : #59bfbf;
+	width:50%;
+}
+td{
+	text-align:left;
+}
+.profile_Img{
+	width:140px;
+	height:140px;
+	border-radius:50%;
+	overflow:hidden;
+}
+.required {
+	color: #e7438b;
+	margin-right: 10px;
+}

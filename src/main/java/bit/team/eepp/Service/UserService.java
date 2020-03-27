@@ -1,5 +1,6 @@
 package bit.team.eepp.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -185,6 +186,21 @@ public class UserService {
 	// (마이페이지) 개설한 클래스 개수
 	public int openClassCount(Map<String, Object> map) {
 		return userMapper.openClassCount(map);
+	}
+
+	// (회원정보) 프로필 보여주기
+	public String mInfoProfile(Map<String, Object> map) {
+		return userMapper.mInfoProfile(map);
+	}
+
+	// (회원정보) 등급 보여주기
+	public int memberInfograde(Map<String, Object> map) {
+		return userMapper.memberInfograde(map);
+	}
+
+	// (회원정보) 가입 날짜 보여주기
+	public Date memberInfoJDate(Map<String, Object> map) {
+		return userMapper.memberInfoJDate(map);
 	}
 
 	/* 포인트 */

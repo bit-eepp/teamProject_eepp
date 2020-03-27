@@ -1,5 +1,6 @@
 package bit.team.eepp.Mapper;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -124,6 +125,18 @@ public interface UserMapper {
 	// 개설한 클래스 개수
 	@Select("select count(*) from class where user_id = #{user_id}")
 	public int openClassCount(Map<String, Object> map);
+	
+	// (회원정보) 프로필 보여주기
+	@Select("select uprofile from users where user_id = #{user_id}")
+	public String mInfoProfile(Map<String, Object> map);
+
+	// (회원정보) 등급 보여주기
+	@Select("select grade_id from users where user_id =  #{user_id}")
+	public int memberInfograde(Map<String, Object> map);
+	
+	// (회원정보) 가입 날짜 보여주기
+	@Select("select ujoindate from users where user_id = #{user_id}")
+	public Date memberInfoJDate(Map<String, Object> map);
 
 	// 받은 쪽지 개수
 	public abstract int receiveCount(Map<String, Object> map);

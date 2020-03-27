@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>MyPage</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/mypage.css">
+	href="${pageContext.request.contextPath}/css/user/mypage.css">
 <%@ include file="/WEB-INF/include/forImport.jspf"%> 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <style>

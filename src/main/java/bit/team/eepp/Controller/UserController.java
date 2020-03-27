@@ -330,6 +330,34 @@ public class UserController {
 			return "redirect:/";
 		}
 	}
+	
+	/* 회원정보 보기*/
+	@RequestMapping(value="/memInfo", method = { RequestMethod.GET, RequestMethod.POST })
+	public String memberInfo(Model model, HttpSession session, UserVO userVO,HttpServletRequest request,
+			@RequestParam(value = "memberWho", required = false, defaultValue = "") String memberWho) {
+		
+		logger.info("load member Info pop-up");
+		userVO.getUser_id();
+		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberWho", memberWho);
+		map.put("user_id", userVO.getUser_id());
+		map.put("listCount", us.listCount(map));
+		map.put("memgrade",us.memberInfograde(map));
+		map.put("mInfoProfile", us.mInfoProfile(map));
+		map.put("openClassCount", us.openClassCount(map));
+		map.put("memberInfoJDate", us.memberInfoJDate(map));
+		
+		model.addAttribute("member",map);;
+		
+		System.out.println("User_id : " + userVO.getUser_id());
+		System.out.println("nickName : " + memberWho);
+		
+		return "user/memInfo/memberInfo";
+		
+	}
 
 	/*
 	 * ------- point part -------
