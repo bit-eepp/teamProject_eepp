@@ -1,0 +1,175 @@
+@charset "UTF-8";
+
+.slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 25px;
+	background: #d3d3d3;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+	margin-top: 10px;
+}
+
+.slider:hover {
+	opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	background: #59bfbf;
+	cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+	width: 25px;
+	height: 25px;
+	background: #4CAF50;
+	cursor: pointer;
+}
+
+.classModifyTitle {
+	width: 100%;
+}
+
+.classModifyTitle img {
+	width: 100%;
+	height: auto;
+}
+
+.clModifyCate .input-group-prepend .clModifyCateMenu label {
+	margin-top: 10px;
+	background-color: #d3d3d3;
+	width: 110px;
+	height: 70px;
+	font-weight: 800;
+	outline: 0;
+	cursor: pointer;
+	border-radius: 0%;
+}
+
+.clModifyCate .input-group-prepend .clModifyCateMenu label img {
+	width: 40%;
+}
+
+.clModifyCate .input-group-prepend .clModifyCateMenu label:hover {
+	background-color: #e7438b;
+	color: #ffffff;
+	outline: 0;
+}
+
+.clModifyCate .input-group-prepend .clModifyCateMenu label.active {
+	background-color: #e7438b;
+	color: #ffffff;
+	outline: 0;
+}
+
+.cModifylDifficulty .input-group-prepend .clModifyDiffMenu label {
+	margin-top: 10px;
+	background-color: #d3d3d3;
+	width: 110px;
+	height: auto;
+	font-weight: 800;
+	outline: 0;
+	border-radius: 0%;
+	cursor: pointer;
+}
+
+.cModifylDifficulty .input-group-prepend .clModifyDiffMenu label:hover {
+	background-color: #e7438b;
+	color: #ffffff;
+	outline: 0;
+}
+
+.cModifylDifficulty .input-group-prepend .clModifyDiffMenu label.active {
+	background-color: #e7438b;
+	color: #ffffff;
+	outline: 0;
+}
+
+.box-file-input label {
+	display: inline-block;
+	background: #59bfbf;
+	color: #ffffff;
+	line-height: 35px;
+	cursor: pointer;
+	width: 120px;
+	text-align: center;
+	font-weight: 800;
+}
+
+.box-file-input label:after {
+	content: "대표사진";
+}
+
+.box-file-input .file-input {
+	display: none;
+}
+
+.box-file-input .filename {
+	display: inline-block;
+	padding-left: 10px;
+}
+
+.clModify .clModifyLeft .input-group {
+	margin-bottom: 3px;
+}
+
+.clModify .clModifyLeft .input-group .input-group-prepend button {
+	width: 110px;
+	border-radius: 0px;
+	color: #ffffff;
+	background-color: #59bfbf;
+	font-weight: 800;
+	outline: 0;
+	cursor: default;
+}
+
+.clModify .clModifyLeft .input-group .form-control {
+	border-radius: 0px;
+}
+
+.classTerm {
+	width: 100%;
+}
+
+#loadImg {
+	width: 100%;
+	height: auto;
+}
+
+.classContentArea button {
+	width: 100%;
+	border-radius: 0px;
+	color: #ffffff;
+	background-color: #59bfbf;
+	font-weight: 800;
+	outline: 0;
+	cursor: default;
+}
+
+.classBtn input {
+	cursor: pointer;
+	font-weight: 800;
+	color: #e7438b;
+}
+
+.classBtn input:hover {
+	background-color: #e7438b;
+	color: #ffffff;
+}
+
+.classBtn button {
+	cursor: pointer;
+	font-weight: 800;
+	color: #e7438b;
+}
+
+.classBtn button:hover {
+	background-color: #e7438b;
+	color: #ffffff;
+}

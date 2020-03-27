@@ -9,7 +9,7 @@ $(document).ready(function() {
 		maxHeight : null,
 		focus : true,
 		lang: 'ko-KR', // 언어 세팅
-		placeholder: '내용을 작성해 주세요',
+		placeholder: '개설예정인 강좌에 대한 상세정보를 입력해 주세요.',
 		tabsize: 2,
 		toolbar: [
 			['style', ['style']],
@@ -25,6 +25,23 @@ $(document).ready(function() {
 		fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
 		fontNamesIgnoreCheck : [ '맑은고딕' ]
 	});
+	
+	var slider = document.getElementById("myRange");
+	var output = document.getElementById("clOpenTerm");
+	output.innerHTML = slider.value;
+
+	slider.oninput = function() {
+		output.innerHTML = this.value;
+	}
+	
+	$(document).on("change", ".file-input", function(){ 
+        $filename = $(this).val();
+
+        if($filename == "")
+            $filename = "클래스 대표사진을 선택해주세요.";
+
+        $(".filename").text($filename);
+    })
 });
 
 function checkForm() {
@@ -65,4 +82,15 @@ function checkForm() {
 	}  else {
 		return true;
 	} 
+}
+
+//프로필 사진 업로드시 미리보기
+function LoadImg(value) {
+	if (value.files && value.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#loadImg').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(value.files[0]);
+	}
 }

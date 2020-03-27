@@ -1,0 +1,144 @@
+@charset "UTF-8";
+.classListImg {
+	width: 100%;
+}
+
+.classListImg img{
+	width: 100%;
+	height: auto;
+}
+
+.row .classListImg {
+	width: 100%;
+	height: 230px;
+}
+
+.row .classListImg img {
+	width: 100%;
+	height: 100%;
+}
+
+.row .card-body {
+	font-weight: 900;
+	margin: 5px;
+}
+
+.row .card-body .clTitle {
+	color: #59bfbf;
+	font-size: 120%;
+	height: 50px;
+}
+
+.row .card-body .clSummary {
+	font-size: 90%;
+	height: 50px;
+}
+
+.row .card-body .clOpenner, .clDate {
+	font-size: 80%;
+	height: 30px;
+}
+
+.row .card-body .clDate strong {
+	color: #e7438b;
+}
+
+.row .card-body .clPoint {
+	font-size: 100%;
+	height: 30px;
+}
+
+.row .card-body .clPoint i {
+	color: #FFC107;
+}
+
+.row .card-body .clBtn button {
+	background-color: #59bfbf;
+	color: #ffffff;
+}
+
+.row .card-body .clBtn button:hover {
+	background-color: #e7438b;
+	color: #26274c;
+}
+
+.classCategory button {
+	background-color: #ddd;
+	font-size:80%;
+	color: #26274c;
+	width: 15%;
+	border: none;
+	outline: 0;
+	font-weight: 700;
+}
+
+.classCategory button:hover {
+	background-color: #e7438b;
+	color: #ffffff;
+}
+
+.classCategory button img {
+	width: 40%;
+	height: auto;
+}
+
+.classSearch {
+	padding-left: 15px;
+	padding-right: 15px;	
+}
+
+.classSearch .input-group {
+	float: left;
+	width: 70%;
+	border: 2px solid #59bfbf;
+	border-radius: 20px;
+}
+
+.classSearch .input-group select {
+	width: 20%;
+	outline: 0;
+	border: none;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.classSearch .input-group input {
+	border-radius: 20px;
+	margin: 5px;
+}
+
+.classSearch .input-group .input-group-append {
+	margin: 5px;
+}
+
+.classSearch .input-group .input-group-append i {
+	color: #59bfbf;
+}
+
+.classMakeBtn {
+	float: left; 
+	width: 30%;
+}
+
+.classMakeBtn button {
+	width: 80%;
+	background-color: #e7438b;
+	border: none;
+	outline: 0;
+	color: #ffffff;
+}
+
+.classMakeBtn button:hover {
+	background-color: #59bfbf;
+}
+
+.clNoSearch {
+	width: 100%;
+	height: 200px;
+	text-align: center;
+}
+
+.clNoSearch h4 {
+	margin-top: 100px;
+	
+}

@@ -11,215 +11,219 @@
 		<title>Class Main</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classMain.css">
 	</head>
 
 	<body>
+		<!-- header -->
+		<%@ include file="/WEB-INF/views/header.jsp"%>
+		<!-- header -->
+		
 		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
 		<input type="hidden" id="classPageMaker" value="${classPageMaker.makeQuery(1)}" />
 		<input type="hidden" id="cCategory" value="${cCategory}" />
 		<input type="hidden" id="classTotalCount" value="${classPageMaker.totalCount}" />
 		<input type="hidden" id="classCriPage" value="${classPageMaker.cri.page}" />
 		<input type="hidden" id="classSearchType" value="${cscri.searchType}" />
-		<input type="hidden" id="classCriPage" value="${classPageMaker.cri.page}" />
-	
-		<h1 class="classTitle"></h1>
-		<button type="button" id="openNewClass" onclick="location.href='classOpenView${classPageMaker.makeQuery(classPageMaker.cri.page)}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'">강좌개설</button>
-		<hr>
-		<br>
 		
-		<!--Class강좌 카테고리 -->
-		<div>
-			<button onclick="location.href='classList'">All</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='classList?&cCategory=it_dev'">IT/개발</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='classList?&cCategory=workSkill'">업무스킬</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='classList?&cCategory=financialTechnology'">재테크</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='classList?&cCategory=daily'">일상</button>&nbsp;&nbsp;&nbsp;
-			<button onclick="location.href='classList?&cCategory=etc'">기타</button>
-		</div>
-		<hr>
-		<br>
-		
-		<!-- class강좌 n개씩 보기 -->
-		<div>
-			<select id="cntPerPage" name="perPageNum">
-				<option value="3"  <c:out value="${classPageMaker.cri.perPageNum eq '3' ? 'selected' : ''}"/>>3개씩 보기</option>
-				<option value="6" <c:out value="${classPageMaker.cri.perPageNum eq '6' ? 'selected' : ''}"/>>6개씩 보기</option>
-				<option value="9" <c:out value="${classPageMaker.cri.perPageNum eq '9' ? 'selected' : ''}"/>>9개씩 보기</option>
-				<option value="12" <c:out value="${classPageMaker.cri.perPageNum eq '12' ? 'selected' : ''}"/>>12개씩 보기</option>
-				<option value="15" <c:out value="${classPageMaker.cri.perPageNum eq '15' ? 'selected' : ''}"/>>15개씩보기</option>
-				<option value="18" <c:out value="${classPageMaker.cri.perPageNum eq '18' ? 'selected' : ''}"/>>18개씩 보기</option>
-			</select>&nbsp;&nbsp;&nbsp;
-		</div>
-		<hr>
-		<br>
-		
-		<!-- 검색 부분  -->
-		<div class="search">
-			<select name="searchType">
-				<option value="n" <c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
-				<option value="w" <c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>개설자</option>
-				<option value="t" <c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>강좌명</option>
-				<option value="c" <c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>강좌내용</option>
-				<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강좌명 + 강좌내용</option>
-			</select> 
+		<section>
+			<div class="container classList">
+				<div class="classListImg">
+					<img alt="classMainImg" src="${pageContext.request.contextPath}/img/class/eeClassMain.jpg">
+				</div>
+				<br>
 			
-			<input type="text" name="keyword" id="keywordInput" value="${cscri.keyword}" />
-			<button id="classSearchBtn" type="button">검색</button>
-		</div>
-		<!-- 검색 부분 끝  -->
-		<hr>
-		
-		<!-- 페이징 -->
-		<div>
-			<c:if test="${classPageMaker.prev}">
-				<a style="text-decoration: none" href="classList${classPageMaker.makeSearch(classPageMaker.startPage - 1)}&cCategory=${cCategory}"> « </a>
-			</c:if>
-			
-			[<c:forEach begin="${classPageMaker.startPage}" end="${classPageMaker.endPage}" var="idx">
-				<a style="text-decoration: none" href="classList${classPageMaker.makeSearch(idx)}&cCategory=${cCategory}">${idx}</a>
-			</c:forEach>]
-	
-			<c:if test="${classPageMaker.next && classPageMaker.endPage > 0}">
-				<a style="text-decoration: none" href="classList${classPageMaker.makeSearch(classPageMaker.endPage + 1)}&cCategory=${cCategory}"> » </a>&nbsp;&nbsp;
-			</c:if>
-		</div>
-		
-		<!-- 클래스 리스트 -->
-		<div>
-			<c:choose>
-				<c:when test="${fn:length(classList) > 0 }">
-					<c:forEach items="${classList}" var="cl">
-						<table align="center" style="float: left; width: 33%; padding: 10px;" cellspacing="2" cellpadding="1" border="1">
-							<tr>
-								<td colspan="2"><img src="${cl.cThumnail}" style="width:350px; height: 200px;">
-								</td>
-							</tr>
-							<tr>
-								<td>클래스 강좌번호</td>
-								<td>${cl.cId}</td>
-							</tr>
-							<tr>
-								<td>클래스 강좌명</td>
-								<td>${cl.cTitle}</td>
-							</tr>
-							<tr>
-								<td>한줄요약</td>
-								<td>${cl.cSummary}</td>
-							</tr>
-							<tr>
-								<td>개설자</td>
-								<td>
-								<c:choose>
-						<c:when test="${cl.uNickname eq loginUser.uNickname or cl.uNickname eq '운영자' or cl.uNickname eq 'admin2'}">
-						<a class="userBtn">${cl.uNickname}</a>
-						</c:when>
+				<!-- 클래스 검색 부분  -->
+				<div class="classSearch">
+					<div class="input-group mb-4">
+						<select name="searchType">
+							<option value="n" <c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
+							<option value="w" <c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>개설자</option>
+							<option value="t" <c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>강좌명</option>
+							<option value="c" <c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>강좌내용</option>
+							<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>강좌명 + 강좌내용</option>
+						</select>
+					
+						<input type="search" name="keyword" id="keywordInput" value="${cscri.keyword}" placeholder="배우고 싶은 지식을 입력해주세요." aria-describedby="button-addon3" class="form-control bg-none border-0">
 						
-						<c:otherwise>
-						<div class="dropdown">
-						<a href="#" class="userBtn" id="user_btn_${cl.user_id}${cl.cId}" data-toggle="dropdown">${cl.uNickname}</a>
-           				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${cl.uNickname}${cl.cId}">
-                			<li><a href="#">회원정보</a></li>
-                			<li><a onclick="sendMessage('${cl.uNickname}',${cl.user_id});">쪽지 보내기</a></li>
-                			<li><a data-toggle="modal" data-target="#report_user_${cl.user_id}${cl.cId}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
-                		</ul>
+						<div class="input-group-append border-0">
+							<button id="classSearchBtn" type="button" class="btn btn-link text-success"><i class="fas fa-search"></i></button>
 						</div>
-						<!-- 유저 신고 modal -->	
-                			<div class="modal fade" id="report_user_${cl.user_id}${cl.cId}" role="dialog">
-                				<div class="modal-dialog">
-                				<div class="modal-content">
-                						
-                				<!-- Modal Header -->
-                				<div class="modal-header">
-                					<button type="button" class="close" data-dismiss="modal">
-                					<span aria-hidden="true">&times;</span>
-			                    	<span class="sr-only">Close</span>
-			                		</button>
-			               			<h4 class="modal-title">${cl.uNickname}님 신고</h4>
-			            		</div>
-			            		<!-- Header -->
-			            				
-			            		<!-- Modal Body -->
-			            		<div class="modal-body">
-			            			<form id="declaration_user_${cl.user_id}${cl.cId}" role="formDeclaration_user_${cl.user_id}${cl.cId}" name="dform">
-			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
-			            			<input type="hidden" name="reported_id" value="${cl.user_id}">
-			            				
-			            			<div class="form-group">
-			            			<label for="inputMessage">신고사유</label><br>
-			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${cl.cId}.disabled=true">  부적절한 홍보 게시글<br>
-			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${cl.cId}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
-			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${cl.cId}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
-			            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${cl.cId}.disabled=false">  기타<br>
-			            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${cl.cId}" name="dReason" disabled></textarea>
-			            			</div>
-			                		</form>
-			                		<!-- declaration -->
-			           		 	</div>
-			           		 	<!-- modal-body -->
-            
-			            		<!-- Modal Footer -->
-			            		<div class="modal-footer">
-			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm(${cl.user_id}${cl.cId})">취소</button>
-			                		<button type="button" class="btn reportBtn" onclick="reportUser(${cl.user_id}${cl.cId},'${cl.uNickname}');">신고</button>
-			            		</div>
-			            		<!-- Footer -->
-			            		
-			        			</div>
-			        			<!-- modal-content -->
-    							</div>
-    							<!-- modal-dialog -->
-							</div>
-							<!-- modal -->
-						</c:otherwise>
-						</c:choose>
-								</td>
-							</tr>
-							
-							<tr>
-								<td>신청기간</td>
-								<td><fmt:formatDate value="${cl.cOpenDate}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${cl.cEndDate}" pattern="yyyy.MM.dd" /></td>
-							</tr>
-
-							<tr>
-								<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"></fmt:parseNumber>
-								<fmt:parseNumber value="${cl.cEndDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-								
-								<td>남은신청기간</td>
-								<td>
-									<c:choose>
-										<c:when test="${endDate - nowDate < 0}">
-											<strong style="color: red;">수강신청기간 종료</strong>
-										</c:when>
-										<c:when test="${endDate - nowDate == 0}">
-											<strong style="color: red;">금일 신청마감 예정</strong>
-										</c:when>
-										<c:otherwise>
-											<strong style="color: red;">${endDate - nowDate}일</strong>
-										</c:otherwise>
-									</c:choose>
-								
-								</td>
-							</tr>
-							
-							<tr>
-								<td>포인트 가격</td>
-								<td>${cl.cPrice}</td>
-							</tr>
-							<tr>
-								<td colspan="2"><button type="button" onclick="location.href='classView${classPageMaker.makeQuery(classPageMaker.cri.page)}&cId=${cl.cId}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'">상세정보</button></td>
-							</tr>
-						</table>
-					</c:forEach>
-				</c:when>
+					</div>
+	          		
+	          		<!-- 클래스개설 -->
+					<div class="classMakeBtn" align="right">
+						<button type="button" id="openNewClass" class="btn btn-warning btn-lg" onclick="location.href='classOpenView${classPageMaker.makeQuery(classPageMaker.cri.page)}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'"><strong>클래스 개설</strong></button>
+					</div>
+				</div>
+				<br><br><br><br>
 				
-				<c:otherwise>
-					<tr>
-						<td colspan="9">조회된 결과가 없습니다.</td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<hr>
+				<!--Class 강좌 카테고리 -->
+				<div class="classCategory btn-group-lg" align="center">
+					<button id="cateAll" class="btn btn-primary" onclick="location.href='classList'"><img alt="allicon" src="${pageContext.request.contextPath}/img/class/all_Icon.png"><br>전 체</button>&nbsp;&nbsp;
+					<button id="cateItDev" class="btn btn-primary" onclick="location.href='classList?&cCategory=it_dev'"><img alt="itdev_icon" src="${pageContext.request.contextPath}/img/class/itDev_Icon.png"><br>IT / 개발</button>&nbsp;&nbsp;
+					<button id="cateWorkSkill" class="btn btn-primary" onclick="location.href='classList?&cCategory=workSkill'"><img alt="workSkill_icon" src="${pageContext.request.contextPath}/img/class/workSkill_Icon.png"><br>업 무 스 킬</button>&nbsp;&nbsp;
+					<button id="cateFinance" class="btn btn-primary" onclick="location.href='classList?&cCategory=financialTechnology'"><img alt="finance_icon" src="${pageContext.request.contextPath}/img/class/finance_Icon.png"><br>재 테 크</button>&nbsp;&nbsp;
+					<button id="cateDaily" class="btn btn-primary" onclick="location.href='classList?&cCategory=daily'"><img alt="daily_icon" src="${pageContext.request.contextPath}/img/class/daily_Icon.png"><br>일 상</button>&nbsp;&nbsp;
+					<button id="cateEtc" class="btn btn-primary" onclick="location.href='classList?&cCategory=etc'"><img alt="etc_icon" src="${pageContext.request.contextPath}/img/class/etc_Icon.png"><br>기 타</button>
+				</div>
+				
+				<!-- 클래스 리스트 -->
+				<div class="row classList">
+					<c:choose>
+						<c:when test="${fn:length(classList) > 0 }">
+							<c:forEach items="${classList}" var="cl">
+								<div class="col-sm-4 mt-4 classList">
+									<div class="card classList">
+										<!-- Card image -->
+										<div class="classListImg">
+		 									<img class="card-img-top classList" src="${cl.cThumnail}">
+										</div>
+
+										<div class="card-body classList">
+											<div class="card-title clTitle">
+												<strong>${cl.cTitle}</strong>
+											</div>
+											
+											<div class="card-text clSummary" >
+												${cl.cSummary}
+											</div>
+											
+											<div class="card-text clOpenner">
+												<c:choose>
+													<c:when test="${cl.uNickname eq loginUser.uNickname or cl.uNickname eq '운영자' or cl.uNickname eq 'admin2' or loginUser.uNickname == null}">
+														<a class="userBtn"><i class="fas fa-portrait"></i> ${cl.uNickname}</a>
+													</c:when>
+									
+													<c:otherwise>
+														<div class="dropdown">
+															<a href="#" class="userBtn" id="user_btn_${cl.user_id}${cl.cId}" data-toggle="dropdown"><i class="fas fa-portrait"></i> ${cl.uNickname}</a>
+									           				<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${cl.uNickname}${cl.cId}">
+									                			<li><a href="#">회원정보</a></li>
+									                			<li><a onclick="sendMessage('${cl.uNickname}',${cl.user_id});">쪽지 보내기</a></li>
+									                			<li><a data-toggle="modal" data-target="#report_user_${cl.user_id}${cl.cId}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
+									                		</ul>
+														</div>
+														
+														<!-- 유저 신고 modal -->	
+						                				<div class="modal fade" id="report_user_${cl.user_id}${cl.cId}" role="dialog">
+						                					<div class="modal-dialog">
+						                						<div class="modal-content">
+						                						
+									                				<!-- Modal Header -->
+									                				<div class="modal-header">
+									                					<button type="button" class="close" data-dismiss="modal">
+									                					<span aria-hidden="true">&times;</span>
+												                    	<span class="sr-only">Close</span>
+												                		</button>
+												               			<h4 class="modal-title">${cl.uNickname}님 신고</h4>
+												            		</div>
+												            		<!-- Header -->
+									            				
+												            		<!-- Modal Body -->
+												            		<div class="modal-body">
+												            			<form id="declaration_user_${cl.user_id}${cl.cId}" role="formDeclaration_user_${cl.user_id}${cl.cId}" name="dform">
+													            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
+													            			<input type="hidden" name="reported_id" value="${cl.user_id}">
+												            				
+													            			<div class="form-group">
+														            			<label for="inputMessage">신고사유</label><br>
+														            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${cl.cId}.disabled=true">  부적절한 홍보 게시글<br>
+														            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${cl.cId}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+														            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${cl.cId}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
+														            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${cl.cId}.disabled=false">  기타<br>
+														            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${cl.cId}" name="dReason" disabled></textarea>
+													            			</div>
+												                		</form>
+												                		<!-- declaration -->
+												           		 	</div>
+												           		 	<!-- modal-body -->
+						            
+												            		<!-- Modal Footer -->
+												            		<div class="modal-footer">
+												                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm()">취소</button>
+												                		<button type="button" class="btn reportBtn" onclick="reportUser(${cl.user_id}${cl.cId},'${cl.uNickname}');">신고</button>
+												            		</div>
+												            		<!-- Footer -->
+									            		
+											        			</div>
+											        			<!-- modal-content -->
+							    							</div>
+							    							<!-- modal-dialog -->
+														</div>
+													<!-- modal -->
+													</c:otherwise>
+												</c:choose>
+											</div>
+											
+											<div class="card-text clDate">
+												<i class="far fa-calendar-alt"></i> <fmt:formatDate value="${cl.cOpenDate}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${cl.cEndDate}" pattern="yyyy.MM.dd" />
+												<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"></fmt:parseNumber>
+												<fmt:parseNumber value="${cl.cEndDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+												<c:choose>
+													<c:when test="${endDate - nowDate < 0}">
+														<strong>(수강신청기간 종료)</strong>
+													</c:when>
+													<c:when test="${endDate - nowDate == 0}">
+														<strong>(금일 마감 예정)</strong>
+													</c:when>
+													<c:otherwise>
+														<strong>(${endDate - nowDate}일)</strong>
+													</c:otherwise>
+												</c:choose>
+											</div>
+					
+											<div class="card-text clPoint" align="right">
+												<i class="fab fa-product-hunt"></i> <fmt:formatNumber value="${cl.cPrice}" pattern="#,###" />
+											</div>
+											<hr>
+											
+											<div class="card-text clBtn">
+												<button class="btn btn-block" type="button" onclick="location.href='classView${classPageMaker.makeQuery(classPageMaker.cri.page)}&cId=${cl.cId}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'"><strong>상 세 정 보</strong></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+					
+						<c:when test="${fn:length(classList) == 0}">
+							<div class="col clNoSearch">
+								<h4>조회된 결과가 없습니다.</h4>
+							</div>
+						</c:when>
+					</c:choose>
+				</div>
+				<hr>	
+				
+				<!-- 페이징 -->
+				<div class="clPage">
+					<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<a class="page-link" href="classList${classPageMaker.makeSearch(classPageMaker.startPage - 1)}&cCategory=${cCategory}"><i class="fas fa-angle-left"></i></a>
+						</li>
+
+						<c:forEach begin="${classPageMaker.startPage}" end="${classPageMaker.endPage}" var="idx">
+							<li class="page-item">
+								<a id="clPage_${idx}" class="page-link" href="classList${classPageMaker.makeSearch(idx)}&cCategory=${cCategory}">${idx}</a>
+							</li>
+						</c:forEach>
+						
+						<li class="page-item">
+							<a class="page-link" href="classList${classPageMaker.makeSearch(classPageMaker.endPage + 1)}&cCategory=${cCategory}"><i class="fas fa-angle-right"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		
+		<!-- chat -->
+		<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+		<!-- chat -->
+		
+		<!-- footer -->
+		<%@ include file="/WEB-INF/views/footer.jsp"%>
+		<!-- footer -->
 		
 		<script src="${pageContext.request.contextPath}/js/class/classMain.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>

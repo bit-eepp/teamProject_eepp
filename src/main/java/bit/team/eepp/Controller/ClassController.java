@@ -67,14 +67,8 @@ public class ClassController {
 	}
 
 	@RequestMapping("/classOpen")
-	public String classOpen(ClassVO classVO, Model model, MultipartFile file,
-			@ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory)
-			throws Exception {
+	public String classOpen(ClassVO classVO, Model model, MultipartFile file, @ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory) throws Exception {
 		System.out.println("classOpen() method");
-
-		if (classVO.getcMaterials().equals("")) {
-			classVO.setcMaterials("없음");
-		}
 
 		// 클래스 썸네일 파일경로
 		String imgUploadPath = uploadPath;
@@ -146,14 +140,8 @@ public class ClassController {
 	}
 
 	@RequestMapping("/modifyClass")
-	public String modifyClass(ClassVO classVO, Model model, MultipartFile file,
-			@ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory)
-			throws Exception {
+	public String modifyClass(ClassVO classVO, Model model, MultipartFile file, @ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory) throws Exception {
 		System.out.println("/modifyClass() method");
-
-		if (classVO.getcMaterials().equals("")) {
-			classVO.setcMaterials("없음");
-		}
 
 		// 클래스 썸네일 파일경로
 		String imgUploadPath = uploadPath;

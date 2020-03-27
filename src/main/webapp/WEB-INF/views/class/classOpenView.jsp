@@ -6,239 +6,199 @@
 		<meta charset="UTF-8">
 		<title>Class Open Page</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
-		
-		<script>
-			//프로필 사진 업로드시 미리보기
-			function LoadImg(value) {
-				if (value.files && value.files[0]) {
-					var reader = new FileReader();
-					reader.onload = function(e) {
-						$('#loadImg').attr('src', e.target.result);
-					}
-					reader.readAsDataURL(value.files[0]);
-				}
-			}
-		</script>
-		
-		<style type="text/css">
-			main {
-				display: flex;
-				align-items: center;
-				flex-direction: column;
-				position: absolute;
-				top: 80px;
-				left: 50%;
-				transform: translateX(-50%);
-			}
-			
-			div.radio-box {
-				width: 450px;
-				display: flex;
-				align-items: center;
-				justify-content: space-around;
-			}
-			
-			input[name="cCategory"], input[name="cDifficulty"] {
-				display: none
-			}
-			
-			input[name="cCategory"]+label, input[name="cDifficulty"]+label {
-				width: 80px;
-				display: inline-block;
-				text-align: center;
-				cursor: pointer;
-				user-select: none;
-			}
-			
-			input[name="cCategory"]+label, input[name="cDifficulty"]+label {
-				transition: all 200ms cubic-bezier(.4, .25, .3, 1);
-				padding: 20px 0;
-				color: #59bfbf;
-				background-color: transparent;
-				border: 2px solid #59bfbf; &:
-				hover {opacity: .65
-			}
-			
-			}
-			input[name="cCategory"]+label:active, input[name="cDifficulty"]+label:active
-				{
-				transition: none;
-				transform: scale(.925);
-			}
-			
-			input[name="cCategory"]:checked+label, input[name="cCategory"]:checked+label:hover,
-				input[name="cDifficulty"]:checked+label, input[name="cDifficulty"]:checked+label:hover
-				{
-				background-color: #FFF;
-				color: #ff578f;
-				opacity: 1;
-				font-weight: bold;
-			}
-			
-			#loadImg {
-				height: 400px;
-				widows: 350px;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classOpen.css">
 	</head>
 
 	<body>
-		<h1 align="center">CLASS Open Page</h1>
-		<br>
-	
-		<div class="container mt-5">
-			<form action="classOpen" name="cform" method="post"
-				enctype="multipart/form-data" onsubmit="return classCheckForm();">
-				<input type="hidden" name="page" value="${cscri.page}" /> <input
-					type="hidden" name="perPageNum" value="${cscri.perPageNum}" /> <input
-					type="hidden" name="searchType" value="${cscri.searchType}" /> <input
-					type="hidden" name="keyword" value="${cscri.keyword}" />
-	
-				<div class="form-group row">
-					<label for="text" class="col-4 col-form-label">Class 개설자</label>
-					<div class="col-8">
-	
-						<p>${loginUser.uNickname}</p>
-						<input type="hidden" name="user_id" value="${loginUser.user_id}" />
-					</div>
+		<!-- header -->
+		<%@ include file="/WEB-INF/views/header.jsp"%>
+		<!-- header -->
+		
+		<section>
+			<div class="container classOpen">
+				<div class="classOpenTitle">
+					<img alt="EEclassOpen Img" src="${pageContext.request.contextPath}/img/class/eeClassOpen.jpg">
 				</div>
 				<br>
+				
+				<div class="classOpenForm">
+					<form action="classOpen" name="cform" method="post" enctype="multipart/form-data" onsubmit="return classCheckForm();">
+						<input type="hidden" name="page" value="${cscri.page}"/> 
+						<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" /> 
+						<input type="hidden" name="searchType" value="${cscri.searchType}" /> 
+						<input type="hidden" name="keyword" value="${cscri.keyword}" />
+						
+						<div class="clOpen form-group row">
+							<div class="clOpenLeft col-6">
+							
+								<div class="input-group clOpenner">
+									<div class="input-group-prepend">
+										<button class="btn btn-default" type="button">개 설 자</button>
+									</div>
+									<input class="form-control" type="text" value="${loginUser.uNickname}">
+									<input type="hidden" name="user_id" value="${loginUser.user_id}" />
+								</div>
+								<br>
+								
+								<div class="input-group clTitle">
+									<div class="input-group-prepend">
+										<button class="btn btn-default" type="button">강 좌 명</button>
+									</div>
+									<input class="form-control" name="cTitle" type="text" maxlength="30" placeholder="30자 이내로 입력해주세요">
+								</div>
+								<br>
+								
+								<div class="input-group clSummary">
+									<div class="input-group-prepend">
+										<button class="btn btn-default" type="button">한줄소개</button>
+									</div>
+									<input class="form-control" type="text" name="cSummary" maxlength="30" placeholder="30자 이내로 작성해주세요."/>
+								</div>
+								<br>
+								
+								<div class="input-group clTotalPeople">
+									<div class="input-group-prepend">
+										<button class="btn btn-default" type="button">모집인원</button>
+									</div>
+									<input class="form-control" type="number" name="cTotalPeopleCount" min="1" max="100" step="1" placeholder="최소 1명, 최대 100명까지 설정 가능합니다."/>
+								</div>
+								<br>
+								
+								<div class="input-group clPoint">
+									<div class="input-group-prepend">
+										<button class="btn btn-default" type="button">포 인 트</button>
+									</div>
+									<input class="form-control" type="number" name="cPrice" placeholder="100Point = 100&#92;" step="100"/>
+								</div>
+								<br>
+				
+								<div class="input-group clTerm">
+									<div class="classTerm">
+										<div class="input-group-prepend">
+											<button class="btn btn-default" type="button">모집기간</button>
+											<b id="clOpenTerm"></b>일(강좌 개설일 기준 <b>최대 30일</b>까지 가능)
+										</div>
+										<input id="myRange" class="slider" type="range" name="cTerm" min="1" max="30" step="1">
+									</div>
+								</div>
+								<br>
+								
+								<div class="input-group clOpenCate">
+									<div class="input-group-prepend">
+										<div class="clOpenCateTitle">
+											<button class="btn btn-default" type="button">카테고리</button>
+										</div>
 	
-				<div class="form-group row">
-					<label for="text" class="col-4 col-form-label">Class강좌명</label>
-					<div class="col-8">
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text"></div>
+										<div class="clCateMenu btn-group btn-group-toggle" data-toggle="buttons">
+											<label class="btn btn-light">
+												<input type="radio" name="cCategory" value="it_dev" autocomplete="off"/>
+												<img alt="itdev_icon" src="${pageContext.request.contextPath}/img/class/itDev_Icon.png"><br>IT / 개발
+											</label>
+											
+											<label class="btn btn-light">
+												<input type="radio" name="cCategory" value="workSkill" autocomplete="off"/>
+												<img alt="workSkill_icon" src="${pageContext.request.contextPath}/img/class/workSkill_Icon.png"><br>업 무 스 킬
+											</label> 
+												
+											<label class="btn btn-light">
+												<input type="radio" name="cCategory" value="financialTechnology" autocomplete="off"/>
+												<img alt="finance_icon" src="${pageContext.request.contextPath}/img/class/finance_Icon.png"><br>재 테 크
+											</label>
+											
+											<label class="btn btn-light"> 
+												<input type="radio" name="cCategory" value="daily" autocomplete="off"/>
+												<img alt="daily_icon" src="${pageContext.request.contextPath}/img/class/daily_Icon.png"><br>일 상
+											</label>
+											
+											<label class="btn btn-light">
+												<input type="radio" name="cCategory" value="etc" autocomplete="off"/>
+												<img alt="etc_icon" src="${pageContext.request.contextPath}/img/class/etc_Icon.png"><br>기 타
+											</label>
+										</div>
+									</div>
+								</div>
+								<br>
+								
+								<div class="input-group clDifficulty">
+									<div class="input-group-prepend">
+										<div class="clOpenDiffTitle">
+											<button class="btn btn-default" type="button">난 이 도</button>
+										</div>
+	
+										<div class="clDiffMenu btn-group btn-group-toggle" data-toggle="buttons" >
+											<label class="clDiffBtn btn btn-light">
+												<input type="radio" name="cDifficulty" value="easy">쉬 움
+											</label>
+											
+											<label class="clDiffBtn btn btn-light">
+												<input type="radio" name="cDifficulty" value="normal">중 간
+											</label>
+											
+											<label class="clDiffBtn btn btn-light">
+												<input type="radio" name="cDifficulty" value="hard">어 려 움
+											</label>
+										</div>
+									</div>
+								</div>						
 							</div>
-							<input id="text" name="cTitle" type="text" aria-describedby="textHelpBlock" class="form-control" maxlength="40">
+							
+							<div class="col-6">
+								<div class="input-group clThumnail">
+									<div class="input-group-prepend">
+										<div class="box-file-input">
+											<label>
+												<input type="file" name="file" id="classImg" onchange="LoadImg(this);" class="file-input" accept="image/*">
+											</label>
+											<span class="filename">클래스 강좌를 대표할 사진을 선택해주세요.</span>
+										</div>
+										<img id="loadImg" src="${pageContext.request.contextPath}/img/class/uploadImage.jpg"/>
+									</div>
+								</div>
+							</div>
+							<hr>
 						</div>
-						<span id="textHelpBlock" class="form-text text-muted">40자 이내로 입력해 주세요.</span>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 한 줄 소개</label>
-					<div class="col-8">
-						<textarea id="transport_instructions" name="cSummary" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" maxlength="100"></textarea>
-						<span id="transport_instructionsHelpBlock" class="form-text text-muted">100자 이내로 입력해 주세요.</span>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="text" class="col-4 col-form-label">Class강좌 대표 이미지</label>
-					<div class="form-group row" align="center">
-						<div class="offset-2 col-9">
-							<img id="loadImg" /> <input type="file" name="file" id="classImg" onchange="LoadImg(this);" />
-						</div>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 참여 인원</label>
-					<div class="col-8">
-						<input style="width: 300px; height: 30px;" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" type="number" name="cTotalPeopleCount" min="1" max="50" step="1">
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 카테고리</label>
-					<div class="col-8">
-						<div class="container">
-							<div class="radio-box">
-								<input id="radio-1" type="radio" name="cCategory" value="it_dev" />
-								<label for="radio-1">IT/개발</label> 
-								<input id="radio-2" type="radio" name="cCategory" value="workSkill"> 
-								<label for="radio-2">업무스킬</label> 
-								<input id="radio-3" type="radio" name="cCategory" value="daily"> 
-								<label for="radio-3">일상</label>
-								<input id="radio-4" type="radio" name="cCategory" value="financialTechnology"> 
-								<label for="radio-4">재테크</label>
-								<input id="radio-5" type="radio" name="cCategory" value="etc">
-								<label for="radio-5">기타</label>
+
+						<div class="clOpen form-group row">
+							<div class="col clContent">
+								<div class="input-group-prepend">
+									<div class="classContentArea">
+										<button class="btn btn-default" type="button">강 좌 소 개</button>
+									</div>
+									<textarea id="summernote" name="cContent"></textarea>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 개설기간</label>
-					<div class="col-8">
-						<select name="cTerm">
-							<option value="" disabled selected>class강좌 개설기간</option>
-							<option value=3>3일</option>
-							<option value=5>5일</option>
-							<option value=7>7일</option>
-							<option value=10>10일</option>
-						</select>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌
-						난이도</label>
-					<div class="col-8">
-						<div class="radio-box">
-							<input id="radio-6" type="radio" name="cDifficulty" value="easy">
-							<label for="radio-6">쉬움</label> 
-							<input id="radio-7" type="radio" name="cDifficulty" value="normal"> 
-							<label for="radio-7">보통</label>
-							<input id="radio-8" type="radio" name="cDifficulty" value="hard">
-							<label for="radio-8">어려움</label>
+						<hr>
+			
+						<div class="clOpen form-group row">
+							<div class="col classBtn" align="right">
+								<input class="btn btn-default btn-lg" type="submit" value="강좌개설">
+								<button id="classList" class="btn btn-default btn-lg" type="button">개설취소</button>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 포인트 가격</label>
-					<div class="col-8">
-						<input style="width: 300px; height: 30px;" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control" type="number" name="cPrice">
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 준비물</label>
-					<div class="col-8">
-						<textarea id="transport_instructions" name="cMaterials" cols="40" rows="2" aria-describedby="transport_instructionsHelpBlock" class="form-control"></textarea>
-						<span id="transport_instructionsHelpBlock" class="form-text text-muted">없을 시 공란으로 제출해 주세요.</span>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<label for="transport_instructions" class="col-4 col-form-label">Class강좌 상세정보 </label>
-					<div class="col-8">
-						<textarea id="summernote" name="cContent"></textarea>
-						<span id="transport_instructionsHelpBlock" class="form-text text-muted">Class강좌에 대한 상세정보를 입력해 주세요.</span>
-					</div>
-				</div>
-				<br>
-	
-				<div class="form-group row">
-					<div class="offset-5 col-8">
-						<input class="btn btn-primary active" type="submit" value="개설">
-						<button id="classList" class="btn btn-danger" type="button">개설취소</button>
-					</div>
-				</div>
-			</form>
-	
-			<form name="form1" role="form" method="post">
-				<input type="hidden" name="page" value="${cscri.page}" /> 
-				<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" /> 
-				<input type="hidden" name="searchType" value="${cscri.searchType}" /> 
-				<input type="hidden" name="keyword" value="${cscri.keyword}" /> 
-				<input type="hidden" name="cCategory" value="${cCategory}" />
-			</form>
-		</div>
+				
+				<form name="form1" role="form" method="post">
+					<input type="hidden" name="page" value="${cscri.page}" /> 
+					<input type="hidden" name="perPageNum" value="${cscri.perPageNum}" /> 
+					<input type="hidden" name="searchType" value="${cscri.searchType}" /> 
+					<input type="hidden" name="keyword" value="${cscri.keyword}" /> 
+					<input type="hidden" name="cCategory" value="${cCategory}" />
+				</form>
+			</div>
+		</section>
+		
+		<!-- chat -->
+		<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+		<!-- chat -->
+		
+		<!-- footer -->
+		<%@ include file="/WEB-INF/views/footer.jsp"%>
+		<!-- footer -->
 	
 		<script src="${pageContext.request.contextPath}/js/class/classOpen.js"></script>
+		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
 </html>

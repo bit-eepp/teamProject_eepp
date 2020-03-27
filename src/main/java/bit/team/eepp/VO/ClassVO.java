@@ -14,18 +14,18 @@ public class ClassVO {
 	private String uNickname;
 	private int cTotalPeopleCount;
 	private String cDifficulty;
-	private String cMaterials;
 	private String cSummary;
 	private int cTerm;
 	private int questionCount;
 	private String cThumnail;
+	private String uProfile;
 
 	public ClassVO() {
 	}
 
 	public ClassVO(int cId, int user_id, String cTitle, String cContent, Timestamp cOpenDate, Timestamp cEndDate,
-			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount,
-			String cDifficulty, String cMaterials, String cSummary, int cTerm, int questionCount, String cThumnail) {
+			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount, String cDifficulty, String cSummary,
+			int cTerm, int questionCount, String cThumnail, String uProfile) {
 		this.cId = cId;
 		this.user_id = user_id;
 		this.cTitle = cTitle;
@@ -37,11 +37,19 @@ public class ClassVO {
 		this.uNickname = uNickname;
 		this.cTotalPeopleCount = cTotalPeopleCount;
 		this.cDifficulty = cDifficulty;
-		this.cMaterials = cMaterials;
 		this.cSummary = cSummary;
 		this.cTerm = cTerm;
 		this.questionCount = questionCount;
 		this.cThumnail = cThumnail;
+		this.uProfile = uProfile;
+	}
+
+	public String getuProfile() {
+		return uProfile;
+	}
+
+	public void setuProfile(String uProfile) {
+		this.uProfile = uProfile;
 	}
 
 	public String getcThumnail() {
@@ -154,14 +162,6 @@ public class ClassVO {
 
 	public void setcDifficulty(String cDifficulty) {
 		this.cDifficulty = cDifficulty;
-	}
-
-	public String getcMaterials() {
-		return cMaterials;
-	}
-
-	public void setcMaterials(String cMaterials) {
-		this.cMaterials = cMaterials;
 	}
 
 	public String getcSummary() {
