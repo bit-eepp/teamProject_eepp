@@ -160,7 +160,7 @@
             
 			            		<!-- Modal Footer -->
 			            		<div class="modal-footer">
-			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm(${content.user_id})">취소</button>
 			                		<button type="button" class="btn reportBtn" onclick="reportUser(${content.user_id},'${content.uNickname}');">신고</button>
 			            		</div>
 			            		<!-- Footer -->

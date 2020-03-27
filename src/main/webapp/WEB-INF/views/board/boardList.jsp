@@ -286,7 +286,7 @@
             
 			            		<!-- Modal Footer -->
 			            		<div class="modal-footer">
-			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
+			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm(${vo.user_id}${btn.index})">취소</button>
 			                		<button type="button" class="btn reportBtn" onclick="reportUser(${vo.user_id}${btn.index},'${vo.uNickname}');">신고</button>
 			            		</div>
 			            		<!-- Footer -->
