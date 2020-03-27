@@ -60,6 +60,7 @@ body button{
     background: rgba(0, 0, 0, 0);
     z-index: 998;
     display: none;
+    top:0;
 }
 #mySidebar{
 	padding:10px;
