@@ -99,7 +99,7 @@
 														<div class="dropdown">
 															<a href="#" class="userBtn" id="user_btn_${cl.user_id}${cl.cId}" data-toggle="dropdown"><i class="fas fa-portrait"></i> ${cl.uNickname}</a>
 									           				<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${cl.uNickname}${cl.cId}">
-									                			<li><a href="#">회원정보</a></li>
+									                			<li><a onclick="memberInfo('${cl.uNickname}',${cl.user_id});">회원정보</a></li>
 									                			<li><a onclick="sendMessage('${cl.uNickname}',${cl.user_id});">쪽지 보내기</a></li>
 									                			<li><a data-toggle="modal" data-target="#report_user_${cl.user_id}${cl.cId}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
 									                		</ul>
