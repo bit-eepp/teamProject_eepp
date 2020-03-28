@@ -5,11 +5,27 @@ section{padding:40px 0;}
 
 
 /* 유저버튼 */
-.userBtn{color: #3e3e3e;font-weight: bold;display: block;}
-.userBtn:hover{color:#59bfbf!important;}
-.dropdown-menu{height: 115px;padding: 10px!important;}
-.dropdown-menu li{margin:5px 0;}
-.dropdown-menu li a{cursor: pointer;color:#59bfbf!important;font-size:14px;}
+.userBtn{
+	color: #3e3e3e!important;
+	font-weight: bold!important;
+	display: block!important;
+}
+.userBtn:hover{
+	color:#59bfbf!important;
+}
+.dropdown-menu{
+	height: 115px!important;
+	padding: 10px!important;
+}
+.dropdown-menu li{
+	margin:5px 0!important;
+}
+.dropdown-menu li a{
+	cursor: pointer!important;
+	color:#59bfbf!important;
+	font-size:14px!important;
+	font-weight: normal!important;
+}
 /* 유저버튼 */
 
 /* 페이징 CSS */
