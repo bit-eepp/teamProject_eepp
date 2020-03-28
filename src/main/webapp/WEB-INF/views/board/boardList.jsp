@@ -221,8 +221,8 @@
 											<td class="bTitle">
 										<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">
 											<c:choose>
-												<c:when test="${fn:length(vo.bTitle) >= 30}">
-												${fn:substring(vo.bTitle, 0, 30)}... [${vo.rpCount}]
+												<c:when test="${fn:length(vo.bTitle) > 33}">
+												${fn:substring(vo.bTitle, 0, 33)}... [${vo.rpCount}]
 												</c:when>
 								
 											<c:otherwise>
