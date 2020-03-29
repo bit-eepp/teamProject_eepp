@@ -152,7 +152,7 @@
 					
 					<div id="mySidenav" class="sidenav" align="center">
 				
-						<div id="myInfo">
+						<div id="myInfo" class="beforeLoginInfo">
 							<a href="javascript:void(0)" class="closebtn"><i class="fas fa-times"></i></a>
 							
 							<div class="box">
