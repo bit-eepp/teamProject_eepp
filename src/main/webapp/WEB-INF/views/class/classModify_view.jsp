@@ -93,27 +93,27 @@
 	
 										<div class="clModifyCateMenu btn-group btn-group-toggle" data-toggle="buttons">
 											<label class="btn btn-light <c:out value="${modifyClass.cCategory eq 'it_dev' ? 'active' : ''}"/>">
-												<input type="radio" name="cCategory" value="it_dev" autocomplete="off"/>
+												<input type="radio" name="cCategory" value="it_dev" autocomplete="off" <c:out value="${modifyClass.cCategory eq 'it_dev' ? 'checked' : ''}"/>/>
 												<img alt="itdev_icon" src="${pageContext.request.contextPath}/img/class/itDev_Icon.png"><br>IT / 개발
 											</label>
 											
 											<label class="btn btn-light <c:out value="${modifyClass.cCategory eq 'workSkill' ? 'active' : ''}"/>">
-												<input type="radio" name="cCategory" value="workSkill" autocomplete="off"/>
+												<input type="radio" name="cCategory" value="workSkill" autocomplete="off" <c:out value="${modifyClass.cCategory eq 'workSkill' ? 'checked' : ''}"/>/>
 												<img alt="workSkill_icon" src="${pageContext.request.contextPath}/img/class/workSkill_Icon.png"><br>업 무 스 킬
 											</label> 
 												
 											<label class="btn btn-light <c:out value="${modifyClass.cCategory eq 'financialTechnology' ? 'active' : ''}"/>">
-												<input type="radio" name="cCategory" value="financialTechnology" autocomplete="off" />
+												<input type="radio" name="cCategory" value="financialTechnology" autocomplete="off" <c:out value="${modifyClass.cCategory eq 'financialTechnology' ? 'checked' : ''}"/>/>
 												<img alt="finance_icon" src="${pageContext.request.contextPath}/img/class/finance_Icon.png"><br>재 테 크
 											</label>
 											
 											<label class="btn btn-light <c:out value="${modifyClass.cCategory eq 'daily' ? 'active' : ''}"/>"> 
-												<input type="radio" name="cCategory" value="daily" autocomplete="off" />
+												<input type="radio" name="cCategory" value="daily" autocomplete="off" <c:out value="${modifyClass.cCategory eq 'daily' ? 'checked' : ''}"/>/>
 												<img alt="daily_icon" src="${pageContext.request.contextPath}/img/class/daily_Icon.png"><br>일 상
 											</label>
 											
 											<label class="btn btn-light <c:out value="${modifyClass.cCategory eq 'etc' ? 'active' : ''}"/>">
-												<input type="radio" name="cCategory" value="etc" autocomplete="off"/>
+												<input type="radio" name="cCategory" value="etc" autocomplete="off" <c:out value="${modifyClass.cCategory eq 'etc' ? 'checked' : ''}"/>/>
 												<img alt="etc_icon" src="${pageContext.request.contextPath}/img/class/etc_Icon.png"><br>기 타
 											</label>
 										</div>
@@ -129,22 +129,22 @@
 	
 										<div class="clModifyDiffMenu btn-group btn-group-toggle" data-toggle="buttons" >
 											<label class="clModifyDiffBtn btn btn-light <c:out value="${modifyClass.cDifficulty eq 'easy' ? 'active' : ''}"/>">
-												<input type="radio" name="cDifficulty" value="easy">쉬 움
+												<input type="radio" name="cDifficulty" value="easy" <c:out value="${modifyClass.cDifficulty eq 'easy' ? 'checked' : ''}"/>>쉬 움
 											</label>
 											
 											<label class="clModifyDiffBtn btn btn-light <c:out value="${modifyClass.cDifficulty eq 'normal' ? 'active' : ''}"/>">
-												<input type="radio" name="cDifficulty" value="normal">중 간
+												<input type="radio" name="cDifficulty" value="normal" <c:out value="${modifyClass.cDifficulty eq 'normal' ? 'checked' : ''}"/>>중 간
 											</label>
 											
 											<label class="clModifyDiffBtn btn btn-light <c:out value="${modifyClass.cDifficulty eq 'hard' ? 'active' : ''}"/>">
-												<input type="radio" name="cDifficulty" value="hard">어 려 움
+												<input type="radio" name="cDifficulty" value="hard" <c:out value="${modifyClass.cDifficulty eq 'hard' ? 'checked' : ''}"/>>어 려 움
 											</label>
 										</div>
 									</div>
 								</div>
 							</div>
 							
-							<div class="col-6">
+							<div class="clOpenRight col-6">
 								<div class="input-group clThumnail">
 									<div class="input-group-prepend">
 										<div class="box-file-input">
@@ -154,6 +154,26 @@
 											<span class="filename">클래스 강좌를 대표할 사진을 선택해주세요.</span>
 										</div>
 										<img id="loadImg" src="${modifyClass.cThumnail}"/>
+									</div>
+								</div>
+								<br>
+								
+								<div class="clAddress">
+									<div class="form-group classPlace">
+										<button class="btn btn-default" type="button">교육장소</button>
+									</div>
+									
+									<div class="form-group ad1">                   
+										<input class="form-control" placeholder="우편번호" name="cAddress1" id="addr1" type="text" readonly="readonly" value="${modifyClass.cAddress1}"/>
+										<button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fas fa-search-location"></i> 주소찾기</button>                               
+									</div>
+									
+									<div class="form-group ad2">
+									    <input class="form-control" placeholder="도로명 주소" name="cAddress2" id="addr2" type="text" readonly="readonly" value="${modifyClass.cAddress2}"/>
+									</div>
+									
+									<div class="form-group ad3">
+									    <input class="form-control" placeholder="상세주소" name="cAddress3" id="addr3" type="text" value="${modifyClass.cAddress3}"/>
 									</div>
 								</div>
 							</div>

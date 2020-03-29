@@ -19,13 +19,17 @@ public class ClassVO {
 	private int questionCount;
 	private String cThumnail;
 	private String uProfile;
+	private String cAddress1;
+	private String cAddress2;
+	private String cAddress3;
 
 	public ClassVO() {
 	}
 
 	public ClassVO(int cId, int user_id, String cTitle, String cContent, Timestamp cOpenDate, Timestamp cEndDate,
 			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount, String cDifficulty, String cSummary,
-			int cTerm, int questionCount, String cThumnail, String uProfile) {
+			int cTerm, int questionCount, String cThumnail, String uProfile, String cAddress1, String cAddress2,
+			String cAddress3) {
 		this.cId = cId;
 		this.user_id = user_id;
 		this.cTitle = cTitle;
@@ -42,6 +46,33 @@ public class ClassVO {
 		this.questionCount = questionCount;
 		this.cThumnail = cThumnail;
 		this.uProfile = uProfile;
+		this.cAddress1 = cAddress1;
+		this.cAddress2 = cAddress2;
+		this.cAddress3 = cAddress3;
+	}
+
+	public String getcAddress1() {
+		return cAddress1;
+	}
+
+	public void setcAddress1(String cAddress1) {
+		this.cAddress1 = cAddress1;
+	}
+
+	public String getcAddress2() {
+		return cAddress2;
+	}
+
+	public void setcAddress2(String cAddress2) {
+		this.cAddress2 = cAddress2;
+	}
+
+	public String getcAddress3() {
+		return cAddress3;
+	}
+
+	public void setcAddress3(String cAddress3) {
+		this.cAddress3 = cAddress3;
 	}
 
 	public String getuProfile() {
