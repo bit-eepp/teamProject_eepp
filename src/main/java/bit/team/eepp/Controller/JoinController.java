@@ -161,7 +161,7 @@ public class JoinController {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('회원가입 완료'); location.href='/eepp/' ;</script>");
+		out.println("<script>alert('회원가입 완료');location.href='/eepp/';</script>");
 		out.close();
 
 }

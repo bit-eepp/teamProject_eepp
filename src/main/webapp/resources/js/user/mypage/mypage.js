@@ -21,54 +21,45 @@ function getContextPath() {
 	return location.href.substring(hostIndex, location.href.indexOf('/',
 			hostIndex + 1));
 };
+
 /* 닉네임 중복확인 */
-
+var ncCheck = 0;
 function nickCheck() {
-	$.ajax({
-		url : getContextPath() + "/mypagenickNameCheck",
-		type : "post",
-		dataType : "json",
-		data : {
-			"uNickname" : $("#changeNickname").val()
-		},
-		success : function(data) {
-			if ($("#changeNickname").val() == "") {
-				alert("닉네임을 입력해주세요.");
-				$("#changeNickname").focus();
-				return false;
-			} else if (data == 0) {
-				alert("사용가능한 닉네임입니다.");
-				$('#mypagenickNameCheck').attr("value", "Y");
-				return;
-
-			} else if (data != 0) {
-				alert("사용중인 닉네임입니다.")
-				$('#mypagenickNameCheck').attr("value", "N");
-				$("#uNickname").focus();
-			}
-		},
-		error : function(data) {
-			alert("에러가 발생했습니다.");
-			return false;
-		}
-	})
-};
+    var inputed = $("#changeNickname").val();
+    $.ajax({
+        dataType : "json",
+        type : "post",
+        url : getContextPath() + "/nickNameCheck",
+        data : {
+        	"uNickname" : $("#changeNickname").val()
+        },
+        success : function(data) {
+            if(inputed=="" && data==0) {
+            	$("#checkNickInfo").html("")
+                ncCheck = 0;
+            } else if (data == 0) {
+                $("#checkNickInfo").html("사용가능한 닉네임입니다.")
+                ncCheck = 1;
+            } else if (data == 1) {
+            	$("#checkNickInfo").html("사용중인 닉네임입니다.")
+                ncCheck = 2;
+            } 
+        }
+    });
+}
 
 $('#submit').click(function(event) {
-
-	if ($("#changeNickname").val() == "") {
+	if (ncCheck == 0) {
 		alert("닉네임을 입력해주세요.");
 		$("#changeNickname").focus();
 		return false;
-	}
-
-	var nickChkVal = $("#mypagenickNameCheck").val();
-	if (nickChkVal == "N") {
-		alert("닉네임 중복확인을 해주세요.");
+	}else if(ncCheck == 2){
+		alert("이미 사용중인 닉네임입니다.")
+		$("#changeNickname").focus();
 		return false;
+	}else{
+		return true;	
 	}
-
-	return true;
 
 });
 

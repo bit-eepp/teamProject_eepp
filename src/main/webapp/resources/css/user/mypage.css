@@ -23,6 +23,7 @@ a:hover {
 
 .info td {
 	padding: 10px 0;
+	position: relative;
 }
 
 .trColor {
@@ -81,6 +82,13 @@ p {
 	background: #59bfbf;
 	color: white;
 	border: none;
+}
+
+span.checkInfo{
+	display: block;
+    position: absolute;
+    color: red;
+    font-size: 12px;
 }
 
 #submit {

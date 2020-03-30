@@ -416,6 +416,9 @@ span img{
     height: calc(2rem)!important;
     width: 130px;
 }
+.checkEmailAuth{
+	padding: 0 0 20px!important;
+}
 .btn-submit{
 	width: 280px!important;
     border-radius: 15px!important;

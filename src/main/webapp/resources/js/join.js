@@ -70,17 +70,17 @@ $('#submit').click(function(event) {
 		return false;
 	}
 	
-	var phoneChkVal = $("#phoneNumCheck").val();
-	if (phoneChkVal == "N") {
-		alert("휴대폰 인증을 해주세요.");
-		return false;
-	}
-	
-	var phoneAuthChkVal = $("#smsAuthBtn").val();
-	if (phoneAuthChkVal == "N") {
-		alert("휴대폰 인증번호를 확인해주세요.");
-		return false;
-	}
+//	var phoneChkVal = $("#phoneNumCheck").val();
+//	if (phoneChkVal == "N") {
+//		alert("휴대폰 인증을 해주세요.");
+//		return false;
+//	}
+//	
+//	var phoneAuthChkVal = $("#smsAuthBtn").val();
+//	if (phoneAuthChkVal == "N") {
+//		alert("휴대폰 인증번호를 확인해주세요.");
+//		return false;
+//	}
 
 	return true;
 });
@@ -103,14 +103,17 @@ function checkEmail() {
           	  $("#checkEmailInfo").html("")
           	  $(".joinTable input").not(".emailInput, #file_route").attr('disabled', false).css("background","transparent");
               emCheck = 0;
+              return false;
           } else if (data == 0) {
         	  emCheck = 1;
         	  $(".joinTable input").not(".emailInput, #file_route").attr('disabled', false).css("background","transparent");
               $("#checkEmailInfo").html("사용가능한 아이디입니다.")
+              return true;
           } else if (data == 1) {
           	$("#checkEmailInfo").html("사용중인 아이디입니다.")
           	$(".joinTable input").not(".emailInput, #file_route").attr('disabled', true).css("background","#ececec");
             emCheck = 2;
+            return false;
           } 
       }
   });
@@ -136,18 +139,21 @@ function passWordCheck() {
 	var orgpw = $("#uPassword").val();
     var checkpw = $("#uPasswordCheck").val();
     
-    if(checkpw=="" || orgpw == checkpw) {
+    if(checkpw=="") {
     	$("#checkPwInfo").html("")
     	$(".joinTable input").not("#uPassword,#uPasswordCheck, #file_route, .emailInput").attr('disabled', false).css("background","transparent");
         pwCheck = 0;
+        return false;
     } else if (checkpw == orgpw) {
     	$("#checkPwInfo").html("")
     	$(".joinTable input").not("#uPassword,#uPasswordCheck, #file_route, .emailInput").attr('disabled', false).css("background","transparent");
         pwCheck = 1;
+        return true;
     } else if (checkpw != orgpw) {
     	$("#checkPwInfo").html("비밀번호가 다릅니다.");
     	$(".joinTable input").not("#uPassword,#uPasswordCheck, #file_route, .emailInput").attr('disabled', true).css("background","#ececec");
     	pwCheck = 2;
+    	return false;
     }
     
 }
@@ -168,14 +174,17 @@ function nickCheck() {
             	$("#checkNickInfo").html("")
             	$(".joinTable input").not("#joinNickname, #file_route, .emailInput, .pwInputBox").attr('disabled', false).css("background","transparent");
                 ncCheck = 0;
+                return false;
             } else if (data == 0) {
             	ncCheck = 1;
             	$(".joinTable input").not("#joinNickname, #file_route, .emailInput, .pwInputBox").attr('disabled', false).css("background","transparent");
                 $("#checkNickInfo").html("사용가능한 닉네임입니다.")
+                return true;
             } else if (data == 1) {
             	$("#checkNickInfo").html("사용중인 닉네임입니다.")
             	$(".joinTable input").not("#joinNickname, #file_route, .emailInput, .pwInputBox").attr('disabled', true).css("background","#ececec");
                 ncCheck = 2;
+                return false;
             } 
         }
     });
@@ -221,10 +230,12 @@ $(".sendSmsBtn").click(function() {
 		return false;
 	}else if(phCheck == 2){
 		alert("이미 가입된 휴대폰번호입니다.");
+		return false;
 	}else{
 		$("#checkPhoneInfo").html("")
 		$('#phoneNumCheck').attr("value", "Y");
 		sendSms();
+		return true;
 	}
 });
 
@@ -241,6 +252,7 @@ function sendSms() {
 			alert("인증번호가 발송되었습니다. \n인증번호를 입력해주세요.");
 			$("#smsAuth").attr('disabled', false).css("background","transparent");
 			$("#afterSendSMSAuth").show(500);
+			return true;
 		},
 		error : function(data) {
 			alert("에러가 발생했습니다.");
@@ -255,6 +267,7 @@ $(".smsCheckBtn").click(function() {
 		return false;
 	}else{
 		checkPhoneAuth();
+		return true;
 	}
 });
 /* 인증번호 검사 */
@@ -270,8 +283,10 @@ function checkPhoneAuth() {
 				alert("인증에 성공했습니다.");
 				$('#smsAuthBtn').attr("value", "Y");
 				$("#smsAuth").attr('disabled', true).css("background","#ececec");
+				return true;
 			} else { 
 				alert("인증에 실패했습니다./n인증번호를 확인해주세요.");
+				return false;
 			} 
 		} 
 	}); 

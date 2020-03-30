@@ -272,7 +272,7 @@
 								<div class="choosePick">
 								 <input type="text" readonly="readonly" id="file_route">
 								 <label>이미지 선택
-								 <input type="file" id="showImg" onchange="javascript:document.getElementById('file_route').value=this.value">
+								 <input type="file" id="showImg" name="file" onchange="javascript:document.getElementById('file_route').value=this.value">
 								 </label>
 						<p class="info_profile">이미지 설정이 없을 시 기본 프로필 사진으로 설정 됩니다.<br>프로필은 마이페이지에서도 변경이 가능합니다.</p>
 						</div>
