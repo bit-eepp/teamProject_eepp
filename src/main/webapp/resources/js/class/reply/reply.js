@@ -296,7 +296,7 @@ function questionModifyPrc(rpId) {
 	} else {
 		var modify_qContent = $('[name=qContent_'+rpId +']').val();
 		$.ajax({
-			url: 'http://localhost:8282/eepp/question/questionModify',
+			url: getContextPath() + '/question/questionModify',
 			type: 'post',
 			data: {'rpContent' : modify_qContent, 'rpId' : rpId},
 			success: function(data){

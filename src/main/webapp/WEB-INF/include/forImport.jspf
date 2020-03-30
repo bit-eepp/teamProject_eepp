@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
 <link rel="icon" href="${pageContext.request.contextPath}/img/EE_logo.png" sizes="16x16"> <!-- 민영추가-->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d4b3987a46162ad1d899676af601c4"></script><!-- 찬경 추가 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d4b3987a46162ad1d899676af601c4&libraries=services,clusterer,drawing"></script><!-- 찬경 추가 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script> <!-- 민영추가(websocket) -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script><!-- 민영추가(websocket) -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->

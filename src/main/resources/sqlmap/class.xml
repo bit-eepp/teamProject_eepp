@@ -97,12 +97,12 @@
     		SELECT CLASS_SEQ.nextval FROM DUAL
   		</selectKey>
   		
-		INSERT INTO CLASS (cId, user_id, cTitle, cContent, cOpenDate, cEndDate, cTerm, cPrice, cCategory, cTotalPeopleCount, cDifficulty, cSummary, cThumnail) 
-		VALUES(#{classVO.cId}, #{classVO.user_id}, #{classVO.cTitle}, #{classVO.cContent}, SYSDATE, SYSDATE + #{classVO.cTerm}, #{classVO.cTerm}, #{classVO.cPrice}, #{classVO.cCategory}, #{classVO.cTotalPeopleCount}, #{classVO.cDifficulty}, #{classVO.cSummary}, #{classVO.cThumnail})
+		INSERT INTO CLASS (cId, user_id, cTitle, cContent, cOpenDate, cEndDate, cTerm, cPrice, cCategory, cTotalPeopleCount, cDifficulty, cSummary, cThumnail, cAddress1, cAddress2, cAddress3) 
+		VALUES(#{classVO.cId}, #{classVO.user_id}, #{classVO.cTitle}, #{classVO.cContent}, SYSDATE, SYSDATE + #{classVO.cTerm}, #{classVO.cTerm}, #{classVO.cPrice}, #{classVO.cCategory}, #{classVO.cTotalPeopleCount}, #{classVO.cDifficulty}, #{classVO.cSummary}, #{classVO.cThumnail}, #{classVO.cAddress1}, #{classVO.cAddress2}, #{classVO.cAddress3})
 	</insert>
 	
 	<select id="classView" resultType="bit.team.eepp.VO.ClassVO">
-		SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, u.uNickname, u.uProfile,
+		SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, c.cAddress1, c.cAddress2, c.cAddress3, u.uNickname, u.uProfile, 
 		(SELECT COUNT(*) FROM REPLY WHERE class_id = c.cId) AS questionCount 
 		FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cId = #{cId}
 	</select>
@@ -112,13 +112,13 @@
 	</delete>
 	
 	<select id="classModifyView" resultType="bit.team.eepp.VO.ClassVO">
-		SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, u.uNickname 
+		SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, c.cAddress1, c.cAddress2, c.cAddress3, u.uNickname 
 		FROM USERS u, CLASS c WHERE u.USER_ID = c.USER_ID AND cId = #{cId}
 	</select>
 	
 	<update id="modifyClass" parameterType="bit.team.eepp.VO.ClassVO">
 		UPDATE CLASS SET cTitle = #{classVO.cTitle}, cContent = #{classVO.cContent}, cEndDate = cOpenDate + #{classVO.cTerm}, cTerm = #{classVO.cTerm}, cPrice = #{classVO.cPrice}, cCategory = #{classVO.cCategory}, 
-		cTotalPeopleCount = #{classVO.cTotalPeopleCount}, cDifficulty = #{classVO.cDifficulty}, cSummary = #{classVO.cSummary}, cThumnail = #{classVO.cThumnail}
+		cTotalPeopleCount = #{classVO.cTotalPeopleCount}, cDifficulty = #{classVO.cDifficulty}, cSummary = #{classVO.cSummary}, cThumnail = #{classVO.cThumnail}, cAddress1 = #{classVO.cAddress1}, cAddress2 = #{classVO.cAddress2}, cAddress3 = #{classVO.cAddress3}
 		WHERE cId = #{classVO.cId}
 	</update>
 	

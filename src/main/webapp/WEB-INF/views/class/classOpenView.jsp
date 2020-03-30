@@ -143,7 +143,7 @@
 								</div>						
 							</div>
 							
-							<div class="col-6">
+							<div class="clOpenRight col-6">
 								<div class="input-group clThumnail">
 									<div class="input-group-prepend">
 										<div class="box-file-input">
@@ -153,6 +153,26 @@
 											<span class="filename">클래스 강좌를 대표할 사진을 선택해주세요.</span>
 										</div>
 										<img id="loadImg" src="${pageContext.request.contextPath}/img/class/uploadImage.jpg"/>
+									</div>
+								</div>
+								<br>
+								
+								<div class="clAddress">
+									<div class="form-group classPlace">
+										<button class="btn btn-default" type="button">교육장소</button>
+									</div>
+									
+									<div class="form-group ad1">                   
+										<input class="form-control" placeholder="우편번호" name="cAddress1" id="addr1" type="text" readonly="readonly" >
+										<button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fas fa-search-location"></i> 주소찾기</button>                               
+									</div>
+									
+									<div class="form-group ad2">
+									    <input class="form-control" placeholder="도로명 주소" name="cAddress2" id="addr2" type="text" readonly="readonly"/>
+									</div>
+									
+									<div class="form-group ad3">
+									    <input class="form-control" placeholder="상세주소" name="cAddress3" id="addr3" type="text"/>
 									</div>
 								</div>
 							</div>
@@ -188,6 +208,10 @@
 					<input type="hidden" name="cCategory" value="${cCategory}" />
 				</form>
 			</div>
+			
+			
+			
+			
 		</section>
 		
 		<!-- chat -->

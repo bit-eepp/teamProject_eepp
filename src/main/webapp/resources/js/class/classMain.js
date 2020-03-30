@@ -51,12 +51,6 @@ $(document).ready(function() {
 	 		}
 	     }
 	});
-
-	//로그인 하지않은 경우, 강좌개설 버튼 삭제
-	if(!$("#userNickname").val()){
-		$('#openNewClass').remove();
-	}
-	
 });
 
 function pageColor(pageNum) {
