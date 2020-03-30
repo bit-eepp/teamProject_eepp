@@ -47,9 +47,18 @@
 					- <input type="text" name="uPhone_2" class="uPhone_2 custom-select" maxlength="4" size="6">
 					- <input type="text" name="uPhone_3" class="uPhone_3 custom-select" maxlength="4" size="6">
 				
+				<div class="sendAuthBtnWrap">
+				<a class="sendAuthBtn" id="registerInfoID">인증번호 전송</a>
+				</div>
+				
+				<div id="findMyEmail02">
+				<input type="hidden" class="random" value="${random}" />
+				<input type="text" name="forgotAuthCode" class="form-control findIDAuthCode" placeholder="인증번호를 입력해주세요.">
 				<div class="findEmailBtnWrap">
 					<a class="findEmailBtn" id="findRegisterEmail">확인</a>
 				</div>
+				</div>
+			
 			</div>
 			<!-- inputUserInfo -->
 			
@@ -65,18 +74,18 @@
 			<form:form name="f" action="resetPassword.me" method="post">
 			<div class="form-group" id="findMyPW01">
 				<label class="title-uEmail">회원가입시 등록한 이메일을 적어주세요.</label>
-				<input type="text" name="uEmail" class="form-control uEmail" placeholder="yourEmail@example.com">
+				<input type="text" name="uEmail" class="form-control uEmail uEmailInput" placeholder="yourEmail@example.com">
 			</div>
 			
 			<div class="sendAuthBtnWrap">
-				<a class="sendAuthBtn" id="registerInfo" onclick="sendPasswordAuth();">인증번호 전송</a>
+				<a class="sendAuthBtn" id="registerInfoPW">인증번호 전송</a>
 			</div>
 			
 			<div id="findMyPW02">
 				<input type="hidden" class="random" value="${random}" />
-				<input type="text" name="forgotAuthCode" class="form-control findAuthCode" placeholder="인증번호를 입력해주세요.">
+				<input type="text" name="forgotAuthCode" class="form-control findPWAuthCode" placeholder="인증번호를 입력해주세요.">
 				<div class="authCheckBtnWrap">
-					<a class="authCheckBtn" onclick="checkPasswordAuth();">확인</a>
+					<a class="authCheckBtn">확인</a>
 				</div>
 			</div>
 			

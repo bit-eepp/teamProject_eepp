@@ -1,7 +1,10 @@
 package bit.team.eepp.Controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Random;
 
@@ -11,6 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +45,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import bit.team.eepp.API.SMSconfig;
 import bit.team.eepp.Service.JoinService;
 import bit.team.eepp.Service.UserService;
 import bit.team.eepp.Utils.UploadFileUtils;
@@ -189,45 +207,25 @@ public class JoinController {
 		
 	return "redirect:/";
 }
-	
-	/* 이메일 중복 확인 후, 인증번호 발송 */
+	/* 이메일 중복 확인 */
 	@ResponseBody
-	@RequestMapping(value="sendEmailAuth", method=RequestMethod.POST)
-	public int sendEmailAuth(HttpServletRequest request){
+	@RequestMapping(value="checkEmailDuplicate", method=RequestMethod.POST)
+	public int checkEmailDuplicate(HttpServletRequest request){
 		
 		System.out.println(request.getParameter("uEmail"));
 		String uEmail = request.getParameter("uEmail");
-		String random = request.getParameter("random");
 		int result = js.checkDuplicate(uEmail);
 		
-		logger.info(uEmail + "에 이메일을 전송합니다.");
-		
-		if(result == 0) {
-			//이메일로 인증번호 발송
-			int ran = new Random().nextInt(900000) + 100000;
-			HttpSession session = request.getSession(true);
-			String authCode = String.valueOf(ran);
-			
-			session.setAttribute("authCode", authCode);
-			session.setAttribute("random", random);
-			
-			String subject = "회원가입 인증 코드 발급 안내 입니다.";
-			StringBuilder sb = new StringBuilder();
-			sb.append("Community EE 이메일 인증 안내");
-			sb.append("귀하의 인증 코드는 " + authCode + "입니다.");
-			
-			js.send(subject, sb.toString(), "bit.eepp@gmail.com", uEmail);
-			logger.info(uEmail + "에 이메일을 전송완료");
-			
+		if(result != 0) {
+			logger.info("DB에 등록된 이메일.");
 			return 1;
-			
 		} else{
-			logger.info(uEmail + "은 이미 등록된 이메일입니다.");
+			logger.info("DB에 등록되지않은 이메일.");
 			return 0;
 		}
 	
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value="checkEmailAuth", method= {RequestMethod.GET, RequestMethod.POST})
 	public int emailAuth(HttpSession session, HttpServletRequest request) throws IOException{
@@ -276,12 +274,86 @@ public class JoinController {
 		if(result != 0) {
 			logger.info("DB에 등록되어있는 핸드폰번호.");
 			return 1;
-		}
-		else {
+		} else {
 			logger.info("DB에 등록되지않은 핸드폰번호.");
 			return 0;
 		}
 	}
+	
+	 @ResponseBody
+	 @RequestMapping("/sendSms")
+	 public void sendSms(String receiver, HttpSession session) throws IOException{
+
+		String hostname = "api.bluehouselab.com";
+        String url = "https://"+hostname+"/smscenter/v1.0/sendsms";
+
+        CredentialsProvider credsProvider = new BasicCredentialsProvider();
+        credsProvider.setCredentials(
+            new AuthScope(hostname, 443, AuthScope.ANY_REALM),
+            new UsernamePasswordCredentials(SMSconfig.appid, SMSconfig.apikey)
+        );
+
+        AuthCache authCache = new BasicAuthCache();
+        authCache.put(new HttpHost(hostname, 443, "http"), new BasicScheme());
+
+        HttpClientContext context = HttpClientContext.create();
+        context.setCredentialsProvider(credsProvider);
+        context.setAuthCache(authCache);
+        
+        CloseableHttpClient client = HttpClientBuilder.create().build();
+        
+        /*인증번호*/
+        int ran = new Random().nextInt(900000) + 100000;
+		String authCode = String.valueOf(ran);
+		session.setAttribute("smsAuthCode", authCode);
+
+        try {
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setHeader("Content-type", "application/json; charset=utf-8");
+			
+            String json = "{\"sender\":\""+SMSconfig.sender+
+            "\",\"receivers\":[\""+ receiver
+            +"\"],\"content\":\""+"[Community EE] 본인확인 인증번호 ["+authCode+"]를 화면에 입력해주세요"+"\"}";
+
+            StringEntity se = new StringEntity(json, "UTF-8");
+            httpPost.setEntity(se);
+
+            HttpResponse httpResponse = client.execute(httpPost, context);
+            System.out.println(httpResponse.getStatusLine().getStatusCode());
+
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            if(inputStream != null) {
+                BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+                String line = "";
+                while((line = bufferedReader.readLine()) != null)
+                    System.out.println(line);
+                inputStream.close();
+            }
+        } catch (Exception e) {
+            System.err.println("Error: "+e.getLocalizedMessage());
+        } finally {
+            client.close();
+        }
+	    }
+	 
+	 @ResponseBody
+	 @RequestMapping("/smsCheck")
+	 public String smsCheck(HttpSession session, HttpServletRequest request) throws IOException{
+		 String authCode = request.getParameter("authCode");
+			System.out.println(authCode);
+			
+			String originalJoinCode = (String) session.getAttribute("smsAuthCode");
+			System.out.println(originalJoinCode);
+			
+			if(originalJoinCode.equals(authCode)) {
+				session.invalidate();
+				return "ok";
+			}else {
+				session.invalidate();
+				return "no";
+			}
+	    }
+	
 
 	
 }

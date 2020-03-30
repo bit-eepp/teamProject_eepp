@@ -9,9 +9,6 @@
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login_join/loginAndJoin.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-<style>
-	
-</style>
 </head>
 <body>
 <!-- header -->
@@ -138,8 +135,8 @@
 					<tr class="nickInputBox">
 						<th class="input-title"><span class="required">&#8226;</span>닉네임</th>
 						<td>
-							<input name="uNickname" id="uNickname" maxlength="8">
-							<button type="button" class="nickCheckBtn joinBtn" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
+						<input name="uNickname" id="joinNickname" maxlength="8" class="lg-inputBox" oninput="nickCheck();">
+						<span class="checkInfo" id="checkNickInfo"></span>
 						</td>
 					</tr>
 					
@@ -152,19 +149,29 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select> 
-					- <input type="text" class="uPhone_2"  name="uPhone_2" maxlength="4" size="6">
-					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6">
-					<button type="button" class="phoneCheckBtn joinBtn" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
+					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
+					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
+					<span class="checkInfo" id="checkPhoneInfo"></span>
+					<button type="button" class="sendSmsBtn joinBtn" id="phoneNumCheck" value="N">인증번호 전송</button>
 					</td>
 					</tr>
+					
+					<tr id="afterSendSMSAuth">
+					<th class="input-title"></th>
+					<td class="checkEmailAuth">
+					<div>
+						<input type="text" name="smsAuth" id="smsAuth">
+						<input type="hidden" name="random" id="random">
+						<button type="button" class="smsCheckBtn joinBtn" id="smsAuthBtn" value="N">확인</button>
+					</div>
+					</td>
+					</tr>
+					
 					<tr class="profileInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>프로필 설정</th>
 					<td>
 					<div class= "profile">
 						<img src="${pageContext.request.contextPath}/img/headerLogin.png" class="basic_img"/>
-								<!-- div class="inputArea">
-									<input type="file" name="file" id="showImg"/>
-								</div> -->
 								<div class="choosePick">
 								 <input type="text" readonly="readonly" id="file_route">
 								 <label>이미지 선택
@@ -194,9 +201,9 @@
 					<tr class="idInputBox">
 						<th class="input-title"><span class="required">•</span>아이디</th>
 						<td>
-						<input type="text" name="email_01" id="email_01" class="email_input_01">&nbsp;@&nbsp;
-						<input type="text" name="email_02" id="email_02" class="email_input_02">
-						<select class="custom-select" name="selectEmail" id="emailSelection">
+						<input type="text" name="email_01" id="email_01" class="email_input_01 emailInput" onchange="checkEmail()">&nbsp;@&nbsp;
+						<input type="text" name="email_02" id="email_02" class="email_input_02 emailInput">
+						<select class="custom-select" name="selectEmail" id="emailSelection" onchange="checkEmail()">
 							<option value="" selected>직접입력</option>
 							<option value="naver.com">naver.com</option>
 							<option value="hanmail.net">hanmail.net</option>
@@ -205,36 +212,28 @@
 							<option value="gmail.com">gmail.com</option>
 						</select>
 						
-						<button type="button" class="emailBtn joinBtn" onclick="sendEmailAuth();" value="N">이메일 인증</button>
+						<span class="checkInfo" id="checkEmailInfo"></span>
 						</td>
-					</tr>
-					
-					<tr id="afterSendEmailAuth">
-					<th class="input-title"></th>
-					<td class="checkEmailAuth">
-					<div>
-						<input type="text" name="emailAuth" id="emailAuth">
-						<input type="hidden" name="random" id="random">
-						<button type="button" class="emailCheckBtn joinBtn" id="emailAuthBtn" onclick="checkEmailAuth();" value="N">확인</button>
-					</div>
-					</td>
 					</tr>
 					
 					<tr class="pwInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>비밀번호</th>
-					<td><input type="password" name="uPassword" id="uPassword" class="lg-inputBox"></td>
+					<td><input type="password" name="uPassword" id="uPassword" class="lg-inputBox pwInputBox"></td>
 					</tr>
 					
 					<tr class="pwInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>비밀번호 재입력</th>
-					<td><input type="password" name="uPasswordCheck" id="uPasswordCheck" class="lg-inputBox"></td>
+					<td>
+						<input type="password" name="uPasswordCheck" id="uPasswordCheck" class="lg-inputBox pwInputBox" oninput="passWordCheck()">
+						<span class="checkInfo" id="checkPwInfo"></span>
+					</td>
 					</tr>
 					
 					<tr class="nickInputBox">
 					<th class="input-title"><span class="required">&#8226;</span>닉네임</th>
 					<td>
-					<input name="uNickname" id="uNickname" maxlength="8" class="lg-inputBox">
-					<button type="button" class="nickCheckBtn joinBtn" id="nickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
+					<input name="uNickname" id="joinNickname" maxlength="8" class="lg-inputBox" oninput="nickCheck();">
+					<span class="checkInfo" id="checkNickInfo"></span>
 					</td>
 					</tr>
 					
@@ -247,9 +246,21 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select> 
-					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6">
-					- <input type="text" class="uPhone_2"  name="uPhone_3" maxlength="4" size="6">
-					<button type="button" class="phoneCheckBtn joinBtn" id="phoneNumCheck" onclick="phoneCheck();" value="N">등록</button>
+					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
+					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
+					<span class="checkInfo" id="checkPhoneInfo"></span>
+					<button type="button" class="sendSmsBtn joinBtn" id="phoneNumCheck" value="N">인증번호 전송</button>
+					</td>
+					</tr>
+					
+					<tr id="afterSendSMSAuth">
+					<th class="input-title"></th>
+					<td class="checkEmailAuth">
+					<div>
+						<input type="text" name="smsAuth" id="smsAuth">
+						<input type="hidden" name="random" id="random">
+						<button type="button" class="smsCheckBtn joinBtn" id="smsAuthBtn" value="N">확인</button>
+					</div>
 					</td>
 					</tr>
 					
@@ -258,9 +269,6 @@
 					<td>
 					<div class= "profile">
 						<img src="${pageContext.request.contextPath}/img/headerLogin.png" class="basic_img"/>
-								<!-- div class="inputArea">
-									<input type="file" name="file" id="showImg"/>
-								</div> -->
 								<div class="choosePick">
 								 <input type="text" readonly="readonly" id="file_route">
 								 <label>이미지 선택
