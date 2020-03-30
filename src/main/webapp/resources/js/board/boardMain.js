@@ -58,6 +58,10 @@
 		if(newArticle >= bWrittenDate){
 			$(".isNew_"+boardbId).addClass("newArticle");
 		}
+		
+		var pageNum = $('#pageMakerCriPage').val();
+		pageColor(pageNum);
+		
 	});
 
 	// 게시판 타이틀 
@@ -97,4 +101,10 @@
 			$(".selectSortType a").removeClass("active");
 			$(".sort-Reply").addClass("active");
 		}
+	}
+	
+	// 페이징 css
+	function pageColor(pageNum) {
+		   $('#boardPage_'+pageNum).css("background-color", "#59bfbf");
+		   $('#boardPage_'+pageNum).css("color", "#ffffff");
 	}

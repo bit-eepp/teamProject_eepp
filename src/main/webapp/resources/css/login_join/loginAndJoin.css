@@ -21,7 +21,7 @@ button:focus{outline: initial!important;}
     margin: 0 6px 0 3px;
     max-width: 5%;
 }
-.sc-login .faildLogin{
+.sc-login .failedLogin{
 	color: #ea0909;
     font-size: 14px;
 }

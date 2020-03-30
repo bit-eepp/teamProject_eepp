@@ -40,15 +40,28 @@
 		
 		<div class="boardTitle"></div>
 		
-		<div class="selectSortType">
+		<div class="boardSelectorWrap">
+			<div class="selectSortType">
 			<a class="sort-Date" href="boardList?page=${pageMaker.startPage}&perPageNum=${pageMaker.cri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=bWrittenDate&bCategory=${bCategory}">최신순</a>&nbsp;&nbsp;&nbsp;
 			<a class="sort-Hit" href="boardList?page=${pageMaker.startPage}&perPageNum=${pageMaker.cri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=bHit&bCategory=${bCategory}">조회순</a>&nbsp;&nbsp;&nbsp;
 			<a class="sort-Like" href="boardList?page=${pageMaker.startPage}&perPageNum=${pageMaker.cri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=bLike&bCategory=${bCategory}">추천순</a>&nbsp;&nbsp;&nbsp;
 			<a class="sort-Reply" href="boardList?page=${pageMaker.startPage}&perPageNum=${pageMaker.cri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=rpCount&bCategory=${bCategory}">댓글순</a>
+			</div>
+			
+			<div class="writeBtnWrap"><a class="writeBtn">새 글 쓰기</a></div>
 		</div>
+			<form name="form1" role="form" method="post">
+			<input type="hidden" name="page" value="${scri.page}" />
+			<input type="hidden" name="perPageNum" value="${scri.perPageNum}" />
+			<input type="hidden" name="searchType" id="scriSearchType" value="${scri.searchType}" />
+			<input type="hidden" name="keyword" id="scriKeyword" value="${scri.keyword}" />
+			<input type="hidden" name="sortType" id="sortType" value="${sortType}" />
+			<input type="hidden" name="bCategory" id="bCategory" value="${bCategory}" />
+			</form>
 		
+		<div class="boardSelectorWrap02">
 		<!-- 게시글 n개씩 보기 -->
-		<div class="sortCountAndWrite">
+		<div class="sortCount">
 			<select id="cntPerPage" class="custom-select" name="perPageNum">
 				<option value="5"  <c:out value="${pageMaker.cri.perPageNum eq '5' ? 'selected' : ''}"/>>5줄 보기</option>
 				<option value="10" <c:out value="${pageMaker.cri.perPageNum eq '10' ? 'selected' : ''}"/>>10줄 보기</option>
@@ -58,17 +71,32 @@
 				<option value="40" <c:out value="${pageMaker.cri.perPageNum eq '40' ? 'selected' : ''}"/>>40줄 보기</option>
 				<option value="50" <c:out value="${pageMaker.cri.perPageNum eq '50' ? 'selected' : ''}"/>>50줄 보기</option>
 			</select>
-			
-			<div class="writeBtnWrap"><a class="writeBtn">새 글 쓰기</a></div>
 		</div>
-		<form name="form1" role="form" method="post">
-			<input type="hidden" name="page" value="${scri.page}" />
-			<input type="hidden" name="perPageNum" value="${scri.perPageNum}" />
-			<input type="hidden" name="searchType" id="scriSearchType" value="${scri.searchType}" />
-			<input type="hidden" name="keyword" id="scriKeyword" value="${scri.keyword}" />
-			<input type="hidden" name="sortType" id="sortType" value="${sortType}" />
-			<input type="hidden" name="bCategory" id="bCategory" value="${bCategory}" />
-		</form>
+		
+		<!-- 검색 부분  -->
+		<div class="search">
+			<select name="searchType" class="selectSearchType">
+				<option value="n" <c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
+				<option value="w" <c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+				<option value="t" <c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+				<option value="c" <c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+				<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+			</select> 
+			
+			<div class="input-group md-form form-sm form-2 pl-0">
+  				<input class="form-control my-0 py-1 amber-border" type="text" placeholder="검색어" aria-label="Search"
+  				 name="keyword" id="keywordInput" value="${scri.keyword}">
+  				<div class="input-group-append">
+  					<a id="searchBtn">
+  						<span class="input-group-text lighten-3" id="basic-text1"><i class="fas fa-search"
+       			 		aria-hidden="true"></i></span>
+       				</a>
+  				</div>
+			</div>
+		</div>
+		<!-- 검색 부분 끝  -->
+		
+	</div>
 		
 		<!-- 게시물 리스트 -->
 		<div class="listTable">
@@ -308,32 +336,17 @@
 					</c:when>
 				
 					<c:otherwise>
-						<tr>
-							<td colspan="9">조회된 결과가 없습니다.</td>
+						<tr class="listTable-list listWidth">
+							<td class="searchResult" colspan="9">조회된 결과가 없습니다.</td>
 						</tr>
 					</c:otherwise>
 				</c:choose>
 			</table>
 		</div>
 		
-		<!-- 검색 부분  -->
-		<div class="search">
-			<select name="searchType">
-				<option value="n" <c:out value="${scri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
-				<option value="w" <c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
-				<option value="t" <c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-				<option value="c" <c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-				<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-			</select> 
-			
-			<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" />
-			<button id="searchBtn" type="button">검색</button>
-		</div>
-		<!-- 검색 부분 끝  -->
-		
 		<!-- 페이징 -->
 		<div class="boardListpaging">
-			<ul class="pagination">
+			<ul class="pagination justify-content-center">
 				<li class="page-item">
 				<a class="page-link" href="boardList${pageMaker.makeSearch(pageMaker.startPage - 1)}&sortType=${sortType}&bCategory=${bCategory}">
 				<i class="fas fa-angle-left"></i>
@@ -342,7 +355,7 @@
 				
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 				<li class="page-item boardPaging">
-				<a id="scrapBoardPage_${idx}" class="page-link boardPaging" href="boardList${pageMaker.makeSearch(idx)}&sortType=${sortType}&bCategory=${bCategory}">${idx}</a></li>
+				<a id="boardPage_${idx}" class="page-link boardPaging" href="boardList${pageMaker.makeSearch(idx)}&sortType=${sortType}&bCategory=${bCategory}">${idx}</a></li>
 				</c:forEach>
 				
 				<li class="page-item">
