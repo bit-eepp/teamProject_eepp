@@ -70,17 +70,17 @@ $('#submit').click(function(event) {
 		return false;
 	}
 	
-//	var phoneChkVal = $("#phoneNumCheck").val();
-//	if (phoneChkVal == "N") {
-//		alert("휴대폰 인증을 해주세요.");
-//		return false;
-//	}
-//	
-//	var phoneAuthChkVal = $("#smsAuthBtn").val();
-//	if (phoneAuthChkVal == "N") {
-//		alert("휴대폰 인증번호를 확인해주세요.");
-//		return false;
-//	}
+	var phoneChkVal = $("#phoneNumCheck").val();
+	if (phoneChkVal == "N") {
+		alert("휴대폰 인증을 해주세요.");
+		return false;
+	}
+	
+	var phoneAuthChkVal = $("#smsAuthBtn").val();
+	if (phoneAuthChkVal == "N") {
+		alert("휴대폰 인증번호를 확인해주세요.");
+		return false;
+	}
 
 	return true;
 });
