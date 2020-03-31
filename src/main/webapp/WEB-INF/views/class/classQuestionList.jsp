@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>CLASS QuestionList</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classQuestionList.css">
 
-<!-- 		<script>
-		var uNickname = $("#userNickname").val();
-		var userId = $("#userId").val();
-		
+		<script>
+			var uNickname = $("#userNickname").val();
+			var userId = $("#userId").val();
+			var cId = $('#classId').val();
+
 			// 해당 class강좌의 문의수를 불러오는 JS메서드(Ajax-Json)
 			function questionCnt() {
+				console.log("cId : " +cId);
+				
 				$.ajax({
 					url: getContextPath() + '/question/questionCount',
 					type: 'post',
@@ -28,7 +33,8 @@
 					}
 				});
 			}
-			
+	
+			// 강좌문의 페이징 코드
 			function questionPagePrint(rpPageMaker) {
 				/* console.log(rpPageMaker);
 				console.log('totalCount : ' +rpPageMaker[0]);
@@ -36,8 +42,8 @@
 				console.log('endPage : ' +rpPageMaker[2]);
 				console.log('prev : ' +rpPageMaker[3]);
 				console.log('next : ' +rpPageMaker[4]);
-				console.log('displayPageNum' +rpPageMaker[5]);
-				console.log('tempEndPage' +rpPageMaker[6]);				
+				console.log('displayPageNum : ' +rpPageMaker[5]);
+				console.log('tempEndPage : ' +rpPageMaker[6]);				
 				console.log('page : ' +rpPageMaker[7].page);
 				console.log('perPageNum : ' +rpPageMaker[7].perPageNum);
 				console.log('startNum : ' +rpPageMaker[7].startNum);
@@ -51,45 +57,44 @@
 				var next = rpPageMaker[4];
 				var tempEndPage = rpPageMaker[6];
 				var page = rpPageMaker[7].page;
-			
+	
 				var paging = '';
-					paging += '<a style="text-decoration: none" href="javascript:questionList(1)">처음으로</a>&nbsp;&nbsp;';
-				 
-				if(prev){
-					paging +='<a style="text-decoration: none" href="javascript:questionList('+(startPage - 1) +')"> « </a>';
-				}
-					paging += '[&nbsp;';
-				
-				for(var i = startPage; i <= endPage; i++){
-					var strClass = page == i ? 'class="active"' : '';
-				 	paging += '<a style="text-decoration: none"'+strClass +'href="javascript:questionList(' +i +')">' +i +'</a>&nbsp;&nbsp;';
-				}
-					paging += ']&nbsp;&nbsp;';
-				 
-				if(next){
-					paging +='<a style="text-decoration: none" href="javascript:questionList(' +(endPage + 1) +')"> » </a>&nbsp;&nbsp;';
-				}
-				 
-				if(page < tempEndPage){
-					paging += '<a style="text-decoration: none" href="javascript:questionList(' +tempEndPage +')">마지막으로</a>';
-				}
-			
-				$('.questionPaging').html(paging);
+					paging += '<ul class="pagination justify-content-center">';
+					
+					if(tempEndPage != 0) {
+						paging += '<li class="page-item">';
+						paging += '<a class="page-link" href="javascript:questionList(1)"><i class="fas fa-angle-left"></i></a>';
+						paging += '</li>';
+					}
+					
+					for(var i = startPage; i <= endPage; i++){
+						paging += '<li class="page-item">';
+					 	paging += '<a id="clQuestionPageNum_' +i +'" class="page-link" href="javascript:questionList(' +i +')">' +i +'</a>';
+					 	paging += '</li>';
+					}
+					
+					if(page < tempEndPage){
+						paging += '<li class="page-item">';
+						paging += '<a class="page-link" href="javascript:questionList(' +tempEndPage +')"><i class="fas fa-angle-right"></i></a>';
+						paging += '</li>';
+					}
+
+				$('.clQuestionPage').html(paging);
 			}
-			
+
 			// 해당 게시글의 댓글들을 출력하는 JS메서드(Ajax-Json)
-			function questionList(page) {
+			function questionList(page) {	
 				var page = Number(page);
 				if(isNaN(page)) {
-					page = 0;
+					page = 1;
 				}
-				
+
 				$.ajax({
 					url: getContextPath() + '/question/questionList',
 					type: 'post',
 					dataType:'json',
 					data: {'class_id' : cId,
-							'page' : page < 1 ? 1 : page
+							'page' : page <= 1 ? 1 : page
 							},
 					success: function(data){
 						console.log(data);
@@ -103,80 +108,150 @@
 						$('.questionList').children().remove();
 						
 						$.each(questionList, function(key, value){
+							console.log(data);
+							
 							var indent = value.rpIndent;
-							var re = '';
+							var tag = '';
 							
-							for(var i = 0; i < indent; i++) {
-								re += '└ RE ';
+							if(indent > 0) {
+								var re = 'RE : ';
+								
+								tag += '<div class="classQuestionA q_'+value.rpId +'">';
+									tag += '<div class="card-body">';
+										tag += '<div class="card card-inner">';		//card-inner
+											tag += '<div class="card-body">';		//card-body
+												tag += '<div class="row">';												//row
+													tag += '<div class="col-md-2" align="center">';
+														tag += '<img src="' +value.uProfile +'" alt="userProfile"/>';
+													
+														if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2' || uNickname == ''){
+															tag += '<div>'
+															tag += '<a class="userBtn"><b style="color:#59bfbf; font-size:100%;">'+value.uNickname+'</b></a>';
+															tag += '</div>'
+														} else{
+															tag += '<div class="dropdown">';
+															tag += '<a href="#" class="userBtn" id="user_btn_'+value.rpId+value.user_id+'" data-toggle="dropdown"><b style="color:#59bfbf; font-size:100%;">'+value.uNickname+'</b></a>';
+															tag += '<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_'+value.rpId+value.user_id+'">';
+															tag += '<li><a onclick="memberInfo(' +'\'' +value.uNickname +'\',' +value.user_id +');">회원정보</a></li>';
+															tag += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
+															tag += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
+															tag += '</ul></div>';
+															tag += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
+															tag += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
+															tag += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
+															tag += '<div class="modal-body">';
+															tag += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
+															tag += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
+															tag += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
+															tag += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
+															tag += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
+															tag += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
+															tag += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
+															tag += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_'+value.rpId+'.disabled=false">기타<br>';
+															tag += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
+															tag += '</div></form></div>';
+															tag += '<div class="modal-footer">';
+															tag += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm()">취소</button>';
+															tag += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
+															tag += '</div>';
+															tag += '</div></div></div>';	
+														}
+
+														tag += '<p class="text-secondary text-center">' +value.rpWrittenDate +'</p>';
+														
+													tag += '</div>';
+													
+													tag += '<div class="col-md-10">';
+														tag += '<div class="clQcontent qContent_'+value.rpId +'"><p><b>' +re +value.rpContent +'</b></p></div>';
+														
+														tag += '<div class="cqMenuBtn">';
+															if(uNickname != value.uNickname){
+																if(uNickname == $("#classUserNickname").val()){
+																	tag += '<a title="답변" class="float-right btn btn btn-info ml-2 reBtn" onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');"><i class="fas fa-reply"></i></a><br>';
+																}
+															} else {
+																tag += '<a title="삭제" class="float-right btn btn btn-info ml-2 delBtn" onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');"><i class="fas fa-eraser"></i></a>';
+																tag += '<a title="수정" class="float-right btn btn btn-info ml-2 editBtn" onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');"><i class="far fa-edit"></i></a>';
+															}
+														tag += '</div>';
+													tag += '</div>';
+												tag += '</div>';	//row
+											tag += '</div>';		//card-body
+										tag += '</div>';			//card-inner
+									tag += '</div>';				//card-body
+								tag += '</div>';
+							} else {
+								var re = '';
+								tag += '<div class="classQuestionB q_'+value.rpId +'">';
+									tag += '<div class="card-body">';	// card-body
+										tag += '<div class="row">';		//row
+											tag += '<div class="col-md-2" align="center">';
+												tag += '<img src="' +value.uProfile +'" alt="userProfile"/>';
+
+												if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2' || uNickname == ''){
+													tag += '<div>'
+													tag += '<a class="userBtn"><b style="color:#59bfbf; font-size:100%;">'+value.uNickname+'</b></a>';
+													tag += '</div>'
+												} else{
+													tag += '<div class="dropdown">';
+													tag += '<a href="#" class="userBtn" id="user_btn_'+value.rpId+value.user_id+'" data-toggle="dropdown"><b style="color:#59bfbf; font-size:100%; ">'+value.uNickname+'</b></a>';
+													tag += '<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_'+value.rpId+value.user_id+'">';
+													tag += '<li><a onclick="memberInfo(' +'\'' +value.uNickname +'\',' +value.user_id +');">회원정보</a></li>';
+													tag += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
+													tag += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
+													tag += '</ul></div>';
+													tag += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
+													tag += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
+													tag += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
+													tag += '<div class="modal-body">';
+													tag += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
+													tag += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
+													tag += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
+													tag += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
+													tag += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
+													tag += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
+													tag += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
+													tag += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_'+value.rpId+'.disabled=false">기타<br>';
+													tag += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
+													tag += '</div></form></div>';
+													tag += '<div class="modal-footer">';
+													tag += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm()">취소</button>';
+													tag += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
+													tag += '</div>';
+													tag += '</div></div></div>';	
+												}
+
+												tag += '<p class="text-secondary text-center">' +value.rpWrittenDate +'</p>';
+												
+											tag += '</div>';
+										
+											tag += '<div class="col-md-10">';  	       
+												tag += '<div class="clQcontent qContent_'+value.rpId  +'"><p><b>' +value.rpContent +'</b></p></div>';
+														
+												tag += '<div class="cqMenuBtn">';
+													if(uNickname != value.uNickname){
+														if(uNickname == $("#classUserNickname").val()){
+															tag += '<a title="답변" class="float-right btn btn btn-info ml-2 reBtn" onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');"><i class="fas fa-reply"></i></a><br>';
+														}
+													} else {
+														tag += '<a title="삭제" class="float-right btn btn btn-info ml-2 delBtn" onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');"><i class="fas fa-eraser"></i></a>';
+														tag += '<a title="수정" class="float-right btn btn btn-info ml-2 editBtn" onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');"><i class="far fa-edit"></i></a>';
+													}
+												tag += '</div>';
+								
+											tag += '</div>';	//col-md-10
+										tag += '</div>';		//row
+									tag += '</div>';			//card-body
+								tag += '</div>';
 							}
+						
+							var tempTag = '<input type=hidden id="currentPageNum" value=' +page +'>';	
+							$("#clCurrentPageNum").html(tempTag);
+								
+							$(".questionList").append(tag);
 							
-							var b = '<div class=q_'+value.rpId +'>';
-								b += '<table border="1">';
-								b += '<tr>';
-								
-								b += '<td width="100">';	
-								b += value.rpId;
-								b += '</td>';
-
-								b += '<td width="300" class="qContent_'+value.rpId +'">';
-								b += re;
-								b += value.rpContent;
-								b += '</td>';
-								
-								b += '<td width="150">';
-								if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2'){
-									b += '<a class="userBtn">'+value.uNickname+'</a>';
-								} else{
-									b += '<div class="dropdown">';
-									b += '<a href="#" class="userBtn" id="user_btn_'+value.rpId+value.user_id+'" data-toggle="dropdown">'+value.uNickname+'</a>';
-									b += '<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_'+value.rpId+value.user_id+'">';
-									b += '<li><a href="#">회원정보</a></li>';
-									b += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
-			                		b += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
-			                		b += '</ul></div>';
-			                		b += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
-			                		b += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
-			               			b += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
-			               			b += '<div class="modal-body">';
-			               			b += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
-						            b += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
-						            b += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
-						            b += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
-						            b += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
-						            b += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
-						            b += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
-						            b += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_'+value.rpId+'.disabled=false">기타<br>';
-						            b += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
-						            b += '</div></form></div>';
-						            b += '<div class="modal-footer">';
-						            b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>';
-						            b += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
-						            b += '</div>';
-						            b += '</div></div></div>';	
-								}
-								/* b += '<h4>' +value.uNickname +'</h4>'; */
-								b += '<h6>' +value.rpWrittenDate +'</h6>';
-								b += '</td>';
-								
-								b += '<td width="100">';
-								if(uNickname != value.uNickname){
-									if(uNickname == $("#classUserNickname").val()){
-										b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[답변]</a><br>';
-									}
-								}else{
-								b += '<a onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');" style="color : blue">[수정] </a>';
-								b += '<br>';
-								b += '<a onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a>';
-								b += '<br>';
-								b += '<a onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
-								}
-								b += '</td>';
-
-								b += '</tr>';
-								b += '</table>';
-								b += '</div>'
-							
-							$(".questionList").append(b);	
+							$('#clQuestionPageNum_'+page).css("background-color", "#59bfbf");
+							$('#clQuestionPageNum_'+page).css("color", "#ffffff");
 				        });
 					},
 					
@@ -186,34 +261,74 @@
 					}
 				});
 			}
-			
-			// 문의에 대한 답변을 작성하기 위한  view 화면 불러오는 JS메서드
+	
+			// 문의에 대한 답변을 작성하기 위한  view 화면  : 개설자만
 			function reQuestionView(rpId, rpGroup, rpStep, rpIndent) {
-				var a = '<div>';
-					a += '<form name="reQform">'
-					a += '<table border="1">';
-					a += '<tr>';
-					a += '<td>';
-					a += '<input type="hidden" name="q_user_id" value='+userId+'>&nbsp;&nbsp;&nbsp;&nbsp;';
-					a += uNickname;
-					a += '<input type="button" value="등록" onclick="reQuestionWrite('+rpGroup +','+rpStep +','+rpIndent +')">&nbsp;&nbsp;';
-					a += '<button type="button" onclick="questionList();">취소</button>';
-					a += '</td>';
-					a += '</tr>';
-					a += '<tr>';
-					a += '<td>';
-					a += '<textarea type="text" name="reQuestion" placeholder="내용을 입력하세요." rows="5" cols="100"></textarea>';
-					a += '</td>';
-					a += '</tr>';
-					a += '</table>';
-					a += '</form>';
-					a += '</div>';
-				$('.q_'+rpId).append(a);
-			}
+				var cn = $('#currentPageNum').val();
+				var tag = '';
+				var nowTime = getTimeStamp();
+					
+					
+				function getTimeStamp() {
+					var d = new Date();
+					var s =
+						leadingZeros(d.getFullYear(), 4) + '-' +
+						leadingZeros(d.getMonth() + 1, 2) + '-' +
+						leadingZeros(d.getDate(), 2) + ' ' +
+					
+						leadingZeros(d.getHours(), 2) + ':' +
+						leadingZeros(d.getMinutes(), 2) + ':' +
+						leadingZeros(d.getSeconds(), 2);
 			
-			// 문의에 대한 답변 작성 JS메서드(Ajax-Json)
+					return s;
+				}
+				
+				function leadingZeros(n, digits) {
+					var zero = '';
+					n = n.toString();
+			
+					if (n.length < digits) {
+						for (i = 0; i < digits - n.length; i++) {
+							zero += '0';
+						}	
+					}
+					return zero + n;
+				}
+				
+				tag += '<div class="comment">';
+					tag += '<div class="card card-inner">';	//card-inner
+						tag += '<div class="card-body">';								// card-body
+							tag += '<form name="reQform">';								//form
+								tag += '<div class="row">';								//row
+									tag += '<div class="col-md-2" align="center">';
+										tag += '<img src="' +$('#uProfile').val() +'" alt="userProfile"/>';
+										tag += '<div class="commentUser"><b>' +uNickname + '</b></div>';
+										tag += '<p class="text-secondary text-center">' +nowTime +'</p>'; 
+									tag += '</div>';
+								
+									tag += '<div class="col-md-10">'; 	       
+										tag += '<input type="hidden" name="q_user_id" value=' +userId +'>';
+										tag += '<textarea class="form-control" type="text" name="reQuestion" placeholder="답변을 입력하세요." rows="5"></textarea>';		
+										tag += '<br>';
+										
+										tag += '<p>';
+										tag += '<button class="float-right btn btn btn-info ml-2 cancelBtn" title="취소" type="button" onclick="questionList('+cn +');"><i class="fas fa-times"></i></button>';
+										tag += '<button class="float-right btn btn btn-info ml-2 submitBtn" title="답변등록" type="button" onclick="reQuestionWrite('+rpGroup +','+rpStep +','+rpIndent +')"><i class="fas fa-check"></i></button>';	
+										tag += '</p>';
+									tag += '</div>';	//col-md-10
+								tag += '</div>';		//row
+							tag += '</form>';			//form
+						tag += '</div>';				//card-body
+					tag += '</div>';
+				tag += '</div>';
+	
+				$('.q_'+rpId).append(tag);
+			}
+	
+			// 문의에 대한 답변 작성 : 개설자만 
 			function reQuestionWrite(rpGroup, rpStep, rpIndent) {
 				var reQuestion = document.reQform.reQuestion;
+				var cn = $('#currentPageNum').val();
 				
 				if(reQuestion.value == '') {
 					alert("내용을 작성해주세요");
@@ -232,9 +347,9 @@
 								'class_id' : cId, 
 								'user_id' : $("#userId").val()},	
 						success: function(data){
-							alert("댓글이 등록되었습니다.")
+							alert("답변이 등록되었습니다.")
 							questionCnt();
-							questionList();
+							questionList(cn);
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);
@@ -243,19 +358,24 @@
 					});
 				}
 			}
-			
-			// class강좌문의 버튼눌렀을때 이벤트 JS메서드
+	
+			// 해당 class강좌에 대해 문의를 작성하는 JS메서드(Ajax-Json) : 개설자, 비로그인 유저를 제외한 유저만 해당
 			$('[name=qBtn]').click(function(){
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					location.href = "/eepp/login/login.do";
+					return false;
+				}
+				
 				var insertData = $('[name=qForm]').serialize();				
 				questionWrite(insertData);
 			});
-			
-			// 해당 class강좌에 대해 문의를 작성하는 JS메서드(Ajax-Json) 
+
 			function questionWrite(insertData) {
 				var rpContent = document.qForm.rpContent;
 				
 				if(rpContent.value == '') {
-					alert("문의하실 내용을 작성해주세요");
+					alert("문의사항을 작성해주세요");
 					document.qForm.rpContent.focus();
 					return false;
 				} else {
@@ -275,21 +395,30 @@
 					});
 				}
 			}
-			
+	
 			// class 강좌문의 수정 view JS메서드(Ajax-Json)
 			function questionModify(rpId, rpContent){
+				var cn = $('#currentPageNum').val();
+				
 			    var a ='';
-				    a += '<div>';
-				    a += '<input type="text" name="qContent_' +rpId +'" value="' +rpContent +'"/>';
-				    a += '<button type="button" onclick="questionModifyPrc(' +rpId +');">수정</button>';
-					a += '<button type="button" onclick="questionList();">취소</button>';
+				    a += '<div class="commentModify">';
+				    a += '<textarea rows="4" type="text" name="qContent_' +rpId +'">' +rpContent +'</textarea>';
+				    a += '<br>';
+				    a += '<p>';
+				    a += '<button class="btn btn btn-info ml-2 updateBtn" title="답변수정" type="button" onclick="questionModifyPrc(' +rpId +');"><i class="fas fa-check"></i></button>';
+					a += '<button class="btn btn btn-info ml-2 cancelBtn" title="수정취소" type="button" onclick="questionList(' +cn +');"><i class="fas fa-times"></i></button>';
+					a += '</p>';
+					 
 				    a += '</div>';
+				    
 			    $('.qContent_'+rpId).html(a);	    
 			}
-			
+	
 			// class 강좌문의 수정 JS메서드(Ajax-Json)
 			function questionModifyPrc(rpId) {
 				var rpContent = $('[name=qContent_' +rpId +']').val();
+				var cn = $('#currentPageNum').val();
+				
 				if(rpContent == '') {
 					alert("내용이 비어있습니다.");
 					$('[name=qContent_' +rpId +']').focus();
@@ -297,11 +426,11 @@
 				} else {
 					var modify_qContent = $('[name=qContent_'+rpId +']').val();
 					$.ajax({
-						url: 'http://localhost:8282/eepp/question/questionModify',
+						url: getContextPath() + '/question/questionModify',
 						type: 'post',
 						data: {'rpContent' : modify_qContent, 'rpId' : rpId},
 						success: function(data){
-							questionList();
+							questionList(cn);
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);
@@ -310,21 +439,23 @@
 					});
 				}
 			}
-			
+	
 			// class 강좌문의 삭제 JS메서드(Ajax-Json)
- 			function questionDelete(rpId, gCount, rpStep, rpIndent) {
+			function questionDelete(rpId, gCount, rpStep, rpIndent) {
+				var cn = $('#currentPageNum').val();
+				
 				if(gCount > 1 && rpStep == 0 && rpIndent == 0) {
-					alert("답변이 달린 문의글은 삭제 할 수 없습니다.");	
+					alert("답변이 달린 글은 삭제 할 수 없습니다.");	
 					return;
 				} else {
-					if(confirm("정말 삭제 하시겠습니까?")){
+					if(confirm(rpId +"번 문의를 삭제 하시겠습니까?")){
 						$.ajax({
 							url: getContextPath() + '/question/questionDelete',
 							type: 'post',
 							data: {'rpId' : rpId},
 							success: function(data){
 								questionCnt();
-								questionList();
+								questionList(cn);
 							},
 							error : function(request, status, error) {
 								console.log(request.responseText);
@@ -334,10 +465,13 @@
 					}
 				}	
 			}
-		</script> -->
+		</script>
 	</head>
+	
 	<body>
-	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-	<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
+		<input type="hidden" id="uProfile" name="loginUserId" value="${loginUser.uprofile}">
+		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
+		<input type="hidden" id="classUserNickname" name="loginUserId" value="${clView.uNickname}" />
 	</body>
 </html>

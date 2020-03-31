@@ -10,229 +10,7 @@
 		
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-		
-		<style type="text/css">
-			.customoverlay {
-				position:relative;
-				bottom:85px;
-				border-radius:6px;
-				border: 1px solid #ccc;
-				border-bottom:2px solid #ddd;
-				float:left;
-			}
-			
-			.customoverlay:nth-of-type(n) {
-				border:0; 
-				box-shadow:0px 1px 2px #888;
-			}
-			
-			.customoverlay a {
-				display:block;
-				text-decoration:none;
-				color:#000;
-				text-align:center;
-				border-radius:6px;
-				font-size:14px;
-				font-weight:bold;
-				overflow:hidden;
-				background: #e7438b;
-				background: #e7438b url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
-			}
-			.customoverlay .title {
-				display:block;
-				text-align:center;
-				background:#fff;
-				margin-right:35px;
-				padding:10px 15px;
-				font-size:14px;
-				font-weight:bold;
-			}
-			.customoverlay:after {
-				content:'';
-				position:absolute;
-				margin-left:-12px;
-				left:50%;
-				bottom:-12px;
-				width:22px;
-				height:12px;
-				background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
-			}
-			
-			.clJoinOkBtn {
-				border: none;
-				outline: 0;
-				cursor: default;
-				width: 100%;
-				font-weight: 1000;
-			}
-			
-			.hr-sect {
-				display: flex;
-				flex-basis: 100%;
-				align-items: center;
-				color: #59bfbf;
-				font-size: 120%;
-				margin: 8px 0px;
-			}
-			
-			.hr-sect::before,.hr-sect::after {
-				content: "";
-				flex-grow: 1;
-				background: #59bfbf;
-				height: 2px;
-				margin: 0px 16px;
-			}
-			
-			.clContent .clContentLeft {
-				width:100%; 
-				height: auto;
-				font-weight: 1000;
-			}
-			
-			.clContent .clContentLeft div {
-				width:100%; 
-				height: auto;
-			}
-			
-			.clContent .clContentLeft .clContentTitle p {
-				color:#59bfbf; 
-				font-size: 180%;
-			}
-			
-			.clContent .clContentLeft .clContentSummary p {
-				color:#4c5454;
-				font-size: 100%;
-			}
-			
-			.clContent .clContentLeft .clContentThumnail img {
-				width: 100%;
-				height: 450px;
-				border-radius: 5px;
-			}
-			
-			.clContent .clContentRight {
-				width:100%; 
-				height: auto;
-				font-weight: 1000;
-			}
-
-			.clContent .clContentRight .clContentDetailHaed button {
-				 background-color: #59bfbf; 
-				 color: #ffffff; 
-				 border-radius: 0; 
-				 cursor: default;
-			}
-
-			.clContent .clContentRight .clContentDetailBody {
-				 border: 2px solid #59bfbf; 
-				 width:100%; 
-				 height: auto;
-				 font-weight: 1000;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody ul {
-				width:100%;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody ul li{
-				border: none;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody ul .applyMenu .classJoinForm .applyBtn {
-				 width: 100%;
-				 font-weight: 1000;
-				 background-color: #59bfbf; 
-				 color:#ffffff; 
-				 border: none;
-				 outline: 0;
-				 border-radius: 10px;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody ul .applyMenu .classJoinForm .applyBtn:hover {
-				 background-color: #e7438b; 
-				 border: none;
-				 outline: 0;
-			}
-										
-			.clContent .clContentRight .clContentDetailBody .diff .clDiffGroup button {
-				display:inline;
-				color:#ffffff; 
-				background-color:#26274c; 
-				border:none; 
-				font-size:100%; 
-				border-radius: 50%; 
-				width: 80px; 
-				height: 80px; 
-				cursor: default; 
-				outline: 0;
-				font-weight: 800;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .diff .clDiffGroup .clDiffBtnSelect {
-				color:#ffffff; 
-				background-color:#e7438b; 
-				border:none;
-				outline: 0;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .diff .clDiffGroup .clDiffBtnE, .clDiffBtnN {
-				margin-right: 10px;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .clPlaceMap #map {
-				width:100%; 
-				height:300px; 
-				overflow: auto; 
-				border-radius: 5px;
-			}
-
-			.clContent .clContentRight .clContentDetailBody .menuBtn button {
-				width: 95px;
-				height: 70px;
-				background-color: #e5e5e5;
-				color: #26274c;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .menuBtn button:hover {
-				background-color: #e7438b;
-				color: #ffffff;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-header {
-				background-color: #59bfbf;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-header p {
-				font-size: 120%; 
-				color: #ffffff;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-body p img{
-				width: 100%;
-				height:300px;
-				border-radius: 10px;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-body .table {
-				font-size: 110%;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-footer {
-				display:table;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-footer .cjoinBtn button {
-				width:80px; 
-				height:80px; 
-				border-radius: 50%; 
-				color: #59bfbf;
-			}
-			
-			.clContent .clContentRight .clContentDetailBody .applyMenu .classJoinForm .modal-footer .cjoinBtn button:hover {
-				background-color:#e7438b;
-				color: #ffffff;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classView.css">
 		
 		<script>
 			function getContextPath() {
@@ -244,7 +22,7 @@
 			var openner = '${clView.uNickname}';
 			var userId = $('#userId').val();
 			var cId = $('#classId').val();
-
+			
 			$(document).ready(function() {
 				// 수강정보 썸머노트 설정
 				$('#summernote').summernote({
@@ -595,13 +373,13 @@
 									<c:choose>
 										<c:when test="${clView.uNickname eq loginUser.uNickname or clView.uNickname eq '운영자' or clView.uNickname eq 'admin2' or loginUser.uNickname == null}">
 											<div class="clOpennerNick">
-												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a class="userBtn"><b>${clView.uNickname}</b></a>
+												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a class="userBtn clUser"><b>${clView.uNickname}</b></a>
 											</div>
 										</c:when>
 											
 										<c:otherwise>	
 											<div class="dropdown clOpennerNick">
-												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a href="#" class="userBtn" id="user_btn_${clView.user_id}${clView.cId}" data-toggle="dropdown"><b>${clView.uNickname}</b></a>	
+												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a href="#" class="userBtn clUser" id="user_btn_${clView.user_id}${clView.cId}" data-toggle="dropdown"><b>${clView.uNickname}</b></a>	
 						           				<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${clView.uNickname}${clView.cId}">
 						                			<li><a onclick="memberInfo('${clView.uNickname}',${clView.user_id});">회원정보</a></li>
 						                			<li><a onclick="sendMessage('${clView.uNickname}',${clView.user_id});">쪽지 보내기</a></li>
@@ -815,7 +593,7 @@
 								<li class="list-group-item menuBtn">
 									<c:choose>		
 										<c:when test="${loginUser.uNickname == null}">
-											<div align="left">
+											<div align="center">
 												<button title="강좌목록" class="btn classList" type="button"><i class="fas fa-list-ul fa-2x"></i></button>
 											</div>
 										</c:when>
@@ -829,7 +607,7 @@
 										</c:when>
 
 										<c:otherwise>
-											<div align="left">
+											<div align="center">
 												<button title="스크랩" class="btn" type="button" onclick="cScrap(${clView.cId})"><i class="fas fa-bookmark fa-2x"></i></button>
 												<button title="강좌목록" class="btn classList" type="button"><i class="fas fa-list-ul fa-2x"></i></button>
 											</div>
@@ -842,7 +620,7 @@
 					</div>
 					<br>
 					
-					<div class="col clQuestion" style="width: 100%;">
+					<div class="col clQuestion">
 						<br><br>
 						<div class="input-group hr-sect" >
 							<h4>강 좌 문 의 (<b class="qCount"></b>)</h4>
@@ -851,20 +629,20 @@
 						<!-- 개설자일경우 안보임-->
 						<c:choose>
 							<c:when test="${loginUser.uNickname == clView.uNickname}"></c:when>
-						
+
 							<c:otherwise>
-								<div class="questionForm" style="width: 100%; font-weight: 800;">
+								<div class="questionForm">
 									<h5>
-										<b><i class="fas fa-pencil-alt"></i>&nbsp;문 의 작 성</b>
+										<b><i class="fas fa-comment-alt"></i>&nbsp;문 의 작 성</b>
 									</h5>
 									
-									<table style="width: 100%;">
+									<table>
 										<tr>
 								            <td align=center rowspan="2" style="width: 85%;">
 								            	<form name="qForm">
 													<input type="hidden" name="class_id" value="${clView.cId}" />
 													<input type="hidden" name="user_id" value="${loginUser.user_id}">
-													<textarea rows="4" name="rpContent" placeholder="강좌와 관련된 문의를 작성해주세요." style="width: 100%;"></textarea>
+													<textarea class="form-control" rows="4" name="rpContent" placeholder="강좌에 문의할 점이 있으면 작성해주세요." style="width: 100%;"></textarea>
 												</form>
 								            </td>
 								            
@@ -875,7 +653,7 @@
 								        
 								        <tr>
 								            <td align=center>
-								            	<button class="btn btn-lg" type="button" name="qBtn" style="width: 80%; background-color:#59bfbf; border:none; color: #ffffff;"><b>문 의</b></button>
+								            	<button class="btn btn-lg questionBtn" type="button" name="qBtn"><b>문 의</b></button>
 								            </td>
 								        </tr>
 									</table>
@@ -883,25 +661,9 @@
 							</c:otherwise>
 						</c:choose>	
 						
-						
-						
-						
-						
-						
-						
-						
-						
-						<div class="questionPaging"></div>
-				
 						<div class="questionList"></div>
-						
-						
-						
-						
-						
-						
+						<div class="clQuestionPage"></div>
 					</div>				
-			
 				</div>	
 			</div>
 
@@ -914,6 +676,10 @@
 				<input type="hidden" name="cCategory" id="cCategory" value="${cCategory}" />
 			</form>
 			
+			<!-- 문의사항 -->
+			<%@ include file="/WEB-INF/views/class/classQuestionList.jsp"%>
+			
+			<div id="clCurrentPageNum"></div>
 		</section>
 		
 		<!-- chat -->
@@ -923,9 +689,7 @@
 		<!-- footer -->
 		<%@ include file="/WEB-INF/views/footer.jsp"%>
 		<!-- footer -->
-		
-		
+
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
-		<script src="${pageContext.request.contextPath}/js/class/reply/reply.js"></script>
 	</body>
 </html>
