@@ -15,29 +15,6 @@
 <%@ include file="/WEB-INF/include/forImport.jspf"%> 
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <style>
-	.page-link {
-	border:none;
-	margin-left: 20px;
-	color: #26274c;
-	background: #ffffff;
-	font-weight: 700;
-}
-
-.page-link:hover {
-	background: #59bfbf;
-	color: #ffffff;
-}
-.text-wrap{
-	
-}
-.text_bold {
-	color: #59bfbf;
-	font-weight: bold;
-	font-size: 1.25rem;
-}
-tr.bordered {
-	border-bottom: 1px solid #BDBDBD;
-}
 
 </style>
 </head>
@@ -63,6 +40,7 @@ tr.bordered {
 	 <input type="hidden" id="scrap" value="${scrap}">
 	 <input type="hidden" id="mpPoint" value="${mpPoint}">
 	 <input type="hidden" id="mpclass" value="${mpclass}">
+	 
 	 <%-- <input type="hidden" id="mpInfo" value="${mpInfo}"> --%>
 	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
@@ -95,7 +73,7 @@ tr.bordered {
 							</tr>
 							
 							<tr class="bordered">
-							<td>개설 0 <br> 참여 0</td>
+							<td>개설 클래스 ${openClassCount} <br> 참여 클래스 ${joinClassCount}</td>
 							</tr>
 							
 							<tr>
@@ -137,27 +115,7 @@ tr.bordered {
 									<td>${loginUser.uEmail}</td>
 								</tr>
 								<tr>
-									<th class="input-title"><span class="required">•</span>포인트</th>
-									<td><%-- session에 저장된 포인트 정보가 있는경우 --%>
-									<c:choose>
-										<c:when test="${not empty userPoint}">
-											${userPoint.poBalance}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</c:when>
-							<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
-										<c:otherwise> ${loginUser.point}P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
-									</c:choose> 
-										<!--  포인트 -->
-						<div class="charge_point">
-							<button type="button" id ="pointBtn" data-toggle="modal" data-target="#charge_point" data-backdrop="static" data-keyboard="false">포인트 충전</button>
-							<%@ include file="/WEB-INF/views/user/payment/chargePoint.jsp"%>
-						</div>
-						<!--  포인트 -->
-									</td>
-								</tr>
-
-								<tr>
-									<th class="input-title"><span class="required">&#8226;</span>닉네임
-										변경</th>
+									<th class="input-title"><span class="required">&#8226;</span>닉네임 변경</th>
 									<td>
 										<form action="updateNickName">
 											<input name="uNickname" id="changeNickname" maxlength="8"
@@ -192,17 +150,12 @@ tr.bordered {
 							<form role="form" action="profileUpdate" method="post"
 								autocomplete="off" enctype="multipart/form-data">
 								<br>
-								<div class="inputArea"><br>
-									<input type="file" id="showImg" name="file" />
+								<div class="choosePick">
+									 	<input type="text" readonly="readonly" id="file_route">
+									 <label>이미지 선택
+									 	<input type="file" id="showImg" onchange="javascript:document.getElementById('file_route').value=this.value">
+									 </label>
 								</div> 
-								<!-- 
-								<input type="text" id="fileName" class="file_input_textbox" readonly="readonly">
-<div class="file_input_div">
-    <input type="button" value="파일선택" class="file_input_button">
-   <input type="file" id="showImg" class="file_input_hidden" onchange="javascript:document.getElementById('fileName').value = this.value.split('\\')[this.value.split('\\').length-1]">
-</div> -->
-
-
 								<br>
 								<button type="submit" id="register_Btn" class="btn btn-info">프로필
 									업데이트</button>
@@ -319,8 +272,7 @@ tr.bordered {
 										</ul>
 									
 									<br>
-								</div>
-																<!-- paging -->
+								</div><!-- paging -->
 							</div>
 						</div>
 						<!-- content_list -->
@@ -340,7 +292,7 @@ tr.bordered {
 										<c:when test="${not empty userPoint}">
 											${userPoint.poBalance}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:when>
-							<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
+									<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
 										<c:otherwise> ${loginUser.point}P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
 									</c:choose> 
 										<!--  포인트 -->
@@ -364,7 +316,15 @@ tr.bordered {
 											<c:forEach items="${pointList}" var="pointList">
 												<tr>
 													<td>${pointList.totalPoint} P</td>
-													<td>${pointList.paInfo}</td>
+													<c:choose>
+														<c:when test ="${pointList.paInfo eq '포인트 입금' or pointList.paInfo eq '포인트 충전'}">
+															<td><div class="po_In">${pointList.paInfo}</div></td>
+														</c:when>
+														<c:otherwise>
+															<td><div class="po_Out">${pointList.paInfo}</div></td>
+														</c:otherwise>
+													</c:choose>
+													
 													<td>${pointList.point_io} P</td>
 													<td>${pointList.paDate}</td>
 												</tr>
@@ -413,20 +373,22 @@ tr.bordered {
 							<br>
 							<br>
 							<div class="scrap_list">
+							<button type="button" class="selectDeleteBtn1">삭제</button>
 							 <div class="col">
-<nav>
-	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	    <a class="nav-item nav-link active" id="nav-board-tab" data-toggle="tab" href="#scrap_board" role="tab" aria-controls="nav-board" aria-selected="true">게시판</a>
-	    <a class="nav-item nav-link" id="nav-class-tab" data-toggle="tab" href="#scrap_class" role="tab" aria-controls="nav-class" aria-selected="false">클래스</a>
-	    <a class="nav-item nav-link" id="nav-eating-tab" data-toggle="tab" href="#scrap_eating" role="tab" aria-controls="nav-eating" aria-selected="false">맛집</a>
-	  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="scrap_board" role="tabpanel" aria-labelledby="nav-board-tab">
+			<nav>
+				  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+				    <a class="nav-item nav-link active" id="nav-board-tab" data-toggle="tab" href="#scrap_board" role="tab" aria-controls="nav-board" aria-selected="true">게시판</a>
+				    <a class="nav-item nav-link" id="nav-class-tab" data-toggle="tab" href="#scrap_class" role="tab" aria-controls="nav-class" aria-selected="false">클래스</a>
+				    <a class="nav-item nav-link" id="nav-eating-tab" data-toggle="tab" href="#scrap_eating" role="tab" aria-controls="nav-eating" aria-selected="false">맛집</a>
+				  </div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+			  <div class="tab-pane fade show active" id="scrap_board" role="tabpanel" aria-labelledby="nav-board-tab">
 		<!--  게시판 스크랩 -->
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
+											<th> <input type="checkbox" class="allCheck"></th>
 											<th>게시물 번호</th>
 											<th>스크랩 게시물</th>
 											<th>스크랩 일시</th>
@@ -436,11 +398,12 @@ tr.bordered {
 										<c:when test="${fn:length(scrapList) > 0 }">
 											<c:forEach items="${scrapList}" var="scrapList">
 												<tr>
+													<!--  스크랩 목록 선택 -->
+													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
 													<td><a style="text-decoration: none"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
-													<td>${scrapList.sDate}</td>
-												</tr>
+													<td><fmt:formatDate value="${scrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 											</c:forEach>
 										</c:when>
 
@@ -472,11 +435,12 @@ tr.bordered {
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
   						
-<!--  class 스크랩 -->
-  	<div class="tab-pane fade" id="scrap_class" role="tabpanel" aria-labelledby="nav-class-tab">
+		<!--  class 스크랩 -->
+		  	<div class="tab-pane fade" id="scrap_class" role="tabpanel" aria-labelledby="nav-class-tab">
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
+											<th> <input type="checkbox" class="allCheck"></th>
 											<th>class 번호</th>
 											<th>스크랩 게시물</th>
 											<th>스크랩 일시</th>
@@ -486,10 +450,12 @@ tr.bordered {
 										<c:when test="${fn:length(ClassscrapList) > 0 }">
 											<c:forEach items="${ClassscrapList}" var="ClassscrapList">
 												<tr>
+												<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${ClassscrapList.sId}" /></td>
 													<td>${ClassscrapList.class_id}</td>
 													<td><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${ClassscrapList.class_id}&cCategory=${cCategory}">${ClassscrapList.cTitle}</a></td>
-													<td>${ClassscrapList.sDate}</td>
+													<td><fmt:formatDate value="${ClassscrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
+													
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -522,11 +488,12 @@ tr.bordered {
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
   						
-<!--  eating 스크랩 -->
-  	<div class="tab-pane fade" id="scrap_eating" role="tabpanel" aria-labelledby="nav-eating-tab">
+		<!--  eating 스크랩 -->
+		  	<div class="tab-pane fade" id="scrap_eating" role="tabpanel" aria-labelledby="nav-eating-tab">
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
+											<th> <input type="checkbox" class="allCheck"></th>
 											<th>eating 번호</th>
 											<th>스크랩 게시물</th>
 											<th>스크랩 일시</th>
@@ -536,10 +503,11 @@ tr.bordered {
 										<c:when test="${fn:length(scrapList) > 0 }">
 											<c:forEach items="${scrapList}" var="scrapList">
 												<tr>
+													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
 													<td><a style="text-decoration: none"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
-													<td>${scrapList.sDate}</td>
+													<td><fmt:formatDate value="${scrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -571,9 +539,7 @@ tr.bordered {
 									<br>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
-  	
-  									
-	</div><!-- class="tab-content" id="nav-tabContent" -->
+			</div><!-- class="tab-content" id="nav-tabContent" -->
 						</div><!-- col -->
   					</div><!-- scrap_list -->
 							
@@ -589,19 +555,19 @@ tr.bordered {
 							<br>
 							<br>
 							<div class="myclass_list">
-<nav>
-	  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	    <a class="nav-item nav-link active" id="nav-class-join-tab" data-toggle="tab" href="#class_join" role="tab" aria-controls="nav-board" aria-selected="true">가입한 클래스</a>
-	    <a class="nav-item nav-link" id="nav-class-open-tab" data-toggle="tab" href="#class_open" role="tab" aria-controls="nav-class" aria-selected="false">개설한 클래스</a>
-	  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="class_join" role="tabpanel" aria-labelledby="nav-class-join-tab">
-		<!--  게시판 스크랩 -->
+				<nav>
+					  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+					    <a class="nav-item nav-link active" id="nav-class-join-tab" data-toggle="tab" href="#class_join" role="tab" aria-controls="nav-board" aria-selected="true">가입한 클래스</a>
+					    <a class="nav-item nav-link" id="nav-class-open-tab" data-toggle="tab" href="#class_open" role="tab" aria-controls="nav-class" aria-selected="false">개설한 클래스</a>
+					  </div>
+				</nav>
+				<div class="tab-content" id="nav-tabContent">
+				  <div class="tab-pane fade show active" id="class_join" role="tabpanel" aria-labelledby="nav-class-join-tab">
+						<!--  게시판 스크랩 -->
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
-											<th>클래스 번호</th>
+											<th>번호</th>
 											<th>클래스 제목</th>
 											<th>클래스 카테고리</th>
 											<th>클래스 가격</th>
@@ -617,7 +583,7 @@ tr.bordered {
 														href="/eepp/class/classView?cId=${joinClass.class_id}&cCategory=${cCategory}">${joinClass.cTitle}</a></td>
 													<td>${joinClass.cCategory}</td>
 													<td>${joinClass.cPrice}</td>
-													<td>${joinClass.cjJoinDate}</td>
+													<td><fmt:formatDate value="${joinClass.cjJoinDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -649,29 +615,29 @@ tr.bordered {
 									<br>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
-  						
-<!--  class 스크랩 -->
-  	<div class="tab-pane fade" id="class_open" role="tabpanel" aria-labelledby="nav-class-open-tab">
+			<!--  class 스크랩 -->
+			  	<div class="tab-pane fade" id="class_open" role="tabpanel" aria-labelledby="nav-class-open-tab">
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
-											<th>클래스 번호</th>
-											<th width="25%">클래스 제목</th>
-											<th width="15%">참여인원</th>
-											<th>클래스 개강일</th>
-											<th>클래스 종강일</th>
+											<th>번호</th>
+											<th>클래스 제목</th>
+											<th>참여인원/참여가능인원</th>
+											<th>모집 시작일</th>
+											<th>모집 기간</th>
 										</tr>
 									</thead>
 									<c:choose>
 										<c:when test="${fn:length(openClass) > 0 }">
 											<c:forEach items="${openClass}" var="openClass">
+												<input type="hidden" id="classId" value="${openClass.cId}" />
 												<tr>
 													<td>${openClass.cId}</td>
 													<td><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${openClass.cId}&cCategory=${cCategory}">${openClass.cTitle}</a></td>
-													<td>${openClass.cTotalPeopleCount}</td>
-													<td>${openClass.cOpenDate}</td>
-													<td>${openClass.cEndDate}</td>
+													<td><a onclick="classjoin_list('${openClass.cId}');"> <b>${openClass.totalcount}</b></a> / ${openClass.cTotalPeopleCount}</td>						
+													<td><fmt:formatDate value="${openClass.cOpenDate}" pattern="yyyy년MM월dd일"/></td>
+													<td>${openClass.cTerm}일</td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -723,6 +689,8 @@ tr.bordered {
 	</c:choose>
 	<script src="${pageContext.request.contextPath}/js/user/mypage/mypage.js"></script>
 	<script type="text/javascript">
+	
+	
 	function openMsg(){
 		 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
 				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");

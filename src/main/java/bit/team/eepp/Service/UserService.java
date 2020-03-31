@@ -187,6 +187,10 @@ public class UserService {
 	public int openClassCount(Map<String, Object> map) {
 		return userMapper.openClassCount(map);
 	}
+	// 클래스 가입한 인원
+	public List<ClassJoinVO> classjoinList(Map<String, Object> map){
+		return userMapper.classjoinList(map);
+	}
 
 	// (회원정보) 프로필 보여주기
 	public String mInfoProfile(Map<String, Object> map) {
@@ -201,6 +205,10 @@ public class UserService {
 	// (회원정보) 가입 날짜 보여주기
 	public Date memberInfoJDate(Map<String, Object> map) {
 		return userMapper.memberInfoJDate(map);
+	}
+	// 스크랩 삭제
+	public void deleteScrap(ScrapVO scrapVO) {
+		userMapper.deleteScrap(scrapVO);
 	}
 
 	/* 포인트 */

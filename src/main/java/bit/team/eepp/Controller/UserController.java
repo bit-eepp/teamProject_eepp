@@ -42,11 +42,13 @@ import bit.team.eepp.Page.ScrapboardPageMaker;
 import bit.team.eepp.Page.myPagePageMaker;
 import bit.team.eepp.Search.MypageSearchCriteria;
 import bit.team.eepp.Search.ScrapSearchCriteria;
+import bit.team.eepp.Service.ClassService;
 import bit.team.eepp.Service.FileService;
 import bit.team.eepp.Service.ScrapService;
 import bit.team.eepp.Service.UserService;
 import bit.team.eepp.Utils.UploadFileUtils;
 import bit.team.eepp.VO.BoardVO;
+import bit.team.eepp.VO.ClassVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.PaymentVO;
@@ -67,6 +69,8 @@ public class UserController {
 	FileService fs;
 	@Autowired
 	ScrapService sc;
+	@Autowired
+	ClassService classservice;
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -206,10 +210,12 @@ public class UserController {
 //			if (mpInfo != null) {
 //				model.addAttribute("mpInfo", mpInfo);
 //			}
-			model.addAttribute("joinClass",us.joinClass(map));
-			model.addAttribute("openClass",us.openClass(map));
-			model.addAttribute("ClassscrapList",us.ClassscrapList(map));
-			model.addAttribute("pointList",us.pointList(map));
+			model.addAttribute("joinClass", us.joinClass(map));
+			model.addAttribute("openClass", us.openClass(map));
+			model.addAttribute("joinClassCount", us.joinClassCount(map));
+			model.addAttribute("openClassCount", us.openClassCount(map));
+			model.addAttribute("ClassscrapList", us.ClassscrapList(map));
+			model.addAttribute("pointList", us.pointList(map));
 			model.addAttribute("messageRes", us.receiveCount(map));
 			model.addAttribute("messageSen", us.sendCount(map));
 			model.addAttribute("scrapList", us.scrapList(map));
@@ -357,6 +363,55 @@ public class UserController {
 		
 		return "user/memInfo/memberInfo";
 		
+	}
+	
+	/* 클래스 가입회원 */
+	@RequestMapping(value = "/classjoin_list", method = { RequestMethod.GET, RequestMethod.POST })
+	public String classjoin_list(Model model, ClassVO classVO,HttpSession session, UserVO userVO, HttpServletRequest request,
+			@RequestParam(value = "cId", required = false, defaultValue = "") String cId) {
+
+		logger.info("load classjoin_list pop-up");
+		userVO.getUser_id();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cId", classVO.getcId());
+		map.put("cId", cId);
+		map.put("classjoinlist", us.classjoinList(map));
+		
+		model.addAttribute("member", map);
+		model.addAttribute("classjoinlist", us.classjoinList(map));
+		model.addAttribute("classList", classservice.classView(classVO));
+
+		return "user/memInfo/classjoin_list";
+
+	}
+
+	@RequestMapping(value = "/deleteScrap", method = { RequestMethod.GET, RequestMethod.POST })
+	public String deleteScrap(Model model, UserVO userVO, ScrapVO scrapVO, HttpSession session,
+			HttpServletRequest request) {
+
+		logger.info("delectScrap Method Active");
+
+		// 유저 세션 받아오기
+		Object loginSession = session.getAttribute("loginUser");
+		UserVO user = (UserVO) loginSession;
+		userVO.setUser_id(user.getUser_id());
+		
+		if (request.getParameter("checkRow") != null) {
+			String[] checkIdx = request.getParameter("checkRow").toString().split(",");
+			for (int i = 0; i < checkIdx.length; i++) {
+				System.out.println("sId는 : " + Integer.parseInt(checkIdx[i]));
+				scrapVO.setsId(Integer.parseInt(checkIdx[i]));
+				scrapVO.setUser_id(user.getUser_id());
+				us.deleteScrap(scrapVO);
+
+				logger.info("스크랩 선택 삭제 완료");
+			}
+		} else {
+			us.deleteScrap(scrapVO);
+			logger.info("스크랩 삭제 완료");
+		}
+		return "redirect:/mypage";
 	}
 
 	/*

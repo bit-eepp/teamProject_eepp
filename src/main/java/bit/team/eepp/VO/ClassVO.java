@@ -19,13 +19,15 @@ public class ClassVO {
 	private int questionCount;
 	private String cThumnail;
 	private String uProfile;
+	private int totalcount;
+
 
 	public ClassVO() {
 	}
 
 	public ClassVO(int cId, int user_id, String cTitle, String cContent, Timestamp cOpenDate, Timestamp cEndDate,
 			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount, String cDifficulty, String cSummary,
-			int cTerm, int questionCount, String cThumnail, String uProfile) {
+			int cTerm, int questionCount, String cThumnail, String uProfile,int totalcount) {
 		this.cId = cId;
 		this.user_id = user_id;
 		this.cTitle = cTitle;
@@ -42,6 +44,14 @@ public class ClassVO {
 		this.questionCount = questionCount;
 		this.cThumnail = cThumnail;
 		this.uProfile = uProfile;
+		this.totalcount = totalcount;
+	}
+	public int getTotalcount() {
+		return totalcount;
+	}
+	
+	public void setTotalcount(int totalcount) {
+		this.totalcount = totalcount;
 	}
 
 	public String getuProfile() {

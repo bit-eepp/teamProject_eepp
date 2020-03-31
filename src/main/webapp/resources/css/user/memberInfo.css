@@ -34,3 +34,24 @@ td{
 	color: #e7438b;
 	margin-right: 10px;
 }
+
+/* classjoin_list.jsp */
+
+.class_img{
+	width: 80%;
+}
+.cj_info{
+	text-align:center;
+	font-size:0.9rem;
+}
+.cName{
+	font-weight:bold;
+	color: #e7438b;
+}
+.cj_info, .container{
+	text-align:center;
+}
+
+
+/* classJoin_list.jsp  */
+
