@@ -346,10 +346,9 @@ public class LoginController {
         ResponseEntity<Map> responseEntity = restTemplate.exchange("https://www.googleapis.com/oauth2/v4/token", HttpMethod.POST, requestEntity, Map.class);
         Map<String, Object> responseMap = responseEntity.getBody();
  
-        // id_token 라는 키에 사용자가 정보가 존재한다.
-        // 받아온 결과는 JWT (Json Web Token) 형식으로 받아온다. 콤마 단위로 끊어서 첫 번째는 현 토큰에 대한 메타 정보, 두 번째는 우리가 필요한 내용이 존재한다.
-        // 세번째 부분에는 위변조를 방지하기 위한 특정 알고리즘으로 암호화되어 사이닝에 사용한다.
-        //Base 64로 인코딩 되어 있으므로 디코딩한다.
+        // id_token 라는 키에 사용자가 정보가 존재
+        // 받아온 결과는 JWT (Json Web Token) 형식으로 받아옴
+        // Base 64로 인코딩 되어 있으므로 디코딩
  
         String[] tokens = ((String)responseMap.get("id_token")).split("\\.");
         Base64 base64 = new Base64(true);
@@ -469,7 +468,7 @@ public class LoginController {
 	/* 가입 이메일 찾기 */
 	@ResponseBody
 	@RequestMapping(value="findRegisterEmail", method=RequestMethod.POST)
-	public String findRegisterEmail(HttpServletRequest request, UserVO userVO, RedirectAttributes redirectAttributes){
+	public String findRegisterEmail(HttpServletRequest request, UserVO userVO, RedirectAttributes redirectAttributes, HttpSession session){
 		
 		String uPhone = request.getParameter("uPhone");
 		System.out.println(uPhone);
@@ -477,7 +476,13 @@ public class LoginController {
 		userVO = ls.findRegisterEmail(userVO);
 		logger.info(userVO.getuEmail());
 		
-		if(userVO.getuEmail() != null) {
+		String authCode = request.getParameter("authCode");
+		System.out.println(authCode);
+		String originalJoinCode = (String) session.getAttribute("smsAuthCode");
+		System.out.println(originalJoinCode);
+		
+		if(originalJoinCode.equals(authCode) && userVO.getuEmail() != null) {
+			session.invalidate();
 			
 			String uEmail = "";
 			String[] findEmail = userVO.getuEmail().split("");
@@ -494,6 +499,7 @@ public class LoginController {
     
             return data.toString();
 		}else {
+			session.invalidate();
 			return "";
 		}
 	}
@@ -538,10 +544,9 @@ public class LoginController {
 		System.out.println(authCode+"/"+random);
 		
 		String originalJoinCode = (String) session.getAttribute("authCode");
-		String originalRandom = (String) session.getAttribute("random");
-		System.out.println(originalJoinCode+"/"+originalRandom);
+		System.out.println(originalJoinCode);
 		
-		if(originalJoinCode.equals(authCode) && originalRandom.equals(random)) {
+		if(originalJoinCode.equals(authCode)) {
 			session.invalidate();
 			return 1;
 		}
@@ -569,6 +574,4 @@ public class LoginController {
 			out.close();
 		}
 	}
-	
-	
 }

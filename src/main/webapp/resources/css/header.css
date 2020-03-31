@@ -146,6 +146,9 @@
 	background-color: #59bfbf;
 	color: #ffffff;
 }
+#myInfo.beforeLoginInfo{
+	height:145px!important;
+}
 
 .box {
 	width: 95px;

@@ -5,13 +5,15 @@
 $(document).ready(function() {
 	
 	$('#summernote').summernote({
-		height: 500,   // set editor height
-		minHeight : null,
-		maxHeight : null,
+		height: 450,   // set editor height
+		minHeight : '450px',
+		maxHeight : '600px',
 		focus : true,
 		lang: 'ko-KR', // 언어 세팅
-		placeholder: '내용을 작성해 주세요',
 		tabsize: 2,
+		disableResize: true,
+	    disableResizeEditor: true,
+	    resize: false,
 		toolbar: [
 			['style', ['style']],
 			['font', ['bold', 'underline','superscript', 'subscript', 'strikethrough', 'clear']],

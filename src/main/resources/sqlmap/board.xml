@@ -121,7 +121,7 @@
 	</select>
 	
 	<select id="selectOne" resultType="bit.team.eepp.VO.BoardVO">
-		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount
+		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, u.uprofile, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount
 		FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bId = #{bId}
 	</select>
 	

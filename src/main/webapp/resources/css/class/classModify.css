@@ -142,6 +142,30 @@
 	height: auto;
 }
 
+.clAddress .classPlace button {
+	width: 110px;
+	border-radius: 0px;
+	color: #ffffff;
+	background-color: #59bfbf;
+	font-weight: 800;
+	outline: 0;
+	cursor: default;
+}
+
+.clAddress .ad1 input {
+	 width: 30%; 
+	 display: inline;
+}
+
+.clAddress .ad1 button {
+	 background-color: #e7438b;
+	 color: #ffffff;
+}
+
+.clAddress .ad2, ad3 input{
+	width: 100%; 
+}
+
 .classContentArea button {
 	width: 100%;
 	border-radius: 0px;

@@ -6,6 +6,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>새 글 쓰기</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/boardView.css">
 	</head>
 	
 	<body>
@@ -13,7 +15,9 @@
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- header -->
 
-		<h1>새 글 쓰기</h1>
+<div class="writeViewWrap">
+<section class="sc-writeView col-sm-8">
+		<h1 class="sc-title">새 글 쓰기</h1>
 		<form name="wform" action="writeContent" method="post" onsubmit="return writeCheckForm();">
 			<input type="hidden" name="page" value="${scri.page}" />
 			<input type="hidden" name="perPageNum" value="${scri.perPageNum}" />
@@ -21,11 +25,11 @@
 			<input type="hidden" name="keyword" value="${scri.keyword}" />
 			<input type="hidden" name="sortType" value="${sortType}" />
 			
-			<table border="1">		
+			<table class="viewTable">		
 				<tr>
-					<td>게시판 카테고리</td>
+					<td class="tb-title">게시판 카테고리</td>
 					<td>
-						<select name="bCategory"> 
+						<select name="bCategory" class="boardSelector"> 
 							<option value="" disabled selected>게시판을 선택해주세요</option>
 							<option value="it_dev">IT/개발</option>
 							<option value="service">서비스</option>
@@ -38,9 +42,9 @@
 				</tr>
 				
 				<tr>
-					<td>주제</td>
+					<td class="tb-title">주제</td>
 					<td>
-						<select name="bSubject">
+						<select name="bSubject" class="boardSelector">
 							<option value="" disabled selected>주제를 선택해주세요</option>
 							<option value="qna">Q&A</option>
 							<option value="info">정보</option>
@@ -50,28 +54,27 @@
 				</tr>
 			
 				<tr>
-					<td> 작성자 </td>
-					<td> <input type="hidden" name="user_id" size = "50" value="${loginUser.user_id}">${loginUser.uNickname}</td>
+					<td class="tb-title"> 작성자 </td>
+					<td class="tb-writer"> <input type="hidden" name="user_id" size = "50" value="${loginUser.user_id}">${loginUser.uNickname}</td>
 				</tr>
 				
 				<tr>
-					<td> 글제목 </td>
-					<td> <input type="text" name="bTitle" size = "50" placeholder="제목"> </td>
+					<td class="tb-title"> 글제목 </td>
+					<td> <input type="text" name="bTitle" size = "50" placeholder="제목" class="boardSelector tb-boardTitle"> </td>
 				</tr>
 				
 				<tr>
-					<td> 내용 </td>
+					<td class="tb-title"> 내용 </td>
 					<td><textarea id="summernote" name="bContent"></textarea></td>
 				</tr>
-				
-				<tr>
-					<td colspan="2"> 
-						<input type="submit" value="등록">&nbsp;&nbsp; 
-						<button class="list" type="button">취소</button>
-					</td>
-				</tr>
 			</table>
+			<div class="btnWrap">
+				<div class="cancleBtn-wrap"><button class="list btn" type="button">취소</button></div>
+				<div class="submitBtn-wrap"><button class="btn" type="submit">등록</button></div>
+			</div>
 		</form>
+	</section>
+</div>
 		
 		<form name="form1" role="form" method="post">
 			<input type="hidden" name="page" value="${scri.page}" />

@@ -150,11 +150,7 @@ function likeCount(bId) {
 		type: 'get',
 		data: {'bId' : bId},
 		success: function(data){
-			console.log("게시글 추천수 : "+data)
-			var a = '<div>';
-				a += data;
-				a += '</div>';
-			$('.like').html(a)
+			$('.like').append(data)
 		},
 		error : function(request, status, error) {
 			console.log(request.responseText);
@@ -195,11 +191,7 @@ function unlikeCount(bId) {
 		type: 'get',
 		data: {'bId' : bId},
 		success: function(data){
-			console.log("게시글 비추천수 : "+data)
-			var a = '<div>';
-				a += data;
-				a += '</div>';
-				$('.unlike').html(a)		
+				$('.unlike').append(data)	
 		},
 		error : function(request, status, error) {
 			console.log(request.responseText);

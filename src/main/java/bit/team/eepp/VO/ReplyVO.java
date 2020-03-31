@@ -22,12 +22,14 @@ public class ReplyVO {
 	private String uNickname;
 	private int gCount;
 	private int rpDcount;
+	private String uProfile;
 
-	public ReplyVO() {}
+	public ReplyVO() {
+	}
 
 	public ReplyVO(int rpId, String rpContent, Timestamp rpWrittenDate, Timestamp rpModifyDate, int rpLike,
 			int rpUnlike, int rpGroup, int rpStep, int rpIndent, int board_id, int class_id, int user_id,
-			String uNickname, int gCount, int rpDcount) {
+			String uNickname, int gCount, int rpDcount, String uProfile) {
 		this.rpId = rpId;
 		this.rpContent = rpContent;
 		this.rpWrittenDate = rpWrittenDate;
@@ -43,6 +45,15 @@ public class ReplyVO {
 		this.uNickname = uNickname;
 		this.gCount = gCount;
 		this.rpDcount = rpDcount;
+		this.uProfile = uProfile;
+	}
+
+	public String getuProfile() {
+		return uProfile;
+	}
+
+	public void setuProfile(String uProfile) {
+		this.uProfile = uProfile;
 	}
 
 	public int getRpDcount() {

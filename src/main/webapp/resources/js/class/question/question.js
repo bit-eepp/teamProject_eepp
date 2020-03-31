@@ -22,6 +22,7 @@ function questionCnt() {
 	});
 }
 
+// 강좌문의 페이징 코드
 function questionPagePrint(rpPageMaker) {
 	/* console.log(rpPageMaker);
 	console.log('totalCount : ' +rpPageMaker[0]);
@@ -51,13 +52,13 @@ function questionPagePrint(rpPageMaker) {
 	if(prev){
 		paging +='<a style="text-decoration: none" href="javascript:questionList('+(startPage - 1) +')"> « </a>';
 	}
-		paging += '[&nbsp;';
+		/*paging += '[&nbsp;';*/
 	
 	for(var i = startPage; i <= endPage; i++){
 		var strClass = page == i ? 'class="active"' : '';
 	 	paging += '<a style="text-decoration: none"'+strClass +'href="javascript:questionList(' +i +')">' +i +'</a>&nbsp;&nbsp;';
 	}
-		paging += ']&nbsp;&nbsp;';
+		/*paging += ']&nbsp;&nbsp;';*/
 	 
 	if(next){
 		paging +='<a style="text-decoration: none" href="javascript:questionList(' +(endPage + 1) +')"> » </a>&nbsp;&nbsp;';
@@ -296,7 +297,7 @@ function questionModifyPrc(rpId) {
 	} else {
 		var modify_qContent = $('[name=qContent_'+rpId +']').val();
 		$.ajax({
-			url: 'http://localhost:8282/eepp/question/questionModify',
+			url: getContextPath() + '/question/questionModify',
 			type: 'post',
 			data: {'rpContent' : modify_qContent, 'rpId' : rpId},
 			success: function(data){

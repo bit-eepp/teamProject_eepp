@@ -21,7 +21,7 @@ button:focus{outline: initial!important;}
     margin: 0 6px 0 3px;
     max-width: 5%;
 }
-.sc-login .faildLogin{
+.sc-login .failedLogin{
 	color: #ea0909;
     font-size: 14px;
 }
@@ -232,11 +232,13 @@ span img{
 	width: 320px!important;
     margin: 0 auto!important;
 }
-#findMyPW .sendAuthBtnWrap{
+#findMyPW .sendAuthBtnWrap,
+#findMyEmail .sendAuthBtnWrap{
 	width:280px;
 	margin: 20px auto;
 }
-#findMyPW .sendAuthBtn{
+#findMyPW .sendAuthBtn,
+#findMyEmail .sendAuthBtn{
 	display: block;
     border: 1px solid #59bfbf;
     border-radius: 20px;
@@ -253,17 +255,17 @@ span img{
 	width: 320px;
     margin: 0 auto;
 }
-#findMyPW02 .form-control.findAuthCode{
+#findMyPW02 .form-control.findPWAuthCode, #findMyEmail .findIDAuthCode{
 	width: 180px;
     font-size: 13px;
     display: inline-block;
 }
-#findMyPW02 .authCheckBtnWrap{
+#findMyPW02 .authCheckBtnWrap, #findMyEmail .findEmailBtnWrap{
 	width: 80px;
     margin-left: 20px;
     display: inline-block;
 }
-#findMyPW02 .authCheckBtn{
+#findMyPW02 .authCheckBtn, #findMyEmail .findEmailBtn{
 	display: block;
     border: 1px solid #59bfbf;
     border-radius: 20px;
@@ -274,9 +276,13 @@ span img{
     transition: .5s;
     cursor: pointer;
 }
-#findMyPW03 .form-control.uPassword, #findMyPW03 .form-control.uPasswordCheck {
+#findMyPW03 .form-control.uPassword {
 	width: 240px;
     margin: 0 auto 20px;
+}
+#findMyPW03 .form-control.uPasswordCheck{
+	width: 240px;
+    margin: 0 auto 30px;
 }
 #findMyPW03 .changePwBtn{
 	width:280px;
@@ -358,6 +364,13 @@ span img{
 .sc-registerForm .joinTable{
 	margin: 0 auto;
 }
+.sc-registerForm .joinTable span.checkInfo{
+	display: block;
+    margin: 5px;
+    position: absolute;
+    color: red;
+    font-size: 12px;
+}
 .sc-registerForm .joinTable .input-title{
 	font-weight: bold;
     font-size: 16px;
@@ -367,6 +380,7 @@ span img{
 .sc-registerForm .joinTable td{
 	padding: 20px 0;
     width: 70%;
+    position: relative;
 }
 .idInputBox input, .pwInputBox input, .nickInputBox input, .phoneInputBox input{
 	border: 1px solid rgba(0,0,0,.15);
@@ -382,17 +396,28 @@ span img{
 	width:150px;
 }
 .checkEmailAuth {padding: 0 0 10px;}
-.emailBtn,.emailCheckBtn,.nickCheckBtn,.phoneCheckBtn{
+.sendSmsBtn, .smsCheckBtn{
 	padding: 5px 10px!important;
     font-size: 14px!important;
     vertical-align: initial!important;
     cursor: pointer!important;
     margin: 0 10px;
-    width: 100px;
+    width: 120px;
     background: #59bfbf;
     color: #fff;
     border: initial;
     border-radius: 10px;
+}
+#smsAuth{
+	border: 1px solid rgba(0,0,0,.15);
+    border-radius: .25rem;
+    padding: 0 1.75rem 0 .75rem!important;
+    background-color: white;
+    height: calc(2rem)!important;
+    width: 130px;
+}
+.checkEmailAuth{
+	padding: 0 0 20px!important;
 }
 .btn-submit{
 	width: 280px!important;

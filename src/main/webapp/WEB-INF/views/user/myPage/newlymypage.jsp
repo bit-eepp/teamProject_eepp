@@ -119,10 +119,9 @@
 									<td>
 										<form action="updateNickName">
 											<input name="uNickname" id="changeNickname" maxlength="8"
-												placeholder="${loginUser.uNickname}">
-											<button type="button" class="btn btn-info"
-												id="mypagenickNameCheck" onclick="nickCheck();" value="N">중복확인</button>
+												placeholder="${loginUser.uNickname}" oninput="nickCheck();">
 											<button type="submit" class="btn btn-submit" id="submit">변경</button>
+											<span class="checkInfo" id="checkNickInfo"></span>
 										</form>
 									</td>
 								</tr>

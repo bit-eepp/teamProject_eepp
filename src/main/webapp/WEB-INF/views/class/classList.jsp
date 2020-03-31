@@ -53,7 +53,13 @@
 	          		
 	          		<!-- 클래스개설 -->
 					<div class="classMakeBtn" align="right">
-						<button type="button" id="openNewClass" class="btn btn-warning btn-lg" onclick="location.href='classOpenView${classPageMaker.makeQuery(classPageMaker.cri.page)}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'"><strong>클래스 개설</strong></button>
+						<c:choose>
+							<c:when test="${loginUser.uNickname == null}">	
+							</c:when>
+							<c:otherwise>
+								<button type="button" id="openNewClass" class="btn btn-warning btn-lg" onclick="location.href='classOpenView${classPageMaker.makeQuery(classPageMaker.cri.page)}&searchType=${cscri.searchType}&keyword=${cscri.keyword}&cCategory=${cCategory}'"><strong>클래스 개설</strong></button>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				<br><br><br><br>
@@ -174,7 +180,7 @@
 											</div>
 					
 											<div class="card-text clPoint" align="right">
-												<i class="fab fa-product-hunt"></i> <fmt:formatNumber value="${cl.cPrice}" pattern="#,###" />
+												<i class="fab fa-product-hunt"></i>&nbsp;<fmt:formatNumber value="${cl.cPrice}" pattern="#,###" />
 											</div>
 											<hr>
 											
