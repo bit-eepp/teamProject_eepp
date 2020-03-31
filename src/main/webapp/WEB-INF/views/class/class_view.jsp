@@ -513,7 +513,7 @@
 											<div class="classJoinForm">
 												<button class="btn btn-lg applyBtn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false">강 좌 참 여</button>
 												<div class="modal fade" id="modalForm" role="dialog">
-													<div class="modal-dialog">
+													<div class="modal-dialog modal-lg">
 														<div class="modal-content text-center">
 												            <!-- Modal Header -->
 												            <div class="modal-header">

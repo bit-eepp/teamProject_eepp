@@ -206,5 +206,13 @@ public interface UserMapper {
 
 	// 참가자 포인트 사용내역 추가
 	public void participantPayment(@Param("paymentVO") PaymentVO paymentVO);
+	
+	// 클래스 개설자의 정보(닉네임, 연락처)
+	@Select("select uNickname, uPhone from users where user_id = #{opennerUser_id}")
+	public UserVO getOpennerInfo(@Param("opennerUser_id") int opennerUser_id);
+	
+	// 신청자 연락처
+	@Select("select uPhone from users where user_id = #{user_id}")
+	public String getJoinnerInfo(@Param("user_id") int user_id);
 
 }

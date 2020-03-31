@@ -34,5 +34,7 @@ public interface ClassMapper {
 	
 	public abstract void classJoin(@Param("classJoinVO") ClassJoinVO classJoinVO);
 
+	public abstract String getClassTitle(@Param("class_id") int class_id);
+
 
 }

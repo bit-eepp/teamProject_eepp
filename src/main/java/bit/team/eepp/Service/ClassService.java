@@ -60,4 +60,8 @@ public class ClassService {
 		return classMapper.getCurrentUserCount(class_id);
 	}
 
+	public String getClassTitle(int class_id) {
+		return classMapper.getClassTitle(class_id);
+	}
+
 }

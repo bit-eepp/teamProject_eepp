@@ -239,5 +239,13 @@ public class UserService {
 	public void participantPayment(PaymentVO paymentVO) {
 		userMapper.participantPayment(paymentVO);
 	}
+	
+	public UserVO getOpennerInfo(int opennerUser_id) {
+		return userMapper.getOpennerInfo(opennerUser_id);
+	}
+	
+	public String getJoinnerInfo(int user_id) {
+		return userMapper.getJoinnerInfo(user_id);
+	}
 
 }

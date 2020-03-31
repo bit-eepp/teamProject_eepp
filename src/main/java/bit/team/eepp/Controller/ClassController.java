@@ -1,12 +1,32 @@
 package bit.team.eepp.Controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import bit.team.eepp.API.SMSconfig;
 import bit.team.eepp.Page.ClassPageMaker;
 import bit.team.eepp.Search.ClassSearchCriteria;
 import bit.team.eepp.Service.ClassService;
@@ -24,6 +45,7 @@ import bit.team.eepp.Utils.UploadFileUtils;
 import bit.team.eepp.VO.ClassJoinVO;
 import bit.team.eepp.VO.ClassVO;
 import bit.team.eepp.VO.PaymentVO;
+import bit.team.eepp.VO.UserVO;
 
 @RequestMapping("/class")
 @Controller
@@ -67,7 +89,9 @@ public class ClassController {
 	}
 
 	@RequestMapping("/classOpen")
-	public String classOpen(ClassVO classVO, Model model, MultipartFile file, @ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory) throws Exception {
+	public String classOpen(ClassVO classVO, Model model, MultipartFile file,
+			@ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory)
+			throws Exception {
 		System.out.println("classOpen() method");
 
 		// 클래스 썸네일 파일경로
@@ -140,7 +164,9 @@ public class ClassController {
 	}
 
 	@RequestMapping("/modifyClass")
-	public String modifyClass(ClassVO classVO, Model model, MultipartFile file, @ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory) throws Exception {
+	public String modifyClass(ClassVO classVO, Model model, MultipartFile file,
+			@ModelAttribute("cscri") ClassSearchCriteria cscri, @RequestParam(value = "cCategory") String cCategory)
+			throws Exception {
 		System.out.println("/modifyClass() method");
 
 		// 클래스 썸네일 파일경로
@@ -182,7 +208,7 @@ public class ClassController {
 	@ResponseBody
 	public void classJoin(PaymentVO paymentVO, ClassJoinVO classJoinVO,
 			@RequestParam(value = "opennerUser_id") int opennerUser_id,
-			@RequestParam(value = "classPrice") int classPrice) {
+			@RequestParam(value = "classPrice") int classPrice) throws IOException {
 		System.out.println("내 user_id : " + classJoinVO.getUser_id());
 		System.out.println("class_id : " + classJoinVO.getClass_id());
 		System.out.println("개설자 user_id : " + opennerUser_id);
@@ -208,6 +234,7 @@ public class ClassController {
 
 		// payment 테이블에 추가 : 참가자
 		int participantTotalPoint = us.getTotalPoint(classJoinVO.getUser_id()); // 업데이트된 클래스 참가자의 총 포인트 금액
+
 		paymentVO.setTotalPoint(participantTotalPoint);
 		paymentVO.setClass_id(classJoinVO.getClass_id());
 		paymentVO.setUser_id(classJoinVO.getUser_id());
@@ -215,6 +242,71 @@ public class ClassController {
 
 		us.participantPayment(paymentVO);
 
-	}
+		// 강좌명
+		String classTitle = classService.getClassTitle(classJoinVO.getClass_id());
 
+		// 개설자 닉네임, 연락처
+		UserVO classOpennerInfo = us.getOpennerInfo(opennerUser_id);
+		String opennerNick = classOpennerInfo.getuNickname();
+		String opennerCP = classOpennerInfo.getuPhone();
+
+		// 신청일 : 지금 시간
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd(HH:mm:ss)");
+		Date time = new Date();
+		String nowtime = format.format(time);
+
+		// 신청자 연락처
+		String joinnerCP = us.getJoinnerInfo(classJoinVO.getUser_id());
+		String joinnerCPEdit = joinnerCP.replace("-", "");
+		
+
+		String hostname = "api.bluehouselab.com";
+		String url = "https://" + hostname + "/smscenter/v1.0/sendlms";
+
+		System.out.println("classTitle : " + classTitle);
+		System.out.println("opennerNick : " + opennerNick);
+		System.out.println("opennerCP : " + opennerCP);
+		System.out.println("nowtime : " + nowtime);
+		System.out.println("joinnerCPEdit : " + joinnerCPEdit);
+		System.out.println("participantTotalPoint : " + participantTotalPoint);
+
+		CredentialsProvider credsProvider = new BasicCredentialsProvider();
+		credsProvider.setCredentials(new AuthScope(hostname, 443, AuthScope.ANY_REALM), new UsernamePasswordCredentials(SMSconfig.appid, SMSconfig.apikey));
+
+		AuthCache authCache = new BasicAuthCache();
+		authCache.put(new HttpHost(hostname, 443, "http"), new BasicScheme());
+
+		HttpClientContext context = HttpClientContext.create();
+		context.setCredentialsProvider(credsProvider);
+		context.setAuthCache(authCache);
+
+		CloseableHttpClient client = HttpClientBuilder.create().build();
+
+		try {
+			HttpPost httpPost = new HttpPost(url);
+			httpPost.setHeader("Content-type", "application/json; charset=utf-8");
+
+			String json = "{\"sender\":\"" + SMSconfig.sender +"\",\"receivers\":[\"" + joinnerCPEdit + "\"]," + "\"subject\":\"" +"수강신청알림" 
+					+ "\",\"content\":\"" + "수강신청이 완료되었습니다.\\r\\n강좌명 - "+ classTitle + "\\r\\n개설자 - " + opennerNick + "("+ opennerCP + ")" +"\\r\\n신청일 - " + nowtime +"\\r\\n포인트잔액 - " + participantTotalPoint +"\"}";
+
+			StringEntity se = new StringEntity(json, "UTF-8");
+			httpPost.setEntity(se);
+
+			HttpResponse httpResponse = client.execute(httpPost, context);
+			System.out.println(httpResponse.getStatusLine().getStatusCode());
+
+			InputStream inputStream = httpResponse.getEntity().getContent();
+			if (inputStream != null) {
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+				String line = "";
+				while ((line = bufferedReader.readLine()) != null)
+					System.out.println(line);
+				inputStream.close();
+			}
+		} catch (Exception e) {
+			System.err.println("Error: " + e.getLocalizedMessage());
+		} finally {
+			client.close();
+		}
+	}
 }

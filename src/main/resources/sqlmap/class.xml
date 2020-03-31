@@ -130,4 +130,8 @@
 		INSERT INTO CLASSJOIN (cjId, class_id, user_id, cjJoinDate) 
 		VALUES(CLASSJOIN_SEQ.nextval, #{classJoinVO.class_id}, #{classJoinVO.user_id}, SYSDATE)
 	</insert>
+	
+	<select id="getClassTitle" resultType="String">
+		SELECT cTitle FROM CLASS WHERE cId = #{class_id}
+	</select>
 </mapper>
