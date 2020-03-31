@@ -230,9 +230,7 @@
 						
 						<c:choose>
 							<c:when test="${newArticle le vo.isNew}">
-							<td class="isNewContent">
-								<img src="${pageContext.request.contextPath}/img/newArticleIcon.png"/>
-							</td>
+							<td class="isNewContent">NEW</td>
 							</c:when>
 							<c:otherwise><td></td></c:otherwise>
 						</c:choose>

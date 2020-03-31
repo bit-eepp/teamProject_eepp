@@ -126,9 +126,8 @@
 }
 .isNewContent{
 	text-align: center;
-}
-.isNewContent img{
-	max-width:65%;
+    color: #f9d312;
+    font-size: 13px;
 }
 .isNoticeList td.bTitle a{
     color: #59bfbf!important;
