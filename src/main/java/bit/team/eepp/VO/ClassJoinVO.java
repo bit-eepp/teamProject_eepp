@@ -2,24 +2,24 @@ package bit.team.eepp.VO;
 
 import java.sql.Timestamp;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ClassJoinVO {
 	private int cjId;
 	private int class_id;
 	private int user_id;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp cjJoinDate;
 	private String cTitle;
 	private String cCategory;
 	private String cPrice;
+	private String usernick;
+	private String uPhone;
+
 
 	public ClassJoinVO() {
 		
 	}
 	
 	public ClassJoinVO(int cjId, int class_id, int user_id, Timestamp cjJoinDate, String cTitle, String cCategory,
-			String cPrice) {
+			String cPrice, String usernick,String uPhone) {
 		this.cjId = cjId;
 		this.class_id = class_id;
 		this.user_id = user_id;
@@ -27,6 +27,24 @@ public class ClassJoinVO {
 		this.cTitle = cTitle;
 		this.cCategory = cCategory;
 		this.cPrice = cPrice;
+		this.usernick = usernick;
+		this.uPhone = uPhone;
+	}
+	
+	public String getuPhone() {
+		return uPhone;
+	}
+
+	public void setuPhone(String uPhone) {
+		this.uPhone = uPhone;
+	}
+
+	public String getUsernick() {
+		return usernick;
+	}
+	
+	public void setUsernick(String usernick) {
+		this.usernick = usernick;
 	}
 
 	public int getCjId() {
@@ -84,7 +102,4 @@ public class ClassJoinVO {
 	public void setcPrice(String cPrice) {
 		this.cPrice = cPrice;
 	}
-
-	
-
 }

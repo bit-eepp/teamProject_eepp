@@ -111,7 +111,7 @@ public interface UserMapper {
 	public int pointCount(Map<String, Object> map);
 
 	// 구매한 클래스
-	@Select("select cj.class_id, c.ccategory,c.cTitle,c.cprice, cj.cjJoinDate from classjoin cj, class c where c.cId = cj.class_id and cj.user_id = #{user_id}")
+	@Select("select cj.class_id, c.ccategory,c.cTitle,c.cprice, cjJoinDate from classjoin cj, class c where c.cId = cj.class_id and cj.user_id = #{user_id}")
 	public List<ClassJoinVO> joinClass(Map<String, Object> map);
 
 	// 구매한 클래스 개수
@@ -119,13 +119,14 @@ public interface UserMapper {
 	public int joinClassCount(Map<String, Object> map);
 
 	// 개설한 클래스
-	@Select("select * from class where user_id = #{user_id}")
+	@Select("select cId, cTitle, cCategory, cTotalPeopleCount, cOpenDate, cTerm\n" + 
+			",(SELECT COUNT(user_id) FROM CLASSJOIN WHERE class_id = class.cId)as totalcount from class where user_id = #{user_id}")
 	public List<ClassVO> openClass(Map<String, Object> map);
 
 	// 개설한 클래스 개수
 	@Select("select count(*) from class where user_id = #{user_id}")
 	public int openClassCount(Map<String, Object> map);
-	
+
 	// (회원정보) 프로필 보여주기
 	@Select("select uprofile from users where user_id = #{user_id}")
 	public String mInfoProfile(Map<String, Object> map);
@@ -133,11 +134,20 @@ public interface UserMapper {
 	// (회원정보) 등급 보여주기
 	@Select("select grade_id from users where user_id =  #{user_id}")
 	public int memberInfograde(Map<String, Object> map);
-	
+
 	// (회원정보) 가입 날짜 보여주기
 	@Select("select ujoindate from users where user_id = #{user_id}")
 	public Date memberInfoJDate(Map<String, Object> map);
 
+	// 스크랩 삭제
+	@Delete("delete Scrap where sId = #{sId} and user_id = #{user_id}")
+	public void deleteScrap(ScrapVO scrapVO);
+	
+	//클래스 가입한 인원
+	@Select("select cj.user_id,cj.cjjoindate,(select uNickname from users u where u.user_id = cj.user_id) as usernick, "
+			+ "(select uphone from users u where u.user_id = cj.user_id) as uPhone from classjoin cj where cj.class_id = #{cId}")
+	public abstract List<ClassJoinVO> classjoinList(Map<String, Object> map);
+	
 	// 받은 쪽지 개수
 	public abstract int receiveCount(Map<String, Object> map);
 

@@ -165,13 +165,92 @@ $("#myclassbtn").click(function() {
 	$(".myclass_list").slideToggle();
 });
 
-// // 회원탈퇴 질문
-// function confirm_event() {
-// if (confirm("지금 탈퇴하시면 60일 동안 재가입 하실 수 없습니다. 정말 삭제하시겠습니까??")== true) {
-// alert("탈퇴되었습니다.");
-// // 삭제페이지나 submit처리를 해준다 //
-// document.form.submit();
-// } else {
-// return;
-// }
-// }
+//페이징
+function pageColor(pageNum) {
+	   $('#boardpaging_'+pageNum).css("background-color", "#59bfbf");
+	   $('#boardpaging_'+pageNum).css("color", "#ffffff");
+	}
+function pageColor(pageNum) {
+	   $('#pointpage_'+pageNum).css("background-color", "#59bfbf");
+	   $('#pointpage_'+pageNum).css("color", "#ffffff");
+	}
+function pageColor(pageNum) {
+	   $('#scrapBoardPage_'+pageNum).css("background-color", "#59bfbf");
+	   $('#scrapBoardPage_'+pageNum).css("color", "#ffffff");
+	}
+function pageColor(pageNum) {
+	   $('#scrapClassPage_'+pageNum).css("background-color", "#59bfbf");
+	   $('#scrapClassPage_'+pageNum).css("color", "#ffffff");
+	}
+function pageColor(pageNum) {
+	   $('#scrapBoardPage_'+pageNum).css("background-color", "#59bfbf");
+	   $('#scrapBoardPage_'+pageNum).css("color", "#ffffff");
+	}
+function pageColor(pageNum) {
+	   $('#clJoinPage_'+pageNum).css("background-color", "#59bfbf");
+	   $('#clJoinPage_'+pageNum).css("color", "#ffffff");
+	}
+function pageColor(pageNum) {
+	   $('#clOpenPage_'+pageNum).css("background-color", "#59bfbf");
+	   $('#clOpenPage_'+pageNum).css("color", "#ffffff");
+	}
+
+$(document).ready(function() {
+	$(".selectDeleteBtn1").click(function() {
+		deleteScrap();
+	});
+});
+
+// 전체 선택 or 해제
+$(function() { 
+	// 전체선택 체크박스 클릭
+	$(".allCheck").click(function() {
+		if ($(".allCheck").prop("checked")) {
+			$("input:checkbox[name='pickCheck']").prop("checked", true);
+		} else {
+			$("input:checkbox[name='pickCheck']").prop("checked", false);
+		}
+	})
+})
+
+// 체크박스 선택 삭제
+function deleteScrap() {
+	var checkRow = "";
+	$("input[name='pickCheck']:checked").each(function() {
+		checkRow = checkRow + $(this).val() + ",";
+	});
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
+
+	if (checkRow == '') {
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	} else {
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+			$.ajax({
+				url : getContextPath() + "/deleteScrap",
+				type : "post",
+				data : {
+					"checkRow" : checkRow,
+					"scrap1" : $(".scrap1").val()
+				},
+				success : function(data) {
+					alert("스크랩이 삭제되었습니다.");
+					location.href="http://localhost:8282/eepp/mypage?&scrap=yes";
+				},
+				error : function(request, status, error) {
+					alert("에러가 발생했습니다.");
+					console.log(request.responseText);
+					console.log(error);
+				}
+			})
+		} else {
+			return false;
+		}
+	}
+}
+
+// 클래스 구입자 보기
+function classjoin_list(cId){
+	var member = window.open("http://localhost:8282/eepp/classjoin_list?cId="+cId,"classjoin_list","left="+(screen.availWidth-700)/2
+			+",top="+(screen.availHeight-560)/2+",width=530,height=560");
+}
