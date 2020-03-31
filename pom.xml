@@ -21,8 +21,13 @@
 	    	<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
 	</repositories>
-	
 	<dependencies>
+			<!-- 메이븐 오류 혜인추가 -->
+		<dependency>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-resources-plugin</artifactId>
+		    <version>2.4.3</version>
+		</dependency>
 		<!-- spring websocket -->
 		<dependency>
 			<groupId>org.springframework</groupId>
