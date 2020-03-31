@@ -6,6 +6,7 @@ public class BoardVO {
 	private int bId;
 	private int user_id;
 	private String uNickname;
+	private String uprofile;
 	private String bTitle;
 	private String bContent;
 	private String bSubject;
@@ -23,12 +24,13 @@ public class BoardVO {
 	public BoardVO() {
 	}
 
-	public BoardVO(int bId, int user_id, String uNickname, String bTitle, String bContent, String bSubject,
+	public BoardVO(int bId, int user_id, String uNickname, String uprofile, String bTitle, String bContent, String bSubject,
 			String bCategory, String bWrittenDate, String bModifyDate, int bHit, int bLike, int bUnlike,
 			String bBlind, int rpCount, int dCount,Timestamp isNew) {
 		this.bId = bId;
 		this.user_id = user_id;
 		this.uNickname = uNickname;
+		this.uprofile = uprofile;
 		this.bTitle = bTitle;
 		this.bContent = bContent;
 		this.bSubject = bSubject;
@@ -91,6 +93,15 @@ public class BoardVO {
 
 	public void setuNickname(String uNickname) {
 		this.uNickname = uNickname;
+	}
+	
+
+	public String getUprofile() {
+		return uprofile;
+	}
+
+	public void setUprofile(String uprofile) {
+		this.uprofile = uprofile;
 	}
 
 	public String getbTitle() {

@@ -4,17 +4,20 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>게시글 수정 페이지</title>
+		<title>게시글 수정</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/boardView.css">
 	</head>
 	<body>
 <!-- header -->
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- header -->
 
-		<h1>#${modify.bId}번 게시글 수정 페이지</h1>
-		<br>
-		<hr>
+<div class="modifyViewWrap">
+	<section class="sc-writeView col-sm-8">
+
+		<h1 class="sc-title">#${modify.bId}번 글 수정</h1>
 		
 		<form name="mform" action="modifyContent" method="post" onsubmit="return checkForm();">
 			<input type="hidden" name="bId" value="${modify.bId}">
@@ -25,36 +28,37 @@
 			<input type="hidden" name="sortType" value="${sortType}">
 			<input type="hidden" name="bCategory" value="${bCategory}">
 			
-			<table border="1">
+			<table class="viewTable">
 				<tr>
-					<td> 게시글 번호 </td>
+					<td class="tb-title"> 게시글 번호 </td>
 					<td> #${modify.bId} </td>
 				</tr>
 				<tr>
-					<td> 조회수 </td>
+					<td class="tb-title"> 조회수 </td>
 					<td> ${modify.bHit} </td>
 				</tr>
 				<tr>
-					<td> 작성자 </td>
-					<td> ${modify.uNickname} </td>
+					<td class="tb-title"> 작성자 </td>
+					<td class="tb-writer"> ${modify.uNickname} </td>
 				</tr>
 				<tr>
-					<td> 글제목 </td>
-					<td> <input type="text" name="bTitle" size = "50" value="${modify.bTitle}"> </td>
+					<td class="tb-title"> 글제목 </td>
+					<td> <input type="text" name="bTitle" size = "50" class="boardSelector tb-boardTitle" placeholder="${modify.bTitle}"> </td>
 				</tr>
 				<tr>
-					<td> 내용 </td>
-					<td width="500" height="300"><textarea id="summernote" name="bContent">${modify.bContent}</textarea> </td>
-				</tr>
-				<tr >
-					<td colspan="2"> 
-						<input type="submit" value="수정"> &nbsp;&nbsp;
-						<button type="button" onclick="location.href='contentView?bId=${modify.bId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}'">취소</button>&nbsp;&nbsp;
+					<td class="tb-title"> 내용 </td>
+					<td>
+						<textarea id="summernote" name="bContent">${modify.bContent}</textarea>
 					</td>
 				</tr>
 			</table>
+			<div class="btnWrap">
+				<div class="cancleBtn-wrap"><button class="list btn" type="button" onclick="location.href='contentView?bId=${modify.bId}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}'">취소</button></div>
+				<div class="submitBtn-wrap"><button class="btn" type="submit">수정</button></div>
+			</div>
 		</form>
-		<script src="${pageContext.request.contextPath}/js/board/boardModify.js"></script>
+		</section>
+		</div>
 
 <!-- chat -->
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
@@ -63,5 +67,6 @@
 <!-- footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 <!-- footer -->
+<script src="${pageContext.request.contextPath}/js/board/boardModify.js"></script>
 	</body>
 </html>

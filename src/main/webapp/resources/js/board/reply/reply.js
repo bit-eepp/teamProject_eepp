@@ -110,7 +110,7 @@
 								}
 
 								var b = '<div class=rp_'+value.rpId +'>';
-									b += '<table border="1">';
+									b += '<table>';
 									b += '<tr>';
 									
 									b += '<td width="100">';	
@@ -405,10 +405,12 @@
 
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
 			$('[name=replyBtn]').click(function(){
-				if(!uNickname){
-					alert("로그인 해주세요.");
-					return false;
-				}
+				var insertData = $('[name=rpform]').serialize();				
+				replyWrite(insertData);
+			});
+			
+			// 댓글 작성 버튼눌렀을때 이벤트 메서드
+			$('#replyBtn').click(function(){
 				var insertData = $('[name=rpform]').serialize();				
 				replyWrite(insertData);
 			});
