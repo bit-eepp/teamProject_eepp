@@ -10,11 +10,11 @@ public interface LoginMapper {
 	
 	// 일반 로그인
 	@Select("select * from users where uEmail = #{uEmail}")
-	public UserVO normalLogin(UserVO userVO);
+	public UserVO normalLogin(@Param("uEmail") String uEmail);
 	
 	// SNS로그인 (가입한 소셜까지 확인)
 	@Select("select * from users where uEmail = #{uEmail}")
-	public UserVO snsLogin(UserVO userVO);
+	public UserVO snsLogin(@Param("uEmail") String uEmail);
 	
 	// 자동 로그인 = 로그인 유지
 	@Update("update users set session_key = #{session_key}, session_limit = #{session_limit} where uEmail = #{uEmail}")

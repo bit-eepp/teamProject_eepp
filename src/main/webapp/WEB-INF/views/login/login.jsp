@@ -14,7 +14,10 @@
 <!-- header -->
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- header -->
-
+	<c:if test="${not empty loginFailInfo}"><input type="hidden" class="loginFailInfo" value="${loginFailInfo}"></c:if>
+	<%-- <c:if test="${loginFailInfo eq 'grade4'}"><input type="hidden" class="isGrade4" value="${loginFailInfo}"></c:if>
+	<c:if test="${loginFailInfo eq 'notSns'}"><input type="hidden" class="isNotSns" value="${loginFailInfo}"></c:if>
+	<c:if test="${loginFailInfo eq 'otherSNS'}"><input type="hidden" class="isOtherSNS" value="${loginFailInfo}"></c:if> --%>
 <section class="sc-login">
 <div class="normal-login-wrap">
 	<div class="container text-center">
@@ -24,7 +27,6 @@
 	</div>
 
 	<div class="container col-md-4">
-
 		<form:form name="f" class="px-4" action="${pageContext.request.contextPath}/nomal_login.do" method="post">
 
 			<div class="form-group">
@@ -87,6 +89,6 @@
 <!-- footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 <!-- footer -->
-
+<script src="${pageContext.request.contextPath}/js/login.js"></script>
 </body>
 </html>

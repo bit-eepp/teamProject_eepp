@@ -19,6 +19,26 @@ $(document).ready(function() {
 	$("#findMyEmail02").hide();
 	$("#findMyPW02").hide();
 	$("#findMyPW03").hide();
+	
+	if(!$(".loginFailInfo").val()){
+		return true;
+	}
+	else if($(".loginFailInfo").val() == 'grade3'){
+		alert("신고 10회가 누적되어 차단된 계정입니다.");
+		return true;
+	}
+	else if($(".loginFailInfo").val() == 'grade4'){
+		alert("탈퇴처리된 계정입니다.\n계정 탈퇴일로부터 90일 후에 재가입 가능합니다.");
+		return true;
+	}
+	else if ($(".loginFailInfo").val() == 'notSns'){
+		alert("일반계정으로 가입된 아이디입니다.");
+		return true;
+	}
+	else if($(".otherSNS").val() == 'otherSNS'){
+		alert("다른 SNS계정으로 가입된 아이디입니다.");
+		return true;
+	}
 })
 
 $("#registerInfoID").click(function() {

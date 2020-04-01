@@ -44,6 +44,12 @@ public class DeclarationController {
 		System.out.println("doUserDeclaration() method");
 		
 		declarationService.doUserDeclaration(declarationVO);
+		
+		int countReportNum = declarationService.countUserDeclaration(declarationVO);
+		if(countReportNum >= 10) {
+			//신고 10회이상 누적시 등급 변경
+			declarationService.updateUserGrade(declarationVO);
+		}
 	}
 
 }

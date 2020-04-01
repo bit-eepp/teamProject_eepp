@@ -79,7 +79,8 @@ section{padding:40px 0;}
 }
 .reportModalBox .modal-footer .reportBtn{
 	border: 1px solid #e7438b;
-    color: #e7438b;
+    color: #e7438b!important;
     font-size:14px;
+    cursor: pointer;
 }
 /* 신고창 CSS */

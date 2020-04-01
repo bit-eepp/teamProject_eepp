@@ -153,7 +153,7 @@
 							<a class="reportMsg" data-toggle="modal" data-target="#modalForm_msg_${msg.mid}${btn.index}" data-backdrop="static" data-keyboard="false">신고</a>
 							
 							<!-- 쪽지 신고 폼 -->
-							<div class="modal fade" id="modalForm_msg_${msg.mid}${btn.index}" role="dialog">
+							<div class="modal fade reportModalBox" id="modalForm_msg_${msg.mid}${btn.index}" role="dialog">
 								<div class="modal-dialog">
 								<div class="modal-content">
 								
@@ -170,15 +170,13 @@
 								<div class="modal-body">
 								<div id="messageDeclaration_${msg.mid}" role="formMsgDeclaration_${msg.mid}">
 									<input type="hidden" name="reporter_id" class="reporterId" value="${loginUser.user_id}">
-									<input type="hidden" name="reported_id" class="reportedId" value="${msg.user_id}">
-									
+
 									<div class="form-group">
-									<label for="inputMessage">신고사유</label><br>
 									<input type="radio" name="dReason_msg" value="부적절한 홍보 내용" onclick="this.form.etc_msg_${msg.mid}.disabled=true">  부적절한 홍보 내용<br>
 									<input type="radio" name="dReason_msg" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_msg_${msg.mid}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 									<input type="radio" name="dReason_msg" value="명예훼손/사생활 침해 등" onclick="this.form.etc_msg_${msg.mid}.disabled=true">  명예훼손/사생활 침해 등<br>
 									<input type="radio" name="dReason_msg" value="etc" onclick="this.form.etc_msg_${msg.mid}.disabled=false">  기타<br>
-									<textarea style="resize:none;height:80px;width:100%;" class="form-control" id="etc_msg_${msg.mid}" name="dReason_msg" disabled></textarea>
+									<textarea style="resize:none;height:45px;width:100%;" class="form-control" id="etc_msg_${msg.mid}" name="dReason_msg" disabled></textarea>
 									</div>
 									<!-- form-group -->
 								</div>
@@ -188,8 +186,7 @@
 											 
 								<!-- Modal Footer -->
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
-									<button type="button" class="btn btn-primary submitBtn" onclick="submitDeclarationForm(${msg.mid},'${msg.uNickname}')">신고</button>
+									<a class="btn reportBtn" onclick="submitDeclarationForm(${msg.mid},'${msg.uNickname}')">신고</a>
 								</div>
 								<!-- Modal Footer -->
 								</div>
@@ -250,26 +247,30 @@
 	
 <div class="message_footer">
 	<button type="button" class="selectDeleteBtn">삭제</button>
-
+	
+	
 	<!-- 페이징 -->
-	<div>
-		<c:if test="${pageMaker.prev}">
-			<a style="text-decoration: none" href="message${pageMaker.makeQuery(pageMaker.startPage - 1)}&messageType=${messageType}">
-				«
-			</a>
-		</c:if>
-		[
-		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-			<a style="text-decoration: none" href="message${pageMaker.makeQuery(idx)}&messageType=${messageType}">${idx}</a>
-		</c:forEach>
-		]
-		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-			<a style="text-decoration: none" href="message${pageMaker.makeQuery(pageMaker.endPage + 1)}&messageType=${messageType}">
-				» 
-			</a>&nbsp;&nbsp;
-		</c:if>
-	</div>
-	<!-- 페이징 -->
+		<div class="messageListpaging">
+			<ul class="pagination">
+				<li class="page-item">
+				<a class="page-link msgPaging" href="message${pageMaker.makeQuery(pageMaker.startPage - 1)}&messageType=${messageType}">
+				<i class="fas fa-angle-left"></i>
+				</a>
+				</li>
+				
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				<li class="page-item boardPaging">
+				<a id="boardPage_${idx}" class="page-link msgPaging" href="message${pageMaker.makeQuery(idx)}&messageType=${messageType}">${idx}</a></li>
+				</c:forEach>
+				
+				<li class="page-item">
+				<a class="page-link msgPaging" href="message${pageMaker.makeQuery(pageMaker.endPage + 1)}&messageType=${messageType}">
+				<i class="fas fa-angle-right"></i>
+				</a>
+				</li>
+			</ul>
+		</div>
+		<!-- paging -->
 </div>
 <!-- message_footer-->
 <script src="${pageContext.request.contextPath}/js/user/message/message.js"></script>

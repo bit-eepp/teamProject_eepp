@@ -26,5 +26,13 @@ public class DeclarationService {
 	public void doUserDeclaration(DeclarationVO declarationVO) {
 		declarationMapper.doUserDeclaration(declarationVO);
 	}
+	
+	public int countUserDeclaration(DeclarationVO declarationVO) {
+		return declarationMapper.countUserDeclaration(declarationVO);
+	}
+	
+	public void updateUserGrade(DeclarationVO declarationVO) {
+		declarationMapper.updateUserGrade(declarationVO);
+	}
 
 }

@@ -120,15 +120,24 @@ public class LoginController {
 			return "redirect:/login/login.do";
 		
 		}else {
-			UserVO login = ls.normalLogin(userVO);
+			UserVO login = ls.normalLogin(userVO.getuEmail());
 			logger.info("로그인 정보 조회 uEmail, uPassword");
 			boolean checkPW = pwEncoder.matches(userVO.getuPassword(), login.getuPassword());
 			logger.info("비밀번호 체크");
 			
+			// 차단된 회원일시
+			if(login.getGrade_Id() == 3) {
+				redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
+				return "redirect:/login/login.do";
+			// 탈퇴한 회원일시
+			}else if(login.getGrade_Id() == 4) {
+				redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
+				return "redirect:/login/login.do";
+			}else {
 			// 로그인 정보가 있고, 비밀번호 체크가 true일 경우
 			if(login != null & checkPW == true){
 				UserVO user = new UserVO();
-				user = us.UserInfo(userVO.getuEmail());
+				user = ls.normalLogin(userVO.getuEmail());
 				session.setAttribute("loginUser", user);
 				
 				// 로그인할때 rememberMe를 체크한 경우, session정보 DB에 저장
@@ -152,11 +161,12 @@ public class LoginController {
 					logger.info("자동 로그인 정보 저장 완료");
 				}
 
-				return "redirect:/";
+					return "redirect:/";
 				
-			} else {
-				redirectAttributes.addFlashAttribute("failedLogin", "failed");
-				return "redirect:/login/login.do";
+				}else {
+					redirectAttributes.addFlashAttribute("failedLogin", "failed");
+					return "redirect:/login/login.do";
+				}
 			}
 		}
 	}
@@ -207,31 +217,34 @@ public class LoginController {
 			} else if(check != 0) {
 				System.out.println(check+"이 null이 아닙니다.");
 				
-				UserVO user = new UserVO();
-				user = us.UserInfo(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
-				System.out.println(user.getSnsType());
+				UserVO login = new UserVO();
+				login = ls.snsLogin(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
+				System.out.println(login.getSnsType());
 				
-				// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
-  				if(user.getSnsType() == null) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('이미 가입된 이메일입니다.'); history.go(-1);</script>");
-				out.close();
-				return "/";
-			}
-  				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
-  				if(user.getSnsType().equals("kakao")) {
-					session.setAttribute("loginUser", user);
+				// 차단된 회원일시
+				if(login.getGrade_Id() == 3) {
+					redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
+					return "redirect:/login/login.do";
+				// 탈퇴한 회원일시
+				}else if(login.getGrade_Id() == 4) {
+					redirectAttributes.addFlashAttribute("loginInfo", "grade4");
+					return "redirect:/login/login.do";
+				}else {
+					// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
+					if(login.getSnsType() == null) {
+						redirectAttributes.addFlashAttribute("loginInfo", "notSns");
+						return "redirect:/login/login.do";
+					}
+					// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
+					else if(login.getSnsType().equals("kakao")) {
+						session.setAttribute("loginUser", login);
 					
-				}// 다른 sns로 가입한 이메일일 경우
-  				else{
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('다른 SNS계정으로 가입된 이메일입니다.'); history.go(-1);</script>");
-					out.close();
-					return "/";
+					}// 다른 sns로 가입한 이메일일 경우
+					else{
+						redirectAttributes.addFlashAttribute("loginInfo", "otherSNS");
+						return "redirect:/login/login.do";
+					}
 				}
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -247,7 +260,7 @@ public class LoginController {
 		
 		//정보동의 취소시 이전페이지로 이동
 		if(code.equals("0")) {
-			return "/";
+			return "redirect:/";
 		}
 		
 		OAuth2AccessToken oauthToken;
@@ -284,43 +297,45 @@ public class LoginController {
 						userInfo.put("uNickname", uNickname);
 						userInfo.put("snsType", "naver");
 						redirectAttributes.addFlashAttribute("user", userInfo);
-						
 						return "redirect:/join/joinForm";
 						
 					} else if(check != 0) {
 						System.out.println(check+"이 null이 아닙니다.");
 						
-						UserVO user = new UserVO();
-						user = us.UserInfo(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
-						System.out.println(user.getSnsType());
+						UserVO login = new UserVO();
+						login = ls.snsLogin(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
+						System.out.println(login.getSnsType());
 						
-						// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
-	      				if(user.getSnsType() == null) {
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter out = response.getWriter();
-						out.println("<script>alert('이미 가입된 이메일입니다.'); history.go(-1);</script>");
-						out.close();
-						return "/";
-					}
-	      				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
-	      				if(user.getSnsType().equals("naver")) {
-	    					session.setAttribute("loginUser", user);
-	    					
-	    				}// 다른 sns로 가입한 이메일일 경우
-	      				else{
-	    					response.setContentType("text/html; charset=UTF-8");
-	    					PrintWriter out = response.getWriter();
-	    					out.println("<script>alert('다른 SNS계정으로 가입된 이메일입니다.'); history.go(-1);</script>");
-	    					out.close();
-	    					return "/";
-	    				}
+						// 차단된 회원일시
+						if(login.getGrade_Id() == 3) {
+							redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
+							return "redirect:/login/login.do";
+						// 탈퇴한 회원일시
+						}else if(login.getGrade_Id() == 4) {
+							redirectAttributes.addFlashAttribute("loginInfo", "grade4");
+							return "redirect:/login/login.do";
+						}else {
+							// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
+							if(login.getSnsType() == null) {
+								redirectAttributes.addFlashAttribute("loginInfo", "notSns");
+								return "redirect:/login/login.do";
+							}
+							// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
+							else if(login.getSnsType().equals("naver")) {
+								session.setAttribute("loginUser", login);
+							}// 다른 sns로 가입한 이메일일 경우
+							else{
+								redirectAttributes.addFlashAttribute("loginInfo", "otherSNS");
+								return "redirect:/login/login.do";
+							}
+						}
 						
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 				return "redirect:/";
+				
 			}
 	
 	
@@ -391,31 +406,33 @@ public class LoginController {
       			} else if(check != 0) {
       				System.out.println(check+"이 null이 아닙니다.");
       				
-      				UserVO user = new UserVO();
-      				user = us.UserInfo(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
-      				System.out.println(user.getSnsType());
+      				UserVO login = new UserVO();
+      				login = ls.snsLogin(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
+      				System.out.println(login.getSnsType());
       				
-      			// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
-      				if(user.getSnsType() == null) {
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('이미 가입된 이메일입니다.'); history.go(-1);</script>");
-					out.close();
-					return "/";
-				}
-      				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검
-      				if(user.getSnsType().equals("google")) {
-    					session.setAttribute("loginUser", user);
-    					
-    				}// 다른 sns로 가입한 이메일일 경우
-      				else{
-    					response.setContentType("text/html; charset=UTF-8");
-    					PrintWriter out = response.getWriter();
-    					out.println("<script>alert('다른 SNS계정으로 가입된 이메일입니다.'); history.go(-1);</script>");
-    					out.close();
-    					return "/";
-    				}
-      				
+      			// 차단된 회원일시
+					if(login.getGrade_Id() == 3) {
+						redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
+						return "redirect:/login/login.do";
+					// 탈퇴한 회원일시
+					}else if(login.getGrade_Id() == 4) {
+						redirectAttributes.addFlashAttribute("loginInfo", "grade4");
+						return "redirect:/login/login.do";
+					}else {
+						// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
+						if(login.getSnsType() == null) {
+							redirectAttributes.addFlashAttribute("loginInfo", "notSns");
+							return "redirect:/login/login.do";
+						}
+						// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
+						else if(login.getSnsType().equals("google")) {
+							session.setAttribute("loginUser", login);
+						}// 다른 sns로 가입한 이메일일 경우
+						else{
+							redirectAttributes.addFlashAttribute("loginInfo", "otherSNS");
+							return "redirect:/login/login.do";
+						}
+					}
       			}
       		} catch (Exception e) {
       			e.printStackTrace();

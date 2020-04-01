@@ -13,8 +13,12 @@ public class LoginService{
 	@Autowired
 	LoginMapper loginMapper;
 
-	public UserVO normalLogin(UserVO userVO) {
-		return loginMapper.normalLogin(userVO);
+	public UserVO normalLogin(String uEmail) {
+		return loginMapper.normalLogin(uEmail);
+	}
+	
+	public UserVO snsLogin(String uEmail) {
+		return loginMapper.normalLogin(uEmail);
 	}
 	
 	// 자동 로그인 = 로그인 유지

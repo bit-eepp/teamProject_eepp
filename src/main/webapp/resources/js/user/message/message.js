@@ -99,7 +99,6 @@ function sendCancle(mid, uNickname) {
 // 쪽지 신고
 function submitDeclarationForm(mid, uNickname) {
 	var reporter_id = $(".reporterId").val();
-	var reported_id = $(".reportedId").val();
 	var dReason = $("input[name='dReason_msg']:checked").val();
 
 	if (dReason.value == "") {
@@ -111,7 +110,6 @@ function submitDeclarationForm(mid, uNickname) {
 			url : getContextPath() + '/declaration/doMsgDeclaration',
 			data : {
 				"reporter_id" : reporter_id,
-				"reported_id" : reported_id,
 				"mid" : mid,
 				"dReason" : dReason
 			},
