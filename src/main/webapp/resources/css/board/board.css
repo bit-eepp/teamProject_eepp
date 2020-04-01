@@ -18,6 +18,10 @@
     font-weight: bold;
     margin-bottom: 30px;
 }
+.boardSideWrap .category.onCategory{
+	color: #e7438b!important;
+	 border-bottom: 0.15rem solid #e7438b!important;
+}
 .boardList-Wrap{
 	padding: 0 40px;
 }

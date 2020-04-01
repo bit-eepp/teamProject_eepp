@@ -71,7 +71,7 @@
 	/*
 	* contentView
 	*/
-	
+
 #boardContentWrapper{
 	padding: 40px 40px;
     display: flex;
@@ -86,6 +86,10 @@
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 30px;
+}
+.contentSideWrap .category.onCategory{
+	color: #e7438b!important;
+	 border-bottom: 0.15rem solid #e7438b!important;
 }
 .contentMainWrap{
 	padding: 0 40px;
@@ -160,26 +164,20 @@
 .infoIcons .title-icon{
 	margin: 0 10px 0;
 }
-.title-icon i.fa-thumbs-up{
+.title-icon.blike{
 	color:#2cc5c5;
 }
-.title-icon span.like{
-	color:#2cc5c5;
-}
-.title-icon i.fa-thumbs-down{
-	color:#e7438b;
-}
-.title-icon span.unlike{
+.title-icon.bunlike{
 	color:#e7438b;
 }
 .infoIcons .modifyBtn, .infoIcons .deleteBtn, .infoIcons .reportBtn{
 	margin: 0 10px 0;
-    font-size: 14px;
-    color: #5d5a5a;
-    text-decoration: underline;
 }
 .infoIcons .modifyBtn a, .infoIcons .deleteBtn a, .infoIcons .reportBtn a{
 	cursor: pointer;
+	font-size: 14px;
+    color: #5d5a5a;
+    text-decoration: underline;
 }
 .contentMain{
 	padding: 15px;
@@ -258,4 +256,123 @@
     color: #fff;
     font-size: 14px;
     cursor: pointer;
+}
+
+	/*
+	* reply
+	*/
+.replyList{
+	margin : 20px 0;
+}
+.replyBoxWrapper{
+	border-top: 1px solid #ddd;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.reReplyBox{
+	background:#f7f7f7;
+}
+.rpMain{
+	width:80%;
+	display: flex;
+}
+.rpMain .wrapeer{
+	width:100%;
+}
+.rpMain .isReply{
+	margin: 0 10px 0 0;
+}
+.rpMain .wrapper p{
+	margin: 0;
+}
+.replyDate p{
+	margin: 0;
+}
+.replyDate .reWrittenDate{
+	color: #8a8a8a;
+    margin-bottom: 5px;
+    font-size:13px;
+}
+.replyActive{
+	display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+.replyActive .reReplyBtn a,
+.replyActive .reModifyBtn a,
+.replyActive .reDeleteBtn a{
+	font-size: 14px;
+    color: #5d5a5a;
+    cursor: pointer;
+}
+.replyInfo{
+	width: 5%;
+    text-align: center;
+}
+.replyInfo .reLike{
+	color: #2cc5c5;
+    margin: 0;
+}
+.replyInfo .reUnlike{
+	margin: 0;
+    color: #e7438b;
+}
+.infoIncon a{
+	cursor: pointer;
+}
+.modifyContentBox{
+	text-align: right;
+    padding: 0 30px 0 0;
+}
+.modifyContentBox input{
+	display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.modifyContentBox a{
+	cursor: pointer;
+}
+.modifyContentBox .modifyConfirm{
+	margin-right:15px;
+}
+.rRpWrapper{
+	margin: 0 30px 30px;
+	width: 80%;
+}
+.rRpInner .rRpWriter{
+	font-weight:bold;
+	margin-bottom:5px;
+	color:#59bfbf;
+}
+.rRpInner textarea{
+	display: block;
+	width:100%;
+    resize: none;
+    height: 60px;
+    padding: 5px 10px;
+}
+.rRpBtnWrap{
+	text-align:right;
+	width:100%;
+	margin-top:10px;
+}
+.rRpBtnWrap a{
+	cursor: pointer;
+}
+.rRpBtnWrap a.rRpWrite{
+	margin-right:15px;
+}
+.replyListpaging .page-link{
+	padding: .5rem!important;
+	margin-left: 0!important;
+}
+.replyList .rpContentInner_{
+	margin-top:8px;
+}
+.replyList .userBtn{
+	color: #59bfbf!important;
+}
+.replyList .myUserBtn{
+	color: #e7438b!important;
 }

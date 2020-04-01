@@ -69,20 +69,28 @@
 		
 		if(title == '') {
 			$('.boardTitle').append('<h2>ALL</h2>');
-		} else if(title == 'notice') {
+			$(".ct-all").addClass("onCategory");
+		} else if(title == 'notice' || title == '공지') {
 			$('.boardTitle').append('<h2>공지사항</h2>');
-		} else if(title == 'it_dev') {
+			$(".ct-notice").addClass("onCategory");
+		} else if(title == 'it_dev' || title == 'IT/개발') {
 			$('.boardTitle').append('<h2>IT / 개발</h2>');
-		} else if(title == 'service') {
+			$(".ct-it").addClass("onCategory");
+		} else if(title == 'service' || title == '서비스') {
 			$('.boardTitle').append('<h2>서비스</h2>');
-		} else if(title == 'finance') {
+			$(".ct-service").addClass("onCategory");
+		} else if(title == 'finance' || title == '금융') {
 			$('.boardTitle').append('<h2>금융</h2>');
-		} else if(title == 'design') {
+			$(".ct-finance").addClass("onCategory");
+		} else if(title == 'design' || title == '디자인') {
 			$('.boardTitle').append('<h2>디자인</h2>');
-		} else if(title == 'official') {
+			$(".ct-design").addClass("onCategory");
+		} else if(title == 'official' || title == '공무원') {
 			$('.boardTitle').append('<h2>공무원</h2>');
-		} else if(title == 'etc') {
+			$(".ct-offi").addClass("onCategory");
+		} else if(title == 'etc' || title == '기타') {
 			$('.boardTitle').append('<h2>기타</h2>');
+			$(".ct-etc").addClass("onCategory");
 		} 
 	}
 	

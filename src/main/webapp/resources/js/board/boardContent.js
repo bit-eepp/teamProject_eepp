@@ -50,8 +50,33 @@ var uNickname = $("#userNickname").val();
 	if(uNickname == $("#content_uNickname").val()){
 		$('.declarationForm').remove();
 	}
+	
+	var title = $("#bCategory").val();
+	boardTitle(title);
 		
 });
+
+//게시판 카테고리
+function boardTitle(title) {
+	
+	if(title == '') {
+		$(".ct-all").addClass("onCategory");
+	} else if(title == 'notice' || title == '공지') {
+		$(".ct-notice").addClass("onCategory");
+	} else if(title == 'it_dev' || title == 'IT/개발') {
+		$(".ct-it").addClass("onCategory");
+	} else if(title == 'service' || title == '서비스') {
+		$(".ct-service").addClass("onCategory");
+	} else if(title == 'finance' || title == '금융') {
+		$(".ct-finance").addClass("onCategory");
+	} else if(title == 'design' || title == '디자인') {
+		$(".ct-design").addClass("onCategory");
+	} else if(title == 'official' || title == '공무원') {
+		$(".ct-offi").addClass("onCategory");
+	} else if(title == 'etc' || title == '기타') {
+		$(".ct-etc").addClass("onCategory");
+	} 
+}
 
 // 해당 댓글 신고 메서드
 function submitRpDeclarationForm(rpId) {
@@ -150,7 +175,7 @@ function likeCount(bId) {
 		type: 'get',
 		data: {'bId' : bId},
 		success: function(data){
-			$('.like').append(data)
+			$('.blike').html('<i class="far fa-thumbs-up"></i> '+data)
 		},
 		error : function(request, status, error) {
 			console.log(request.responseText);
@@ -191,7 +216,7 @@ function unlikeCount(bId) {
 		type: 'get',
 		data: {'bId' : bId},
 		success: function(data){
-				$('.unlike').append(data)	
+				$('.bunlike').html('<i class="far fa-thumbs-down"></i> '+data)	
 		},
 		error : function(request, status, error) {
 			console.log(request.responseText);

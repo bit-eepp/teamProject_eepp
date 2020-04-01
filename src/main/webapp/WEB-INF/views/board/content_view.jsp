@@ -18,14 +18,14 @@
 <div id="boardContentWrapper">
 	<div class="contentSideWrap col-sm-2">
 	<!-- 직무 게시판 카테고리 -->
-		<a class="category" href="boardList">All</a>
-		<a class="category" href="boardList?&bCategory=notice">공지사항</a>
-		<a class="category" href="boardList?&bCategory=it_dev">IT & 개발</a>
-		<a class="category" href="boardList?&bCategory=service">서비스</a>
-		<a class="category" href="boardList?&bCategory=finance">금융</a>
-		<a class="category" href="boardList?&bCategory=design">디자인</a>
-		<a class="category" href="boardList?&bCategory=official">공무원</a>
-		<a class="category" href="boardList?&bCategory=etc">etc</a>
+		<a class="category ct-all" href="boardList">All</a>
+		<a class="category ct-notice" href="boardList?&bCategory=notice">공지사항</a>
+		<a class="category ct-it" href="boardList?&bCategory=it_dev">IT & 개발</a>
+		<a class="category ct-service" href="boardList?&bCategory=service">서비스</a>
+		<a class="category ct-finance" href="boardList?&bCategory=finance">금융</a>
+		<a class="category ct-design" href="boardList?&bCategory=design">디자인</a>
+		<a class="category ct-offi" href="boardList?&bCategory=official">공무원</a>
+		<a class="category ct-etc" href="boardList?&bCategory=etc">기타</a>
 	</div>
 	
 	<div class="contentMainWrap col-sm-9">
@@ -127,8 +127,8 @@
 	
 			<div class="infoIcons">
 				<p class="title-icon"><i class="fas fa-eye"></i> ${content.bHit}</p>
-				<p class="title-icon"><i class="far fa-thumbs-up"></i> <span class="like"></span></p>
-				<p class="title-icon"><i class="far fa-thumbs-down"></i> <span class="unlike"></span></p>
+				<p class="title-icon blike"></p>
+				<p class="title-icon bunlike"></p>
 				<c:choose>
 					<c:when test="${loginUser.uNickname == content.uNickname}">
 						<p class="modifyBtn"><a class="modify">수정</a></p>

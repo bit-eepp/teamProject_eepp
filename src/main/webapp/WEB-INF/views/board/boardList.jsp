@@ -26,14 +26,14 @@
 		
 		<div class="boardSideWrap col-sm-2">
 		<!-- 직무 게시판 카테고리 -->
-			<a class="category" href="boardList">All</a>
-			<a class="category" href="boardList?&bCategory=notice">공지사항</a>
-			<a class="category" href="boardList?&bCategory=it_dev">IT & 개발</a>
-			<a class="category" href="boardList?&bCategory=service">서비스</a>
-			<a class="category" href="boardList?&bCategory=finance">금융</a>
-			<a class="category" href="boardList?&bCategory=design">디자인</a>
-			<a class="category" href="boardList?&bCategory=official">공무원</a>
-			<a class="category" href="boardList?&bCategory=etc">etc</a>
+			<a class="category ct-all" href="boardList">All</a>
+			<a class="category ct-notice" href="boardList?&bCategory=notice">공지사항</a>
+			<a class="category ct-it" href="boardList?&bCategory=it_dev">IT & 개발</a>
+			<a class="category ct-service" href="boardList?&bCategory=service">서비스</a>
+			<a class="category ct-finance" href="boardList?&bCategory=finance">금융</a>
+			<a class="category ct-design" href="boardList?&bCategory=design">디자인</a>
+			<a class="category ct-offi" href="boardList?&bCategory=official">공무원</a>
+			<a class="category ct-etc" href="boardList?&bCategory=etc">기타</a>
 		</div>
 		
 		<div class="boardList-Wrap col-sm-10">
@@ -120,7 +120,7 @@
 						<td class="bSubject">${notice.bSubject}</td>
 						<td class="bCategory">${notice.bCategory}</td>
 						<td class="bTitle">
-							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
+							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${notice.bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
 						</td>
 						
 						<td class="bWriter">
@@ -141,7 +141,7 @@
 						<td class="bSubject">${hot.bSubject}</td>
 						<td class="bCategory">${hot.bCategory}</td>
 						<td class="bTitle">
-							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
+							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${hot.bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
 						</td>
 						
 						<td class="bWriter">
@@ -245,7 +245,7 @@
 										</c:when>
 										<c:otherwise>
 											<td class="bTitle">
-										<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">
+										<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${vo.bCategory}">
 											<c:choose>
 												<c:when test="${fn:length(vo.bTitle) > 33}">
 												${fn:substring(vo.bTitle, 0, 33)}... [${vo.rpCount}]

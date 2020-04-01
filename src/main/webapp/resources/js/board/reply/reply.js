@@ -3,7 +3,7 @@
 		var userId = $("#userId").val();
 		var bId = $("#contentBid").val();
 		var isAdmin = '운영자';
-		
+
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function replyCount(bId) {
 				$.ajax({
@@ -24,19 +24,6 @@
 			}
 			
 			function replyPagePrint(rpPageMaker) {
-				/* console.log(rpPageMaker);
-				console.log('totalCount : ' +rpPageMaker[0]);
-				console.log('startPage : ' +rpPageMaker[1]);
-				console.log('endPage : ' +rpPageMaker[2]);
-				console.log('prev : ' +rpPageMaker[3]);
-				console.log('next : ' +rpPageMaker[4]);
-				console.log('displayPageNum' +rpPageMaker[5]);
-				console.log('tempEndPage' +rpPageMaker[6]);				
-				console.log('page : ' +rpPageMaker[7].page);
-				console.log('perPageNum : ' +rpPageMaker[7].perPageNum);
-				console.log('startNum : ' +rpPageMaker[7].startNum);
-				console.log('endNum : ' +rpPageMaker[7].endNum);
-				console.log('pageStart : ' +rpPageMaker[7].pageStart); */
 				
 				// 댓글 페이징 처리를 위한 변수
 				var startPage = rpPageMaker[1];
@@ -47,26 +34,33 @@
 				var page = rpPageMaker[7].page;
 			
 				var paging = '';
-					paging += '<a style="text-decoration: none" href="javascript:replyList(1)">처음으로</a>&nbsp;&nbsp;';
-				 
-				if(prev){
-					paging +='<a style="text-decoration: none" href="javascript:replyList('+(startPage - 1) +')"> « </a>';
-				}
-					paging += '[&nbsp;';
+				paging += '<div class="replyListpaging">';
+				paging += '<ul class="pagination">';
+
+//				if(prev){
+					paging += '<li class="page-item">';
+					paging += '<a class="page-link" href="javascript:replyList('+(startPage - 1) +')">';
+					paging += '<i class="fas fa-angle-left"></i>';
+					paging += '</a>';
+					paging += '</li>';
+//				}
 				
 				for(var i = startPage; i <= endPage; i++){
-					var strClass = page == i ? 'class="active"' : '';
-				 	paging += '<a style="text-decoration: none"'+strClass +'href="javascript:replyList(' +i +')">' +i +'</a>&nbsp;&nbsp;';
-				}
-					paging += ']';
-				 
-				if(next){
-					paging +='<a style="text-decoration: none" href="javascript:replyList(' +(endPage + 1) +')"> » </a>&nbsp;&nbsp;';
+					paging += '<li class="page-item pageNum">';
+					paging += '<a class="page-link" href="javascript:replyList(' +i +')">' + i +'</a>';
+					paging += '</li>';
 				}
 				 
-				if(page < tempEndPage){
-					paging += '<a style="text-decoration: none" href="javascript:replyList(' +tempEndPage +')">마지막으로</a>';
-				}
+//				if(next){
+					paging += '<li class="page-item">';
+					paging += '<a class="page-link" href="javascript:replyList('+(endPage + 1) +')">';
+					paging += '<i class="fas fa-angle-right"></i>';
+					paging += '</a>';
+					paging += '</li>';
+//				}
+				
+				paging += '</ul>';
+				paging += '</div>';
 			
 				$('.replyPaging').html(paging);
 			}
@@ -104,31 +98,25 @@
 							} else {
 								var indent = value.rpIndent;
 								var re = '';
+								var b = '';
 								
-								for(var i = 0; i < indent; i++) {
-									re += '└ RE ';
-								}
-
-								var b = '<div class=rp_'+value.rpId +'>';
-									b += '<table>';
-									b += '<tr>';
-									
-									b += '<td width="100">';	
-									b += value.rpId;
-									b += '</td>';
-									
-									b += '<td width="50">';	
-									b += value.rpDcount;
-									b += '</td>';
-									
-									b += '<td width="300" class="rpContent_'+value.rpId +'">';
+								if(indent != 0){
+									b += '<div class="rp_'+value.rpId +' replyBoxWrapper reReplyBox">';
+									b += '<div class="rpContent_'+value.rpId +' rpMain">';
+									re += '<p class="isReply">';
+									for(var i = 0; i < indent; i++) {
+										re += '└';
+									}
+									re += '</p>';
 									b += re;
-									b += value.rpContent;
-									b += '</td>';
-									
-									b += '<td width="150">';
+								}else{
+									b += '<div class="rp_'+value.rpId +' replyBoxWrapper">';
+									b += '<div class="rpContent_'+value.rpId +' rpMain">';
+								}
+									b += '<div class="wrapper">';
+									b += '<div class="replyWriter">';
 									if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2'){
-										b += '<a class="userBtn">'+value.uNickname+'</a>';
+										b += '<a class="userBtn myUserBtn">'+value.uNickname+'</a>';
 									} else{
 										b += '<div class="dropdown">';
 										b += '<a href="#" class="userBtn" id="user_btn_'+value.rpId+value.user_id+'" data-toggle="dropdown">'+value.uNickname+'</a>';
@@ -157,47 +145,27 @@
 							            b += '</div>';
 							            b += '</div></div></div>';	
 									}
-									/* b += '<h4>' + value.uNickname +'</h4>'; */
-									b += '<h6>' +value.rpWrittenDate +'</h6>';
-									b += '</td>';
+									b += '</div>';
+									//replyWriter
+									b += '<div class="rpContentInner_'+value.rpId+' rpContentInner_">';
+									b += value.rpContent;
+									b += '</div>';
+									b += '</div>';
+									//wrapper
+									b += '</div>';
 									
-									b += '<td width="100">';
-									b += '추천 : <b class="rpLike_' +value.rpId +'">' +value.rpLike +'</b>';
-									b += '<br>';
-									b += '비추천 : <b class="rpUnlike_' +value.rpId +'">' +value.rpUnlike +'</b>';
-									b += '</td>';
-									
-									b += '<td width="100">';
-									if(uNickname == value.uNickname || value.uNickname == isAdmin){
-										//자기가 쓴 댓글일 경우 추천, 비추천 불가능
-									}else{
-									b += '<a onclick="rpLike(' +value.rpId +');" style="color : blue">[추천]</a>';
-									b += '<br>';
-									b += '<a onclick="rpUnlike('+value.rpId +');" style="color : blue">[비추천] </a>';
-									b += '<br>';
-									}
-									b += '</td>';
-									
-									b += '<td width="100">';
+									b += '<div class="replyDate">';
+									b += '<p class="reWrittenDate">' +value.rpWrittenDate +'</p>';
+									b += '<div class="replyActive">';
 									if(uNickname != value.uNickname){
-									b += '<a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a><br>';
-									}else{
-									b += '<a onclick="replyModify('+value.rpId +',\''+value.rpContent+'\');" style="color : blue">[수정] </a>';
-									b += '<br>';
-									b += '<a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');" style="color : blue">[댓글]</a>'
-									b += '<br>';
-									b += '<a onclick="replyDelete(' +value.rpId +',' +value.gCount +',' +value.rpStep +',' +value.rpIndent +');" style="color : blue">[삭제] </a>';
-									}
-									b += '</td>';
-									
-									// 댓글 신고 부분
-										b += '<td width="100" id="rpModalFormBtn">';
+										b += '<p class="reReplyBtn"><a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');">답댓글</a></p>';
+										// 댓글 신고 부분
+										b += '<p class="reReportBtn" id="rpModalFormBtn">';
 										if(uNickname == value.uNickname || value.uNickname == isAdmin){
-											//자기가 쓴 댓글일경우 신고버튼 안보임
 										}else{
-										b += '<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#rpModalForm_' +value.rpId +'" data-backdrop="static" data-keyboard="false">';
-										b += '댓글 신고';
-										b += '</button>';
+										b += '<a data-toggle="modal" data-target="#rpModalForm_' +value.rpId +'" data-backdrop="static" data-keyboard="false">';
+										b += '신고';
+										b += '</a>';
 										b += '<div class="modal fade" id="rpModalForm_' +value.rpId +'" role="RPdialog">';
 										b += '<div class="modal-dialog">';
 										b += '<div class="modal-content">';
@@ -234,12 +202,44 @@
 										b += '<button type="button" class="btn btn-primary submitBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
 										b += '</div></div></div></div>';
 										}
-										b += '</td>';
 										// 댓글 신고 부분 끝
+										}else{
+										b += '<p class="reReplyBtn"><a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');">답댓글</a></p>'
+										b += '<p class="reModifyBtn"><a onclick="replyModify('+value.rpId +',\''+value.rpContent +'\');">수정</a></p>';
+										b += '<p class="reDeleteBtn"><a onclick="replyDelete(' +value.rpId +',' +value.gCount +',' +value.rpStep +',' +value.rpIndent +');">삭제</a></p>';
+										}
+									b += '</div>';
+									// replyActive
+									b += '</div>';
+
+									b += '<div class="replyInfo">';
+									b += '<p class="infoIncon rpLike_'+value.rpId+' reLike">';
+									if(uNickname == value.uNickname || value.uNickname == isAdmin){
+										//자기가 쓴 댓글일 경우 추천, 비추천 불가능
+										b += '<i class="far fa-thumbs-up"></i> '+value.rpLike
+									}else{
+										b += '<a onclick="rpLike(' +value.rpId +');">';
+										b += '<i class="far fa-thumbs-up"></i> '+value.rpLike;
+										b += '</a>';
+									}
+									b += '</p>';
 									
-									b += '</tr>';
-									b += '</table>';
-									b += '</div>'
+									b += '<p class="infoIncon rpUnlike_'+value.rpId+' reUnlike">';
+									if(uNickname == value.uNickname || value.uNickname == isAdmin){
+										//자기가 쓴 댓글일 경우 추천, 비추천 불가능
+										b += '<i class="far fa-thumbs-down"></i> '+value.rpUnlike
+									}else{
+										b += '<a onclick="rpUnlike(' +value.rpId +');">';
+										b += '<i class="far fa-thumbs-down"></i> '+value.rpUnlike;
+										b += '</a>';
+									}
+									b += '</p>';
+									b += '</div>';
+									//replyInfo
+											
+									b += '</div>';
+									b += '<div class="rRp_'+value.rpId+'"></div>';
+									// replyWrapper
 								
 								$(".replyList").append(b);	
 							}
@@ -259,8 +259,7 @@
 					type: 'get',
 					data: {'rpId' : rpId},
 					success: function(data){
-						console.log("댓글 추천수 : "+data)
-						var a = data;
+						var a = '<i class="far fa-thumbs-up"></i> '+data;
 						$('.rpLike_'+rpId).html(a);
 					},
 					error : function(request, status, error) {
@@ -304,8 +303,7 @@
 					type: 'get',
 					data: {'rpId' : rpId},
 					success: function(data){
-						console.log("댓글 비추천수 : "+data)
-						var a = data;
+						var a = '<i class="far fa-thumbs-down"></i> '+data;
 						$('.rpUnlike_'+rpId).html(a);
 					},
 					error : function(request, status, error) {
@@ -347,26 +345,20 @@
 				if(!uNickname){
 					alert("로그인 해주세요.");
 				}else{
-				var a = '<div>';
+				var a = '<div class="rRpWrapper">';
 					a += '<form name="Rrpform">'
-					a += '<table border="1">';
-					a += '<tr>';
-					a += '<td>';
+					a += '<div class="rRpInner">';
 					a += '<input type="hidden" name="rp_user_id" value='+userId+'>';
-					a += uNickname;
-					a += '<input type="button" value="등록" onclick="reReplyWrite('+rpGroup +','+rpStep +','+rpIndent +')">&nbsp;&nbsp;';
-					a += '<button type="button" onclick="replyList();">취소</button>';
-					a += '</td>';
-					a += '</tr>';
-					a += '<tr>';
-					a += '<td>';
-					a += '<textarea type="text" name="rRpContent" placeholder="내용을 입력하세요." rows="5" cols="100"></textarea>';
-					a += '</td>';
-					a += '</tr>';
-					a += '</table>';
+					a += '<p class="rRpWriter">'+uNickname+'</p>';
+					a += '<textarea class="rRpContent" name="rRpContent" placeholder="내용을 입력하세요."></textarea>';
+					a += '</div>';
+					a += '<div class="rRpBtnWrap">';
+					a += '<a class="rRpWrite" onclick="reReplyWrite('+rpGroup +','+rpStep +','+rpIndent +')">등록</a>';
+					a += '<a onclick="replyList();">취소</a>';
+					a += '</div>';
 					a += '</form>';
 					a += '</div>';
-				$('.rp_'+rpId).append(a);
+				$('.rRp_'+rpId).append(a);
 			}
 			}
 			
@@ -444,12 +436,12 @@
 			// 댓글 수정 view JS메서드(Ajax-Json)
 			function replyModify(rpId, rpContent){
 			    var a ='';
-				    a += '<div>';
+				    a += '<div class="modifyContentBox">';
 				    a += '<input type="text" name="rpContent_' +rpId +'" value="' +rpContent +'"/>';
-				    a += '<button type="button" onclick="replyModifyPrc(' +rpId +');">수정</button>';
-					a += '<button type="button" onclick="replyList();">취소</button>';
+				    a += '<a class="modifyConfirm" onclick="replyModifyPrc(' +rpId +');">수정</a>';
+					a += '<a class="modifyCancle" onclick="replyList();">취소</a>';
 				    a += '</div>';
-			    $('.rpContent_'+rpId).html(a);	    
+			    $('.rpContentInner_'+rpId).html(a);	    
 			}
 			
 			// 댓글 수정 JS메서드(Ajax-Json)
