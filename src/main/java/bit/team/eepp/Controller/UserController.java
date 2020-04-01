@@ -125,7 +125,7 @@ public class UserController {
 	@RequestMapping("/mypage")
 	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri, JoinClassCriteria joclcri, OpenClassCriteria opclcri,
-			@ModelAttribute("scrapcri") ScrapboardCriteria scrapcri, ScrapClassCriteria scrapclasscri, PointCriteria poCri,
+			@ModelAttribute("scrapcri") ScrapboardCriteria scrapcri, ScrapClassCriteria scrapclasscri,PointCriteria poCri,
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
@@ -153,18 +153,20 @@ public class UserController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("scrapcri", scrapcri);
 			map.put("mscri", mscri);
+			map.put("poCri", poCri);
+			map.put("scrapclasscri", scrapclasscri);
+			map.put("joclcri",joclcri);
+			map.put("opclcri", opclcri);
 			map.put("sortType", sortType);
 			map.put("bCategory", bCategory);
+			
 			map.put("user_id", userVO.getUser_id());
+			
 			map.put("listCount", us.listCount(map));
 			map.put("replyCount", us.replyCount(map));
 			map.put("messageRes", us.receiveCount(map));
 			map.put("messageSen", us.sendCount(map));
 			map.put("pointList", us.pointList(map));
-			map.put("poCri", poCri);
-			map.put("scrapclasscri", scrapclasscri);
-			map.put("joclcri",joclcri);
-			map.put("opclcri", opclcri);
 			
 			//개설한 클래스
 			OpenClassPageMaker OpenClassPageMaker = new OpenClassPageMaker();
@@ -177,10 +179,9 @@ public class UserController {
 			JoinClassPageMaker.setTotalCount(us.joinClassCount(map));
 			
 			// 포인트
-			PointPageMaker pointpageMaker = new PointPageMaker();
-			int poTotal = us.pointCount(map);
-			pointpageMaker.setCri(poCri);
-			pointpageMaker.setTotalCount(poTotal);
+			PointPageMaker PointPageMaker = new PointPageMaker();
+			PointPageMaker.setCri(poCri);
+			PointPageMaker.setTotalCount(us.pointCount(map));
 			
 			// 게시글 스크랩
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
@@ -210,12 +211,16 @@ public class UserController {
 //			if (mpInfo != null) {
 //				model.addAttribute("mpInfo", mpInfo);
 //			}
+			model.addAttribute("sortType", sortType);
+			model.addAttribute("bCategory", bCategory);
+			
 			model.addAttribute("joinClass", us.joinClass(map));
 			model.addAttribute("openClass", us.openClass(map));
 			model.addAttribute("joinClassCount", us.joinClassCount(map));
 			model.addAttribute("openClassCount", us.openClassCount(map));
 			model.addAttribute("ClassscrapList", us.ClassscrapList(map));
 			model.addAttribute("pointList", us.pointList(map));
+			model.addAttribute("pointCount", us.pointCount(map));
 			model.addAttribute("messageRes", us.receiveCount(map));
 			model.addAttribute("messageSen", us.sendCount(map));
 			model.addAttribute("scrapList", us.scrapList(map));
@@ -223,14 +228,13 @@ public class UserController {
 			model.addAttribute("replyCount", us.replyCount(map));
 			model.addAttribute("listCount", us.listCount(map));
 			model.addAttribute("myBoardList", us.myBoardList(map));
+			
 			model.addAttribute("myPagePageMaker", myPagePageMaker);
 			model.addAttribute("ScrapboardPageMaker", ScrapboardPageMaker);
 			model.addAttribute("ScrapClassPageMaker", ScrapClassPageMaker);
-			model.addAttribute("pointpageMaker", pointpageMaker);
+			model.addAttribute("PointPageMaker", PointPageMaker);
 			model.addAttribute("JoinClassPageMaker", JoinClassPageMaker);
 			model.addAttribute("OpenClassPageMaker", OpenClassPageMaker);
-			model.addAttribute("sortType", sortType);
-			model.addAttribute("bCategory", bCategory);
 		}
 		return "user/myPage/newlymypage";
 
