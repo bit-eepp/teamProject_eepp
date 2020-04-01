@@ -1,47 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>MyPage</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/user/mypage.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
 <%@ include file="/WEB-INF/include/forImport.jspf"%> 
-<%@ include file="/WEB-INF/views/header.jsp"%>
 <style>
-
+.input-group{width:30%;}
 </style>
 </head>
 <body>
-	<input type="hidden" id="userNickname" name="loginUser"
-		value="${loginUser.uNickname}">
-
-	<input type="hidden" id="mypageMakerTotalCount"
-		value="${myPagePageMaker.totalCount}">
-	<input type="hidden" id="mypageMakerCriPage"
-		value="${myPagePageMaker.cri.page}">
-	<input type="hidden" id="mypageMakeQuery"
-		value="${myPagePageMaker.makeQuery(1)}">
-
-	<input type="hidden" id="ScrapMakerTotalCount"
-		value="${ScrapPageMaker.totalCount}">
-	<input type="hidden" id="ScrapMakerCriPage"
-		value="${ScrapPageMaker.cri.page}">
-	<input type="hidden" id="ScrapMakeQuery"
-		value="${ScrapPageMaker.makeQuery(1)}">
+		<!-- header -->
+		<%@ include file="/WEB-INF/views/header.jsp"%>
+		<!-- header -->
+		
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+	<input type="hidden" id="mypageMakerTotalCount" value="${myPagePageMaker.totalCount}">
+	<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page}">
+	<input type="hidden" id="mypageMakeQuery" value="${myPagePageMaker.makeQuery(1)}">
+	<input type="hidden" id="ScrapMakerTotalCount" value="${ScrapPageMaker.totalCount}">
+	<input type="hidden" id="ScrapMakerCriPage" value="${ScrapPageMaker.cri.page}">
+	<input type="hidden" id="ScrapMakeQuery" value="${ScrapPageMaker.makeQuery(1)}">
 		
 	 <input type="hidden" id="board" value="${board}">
 	 <input type="hidden" id="scrap" value="${scrap}">
 	 <input type="hidden" id="mpPoint" value="${mpPoint}">
 	 <input type="hidden" id="mpclass" value="${mpclass}">
 	 
-	 <%-- <input type="hidden" id="mpInfo" value="${mpInfo}"> --%>
 	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
 			<!-- 로그인 성공 -->
@@ -56,7 +46,7 @@
 							<td class="text_bold"><span class="required">• </span>내 포인트</td>
 						</tr>
 						<tr class="bordered">
-							<td><a href="#mypointbtn">${loginUser.point} P</a></td>
+							<td><a href="#mpPoBtn"><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P</a></td>
 							</tr>
 							
 							<tr>
@@ -64,8 +54,8 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td class="liwrap" value="open_message" onclick="openMsg();">받은
-								쪽지 ${messageRes} <br> 보낸 쪽지 ${messageSen}</td>
+							<td class="liwrap" value="open_message" style="cursor:pointer" onclick="openMsg();">받은
+								쪽지 ${messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${messageSen}</td>
 							</tr>
 							
 							<tr>
@@ -73,7 +63,7 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td>개설 클래스 ${openClassCount} <br> 참여 클래스 ${joinClassCount}</td>
+							<td><a href="#mpClBtn">개설 ${openClassCount}&nbsp;&nbsp;&nbsp;&nbsp;참여 ${joinClassCount}</a></td>
 							</tr>
 							
 							<tr>
@@ -81,9 +71,9 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="content_count"><a href="#mycontentbtn">게시물
-									${listCount} <br>  댓글 ${replyCount}</a></div></td>
-							
+							<td><div class="content_count">
+							<a href="#mpBoBtn">게시물 ${listCount}&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${replyCount}</a></div></td>
+							<!-- <a style="cursor:pointer" onclick="location.href='mypage?board=board'"> -->
 							</tr>
 							
 							<tr>
@@ -91,7 +81,7 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="scrap_count"><a href="#myscrapbtn">${scrapCount}건</a></div></td>
+							<td><div class="scrap_count"><a href="#mpScBtn">${scrapCount}건</a></div></td>
 							</tr>
 							
 						</table>
@@ -103,13 +93,36 @@
 						<!-- <br><br><br><br> -->
 						<div class="myinfo-wrap">
 							<br>
-							<h3>회원 정보</h3>
+							<h3 id="mpInBtn">회원 정보</h3>
 							<hr>
 							<p>닉네임, 비밀번호 변경 등 회원 정보 수정이 가능합니다.</p>
 							<div align="right">
 								<button type="button" class="btn btn-info" id="myinfobtn">수정</button>
 							</div><br>
 							<table class="info">
+								<tr>
+									<th class="input-title"><span class="required">•</span>프로필</th>
+									<td style ="padding:0;">
+							<br>
+							<img src="${loginUser.uprofile}" class="img-circle" alt="profile_img">
+							<form role="form" action="profileUpdate" method="post"
+								autocomplete="off" enctype="multipart/form-data">
+								<br>
+								<div class="choosePick">
+									 	<input type="text" readonly="readonly" id="file_route">
+									 <label>이미지 선택
+									 	<input type="file" id="showImg" onchange="javascript:document.getElementById('file_route').value=this.value">
+									 </label>
+								</div> 
+								<br>
+								<button type="submit" id="register_Btn" class="btn btn-submit">프로필 업데이트</button>
+								<button type="submit" id="changeImg" class="btn btn-submit">기본이미지로</button>
+							</form>
+							
+						<br>
+						<br>
+									</td>
+								</tr>
 								<tr>
 									<th class="input-title"><span class="required">•</span>이메일</th>
 									<td>${loginUser.uEmail}</td>
@@ -118,8 +131,7 @@
 									<th class="input-title"><span class="required">&#8226;</span>닉네임 변경</th>
 									<td>
 										<form action="updateNickName">
-											<input name="uNickname" id="changeNickname" maxlength="8"
-												placeholder="${loginUser.uNickname}" oninput="nickCheck();">
+											<input name="uNickname" id="changeNickname" maxlength="8" placeholder="${loginUser.uNickname}" oninput="nickCheck();">
 											<button type="submit" class="btn btn-submit" id="submit">변경</button>
 											<span class="checkInfo" id="checkNickInfo"></span>
 										</form>
@@ -140,36 +152,11 @@
 									<td class="drop"><a href="withdrawal" id=drop
 										onclick="drop();">회원탈퇴</a></td>
 								</tr>
-								<tr>
-									<th class="input-title"><span class="required">•</span>프로필</th>
-									<td>
-						
-							<br>
-							<img src="${loginUser.uprofile}" class="img-circle" alt="profile_img">
-							<form role="form" action="profileUpdate" method="post"
-								autocomplete="off" enctype="multipart/form-data">
-								<br>
-								<div class="choosePick">
-									 	<input type="text" readonly="readonly" id="file_route">
-									 <label>이미지 선택
-									 	<input type="file" id="showImg" onchange="javascript:document.getElementById('file_route').value=this.value">
-									 </label>
-								</div> 
-								<br>
-								<button type="submit" id="register_Btn" class="btn btn-info">프로필
-									업데이트</button>
-								<button type="submit" id="changeImg" class="btn btn-info">기본이미지로</button>
-							</form>
-							
-						<br>
-						<br>
-									</td>
-								</tr>
 							</table>
 						</div>
-						<br>
+						<br><br>
 						<div class="myinfo-wrap">
-							<h3>게시글 목록</h3>
+							<h3 id="mpBoBtn">게시글 목록</h3>
 							<hr>
 							<div align="right">
 								<button type="button" class="btn btn-info" id="mycontentbtn">확인</button>
@@ -181,8 +168,8 @@
 							<div class="content_list">
 								<br>
 								<!-- 검색 부분  -->
-								<div class="search justify-content-center">
-									<select name="searchType">
+								<div class="search">
+									<select name="searchType" class="selectSearchType">
 										<option value="n"
 											<c:out value="${mscri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
 										<option value="w"
@@ -193,16 +180,20 @@
 											<c:out value="${mscri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
 										<option value="tc"
 											<c:out value="${mscri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-									</select> <input type="text" name="keyword" id="keywordInput"
-										value="${mscri.keyword}" />
-									<button id="searchBtn" class="btn" type="button">검색</button>
+									</select>
+									
+									<div class="input-group md-form form-sm form-2 pl-0">
+									<input class="form-control my-0 py-1 amber-border" type="text"placeholder="검색어" aria-label="Search" name="keyword" id="keywordInput" value="${mscri.keyword}">
+										<a id="searchBtn">
+										<span class="input-group-text lighten-3" id="basic-text1"><i class="fas fa-search" aria-hidden="true"></i></span>
+										</a>
+									</div>
 								</div>
 								<!-- 검색 부분 끝  -->
 								<br>
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
-											<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 											<th>글 번호</th>
 											<th>카테고리</th>
 											<th>말머리</th>
@@ -215,26 +206,20 @@
 									<c:choose>
 										<c:when test="${fn:length(myBoardList) > 0 }">
 											<c:forEach items="${myBoardList}" var="vo">
-												<tr>
-													<td><c:choose>
-															<c:when test="${vo.dCount > 10}">
-																<b style="color: red">[BLIND]</b>
-															</c:when>
-															<c:otherwise>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
-														</c:choose></td>
+												<tr class="boardList_tr">
 													<td>${vo.bId}</td>
 													<td>${vo.bCategory}</td>
 													<td>${vo.bSubject}</td>
-													<td><c:choose>
+													<td class="Title"><c:choose>
 															<c:when test="${vo.dCount > 10}">${vo.bTitle}</c:when>
 															<c:otherwise>
 																<a style="text-decoration: none"
-																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">
+																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
 																	${vo.bTitle} [${vo.rpCount}]</a>
 															</c:otherwise>
 														</c:choose></td>
 
-													<td><b>${vo.uNickname}</b><br> ${vo.bWrittenDate}</td>
+													<td style="color:#000;"><b>${vo.uNickname}</b><br> ${vo.bWrittenDate}</td>
 													<td>${vo.bHit}</td>
 													<td>${vo.bLike}//${vo.bUnlike}</td>
 												</tr>
@@ -276,7 +261,7 @@
 						</div>
 						<!-- content_list -->
 						<div class="myinfo-wrap">
-							<h3>포인트 사용 / 충전내역</h3>
+							<h3 id="mpPoBtn">포인트 사용 / 충전내역</h3>
 							<hr>
 							<div align="right">
 								<button type="button" class="btn btn-info" id="mypointbtn">확인</button>
@@ -289,10 +274,10 @@
 									<%-- session에 저장된 포인트 정보가 있는경우 --%>
 									<c:choose>
 										<c:when test="${not empty userPoint}">
-											${userPoint.poBalance}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<fmt:formatNumber value="${userPoint.poBalance}" pattern="###,###,###" /> P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:when>
 									<%-- session에 저장된 포인트 정보가 없을 경우 0 --%>
-										<c:otherwise> ${loginUser.point}P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
+										<c:otherwise><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</c:otherwise>
 									</c:choose> 
 										<!--  포인트 -->
 						<div class="charge_point">
@@ -314,22 +299,23 @@
 										<c:when test="${fn:length(pointList) > 0 }">
 											<c:forEach items="${pointList}" var="pointList">
 												<tr>
-													<td>${pointList.totalPoint} P</td>
+													<td><fmt:formatNumber value="${pointList.totalPoint}" pattern="###,###,###" /> P</td>
 													<c:choose>
 														<c:when test ="${pointList.paInfo eq '포인트 입금' or pointList.paInfo eq '포인트 충전'}">
-															<td><div class="po_In">${pointList.paInfo}</div></td>
+															<td><div class="po_In"><b>${pointList.paInfo}</b></div></td>
+															<td><i class="fas fa-caret-up"></i> &nbsp; 
+																<fmt:formatNumber value="${pointList.point_io}" pattern="###,###,###" /> P</td>
 														</c:when>
 														<c:otherwise>
-															<td><div class="po_Out">${pointList.paInfo}</div></td>
+															<td><div class="po_Out"><b>${pointList.paInfo}</b></div></td>
+															<td><i class="fas fa-caret-down"></i> &nbsp;
+															<fmt:formatNumber value="${pointList.point_io}" pattern="###,###,###" /> P</td>
 														</c:otherwise>
 													</c:choose>
-													
-													<td>${pointList.point_io} P</td>
 													<td>${pointList.paDate}</td>
 												</tr>
 											</c:forEach>
 										</c:when>
-
 										<c:otherwise>
 											<tr>
 												<td colspan="9">조회된 결과가 없습니다.</td>
@@ -337,22 +323,23 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
+								
 
 								<!-- 페이징 -->
 								<div class = "pointpage">
 									<ul class="pagination justify-content-center">
       									<li class="page-item">
-													<a class="page-link" href="mypage${pointpageMaker.makeQuery(pointpageMaker.startPage - 1)}&mpPoint=yes">
+													<a class="page-link" href="mypage${PointPageMaker.makeQuery(PointPageMaker.startPage - 1)}&mpPoint=yes">
 														<i class="fas fa-angle-left"></i>
 													</a>
 												</li>
-											<c:forEach begin="${pointpageMaker.startPage}" end="${pointpageMaker.endPage}" var="idx">
+											<c:forEach begin="${PointPageMaker.startPage}" end="${PointPageMaker.endPage}" var="idx">
 												<li class="page-item">
-												<a id="pointpage_${idx}" class="page-link" href="mypage${pointpageMaker.makeQuery(idx)}&mpPoint=yes">${idx}</a>
+												<a id="pointpage_${idx}" class="page-link" href="mypage${PointPageMaker.makeQuery(idx)}&mpPoint=yes">${idx}</a>
 												</li>
 											</c:forEach>
 											<li class="page-item">
-													<a class="page-link"href="mypage${pointpageMaker.makeQuery(pageMaker.endPage + 1)}&mpPoint=yes">
+													<a class="page-link"href="mypage${PointPageMaker.makeQuery(PointPageMaker.endPage + 1)}&mpPoint=yes">
 														<i class="fas fa-angle-right"></i>
 													</a>
 												</li>
@@ -363,7 +350,7 @@
 						<br>
 						<!-- -------- 스크랩 목록 ------------- -->
 						<div class="myinfo-wrap">
-							<h3>스크랩 목록</h3>
+							<h3 id="mpScBtn">스크랩 목록</h3>
 							<hr>
 							<div align="right">
 								<button type="button" class="btn btn-info" id="myscrapbtn">확인</button>
@@ -372,7 +359,6 @@
 							<br>
 							<br>
 							<div class="scrap_list">
-							<button type="button" class="selectDeleteBtn1">삭제</button>
 							 <div class="col">
 			<nav>
 				  <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -396,11 +382,11 @@
 									<c:choose>
 										<c:when test="${fn:length(scrapList) > 0 }">
 											<c:forEach items="${scrapList}" var="scrapList">
-												<tr>
+												<tr class="scrapList_tr">
 													<!--  스크랩 목록 선택 -->
 													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
-													<td><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
 													<td><fmt:formatDate value="${scrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 											</c:forEach>
@@ -413,6 +399,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
+								<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>		
 								<div class="scrapBoardPage">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
@@ -448,10 +435,10 @@
 									<c:choose>
 										<c:when test="${fn:length(ClassscrapList) > 0 }">
 											<c:forEach items="${ClassscrapList}" var="ClassscrapList">
-												<tr>
+												<tr class="scrapCList_tr">
 												<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${ClassscrapList.sId}" /></td>
 													<td>${ClassscrapList.class_id}</td>
-													<td><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${ClassscrapList.class_id}&cCategory=${cCategory}">${ClassscrapList.cTitle}</a></td>
 													<td><fmt:formatDate value="${ClassscrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 													
@@ -466,6 +453,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
+								<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>
 									<div class="scrapClassPage">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
@@ -501,10 +489,10 @@
 									<c:choose>
 										<c:when test="${fn:length(scrapList) > 0 }">
 											<c:forEach items="${scrapList}" var="scrapList">
-												<tr>
+												<tr class="scrapEList_tr">
 													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
-													<td><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
 													<td><fmt:formatDate value="${scrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
@@ -518,6 +506,8 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
+						<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>
+								
 									<div class="scrapBoardPage">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
@@ -537,6 +527,7 @@
 										</ul>
 									<br>
 								</div><!-- paging -->
+								
   						</div><!-- class="tab-pane fade show active" -->
 			</div><!-- class="tab-content" id="nav-tabContent" -->
 						</div><!-- col -->
@@ -545,7 +536,7 @@
 						</div>
 						<!-- -------- 클래스 목록 ------------- -->
 						<div class="myclass-wrap">
-							<h3>클래스 목록</h3>
+							<h3 id="mpClBtn">클래스 목록</h3>
 							<hr>
 							<div align="right">
 								<button type="button" class="btn btn-info" id="myclassbtn">확인</button>
@@ -567,8 +558,8 @@
 									<thead class="thead-color">
 										<tr class="content_tr">
 											<th>번호</th>
-											<th>클래스 제목</th>
 											<th>클래스 카테고리</th>
+											<th>클래스 제목</th>
 											<th>클래스 가격</th>
 											<th>클래스 구매일</th>
 										</tr>
@@ -576,12 +567,12 @@
 									<c:choose>
 										<c:when test="${fn:length(joinClass) > 0 }">
 											<c:forEach items="${joinClass}" var="joinClass">
-												<tr>
+												<tr class="classJList_tr">
 													<td>${joinClass.class_id}</td>
-													<td><a style="text-decoration: none"
-														href="/eepp/class/classView?cId=${joinClass.class_id}&cCategory=${cCategory}">${joinClass.cTitle}</a></td>
 													<td>${joinClass.cCategory}</td>
-													<td>${joinClass.cPrice}</td>
+													<td class="Title"><a style="text-decoration: none"
+														href="/eepp/class/classView?cId=${joinClass.class_id}&cCategory=${cCategory}">${joinClass.cTitle}</a></td>
+													<td class="cPrice">${joinClass.cPrice} P</td>
 													<td><fmt:formatDate value="${joinClass.cjJoinDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
 											</c:forEach>
@@ -603,7 +594,7 @@
 										</li>
 											<c:forEach begin="${JoinClassPageMaker.startPage}" end="${JoinClassPageMaker.endPage}" var="idx">
 												<li class="page-item">
-													<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
+													<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&mpclass=yes">${idx}</a></li>
 											</c:forEach>
 											<li class="page-item">
 													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes">
@@ -630,11 +621,11 @@
 										<c:when test="${fn:length(openClass) > 0 }">
 											<c:forEach items="${openClass}" var="openClass">
 												<input type="hidden" id="classId" value="${openClass.cId}" />
-												<tr>
+												<tr class="classOList_tr">
 													<td>${openClass.cId}</td>
-													<td><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${openClass.cId}&cCategory=${cCategory}">${openClass.cTitle}</a></td>
-													<td><a onclick="classjoin_list('${openClass.cId}');"> <b>${openClass.totalcount}</b></a> / ${openClass.cTotalPeopleCount}</td>						
+													<td><a style="cursor:pointer; color:#000;" onclick="classjoin_list('${openClass.cId}');"> <b>${openClass.totalcount}</b></a> / ${openClass.cTotalPeopleCount}</td>						
 													<td><fmt:formatDate value="${openClass.cOpenDate}" pattern="yyyy년MM월dd일"/></td>
 													<td>${openClass.cTerm}일</td>
 												</tr>
@@ -658,7 +649,7 @@
 										</li>
 											<c:forEach begin="${OpenClassPageMaker.startPage}" end="${OpenClassPageMaker.endPage}" var="idx">
 												<li class="page-item">
-													<a id="clOpenPage_${idx}" class="page-link" href="mypage${OpenClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&scrap=yes">${idx}</a></li>
+													<a id="clOpenPage_${idx}" class="page-link" href="mypage${OpenClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&mpclass=yes">${idx}</a></li>
 											</c:forEach>
 											<li class="page-item">
 													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes">
@@ -666,7 +657,6 @@
 													</a>
 												</li>
 										</ul>
-									<br>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
 							</div>
@@ -688,15 +678,11 @@
 	</c:choose>
 	<script src="${pageContext.request.contextPath}/js/user/mypage/mypage.js"></script>
 	<script type="text/javascript">
-	
-	
 	function openMsg(){
 		 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
 				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 		}
-
 	</script>
-	
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 </body>

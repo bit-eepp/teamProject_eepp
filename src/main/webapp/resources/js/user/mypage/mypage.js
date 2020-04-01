@@ -25,27 +25,27 @@ function getContextPath() {
 /* 닉네임 중복확인 */
 var ncCheck = 0;
 function nickCheck() {
-    var inputed = $("#changeNickname").val();
-    $.ajax({
-        dataType : "json",
-        type : "post",
-        url : getContextPath() + "/nickNameCheck",
-        data : {
-        	"uNickname" : $("#changeNickname").val()
-        },
-        success : function(data) {
-            if(inputed=="" && data==0) {
-            	$("#checkNickInfo").html("")
-                ncCheck = 0;
-            } else if (data == 0) {
-                $("#checkNickInfo").html("사용가능한 닉네임입니다.")
-                ncCheck = 1;
-            } else if (data == 1) {
-            	$("#checkNickInfo").html("사용중인 닉네임입니다.")
-                ncCheck = 2;
-            } 
-        }
-    });
+	var inputed = $("#changeNickname").val();
+	$.ajax({
+		dataType : "json",
+		type : "post",
+		url : getContextPath() + "/nickNameCheck",
+		data : {
+			"uNickname" : $("#changeNickname").val()
+		},
+		success : function(data) {
+			if (inputed == "" && data == 0) {
+				$("#checkNickInfo").html("")
+				ncCheck = 0;
+			} else if (data == 0) {
+				$("#checkNickInfo").html("사용가능한 닉네임입니다.")
+				ncCheck = 1;
+			} else if (data == 1) {
+				$("#checkNickInfo").html("사용중인 닉네임입니다.")
+				ncCheck = 2;
+			}
+		}
+	});
 }
 
 $('#submit').click(function(event) {
@@ -53,12 +53,12 @@ $('#submit').click(function(event) {
 		alert("닉네임을 입력해주세요.");
 		$("#changeNickname").focus();
 		return false;
-	}else if(ncCheck == 2){
+	} else if (ncCheck == 2) {
 		alert("이미 사용중인 닉네임입니다.")
 		$("#changeNickname").focus();
 		return false;
-	}else{
-		return true;	
+	} else {
+		return true;
 	}
 
 });
@@ -66,6 +66,8 @@ $('#submit').click(function(event) {
 // 게시물 검색
 $('#searchBtn').click(
 		function() {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == 13) {
 			if ($('select[name=searchType]').val() == 'n') {
 				alert('검색조건을 지정해주세요');
 				return;
@@ -74,19 +76,14 @@ $('#searchBtn').click(
 						+ "&searchType=" + $("select[name=searchType]").val()
 						+ "&keyword="
 						+ encodeURIComponent($('#keywordInput').val())
-						+ "&sortType=" + $("#sortType").val() + "&bCategory="
-						+ $("#bCategory").val();
+						+ "&board=yes"
 			}
-		});
+		}
+	});
 
 // 회원탈퇴 알림
 function drop() {
 	alert("회원탈퇴 페이지로 이동합니다.");
-	// if (confirm("회원탈퇴 페이지 입니다. 계속 하시겠습니까?") == true) {
-	// document.form.submit();
-	// } else {
-	// return;
-	// }
 }
 
 // 프로필 사진 있는지 확인 - 있으면 변경
@@ -106,103 +103,94 @@ $('#changeImg').click(function() {
 });
 
 // 회원정보 수정 보여주고 닫기
- $(document).ready(function() {
- if (!$('#mpInfo').val()) {
- $(".info").hide();
- } else {
- $(".info").show();
- }
- })
- $("#myinfobtn").click(function() {
- $(".info").slideToggle();
- });
+$("#myinfobtn").click(function() {
+	$(".info").slideToggle(500);
+});
 
 // 게시글 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#board').val()) {
-		$(".content_list").hide();
+		$(".content_list").hide("slow");
 	} else {
-		$(".content_list").show();
+		$(".content_list").show("slow");
 	}
 })
 $("#mycontentbtn").click(function() {
-	$(".content_list").slideToggle();
+	$(".content_list").slideToggle(500);
+	$(".info").hide();
 });
 
 // 스크랩 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#scrap').val()) {
-		$(".scrap_list").hide();
+		$(".scrap_list").hide("slow");
 	} else {
-		$(".scrap_list").show();
+		$(".scrap_list").show("slow");
 	}
 })
 $("#myscrapbtn").click(function() {
-	$(".scrap_list").slideToggle();
+	$(".scrap_list").slideToggle(500);
+	$(".info").hide();
 });
 
 // 포인트 사용내역 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#mpPoint').val()) {
-		$("#point_list").hide();
+		$("#point_list").hide("slow");
 	} else {
-		$("#point_list").show();
+		$("#point_list").show("slow");
 	}
 })
 $("#mypointbtn").click(function() {
-	$("#point_list").slideToggle();
+	$("#point_list").slideToggle(500);
+	$(".info").hide();
 });
 
-//클래스 내역 보여주고 닫기
+// 클래스 내역 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#mpclass').val()) {
-		$(".myclass_list").hide();
+		$(".myclass_list").hide("slow");
 	} else {
-		$(".myclass_list").show();
+		$(".myclass_list").show("slow");
 	}
 })
 $("#myclassbtn").click(function() {
-	$(".myclass_list").slideToggle();
+	$(".myclass_list").slideToggle(500);
+	$(".info").hide();
 });
 
-//페이징
+// 페이징
 function pageColor(pageNum) {
-	   $('#boardpaging_'+pageNum).css("background-color", "#59bfbf");
-	   $('#boardpaging_'+pageNum).css("color", "#ffffff");
-	}
-function pageColor(pageNum) {
-	   $('#pointpage_'+pageNum).css("background-color", "#59bfbf");
-	   $('#pointpage_'+pageNum).css("color", "#ffffff");
-	}
-function pageColor(pageNum) {
-	   $('#scrapBoardPage_'+pageNum).css("background-color", "#59bfbf");
-	   $('#scrapBoardPage_'+pageNum).css("color", "#ffffff");
-	}
-function pageColor(pageNum) {
-	   $('#scrapClassPage_'+pageNum).css("background-color", "#59bfbf");
-	   $('#scrapClassPage_'+pageNum).css("color", "#ffffff");
-	}
-function pageColor(pageNum) {
-	   $('#scrapBoardPage_'+pageNum).css("background-color", "#59bfbf");
-	   $('#scrapBoardPage_'+pageNum).css("color", "#ffffff");
-	}
-function pageColor(pageNum) {
-	   $('#clJoinPage_'+pageNum).css("background-color", "#59bfbf");
-	   $('#clJoinPage_'+pageNum).css("color", "#ffffff");
-	}
-function pageColor(pageNum) {
-	   $('#clOpenPage_'+pageNum).css("background-color", "#59bfbf");
-	   $('#clOpenPage_'+pageNum).css("color", "#ffffff");
-	}
+	$('#boardpaging_' + pageNum).css("background-color", "#59bfbf");
+	$('#boardpaging_' + pageNum).css("color", "#ffffff");
+
+	$('#pointpage_' + pageNum).css("background-color", "#59bfbf");
+	$('#pointpage_' + pageNum).css("color", "#ffffff");
+
+	$('#scrapBoardPage_' + pageNum).css("background-color", "#59bfbf");
+	$('#scrapBoardPage_' + pageNum).css("color", "#ffffff");
+
+	$('#scrapClassPage_' + pageNum).css("background-color", "#59bfbf");
+	$('#scrapClassPage_' + pageNum).css("color", "#ffffff");
+
+	$('#scrapBoardPage_' + pageNum).css("background-color", "#59bfbf");
+	$('#scrapBoardPage_' + pageNum).css("color", "#ffffff");
+
+	$('#clJoinPage_' + pageNum).css("background-color", "#59bfbf");
+	$('#clJoinPage_' + pageNum).css("color", "#ffffff");
+
+	$('#clOpenPage_' + pageNum).css("background-color", "#59bfbf");
+	$('#clOpenPage_' + pageNum).css("color", "#ffffff");
+}
 
 $(document).ready(function() {
-	$(".selectDeleteBtn1").click(function() {
+	$("#selectDeleteBtn1").click(function() {
 		deleteScrap();
 	});
 });
 
 // 전체 선택 or 해제
-$(function() { 
+$(function() {
 	// 전체선택 체크박스 클릭
 	$(".allCheck").click(function() {
 		if ($(".allCheck").prop("checked")) {
@@ -227,22 +215,22 @@ function deleteScrap() {
 	} else {
 		if (confirm("정말 삭제하시겠습니까?") == true) {
 			$.ajax({
-				url : getContextPath() + "/deleteScrap",
-				type : "post",
-				data : {
-					"checkRow" : checkRow,
-					"scrap1" : $(".scrap1").val()
-				},
-				success : function(data) {
-					alert("스크랩이 삭제되었습니다.");
-					location.href="http://localhost:8282/eepp/mypage?&scrap=yes";
-				},
-				error : function(request, status, error) {
-					alert("에러가 발생했습니다.");
-					console.log(request.responseText);
-					console.log(error);
-				}
-			})
+						url : getContextPath() + "/deleteScrap",
+						type : "post",
+						data : {
+							"checkRow" : checkRow,
+							"scrap1" : $(".scrap1").val()
+						},
+						success : function(data) {
+							alert("스크랩이 삭제되었습니다.");
+							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
+						},
+						error : function(request, status, error) {
+							alert("에러가 발생했습니다.");
+							console.log(request.responseText);
+							console.log(error);
+						}
+					})
 		} else {
 			return false;
 		}
@@ -250,7 +238,9 @@ function deleteScrap() {
 }
 
 // 클래스 구입자 보기
-function classjoin_list(cId){
-	var member = window.open("http://localhost:8282/eepp/classjoin_list?cId="+cId,"classjoin_list","left="+(screen.availWidth-700)/2
-			+",top="+(screen.availHeight-560)/2+",width=530,height=560");
+function classjoin_list(cId) {
+	var member = window.open("http://localhost:8282/eepp/classjoin_list?cId="
+			+ cId, "classjoin_list", "left=" + (screen.availWidth - 530) / 2
+			+ ",top=" + (screen.availHeight - 620) / 2
+			+ ",width=530,height=620");
 }

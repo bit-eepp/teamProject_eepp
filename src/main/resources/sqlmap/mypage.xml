@@ -3,6 +3,16 @@
 
 <mapper namespace="bit.team.eepp.Mapper.UserMapper">
 
+<!--포인트 리스트 -->
+	<select id = "pointList" parameterType="int" resultType="bit.team.eepp.VO.PaymentVO">
+			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+from(select paId, paInfo,point_io,totalPoint,paDate FROM payment p, users u
+			WHERE p.user_id = u.user_id and p.user_id = #{user_id} ORDER BY paDate DESC) A)
+			WHERE RNUM BETWEEN #{poCri.rowStart}
+			AND #{poCri.rowEnd}
+		
+	</select>
+
 	<!-- 댓글 신고 -->
 	<select id="rep_Declaration"
 		resultType="bit.team.eepp.VO.DeclarationVO" parameterType="int">
