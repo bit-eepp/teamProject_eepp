@@ -160,7 +160,7 @@
                 		</ul>
 						</div>
 						<!-- 유저 신고 modal -->	
-                			<div class="modal fade" id="report_user_${hot.user_id}${btn.index}" role="dialog">
+                			<div class="modal fade reportModalBox" id="report_user_${hot.user_id}${btn.index}" role="dialog">
                 				<div class="modal-dialog">
                 				<div class="modal-content">
                 						
@@ -170,7 +170,7 @@
                 					<span aria-hidden="true">&times;</span>
 			                    	<span class="sr-only">Close</span>
 			                		</button>
-			               			<h4 class="modal-title">${hot.uNickname}님 신고</h4>
+			               			<h4 class="modal-title">&#8988;${hot.uNickname}&#8991;님 신고</h4>
 			            		</div>
 			            		<!-- Header -->
 			            				
@@ -179,9 +179,9 @@
 			            			<form id="declaration_user_${hot.user_id}${btn.index}" role="formDeclaration_user_${hot.user_id}${btn.index}" name="dform">
 			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 			            			<input type="hidden" name="reported_id" value="${hot.user_id}">
-			            				
+			            			
+			            			<p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
 			            			<div class="form-group">
-			            			<label for="inputMessage">신고사유</label><br>
 			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  부적절한 홍보 게시글<br>
 			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
@@ -195,7 +195,6 @@
             
 			            		<!-- Modal Footer -->
 			            		<div class="modal-footer">
-			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>
 			                		<button type="button" class="btn reportBtn" onclick="reportUser(${hot.user_id}${btn.index},'${hot.uNickname}');">신고</button>
 			            		</div>
 			            		<!-- Footer -->
@@ -276,7 +275,7 @@
                 					</ul>
 								</div>
 								<!-- 유저 신고 modal -->	
-                			<div class="modal fade" id="report_user_${vo.user_id}${btn.index}" role="dialog">
+                			<div class="modal fade reportModalBox" id="report_user_${vo.user_id}${btn.index}" role="dialog">
                 				<div class="modal-dialog">
                 				<div class="modal-content">
                 						
@@ -286,7 +285,7 @@
                 					<span aria-hidden="true">&times;</span>
 			                    	<span class="sr-only">Close</span>
 			                		</button>
-			               			<h4 class="modal-title">${vo.uNickname}님 신고</h4>
+			               			<h4 class="modal-title">&#8988;${vo.uNickname}&#8991; 님 신고</h4>
 			            		</div>
 			            		<!-- Header -->
 			            				
@@ -297,8 +296,8 @@
 			            			<input type="hidden" name="reported_id" value="${vo.user_id}">
 			            			<input type="hidden" class="reported_nickname" value="${vo.uNickname}">
 			            				
+			            			<p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
 			            			<div class="form-group">
-			            			<label for="inputMessage">신고사유</label><br>
 			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  부적절한 홍보 게시글<br>
 			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
@@ -312,7 +311,6 @@
             
 			            		<!-- Modal Footer -->
 			            		<div class="modal-footer">
-			                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm(${vo.user_id}${btn.index})">취소</button>
 			                		<button type="button" class="btn reportBtn" onclick="reportUser(${vo.user_id}${btn.index},'${vo.uNickname}');">신고</button>
 			            		</div>
 			            		<!-- Footer -->
