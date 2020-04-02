@@ -13,11 +13,10 @@
 <meta charset="UTF-8">
 <title>withdrawal</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mypage.css">
-<%@ include file="/WEB-INF/views/header.jsp"%>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
-
 </head>
 <body>
+<%@ include file="/WEB-INF/views/header.jsp"%>
 			<div class="form-group">
 			<div class="container text-center">
 				<h1 style="text-align: center; width: 15%; margin: 0 auto">

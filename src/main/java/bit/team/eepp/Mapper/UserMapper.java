@@ -102,10 +102,6 @@ public interface UserMapper {
 	@Update("UPDATE users SET uNickname = '${uNickname}' WHERE user_id = ${user_id}")
 	public void myNickNameUpdate(UserVO userVO);
 
-	// 포인트 가져오기
-	@Select("select * from payment where user_id = #{user_id} order by paDate desc")
-	public List<PaymentVO> pointList(Map<String, Object> map);
-
 	// 포인트 사용 내역 개수
 	@Select("select count(*) from payment where user_id = #{user_id}")
 	public int pointCount(Map<String, Object> map);
@@ -147,6 +143,9 @@ public interface UserMapper {
 	@Select("select cj.user_id,cj.cjjoindate,(select uNickname from users u where u.user_id = cj.user_id) as usernick, "
 			+ "(select uphone from users u where u.user_id = cj.user_id) as uPhone from classjoin cj where cj.class_id = #{cId}")
 	public abstract List<ClassJoinVO> classjoinList(Map<String, Object> map);
+
+	// 포인트 가져오기
+	public abstract List<PaymentVO> pointList(Map<String, Object> map);
 	
 	// 받은 쪽지 개수
 	public abstract int receiveCount(Map<String, Object> map);
