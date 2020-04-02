@@ -60,7 +60,7 @@
 					<div class="dropdown">
 						<a href="#" class="userBtn" id="user_btn_${content.uNickname}" data-toggle="dropdown">${content.uNickname}</a>
            				 <ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${content.uNickname}">
-                			<li><a href="#">회원정보</a></li>
+                			<li><a onclick="memberInfo('${content.uNickname}',${content.user_id});">회원정보</a></li>
                 			<li><a onclick="sendMessage('${content.uNickname}',${content.user_id});">쪽지 보내기</a></li>
                 			<li><a data-toggle="modal" data-target="#report_user_${content.user_id}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
                 		</ul>
