@@ -159,6 +159,7 @@ span.checkInfo {
 	margin-right: 20px;
 	width: 10%;
 	background-color: #59bfbf;
+	border:none;
 }
 
 .btn-info {
@@ -177,18 +178,20 @@ tr.bordered td a {
 	font-size: 0.9rem;
 }
 
+/* 페이징 CSS */
 .page-link {
-	border: none;
-	margin-left: 20px;
-	color: #26274c;
-	background: #ffffff;
-	font-weight: 700;
+	border: none!important;
+	margin-left: 20px!important;
+	color: #26274c!important;
+	background: #ffffff!important;
+	font-weight: 700!important;
 }
 
 .page-link:hover {
-	background: #59bfbf;
-	color: #ffffff;
+	background: #59bfbf!important;
+	color: #ffffff!important;
 }
+/* 페이징 CSS */
 
 .text-wrap {
 	width: 80%;
