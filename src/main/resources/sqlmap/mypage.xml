@@ -100,9 +100,9 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 	</select>
 
 	<!-- 회원 탈퇴 -->
-	<delete id="withdrawal">
+	<delete id="withdrawal" parameterType="bit.team.eepp.VO.UserVO">
 	<![CDATA[
-		delete from users where USER_ID = #{user_id}
+		update users set grade_id = 4 where user_id = #{user_id}
 		]]>
 	</delete>
 	<!-- 게시판 스크랩 개수 -->
