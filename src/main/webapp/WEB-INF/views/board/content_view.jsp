@@ -136,7 +136,7 @@
 					</c:when>
 					<c:otherwise>
 					<!-- 게시글 신고 -->
-					<div class="declarationForm reportBtn">
+					<div class="declarationForm reportBtn reportModalBox ">
 					<a class="report" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false" id="modalFormBtn">신고</a>
 					<div class="modal fade" id="modalForm" role="dialog">
 						<div class="modal-dialog">
