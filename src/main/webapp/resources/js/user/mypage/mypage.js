@@ -86,6 +86,14 @@ function drop() {
 	alert("회원탈퇴 페이지로 이동합니다.");
 }
 
+function onlyNumber(e){
+	var keyValue = event.keyCode; 
+	if( ((keyValue >= 48) && (keyValue <= 57)) ) 
+		return true; 
+	else 
+		return false;
+}
+
 // 프로필 사진 있는지 확인 - 있으면 변경
 $('#register_Btn').click(function() {
 	var fileCheck = document.getElementById("showImg").value;

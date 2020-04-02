@@ -71,13 +71,24 @@
 	</interceptors>
 	
 	<!-- 관리자 페이지 접근권한 interceptor -->
-	<beans:bean id="accessInterceptor" class="bit.team.eepp.Interceptor.accessInterceptor" />
+	<beans:bean id="isAdminInterceptor" class="bit.team.eepp.Interceptor.isAdminInterceptor" />
 	<!-- interceptor 설정 -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/admin" />
 			<mapping path="/admin/*" />
-			<beans:ref bean="accessInterceptor" />
+			<beans:ref bean="isAdminInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<!-- 마이페이지 접근권한 interceptor -->
+	<beans:bean id="isUserInterceptor" class="bit.team.eepp.Interceptor.isUserInterceptor" />
+	<!-- interceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/mypage" />
+			<mapping path="/mypage/*" />
+			<beans:ref bean="isUserInterceptor" />
 		</interceptor>
 	</interceptors>
 	

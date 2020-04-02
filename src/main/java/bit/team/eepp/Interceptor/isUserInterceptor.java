@@ -14,24 +14,24 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import bit.team.eepp.VO.UserVO;
 
-public class accessInterceptor extends HandlerInterceptorAdapter{
+public class isUserInterceptor extends HandlerInterceptorAdapter{
 	
-	private static final Logger logger = LoggerFactory.getLogger(accessInterceptor.class);
+	private static final Logger logger = LoggerFactory.getLogger(isUserInterceptor.class);
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		logger.info("accessInterceptor preHandle Active()");
+		logger.info("isUserInterceptor preHandle Active()");
 		
 		Object loginSession = session.getAttribute("loginUser");
-		UserVO isAdmin = (UserVO) loginSession;
+		UserVO isUser = (UserVO) loginSession;
 		
-		if(isAdmin.getGrade_Id() != 1 || isAdmin == null) {
+		if(isUser == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('잘못된 접근입니다.'); history.go(-1);</script>");
+			out.println("<script>alert('로그인 해주세요.'); location.href='/eepp/login/login.do';</script>");
 			out.close();
 			return false;
 		}
