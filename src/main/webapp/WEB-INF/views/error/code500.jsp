@@ -15,7 +15,7 @@
 	<div id="InternalError">
 		<div class="internalError">
 			<div class="internalError-500">
-				<h3>Internal Server Error</h3>
+				<h3>Oops! Internal Server Error</h3>
 				<h1><span>5</span><span>0</span><span>0</span></h1>
 			</div>
 			<h2>요청 처리 과정에서 에러가 발생하였습니다.<br>빠른시간 내에 문제를 해결하도록 하겠습니다.</h2>
