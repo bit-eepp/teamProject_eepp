@@ -15,7 +15,11 @@
 	<div id="pageNotWorking">
 		<div class="pageNotWorking">
 			<div class="pageNotWorking-400">
+<<<<<<< HEAD
 				<h3>Bad Request</h3>
+=======
+				<h3>Oops! Bad Request</h3>
+>>>>>>> 4324733a5b04f3d3016ab2081b034a489b43a6a1
 				<h1><span>4</span><span>0</span><span>0</span></h1>
 			</div>
 			<h2>문제가 계속되면 Community EE에 문의해주세요.</h2>
