@@ -183,7 +183,7 @@ function getContextPath() {
 										b += '<p class="statusMsg"></p>';
 										
 										if(!$("#userNickname").val()){
-											b += '<h3>해당 댓글 신고를 원하시면 로그인 해주세요.</h3>'
+											b += '<h3 class="cantReport">해당 댓글 신고를 원하시면 로그인 해주세요.</h3>'
 										}else{
 											b += '<form id="rpDeclaration_' +value.rpId +'" role="formRpDeclaration_' +value.rpId +'" name="rpDform_' +value.rpId +'">';
 											b += '<input type="hidden" name="reporter_id" value=' +userId +'>';

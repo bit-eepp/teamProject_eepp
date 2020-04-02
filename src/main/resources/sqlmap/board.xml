@@ -8,25 +8,25 @@
 		]]>
 		<if test="bCategory != null">
 			<choose>
-				<when test="bCategory == 'notice'">
+				<when test="bCategory == 'notice' || bCategory == '공지'">
 	               AND b.bCategory = '공지'
 	            </when>
-	            <when test="bCategory == 'it_dev'">
+	            <when test="bCategory == 'it_dev' || bCategory == 'IT/개발'">
 	               AND b.bCategory = 'IT/개발'
 	            </when>
-	            <when test="bCategory == 'service'">
+	            <when test="bCategory == 'service' || bCategory == '서비스'">
 	               AND b.bCategory = '서비스'
 	            </when>
-	            <when test="bCategory == 'finance'">
+	            <when test="bCategory == 'finance' || bCategory == '금융'">
 	               AND b.bCategory = '금융'
 	            </when>
-	            <when test="bCategory == 'design'">
+	            <when test="bCategory == 'design' || bCategory == '디자인'">
 	               AND b.bCategory = '디자인'
 	            </when>
-	            <when test="bCategory == 'official'">
+	            <when test="bCategory == 'official' || bCategory == '공무원'">
 	               AND b.bCategory = '공무원'
 	            </when>
-	            <when test="bCategory == 'etc'">
+	            <when test="bCategory == 'etc' || bCategory == '기타'">
 	               AND b.bCategory = '기타'
 	            </when>
 	        </choose>
@@ -59,25 +59,25 @@
 		
 		<if test="bCategory != null">
 			<choose>
-				<when test="bCategory == 'notice'">
+				<when test="bCategory == 'notice' || bCategory == '공지'">
 	               AND b.bCategory = '공지'
 	            </when>
-	            <when test="bCategory == 'it_dev'">
+	            <when test="bCategory == 'it_dev' || bCategory == 'IT/개발'">
 	               AND b.bCategory = 'IT/개발'
 	            </when>
-	            <when test="bCategory == 'service'">
+	            <when test="bCategory == 'service' || bCategory == '서비스'">
 	               AND b.bCategory = '서비스'
 	            </when>
-	            <when test="bCategory == 'finance'">
+	            <when test="bCategory == 'finance' || bCategory == '금융'">
 	               AND b.bCategory = '금융'
 	            </when>
-	            <when test="bCategory == 'design'">
+	            <when test="bCategory == 'design' || bCategory == '디자인'">
 	               AND b.bCategory = '디자인'
 	            </when>
-	            <when test="bCategory == 'official'">
+	            <when test="bCategory == 'official' || bCategory == '금융'">
 	               AND b.bCategory = '공무원'
 	            </when>
-	            <when test="bCategory == 'etc'">
+	            <when test="bCategory == 'etc' || bCategory == '기타'">
 	               AND b.bCategory = '기타'
 	            </when>
 	        </choose>

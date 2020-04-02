@@ -171,7 +171,7 @@
 			                </c:when>
 			                
 			                <c:otherwise>
-			                <h3>해당 게시글 신고를 원하시면 로그인 해주세요.</h3>
+			                <h3 class="cantReport">해당 게시글 신고를 원하시면 로그인 해주세요.</h3>
 			                </c:otherwise>
 			                </c:choose>
 			            </div>

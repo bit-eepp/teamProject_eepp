@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+	/*
+	* 공통
+	*/
+	h3.cantReport{
+	font-size:16px;
+	}
 	/*
 	* write_view
 	*/
