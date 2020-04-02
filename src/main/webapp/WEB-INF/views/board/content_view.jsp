@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>게시글보기</title>
+		<title>#${content.bId}번 게시글</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/board/boardView.css">

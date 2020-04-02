@@ -200,6 +200,7 @@
 								<a title="ABOUT US" href="${pageContext.request.contextPath}"><strong>ABOUT US</strong></a>
 							</div>		
 						</div>
+						<div class="side_overlay"></div>
 					</div>
 				</div>
 			</c:otherwise>
