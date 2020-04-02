@@ -178,8 +178,7 @@
 			            <!-- Modal Body -->
             
 			            <div class="modal-footer">
-			                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="resetForm()">취소</button>
-			                <button type="button" class="btn btn-primary submitBtn" onclick="submitDeclarationForm()">신고</button>
+			                <button type="button" class="btn reportBtn" onclick="submitDeclarationForm()">신고</button>
 			            </div>
 			            <!-- Modal Footer -->
 			        </div>

@@ -5,10 +5,10 @@ function getContextPath() {
 			hostIndex + 1));
 };
 
-		var uNickname = $("#userNickname").val();
-		var userId = $("#userId").val();
-		var bId = $("#contentBid").val();
-		var isAdmin = '운영자';
+var uNickname = $("#userNickname").val();
+var userId = $("#userId").val();
+var bId = $("#contentBid").val();
+var isAdmin = '운영자';
 
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function replyCount(bId) {
@@ -143,7 +143,6 @@ function getContextPath() {
 							            b += '<textarea class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
 							            b += '</div></form></div>';
 							            b += '<div class="modal-footer">';
-							            b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>';
 							            b += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
 							            b += '</div>';
 							            b += '</div></div></div>';	
@@ -180,7 +179,6 @@ function getContextPath() {
 										b += '<h4 class="modal-title" id="RpMyModalLabel_' +value.rpId +'">#' +value.rpId +'번 댓글 신고</h4>';
 										b += '</div>';
 										b += '<div class="modal-body">';
-										b += '<p class="statusMsg"></p>';
 										
 										if(!$("#userNickname").val()){
 											b += '<h3 class="cantReport">해당 댓글 신고를 원하시면 로그인 해주세요.</h3>'
@@ -201,8 +199,11 @@ function getContextPath() {
 										
 										b += '</div>';
 										b += '<div class="modal-footer">';
-										b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="rpResetForm(' +value.rpId +')">취소</button>';
-										b += '<button type="button" class="btn btn-primary submitBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
+										if(!$("#userNickname").val()){
+											b += '<button type="button" class="btn reportBtn" data-dismiss="modal" onclick="resetForm()">취소</button>';
+										}else{
+											b += '<button type="button" class="btn RereportBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
+										}
 										b += '</div></div></div></div>';
 										}
 										// 댓글 신고 부분 끝
