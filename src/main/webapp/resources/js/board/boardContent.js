@@ -108,7 +108,7 @@ function rpResetForm(rpId) {
 	
 // 해당 게시글 신고 JS메서드
 function submitDeclarationForm(){
-	var dReason = document.dform.dReason;
+	var dReason = document.getElementById("declaration").dReason;
 			
 	if(dReason.value == "") {
 		alert("신고사유를 선택 해주세요.");
