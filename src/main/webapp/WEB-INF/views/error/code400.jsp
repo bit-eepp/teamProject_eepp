@@ -16,7 +16,7 @@
 		<div class="pageNotWorking">
 			<div class="pageNotWorking-400">
 				<h3>Bad Request</h3>
-				<h1><span>4</span><span>0</span><span>4</span></h1>
+				<h1><span>4</span><span>0</span><span>0</span></h1>
 			</div>
 			<h2>문제가 계속되면 Community EE에 문의해주세요.</h2>
 			<p class="backToHome"><a href="${pageContext.request.contextPath}">EE 메인홈으로</a></p>
