@@ -138,7 +138,6 @@ public class UserController {
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
 			@RequestParam(value = "mpPoint", required = false, defaultValue = "") String mpPoint,
-//			@RequestParam(value = "mpInfo", required = false, defaultValue = "") String mpInfo,
 			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap,
 			@RequestParam(value = "mpclass", required = false, defaultValue = "") String mpclass) throws IOException {
 		logger.info("my contents List");
@@ -147,14 +146,6 @@ public class UserController {
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
 		System.out.println("loginsession : " + loginSession);
-
-		if (loginSession == null) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인 해주세요'); location.href='/eepp/login/login.do';</script>");
-			out.flush();
-
-		} else {
 
 			userVO.setUser_id(user.getUser_id());
 
@@ -216,9 +207,7 @@ public class UserController {
 			if (mpPoint != null) {
 				model.addAttribute("mpPoint", mpPoint);
 			}
-//			if (mpInfo != null) {
-//				model.addAttribute("mpInfo", mpInfo);
-//			}
+			
 			model.addAttribute("sortType", sortType);
 			model.addAttribute("bCategory", bCategory);
 			
@@ -243,9 +232,8 @@ public class UserController {
 			model.addAttribute("PointPageMaker", PointPageMaker);
 			model.addAttribute("JoinClassPageMaker", JoinClassPageMaker);
 			model.addAttribute("OpenClassPageMaker", OpenClassPageMaker);
-		}
+			
 		return "user/myPage/newlymypage";
-
 	}
 
 	// 닉네임 중복 체크

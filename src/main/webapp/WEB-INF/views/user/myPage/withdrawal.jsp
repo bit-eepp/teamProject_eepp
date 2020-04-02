@@ -1,31 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <meta charset="UTF-8">
-<title>withdrawal</title>
+<title>Community EE 회원 탈퇴</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/mypage.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 </head>
 <body>
+<!-- header -->
 <%@ include file="/WEB-INF/views/header.jsp"%>
-			<div class="form-group">
-			<div class="container text-center">
-				<h1 style="text-align: center; width: 15%; margin: 0 auto">
-					<img style="max-width: 100%"src="${pageContext.request.contextPath}/img/EE_logo.png" />
-				</h1>
-				<p style="text-align: center; font-weight: bold; margin: 0;">Community EE</p>
-				<p style="text-align: center; font-weight: bold;">탈 퇴 페 이 지</p>
-			</div>
+<!-- header -->
+
+	<div class="form-group">
 			
-	<c:choose>
-		<c:when test="${loginUser.uNickname != null}">
 			<c:choose>
 				<c:when test="${loginUser.snsType != null}">
 					<form role="form" method="post" class="drop_form">
@@ -60,18 +52,10 @@
 							<p>입력하신 정보가 잘못되었습니다.</p>
 						</c:if>
 						
-						<p>
-							<button type="submit" class="btn btn-info" id="dropBtn">회원 탈퇴</button>
-						</p>
+						<p><button type="submit" class="btn btn-info" id="dropBtn">회원 탈퇴</button></p>
 					</form>
 				</c:otherwise>
 			</c:choose>
-		</c:when>
-		<c:otherwise>
-			<h1>Please Login</h1>
-			<button type="button" onclick="location.href='login/login.do'">로그인</button>
-		</c:otherwise>
-	</c:choose>
 	</div>
 	
 <!-- chatting -->
