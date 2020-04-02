@@ -227,12 +227,12 @@ public class LoginController {
 					return "redirect:/login/login.do";
 				// 탈퇴한 회원일시
 				}else if(login.getGrade_Id() == 4) {
-					redirectAttributes.addFlashAttribute("loginInfo", "grade4");
+					redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
 					return "redirect:/login/login.do";
 				}else {
 					// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
 					if(login.getSnsType() == null) {
-						redirectAttributes.addFlashAttribute("loginInfo", "notSns");
+						redirectAttributes.addFlashAttribute("loginFailInfo", "notSns");
 						return "redirect:/login/login.do";
 					}
 					// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
@@ -241,7 +241,7 @@ public class LoginController {
 					
 					}// 다른 sns로 가입한 이메일일 경우
 					else{
-						redirectAttributes.addFlashAttribute("loginInfo", "otherSNS");
+						redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
 						return "redirect:/login/login.do";
 					}
 				}
@@ -312,12 +312,12 @@ public class LoginController {
 							return "redirect:/login/login.do";
 						// 탈퇴한 회원일시
 						}else if(login.getGrade_Id() == 4) {
-							redirectAttributes.addFlashAttribute("loginInfo", "grade4");
+							redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
 							return "redirect:/login/login.do";
 						}else {
 							// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
 							if(login.getSnsType() == null) {
-								redirectAttributes.addFlashAttribute("loginInfo", "notSns");
+								redirectAttributes.addFlashAttribute("loginFailInfo", "notSns");
 								return "redirect:/login/login.do";
 							}
 							// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
@@ -325,7 +325,7 @@ public class LoginController {
 								session.setAttribute("loginUser", login);
 							}// 다른 sns로 가입한 이메일일 경우
 							else{
-								redirectAttributes.addFlashAttribute("loginInfo", "otherSNS");
+								redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
 								return "redirect:/login/login.do";
 							}
 						}
@@ -410,18 +410,18 @@ public class LoginController {
       				login = ls.snsLogin(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
       				System.out.println(login.getSnsType());
       				
-      			// 차단된 회원일시
+      				// 차단된 회원일시
 					if(login.getGrade_Id() == 3) {
 						redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
 						return "redirect:/login/login.do";
 					// 탈퇴한 회원일시
 					}else if(login.getGrade_Id() == 4) {
-						redirectAttributes.addFlashAttribute("loginInfo", "grade4");
+						redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
 						return "redirect:/login/login.do";
 					}else {
 						// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
 						if(login.getSnsType() == null) {
-							redirectAttributes.addFlashAttribute("loginInfo", "notSns");
+							redirectAttributes.addFlashAttribute("loginFailInfo", "notSns");
 							return "redirect:/login/login.do";
 						}
 						// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
@@ -429,7 +429,7 @@ public class LoginController {
 							session.setAttribute("loginUser", login);
 						}// 다른 sns로 가입한 이메일일 경우
 						else{
-							redirectAttributes.addFlashAttribute("loginInfo", "otherSNS");
+							redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
 							return "redirect:/login/login.do";
 						}
 					}
@@ -575,7 +575,7 @@ public class LoginController {
 	
 	/* 비밀번호 재설정 */
 	@RequestMapping(value = "login/resetPassword.me", method = { RequestMethod.GET, RequestMethod.POST })
-		public void resetPassword(HttpServletResponse response, UserVO userVO) throws IOException{
+		public void resetPassword(HttpServletResponse response, UserVO userVO, RedirectAttributes redirectAttributes) throws IOException{
 		
 		String inputPass = userVO.getuPassword();
 		String encodingPW = pwEncoder.encode(inputPass);

@@ -338,7 +338,7 @@
 	margin-right:15px;
 }
 .rRpWrapper{
-	margin: 0 30px 30px;
+	margin: 20px 30px;
 	width: 80%;
 }
 .rRpInner .rRpWriter{
@@ -374,6 +374,6 @@
 .replyList .userBtn{
 	color: #59bfbf!important;
 }
-.replyList .myUserBtn{
+.replyList .myUserBtn, .rRpInner .myUserBtn{
 	color: #e7438b!important;
 }

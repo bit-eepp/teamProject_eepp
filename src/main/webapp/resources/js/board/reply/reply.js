@@ -43,13 +43,11 @@ function getContextPath() {
 				paging += '<div class="replyListpaging">';
 				paging += '<ul class="pagination">';
 
-//				if(prev){
 					paging += '<li class="page-item">';
 					paging += '<a class="page-link" href="javascript:replyList('+(startPage - 1) +')">';
 					paging += '<i class="fas fa-angle-left"></i>';
 					paging += '</a>';
 					paging += '</li>';
-//				}
 				
 				for(var i = startPage; i <= endPage; i++){
 					paging += '<li class="page-item pageNum">';
@@ -57,13 +55,11 @@ function getContextPath() {
 					paging += '</li>';
 				}
 				 
-//				if(next){
 					paging += '<li class="page-item">';
 					paging += '<a class="page-link" href="javascript:replyList('+(endPage + 1) +')">';
 					paging += '<i class="fas fa-angle-right"></i>';
 					paging += '</a>';
 					paging += '</li>';
-//				}
 				
 				paging += '</ul>';
 				paging += '</div>';
@@ -356,7 +352,7 @@ function getContextPath() {
 					a += '<form name="Rrpform">'
 					a += '<div class="rRpInner">';
 					a += '<input type="hidden" name="rp_user_id" value='+userId+'>';
-					a += '<p class="rRpWriter">'+uNickname+'</p>';
+					a += '<p class="rRpWriter myUserBtn">'+uNickname+'</p>';
 					a += '<textarea class="rRpContent" name="rRpContent" placeholder="내용을 입력하세요."></textarea>';
 					a += '</div>';
 					a += '<div class="rRpBtnWrap">';
@@ -431,6 +427,7 @@ function getContextPath() {
 							alert("댓글이 등록되었습니다.")
 							replyCount(bId);
 							replyList();
+							$("#rpContent").val("");
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);
