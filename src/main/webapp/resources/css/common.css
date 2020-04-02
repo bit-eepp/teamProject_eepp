@@ -70,6 +70,9 @@ section{padding:40px 0;}
 }
 .reportModalBox .modal-body textarea{
 	margin-top:10px;
+	resize:none;
+	height:80px;
+	width:100%;
 }
 .reportModalBox .modal-body .form-group{
 	padding: 20px 15px;

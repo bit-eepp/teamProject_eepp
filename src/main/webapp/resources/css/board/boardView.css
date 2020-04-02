@@ -301,7 +301,8 @@
 }
 .replyActive .reReplyBtn a,
 .replyActive .reModifyBtn a,
-.replyActive .reDeleteBtn a{
+.replyActive .reDeleteBtn a,
+.replyActive .reReportBtn a{
 	font-size: 14px;
     color: #5d5a5a;
     cursor: pointer;

@@ -186,7 +186,7 @@
 			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
 			            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${hot.user_id}${btn.index}.disabled=false">  기타<br>
-			            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${hot.user_id}${btn.index}" name="dReason" disabled></textarea>
+			            			<textarea class="form-control" id="etc_${hot.user_id}${btn.index}" name="dReason" disabled></textarea>
 			            			</div>
 			                		</form>
 			                		<!-- declaration -->
@@ -302,7 +302,7 @@
 			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
 			            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${vo.user_id}${btn.index}.disabled=false">  기타<br>
-			            			<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${vo.user_id}${btn.index}" name="dReason" disabled></textarea>
+			            			<textarea class="form-control" id="etc_${vo.user_id}${btn.index}" name="dReason" disabled></textarea>
 			            			</div>
 			                		</form>
 			                		<!-- declaration -->

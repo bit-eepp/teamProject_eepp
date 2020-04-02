@@ -1,3 +1,9 @@
+//ContextPath
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/',
+			hostIndex + 1));
+};
 
 		var uNickname = $("#userNickname").val();
 		var userId = $("#userId").val();
@@ -125,19 +131,20 @@
 										b += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
 				                		b += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
 				                		b += '</ul></div>';
-				                		b += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
+				                		b += '<div class="modal fade reportModalBox" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
 				                		b += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
 				               			b += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
 				               			b += '<div class="modal-body">';
 				               			b += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
 							            b += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
 							            b += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
-							            b += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
+							            b += '<p class="reportBoxIcon"><img src="'+getContextPath()+'/img/reportBoxIcon.png"></p>';
+							            b += '<div class="form-group">';
 							            b += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
 							            b += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
 							            b += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
 							            b += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_'+value.rpId+'.disabled=false">기타<br>';
-							            b += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
+							            b += '<textarea class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
 							            b += '</div></form></div>';
 							            b += '<div class="modal-footer">';
 							            b += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset()">취소</button>';
@@ -166,7 +173,7 @@
 										b += '<a data-toggle="modal" data-target="#rpModalForm_' +value.rpId +'" data-backdrop="static" data-keyboard="false">';
 										b += '신고';
 										b += '</a>';
-										b += '<div class="modal fade" id="rpModalForm_' +value.rpId +'" role="RPdialog">';
+										b += '<div class="modal fade reportModalBox" id="rpModalForm_' +value.rpId +'" role="RPdialog">';
 										b += '<div class="modal-dialog">';
 										b += '<div class="modal-content">';
 										b += '<div class="modal-header">';
@@ -185,13 +192,13 @@
 											b += '<form id="rpDeclaration_' +value.rpId +'" role="formRpDeclaration_' +value.rpId +'" name="rpDform_' +value.rpId +'">';
 											b += '<input type="hidden" name="reporter_id" value=' +userId +'>';
 											b += '<input type="hidden" name="reply_id" value=' +value.rpId +'>';
+											b += '<p class="reportBoxIcon"><img src="'+getContextPath()+'/img/reportBoxIcon.png"></p>';
 											b += '<div class="form-group">';
-											b += '<label for="inputMessage">신고사유</label><br>';
 											b += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  부적절한 홍보 게시글<br>';
 											b += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>';
 											b += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_' +value.rpId +'.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>';
 											b += '<input type="radio" name="dReason" value="etc" onclick="this.form.etcRp_' +value.rpId +'.disabled=false">  기타<br>';
-											b += '<textarea cols="30" rows="10" class="form-control" id="etcRp_' +value.rpId +'" name="dReason" disabled></textarea>';
+											b += '<textarea class="form-control" id="etcRp_' +value.rpId +'" name="dReason" disabled></textarea>';
 											b += '</div>';
 											b += '</form>';
 										}

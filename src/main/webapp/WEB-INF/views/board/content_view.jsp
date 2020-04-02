@@ -92,7 +92,7 @@
 			            		<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${content.user_id}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 			            		<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${content.user_id}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
 			            		<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${content.user_id}.disabled=false">  기타<br>
-			            		<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etc_${content.user_id}" name="dReason" disabled></textarea>
+			            		<textarea class="form-control" id="etc_${content.user_id}" name="dReason" disabled></textarea>
 			            		</div>
 			                	</form>
 			                	<!-- declaration -->
@@ -135,7 +135,7 @@
 					</c:when>
 					<c:otherwise>
 					<!-- 게시글 신고 -->
-					<div class="declarationForm reportBtn">
+					<div class="declarationForm reportBtn reportModalBox">
 					<a class="report" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false" id="modalFormBtn">신고</a>
 					<div class="modal fade" id="modalForm" role="dialog">
 						<div class="modal-dialog">
@@ -152,19 +152,20 @@
             
 			            <!-- Modal Body -->
 			            <div class="modal-body">
-			                <p class="statusMsg"></p>
 			                <c:choose>
 			                <c:when test="${not empty loginUser.uNickname}">
 			                <form id="declaration" role="formDeclaration" name="dform">
 			                    <input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 			                    <input type="hidden" name="board_id" value="${content.bId}">
+			                    
+			                    <p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
 			                    <div class="form-group">
 			                        <label for="inputMessage">신고사유</label><br>
 			                        <input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc.disabled=true">  부적절한 홍보 게시글<br>
 									<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 									<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
 									<input type="radio" name="dReason" value="etc" onclick="this.form.etc.disabled=false">  기타<br>
-									<textarea cols="30" rows="10" class="form-control" id="etc" name="dReason" disabled></textarea>
+									<textarea class="form-control" id="etc" name="dReason" disabled></textarea>
 			                    </div>
 			                </form>
 			                </c:when>
