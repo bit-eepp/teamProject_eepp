@@ -265,7 +265,7 @@
 							<textarea id="rpContent" name="rpContent" style="resize:none;height:80px;width:100%;" placeholder="내용을 작성해주세요."></textarea>
 							</c:when>
 							<c:otherwise>
-							<textarea id="rpContent" style="resize:none;height:80;width:100%;" placeholder="로그인 후 댓글을 작성하실 수 있습니다."></textarea>
+							<textarea id="rpContent" style="resize:none;height:80px;width:100%;" placeholder="로그인 후 댓글을 작성하실 수 있습니다."></textarea>
 							</c:otherwise>
 						</c:choose>
 						</td>
