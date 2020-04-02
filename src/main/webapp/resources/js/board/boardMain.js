@@ -46,7 +46,7 @@
 		var sortType = $("#sortType").val();
 		sortTypeTitle(sortType);
 
-		//로그인 하지않은 경우, 새글쓰기 버튼 삭제
+		//로그인 하지않은 경우, 새글쓰기 버튼 삭제 및 댓글신고버튼삭제
 		if(!$("#userNickname").val()){
 			$('.writeBtn').remove();
 		}

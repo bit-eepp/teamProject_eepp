@@ -42,9 +42,13 @@ var uNickname = $("#userNickname").val();
 	if(bSubject == '공지') {
 		$('.declarationForm').remove();
 	}
-	//로그인 하지않은 경우, 새글쓰기 버튼 삭제
+	//로그인 하지않은 경우, 새글쓰기 버튼 삭제 및 게시글신고버튼삭제
 	if(!uNickname){
 		$('.writeBtn').remove();
+		$(".modal-footer .reportBtn").remove();
+		var a = "";
+		a += '<button type="button" class="btn reportBtn" data-dismiss="modal" onclick="resetForm()">취소</button>';
+		$(".modal-footer").append(a);
 	}
 	// 자기가 작성한 게시글일 경우 게시물 신고버튼 표시안됨
 	if(uNickname == $("#content_uNickname").val()){
@@ -85,7 +89,7 @@ function submitRpDeclarationForm(rpId) {
 	if(dReasonRp.value == "") {
 		alert("신고사유를 선택 해주세요.");
 		return false;
-	} else {
+	}else {
 		$.ajax({
 			type:'POST',
 			url:getContextPath()+'/declaration/doRpDeclaration',
