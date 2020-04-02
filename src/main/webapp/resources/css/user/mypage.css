@@ -349,7 +349,7 @@ td {
 }
 
 .input-group {
-	width: 30%;
+	width: 30% !important;
 }
 
 .thead-color {
@@ -359,6 +359,7 @@ td {
 .boardList_tr td, .scrapList_tr td, .scrapCList_tr td, .scrapEList_tr td, .classJList_tr td, .classOList_tr td {
 	color:#6d6d6d;
 }
+
 /*
 
 회원탈퇴 css
@@ -383,7 +384,11 @@ td {
 .drop_form {
 	text-align: center;
 }
-
+#drop{
+	color:inherit;
+	text-decoration:underline;
+	margin-left:80%;
+}
 /*
 	
 	포인트

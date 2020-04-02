@@ -83,6 +83,9 @@
 							<tr class="bordered">
 							<td><div class="scrap_count"><a href="#mpScBtn">${scrapCount}건</a></div></td>
 							</tr>
+							<tr>
+							<td class="drop"><a href="withdrawal" id=drop onclick="drop();">회원탈퇴</a></td>
+							</tr>
 							
 						</table>
 
@@ -149,8 +152,7 @@
 											<button class="btn btn-submit" id="submit">비밀번호 변경</button>
 										</form>
 									</td>
-									<td class="drop"><a href="withdrawal" id=drop
-										onclick="drop();">회원탈퇴</a></td>
+									
 								</tr>
 							</table>
 						</div>
@@ -572,7 +574,7 @@
 													<td>${joinClass.cCategory}</td>
 													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${joinClass.class_id}&cCategory=${cCategory}">${joinClass.cTitle}</a></td>
-													<td class="cPrice">${joinClass.cPrice} P</td>
+													<td class="cPrice"> <fmt:formatNumber value="${joinClass.cPrice}" pattern="###,###,###" /> P</td>
 													<td><fmt:formatDate value="${joinClass.cjJoinDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
 											</c:forEach>
