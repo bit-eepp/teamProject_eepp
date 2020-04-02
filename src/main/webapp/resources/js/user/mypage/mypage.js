@@ -189,12 +189,34 @@ $(document).ready(function() {
 	});
 });
 
-// 전체 선택 or 해제
+//전체 선택 or 해제 (게시판 스크랩)
 $(function() {
 	// 전체선택 체크박스 클릭
 	$(".allCheck").click(function() {
 		if ($(".allCheck").prop("checked")) {
 			$("input:checkbox[name='pickCheck']").prop("checked", true);
+		} else {
+			$("input:checkbox[name='pickCheck']").prop("checked", false);
+		}
+	})
+})
+// 전체 선택 or 해제(클래스 스크랩)
+$(function() {
+	// 전체선택 체크박스 클릭
+	$(".allCheck1").click(function() {
+		if ($(".allCheck1").prop("checked")) {
+			$("input:checkbox[name='pickCheck1']").prop("checked", true);
+		} else {
+			$("input:checkbox[name='pickCheck1']").prop("checked", false);
+		}
+	})
+})
+// 전체 선택 or 해제(맛집 스크랩)
+$(function() {
+	// 전체선택 체크박스 클릭
+	$(".allCheck2").click(function() {
+		if ($(".allCheck2").prop("checked")) {
+			$("input:checkbox[name='pickCheck2']").prop("checked", true);
 		} else {
 			$("input:checkbox[name='pickCheck']").prop("checked", false);
 		}

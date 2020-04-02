@@ -426,7 +426,7 @@
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
-											<th> <input type="checkbox" class="allCheck"></th>
+											<th> <input type="checkbox" class="allCheck1"></th>
 											<th>class 번호</th>
 											<th>스크랩 게시물</th>
 											<th>스크랩 일시</th>
@@ -436,7 +436,7 @@
 										<c:when test="${fn:length(ClassscrapList) > 0 }">
 											<c:forEach items="${ClassscrapList}" var="ClassscrapList">
 												<tr class="scrapCList_tr">
-												<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${ClassscrapList.sId}" /></td>
+												<td><input type="checkbox" name="pickCheck1" class="pickCheck1" value="${ClassscrapList.sId}" /></td>
 													<td>${ClassscrapList.class_id}</td>
 													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${ClassscrapList.class_id}&cCategory=${cCategory}">${ClassscrapList.cTitle}</a></td>
@@ -480,7 +480,7 @@
 								<table class="table table-bordered">
 									<thead class="thead-color">
 										<tr class="content_tr">
-											<th> <input type="checkbox" class="allCheck"></th>
+											<th> <input type="checkbox" class="allCheck2"></th>
 											<th>eating 번호</th>
 											<th>스크랩 게시물</th>
 											<th>스크랩 일시</th>
@@ -490,7 +490,7 @@
 										<c:when test="${fn:length(scrapList) > 0 }">
 											<c:forEach items="${scrapList}" var="scrapList">
 												<tr class="scrapEList_tr">
-													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
+													<td><input type="checkbox" name="pickCheck2" class="pickCheck2" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
 													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
