@@ -74,7 +74,9 @@ public class BoardController {
 		System.out.println("writeContent() method");
 		
 		// 카테고리 한글로 변경
-		if(boardVO.getbCategory().equals("it_dev")) {
+		if(boardVO.getbCategory().equals("notice")) {
+			boardVO.setbCategory("공지");
+		} else if(boardVO.getbCategory().equals("it_dev")) {
 			boardVO.setbCategory("IT/개발");
 		} else if(boardVO.getbCategory().equals("service")) {
 			boardVO.setbCategory("서비스");
@@ -89,7 +91,9 @@ public class BoardController {
 		}
 		
 		// 말머리 한글로 변경
-		if(boardVO.getbSubject().equals("qna")) {
+		if(boardVO.getbSubject().equals("notice")) {
+			boardVO.setbSubject("공지");
+		} else if(boardVO.getbSubject().equals("qna")) {
 			boardVO.setbSubject("QnA");
 		} else if(boardVO.getbSubject().equals("info")) {
 			boardVO.setbSubject("정보");

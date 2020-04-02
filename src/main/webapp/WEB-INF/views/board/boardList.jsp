@@ -120,7 +120,7 @@
 						<td class="bSubject">${notice.bSubject}</td>
 						<td class="bCategory">${notice.bCategory}</td>
 						<td class="bTitle">
-							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${notice.bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
+							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
 						</td>
 						
 						<td class="bWriter">
@@ -141,7 +141,7 @@
 						<td class="bSubject">${hot.bSubject}</td>
 						<td class="bCategory">${hot.bCategory}</td>
 						<td class="bTitle">
-							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${hot.bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
+							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
 						</td>
 						
 						<td class="bWriter">
@@ -244,7 +244,7 @@
 										</c:when>
 										<c:otherwise>
 											<td class="bTitle">
-										<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${vo.bCategory}">
+										<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">
 											<c:choose>
 												<c:when test="${fn:length(vo.bTitle) > 33}">
 												${fn:substring(vo.bTitle, 0, 33)}... [${vo.rpCount}]

@@ -16,7 +16,7 @@
 <!-- header -->
 
 <div class="writeViewWrap">
-<section class="sc-writeView col-sm-8">
+	<section class="sc-writeView col-sm-8">
 		<h1 class="sc-title">새 글 쓰기</h1>
 		<form name="wform" action="writeContent" method="post" onsubmit="return writeCheckForm();">
 			<input type="hidden" name="page" value="${scri.page}" />
@@ -29,27 +29,58 @@
 				<tr>
 					<td class="tb-title">게시판 카테고리</td>
 					<td>
-						<select name="bCategory" class="boardSelector"> 
-							<option value="" disabled selected>게시판을 선택해주세요</option>
-							<option value="it_dev">IT/개발</option>
-							<option value="service">서비스</option>
-							<option value="finance" >금융</option>
-							<option value="design">디자인</option>
-							<option value="official">공무원</option>
-							<option value="etc">기타</option>
-						</select>
+						<c:choose>
+							<c:when test="${loginUser.uNickname == '운영자' or loginUser.uNickname == 'admin2'}">
+								<select name="bCategory" class="boardSelector"> 
+									<option value="" disabled selected>게시판을 선택해주세요</option>
+									<option value="notice">공지</option>
+									<option value="it_dev">IT/개발</option>
+									<option value="service">서비스</option>
+									<option value="finance" >금융</option>
+									<option value="design">디자인</option>
+									<option value="official">공무원</option>
+									<option value="etc">기타</option>
+								</select>
+							</c:when>
+							
+							<c:otherwise>
+								<select name="bCategory" class="boardSelector"> 
+									<option value="" disabled selected>게시판을 선택해주세요</option>
+									<option value="it_dev">IT/개발</option>
+									<option value="service">서비스</option>
+									<option value="finance" >금융</option>
+									<option value="design">디자인</option>
+									<option value="official">공무원</option>
+									<option value="etc">기타</option>
+								</select>
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 				
 				<tr>
 					<td class="tb-title">주제</td>
 					<td>
-						<select name="bSubject" class="boardSelector">
-							<option value="" disabled selected>주제를 선택해주세요</option>
-							<option value="qna">Q&A</option>
-							<option value="info">정보</option>
-							<option value="daily">일상</option>
-						</select>
+						<c:choose>
+							<c:when test="${loginUser.uNickname == '운영자' or loginUser.uNickname == 'admin2'}">
+								<select name="bSubject" class="boardSelector">
+									<option value="" disabled selected>주제를 선택해주세요</option>
+									<option value="notice">공지</option>
+									<option value="qna">Q&A</option>
+									<option value="info">정보</option>
+									<option value="daily">일상</option>
+								</select>
+							</c:when>
+						
+							<c:otherwise>
+								<select name="bSubject" class="boardSelector">
+									<option value="" disabled selected>주제를 선택해주세요</option>
+									<option value="qna">Q&A</option>
+									<option value="info">정보</option>
+									<option value="daily">일상</option>
+								</select>
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 			
