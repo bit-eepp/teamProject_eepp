@@ -70,8 +70,18 @@
 		</interceptor>
 	</interceptors>
 	
-	<!-- 파일 업로드 설정 -->
+	<!-- 관리자 페이지 접근권한 interceptor -->
+	<beans:bean id="accessInterceptor" class="bit.team.eepp.Interceptor.accessInterceptor" />
+	<!-- interceptor 설정 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin" />
+			<mapping path="/admin/*" />
+			<beans:ref bean="accessInterceptor" />
+		</interceptor>
+	</interceptors>
 	
+	<!-- 파일 업로드 설정 -->
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg value="/Users/dohxxzun/Documents/apache-tomcat-9.0.30/webapps/ROOT" />
