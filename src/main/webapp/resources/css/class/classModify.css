@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.classModifyWrap {
+	padding-top: 120px;	
+}
 
 .slider {
 	-webkit-appearance: none;

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.ClassVO;
+import bit.team.eepp.VO.EatingVO;
 
 @Repository
 public interface MainMapper {
@@ -29,5 +30,7 @@ public interface MainMapper {
 	public abstract List<BoardVO> getBoardListEtc();
 
 	public abstract List<ClassVO> getClassList();
+
+	public abstract List<EatingVO> getEatStoreList();
 	
 }

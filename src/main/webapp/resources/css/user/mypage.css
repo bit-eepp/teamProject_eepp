@@ -3,6 +3,10 @@
 /*
 * 마이페이지 css 부
 */
+.mypageWrap {
+	padding-top: 100px;
+}
+
 .bordered a {
 	color: inherit;
 }
@@ -365,6 +369,10 @@ td {
 회원탈퇴 css
 
 */
+.withdrawWrap {
+	padding-top: 120px;
+}
+
 .required {
 	color: #e7438b;
 	margin-right: 10px;

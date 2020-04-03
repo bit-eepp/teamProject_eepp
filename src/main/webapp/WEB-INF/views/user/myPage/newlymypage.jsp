@@ -14,25 +14,26 @@
 .input-group{width:30%;}
 </style>
 </head>
-<body>
+	<body>
 		<!-- header -->
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
 		
-	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-	<input type="hidden" id="mypageMakerTotalCount" value="${myPagePageMaker.totalCount}">
-	<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page}">
-	<input type="hidden" id="mypageMakeQuery" value="${myPagePageMaker.makeQuery(1)}">
-	<input type="hidden" id="ScrapMakerTotalCount" value="${ScrapPageMaker.totalCount}">
-	<input type="hidden" id="ScrapMakerCriPage" value="${ScrapPageMaker.cri.page}">
-	<input type="hidden" id="ScrapMakeQuery" value="${ScrapPageMaker.makeQuery(1)}">
-		
-	 <input type="hidden" id="board" value="${board}">
-	 <input type="hidden" id="scrap" value="${scrap}">
-	 <input type="hidden" id="mpPoint" value="${mpPoint}">
-	 <input type="hidden" id="mpclass" value="${mpclass}">
-	 
-	<c:choose>
+		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+		<input type="hidden" id="mypageMakerTotalCount" value="${myPagePageMaker.totalCount}">
+		<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page}">
+		<input type="hidden" id="mypageMakeQuery" value="${myPagePageMaker.makeQuery(1)}">
+		<input type="hidden" id="ScrapMakerTotalCount" value="${ScrapPageMaker.totalCount}">
+		<input type="hidden" id="ScrapMakerCriPage" value="${ScrapPageMaker.cri.page}">
+		<input type="hidden" id="ScrapMakeQuery" value="${ScrapPageMaker.makeQuery(1)}">
+			
+		<input type="hidden" id="board" value="${board}">
+		<input type="hidden" id="scrap" value="${scrap}">
+		<input type="hidden" id="mpPoint" value="${mpPoint}">
+		<input type="hidden" id="mpclass" value="${mpclass}">
+ 	
+	 	<section class="mypageWrap">
+		<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
 			<!-- 로그인 성공 -->
 			<br>
@@ -678,6 +679,8 @@
 
 		</c:otherwise>
 	</c:choose>
+	</section>
+	
 	<script src="${pageContext.request.contextPath}/js/user/mypage/mypage.js"></script>
 	<script type="text/javascript">
 	function openMsg(){

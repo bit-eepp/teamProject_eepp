@@ -25,6 +25,7 @@ import bit.team.eepp.Service.MainService;
 import bit.team.eepp.Service.UserService;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.ClassVO;
+import bit.team.eepp.VO.EatingVO;
 import bit.team.eepp.VO.UserVO;
 
 /**
@@ -37,10 +38,9 @@ public class MainController {
 
 	@Inject
 	UserService us;
-	
+
 	@Autowired
 	private MainService mainService;
-	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model, HttpSession session) {
@@ -64,35 +64,38 @@ public class MainController {
 		}
 		/* 읽지않은 쪽지 알람 띄우기 */
 
-		// 직무게시판 - 공지사항 2개
+		// 직무게시판 베스트 - 공지사항 2개
 		List<BoardVO> boardNotice = mainService.getBoardNotice();
 
-		// 직무게시판 - Hot글 3개
+		// 직무게시판 베스트 - Hot글 3개
 		List<BoardVO> boardHot = mainService.getBoardHot();
 
-		// 직무게시판 - 최신글 5개(전체)
+		// 직무게시판 베스트 - 최신글 5개(전체)
 		List<BoardVO> boardListALL = mainService.getBoardListALL();
 
-		// 직무게시판 - 최신글 8개(IT)
+		// 직무게시판 베스트 - 최신글 8개(IT)
 		List<BoardVO> boardListIT = mainService.getBoardListIT();
 
-		// 직무게시판 - 최신글 8개(서비스)
+		// 직무게시판 베스트 - 최신글 8개(서비스)
 		List<BoardVO> boardListService = mainService.getBoardListService();
 
-		// 직무게시판 - 최신글 8개(금융)
+		// 직무게시판 베스트 - 최신글 8개(금융)
 		List<BoardVO> boardListFinance = mainService.getBoardListFinance();
 
-		// 직무게시판 - 최신글 8개(디자인)
+		// 직무게시판 베스트 - 최신글 8개(디자인)
 		List<BoardVO> boardListDesign = mainService.getBoardListDesign();
 
-		// 직무게시판 - 최신글 8개(공무원)
+		// 직무게시판 베스트 - 최신글 8개(공무원)
 		List<BoardVO> boardListOfficial = mainService.getBoardListOfficial();
 
-		// 직무게시판 - 최신글 8개(기타)
+		// 직무게시판 베스트 - 최신글 8개(기타)
 		List<BoardVO> boardListEtc = mainService.getBoardListEtc();
 
-		// 클래스강좌 - 최신개설 4개
+		// 클래스강좌 베스트- 마감임박 4개
 		List<ClassVO> classList = mainService.getClassList();
+
+		// 오늘뭐먹지 베스트 - 평점 높은 4개
+		List<EatingVO> eatStoreList = mainService.getEatStoreList();
 
 		// 최신글 검사
 		String isNew = null;
@@ -115,6 +118,7 @@ public class MainController {
 		mv.addObject("boardListOfficial", boardListOfficial);
 		mv.addObject("boardListEtc", boardListEtc);
 		mv.addObject("classList", classList);
+		mv.addObject("eatStoreList", eatStoreList);
 
 		mv.setViewName("main");
 

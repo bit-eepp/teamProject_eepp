@@ -17,7 +17,7 @@
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
 		
-		<section>
+		<section class="classModifyWrap">
 			<div class="container classModify">
 				<div class="classModifyTitle">
 					<img alt="EEclassOpen Img" src="${pageContext.request.contextPath}/img/class/eeClassModify.jpg">

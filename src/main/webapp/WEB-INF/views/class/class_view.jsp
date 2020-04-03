@@ -340,7 +340,7 @@
 		<input type="hidden" id="difficulty" value="${clView.cDifficulty}"/>
 		<input type="hidden" id="classEndDate" value="<fmt:formatDate value="${clView.cEndDate}" pattern="yyyy-MM-dd HH:MM:ss"/>">
 		
-		<section>
+		<section class="classViewWrap">
 			<div class="container clView">
 				<div class="row clContent">
 					<div class="col-8 clContentLeft">

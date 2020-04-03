@@ -26,7 +26,7 @@
 		<input type="hidden" id="classCriPage" value="${classPageMaker.cri.page}" />
 		<input type="hidden" id="classSearchType" value="${cscri.searchType}" />
 		
-		<section>
+		<section class="eeClassList">
 			<div class="container classList">
 				<div class="classListImg">
 					<img alt="classMainImg" src="${pageContext.request.contextPath}/img/class/eeClassMain.jpg">

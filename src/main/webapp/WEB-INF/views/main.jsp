@@ -10,201 +10,7 @@
 		<title>Community EE</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-		
-		<style type="text/css">
-			#carousel-example-generic {
-				height: auto;;
-				width: 100%;
-			}
-
-			.carouselTitle {
-				font-size: 250%;
-				font-weight: 700;
-				color: #ddd;
-				text-shadow: 0 1px 2px #000;
-				position: absolute;
-				bottom: 60px;
-				left: 80px;
-			}
-			
-			.carousel-item img {
-				width:100%; 
-				height:auto;"
-			}
-			
-			.carousel-item p b {
-				color:#e7438b;
-			}
-			
-			.nav-item {
-				color:#26247c;
-				font-weight: 800;
-				font-size: 90%;
-			}
-			
-			.nav-item:hover {
-				background-color: #76d2d2;
-				color:#ffffff;
-			}
-			
-			.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-				color:#76d2d2;
-			}
-
-			.listTable table{
-				width:100%;
-				font-size:14px;
-			}
-			
-			.isNoticeContent{
-			    color: #59bfbf!important;
-			    text-align: center;
-			    font-size: 18px;
-			}
-			
-			.isHotContent{
-				text-align: center;
-			    color: #e7438b!important;
-			    font-size: 20px;
-			}
-			
-			.isNewContent{
-				text-align: center;
-			    color: #f9d312;
-			    font-size: 13px;
-			}
-			
-			.isNoticeList td.bTitle a{
-			    color: #59bfbf!important;
-			    font-weight:bold;
-			}
-			
-			.isHotList td.bTitle a{
-				color: #e7438b!important;
-			}
-			
-			.listTable .listTable-title:first-child{
-				background-color: #76d2d2;
-			    border: 1px solid #76d2d2;
-			}
-			
-			.listTable .listTable-title:first-child td{
-				padding: 5px 5px;
-			    border-right: 2px solid #fff;
-			    border-bottom: initial;
-			    color: #fff!important;
-			    text-align: center;
-			}
-			
-			.listTable-title{
-				border-bottom: 1px solid #bdbdbd;
-			    width: 100%;
-			    font-size: 14px;
-			}
-			
-			.listTable-list td{
-				border-bottom: 1px solid #d8d8d8;
-			    width: 5%;
-			    padding: 5px 5px;
-			}
-			
-			.listWidth td.bId{
-				text-align: center;
-				width:7%;
-				color:#6d6d6d;
-			}
-			
-			.listWidth td.bHit{
-				text-align:center;
-				color:#6d6d6d;
-			}
-			
-			.listWidth td.bTitle{
-				width:40%;
-			}
-			
-			.listWidth td.bTitle a{
-				color:#000;
-			}
-			
-			.listTable .listTable-list.isNoticeList td.bTitle a:hover{
-				color:#000!important;
-			}
-			
-			.listTable .listTable-list td.bTitle a:hover{
-				color:#59bfbf!important;
-			}
-			
-			.listWidth td.bTitle span{
-				color:#6d6d6d;
-			}
-			
-			.listWidth td.bWriter{
-				width:15%;
-			}
-			
-			.listWidth td.bLike{
-				width:10%;
-				text-align: center;
-				color:#6d6d6d;
-			}
-			
-			.listWidth td.bCategory, .listWidth td.bSubject{
-				width:6%;
-				text-align:center;
-				color:#6d6d6d;
-			}
-			
-			.isBlind{
-				color:#757272!important;
-			}
-			
-			.listTable-list.blindContent{
-				color: #757474!important;
-			    background: #efefef;
-			}
-			
-			.listTable-list td.searchResult{
-				text-align: center;
-			    padding: 40px 0;
-			    color:#696969;
-			}
-			
-			.mainClassList .col-md-3 .card {
-				font-weight: 900;
-			}
-			
-			.mainClassList .col-md-3 .card .classListImg .card-img-top {
-				width: 100%; 
-				height: 160px;
-			}
-			
-			.mainClassList .col-md-3 .card .card-body .card-title {
-				height: 50px;
-				font-size: 100%; 
-				color:#59bfbf;
-			}
-			
-			.mainClassList .col-md-3 .card .card-body .card-text {
-				font-size: 90%;
-			}
-			
-			.mainClassList .col-md-3 .card .card-body .card-text b {
-				color:#e7438b;
-			}
-			
-			.mainClassList .col-md-3 .card .card-body button {
-	 			background-color: #59bfbf; 
-	 			color: #ffffff; 
-	 			width: 100%; 
-	 			border: none; 
-			}
-			
-			.mainClassList .col-md-3 .card .card-body button:hover {
-	 			background-color: #e7438b; 
-	 			color: #ffffff; 
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
 	</head>
 
 	<body>
@@ -218,6 +24,7 @@
 		<!-- Main Page Contents -->
 		<section id="sc-mainPage">
 			<div class="container mainPage">
+				<!-- 사진 슬라이드 시작 -->
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -252,9 +59,12 @@
 					</a>
 				</div>
 				<br><br>
-				
+				<!-- 사진 슬라이드 끝 -->
+
+			
+				<!-- 직무게시판 베스트 리스트 시작 -->
 				<div class="col mainBoardList">
-					<h5><i class="fas fa-star" style="color: #ffc107;"></i> BOARD BEST</h5>
+					<h5><i class="fas fa-star" style="color: #ffc107;"></i> BOARD - JOB <b style="color: #ffc107">BEST</b></h5>
 					<div class="row">
                     	<div class="col-md-12">
 	                        <nav>
@@ -1404,16 +1214,68 @@
                 	</div>	<!-- row -->			
 				</div>	<!-- col boardList -->
 				<br><br>
+				<!-- 직무게시판 베스트 리스트 끝 -->
 				
+				
+				<!-- 오늘뭐먹지? 베스트 시작 -->
+				<div class="col mainEatingList">
+					<h5><i class="fas fa-star" style="color: #ffc107;"></i> EATING <b style="color: #ffc107">BEST</b></h5>
+					<div class="row">
+						<c:forEach items="${eatStoreList}" var="el">
+							<div class="col-md-3">
+								<div class="imgThumnail">
+									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}"><img class="img-thumbnail" alt="eatImg" src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${el.eId}.jpg" style="width: 100%; height: auto; margin-bottom: 10px;"></a>
+									<div class="imgText">
+										<p>
+											<img alt="good" src="${pageContext.request.contextPath}/img/main/eat_good.png" style="max-width: 15%;">
+										</p>
+									</div>
+								</div>
+							
+								<p class="eTitle">
+									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}">${el.eTitle}&nbsp;&nbsp;<b style="color: #e7438b;">${el.rvAVG}</b></a>
+								</p>
+								
+								<p>
+									<c:choose>
+										<c:when test="${el.eThema == 'thema_1'}">
+											신촌/홍대 - ${el.eKeyword_food}
+										</c:when>
+										<c:when test="${el.eThema == 'thema_2'}">
+											여의도 - ${el.eKeyword_food}
+										</c:when>
+										<c:when test="${el.eThema == 'thema_3'}">
+											용산/이태원 - ${el.eKeyword_food}
+										</c:when>
+										<c:when test="${el.eThema == 'thema_4'}">
+											강남/논현 - ${el.eKeyword_food}
+										</c:when>
+										<c:when test="${el.eThema == 'thema_5'}">
+											건대입구 - ${el.eKeyword_food}
+										</c:when>
+										<c:when test="${el.eThema == 'thema_6'}">
+											합정/망원 - ${el.eKeyword_food}
+										</c:when>
+									</c:choose>
+								</p>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+				<br><br>
+				<!-- 오늘뭐먹지? 베스트 끝 -->
+
+				
+				<!-- EE CLASS 베스트 시작 -->
 				<div class="col mainClassList">
-					<h5><i class="fas fa-star" style="color: #ffc107;"></i> CLASS BEST</h5>
+					<h5><i class="fas fa-star" style="color: #ffc107;"></i> EE CLASS <b style="color: #ffc107">BEST</b></h5>
 					<div class="row">
                    		<c:forEach items="${classList}" var="cl">
 							<div class="col-md-3">
 								<div class="card cl">
 									<!-- Card image -->
 									<div class="classListImg">
-	 									<img class="card-img-top" src="${cl.cThumnail}">
+	 									<a href="${pageContext.request.contextPath}/class/classView?cId=${cl.cId}&cCategory=${cl.cCategory}"><img class="card-img-top" src="${cl.cThumnail}"></a>
 									</div>
 
 									<div class="card-body classList">
@@ -1450,25 +1312,8 @@
 						</c:forEach>
                    	</div>
 				</div>
-				<br><br>
-				
-				<div class="col mainEatingList">
-					<h5><i class="fas fa-star" style="color: #ffc107;"></i> EATING BEST</h5>
-					<div class="row">
-						<c:forEach items="${classList}" var="cl">
-							<div class="col-md-3">
-							
-							
-							
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-				
+				<!-- EE CLASS 베스트 끝 -->
 			</div>
-	
-
-
 		</section>
 		<!-- Main Page Contents -->
 	

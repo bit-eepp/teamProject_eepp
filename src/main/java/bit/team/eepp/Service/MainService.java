@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import bit.team.eepp.Mapper.MainMapper;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.ClassVO;
+import bit.team.eepp.VO.EatingVO;
 
 @Service
 public class MainService {
@@ -53,6 +54,10 @@ public class MainService {
 
 	public List<ClassVO> getClassList() {
 		return mainMapper.getClassList();
+	}
+
+	public List<EatingVO> getEatStoreList() {
+		return mainMapper.getEatStoreList();
 	}
 
 }

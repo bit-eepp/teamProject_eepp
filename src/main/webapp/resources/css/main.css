@@ -1,0 +1,262 @@
+@charset "UTF-8";
+
+#sc-mainPage {
+	padding-top: 100px;
+}
+
+#carousel-example-generic {
+	height: auto;;
+	width: 100%;
+}
+
+.carouselTitle {
+	font-size: 250%;
+	font-weight: 700;
+	color: #ddd;
+	text-shadow: 0 1px 2px #000;
+	position: absolute;
+	bottom: 60px;
+	left: 80px;
+}
+
+.carousel-item img {
+	width: 100%;
+	height: auto;
+	"
+}
+
+.carousel-item p b {
+	color: #e7438b;
+}
+
+.nav-item {
+	color: #26247c;
+	font-weight: 800;
+	font-size: 90%;
+}
+
+.nav-item:hover {
+	background-color: #76d2d2;
+	color: #ffffff;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #76d2d2;
+}
+
+.mainBoardList {
+	border: 1px solid #e9ecefeb;
+	border-radius: 10px;
+}
+
+.mainBoardList h5 {
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+
+.mainBoardList .row {
+	margin-bottom: 25px;
+}
+
+.listTable table {
+	width: 100%;
+	font-size: 14px;
+}
+
+.isNoticeContent {
+	color: #59bfbf !important;
+	text-align: center;
+	font-size: 18px;
+}
+
+.isHotContent {
+	text-align: center;
+	color: #e7438b !important;
+	font-size: 20px;
+}
+
+.isNewContent {
+	text-align: center;
+	color: #f9d312;
+	font-size: 13px;
+}
+
+.isNoticeList td.bTitle a {
+	color: #59bfbf !important;
+	font-weight: bold;
+}
+
+.isHotList td.bTitle a {
+	color: #e7438b !important;
+}
+
+.listTable .listTable-title:first-child {
+	background-color: #76d2d2;
+	border: 1px solid #76d2d2;
+}
+
+.listTable .listTable-title:first-child td {
+	padding: 5px 5px;
+	border-right: 2px solid #fff;
+	border-bottom: initial;
+	color: #fff !important;
+	text-align: center;
+}
+
+.listTable-title {
+	border-bottom: 1px solid #bdbdbd;
+	width: 100%;
+	font-size: 14px;
+}
+
+.listTable-list td {
+	border-bottom: 1px solid #d8d8d8;
+	width: 5%;
+	padding: 5px 5px;
+}
+
+.listWidth td.bId {
+	text-align: center;
+	width: 7%;
+	color: #6d6d6d;
+}
+
+.listWidth td.bHit {
+	text-align: center;
+	color: #6d6d6d;
+}
+
+.listWidth td.bTitle {
+	width: 40%;
+}
+
+.listWidth td.bTitle a {
+	color: #000;
+}
+
+.listTable .listTable-list.isNoticeList td.bTitle a:hover {
+	color: #000 !important;
+}
+
+.listTable .listTable-list td.bTitle a:hover {
+	color: #59bfbf !important;
+}
+
+.listWidth td.bTitle span {
+	color: #6d6d6d;
+}
+
+.listWidth td.bWriter {
+	width: 15%;
+}
+
+.listWidth td.bLike {
+	width: 10%;
+	text-align: center;
+	color: #6d6d6d;
+}
+
+.listWidth td.bCategory, .listWidth td.bSubject {
+	width: 6%;
+	text-align: center;
+	color: #6d6d6d;
+}
+
+.isBlind {
+	color: #757272 !important;
+}
+
+.listTable-list.blindContent {
+	color: #757474 !important;
+	background: #efefef;
+}
+
+.listTable-list td.searchResult {
+	text-align: center;
+	padding: 40px 0;
+	color: #696969;
+}
+
+.mainEatingList {
+	border: 1px solid #e9ecefeb;
+	border-radius: 10px;
+}
+
+.mainEatingList h5 {
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+
+.mainEatingList .row {
+	margin-bottom: 25px;
+}
+
+.mainEatingList .row .col-md-3 .imgThumnail {
+	position: relative;
+}
+
+.mainEatingList .row .col-md-3 .imgThumnail .imgText {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	color: #e7438b;
+}
+
+.mainEatingList .row .col-md-3 .eTitle {
+	font-size: 130%;
+	font-weight: 700;
+}
+
+.mainEatingList .row .col-md-3 .eTitle a {
+	text-decoration: none;
+	color: #495057;
+}
+
+.mainClassList {
+	border: 1px solid #e9ecefeb;
+	border-radius: 10px;
+}
+
+.mainClassList h5 {
+	margin-top: 25px;
+	margin-bottom: 10px;
+}
+
+.mainClassList ..mainClassList {
+	margin-bottom: 25px;
+}
+
+.mainClassList .col-md-3 .card {
+	font-weight: 900;
+}
+
+.mainClassList .col-md-3 .card .classListImg .card-img-top {
+	width: 100%;
+	height: 160px;
+}
+
+.mainClassList .col-md-3 .card .card-body .card-title {
+	height: 50px;
+	font-size: 100%;
+	color: #59bfbf;
+}
+
+.mainClassList .col-md-3 .card .card-body .card-text {
+	font-size: 90%;
+}
+
+.mainClassList .col-md-3 .card .card-body .card-text b {
+	color: #e7438b;
+}
+
+.mainClassList .col-md-3 .card .card-body button {
+	background-color: #59bfbf;
+	color: #ffffff;
+	width: 100%;
+	border: none;
+}
+
+.mainClassList .col-md-3 .card .card-body button:hover {
+	background-color: #e7438b;
+	color: #ffffff;
+}
