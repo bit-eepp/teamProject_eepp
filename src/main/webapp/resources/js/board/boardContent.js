@@ -46,8 +46,9 @@ var uNickname = $("#userNickname").val();
 	if(!uNickname){
 		$('.writeBtn').remove();
 		$(".modal-footer .reportBtn").remove();
+		
 		var a = "";
-		a += '<button type="button" class="btn reportBtn" data-dismiss="modal" onclick="resetForm()">취소</button>';
+			a += '<button type="button" class="btn reportBtn" data-dismiss="modal">취소</button>';
 		$(".modal-footer").append(a);
 	}
 	// 자기가 작성한 게시글일 경우 게시물 신고버튼 표시안됨
@@ -61,8 +62,7 @@ var uNickname = $("#userNickname").val();
 });
 
 //게시판 카테고리
-function boardTitle(title) {
-	
+function boardTitle(title) {	
 	if(title == '') {
 		$(".ct-all").addClass("onCategory");
 	} else if(title == 'notice' || title == '공지') {
@@ -106,7 +106,7 @@ function submitRpDeclarationForm(rpId) {
 	
 function rpResetForm(rpId) {
 	$('#rpModalForm_' +rpId).on('hidden.bs.modal', function (e) {
-		$(this).find('form')[0].reset()
+		$(this).find('form')[0].reset();
 	});
 }
 	
@@ -127,13 +127,13 @@ function submitDeclarationForm(){
 				$('#modalForm').modal('hide');
 				resetForm();
 			}
-	       });
+	    });
 	}
 }
 	
 function resetForm() {
 	$('#modalForm').on('hidden.bs.modal', function (e) {
-		$(this).find('form')[0].reset()
+		$(this).find('form')[0].reset();
 	});
 }
 

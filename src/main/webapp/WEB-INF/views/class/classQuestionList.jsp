@@ -7,6 +7,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CLASS QuestionList</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classQuestionList.css">
 
 		<script>
@@ -120,13 +121,13 @@
 									tag += '<div class="card-body">';
 										tag += '<div class="card card-inner">';		//card-inner
 											tag += '<div class="card-body">';		//card-body
-												tag += '<div class="row">';												//row
+												tag += '<div class="row">';			//row
 													tag += '<div class="col-md-2" align="center">';
-														tag += '<img src="' +value.uProfile +'" alt="userProfile"/>';
+														tag += '<img class="qprofile" src="' +value.uProfile +'" alt="userProfile"/>';
 													
 														if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2' || uNickname == ''){
 															tag += '<div>'
-															tag += '<a class="userBtn"><b style="color:#59bfbf; font-size:100%;">'+value.uNickname+'</b></a>';
+															tag += '<a class="userBtn"><b style="color:#e7438b; font-size:100%;">'+value.uNickname+'</b></a>';
 															tag += '</div>'
 														} else{
 															tag += '<div class="dropdown">';
@@ -136,14 +137,15 @@
 															tag += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
 															tag += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
 															tag += '</ul></div>';
-															tag += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
+															tag += '<div class="modal fade reportModalBox" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
 															tag += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
-															tag += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
+															tag += '<h4 class="modal-title">&#8988;'+value.uNickname+'&#8991;님 신고</h4></div>';
+															tag += '<p class="reportBoxIcon"><img style="max-width:35%;" src="' +getContextPath() +'/img/reportBoxIcon.png"></p>';
 															tag += '<div class="modal-body">';
 															tag += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
 															tag += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
 															tag += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
-															tag += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
+															tag += '<div class="form-group" align="left">';
 															tag += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
 															tag += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
 															tag += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
@@ -151,7 +153,6 @@
 															tag += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
 															tag += '</div></form></div>';
 															tag += '<div class="modal-footer">';
-															tag += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm()">취소</button>';
 															tag += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
 															tag += '</div>';
 															tag += '</div></div></div>';	
@@ -186,11 +187,11 @@
 									tag += '<div class="card-body">';	// card-body
 										tag += '<div class="row">';		//row
 											tag += '<div class="col-md-2" align="center">';
-												tag += '<img src="' +value.uProfile +'" alt="userProfile"/>';
+												tag += '<img class="qprofile" src="' +value.uProfile +'" alt="userProfile"/>';
 
 												if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2' || uNickname == ''){
 													tag += '<div>'
-													tag += '<a class="userBtn"><b style="color:#59bfbf; font-size:100%;">'+value.uNickname+'</b></a>';
+													tag += '<a class="userBtn"><b style="color:#e7438b; font-size:100%;">'+value.uNickname+'</b></a>';
 													tag += '</div>'
 												} else{
 													tag += '<div class="dropdown">';
@@ -200,14 +201,15 @@
 													tag += '<li><a onclick="sendMessage('+'\''+value.uNickname+'\','+value.user_id+');">쪽지 보내기</a></li>';
 													tag += '<li><a data-toggle="modal" data-target="#report_rp_user_'+value.rpId+value.user_id+'" data-backdrop="static" data-keyboard="false">신고하기</a></li>';
 													tag += '</ul></div>';
-													tag += '<div class="modal fade" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
+													tag += '<div class="modal fade reportModalBox" id="report_rp_user_'+value.rpId+value.user_id+'" role="dialog"><div class="modal-dialog"><div class="modal-content">';
 													tag += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
-													tag += '<h4 class="modal-title">'+value.uNickname+'님 신고</h4></div>';
+													tag += '<h4 class="modal-title">&#8988;'+value.uNickname+'&#8991;님 신고</h4></div>';
+													tag += '<p class="reportBoxIcon"><img style="max-width:35%;" src="' +getContextPath() +'/img/reportBoxIcon.png"></p>';
 													tag += '<div class="modal-body">';
 													tag += '<form id="declaration_rp_user_'+value.rpId+value.user_id+'" role="formDeclaration_rp_user_'+value.rpId+value.user_id+'" name="dform">'
 													tag += '<input type="hidden" name="reporter_id" value="${loginUser.user_id}">';
 													tag += '<input type="hidden" name="reported_id" value="'+value.user_id+'">';
-													tag += '<div class="form-group"><label for="inputMessage">신고사유</label><br>';
+													tag += '<div class="form-group" align="left">';
 													tag += '<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">부적절한 홍보 게시글<br>';
 													tag += '<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">음란성 또는 청소년에게 부적합한 내용<br>';
 													tag += '<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etcRp_'+value.rpId+'.disabled=true">명예훼손/사생활 침해 및 저작권침해등<br>';
@@ -215,7 +217,6 @@
 													tag += '<textarea style="resize:none;height:80px;width:100%;" cols="30" rows="10" class="form-control" id="etcRp_'+value.rpId+'" name="dReason" disabled></textarea>';
 													tag += '</div></form></div>';
 													tag += '<div class="modal-footer">';
-													tag += '<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm()">취소</button>';
 													tag += '<button type="button" class="btn reportBtn" onclick="reportRpUser('+value.rpId+value.user_id+',\''+value.uNickname+'\');">신고</button>';
 													tag += '</div>';
 													tag += '</div></div></div>';	
@@ -296,10 +297,10 @@
 				}
 				
 				tag += '<div class="comment">';
-					tag += '<div class="card card-inner">';	//card-inner
-						tag += '<div class="card-body">';								// card-body
-							tag += '<form name="reQform">';								//form
-								tag += '<div class="row">';								//row
+					tag += '<div class="card card-inner">';				//card-inner
+						tag += '<div class="card-body">';				// card-body
+							tag += '<form name="reQform">';				//form
+								tag += '<div class="row">';				//row
 									tag += '<div class="col-md-2" align="center">';
 										tag += '<img src="' +$('#uProfile').val() +'" alt="userProfile"/>';
 										tag += '<div class="commentUser"><b>' +uNickname + '</b></div>';
@@ -308,7 +309,7 @@
 								
 									tag += '<div class="col-md-10">'; 	       
 										tag += '<input type="hidden" name="q_user_id" value=' +userId +'>';
-										tag += '<textarea class="form-control" type="text" name="reQuestion" placeholder="답변을 입력하세요." rows="5"></textarea>';		
+										tag += '<textarea style="resize:none;" class="form-control" type="text" name="reQuestion" placeholder="답변을 입력하세요." rows="5"></textarea>';		
 										tag += '<br>';
 										
 										tag += '<p>';
@@ -347,7 +348,8 @@
 								'class_id' : cId, 
 								'user_id' : $("#userId").val()},	
 						success: function(data){
-							alert("답변이 등록되었습니다.")
+							alert("답변이 등록되었습니다.");
+							
 							questionCnt();
 							questionList(cn);
 						},
@@ -387,6 +389,7 @@
 							alert("문의사항이 등록되었습니다.")
 							questionCnt();
 							questionList();
+							$('#cqInputform').val("");
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);

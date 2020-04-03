@@ -40,26 +40,32 @@ var isAdmin = '운영자';
 				var page = rpPageMaker[7].page;
 			
 				var paging = '';
-				paging += '<div class="replyListpaging">';
-				paging += '<ul class="pagination">';
-
-					paging += '<li class="page-item">';
-					paging += '<a class="page-link" href="javascript:replyList('+(startPage - 1) +')">';
-					paging += '<i class="fas fa-angle-left"></i>';
-					paging += '</a>';
-					paging += '</li>';
+					paging += '<div class="replyListpaging">';
+					paging += '<ul class="pagination">';
+					
+					
+					if(tempEndPage != 0) {
+						paging += '<li class="page-item">';
+						paging += '<a class="page-link" href="javascript:replyList('+(startPage - 1) +')">';
+						paging += '<i class="fas fa-angle-left"></i>';
+						paging += '</a>';
+						paging += '</li>';
+					}
 				
-				for(var i = startPage; i <= endPage; i++){
-					paging += '<li class="page-item pageNum">';
-					paging += '<a class="page-link" href="javascript:replyList(' +i +')">' + i +'</a>';
-					paging += '</li>';
-				}
-				 
-					paging += '<li class="page-item">';
-					paging += '<a class="page-link" href="javascript:replyList('+(endPage + 1) +')">';
-					paging += '<i class="fas fa-angle-right"></i>';
-					paging += '</a>';
-					paging += '</li>';
+					for(var i = startPage; i <= endPage; i++){
+						paging += '<li class="page-item pageNum">';
+						paging += '<a id="bReplyPageNum_' +i +'" class="page-link" href="javascript:replyList(' +i +')">' + i +'</a>';
+						paging += '</li>';
+					}
+					
+					if(page < tempEndPage){
+						paging += '<li class="page-item">';
+						paging += '<a class="page-link" href="javascript:replyList('+(endPage + 1) +')">';
+						paging += '<i class="fas fa-angle-right"></i>';
+						paging += '</a>';
+						paging += '</li>';
+					}
+					
 				
 				paging += '</ul>';
 				paging += '</div>';
@@ -71,7 +77,7 @@ var isAdmin = '운영자';
 			function replyList(page) {
 				var page = Number(page);
 				if(isNaN(page)) {
-					page = 0;
+					page = 1;
 				}
 				
 				$.ajax({
@@ -79,10 +85,11 @@ var isAdmin = '운영자';
 					type: 'GET',
 					dataType:'json',
 					data: {'board_id' : bId,
-							'page' : page < 1 ? 1 : page
+							'page' : page <= 1 ? 1 : page
 							},
 					success: function(data){
 						console.log(data);
+						console.log('page : ' +page);
 						
 						// 댓글 페이징
 						var rpPageMaker = Object.values(data["rpPageMaker"]);
@@ -117,7 +124,7 @@ var isAdmin = '운영자';
 								}
 									b += '<div class="wrapper">';
 									b += '<div class="replyWriter">';
-									if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2'){
+									if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2' || uNickname == ''){
 										b += '<a class="userBtn myUserBtn">'+value.uNickname+'</a>';
 									} else{
 										b += '<div class="dropdown">';
@@ -244,8 +251,15 @@ var isAdmin = '운영자';
 									b += '</div>';
 									b += '<div class="rRp_'+value.rpId+'"></div>';
 									// replyWrapper
+									
+									
+								var temp = '<input type=hidden id="currentPageNum" value=' +page +'>';	
+								$(".brCurrentPageNum").html(temp);
 								
-								$(".replyList").append(b);	
+								$(".replyList").append(b);
+								
+								$('#bReplyPageNum_'+page).css("background-color", "#59bfbf");
+								$('#bReplyPageNum_'+page).css("color", "#ffffff");
 							}
 				        });
 					},
@@ -346,6 +360,8 @@ var isAdmin = '운영자';
 			
 			// 대댓글을 작성하기 위한  view 화면 불러오는 JS메서드
 			function reReplyView(rpId, rpGroup, rpStep, rpIndent) {
+				var cn = $('#currentPageNum').val();
+				
 				if(!uNickname){
 					alert("로그인 해주세요.");
 				}else{
@@ -358,7 +374,7 @@ var isAdmin = '운영자';
 					a += '</div>';
 					a += '<div class="rRpBtnWrap">';
 					a += '<a class="rRpWrite" onclick="reReplyWrite('+rpGroup +','+rpStep +','+rpIndent +')">등록</a>';
-					a += '<a onclick="replyList();">취소</a>';
+					a += '<a onclick="replyList(' +cn +');">취소</a>';
 					a += '</div>';
 					a += '</form>';
 					a += '</div>';
@@ -369,6 +385,7 @@ var isAdmin = '운영자';
 			// 대댓글 작성 JS메서드(Ajax-Json)
 			function reReplyWrite(rpGroup, rpStep, rpIndent) {
 				var rRpContent = document.Rrpform.rRpContent;
+				var cn = $('#currentPageNum').val();
 				
 				if(rRpContent.value == '') {
 					alert("내용을 작성해주세요");
@@ -389,7 +406,7 @@ var isAdmin = '운영자';
 						success: function(data){
 							alert("댓글이 등록되었습니다.")
 							replyCount(bId);
-							replyList();
+							replyList(cn);
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);
@@ -401,18 +418,31 @@ var isAdmin = '운영자';
 
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
 			$('[name=replyBtn]').click(function(){
-				var insertData = $('[name=rpform]').serialize();				
-				replyWrite(insertData);
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					$('#rpContent').val("");
+					return false;
+				} else {
+					var insertData = $('[name=rpform]').serialize();				
+					replyWrite(insertData);
+				}
 			});
 			
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
 			$('#replyBtn').click(function(){
-				var insertData = $('[name=rpform]').serialize();				
-				replyWrite(insertData);
+				if(!uNickname){
+					alert("로그인 해주세요.");
+					$('#rpContent').val("");
+					return false;
+				} else {
+					var insertData = $('[name=rpform]').serialize();				
+					replyWrite(insertData);
+				}
 			});
 			
 			// 해당 게시물에 대해 댓글을 작성하는 JS메서드(Ajax-Json) 
 			function replyWrite(insertData) {
+				var cn = $('#currentPageNum').val();
 				var rpContent = document.rpform.rpContent;
 				
 				if(rpContent.value == '') {
@@ -427,7 +457,7 @@ var isAdmin = '운영자';
 						success: function(insertData){
 							alert("댓글이 등록되었습니다.")
 							replyCount(bId);
-							replyList();
+							replyList(cn);
 							$("#rpContent").val("");
 						},
 						error : function(request, status, error) {
@@ -440,17 +470,19 @@ var isAdmin = '운영자';
 			
 			// 댓글 수정 view JS메서드(Ajax-Json)
 			function replyModify(rpId, rpContent){
+				var cn = $('#currentPageNum').val();
 			    var a ='';
 				    a += '<div class="modifyContentBox">';
 				    a += '<input type="text" name="rpContent_' +rpId +'" value="' +rpContent +'"/>';
 				    a += '<a class="modifyConfirm" onclick="replyModifyPrc(' +rpId +');">수정</a>';
-					a += '<a class="modifyCancle" onclick="replyList();">취소</a>';
+					a += '<a class="modifyCancle" onclick="replyList(' +cn +');">취소</a>';
 				    a += '</div>';
 			    $('.rpContentInner_'+rpId).html(a);	    
 			}
 			
 			// 댓글 수정 JS메서드(Ajax-Json)
 			function replyModifyPrc(rpId) {
+				var cn = $('#currentPageNum').val();
 				var rpContent = $('[name=rpContent_' +rpId +']').val();
 				if(rpContent == '') {
 					alert("내용이 비어있습니다.");
@@ -463,7 +495,7 @@ var isAdmin = '운영자';
 						type: 'post',
 						data: {'rpContent' : modify_rpContent, 'rpId' : rpId},
 						success: function(data){
-							replyList();
+							replyList(cn);
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);
@@ -475,6 +507,8 @@ var isAdmin = '운영자';
 			
 			// 댓글 삭제 JS메서드(Ajax-Json)
  			function replyDelete(rpId, gCount, rpStep, rpIndent) {
+ 				var cn = $('#currentPageNum').val();
+ 				
 				if(gCount > 1 && rpStep == 0 && rpIndent == 0) {
 					alert("대댓글이 달린 댓글은 삭제 할 수 없습니다.");	
 					return;
@@ -486,7 +520,7 @@ var isAdmin = '운영자';
 							data: {'rpId' : rpId},
 							success: function(data){
 								replyCount(bId);
-								replyList();
+								replyList(cn);
 							},
 							error : function(request, status, error) {
 								console.log(request.responseText);

@@ -4,8 +4,8 @@
 $(document).ready(function() {
 	$('#summernote').summernote({
 		height: 500,   // set editor height
-		minHeight : null,
-		maxHeight : null,
+		minHeight : 500,
+		maxHeight : 500,
 		focus : true,
 		lang: 'ko-KR', // 언어 세팅
 		placeholder: '개설예정인 강좌에 대한 상세정보를 입력해 주세요.',

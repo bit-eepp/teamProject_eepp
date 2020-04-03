@@ -15,9 +15,23 @@
 			} else {
 				self.location = "boardList" + $("#pageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) 
 				+ "&sortType=" + $("#sortType").val() + "&bCategory=" + $("#bCategory").val();
-				}
-			});
-					
+			}
+		});
+				
+		$('#bKeywordInput').keydown(function(event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if(keycode == 13) {
+		    	 if($('select[name=searchType]').val() == 'n') {
+		 			alert('검색조건을 지정해주세요');
+		 			return;
+		 		} else {
+		 			self.location = "boardList" + $("#pageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) 
+					+ "&sortType=" + $("#sortType").val() + "&bCategory=" + $("#bCategory").val();
+		 		}
+		     }
+		});
+		// 게시물 검색 끝
+				
 		// 게시글 n개씩 보기
 		$('#cntPerPage').change(function() {
 			var totalCount = $("#pageMakerTotalCount").val();

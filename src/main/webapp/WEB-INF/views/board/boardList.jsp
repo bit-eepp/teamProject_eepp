@@ -84,8 +84,7 @@
 			</select> 
 			
 			<div class="input-group md-form form-sm form-2 pl-0">
-  				<input class="form-control my-0 py-1 amber-border" type="text" placeholder="검색어" aria-label="Search"
-  				 name="keyword" id="keywordInput" value="${scri.keyword}">
+  				<input class="form-control my-0 py-1 amber-border" type="text" placeholder="검색어" aria-label="Search" name="keyword" id="bKeywordInput" value="${scri.keyword}">
   				<div class="input-group-append">
   					<a id="searchBtn">
   						<span class="input-group-text lighten-3" id="basic-text1"><i class="fas fa-search"

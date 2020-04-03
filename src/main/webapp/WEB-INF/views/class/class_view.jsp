@@ -9,8 +9,8 @@
 		<title>No.${clView.cId} CLASS강좌</title>
 		
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classView.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		
 		<script>
 			function getContextPath() {
@@ -26,11 +26,14 @@
 			$(document).ready(function() {
 				// 수강정보 썸머노트 설정
 				$('#summernote').summernote({
-					height: 500,  
+					height: 500,
+					minHeight: 500,
+					maxHeight: 500,
 					toolbar: []
 				});
 				
 				$('.note-editor').width($('.clContentView').width());
+				$('#summernote').css('resize', 'none');
 				$('#summernote').summernote('disable');
 				
 				// 신청종료일 카운트다운
@@ -50,6 +53,9 @@
 					if (difference < 0) {
 						clearInterval(x);
 						document.getElementById("classEndCountDown").textContent = "신청기간 종료";
+						
+						var tag = '<button class="btn btn-default btn-lg" style="background-color:#e7438b; color:#ffffff; width:100%; cursor:default;">신 청 기 간 종 료</button>';
+						$('.classJoinForm').html(tag);
 					} 
 				}, 1000);
 
@@ -373,7 +379,7 @@
 									<c:choose>
 										<c:when test="${clView.uNickname eq loginUser.uNickname or clView.uNickname eq '운영자' or clView.uNickname eq 'admin2' or loginUser.uNickname == null}">
 											<div class="clOpennerNick">
-												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a class="userBtn clUser"><b>${clView.uNickname}</b></a>
+												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a class="userBtn clUserE"><b>${clView.uNickname}</b></a>
 											</div>
 										</c:when>
 											
@@ -388,7 +394,7 @@
 											</div>			
 											
 											<!-- 유저 신고 modal -->	
-				                			<div class="modal fade" id="report_user_${clView.user_id}${clView.cId}" role="dialog">
+				                			<div class="modal fade reportModalBox" id="report_user_${clView.user_id}${clView.cId}" role="dialog">
 				                				<!-- modal-dialog -->
 				                				<div class="modal-dialog">
 				                					<!-- modal-content -->
@@ -399,7 +405,7 @@
 						                					<span aria-hidden="true">&times;</span>
 									                    	<span class="sr-only">Close</span>
 									                		</button>
-									               			<h4 class="modal-title">${clView.uNickname}님 신고</h4>
+									               			<h4 class="modal-title">&#8988;${clView.uNickname}&#8991;님 신고</h4>
 									            		</div>
 									            		<!-- Header -->
 									            				
@@ -409,9 +415,8 @@
 									            			<form id="declaration_user_${clView.user_id}${clView.cId}" role="formDeclaration_user_${clView.user_id}${clView.cId}" name="dform">
 										            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 										            			<input type="hidden" name="reported_id" value="${clView.user_id}">
-									            				
+									            				<p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
 										            			<div class="form-group">
-											            			<label for="inputMessage">신고사유</label><br>
 											            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${clView.cId}.disabled=true">  부적절한 홍보 게시글<br>
 											            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${clView.cId}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 											            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${clView.cId}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
@@ -425,7 +430,6 @@
 						            
 									            		<!-- Modal Footer -->
 									            		<div class="modal-footer">
-									                		<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ResetForm()">취소</button>
 									                		<button type="button" class="btn reportBtn" onclick="reportUser(${clView.user_id}${clView.cId},'${clView.uNickname}');">신고</button>
 									            		</div>
 									            		<!-- Footer -->
@@ -642,7 +646,7 @@
 								            	<form name="qForm">
 													<input type="hidden" name="class_id" value="${clView.cId}" />
 													<input type="hidden" name="user_id" value="${loginUser.user_id}">
-													<textarea class="form-control" rows="4" name="rpContent" placeholder="강좌에 문의할 점이 있으면 작성해주세요." style="width: 100%;"></textarea>
+													<textarea id="cqInputform" class="form-control" rows="4" name="rpContent" placeholder="강좌에 문의할 점이 있으면 작성해주세요." style="width: 100%; resize: none;"></textarea>
 												</form>
 								            </td>
 								            

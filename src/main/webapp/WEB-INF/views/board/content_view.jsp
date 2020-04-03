@@ -154,25 +154,25 @@
 			            <!-- Modal Body -->
 			            <div class="modal-body">
 			                <c:choose>
-			                <c:when test="${not empty loginUser.uNickname}">
-			                <form id="declaration" role="formDeclaration" name="dform">
-			                    <input type="hidden" name="reporter_id" value="${loginUser.user_id}">
-			                    <input type="hidden" name="board_id" value="${content.bId}">
-			                    
-			                    <p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
-			                    <div class="form-group">
-			                        <input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc.disabled=true">  부적절한 홍보 게시글<br>
-									<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
-									<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
-									<input type="radio" name="dReason" value="etc" onclick="this.form.etc.disabled=false">  기타<br>
-									<textarea class="form-control" id="etc" name="dReason" disabled></textarea>
-			                    </div>
-			                </form>
-			                </c:when>
-			                
-			                <c:otherwise>
-			                <h3 class="cantReport">해당 게시글 신고를 원하시면 로그인 해주세요.</h3>
-			                </c:otherwise>
+				                <c:when test="${not empty loginUser.uNickname}">
+					                <form id="declaration" role="formDeclaration" name="dform">
+					                    <input type="hidden" name="reporter_id" value="${loginUser.user_id}">
+					                    <input type="hidden" name="board_id" value="${content.bId}">
+					                    
+					                    <p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
+					                    <div class="form-group">
+					                        <input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc.disabled=true">  부적절한 홍보 게시글<br>
+											<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
+											<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
+											<input type="radio" name="dReason" value="etc" onclick="this.form.etc.disabled=false">  기타<br>
+											<textarea class="form-control" id="etc" name="dReason" disabled></textarea>
+					                    </div>
+					                </form>
+				                </c:when>
+				                
+				                <c:otherwise>
+				               		<h3 class="cantReport">해당 게시글 신고를 원하시면 로그인 해주세요.</h3>
+				                </c:otherwise>
 			                </c:choose>
 			            </div>
 			            <!-- Modal Body -->
@@ -277,8 +277,9 @@
 		<div>
 			<div class="replyList"></div>
 			<div class="replyPaging"></div>
+			<div class="brCurrentPageNum"></div>
 		</div>
-</div>
+	</div>
 
 	
 		<%-- <%@ include file="/WEB-INF/views/board/replyList.jsp"%> --%>

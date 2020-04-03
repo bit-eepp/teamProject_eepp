@@ -9,7 +9,7 @@
 	background-color:#dae0e547;
 }
 
-.classQuestionA .card-body .card-inner .card-body .row .col-md-2 img {
+.classQuestionA .card-body .card-inner .card-body .row .col-md-2 .qprofile {
 	border-radius:50%;
 	width:65px;
 	height:65px;
@@ -32,7 +32,7 @@
 	cursor: pointer;
 }
 
-.classQuestionB .card-body .row .col-md-2 img {
+.classQuestionB .card-body .row .col-md-2 .qprofile {
 	border-radius:50%;
 	width:65px; 
 	height:65px;
