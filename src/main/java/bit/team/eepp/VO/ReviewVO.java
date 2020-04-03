@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReviewVO {
 	private int rvId;
-	private int eId;
+	private int eating_id;
 	private int user_id;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Timestamp rvWrittenDate;
@@ -15,6 +15,7 @@ public class ReviewVO {
 	private String rvComment;
 	private float rvScore;
 	private float reviewAVG;
+	
 	public float getReviewAVG() {
 		return reviewAVG;
 	}
@@ -28,11 +29,11 @@ public class ReviewVO {
 	public ReviewVO() {
 	}
 
-	public ReviewVO(float reviewAVG,int rvId, int eId, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
+	public ReviewVO(float reviewAVG,int rvId, int eating_id, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
 			float rvScore, String uNickname) {
 		this.rvId = rvId;
 		this.reviewAVG = reviewAVG;
-		this.eId = eId;
+		this.eating_id = eating_id;
 		this.user_id = user_id;
 		this.rvWrittenDate = rvWrittenDate;
 		this.rvModifyDate = rvModifyDate;
@@ -41,20 +42,20 @@ public class ReviewVO {
 		this.uNickname = uNickname;
 	}
 
+	public int getEating_id() {
+		return eating_id;
+	}
+
+	public void setEating_id(int eating_id) {
+		this.eating_id = eating_id;
+	}
+
 	public int getRvId() {
 		return rvId;
 	}
 
 	public void setRvId(int rvId) {
 		this.rvId = rvId;
-	}
-
-	public int geteId() {
-		return eId;
-	}
-
-	public void seteId(int eId) {
-		this.eId = eId;
 	}
 
 	public int getUser_id() {

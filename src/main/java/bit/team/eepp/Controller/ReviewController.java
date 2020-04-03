@@ -42,12 +42,12 @@ public class ReviewController {
 		System.out.println("criteria.getPerPageNum() : " + rvCriteria.getPerPageNum());
 		System.out.println("criteria.getPage() : " + rvCriteria.getPage());
 
-		int rvCount = reviewCount(reviewVO.geteId());
+		int rvCount = reviewCount(reviewVO.getEating_id());
 		System.out.println("댓글수 : " + rvCount);
 
 		rvPageMaker.setTotalCount(rvCount);
 		
-		List<ReviewVO> reviewList = reviewService.reviewList(rvCriteria, reviewVO.geteId());
+		List<ReviewVO> reviewList = reviewService.reviewList(rvCriteria, reviewVO.getEating_id());
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rvPageMaker", rvPageMaker);
