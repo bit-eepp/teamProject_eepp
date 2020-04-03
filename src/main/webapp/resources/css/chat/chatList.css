@@ -156,27 +156,57 @@ body button{
     font-weight: bold;
     font-size: 14px;
 }
+
+	/*
+	* 채팅방 개설
+	*/
+	
 #chatModalForm .modal-dialog .modal-content .modal-header .chatMklogo {
 	width: 10%;
 	height: auto;	
 }
-#chatModalForm .modal-dialog .modal-content .modal-header strong {
+#chatModalForm .modal-dialog .modal-content .modal-header h5{
+	margin-bottom:0;
+}
+#chatModalForm .modal-dialog .modal-content .modal-header span{
 	color: #e7438b;
 }
-#chatModalForm .modal-dialog .modal-content .modal-body button {
-	min-width: 130px;
-	background-color: #59bfbf;
-	color:#ffffff;
+
+#chatModalForm .modal-dialog .modal-content .modal-body .openChatTitle{
+	margin: 10px 0 20px;
+    font-size: 18px;
+    color: #e7438b;
 }
-#chatModalForm .modal-dialog .modal-content .modal-footer button {
-	min-width: 120px;
-	background-color: #59bfbf;
-	color:#ffffff;
-	font-weight: 600;
+#chatModalForm .modal-dialog .modal-content .modal-body .input-group{
+	align-items: center;
 }
-#chatModalForm .modal-dialog .modal-content .modal-footer button:hover {
-	background-color: #e7438b;
-	color:#26274c;
+#chatModalForm .modal-dialog .modal-content .modal-body .input-group p{
+	margin-bottom:0;
+	margin-left:10px;
+}
+#chatModalForm .modal-dialog .modal-content .modal-body .input-group input{
+	font-size: 13px;
+    margin-left: 10px;
+}
+#chatModalForm .modal-dialog .modal-content .modal-body .input-group-prepend{
+	background: #59bfbf;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    width: 120px;
+}
+#chatModalForm .modal-dialog .modal-content .modal-body .input-group-prepend i{
+	margin-right:8px;
+}
+
+#chatModalForm .modal-dialog .modal-content .modal-footer .cancleBtn{
+	border: 1px solid #e7438b;
+    color: #e7438b;
+}
+#chatModalForm .modal-dialog .modal-content .modal-footer .submitBtn{
+	background: #e7438b;
+    color: #fff;
 }
 #goToTop {
 	position: absolute;

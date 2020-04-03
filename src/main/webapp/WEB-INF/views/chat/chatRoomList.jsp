@@ -261,7 +261,7 @@
 		    function goChatRoom(chId, user_id) {
 		    	var chForm = document.createElement('form');
 		    	
-		    	chatWin = window.open('about:blank', chId, 'width=400, height=800, resizable = no, location = no');
+		    	chatWin = window.open('about:blank', chId, 'width=400, height=700, resizable = no, location = no');
 	
 		    	chForm.setAttribute('method', 'post');
 		    	chForm.setAttribute('action', "/eepp/chat/chatRoomSelect");
@@ -333,49 +333,38 @@
 							<!-- Modal Header -->
 							<div class="modal-header" >
 								<img class="chatMklogo" alt="" src="${pageContext.request.contextPath}/img/EE_logo.png">
-								<h5>퇴근 후  <strong>EE Chat</strong>을 통해 모여봐요</h5>
+								<h5>퇴근 후 <span>EE Chat</span> 을 통해 모여봐요</h5>
 							</div>
 		
 							<!-- Modal Body -->
 							<div class="modal-body" align="center">
-								<h5><strong>EE chat 개설을 위해 정보를 입력해주세요.</strong></h5>
-								<br>
+								<p class="openChatTitle">EE chat 개설을 위해 정보를 입력해주세요.</p>
 								
 								<form id="chatRoomMake" name="chForm">
 									<input type="hidden" name="user_id" value="${loginUser.user_id}">
 
 									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<button class="btn btn-default" type="button"><i class="fas fa-user-alt"></i> 모  임  장</button>
-										</div>
-										<input type="text" class="form-control" value="${loginUser.uNickname}">
+										<div class="input-group-prepend"><i class="fas fa-user-alt"></i>모임장</div>
+										<p>${loginUser.uNickname}</p>
 									</div>
 								
 									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<button class="btn btn-default" type="button"><i class="fas fa-heading"></i> 모  임  명</button>
-										</div>
+										<div class="input-group-prepend"><i class="fas fa-heading"></i> 모임명</div>
 										<input type="text" class="form-control" name="chTitle" placeholder="모임명을 입력해주세요(최대 30자)" maxlength="30">
 									</div>
 								
 									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<button class="btn btn-default" type="button"><i class="fas fa-map-marker-alt"></i> 모임장소</button>
-										</div>
+										<div class="input-group-prepend"><i class="fas fa-map-marker-alt"></i>모임장소</div>
 										<input type="text" class="form-control" name="chPlace" placeholder="모임장소을 입력해주세요(최대 20자)" maxlength="20">
 									</div>
 
 									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<button class="btn btn-default" type="button"><i class="far fa-clock"></i> 모임시간</button>
-										</div>
+										<div class="input-group-prepend"><i class="far fa-clock"></i> 모임시간</div>
 										<input type="datetime-local" class="form-control" name="chMeetTime">
 									</div>
 									
 									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<button class="btn btn-default" type="button"><i class="fas fa-sort-numeric-down"></i> 모임인원</button>
-										</div>
+										<div class="input-group-prepend"><i class="fas fa-sort-numeric-down"></i> 모임인원</div>
 										<input type="number" class="form-control" name="chTotalPeopleCount" min="1" max="30" placeholder="최소 : 1인, 최대 30인">
 									</div>
 								</form>
@@ -384,8 +373,8 @@
 		
 							<!-- Modal Footer -->
 							<div class="modal-footer">
-								<button type="button" class="btn" data-dismiss="modal" onclick="resetForm()">개설 취소</button>
-								<button type="button" class="btn submitBtn" onclick="chatRoomMake(${loginUser.user_id})">EE Chat 개설</button>
+								<button type="button" class="btn cancleBtn" data-dismiss="modal" onclick="resetForm()">취소</button>
+								<button type="button" class="btn submitBtn" onclick="chatRoomMake(${loginUser.user_id})">개설</button>
 							</div>
 							<!-- Modal Footer -->
 							

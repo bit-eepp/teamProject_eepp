@@ -97,48 +97,41 @@
 				
 				if(msg.type == "notice") {
 					tag += '<div class="notice">';
-					tag += '<div class="notice-body">';
 					tag += '<div class="notice-message">';
-					tag += '<br>';
-					tag += '<h6><b style="color:#26274c;">' +msg.uNickname +msg.text +' ['+timeStr +'] </b></h6>';
-					tag += '</div>';
+					tag += '<p>' +msg.uNickname +msg.text +' ['+timeStr +'] </p>';
 					tag += '</div>';
 					tag += '</div>';
 					appendMessage(tag); 	
 				} else if(msg.type == "delete") {
 					tag += '<div class="notice">';
-					tag += '<div class="notice-body">';
 					tag += '<div class="notice-message">';
-					tag += '<br>';
-					tag += '<h6><b style="color:red;">' +msg.text +' ['+timeStr +'] </b></h6>';
-					tag += '</div>';
+					tag += '<p class="deleteNotice">' +msg.text +' ['+timeStr +'] </p>';
 					tag += '</div>';
 					tag += '</div>';
 					appendMessage(tag);
 				} else if(msg.type == "msg") {
 					if(msg.uNickname == currentUserNickname) {
 			    		tag += '<li class="out">';
-			    		tag += '<div class="chat-img">';
-			    		tag += '</div>';
 			    		tag += '<div class="chat-body">';
 			    		tag += '<div class="chat-message">';
-			    		tag += '<h6 style="color:#ffffff">' +msg.text +'</h6>';
-			    		tag += '<p style="color:#26274c;">' +msg.uNickname +'</p>';
-			    		tag += '<p style="color:#26274c;">' +timeStr +'</p>' ;
+			    		tag += '<h6 class="mySendMessage messageText">' +msg.text +'</h6>';
+			    		tag += '<div class="chat-message-info">'
+			    		tag += '<p class="myMsgTime">' +timeStr +'</p>' ;
+			    		tag += '</div>';
 			    		tag += '</div>';
 			    		tag += '</div>';
 			    		tag += '</li>';
 			    		appendMessage(tag);    		
 			    	} else {
 			    		tag += '<li class="in">';
-			    		tag += '<div class="chat-img">';
-			    		tag += '<img alt="Avtar" src="https://bootdey.com/img/Content/avatar/avatar6.png">';
-			    		tag += '</div>';
 			    		tag += '<div class="chat-body">';
+			    		tag += '<div class="chat-img">';
+			    		tag += '<img alt="Avtar" src="'+$("#userProfile").val()+'">';
+			    		tag += '</div>';
 			    		tag += '<div class="chat-message">';
-			    		tag += '<h6 style="color:#ffffff">' +msg.text +'</h6>';
-			    		tag += '<p style="color:#26274c;">' +msg.uNickname +'</p>';
-			    		tag += '<p style="color:#26274c;">' +timeStr +'</p>' ;
+			    		tag += '<div class="chat-message-info"><p>'+msg.uNickname+'</p></div>';
+			    		tag += '<h6 class="myReceiveMessage messageText">' +msg.text +'</h6>';
+			    		tag += '<div class="chat-message-info"><p>'+timeStr+'</p></div>';
 			    		tag += '</div>';
 			    		tag += '</div>';
 			    		tag += '</li>';
@@ -154,7 +147,7 @@
 	
 			// 보낸 채팅메세지를 화면에 나타내는 메서드
 			function appendMessage(tag) {
-				$(".chat-list").append(tag + "<br>");
+				$(".chat-list").append(tag);
 				$(".chatMessageArea").scrollTop($(".chatMessageArea")[0].scrollHeight);	
 			}
 	
@@ -253,29 +246,23 @@
 	</head>
 	
 	<body oncontextmenu="return false">
-		<div class="container content">		
-			<div class="row">
-				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+	<input type="hidden" id="userProfile" value="${loginUser.uprofile}">
+				<div class="chatRoomWrapper">
 					<div class="card">
-					
 						<div class="card-header">
+						
 							<span class="noticeMsg">
 								<i class="fas fa-comment-alt fa-2x"></i>
 							</span>
 							
-							No.${chatRoomSelect.chId}
-							
-							<div class="chatTitle">${chatRoomSelect.chTitle}</div>
-							<br>
-							
-							<div class="chatMaster">모 임 장 : ${chatRoomSelect.uNickname}</div>
-							<div class="openTime" >개설시간 : <fmt:formatDate value="${chatRoomSelect.chDate}" pattern="yyyy.MM.dd HH:mm" /></div>
-							<div class="count"></div>
-							
-							<div>
-								<div class="chatMemberList"></div>
+							<div class="chatTitle">
+								${chatRoomSelect.chTitle}
 							</div>
-							<br>
+							
+							<div class="chatRoomMakeInfo">
+								<p class="chatMaster">모임장 : ${chatRoomSelect.uNickname}</p>
+								<p class="openTime"><fmt:formatDate value="${chatRoomSelect.chDate}" pattern="yyyy.MM.dd HH:mm" /></p>
+							</div>
 							
 							<span class="chMenu">
 								<button title="EE Chat 삭제" id="deleteBtn" class="btn btn-default btn-sm" onclick="chatRoomDelete(${chatRoomSelect.chId}, ${loginUser.user_id})"><i class="fas fa-trash-alt fa-2x"></i></button>
@@ -287,7 +274,14 @@
 								<p><i title="모임시간" class="far fa-clock">&nbsp;<b>${chatRoomSelect.chMeetTime}</b></i></p>
 							</div>
 							
+							<div class="count"></div>
+							
+							<div>
+								<div class="chatMemberList"></div>
+							</div>
+							
 						</div>
+						<!-- card-header -->
 						
 						<div class="chatMessageArea">
 							<ul class="chat-list"></ul>
@@ -302,8 +296,8 @@
 		                    </div>
 		                </div>
 					</div>
-				</div>		
-			</div>
-		</div>
+					<!-- card -->
+				</div>
+				<!-- chatRoomWrapper -->
 	</body>
 </html>
