@@ -33,7 +33,7 @@
 						    	<div class="dropdown">
 								<a href="#" class="userBtn" id="header_user_btn" data-toggle="dropdown">
 								<strong id="loginNickname">${loginUser.uNickname}</strong>
-									<img id="headerLogin" src="${pageContext.request.contextPath}/img/headerLogin.png">
+									<img id="headerLogin" class="afterLoginProfile" src="${loginUser.uprofile}">
 								</a>
            						 <ul class="dropdown-menu" role="menu" aria-labelledby="header_user_btn">
                 					<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
