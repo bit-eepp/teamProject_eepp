@@ -7,7 +7,10 @@
 	padding: 0px;
 }
 /* 공통 스타일 */
-
+#headerAll{
+	position: fixed;
+    z-index: 999;
+}
 #headerMain{
 	height: 90px;
     border-bottom: 1px solid #ddd;
