@@ -54,6 +54,9 @@
 #headerLogin {
 	max-width: 11%;
 }
+.afterLoginProfile{
+	border-radius: 50%;
+}
 #loginNickname {
 	font-size: 80%;
 	color: #26274c;

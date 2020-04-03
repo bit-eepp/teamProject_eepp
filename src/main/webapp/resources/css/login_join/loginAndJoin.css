@@ -10,6 +10,9 @@ button:focus{outline: initial!important;}
 	/*
 	* 로그인페이지
 	*/
+.sc-login{
+	padding:40px 0 20px!important;
+}
 .loginMainTitle{
 	text-align: center;
     margin-bottom: 20px;
@@ -21,9 +24,13 @@ button:focus{outline: initial!important;}
     margin: 0 6px 0 3px;
     max-width: 5%;
 }
+.loginpassBox{
+	margin-bottom:5px!important;
+}
 .sc-login .failedLogin{
 	color: #ea0909;
     font-size: 14px;
+    margin-bottom: 5px;
 }
 
 .rememberMeCheck{
@@ -33,7 +40,7 @@ button:focus{outline: initial!important;}
 	font-size:16px;
 }
 .loginOrRegister{
-	margin-top: 30px;
+	margin-top: 15px;
 }
 .loginBtn button{
 	background: #000;

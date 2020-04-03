@@ -26,10 +26,10 @@
 	<div class="container col-md-4">
 		<form:form name="f" class="px-4" action="${pageContext.request.contextPath}/nomal_login.do" method="post">
 
-			<div class="form-group">
+			<div class="form-group loginIdBox">
 				<input type="text" class="form-control" name="uEmail" placeholder="아이디">
 			</div>
-			<div class="form-group">
+			<div class="form-group loginpassBox">
 				<input type="password" class="form-control" name="uPassword" placeholder="비밀번호">
 			</div>
 			
