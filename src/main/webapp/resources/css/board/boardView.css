@@ -10,7 +10,7 @@
 	*/
 .sc-writeView, .sc-contentView{
 	margin: 0 auto;
-	padding: 80px 0 120px;
+	padding: 160px 0 120px;
 }
 .sc-writeView .sc-title{
 	font-size: 26px;
@@ -78,7 +78,7 @@
 	*/
 
 #boardContentWrapper{
-	padding: 40px 40px;
+	padding: 160px 40px 40px;
     display: flex;
 }
 .contentSideWrap{

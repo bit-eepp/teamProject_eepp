@@ -4,7 +4,7 @@
 	* boardList
 	*/
 #boardWrapper{
-	padding: 40px 40px;
+	padding: 160px 40px 40px;
     display: flex;
 }
 .boardSideWrap{
