@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -58,7 +60,7 @@
 							<div id="userInfo">
 								<h5>${loginUser.uNickname}님</h5>
 								<h6>EE Point : <i class="fab fa-product-hunt"></i>
-									${loginUser.point}
+									<fmt:formatNumber value="${loginUser.point}" pattern="#,###" />
 								</h6>
 							</div>
 							
@@ -111,7 +113,7 @@
 								<a title="BOARD - ETC" href="${pageContext.request.contextPath}/board/boardList?&bCategory=etc"><strong>ETC</strong></a>
 							</div>
 							<div id="menu9">
-								<a title="WHAT TO EAT TODAY?" href="${pageContext.request.contextPath}/eating/eatingList"><strong>WHAT TO EAT TODAY?</strong></a>
+								<a title="WHAT TO EAT TODAY?" href="${pageContext.request.contextPath}/eating/eatingList"><strong>WHAT SHOULD WE EAT TODAY?</strong></a>
 							</div>
 							<div id="menu10">
 								<a title="EE CLASS" href="${pageContext.request.contextPath}/class/classList"><strong>EE CLASS</strong></a>
@@ -191,7 +193,7 @@
 								<a title="BOARD - ETC" href="${pageContext.request.contextPath}/board/boardList?&bCategory=etc"><strong>ETC</strong></a>
 							</div>
 							<div id="menu9">
-								<a title="WHAT TO EAT TODAY?" href="${pageContext.request.contextPath}/eating/eatingList"><strong>WHAT TO EAT TODAY?</strong></a>
+								<a title="WHAT TO EAT TODAY?" href="${pageContext.request.contextPath}/eating/eatingList"><strong>WHAT SHOULD WE EAT TODAY?</strong></a>
 							</div>
 							<div id="menu10">
 								<a title="EE CLASS" href="${pageContext.request.contextPath}/class/classList"><strong>EE CLASS</strong></a>

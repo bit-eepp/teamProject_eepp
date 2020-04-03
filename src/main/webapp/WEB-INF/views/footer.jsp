@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -34,15 +33,13 @@
 					<div id="serviceTab" class="col-lg-3 mx-auto mt-1">
 						<h5 class="text-uppercase mb-4 font-weight-bold">Services</h5>
 						<p>
-							<a href="${pageContext.request.contextPath}/board/boardList">Board-JOB</a>
+							<a href="${pageContext.request.contextPath}/board/boardList">BOARD - JOB</a>
 						</p>
 						<p>
-							<a href="${pageContext.request.contextPath}/eating/eatingList">What
-								should we eat Today?</a>
+							<a href="${pageContext.request.contextPath}/eating/eatingList">WHAT SHOULD WE EAT TODAY?</a>
 						</p>
 						<p>
-							<a href="${pageContext.request.contextPath}/class/classList">EE
-								Class</a>
+							<a href="${pageContext.request.contextPath}/class/classList">EE Class</a>
 						</p>
 					</div>
 					<!-- Grid column -->
