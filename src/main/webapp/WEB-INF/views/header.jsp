@@ -119,7 +119,7 @@
 								<a title="EE CLASS" href="${pageContext.request.contextPath}/class/classList"><strong>EE CLASS</strong></a>
 							</div>
 							<div id="menu11">
-								<a title="ABOUT US" href="${pageContext.request.contextPath}"><strong>ABOUT US</strong></a>
+								<a title="ABOUT US" href="${pageContext.request.contextPath}/aboutUs"><strong>ABOUT US</strong></a>
 							</div>		
 						</div>
 					</div>
@@ -199,7 +199,7 @@
 								<a title="EE CLASS" href="${pageContext.request.contextPath}/class/classList"><strong>EE CLASS</strong></a>
 							</div>
 							<div id="menu11">
-								<a title="ABOUT US" href="${pageContext.request.contextPath}"><strong>ABOUT US</strong></a>
+								<a title="ABOUT US" href="${pageContext.request.contextPath}/aboutUs"><strong>ABOUT US</strong></a>
 							</div>		
 						</div>
 					</div>
