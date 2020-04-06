@@ -3,19 +3,16 @@ package bit.team.eepp.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,27 +26,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.WebUtils;
 
+import bit.team.eepp.Page.BoardReportCriteria;
+import bit.team.eepp.Page.BoardReportPageMaker;
 import bit.team.eepp.Page.JoinClassCriteria;
 import bit.team.eepp.Page.JoinClassPageMaker;
+import bit.team.eepp.Page.MemberPageMaker;
 import bit.team.eepp.Page.MessageCriteria;
 import bit.team.eepp.Page.MessagePageMaker;
+import bit.team.eepp.Page.MyReviewCriteria;
+import bit.team.eepp.Page.MyReviewPageMaker;
+import bit.team.eepp.Page.NoticeCriteria;
+import bit.team.eepp.Page.NoticePageMaker;
 import bit.team.eepp.Page.OpenClassCriteria;
 import bit.team.eepp.Page.OpenClassPageMaker;
 import bit.team.eepp.Page.PointCriteria;
 import bit.team.eepp.Page.PointPageMaker;
+import bit.team.eepp.Page.ReplyReportCriteria;
+import bit.team.eepp.Page.ReplyReportPageMaker;
 import bit.team.eepp.Page.ScrapClassCriteria;
 import bit.team.eepp.Page.ScrapClassPageMaker;
-import bit.team.eepp.Page.ScrapPageMaker;
 import bit.team.eepp.Page.ScrapboardCriteria;
 import bit.team.eepp.Page.ScrapboardPageMaker;
+import bit.team.eepp.Page.UserReportCriteria;
+import bit.team.eepp.Page.UserReportPageMaker;
 import bit.team.eepp.Page.myPagePageMaker;
+import bit.team.eepp.Search.MemberSearchCriteria;
 import bit.team.eepp.Search.MypageSearchCriteria;
-import bit.team.eepp.Search.ScrapSearchCriteria;
 import bit.team.eepp.Service.ClassService;
 import bit.team.eepp.Service.FileService;
-import bit.team.eepp.Service.LoginService;
 import bit.team.eepp.Service.ScrapService;
 import bit.team.eepp.Service.UserService;
 import bit.team.eepp.Utils.UploadFileUtils;
@@ -69,8 +74,6 @@ public class UserController {
 
 	@Inject
 	UserService us;
-	@Inject
-	LoginService ls;
 	@Inject
 	BCryptPasswordEncoder pwEncoder;
 	@Autowired
@@ -132,20 +135,31 @@ public class UserController {
 
 	@RequestMapping("/mypage")
 	public String mypageList(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri, JoinClassCriteria joclcri, OpenClassCriteria opclcri,
-			@ModelAttribute("scrapcri") ScrapboardCriteria scrapcri, ScrapClassCriteria scrapclasscri,PointCriteria poCri,
+			UserVO userVO, Model model, @ModelAttribute("mscri") MypageSearchCriteria mscri, JoinClassCriteria joclcri,
+			OpenClassCriteria opclcri, @ModelAttribute("scrapcri") ScrapboardCriteria scrapcri,
+			ScrapClassCriteria scrapclasscri, PointCriteria poCri, MyReviewCriteria myreviewcri,
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
 			@RequestParam(value = "mpPoint", required = false, defaultValue = "") String mpPoint,
+//			@RequestParam(value = "mpInfo", required = false, defaultValue = "") String mpInfo,
 			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap,
-			@RequestParam(value = "mpclass", required = false, defaultValue = "") String mpclass) throws IOException {
+			@RequestParam(value = "mpclass", required = false, defaultValue = "") String mpclass,
+			@RequestParam(value = "rv", required = false, defaultValue = "") String rv) throws IOException {
 		logger.info("my contents List");
 
 		// 유저 세션 받아오기
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
 		System.out.println("loginsession : " + loginSession);
+
+		if (loginSession == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 해주세요'); location.href='/eepp/login/login.do';</script>");
+			out.flush();
+
+		} else {
 
 			userVO.setUser_id(user.getUser_id());
 
@@ -154,49 +168,56 @@ public class UserController {
 			map.put("mscri", mscri);
 			map.put("poCri", poCri);
 			map.put("scrapclasscri", scrapclasscri);
-			map.put("joclcri",joclcri);
+			map.put("myreviewcri", myreviewcri);
+			map.put("joclcri", joclcri);
 			map.put("opclcri", opclcri);
 			map.put("sortType", sortType);
 			map.put("bCategory", bCategory);
-			
+
 			map.put("user_id", userVO.getUser_id());
-			
+
 			map.put("listCount", us.listCount(map));
 			map.put("replyCount", us.replyCount(map));
 			map.put("messageRes", us.receiveCount(map));
 			map.put("messageSen", us.sendCount(map));
 			map.put("pointList", us.pointList(map));
-			
-			//개설한 클래스
+			map.put("reviewList", us.reviewList(map));
+			map.put("reviewListCount", us.reviewListCount(map));
+
+			// 내가 쓴 리뷰 목록
+			MyReviewPageMaker MyReviewPageMaker = new MyReviewPageMaker();
+			MyReviewPageMaker.setCri(myreviewcri);
+			MyReviewPageMaker.setTotalCount(us.reviewListCount(map));
+
+			// 개설한 클래스
 			OpenClassPageMaker OpenClassPageMaker = new OpenClassPageMaker();
 			OpenClassPageMaker.setCri(opclcri);
 			OpenClassPageMaker.setTotalCount(us.openClassCount(map));
-			
-			//가입한 클래스
+
+			// 가입한 클래스
 			JoinClassPageMaker JoinClassPageMaker = new JoinClassPageMaker();
 			JoinClassPageMaker.setCri(joclcri);
 			JoinClassPageMaker.setTotalCount(us.joinClassCount(map));
-			
+
 			// 포인트
 			PointPageMaker PointPageMaker = new PointPageMaker();
 			PointPageMaker.setCri(poCri);
 			PointPageMaker.setTotalCount(us.pointCount(map));
-			
+
 			// 게시글 스크랩
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
 			myPagePageMaker.setCri(mscri);
 			myPagePageMaker.setTotalCount(us.listCount(map));
-			
+
 			// 게시판 스크랩
 			ScrapboardPageMaker ScrapboardPageMaker = new ScrapboardPageMaker();
 			ScrapboardPageMaker.setCri(scrapcri);
 			ScrapboardPageMaker.setTotalCount(us.scrapBoardCount(map));
-			
+
 			// 클래스 스크랩
 			ScrapClassPageMaker ScrapClassPageMaker = new ScrapClassPageMaker();
 			ScrapClassPageMaker.setCri(scrapclasscri);
 			ScrapClassPageMaker.setTotalCount(us.scrapClassCount(map));
-			
 
 			if (board != null) {
 				model.addAttribute("board", board);
@@ -207,10 +228,18 @@ public class UserController {
 			if (mpPoint != null) {
 				model.addAttribute("mpPoint", mpPoint);
 			}
-			
+			if (mpclass != null) {
+				model.addAttribute("mpclass", mpclass);
+			}
+			if (rv != null) {
+				model.addAttribute("rv", rv);
+			}
+//			if (mpInfo != null) {
+//				model.addAttribute("mpInfo", mpInfo);
+//			}
 			model.addAttribute("sortType", sortType);
 			model.addAttribute("bCategory", bCategory);
-			
+
 			model.addAttribute("joinClass", us.joinClass(map));
 			model.addAttribute("openClass", us.openClass(map));
 			model.addAttribute("joinClassCount", us.joinClassCount(map));
@@ -225,15 +254,125 @@ public class UserController {
 			model.addAttribute("replyCount", us.replyCount(map));
 			model.addAttribute("listCount", us.listCount(map));
 			model.addAttribute("myBoardList", us.myBoardList(map));
-			
+			model.addAttribute("reviewList", us.reviewList(map));
+			model.addAttribute("reviewListCount", us.reviewListCount(map));
+
 			model.addAttribute("myPagePageMaker", myPagePageMaker);
 			model.addAttribute("ScrapboardPageMaker", ScrapboardPageMaker);
 			model.addAttribute("ScrapClassPageMaker", ScrapClassPageMaker);
 			model.addAttribute("PointPageMaker", PointPageMaker);
 			model.addAttribute("JoinClassPageMaker", JoinClassPageMaker);
 			model.addAttribute("OpenClassPageMaker", OpenClassPageMaker);
-			
+			model.addAttribute("MyReviewPageMaker", MyReviewPageMaker);
+		}
 		return "user/myPage/newlymypage";
+
+	}
+
+	@RequestMapping("/adminPage")
+	public String adminPage(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			UserVO userVO, Model model, @ModelAttribute("memcri") MemberSearchCriteria memcri, NoticeCriteria Ncri,
+			UserReportCriteria ureportcri, BoardReportCriteria breportcri, ReplyReportCriteria rreportcri,
+			ClassVO classVO,
+			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
+			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory)
+			throws IOException {
+		logger.info("my contents List");
+
+		// 유저 세션 받아오기
+		Object loginSession = session.getAttribute("loginUser");
+		UserVO user = (UserVO) loginSession;
+		System.out.println("loginsession : " + loginSession);
+
+		if (loginSession == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 해주세요'); location.href='/eepp/login/login.do';</script>");
+			out.flush();
+
+		} else {
+
+			userVO.setUser_id(user.getUser_id());
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("memcri", memcri);
+			map.put("Ncri", Ncri);
+			map.put("ureportcri", ureportcri);
+			map.put("breportcri", breportcri);
+			map.put("rreportcri", rreportcri);
+			map.put("sortType", sortType);
+			map.put("bCategory", bCategory);
+			map.put("user_id", userVO.getUser_id());
+
+			// 왼쪽
+			map.put("messageRes", us.receiveCount(map));
+			map.put("messageSen", us.sendCount(map));
+			map.put("BListALL", us.BListALL(map));
+			map.put("BListIT", us.BListIT(map));
+			map.put("BListService", us.BListService(map));
+			map.put("BListFinancial", us.BListFinancial(map));
+			map.put("BListDesign", us.BListDesign(map));
+			map.put("BListOfficer", us.BListOfficer(map));
+			map.put("BListEtc", us.BListEtc(map));
+
+			map.put("CListALL", us.CListALL(map));
+			map.put("CListIt_dev", us.CListIt_dev(map));
+			map.put("CListEtc", us.CListEtc(map));
+			map.put("CListWorkSkill", us.CListWorkSkill(map));
+			map.put("CListFinacialTech", us.CListFinacialTech(map));
+			map.put("CListDaily", us.CListDaily(map));
+
+			// 오른쪽
+			map.put("noticeList", us.noticeList(map));
+			map.put("noticeListCount", us.noticeListCount(map));
+			map.put("UserReportList", us.UserReportList(map));
+			map.put("UserReportListCount", us.UserReportListCount(map));
+			map.put("BoardReportList", us.BoardReportList(map));
+			map.put("BoardReportListCount", us.BoardReportListCount(map));
+			map.put("ReplyReportList", us.ReplyReportList(map));
+			map.put("ReplyReportCount", us.ReplyReportListCount(map));
+			map.put("MemberList", us.MemberList(map));
+			map.put("MemberListCount", us.MemberListCount(map));
+			
+
+			// 회원 목록
+			MemberPageMaker MemberPageMaker = new MemberPageMaker();
+			MemberPageMaker.setCri(memcri);
+			MemberPageMaker.setTotalCount(us.MemberListCount(map));
+
+			// 공지 사항
+			NoticePageMaker NoticePageMaker = new NoticePageMaker();
+			NoticePageMaker.setCri(Ncri);
+			NoticePageMaker.setTotalCount(us.noticeListCount(map));
+
+			// 유저신고
+			UserReportPageMaker UserReportPageMaker = new UserReportPageMaker();
+			UserReportPageMaker.setCri(ureportcri);
+			UserReportPageMaker.setTotalCount(us.UserReportListCount(map));
+
+			// 게시글 신고
+			BoardReportPageMaker BoardReportPageMaker = new BoardReportPageMaker();
+			BoardReportPageMaker.setCri(breportcri);
+			BoardReportPageMaker.setTotalCount(us.BoardReportListCount(map));
+
+			// 댓글 신고
+			ReplyReportPageMaker ReplyReportPageMaker = new ReplyReportPageMaker();
+			ReplyReportPageMaker.setCri(rreportcri);
+			ReplyReportPageMaker.setTotalCount(us.ReplyReportListCount(map));
+
+			model.addAttribute("map", map);
+			model.addAttribute("sortType", sortType);
+			model.addAttribute("bCategory", bCategory);
+
+			model.addAttribute("NoticePageMaker", NoticePageMaker);
+			model.addAttribute("UserReportPageMaker", UserReportPageMaker);
+			model.addAttribute("BoardReportPageMaker", BoardReportPageMaker);
+			model.addAttribute("ReplyReportPageMaker", ReplyReportPageMaker);
+			model.addAttribute("MemberPageMaker", MemberPageMaker);
+			
+		}
+		return "admin/adminPage";
+
 	}
 
 	// 닉네임 중복 체크
@@ -289,42 +428,26 @@ public class UserController {
 
 	// 회원 탈퇴 post
 	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
-	public String postWithdrawal(HttpSession session, UserVO userVO, RedirectAttributes rttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String postWithdrawal(HttpSession session, UserVO userVO, RedirectAttributes rttr) throws Exception {
 		logger.info("post withdrawal");
-		logger.info("회원탈퇴 페이지");
 
 		// 유저 세션 받아오기
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
+		userVO.setUser_id(user.getUser_id());
+		userVO.setSnsType(user.getSnsType());
 
-		// 일반 로그인 회원 탈퇴 방법
 		if (user.getSnsType() == null) {
-			String orgPass = user.getuPassword();
+			// 일반 로그인 회원 탈퇴 방법
+			String oldPass = user.getuPassword();
 			String newPass = userVO.getuPassword();
 
-			boolean checkPW = pwEncoder.matches(newPass, orgPass);
+			boolean checkPW = pwEncoder.matches(newPass, oldPass);
 
 			if (checkPW == true) {
-				us.withdrawal(user);
-				
-					// 자동 로그인 정보가 있을시 삭제
-					Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-					if(loginCookie != null) {
-						loginCookie.setMaxAge(0);
-						loginCookie.setPath("/");
-						response.addCookie(loginCookie);
-						user.setSession_key("none");
-						SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-						Calendar cal = Calendar.getInstance();
-						String today = null;
-						today = formatter.format(cal.getTime());
-						user.setSession_limit(Timestamp.valueOf(today));
-						ls.keepLogin(user);
-						logger.info("자동 로그인 정보 삭제");
-					}
-					
+
+				us.withdrawal(userVO);
 				System.out.println("회원탈퇴완료");
-				session.removeAttribute("loginUser");
 				session.invalidate();
 				return "redirect:/";
 
@@ -334,71 +457,56 @@ public class UserController {
 			}
 		} else {
 			// SNS 로그인 회원 탈퇴 방법
-			String orguPhone = user.getuPhone();
-			String checkuPhone = request.getParameter("uPhone_1") + "-" + request.getParameter("uPhone_2") + "-" + request.getParameter("uPhone_3");
+			String oldEmail = user.getuEmail();
+			String newEmail = userVO.getuEmail();
 
-			if (!orguPhone.equals(checkuPhone)) {
+			String oldNickname = user.getuNickname();
+			String newNickname = userVO.getuNickname();
+
+			if ((!(oldEmail.equals(newEmail)) && (!(oldNickname.equals(newNickname))))) {
 				rttr.addFlashAttribute("msg", false);
+
 				return "redirect:/withdrawal";
-			} else {
-				us.withdrawal(user);
-				
-				// 자동 로그인 정보가 있을시 삭제
-				Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-				if(loginCookie != null) {
-					loginCookie.setMaxAge(0);
-					loginCookie.setPath("/");
-					response.addCookie(loginCookie);
-					user.setSession_key("none");
-					SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-					Calendar cal = Calendar.getInstance();
-					String today = null;
-					today = formatter.format(cal.getTime());
-					user.setSession_limit(Timestamp.valueOf(today));
-					ls.keepLogin(user);
-					logger.info("자동 로그인 정보 삭제");
-				}
-				System.out.println("회원탈퇴완료");
-				session.removeAttribute("loginUser");
-				session.invalidate();
 			}
+
+			us.withdrawal(userVO);
+			session.invalidate();
 
 			return "redirect:/";
 		}
 	}
-	
-	/* 회원정보 보기*/
-	@RequestMapping(value="/memInfo", method = { RequestMethod.GET, RequestMethod.POST })
-	public String memberInfo(Model model, HttpSession session, UserVO userVO,HttpServletRequest request,
+
+	/* 회원정보 보기 */
+	@RequestMapping(value = "/memInfo", method = { RequestMethod.GET, RequestMethod.POST })
+	public String memberInfo(Model model, HttpSession session, UserVO userVO, HttpServletRequest request,
 			@RequestParam(value = "memberWho", required = false, defaultValue = "") String memberWho) {
-		
+
 		logger.info("load member Info pop-up");
 		userVO.getUser_id();
-		
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("memberWho", memberWho);
 		map.put("user_id", userVO.getUser_id());
 		map.put("listCount", us.listCount(map));
-		map.put("memgrade",us.memberInfograde(map));
+		map.put("memgrade", us.memberInfograde(map));
 		map.put("mInfoProfile", us.mInfoProfile(map));
 		map.put("openClassCount", us.openClassCount(map));
 		map.put("memberInfoJDate", us.memberInfoJDate(map));
-		
-		model.addAttribute("member",map);;
-		
+
+		model.addAttribute("member", map);
+
 		System.out.println("User_id : " + userVO.getUser_id());
 		System.out.println("nickName : " + memberWho);
-		
+
 		return "user/memInfo/memberInfo";
-		
+
 	}
-	
+
 	/* 클래스 가입회원 */
 	@RequestMapping(value = "/classjoin_list", method = { RequestMethod.GET, RequestMethod.POST })
-	public String classjoin_list(Model model, ClassVO classVO,HttpSession session, UserVO userVO, HttpServletRequest request,
-			@RequestParam(value = "cId", required = false, defaultValue = "") String cId) {
+	public String classjoin_list(Model model, ClassVO classVO, HttpSession session, UserVO userVO,
+			HttpServletRequest request, @RequestParam(value = "cId", required = false, defaultValue = "") String cId) {
 
 		logger.info("load classjoin_list pop-up");
 		userVO.getUser_id();
@@ -407,7 +515,7 @@ public class UserController {
 		map.put("cId", classVO.getcId());
 		map.put("cId", cId);
 		map.put("classjoinlist", us.classjoinList(map));
-		
+
 		model.addAttribute("member", map);
 		model.addAttribute("classjoinlist", us.classjoinList(map));
 		model.addAttribute("classList", classservice.classView(classVO));
@@ -416,6 +524,7 @@ public class UserController {
 
 	}
 
+	// 스크랩 삭제
 	@RequestMapping(value = "/deleteScrap", method = { RequestMethod.GET, RequestMethod.POST })
 	public String deleteScrap(Model model, UserVO userVO, ScrapVO scrapVO, HttpSession session,
 			HttpServletRequest request) {
@@ -426,7 +535,7 @@ public class UserController {
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
 		userVO.setUser_id(user.getUser_id());
-		
+
 		if (request.getParameter("checkRow") != null) {
 			String[] checkIdx = request.getParameter("checkRow").toString().split(",");
 			for (int i = 0; i < checkIdx.length; i++) {
@@ -442,6 +551,31 @@ public class UserController {
 			logger.info("스크랩 삭제 완료");
 		}
 		return "redirect:/mypage";
+	}
+
+	// 등급 변경
+	@RequestMapping(value = "/changeGrade", method = { RequestMethod.GET, RequestMethod.POST })
+	public String changeGrade(Model model, UserVO userVO, HttpServletRequest request) {
+
+		logger.info("changeGrade Method Active");
+
+		if (request.getParameter("checkRow") != null) {
+			String[] checkIdx = request.getParameter("checkRow").toString().split(",");
+
+			for (int i = 0; i < checkIdx.length; i++) {
+				System.out.println("유저는 : " + Integer.parseInt(checkIdx[i]));
+				userVO.setUser_id(Integer.parseInt(checkIdx[i]));
+
+				String selectgrade = request.getParameter("selectgrade");
+				userVO.setGrade_Id(Integer.parseInt(selectgrade));
+
+				System.out.println("등급" + userVO.getGrade_Id());
+				us.UpdateGrade(userVO);
+				logger.info("선택 업데이트 완료");
+			}
+		}
+
+		return "redirect:/";
 	}
 
 	/*

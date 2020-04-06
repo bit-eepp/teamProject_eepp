@@ -9,31 +9,32 @@
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>MyPage</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
-<%@ include file="/WEB-INF/include/forImport.jspf"%> 
-<style>
-.input-group{width:30%;}
-</style>
+<%@ include file="/WEB-INF/include/forImport.jspf"%>
 </head>
-	<body>
+<body>
 		<!-- header -->
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
 		
-		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-		<input type="hidden" id="mypageMakerTotalCount" value="${myPagePageMaker.totalCount}">
-		<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page}">
-		<input type="hidden" id="mypageMakeQuery" value="${myPagePageMaker.makeQuery(1)}">
-		<input type="hidden" id="ScrapMakerTotalCount" value="${ScrapPageMaker.totalCount}">
-		<input type="hidden" id="ScrapMakerCriPage" value="${ScrapPageMaker.cri.page}">
-		<input type="hidden" id="ScrapMakeQuery" value="${ScrapPageMaker.makeQuery(1)}">
-			
-		<input type="hidden" id="board" value="${board}">
-		<input type="hidden" id="scrap" value="${scrap}">
-		<input type="hidden" id="mpPoint" value="${mpPoint}">
-		<input type="hidden" id="mpclass" value="${mpclass}">
- 	
-	 	<section class="mypageWrap">
-		<c:choose>
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
+	<input type="hidden" id="mypageMakerTotalCount" value="${myPagePageMaker.totalCount}">
+	<input type="hidden" id="mypageMakeQuery" value="${myPagePageMaker.makeQuery(1)}">
+	
+	<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page}">
+	<input type="hidden" id="OpenClassCriPage" value="${OpenClassPageMaker.cri.page}">
+	<input type="hidden" id="JoinClassCriPage" value="${JoinClassPageMaker.cri.page}">
+	<input type="hidden" id="PointCriPage" value="${PointPageMaker.cri.page}">
+	<input type="hidden" id="ScrapboardCriPage" value="${ScrapboardPageMaker.cri.page}">
+	<input type="hidden" id="ScrapClassCriPage" value="${ScrapClassPageMaker.cri.page}">
+	<input type="hidden" id="MyReviewCriPage" value="${MyReviewPageMaker.cri.page}">
+		
+	 <input type="hidden" id="board" value="${board}">
+	 <input type="hidden" id="scrap" value="${scrap}">
+	 <input type="hidden" id="mpPoint" value="${mpPoint}">
+	 <input type="hidden" id="mpclass" value="${mpclass}">
+	 <input type="hidden" id="rv" value="${rv}">
+	 
+	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
 			<!-- 로그인 성공 -->
 			<br>
@@ -83,6 +84,13 @@
 							
 							<tr class="bordered">
 							<td><div class="scrap_count"><a href="#mpScBtn">${scrapCount}건</a></div></td>
+							</tr>
+							<tr>
+							<td class="text_bold"><span class="required">• </span>리뷰</td>
+							</tr>
+							
+							<tr class="bordered">
+							<td><div class="review_count"><a href="#mpReviewBtn">${reviewListCount}건</a></div></td>
 							</tr>
 							<tr>
 							<td class="drop"><a href="withdrawal" id=drop onclick="drop();">회원탈퇴</a></td>
@@ -572,7 +580,29 @@
 											<c:forEach items="${joinClass}" var="joinClass">
 												<tr class="classJList_tr">
 													<td>${joinClass.class_id}</td>
-													<td>${joinClass.cCategory}</td>
+													<td>
+													<c:choose>
+															<c:when test="${joinClass.cCategory eq 'it_dev'}">
+																IT / 개발
+															</c:when>
+															
+															<c:when test="${joinClass.cCategory eq 'workSkill'}">
+																업무스킬
+															</c:when>
+															
+															<c:when test="${joinClass.cCategory eq 'financialTechnology'}">
+																재 테 크
+															</c:when>
+															
+															<c:when test="${joinClass.cCategory eq 'daily'}">
+																일 상
+															</c:when>
+															
+															<c:when test="${joinClass.cCategory eq 'etc'}">
+																기 타
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="Title"><a style="text-decoration: none"
 														href="/eepp/class/classView?cId=${joinClass.class_id}&cCategory=${cCategory}">${joinClass.cTitle}</a></td>
 													<td class="cPrice"> <fmt:formatNumber value="${joinClass.cPrice}" pattern="###,###,###" /> P</td>
@@ -662,8 +692,75 @@
 										</ul>
 								</div><!-- paging -->
   						</div><!-- class="tab-pane fade show active" -->
+  						</div>
+  						</div>
+  						<!-- content_list -->
+						<div class="myreview-wrap">
+							<h3 id="mpRVBtn1">나의 리뷰</h3>
+							<hr>
+							<div align="right">
+								<button type="button" class="btn btn-info" id="mpRVBtn">확인</button>
 							</div>
+							<p>'EE'에서 작성하신 음식점 후기를 확인 할 수 있습니다.</p>
+							<br>
+							<br>
+							<div class="review_list">
+						<!--  리뷰 -->
+								<table class="table table-bordered">
+									<thead class="thead-color">
+										<tr class="content_tr">
+											<th>리뷰 번호</th>
+											<th>음식점</th>
+											<th>후기</th>
+											<th>작성일</th>
+											<th>평점</th>
+										</tr>
+									</thead>
+									<c:choose>
+										<c:when test="${fn:length(reviewList) > 0 }">
+											<c:forEach items="${reviewList}" var="reviewList">
+												<tr>
+													<td>${reviewList.rvId}</td>
+													<td>${reviewList.ename}</td>
+													<td>${reviewList.rvComment}</td>
+													<td>${reviewList.rvWrittenDate}</td>
+													<td>${reviewList.rvScore}</td>
+												</tr>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<tr>
+												<td colspan="9">조회된 결과가 없습니다.</td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
+								</table>
+								
+
+								<!-- 페이징 -->
+								<div class = "rv">
+									<ul class="pagination justify-content-center">
+      									<li class="page-item">
+													<a class="page-link" href="mypage${MyReviewPageMaker.makeQuery(MyReviewPageMaker.startPage - 1)}&rv=yes">
+														<i class="fas fa-angle-left"></i>
+													</a>
+												</li>
+											<c:forEach begin="${MyReviewPageMaker.startPage}" end="${MyReviewPageMaker.endPage}" var="idx">
+												<li class="page-item">
+												<a id="rv_${idx}" class="page-link" href="mypage${MyReviewPageMaker.makeQuery(idx)}&rv=yes">${idx}</a>
+												</li>
+											</c:forEach>
+											<li class="page-item">
+													<a class="page-link"href="mypage${MyReviewPageMaker.makeQuery(MyReviewPageMaker.endPage + 1)}&rv=yes">
+														<i class="fas fa-angle-right"></i>
+													</a>
+												</li>
+										</ul>
+								</div>
+							</div><!-- review_List -->
 						</div>
+							
+						
 					</div>
 					<!-- col-sm-8 -->
 				</div>
@@ -679,8 +776,6 @@
 
 		</c:otherwise>
 	</c:choose>
-	</section>
-	
 	<script src="${pageContext.request.contextPath}/js/user/mypage/mypage.js"></script>
 	<script type="text/javascript">
 	function openMsg(){

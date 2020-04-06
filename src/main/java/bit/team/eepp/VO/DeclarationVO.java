@@ -11,10 +11,14 @@ public class DeclarationVO {
 	private int mid;
 	private Timestamp dDate;
 	private String dReason;
+	private String reported_nick;
+	private String reporter_nick;
+	private String rpContent;
 	
 	public DeclarationVO() {}
-	
-	public DeclarationVO(int dId, int reporter_id, int reported_id, int board_id, int reply_id, int mid, Timestamp dDate, String dReason) {
+
+	public DeclarationVO(int dId, int reporter_id, int reported_id, int board_id, int reply_id, int mid,
+			Timestamp dDate, String dReason, String reported_nick, String reporter_nick, String rpContent) {
 		this.dId = dId;
 		this.reporter_id = reporter_id;
 		this.reported_id = reported_id;
@@ -23,6 +27,9 @@ public class DeclarationVO {
 		this.mid = mid;
 		this.dDate = dDate;
 		this.dReason = dReason;
+		this.reported_nick = reported_nick;
+		this.reporter_nick = reporter_nick;
+		this.rpContent = rpContent;
 	}
 
 	public int getdId() {
@@ -49,14 +56,6 @@ public class DeclarationVO {
 		this.reported_id = reported_id;
 	}
 
-	public int getMid() {
-		return mid;
-	}
-
-	public void setMid(int mid) {
-		this.mid = mid;
-	}
-
 	public int getBoard_id() {
 		return board_id;
 	}
@@ -71,6 +70,14 @@ public class DeclarationVO {
 
 	public void setReply_id(int reply_id) {
 		this.reply_id = reply_id;
+	}
+
+	public int getMid() {
+		return mid;
+	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
 	}
 
 	public Timestamp getdDate() {
@@ -89,4 +96,30 @@ public class DeclarationVO {
 		this.dReason = dReason;
 	}
 
+	public String getReported_nick() {
+		return reported_nick;
+	}
+
+	public void setReported_nick(String reported_nick) {
+		this.reported_nick = reported_nick;
+	}
+
+	public String getReporter_nick() {
+		return reporter_nick;
+	}
+
+	public void setReporter_nick(String reporter_nick) {
+		this.reporter_nick = reporter_nick;
+	}
+
+	public String getRpContent() {
+		return rpContent;
+	}
+
+	public void setRpContent(String rpContent) {
+		this.rpContent = rpContent;
+	}
+	
+	
+	
 }
