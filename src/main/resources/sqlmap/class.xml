@@ -42,6 +42,7 @@
 				</when>
 			</choose>
 		</if>
+		AND cDeleted = 'no'
 	</select>
 	
 	<select id="classList" resultType="bit.team.eepp.VO.ClassVO" parameterType="map">
@@ -88,7 +89,7 @@
 			</choose>
 		</if>
 		
-		ORDER BY cOpenDate DESC) A)
+		AND cDeleted = 'no' ORDER BY cOpenDate DESC) A)
 		WHERE RNUM BETWEEN #{cscri.rowStart} AND #{cscri.rowEnd}	
 	</select>
 	
@@ -97,8 +98,8 @@
     		SELECT CLASS_SEQ.nextval FROM DUAL
   		</selectKey>
   		
-		INSERT INTO CLASS (cId, user_id, cTitle, cContent, cOpenDate, cEndDate, cTerm, cPrice, cCategory, cTotalPeopleCount, cDifficulty, cSummary, cThumnail, cAddress1, cAddress2, cAddress3) 
-		VALUES(#{classVO.cId}, #{classVO.user_id}, #{classVO.cTitle}, #{classVO.cContent}, SYSDATE, SYSDATE + #{classVO.cTerm}, #{classVO.cTerm}, #{classVO.cPrice}, #{classVO.cCategory}, #{classVO.cTotalPeopleCount}, #{classVO.cDifficulty}, #{classVO.cSummary}, #{classVO.cThumnail}, #{classVO.cAddress1}, #{classVO.cAddress2}, #{classVO.cAddress3})
+		INSERT INTO CLASS (cId, user_id, cTitle, cContent, cOpenDate, cEndDate, cTerm, cPrice, cCategory, cTotalPeopleCount, cDifficulty, cSummary, cThumnail, cAddress1, cAddress2, cAddress3, cDeleted) 
+		VALUES(#{classVO.cId}, #{classVO.user_id}, #{classVO.cTitle}, #{classVO.cContent}, SYSDATE, SYSDATE + #{classVO.cTerm}, #{classVO.cTerm}, #{classVO.cPrice}, #{classVO.cCategory}, #{classVO.cTotalPeopleCount}, #{classVO.cDifficulty}, #{classVO.cSummary}, #{classVO.cThumnail}, #{classVO.cAddress1}, #{classVO.cAddress2}, #{classVO.cAddress3}, 'no')
 	</insert>
 	
 	<select id="classView" resultType="bit.team.eepp.VO.ClassVO">
@@ -108,7 +109,7 @@
 	</select>
 	
 	<delete id="deleteClass" parameterType="bit.team.eepp.VO.ClassVO">
-		DELETE FROM CLASS WHERE cId = #{cId}
+		UPDATE class set cDeleted = 'yes' WHERE cId = #{cId}
 	</delete>
 	
 	<select id="classModifyView" resultType="bit.team.eepp.VO.ClassVO">
