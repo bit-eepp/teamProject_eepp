@@ -167,6 +167,19 @@ $("#myclassbtn").click(function() {
 	$(".info").hide();
 });
 
+//리뷰 보여주고 닫기
+$(document).ready(function() {
+	if (!$('#rv').val()) {
+		$(".review_list").hide("slow");
+	} else {
+		$(".review_list").show("slow");
+	}
+})
+$("#mpRVBtn").click(function() {
+	$(".review_list").slideToggle(500);
+	$(".info").hide();
+});
+
 // 페이징
 function pageColor(pageNum) {
 	$('#boardpaging_' + pageNum).css("background-color", "#59bfbf");
@@ -226,7 +239,7 @@ $(function() {
 		if ($(".allCheck2").prop("checked")) {
 			$("input:checkbox[name='pickCheck2']").prop("checked", true);
 		} else {
-			$("input:checkbox[name='pickCheck']").prop("checked", false);
+			$("input:checkbox[name='pickCheck2']").prop("checked", false);
 		}
 	})
 })

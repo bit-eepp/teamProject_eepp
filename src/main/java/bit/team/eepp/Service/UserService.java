@@ -15,6 +15,7 @@ import bit.team.eepp.VO.ClassVO;
 import bit.team.eepp.VO.DeclarationVO;
 import bit.team.eepp.VO.MessageVO;
 import bit.team.eepp.VO.PaymentVO;
+import bit.team.eepp.VO.ReviewVO;
 import bit.team.eepp.VO.ScrapVO;
 import bit.team.eepp.VO.UserActiveVO;
 import bit.team.eepp.VO.UserVO;
@@ -187,8 +188,9 @@ public class UserService {
 	public int openClassCount(Map<String, Object> map) {
 		return userMapper.openClassCount(map);
 	}
+
 	// 클래스 가입한 인원
-	public List<ClassJoinVO> classjoinList(Map<String, Object> map){
+	public List<ClassJoinVO> classjoinList(Map<String, Object> map) {
 		return userMapper.classjoinList(map);
 	}
 
@@ -206,9 +208,144 @@ public class UserService {
 	public Date memberInfoJDate(Map<String, Object> map) {
 		return userMapper.memberInfoJDate(map);
 	}
+
 	// 스크랩 삭제
 	public void deleteScrap(ScrapVO scrapVO) {
 		userMapper.deleteScrap(scrapVO);
+	}
+
+	// 내가 쓴 리뷰 리스트
+	public List<ReviewVO> reviewList(Map<String, Object> map) {
+		return userMapper.reviewList(map);
+	}
+
+	// 내가 쓴 리뷰 카운트
+	public int reviewListCount(Map<String, Object> map) {
+		return userMapper.reviewListCount(map);
+
+	}
+
+	/* 운영자 마이페이지 */
+
+	// All
+	public int BListALL(Map<String, Object> map) {
+		return userMapper.BListALL(map);
+	}
+
+	// IT/개발
+	public int BListIT(Map<String, Object> map) {
+		return userMapper.BListIT(map);
+	}
+
+	// 서비스
+	public int BListService(Map<String, Object> map) {
+		return userMapper.BListService(map);
+	}
+
+	// 금융
+	public int BListFinancial(Map<String, Object> map) {
+		return userMapper.BListFinancial(map);
+	}
+
+	// 디자인
+	public int BListDesign(Map<String, Object> map) {
+		return userMapper.BListDesign(map);
+	}
+
+	// 공무원
+	public int BListOfficer(Map<String, Object> map) {
+		return userMapper.BListOfficer(map);
+	}
+
+	// 기타
+	public int BListEtc(Map<String, Object> map) {
+		return userMapper.BListEtc(map);
+	}
+	// 클래스 현황
+
+	// All
+	public int CListALL(Map<String, Object> map) {
+		return userMapper.CListALL(map);
+	}
+
+	// it_dev
+	public int CListIt_dev(Map<String, Object> map) {
+		return userMapper.CListIt_dev(map);
+	}
+
+	// etc
+	public int CListEtc(Map<String, Object> map) {
+		return userMapper.CListEtc(map);
+	}
+
+	// workSkill
+	public int CListWorkSkill(Map<String, Object> map) {
+		return userMapper.CListWorkSkill(map);
+	}
+
+	// financialTechnology
+	public int CListFinacialTech(Map<String, Object> map) {
+		return userMapper.CListFinacialTech(map);
+	}
+
+	// daily
+	public int CListDaily(Map<String, Object> map) {
+		return userMapper.CListDaily(map);
+	}
+
+	// 회원 목록
+	public List<UserVO> MemberList(Map<String, Object> map) {
+		return userMapper.MemberList(map);
+	}
+
+	// 회원 수 카운트
+	public int MemberListCount(Map<String, Object> map) {
+		return userMapper.MemberListCount(map);
+	}
+
+	// 공지사항 리스트
+	public List<BoardVO> noticeList(Map<String, Object> map) {
+		return userMapper.noticeList(map);
+	}
+
+	// 공지사항 개수 카운트
+	public int noticeListCount(Map<String, Object> map) {
+		return userMapper.noticeListCount(map);
+	}
+
+	// 유저신고 목록
+	public List<BoardVO> UserReportList(Map<String, Object> map) {
+		return userMapper.UserReportList(map);
+	}
+
+	// 유저 신고 개수 카운트
+	public int UserReportListCount(Map<String, Object> map) {
+		return userMapper.UserReportListCount(map);
+	}
+
+	// 게시글 신고 목록
+	public List<BoardVO> BoardReportList(Map<String, Object> map) {
+		return userMapper.BoardReportList(map);
+	}
+
+	// 게시글 신고 개수 카운트
+	public int BoardReportListCount(Map<String, Object> map) {
+		return userMapper.BoardReportListCount(map);
+	}
+
+	// 댓글 신고 목록
+	public List<BoardVO> ReplyReportList(Map<String, Object> map) {
+		return userMapper.ReplyReportList(map);
+	}
+
+	// 댓글 신고 개수 카운트
+	public int ReplyReportListCount(Map<String, Object> map) {
+		return userMapper.ReplyReportListCount(map);
+	}
+
+	// 등급 변경
+	public int UpdateGrade(UserVO userVO) {
+		return userMapper.UpdateGrade(userVO);
 	}
 
 	/* 포인트 */
@@ -239,11 +376,11 @@ public class UserService {
 	public void participantPayment(PaymentVO paymentVO) {
 		userMapper.participantPayment(paymentVO);
 	}
-	
+
 	public UserVO getOpennerInfo(int opennerUser_id) {
 		return userMapper.getOpennerInfo(opennerUser_id);
 	}
-	
+
 	public String getJoinnerInfo(int user_id) {
 		return userMapper.getJoinnerInfo(user_id);
 	}

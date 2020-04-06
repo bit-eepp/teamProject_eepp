@@ -15,6 +15,7 @@ public class ReviewVO {
 	private String rvComment;
 	private float rvScore;
 	private float reviewAVG;
+	private String ename;
 	
 	public float getReviewAVG() {
 		return reviewAVG;
@@ -30,7 +31,7 @@ public class ReviewVO {
 	}
 
 	public ReviewVO(float reviewAVG,int rvId, int eating_id, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
-			float rvScore, String uNickname) {
+			float rvScore, String uNickname,String ename) {
 		this.rvId = rvId;
 		this.reviewAVG = reviewAVG;
 		this.eating_id = eating_id;
@@ -40,6 +41,14 @@ public class ReviewVO {
 		this.rvComment = rvComment;
 		this.rvScore = rvScore;
 		this.uNickname = uNickname;
+		this.ename = ename;
+	}
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 
 	public int getEating_id() {

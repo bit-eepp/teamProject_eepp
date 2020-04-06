@@ -2,6 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bit.team.eepp.Mapper.UserMapper">
+<!-- 운영자 마이페이지 -->
+	<select id = "MemberList" parameterType="map" resultType="bit.team.eepp.VO.UserVO">
+	<!-- 회원정보 -->
+	SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+			from(select user_id, uEmail, uNickname, uJoindate, grade_id from users ORDER BY uJoindate DESC) A)
+			WHERE RNUM BETWEEN #{memcri.rowStart} AND #{memcri.rowEnd}
+			<if test="memcri != null">
+			<choose>
+				<when test='memcri.searchType =="k"'>
+					AND uNickname LIKE '%' || #{memcri.keyword} || '%'
+				</when>
+				<when test='memcri.searchType == "g"'>
+					AND grade_Id LIKE '%' || #{memcri.keyword} || '%'
+				</when>
+				<when test='memcri.searchType == "i"'>
+					AND user_id LIKE '%' || #{memcri.keyword} || '%'
+				</when>
+				<when test='memcri.searchType == "in"'>
+					AND (user_id LIKE '%' || #{memcri.keyword} || '%' OR
+					uNickname LIKE '%' || #{mmemcri.keyword} || '%')
+				</when>
+			</choose>
+		</if>
+	</select>
+	<!-- 유저신고 리스트 -->
+	<select id = "UserReportList" parameterType="map" resultType="bit.team.eepp.VO.DeclarationVO">
+			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+			from(select d.did, d.reporter_id, d.reported_id,
+			(select uNickname from users where user_id = d.reported_id) as reported_nick, 
+			(select uNickname from users where user_id = d.reporter_id) as reporter_nick, d.dreason, d.ddate from declaration d, users u 
+			where reported_id is not null AND d.reporter_id = u.user_id ORDER BY dDate DESC) A)
+			WHERE RNUM BETWEEN #{ureportcri.rowStart}
+			AND #{ureportcri.rowEnd}
+	</select>
+	
+	<!-- 게시글 신고 리스트 -->
+	<select id = "BoardReportList" parameterType="map" resultType="bit.team.eepp.VO.DeclarationVO">
+			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+			from(select d.did, d.board_id, d.ddate, d.dreason, u.unickname as reporter_nick from declaration d, board b,users u where not board_id is null and b.bId = d.board_id and d.reporter_id = u.user_id ORDER BY ddate DESC) A)
+			WHERE RNUM BETWEEN #{breportcri.rowStart}
+			AND #{breportcri.rowEnd}
+	</select>
+
+	<!-- 댓글 신고 리스트 -->
+	<select id = "ReplyReportList" parameterType="map" resultType="bit.team.eepp.VO.DeclarationVO">
+			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+from(select d.did, d.reporter_id, d.dreason,d.ddate,u.unickname as reporter_nick, r.rpContent as rpContent from declaration d,reply r,users u 
+where not reply_id is null and r.rpId = d.reply_id and d.reporter_id = u.user_id ORDER BY ddate DESC) A)
+			WHERE RNUM BETWEEN #{rreportcri.rowStart} AND #{rreportcri.rowEnd}
+	</select>
+
+<!-- 공지사항 리스트 -->
+	<select id = "noticeList" parameterType="map" resultType="bit.team.eepp.VO.BoardVO">
+			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+			from(SELECT * FROM BOARD WHERE BCATEGORY='공지' and user_id = 1 ORDER BY bWrittendate DESC) A)
+			WHERE RNUM BETWEEN #{Ncri.rowStart}
+			AND #{Ncri.rowEnd}
+		
+	</select>
 
 <!--포인트 리스트 -->
 	<select id = "pointList" parameterType="int" resultType="bit.team.eepp.VO.PaymentVO">
@@ -58,6 +117,12 @@ from(select s.sId, s.sDate, s.user_id, s.class_id, c.cTitle, u.uNickname as test
 		AND #{scrapcri.rowEnd}
 		
 	</select>
+	<select id="reviewList" parameterType="int" resultType="bit.team.eepp.VO.ReviewVO">
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+			from(select rv.rvId, e.eid,e.etitle as ename, rv.rvwrittendate, rv.rvcomment, rv.rvscore from eating e, review rv where e.eid = rv.eating_id and rv.user_id = #{user_id}
+            ORDER BY rvWrittendate DESC) A)
+			WHERE RNUM BETWEEN #{myreviewcri.rowStart} AND #{myreviewcri.rowEnd}
+	</select>
 	
 	<!-- 게시글 스크랩 목록 -->
 	<select id="scrapList" parameterType="int"
@@ -100,9 +165,9 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 	</select>
 
 	<!-- 회원 탈퇴 -->
-	<delete id="withdrawal" parameterType="bit.team.eepp.VO.UserVO">
+	<delete id="withdrawal">
 	<![CDATA[
-		update users set grade_id = 4 where user_id = #{user_id}
+		delete from users where USER_ID = #{user_id}
 		]]>
 	</delete>
 	<!-- 게시판 스크랩 개수 -->
