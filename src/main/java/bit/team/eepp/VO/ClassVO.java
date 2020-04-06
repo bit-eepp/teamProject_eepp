@@ -23,6 +23,7 @@ public class ClassVO {
 	private String cAddress2;
 	private String cAddress3;
 	private int totalcount;
+	private String cDeleted;
 
 	public ClassVO() {
 	}
@@ -30,7 +31,7 @@ public class ClassVO {
 	public ClassVO(int cId, int user_id, String cTitle, String cContent, Timestamp cOpenDate, Timestamp cEndDate,
 			int cPrice, String cCategory, String uNickname, int cTotalPeopleCount, String cDifficulty, String cSummary,
 			int cTerm, int questionCount, String cThumnail, String uProfile, String cAddress1, String cAddress2,
-			String cAddress3,int totalcount) {
+			String cAddress3,int totalcount, String cDeleted) {
 		this.cId = cId;
 		this.user_id = user_id;
 		this.cTitle = cTitle;
@@ -51,7 +52,17 @@ public class ClassVO {
 		this.cAddress2 = cAddress2;
 		this.cAddress3 = cAddress3;
 		this.totalcount = totalcount;
+		this.cDeleted = cDeleted;
 	}
+	
+	public String getcDeleted() {
+		return cDeleted;
+	}
+
+	public void setcDeleted(String cDeleted) {
+		this.cDeleted = cDeleted;
+	}
+
 	public int getTotalcount() {
 		return totalcount;
 	}

@@ -79,8 +79,17 @@
 					<c:choose>
 						<c:when test="${fn:length(classList) > 0 }">
 							<c:forEach items="${classList}" var="cl">
-								<div class="col-sm-4 mt-4 classList">
-									<div class="card classList">
+							<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"></fmt:parseNumber>
+							<fmt:parseNumber value="${cl.cEndDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
+								<c:choose>
+									<c:when test="${endDate - nowDate < 0}">
+										<div class="col-sm-4 mt-4 classList" id="isEndedClass">
+									</c:when>
+									<c:otherwise>
+										<div class="col-sm-4 mt-4 classList" id="isActiveClass">
+									</c:otherwise>
+								</c:choose>
+									<div class="card classList classWrapper">
 										<!-- Card image -->
 										<div class="classListImg">
 		 									<img class="card-img-top classList" src="${cl.cThumnail}">
@@ -103,7 +112,7 @@
 									
 													<c:otherwise>
 														<div class="dropdown">
-															<a href="#" class="userBtn" id="user_btn_${cl.user_id}${cl.cId}" data-toggle="dropdown"><i class="fas fa-portrait"></i> ${cl.uNickname}</a>
+															<a class="userBtn" id="user_btn_${cl.user_id}${cl.cId}" data-toggle="dropdown"><i class="fas fa-portrait"></i> ${cl.uNickname}</a>
 									           				<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${cl.uNickname}${cl.cId}">
 									                			<li><a onclick="memberInfo('${cl.uNickname}',${cl.user_id});">회원정보</a></li>
 									                			<li><a onclick="sendMessage('${cl.uNickname}',${cl.user_id});">쪽지 보내기</a></li>
@@ -162,11 +171,9 @@
 											
 											<div class="card-text clDate">
 												<i class="far fa-calendar-alt"></i> <fmt:formatDate value="${cl.cOpenDate}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${cl.cEndDate}" pattern="yyyy.MM.dd" />
-												<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="nowDate"></fmt:parseNumber>
-												<fmt:parseNumber value="${cl.cEndDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 												<c:choose>
 													<c:when test="${endDate - nowDate < 0}">
-														<strong>(수강신청기간 종료)</strong>
+														<strong class="isEndedClass">(수강신청기간 종료)</strong>
 													</c:when>
 													<c:when test="${endDate - nowDate == 0}">
 														<strong>(금일 마감 예정)</strong>

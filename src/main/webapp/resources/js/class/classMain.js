@@ -28,6 +28,12 @@ $(document).ready(function() {
 		$('#cateEtc').css('color', '#ffffff');
 	}
 	
+	$("#isEndedClass button").prop("disabled", true);
+	
+	$("#isEndedClass a.userBtn").on("click",function(event){
+	    return false;
+	});
+	
 	// 게시물 검색
 	$('#classSearchBtn').click(function() {
 		if($('select[name=searchType]').val() == 'n') {

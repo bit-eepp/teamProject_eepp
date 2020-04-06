@@ -65,14 +65,6 @@
 			$('.writeBtn').remove();
 		}
 		
-		var newArticle = Number($("#newArticle").val());
-		var bWrittenDate = Number($("#bWrittenDate_"+boardbId).val());
-		console.log(newArticle)
-		console.log(bWrittenDate)
-		if(newArticle >= bWrittenDate){
-			$(".isNew_"+boardbId).addClass("newArticle");
-		}
-		
 		var pageNum = $('#pageMakerCriPage').val();
 		pageColor(pageNum);
 		
