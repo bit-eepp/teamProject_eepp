@@ -64,7 +64,7 @@
 			
 				<!-- 직무게시판 베스트 리스트 시작 -->
 				<div class="col mainBoardList">
-					<h5><i class="fas fa-star" style="color: #ffc107;"></i> BOARD - JOB <b style="color: #ffc107">BEST</b></h5>
+					<h5><!-- <i class="fas fa-star" style="color: #ffc107;"></i> -->BOARD - JOB&nbsp;&nbsp;<b style="color: #ffc107">BEST</b></h5>
 					<div class="row">
                     	<div class="col-md-12">
 	                        <nav>
@@ -1219,7 +1219,7 @@
 				
 				<!-- 오늘뭐먹지? 베스트 시작 -->
 				<div class="col mainEatingList">
-					<h5><i class="fas fa-star" style="color: #ffc107;"></i> EATING <b style="color: #ffc107">BEST</b></h5>
+					<h5><!-- <i class="fas fa-star" style="color: #ffc107;"></i> --> EATING&nbsp;&nbsp;<b style="color: #ffc107">BEST</b></h5>
 					<div class="row">
 						<c:forEach items="${eatStoreList}" var="el">
 							<div class="col-md-3">
@@ -1268,7 +1268,7 @@
 				
 				<!-- EE CLASS 베스트 시작 -->
 				<div class="col mainClassList">
-					<h5><i class="fas fa-star" style="color: #ffc107;"></i> EE CLASS <b style="color: #ffc107">BEST</b></h5>
+					<h5><!-- <i class="fas fa-star" style="color: #ffc107;"></i> --> EE CLASS&nbsp;&nbsp;<b style="color: #ffc107">BEST</b></h5>
 					<div class="row">
                    		<c:forEach items="${classList}" var="cl">
 							<div class="col-md-3">

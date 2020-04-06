@@ -56,7 +56,7 @@
 							
 							<br><br><br>
 							
-							<div class="cuBtn" align="center">
+							<div class="cuBtn" align="left">
 								<button class="btn btn-primary" onclick="move();">Contact Us</button>
 							</div>
 							
