@@ -2,31 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bit.team.eepp.Mapper.EatingMapper">
-	<select id="eatingListCount" resultType="int"
-		parameterType="map">
+	<select id="eatingListCount" resultType="int" parameterType="map">
 		<![CDATA[
-			SELECT COUNT(eId) FROM eating where eId>0
+			SELECT COUNT(eId) FROM EATING where eId > 0
 		]]>
 
 		<if test="eCategory != null">
 			<choose>
-				<when test="eCategory == 'american_food'">
-					AND eCategory = 'american_food'
+				<when test="eCategory == 'asian_food'">
+					AND eCategory = 'asian_food'
 				</when>
-				<when test="eCategory == 'korean_food'">
-					AND eCategory = 'korean_food'
-				</when>
-				<when test="eCategory == 'japaneses_food'">
-					AND eCategory = 'japaneses_food'
+				<when test="eCategory == 'japanese_food'">
+					AND eCategory = 'japanese_food'
 				</when>
 				<when test="eCategory == 'chinese_food'">
 					AND eCategory = 'chinese_food'
 				</when>
-				<when test="eCategory == 'asian_food'">
-					AND eCategory = 'asian_food'
+				<when test="eCategory == 'western_food'">
+					AND eCategory = 'western_food'
 				</when>
-				<when test="eCategory == 'etc'">
-					AND eCategory = 'etc'
+				<when test="eCategory == 'korean_food'">
+					AND eCategory = 'korean_food'
+				</when>
+				<when test="eCategory == 'fusion_food'">
+					AND eCategory = 'fusion_food'
+				</when>
+				<when test="eCategory == 'etc_food'">
+					AND eCategory = 'etc_food'
 				</when>
 			</choose>
 		</if>
@@ -40,37 +42,46 @@
 				<when test='escri.searchType == "c"'>
 					AND eContent LIKE '%' || #{escri.keyword} || '%'
 				</when>
+				<when test='escri.searchType == "a"'>
+					AND (eAddress_new LIKE '%' || #{escri.keyword} || '%' OR eAddress_old LIKE '%' || #{escri.keyword} || '%')
+				</when>
+				<when test='escri.searchType == "tc"'>
+					AND (eTitle LIKE '%' || #{escri.keyword} || '%' OR eContent LIKE '%' || #{escri.keyword} || '%')
+				</when>
 			</choose>
 		</if>
 	</select>
 
-	<select id="eatingList" resultType="bit.team.eepp.VO.EatingVO"
-		parameterType="map">
-		SELECT * FROM
-		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
-		(SELECT eID, eTITLE, eADDRESS_new, eADDRESS_old, eTEL, eCONTENT, eMAP_1,
-		eMAP_2, eSEARCH_1, eSEARCH_2, eSEARCH_3, eGrade
-		FROM Eating where eId > 0
+		<select id="eatingList" resultType="bit.team.eepp.VO.EatingVO" parameterType="map">
+			SELECT * FROM
+			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
+			(SELECT eId, eTitle, eThema, eCategory, eDate, eAddress_new, eAddress_old, eTel, eCONTENT, eKeyword_food,
+			(SELECT COUNT(*) from review where eating_id = eId) as rvCount,
+			(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id) as rvAVG
+			FROM Eating where eId = eId
 
 		<if test="eCategory != null">
 			<choose>
-				<when test="eCategory == 'american_food'">
-					AND eCategory = 'american_food'
+				<when test="eCategory == 'asian_food'">
+					AND eCategory = 'asian_food'
 				</when>
-				<when test="eCategory == 'korean_food'">
-					AND eCategory = 'korean_food'
-				</when>
-				<when test="eCategory == 'japaneses_food'">
-					AND eCategory = 'japaneses_food'
+				<when test="eCategory == 'japanese_food'">
+					AND eCategory = 'japanese_food'
 				</when>
 				<when test="eCategory == 'chinese_food'">
 					AND eCategory = 'chinese_food'
 				</when>
-				<when test="eCategory == 'asian_food'">
-					AND eCategory = 'asian_food'
+				<when test="eCategory == 'western_food'">
+					AND eCategory = 'western_food'
 				</when>
-				<when test="eCategory == 'etc'">
-					AND eCategory = 'etc'
+				<when test="eCategory == 'korean_food'">
+					AND eCategory = 'korean_food'
+				</when>
+				<when test="eCategory == 'fusion_food'">
+					AND eCategory = 'fusion_food'
+				</when>
+				<when test="eCategory == 'etc_food'">
+					AND eCategory = 'etc_food'
 				</when>
 			</choose>
 		</if>
@@ -83,32 +94,36 @@
 				<when test='escri.searchType == "c"'>
 					AND eContent LIKE '%' || #{escri.keyword} || '%'
 				</when>
+				<when test='escri.searchType == "a"'>
+					AND (eAddress_new LIKE '%' || #{escri.keyword} || '%' OR eAddress_old LIKE '%' || #{escri.keyword} || '%')
+				</when>
+				<when test='escri.searchType == "tc"'>
+					AND (eTitle LIKE '%' || #{escri.keyword} || '%' OR eContent LIKE '%' || #{escri.keyword} || '%')
+				</when>
 			</choose>
 		</if>
 
 		ORDER BY
-
+		
 		<choose>
 			<when test="sortType == 'eDate'">
-				eDate
+				 eDate
 			</when>
 		</choose>
 
 		DESC) A)
 		WHERE RNUM BETWEEN #{escri.rowStart} AND #{escri.rowEnd}
+	
 	</select>
 	
-	<!-- !!!! 차후 해당 쿼리 수정 필!!!!! -->
+	<!-- !!!! 차후 해당 쿼리 수정 필!!!!! 1차 수정(04/06)-->
 	<select id="selectOne" resultType="bit.team.eepp.VO.EatingVO">
-		SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new,
-		eAddress_old, eGrade, eMap_1, eMap_2, eSearch_1, eSearch_2, eSearch_3,
-		eReview,
-		(SELECT COUNT(*)FROM REVIEW WHERE eId = eId) AS rvCount
-		FROM EATING WHERE eId = #{eId}
+		SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food,
+		(SELECT COUNT(*) FROM REVIEW WHERE eating_id = eId) AS rvCount
+		FROM EATING WHERE eId = #{eId};
 	</select>
 	
-	<!-- <update id="hitUp" parameterType="bit.team.eepp.VO.EatingVO"> UPDATE 
-		BOARD SET bHit = bHit + 1 WHERE bId = #{bId} </update> -->
+	
 		
 	<insert id="write" parameterType="bit.team.eepp.VO.EatingVO">
 		<selectKey keyProperty="eatingVO.eId" resultType="int"
@@ -126,8 +141,7 @@
 	</insert>
 
 	<delete id="delete" parameterType="bit.team.eepp.VO.EatingVO">
-		DELETE FROM EATING WHERE eId =
-		#{eId}
+		DELETE FROM EATING WHERE eId = #{eId}
 	</delete>
 
 	<select id="modifyView" resultType="bit.team.eepp.VO.EatingVO">
@@ -143,17 +157,4 @@
 		#{eatingVO.eTitle}, eContent = #{eatingVO.eContent}, eDate = SYSDATE
 		WHERE eId = #{eatingVO.eId}
 	</update>
-
-	<!-- <select id="noticeList" resultType="bit.team.eepp.VO.EatingVO"> <![CDATA[ 
-		SELECT * FROM ( SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, 
-		u.uNickname, b.bWrittenDate, b.bHit, b.bLike, b.bUnlike, (SELECT COUNT(*)FROM 
-		REPLY WHERE board_id = b.bId) AS rpCount FROM USERS u, BOARD b WHERE u.USER_ID 
-		= b.USER_ID AND b.bCategory = 'notice' ORDER BY bWrittenDate DESC) WHERE 
-		ROWNUM <= 2 ]]> </select> <select id="hotList" resultType="bit.team.eepp.VO.BoardVO"> 
-		<![CDATA[ SELECT * FROM ( SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, 
-		bContent, u.uNickname, b.bWrittenDate, b.bHit, b.bLike, b.bUnlike, (SELECT 
-		COUNT(*) FROM REPLY WHERE board_id = b.bId) AS rpCount, (SELECT COUNT(*) 
-		FROM DECLARATION WHERE board_id = b.bId) AS dCount FROM USERS u, BOARD b 
-		WHERE u.USER_ID = b.USER_ID AND TO_CHAR(b.bWrittenDate,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD') 
-		ORDER BY rpCount DESC) WHERE dCount <= 10 AND ROWNUM <= 3 ]]> </select> -->
 </mapper>
