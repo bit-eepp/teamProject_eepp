@@ -44,7 +44,7 @@ public class EatingController {
 	
 	@RequestMapping("/eatingView")
 	public String eatingView(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "sortType", required = false) String sortType, @RequestParam(value = "eCategory") String eCategory) {
+			@RequestParam(value = "sortType", required = false, defaultValue = "eDate") String sortType, @RequestParam(value = "eCategory", required = false, defaultValue = "") String eCategory) {
 		
 		System.out.println("store information print");
 		
@@ -58,12 +58,21 @@ public class EatingController {
 	
 	@RequestMapping("/themaList")
 	public String themaList(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "sortType", required = false) String sortType, @RequestParam(value = "eCategory") String eCategory) {
+			@RequestParam(value = "sortType", required = false, defaultValue = "eDate") String sortType, @RequestParam(value = "eCategory", required = false, defaultValue = "") String eCategory) {
 		
 		System.out.println("thema list print");
 		
-		model.addAttribute("eContentView", eatingService.selectOne(eatingVO));
-		model.addAttribute("escri", escri);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("escri", escri);
+		map.put("sortType", sortType);
+		map.put("eCategory", eCategory);
+
+		EatingPageMaker eatingPageMaker = new EatingPageMaker();
+		eatingPageMaker.setCri(escri);
+		eatingPageMaker.setTotalCount(eatingService.eatingListCount(map));
+
+		model.addAttribute("eatingList", eatingService.eatingList(map));
+		model.addAttribute("eatingPageMaker", eatingPageMaker);
 		model.addAttribute("sortType", sortType);
 		model.addAttribute("eCategory", eCategory);
 		
