@@ -63,7 +63,7 @@ public interface UserMapper {
 	public MessageVO showMySendMessage(MessageVO messageVO);
 
 	// 쪽지 삭제
-	@Delete("delete message where mid = #{mid}")
+	@Delete("update message set mdeleted = 'yes' where mid = #{mid}")
 	public void deleteMessage(MessageVO messageVO);
 
 	// 쪽지 발송 취소
@@ -83,7 +83,7 @@ public interface UserMapper {
 	public DeclarationVO reportMessageInfo(DeclarationVO declarationVO);
 
 	// 쪽지 보내기
-	@Insert("insert into message (mid, sender_id, receiver_id, mcontent, mdate) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate)")
+	@Insert("insert into message (mid, sender_id, receiver_id, mcontent, mdate, mdeleted) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate, 'no')")
 	public void replyMessage(MessageVO messageVO);
 
 	/*

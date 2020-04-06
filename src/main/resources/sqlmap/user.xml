@@ -20,6 +20,8 @@
 		<if test="fromMain != null">
 			WHERE u.USER_ID = m.sender_ID AND receiver_id = #{user_id} AND status = '읽지않음'
 		</if>
+		
+		AND mdeleted = 'no'
 	</select>
         	
        <select id="messageList" resultType="bit.team.eepp.VO.MessageVO" parameterType="map">
@@ -38,7 +40,7 @@
 	            </when>
 	        </choose>
 		</if>
-		ORDER BY mid desc) A) WHERE RNUM BETWEEN #{msgCri.startNum} AND #{msgCri.endNum}
+		AND mdeleted = 'no' ORDER BY mid desc) A) WHERE RNUM BETWEEN #{msgCri.startNum} AND #{msgCri.endNum}
 	</select>
 	
 </mapper>
