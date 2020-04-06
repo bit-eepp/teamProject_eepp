@@ -43,7 +43,7 @@
 				</tr>
 				<tr>
 					<td class="tb-title"> 글제목 </td>
-					<td> <input type="text" name="bTitle" size = "50" class="boardSelector tb-boardTitle" placeholder="${modify.bTitle}"> </td>
+					<td> <input type="text" name="bTitle" size = "50" class="boardSelector tb-boardTitle" value="${modify.bTitle}"> </td>
 				</tr>
 				<tr>
 					<td class="tb-title"> 내용 </td>

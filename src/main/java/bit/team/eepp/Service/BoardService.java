@@ -58,4 +58,8 @@ public class BoardService {
 		return boardMapper.hotList();
 	}
 
+	public String getDeleteInfo(int bId) {
+		return boardMapper.getDeleteInfo(bId);
+	}
+
 }

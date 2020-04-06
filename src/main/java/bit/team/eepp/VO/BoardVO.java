@@ -20,13 +20,14 @@ public class BoardVO {
 	private int rpCount;
 	private int dCount;
 	private Timestamp isNew;
+	private String bDeleted;
 
 	public BoardVO() {
 	}
 
-	public BoardVO(int bId, int user_id, String uNickname, String uprofile, String bTitle, String bContent, String bSubject,
-			String bCategory, String bWrittenDate, String bModifyDate, int bHit, int bLike, int bUnlike,
-			String bBlind, int rpCount, int dCount,Timestamp isNew) {
+	public BoardVO(int bId, int user_id, String uNickname, String uprofile, String bTitle, String bContent,
+			String bSubject, String bCategory, String bWrittenDate, String bModifyDate, int bHit, int bLike,
+			int bUnlike, String bBlind, int rpCount, int dCount, Timestamp isNew, String bDeleted) {
 		this.bId = bId;
 		this.user_id = user_id;
 		this.uNickname = uNickname;
@@ -44,9 +45,17 @@ public class BoardVO {
 		this.rpCount = rpCount;
 		this.dCount = dCount;
 		this.isNew = isNew;
+		this.bDeleted = bDeleted;
 	}
-	
-	
+
+	public String getbDeleted() {
+		return bDeleted;
+	}
+
+	public void setbDeleted(String bDeleted) {
+		this.bDeleted = bDeleted;
+	}
+
 	public Timestamp getIsNew() {
 		return isNew;
 	}
@@ -94,7 +103,6 @@ public class BoardVO {
 	public void setuNickname(String uNickname) {
 		this.uNickname = uNickname;
 	}
-	
 
 	public String getUprofile() {
 		return uprofile;
