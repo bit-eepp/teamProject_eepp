@@ -10,6 +10,7 @@
 		
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classView.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classQuestionList.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 	</head>
 	
@@ -17,18 +18,6 @@
 		<!-- header -->
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
-	
-		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
-		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}" />
-		<input type="hidden" id="classId" value="${clView.cId}" />
-		<input type="hidden" id="classOpenner" value="${clView.uNickname}" />
-		<input type="hidden" id="classPrice" value="${clView.cPrice}" />
-		<input type="hidden" id="difficulty" value="${clView.cDifficulty}"/>
-		<input type="hidden" id="ad1" value="${clView.cAddress1}"/>
-		<input type="hidden" id="ad2" value="${clView.cAddress2}"/>
-		<input type="hidden" id="ad3" value="${clView.cAddress3}"/>
-		<input type="hidden" id="difficulty" value="${clView.cDifficulty}"/>
-		<input type="hidden" id="classEndDate" value="<fmt:formatDate value="${clView.cEndDate}" pattern="yyyy-MM-dd HH:MM:ss"/>">
 		
 		<section class="classViewWrap">
 			<div class="container clView">
@@ -370,8 +359,21 @@
 				<input type="hidden" name="cCategory" id="cCategory" value="${cCategory}" />
 			</form>
 			
+			<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
+			<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}" />
+			<input type="hidden" id="uProfile" name="loginUserId" value="${loginUser.uprofile}">
+			<input type="hidden" id="classId" value="${clView.cId}" />
+			<input type="hidden" id="classOpenner" value="${clView.uNickname}" />
+			<input type="hidden" id="classPrice" value="${clView.cPrice}" />
+			<input type="hidden" id="difficulty" value="${clView.cDifficulty}"/>
+			<input type="hidden" id="ad1" value="${clView.cAddress1}"/>
+			<input type="hidden" id="ad2" value="${clView.cAddress2}"/>
+			<input type="hidden" id="ad3" value="${clView.cAddress3}"/>
+			<input type="hidden" id="difficulty" value="${clView.cDifficulty}"/>
+			<input type="hidden" id="classEndDate" value="<fmt:formatDate value="${clView.cEndDate}" pattern="yyyy-MM-dd HH:MM:ss"/>">
+			
 			<!-- 문의사항 -->
-			<%@ include file="/WEB-INF/views/class/classQuestionList.jsp"%>
+			<script src="${pageContext.request.contextPath}/js/class/question/question.js"></script>
 			
 			<div id="clCurrentPageNum"></div>
 		</section>

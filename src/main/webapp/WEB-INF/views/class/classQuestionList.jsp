@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -167,7 +167,7 @@
 														
 														tag += '<div class="cqMenuBtn">';
 															if(uNickname != value.uNickname){
-																if(uNickname == $("#classUserNickname").val()){
+																if(uNickname == $("#classOpenner").val()){
 																	tag += '<a title="답변" class="float-right btn btn btn-info ml-2 reBtn" onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');"><i class="fas fa-reply"></i></a><br>';
 																}
 															} else {
@@ -231,7 +231,7 @@
 														
 												tag += '<div class="cqMenuBtn">';
 													if(uNickname != value.uNickname){
-														if(uNickname == $("#classUserNickname").val()){
+														if(uNickname == $("#classOpenner").val()){
 															tag += '<a title="답변" class="float-right btn btn btn-info ml-2 reBtn" onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');"><i class="fas fa-reply"></i></a><br>';
 														}
 													} else {
@@ -469,11 +469,5 @@
 			}
 		</script>
 	</head>
-	
-	<body>
-		<input type="hidden" id="uProfile" name="loginUserId" value="${loginUser.uprofile}">
-		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
-		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}">
-		<input type="hidden" id="classUserNickname" name="loginUserId" value="${clView.uNickname}" />
-	</body>
-</html>
+
+</html> --%>
