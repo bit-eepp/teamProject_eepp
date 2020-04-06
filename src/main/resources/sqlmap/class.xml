@@ -103,7 +103,7 @@
 	</insert>
 	
 	<select id="classView" resultType="bit.team.eepp.VO.ClassVO">
-		SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, c.cAddress1, c.cAddress2, c.cAddress3, u.uNickname, u.uProfile, 
+		SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, c.cAddress1, c.cAddress2, c.cAddress3, c.cDeleted, u.uNickname, u.uProfile, 
 		(SELECT COUNT(*) FROM REPLY WHERE class_id = c.cId) AS questionCount 
 		FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cId = #{cId}
 	</select>
