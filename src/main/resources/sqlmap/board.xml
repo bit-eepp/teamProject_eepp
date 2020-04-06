@@ -54,7 +54,7 @@
 		SELECT * FROM
 		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
 		(SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
-		b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
+		b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
 		FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes'
 		
 		<if test="bCategory != null">
@@ -122,7 +122,7 @@
 	
 	<select id="selectOne" resultType="bit.team.eepp.VO.BoardVO">
 		SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, u.uprofile, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bHit, b.bLike, b.bUnlike, 
-		b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS rpCount
+		b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount
 		FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bId = #{bId}
 	</select>
 	

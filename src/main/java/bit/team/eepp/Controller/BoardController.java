@@ -120,9 +120,9 @@ public class BoardController {
 		if(flag.equals("yes")) {	
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('삭제된 게시물입니다.'); location.href='/eepp/';</script>");
+			out.println("<script>alert('삭제된 게시물입니다.'); location.href='/eepp/board/boardList';</script>");
 			out.close();
-			return "redirect:/";
+			return "";
 		} else {
 			model.addAttribute("content", boardService.selectOne(boardVO));
 			model.addAttribute("scri", scri);
@@ -149,9 +149,9 @@ public class BoardController {
 		if(flag.equals("yes")) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('삭제된 게시물입니다.'); location.href='/eepp/';</script>");
+			out.println("<script>alert('삭제된 게시물입니다.'); location.href='/eepp/board/boardList';</script>");
 			out.close();
-			return "redirect:/";
+			return "";
 		} else {
 			model.addAttribute("modify", boardService.modifyView(boardVO));
 			model.addAttribute("scri", scri);
