@@ -20,7 +20,12 @@
 	
 		<input type="hidden" id="user_id" value="${loginUser.user_id}" />
 		<input type="hidden" id="uNickname" value="${loginUser.uNickname}" />
-	
+		
+		<form name="form1" role="form" method="post">
+			<input type="hidden" name="sortType" id="sortType" value="${sortType}" />
+			<input type="hidden" name="bCategory" id="bCategory" value="${bCategory}" />
+		</form>	
+		
 		<!-- Main Page Contents -->
 		<section id="sc-mainPage">
 			<div class="container mainPage">
@@ -60,11 +65,14 @@
 				</div>
 				<br><br>
 				<!-- 사진 슬라이드 끝 -->
-
-			
+		
 				<!-- 직무게시판 베스트 리스트 시작 -->
 				<div class="col mainBoardList">
 					<h5><!-- <i class="fas fa-star" style="color: #ffc107;"></i> -->BOARD - JOB&nbsp;&nbsp;<b style="color: #ffc107">BEST</b></h5>
+					<div align="right">
+						<a class="writeBtn">새 글 쓰기</a>
+					</div>
+					
 					<div class="row">
                     	<div class="col-md-12">
 	                        <nav>
@@ -1324,7 +1332,7 @@
 		<!-- footer -->
 		<%@ include file="/WEB-INF/views/footer.jsp"%>
 		<!-- footer -->
-	
+		<script src="${pageContext.request.contextPath}/js/main.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
 </html>
