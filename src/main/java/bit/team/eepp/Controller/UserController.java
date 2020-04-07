@@ -269,7 +269,7 @@ public class UserController {
 
 	}
 
-	@RequestMapping("/adminPage")
+	@RequestMapping("/admin/adminPage")
 	public String adminPage(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			UserVO userVO, Model model, @ModelAttribute("memcri") MemberSearchCriteria memcri, NoticeCriteria Ncri,
 			UserReportCriteria ureportcri, BoardReportCriteria breportcri, ReplyReportCriteria rreportcri,

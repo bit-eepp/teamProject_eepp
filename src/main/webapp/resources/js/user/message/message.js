@@ -198,3 +198,8 @@ function sendMessage(uNickname, receiver_id, msgType) {
 			"left=" + (screen.availWidth - 370) / 2 + ",top="
 					+ (screen.availHeight - 425) / 2 + ",width=370,height=425");
 }
+//회원정보 - 회원정보 보기
+function memberInfo(uNickname, user_id){
+	var member = window.open("http://localhost:8282/eepp/memInfo?memberWho="+uNickname+"&user_id="+user_id,"memberInfo","left="+(screen.availWidth-700)/2
+				 +",top="+(screen.availHeight-560)/2+",width=425,height=560");
+}
