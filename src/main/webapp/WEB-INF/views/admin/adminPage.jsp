@@ -22,13 +22,13 @@
 		
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 	<input type="hidden" id="MemberMakerTotalCount" value="${MemberPageMaker.totalCount}">
-	<input type="hidden" id="MemberCriPage" value="${MemberPageMaker.cri.page}">
+	<input type="hidden" id="MemberCriPage" value="${MemberPageMaker.cri.page_member}">
 	<input type="hidden" id="MemberMakeQuery" value="${MemberPageMaker.makeQuery(1)}">
 	 
-	 <input type="hidden" id="NoticeCriPage" value="${NoticePageMaker.cri.page}">
-	 <input type="hidden" id="UserReportCriPage" value="${UserReportPageMaker.cri.page}">
-	 <input type="hidden" id="BoardReportCriPage" value="${BoardReportPageMaker.cri.page}">
-	 <input type="hidden" id="ReplyReportCriPage" value="${ReplyReportPageMaker.cri.page}">
+	 <input type="hidden" id="NoticeCriPage" value="${NoticePageMaker.cri.page_no}">
+	 <input type="hidden" id="UserReportCriPage" value="${UserReportPageMaker.cri.page_urp}">
+	 <input type="hidden" id="BoardReportCriPage" value="${BoardReportPageMaker.cri.page_boardRe}">
+	 <input type="hidden" id="ReplyReportCriPage" value="${ReplyReportPageMaker.cri.page_rpr}">
 	 
 	 
 	<c:choose>
@@ -39,7 +39,7 @@
 				<br>
 				<br>
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<table class="text-wrap">
 						<tr>
 							<td class="text_bold"><span class="required">• </span>회원 현황</td>
@@ -103,9 +103,9 @@
 							
 						</table>
 
-					</div><!-- col-sm-4 -->
+					</div><!-- col-sm-3 -->
 
-					<div class="col-sm-8">
+					<div class="col-sm-9">
 						<div class="myNotice-wrap">
 							<h3 id="mpNoBtn">공지사항</h3>
 							<hr>
@@ -220,7 +220,7 @@
 									<c:choose>
 										<c:when test="${fn:length(map.UserReportList) > 0 }">
 											<c:forEach items="${map.UserReportList}" var="URL">
-												<tr class="scrapList_tr">
+												<tr class="userReportList_tr">
 													<!--  신고 목록 선택 -->
 													<%-- <td><input type="checkbox" name="pickCheck" class="pickCheck" value="${URL.dId}" /></td> --%>
 													<td>${URL.dId}</td>
@@ -243,16 +243,16 @@
 								<div class="URLP">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
-													<a class="page-link"href="adminPage${UserReportPageMaker.makeQuery(UserReportPageMaker.startPage - 1)}&URL=yes">
+													<a class="page-link" href="adminPage${UserReportPageMaker.makeQuery(UserReportPageMaker.startPage - 1)}">
 														<i class="fas fa-angle-left"></i>
 													</a>
 												</li>
 											<c:forEach begin="${UserReportPageMaker.startPage}" end="${UserReportPageMaker.endPage}" var="idx">
 												<li class="page-item">
-												<a id="URLP_${idx}" class="page-link" href="adminPage${UserReportPageMaker.makeQuery(idx)}&URL=yes">${idx}</a></li>
+												<a id="URLP_${idx}" class="page-link" href="adminPage${UserReportPageMaker.makeQuery(idx)}">${idx}</a></li>
 											</c:forEach>
 											<li class="page-item">
-													<a class="page-link" href="adminPage${UserReportPageMaker.makeQuery(UserReportPageMaker.endPage + 1)}&URL=yes">
+													<a class="page-link" href="adminPage${UserReportPageMaker.makeQuery(UserReportPageMaker.endPage + 1)}">
 														<i class="fas fa-angle-right"></i>
 													</a>
 											</li>
@@ -354,30 +354,28 @@
 									</c:choose>
 								</table>
 					<!-- 	<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div> -->
-								
-									<div class="RRLP">
-										   <ul class="pagination justify-content-center">
-										      <li class="page-item">
-													<a class="page-link"href="adminPage${ReplyReportPageMaker.makeQuery(ReplyReportPageMaker.startPage - 1)}&scrap=yes">
+								<div class = "RRLP">
+									<ul class="pagination justify-content-center">
+      									<li class="page-item">
+													<a class="page-link" href="adminPage${ReplyReportPageMaker.makeQuery(ReplyReportPageMaker.startPage - 1)}">
 														<i class="fas fa-angle-left"></i>
 													</a>
 												</li>
 											<c:forEach begin="${ReplyReportPageMaker.startPage}" end="${ReplyReportPageMaker.endPage}" var="idx">
 												<li class="page-item">
-												<a id="RRLP_${idx}" class="page-link" href="adminPage${ReplyReportPageMaker.makeQuery(idx)}&scrap=yes">${idx}</a></li>
+												<a id="RRLP_${idx}" class="page-link" href="adminPage${ReplyReportPageMaker.makeQuery(idx)}">${idx}</a>
+												</li>
 											</c:forEach>
 											<li class="page-item">
-													<a class="page-link" href="adminPage${ReplyReportPageMaker.makeQuery(ReplyReportPageMaker.endPage + 1)}&scrap=yes">
+													<a class="page-link"href="adminPage${ReplyReportPageMaker.makeQuery(ReplyReportPageMaker.endPage + 1)}">
 														<i class="fas fa-angle-right"></i>
 													</a>
-											</li>
+												</li>
 										</ul>
-									<br>
-								</div><!-- paging -->
-								
+								</div>	
   						</div><!-- class="tab-pane fade show active" -->
 					</div><!-- class="tab-content" id="nav-tabContent" -->
-				</div><!-- col -->
+				</div><!-- col-sm-3 -->
 				</div>
 			</div>
 			<!-- 회원관리 -->	
@@ -490,7 +488,7 @@
 								</div><!-- paging -->
 							</div>
 						</div>			
-					</div><!-- col-sm-8 -->
+					</div><!-- col-sm-9 -->
 				</div><!-- row -->
 			</div><!-- container -->
 	<br>
@@ -502,7 +500,6 @@
 
 		</c:otherwise>
 	</c:choose>
-	<%-- <script src="${pageContext.request.contextPath}/js/user/mypage/mypage.js"></script> --%>
 	<script type="text/javascript">
 	function openMsg(){
 		 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2

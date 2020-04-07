@@ -56,7 +56,7 @@ public class ScrapPageMaker {
 	}
 
 	private void calcData() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage_scrap() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
@@ -72,8 +72,8 @@ public class ScrapPageMaker {
 		return uriComponents.toUriString();
 	}
 	
-	public String makeSearch(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+	public String makeSearch(int page_scrap) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page_scrap", page_scrap)
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.queryParam("searchType", ((ScrapSearchCriteria) cri).getSearchType())
 				.queryParam("keyword", encoding(((ScrapSearchCriteria) cri).getKeyword())).build();

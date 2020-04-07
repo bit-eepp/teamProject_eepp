@@ -51,7 +51,7 @@ public class ReplyReportPageMaker {
 	}
 
 	private void calcData() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage_rpr() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
@@ -62,9 +62,9 @@ public class ReplyReportPageMaker {
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 
-	public String makeQuery(int page) {
+	public String makeQuery(int page_rpr) {
     	// 페이지 이동을 위한 함수
-        UriComponents uriComponentsBuilder = UriComponentsBuilder.newInstance().queryParam("page", page)
+        UriComponents uriComponentsBuilder = UriComponentsBuilder.newInstance().queryParam("page_rpr", page_rpr)
         		.queryParam("perPageNum", cri.getPerPageNum()) // page=3&perPageNum=10
         		.build(); // ?page=3&perPageNum=10
         

@@ -2,22 +2,22 @@ package bit.team.eepp.Page;
 
 // 한페이지에 담아내야할 것들을 모음
 public class MyReviewCriteria {
-	private int page;
+	private int page_rv;
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
 
 	public MyReviewCriteria() {
-		this.page = 1;
+		this.page_rv = 1;
 		this.perPageNum = 10;
 	}
 
-	public void setPage(int page) {
-		if (page <= 0) {
-			this.page = 1;
+	public void setPage_rv(int page_rv) {
+		if (page_rv <= 0) {
+			this.page_rv = 1;
 			return;
 		}
-		this.page = page;
+		this.page_rv = page_rv;
 	}
 
 	public void setPerPageNum(int perPageNum) {
@@ -28,12 +28,12 @@ public class MyReviewCriteria {
 		this.perPageNum = perPageNum;
 	}
 
-	public int getPage() {
-		return page;
+	public int getPage_rv() {
+		return page_rv;
 	}
 
 	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+		return (this.page_rv - 1) * perPageNum;
 	}
 
 	public int getPerPageNum() {
@@ -41,7 +41,7 @@ public class MyReviewCriteria {
 	}
 
 	public int getRowStart() {
-		rowStart = ((page - 1) * perPageNum) + 1;
+		rowStart = ((page_rv - 1) * perPageNum) + 1;
 		return rowStart;
 	}
 
@@ -52,6 +52,6 @@ public class MyReviewCriteria {
 
 	@Override
 	public String toString() {
-		return "MyReviewCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
+		return "MyReviewCriteria [page_rv=" + page_rv + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
 	}
 }

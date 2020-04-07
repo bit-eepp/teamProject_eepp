@@ -1,23 +1,23 @@
 package bit.team.eepp.Page;
 
 public class EatingCriteria {
-	private int page;
+	private int page_eating;
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
 	
 	public EatingCriteria() {
 		//1 페이지 당 n개 
-		this.page = 1;
+		this.page_eating = 1;
 		this.perPageNum = 6;
 	}
 	
-	public void setPage(int page) {
-		if(page <= 0) {
-			this.page = 1;
+	public void setPage_eating(int page_eating) {
+		if(page_eating <= 0) {
+			this.page_eating = 1;
 			return;
 		}
-		this.page = page;
+		this.page_eating = page_eating;
 	}
 	
 	public void setPerPageNum(int perPageNum) {
@@ -29,11 +29,11 @@ public class EatingCriteria {
 	}
 	
 	public int getPageStart() {
-		return (this.page -1) * perPageNum;
+		return (this.page_eating -1) * perPageNum;
 	}
 	
 	public int getRowStart() {
-		rowStart = ((page-1) * perPageNum) + 1;
+		rowStart = ((page_eating-1) * perPageNum) + 1;
 		return rowStart;
 	}
 	
@@ -43,8 +43,8 @@ public class EatingCriteria {
 	}
 	
 	//only return
-	public int getPage() {
-		return page;
+	public int getPage_eating() {
+		return page_eating;
 	}
 	
 	public int getPerPageNum() {
@@ -53,6 +53,6 @@ public class EatingCriteria {
 	
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
+		return "Criteria [page_eating=" + page_eating + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
 	}
 }

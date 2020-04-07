@@ -2,22 +2,22 @@ package bit.team.eepp.Page;
 
 // 한페이지에 담아내야할 것들을 모음
 public class PointCriteria {
-	private int page;
+	private int page_po;
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
 
 	public PointCriteria() {
-		this.page = 1;
+		this.page_po = 1;
 		this.perPageNum = 10;
 	}
 
-	public void setPage(int page) {
-		if (page <= 0) {
-			this.page = 1;
+	public void setPage_po(int page_po) {
+		if (page_po <= 0) {
+			this.page_po = 1;
 			return;
 		}
-		this.page = page;
+		this.page_po = page_po;
 	}
 
 	public void setPerPageNum(int perPageNum) {
@@ -28,12 +28,12 @@ public class PointCriteria {
 		this.perPageNum = perPageNum;
 	}
 
-	public int getPage() {
-		return page;
+	public int getPage_po() {
+		return page_po;
 	}
 
 	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+		return (this.page_po - 1) * perPageNum;
 	}
 
 	public int getPerPageNum() {
@@ -41,7 +41,7 @@ public class PointCriteria {
 	}
 
 	public int getRowStart() {
-		rowStart = ((page - 1) * perPageNum) + 1;
+		rowStart = ((page_po - 1) * perPageNum) + 1;
 		return rowStart;
 	}
 
@@ -52,6 +52,6 @@ public class PointCriteria {
 
 	@Override
 	public String toString() {
-		return "PointCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
+		return "PointCriteria [page_po=" + page_po + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
 	}
 }

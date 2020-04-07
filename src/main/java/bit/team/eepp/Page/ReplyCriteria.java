@@ -2,19 +2,19 @@ package bit.team.eepp.Page;
 
 // 한페이지에 담아내야할 것들을 모음
 public class ReplyCriteria {
-	private int page; 			// 화면에 보여줄 페이지 번호 : 1 2 3 4 5 6....
+	private int page_rp; 			// 화면에 보여줄 페이지 번호 : 1 2 3 4 5 6....
 	private int perPageNum; 	// 한 페이지당 보여줄 게시글의 수
 
 	private int startNum; 		// 해당 페이지에서 시작 게시글의 번호
 	private int endNum; 		// 해당 페이지에서 마지막 게시글의 번호
 
 	public ReplyCriteria() { 		// 최초 default Constructor 초기값을 지정(1페이지, 게시글 10개)
-		this.page = 1; 			// 사용자가 세팅하지 않으면 기본 1
+		this.page_rp = 1; 			// 사용자가 세팅하지 않으면 기본 1
 		this.perPageNum = 5; 	// 페이지당 기본 10개씩 출력하도록 세팅
 	}
 
 	public int getStartNum() {
-		if (page == 1) {
+		if (page_rp == 1) {
 			startNum = 1;
 		} else {
 			startNum = getEndNum() - perPageNum + 1;
@@ -29,7 +29,7 @@ public class ReplyCriteria {
 	}
 
 	public int getEndNum() {
-		endNum = page * getPerPageNum();
+		endNum = page_rp * getPerPageNum();
 		// endNum = getStartNum() + getPerPageNum();
 		System.out.println("엔드번호 : " + endNum);
 		return endNum;
@@ -41,7 +41,7 @@ public class ReplyCriteria {
 
 	// limit 구문에서 시작 부분에 필요한 값을 반환(mybatis에서 사용)
 	public int getPageStart() {
-		return (this.page - 1) * this.perPageNum;
+		return (this.page_rp - 1) * this.perPageNum;
 		// RowBounds 의 매개변수의 값을 설정하는 메소드
 		// RouwBounds 의 start index는 0부터 시작하므로
 		// 1페이지 : (1 - 1) * 10 = 0 ->>
@@ -49,16 +49,16 @@ public class ReplyCriteria {
 	}
 
 	// getter setter
-	public int getPage() {
-		return page;
+	public int getPage_rp() {
+		return page_rp;
 	}
 
-	public void setPage(int page) {
-		if (page <= 0) {
+	public void setPage(int page_rp) {
+		if (page_rp <= 0) {
 			// 페이지는 1페이지부터임으로 0보다 작거나 같은값일 경우 무조건 첫번째 페이지로 설정되도록 해준다.
-			this.page = 1;
+			this.page_rp = 1;
 		} else {
-			this.page = page;
+			this.page_rp = page_rp;
 		}
 	}
 
@@ -76,6 +76,6 @@ public class ReplyCriteria {
 
 	@Override
 	public String toString() {
-		return "ReplyCriteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "ReplyCriteria [page_rp=" + page_rp + ", perPageNum=" + perPageNum + "]";
 	}
 }
