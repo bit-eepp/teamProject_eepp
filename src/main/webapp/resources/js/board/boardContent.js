@@ -35,6 +35,10 @@ var uNickname = $("#userNickname").val();
 	$('.delete').on('click', function(){
 		deleteConfirm();
 	});
+	
+	$('.share').on('click', function(){
+		shareLink();
+	});
 		
 	// 해당 게시글이 공지사항이면 게시물 신고 버튼 안보이게 하기
 	var bSubject = $("#content_bSubject").val();
@@ -60,6 +64,20 @@ var uNickname = $("#userNickname").val();
 	boardTitle(title);
 		
 });
+
+// 카카오 링크 공유
+Kakao.init('55d4b3987a46162ad1d899676af601c4');
+function shareLink() {
+    Kakao.Link.sendCustom({
+      templateId: 22997,
+      templateArgs: {
+        title: '#'+$("#bCategory").val()+'게시판 \n'+$("#contentBtitle").val(),
+        description: 'Community EE에서 확인하세요!',
+        pathLink : 
+        	'eepp/board/contentView?bId='+$("#contentBid").val()+'&bCategory=&sortType=',
+      },
+    })
+  }
 
 //게시판 카테고리
 function boardTitle(title) {	

@@ -16,6 +16,7 @@
 <!-- header -->
 
 <div id="boardContentWrapper">
+<input type="hidden" value="${content.bTitle}" id="contentBtitle" />
 	<div class="contentSideWrap col-sm-2">
 	<!-- 직무 게시판 카테고리 -->
 		<a class="category ct-all" href="boardList">All</a>
@@ -210,6 +211,12 @@
 						<button type="button" class="btn scrapBtn" onclick="bScrap(${content.bId})">
 							<i class="fas fa-bookmark fa-2x"></i>
 						</button>
+						<!-- 게시글 공유 -->
+						<p class="shareBtn">
+							<a class="share" id="kakaoShareBtn">
+							<img src="${pageContext.request.contextPath}/img/kakaolink_btn_medium.png"/>
+							</a>
+						</p>
 					</c:when>
 					<c:otherwise>
 						<button type="button" class="btn scrapBtn" onclick="bScrap(${content.bId})">
@@ -221,6 +228,12 @@
 						<button type="button" class="btn unlikeBtn" onclick="unlike(${content.bId})">
 							<i class="far fa-thumbs-down"></i>
 						</button>
+						<!-- 게시글 공유 -->
+						<p class="shareBtn">
+							<a class="share" id="kakaoShareBtn">
+							<img src="${pageContext.request.contextPath}/img/kakaolink_btn_medium.png"/>
+							</a>
+						</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -280,9 +293,7 @@
 			<div class="brCurrentPageNum"></div>
 		</div>
 	</div>
-
-	
-		<%-- <%@ include file="/WEB-INF/views/board/replyList.jsp"%> --%>
+	<script src="${pageContext.request.contextPath}/js/board/reply/reply.js"></script>
 	</div>
 
 <!-- chat -->
@@ -292,7 +303,6 @@
 <!-- footer -->
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 <!-- footer -->
-	<script src="${pageContext.request.contextPath}/js/board/reply/reply.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/boardContent.js"></script>
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
