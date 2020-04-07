@@ -7,11 +7,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>No.${clView.cId} CLASS강좌</title>
-		
-		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classView.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classQuestionList.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 	</head>
 	
 	<body>
@@ -23,49 +22,53 @@
 			<div class="container clView">
 				<div class="row clContent">
 					<div class="col-8 clContentLeft">
-						<div class="input-group clContentTitle">
-							<p><b>${clView.cTitle}</b></p>
+						<div class="clContentTitle">
+							<p>${clView.cTitle}</p>
 						</div>
 						
-						<div class="input-group clContentSummary">
-							<p><b>${clView.cSummary}</b></p>
+						<div class="clContentSummary">
+							<p>${clView.cSummary}</p>
 						</div>
 
-						<div class="input-group clContentThumnail">
+						<div class="clContentThumnail">
 							<img alt="ClassImg" src="${clView.cThumnail}">
 						</div>
 						<br>
 						
-						<div class="input-group hr-sect" >
-							<b>강 좌 소 개</b>
+						<div class="hr-sect" >
+							<p>강좌소개</p>
 						</div>
 						
-						<div class="input-group clContentView">
-							<textarea id="summernote">${clView.cContent}</textarea>
+						<div class="clContentView">
+							${clView.cContent}
 						</div>
 					</div>
 					
 					<div class="col-4 clContentRight">
-						<div class="input-group clContentDetailHaed">
-							<button class="btn btn-default" type="button"><b>세 부 정 보</b></button>
+						<div class="clContentDetailHaed">
+							<p class="classInfoTitle">세 부 정 보</p>
 						</div>
 						
-						<div class="input-group clContentDetailBody">			
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item"></li>
-								
-								<li class="list-group-item openUser">
+						<div class="clContentDetailBody">			
+							<ul class="detailBody-ul">
+								<li class="openUser detailBody-li">
 									<c:choose>
 										<c:when test="${clView.uNickname eq loginUser.uNickname or clView.uNickname eq '운영자' or clView.uNickname eq 'admin2' or loginUser.uNickname == null}">
 											<div class="clOpennerNick">
-												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a class="userBtn clUserE"><b>${clView.uNickname}</b></a>
+												<p class="clInfoTitle">
+													<i title="개설자" class="fas fa-user-circle"></i>개설자
+												</p>
+												<p class="clInfoTxt"><a class="userBtn clUserE">${clView.uNickname}</a></p>
 											</div>
 										</c:when>
 											
 										<c:otherwise>	
 											<div class="dropdown clOpennerNick">
-												<i title="개설자" class="fas fa-user-circle"></i>&nbsp;개 설 자 : <a href="#" class="userBtn clUser" id="user_btn_${clView.user_id}${clView.cId}" data-toggle="dropdown"><b>${clView.uNickname}</b></a>	
-						           				<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${clView.uNickname}${clView.cId}">
+												<p class="clInfoTitle">
+													<i title="개설자" class="fas fa-user-circle"></i>개설자
+												</p>
+													<a href="#" class="userBtn clUser clInfoTxt" id="user_btn_${clView.user_id}${clView.cId}" data-toggle="dropdown">${clView.uNickname}</a>
+						           				<ul class="dropdown-menu" role="menu" aria-labelledby="user_btn_${clView.user_id}${clView.cId}">
 						                			<li><a onclick="memberInfo('${clView.uNickname}',${clView.user_id});">회원정보</a></li>
 						                			<li><a onclick="sendMessage('${clView.uNickname}',${clView.user_id});">쪽지 보내기</a></li>
 						                			<li><a data-toggle="modal" data-target="#report_user_${clView.user_id}${clView.cId}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
@@ -100,7 +103,7 @@
 											            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${clView.cId}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 											            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${clView.cId}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
 											            			<input type="radio" name="dReason" value="etc" onclick="this.form.etc_${clView.cId}.disabled=false">  기타<br>
-											            			<textarea style="resize:none; height:80px; width:100%;" cols="30" rows="10" class="form-control" id="etc_${clView.cId}" name="dReason" disabled></textarea>
+											            			<textarea class="form-control" id="etc_${clView.cId}" name="dReason" disabled></textarea>
 										            			</div>
 									                		</form>
 									                		<!-- declaration -->
@@ -122,15 +125,23 @@
 									</c:choose>
 								</li>
 								
-								<li class="list-group-item price">
-									<i title="포인트 가격" class="fab fa-product-hunt" style="color: #FFC107;"></i>&nbsp;포 인 트 : <fmt:formatNumber value="${clView.cPrice}" pattern="#,###" />
+								<li class="price detailBody-li">
+									<p class="clInfoTitle">
+										<i title="포인트 가격" class="fab fa-product-hunt" style="color: #FFC107;"></i>포인트
+									</p>
+									<p class="clInfoTxt">
+										<fmt:formatNumber value="${clView.cPrice}" pattern="#,###" />
+									</p>
 								</li>
 								
-								<li class="list-group-item cate">
-									<i title="강좌 카테고리" class="fas fa-th-list"></i>&nbsp;카테고리 : 
+								<li class="cate detailBody-li">
+									<p class="clInfoTitle">
+										<i title="강좌 카테고리" class="fas fa-th-list"></i>카테고리
+									</p>
+									<p class="clInfoTxt">
 									<c:choose>
 										<c:when test="${clView.cCategory eq 'it_dev'}">
-											IT / 개발
+											IT/개발
 										</c:when>
 										
 										<c:when test="${clView.cCategory eq 'workSkill'}">
@@ -138,53 +149,64 @@
 										</c:when>
 										
 										<c:when test="${clView.cCategory eq 'financialTechnology'}">
-											재 테 크
+											재테크
 										</c:when>
 										
 										<c:when test="${clView.cCategory eq 'daily'}">
-											일 상
+											일상
 										</c:when>
 										
 										<c:when test="${clView.cCategory eq 'etc'}">
-											기 타
+											기타
 										</c:when>
 									</c:choose>
+									</p>
 								</li>
 								
-								<li class="list-group-item period">
-									<i title="신청기간" class="fas fa-calendar-alt"></i>&nbsp;신청기간 : <fmt:formatDate value="${clView.cOpenDate}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${clView.cEndDate}" pattern="yyyy.MM.dd"/>
+								<li class="period detailBody-li">
+									<p class="clInfoTitle">
+										<i title="신청기간" class="fas fa-calendar-alt"></i>신청기간
+									</p>
+									<p class="clInfoTxt">
+										<fmt:formatDate value="${clView.cOpenDate}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${clView.cEndDate}" pattern="yyyy.MM.dd"/>
+									</p>
 								</li>
 
-								<li class="list-group-item remain">
-									<i title="남은기간" class="far fa-clock"></i>&nbsp;남은기간 : <b id="classEndCountDown" style="color: #e7438b"></b>
+								<li class="remain detailBody-li">
+									<p class="clInfoTitle">
+										<i title="남은기간" class="far fa-clock"></i>남은기간
+									</p>
+									<p id="classEndCountDown" class="clInfoTxt"></p>
 								</li>
 					
-								<li class="list-group-item count" >
-									<i title="남은기간" class="fas fa-users"></i>&nbsp;신청인원 : <b class="classCurrentPeople" style="color: #e7438b"></b> / ${clView.cTotalPeopleCount}
+								<li class="count detailBody-li">
+									<p class="clInfoTitle">
+										<i title="신청인원" class="fas fa-users"></i>신청인원
+									</p>
+									<p class="classCurrentPeople clInfoTxt"></p>
 								</li>
 								
-								<li class="list-group-item diff">
-									<p>
-										<i title="난이도" class="fas fa-layer-group"></i>&nbsp;난 이 도
+								<li class="diff detailBody-li">
+									<p class="clInfoTitle">
+										<i title="난이도" class="fas fa-layer-group"></i>난이도
 									</p>
-									<div class="clDiffGroup" align="center">
-										<button type="button" class="clDiffBtnE <c:if test="${clView.cDifficulty eq 'easy'}">clDiffBtnSelect</c:if>">쉬 움</button>
-										<button type="button" class="clDiffBtnN <c:if test="${clView.cDifficulty eq 'normal'}">clDiffBtnSelect</c:if>">보 통</button>
-										<button type="button" class="clDiffBtnH <c:if test="${clView.cDifficulty eq 'hard'}">clDiffBtnSelect</c:if>">어려움</button>
+									<div class="clDiffGroup clInfoTxt">
+										<p class="clDiff <c:if test="${clView.cDifficulty eq 'easy'}">clDiffSelect</c:if>">쉬 움</p>
+										<p class="clDiff <c:if test="${clView.cDifficulty eq 'normal'}">clDiffSelect</c:if>">보 통</p>
+										<p class="clDiff <c:if test="${clView.cDifficulty eq 'hard'}">clDiffSelect</c:if>">어려움</p>
 									</div>
 								</li>
 								
-								<li class="list-group-item clPlaceMap">
-									<p>
-										<i title="교육장소" class="fas fa-map-marked-alt"></i>&nbsp;교육장소
+								<li class="clPlaceMap detailBody-li">
+									<p class="clInfoTitle">
+										<i title="교육장소" class="fas fa-map-marked-alt"></i>교육장소
 									</p>
-									<p>
+									<p class="clInfoMap">
 										${clView.cAddress2}<br>
 										${clView.cAddress3}(${clView.cAddress1})
 									</p>
-									<div id="map"></div>
-								</li>								
-								<hr>
+									<div id="map" style="width:100%; height:200px;"></div>
+								</li>
 								
 								<c:choose>
 									<c:when test="${loginUser.uNickname == null or loginUser.uNickname == clView.uNickname}">
@@ -192,11 +214,11 @@
 									</c:when>
 
 									<c:otherwise>
-										<li class="list-group-item applyMenu">
+										<li class="applyMenu detailBody-li">
 											<div class="classJoinForm">
-												<button class="btn btn-lg applyBtn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false">강 좌 참 여</button>
+												<button class="btn applyBtn" data-toggle="modal" data-target="#modalForm" data-backdrop="static" data-keyboard="false">강좌참여</button>
 												<div class="modal fade" id="modalForm" role="dialog">
-													<div class="modal-dialog modal-lg">
+													<div class="modal-dialog">
 														<div class="modal-content text-center">
 												            <!-- Modal Header -->
 												            <div class="modal-header">
@@ -205,29 +227,29 @@
 									            
 												            <!-- Modal Body -->
 												            <div class="modal-body">									            												            	
-												            	<p>
+												            	<p class="classImg">
 												           			<img alt="class IMG" src="${clView.cThumnail}">
 												            	</p>
 
-												            	<table class="table table-hover">
+												            	<table>
 												            		<tbody>
 													            		<tr class="table-Default">
-													            			<td>강 좌 명</td>
+													            			<td class="tb-title">강 좌 명</td>
 													            			<td>${clView.cTitle}</td>
 													            		</tr>
 													            		
 													            		<tr class="table-Default">
-													            			<td>개 설 자</td>
+													            			<td class="tb-title">개 설 자</td>
 													            			<td>${clView.uNickname}</td>
 													            		</tr>
 													            		
 													            		<tr class="table-Default">
-													            			<td>포 인 트</td>
+													            			<td class="tb-title">포 인 트</td>
 													            			<td><i class="fab fa-product-hunt" style="color: #FFC107;"></i>&nbsp;<fmt:formatNumber value="${clView.cPrice}" pattern="#,###" /></td>
 													            		</tr>
 													            		
 													            		<tr class="table-Default">
-													            			<td>신 청 일</td>
+													            			<td class="tb-title">신 청 일</td>
 													            			<td><fmt:formatDate value="${now}" pattern="yyyy.MM.dd HH:MM"/></td>
 													            		</tr>
 												            		</tbody>
@@ -243,26 +265,17 @@
 									            
 												            <!-- Modal Footer -->
 												            <div class="modal-footer">
-																<p>
+																<p class="paymentInfo">
 												            		<b style="color: #e7438b;"><fmt:formatNumber value="${clView.cPrice}" pattern="#,###"/></b> 포인트를 사용하여<br>
 												            		<b style="color: #e7438b;">"${clView.cTitle}"</b><br>
 												            		강좌를 결제합니다.
 												            	</p>
-												            	
-												            	<div>										            	
-													            	<table style="width: 100%;">
-													            		<tr>
-													            			<td>사용가능 포인트</td>
-													            			<td><i class="fab fa-product-hunt" style="color: #FFC107;"></i>&nbsp;<fmt:formatNumber value="${loginUser.point}" pattern="#,###"/></td>
-													            		</tr>
-													            	</table>
-												            	</div>
-												            	<br>
+												            	<p class="mypointInfo">사용가능 포인트 : <i class="fab fa-product-hunt" style="color: #FFC107;"></i>&nbsp;<fmt:formatNumber value="${loginUser.point}" pattern="#,###"/></p>
 												            	
 													            <div class="cjoinBtn" align="center">
-																	<button title="개설자에게 문의하기" class="btn btn-default" type="button" onclick="sendMessage('${clView.uNickname}',${clView.user_id});" style="margin-right: 30px;"><i class="fas fa-question fa-2x"></i></button>
-																	<button title="수강신청" class="btn btn-default" type="button" onclick="classJoinForm(${loginUser.point}, ${clView.cTotalPeopleCount}, ${loginUser.user_id})" style="margin-right: 30px;"><i class="fas fa-check fa-2x"></i></button>
-																	<button title="취소" class="btn btn-default" type="button" data-dismiss="modal" onclick="resetForm()"><i class="fas fa-ban fa-2x"></i></button>
+																	<button title="개설자에게 문의하기" class="btn" type="button" onclick="sendMessage('${clView.uNickname}',${clView.user_id});"><i class="far fa-envelope"></i></button>
+																	<button title="수강신청" class="btn" type="button" onclick="classJoinForm(${loginUser.point}, ${clView.cTotalPeopleCount}, ${loginUser.user_id})"><i class="fas fa-check fa-2x"></i></button>
+																	<button title="취소" class="btn" type="button" data-dismiss="modal" onclick="resetForm()"><i class="fas fa-times"></i></button>
 																</div>
 															</div>
 												        </div>
@@ -273,26 +286,44 @@
 									</c:otherwise>
 								</c:choose>
 
-								<li class="list-group-item menuBtn">
+								<li class="menuBtn detailBody-li">
 									<c:choose>		
 										<c:when test="${loginUser.uNickname == null}">
-											<div align="center">
+											<div class="btnWrap">
 												<button title="강좌목록" class="btn classList" type="button"><i class="fas fa-list-ul fa-2x"></i></button>
+												<!-- 게시글 공유 -->
+												<p class="shareBtn">
+													<a class="share" id="kakaoShareBtn">
+														<img src="${pageContext.request.contextPath}/img/kakaolink_btn_medium.png"/>
+													</a>
+												</p>
 											</div>
 										</c:when>
 
 										<c:when test="${loginUser.uNickname == clView.uNickname}"> 
-											<div align="center">
+											<div class="btnWrap">
 												<button title="강좌수정" class="btn classModify" type="button"><i class="fas fa-edit fa-2x"></i></button>
 												<button title="강좌삭제" class="btn classDelete" type="button"><i class="fas fa-eraser fa-2x"></i></button>
 												<button title="강좌목록" class="btn classList" type="button"><i class="fas fa-list-ul fa-2x"></i></button>
+												<!-- 게시글 공유 -->
+												<p class="shareBtn">
+													<a class="share" id="kakaoShareBtn">
+														<img src="${pageContext.request.contextPath}/img/kakaolink_btn_medium.png"/>
+													</a>
+												</p>
 											</div>
 										</c:when>
 
 										<c:otherwise>
-											<div align="center">
+											<div class="btnWrap">
 												<button title="스크랩" class="btn" type="button" onclick="cScrap(${clView.cId})"><i class="fas fa-bookmark fa-2x"></i></button>
 												<button title="강좌목록" class="btn classList" type="button"><i class="fas fa-list-ul fa-2x"></i></button>
+												<!-- 게시글 공유 -->
+												<p class="shareBtn">
+													<a class="share" id="kakaoShareBtn">
+														<img src="${pageContext.request.contextPath}/img/kakaolink_btn_medium.png"/>
+													</a>
+												</p>
 											</div>
 										</c:otherwise>
 									</c:choose>
@@ -304,7 +335,6 @@
 					<br>
 					
 					<div class="col clQuestion">
-						<br><br>
 						<div class="input-group hr-sect" >
 							<h4>강 좌 문 의 (<b class="qCount"></b>)</h4>
 						</div>
@@ -364,6 +394,7 @@
 			<input type="hidden" id="uProfile" name="loginUserId" value="${loginUser.uprofile}">
 			<input type="hidden" id="classId" value="${clView.cId}" />
 			<input type="hidden" id="classOpenner" value="${clView.uNickname}" />
+			<input type="hidden" id="classTotalPeopleCount" value="${clView.cTotalPeopleCount}">
 			<input type="hidden" id="classPrice" value="${clView.cPrice}" />
 			<input type="hidden" id="difficulty" value="${clView.cDifficulty}"/>
 			<input type="hidden" id="ad1" value="${clView.cAddress1}"/>

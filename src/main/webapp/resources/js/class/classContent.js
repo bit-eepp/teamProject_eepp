@@ -10,17 +10,20 @@ var cId = $('#classId').val();
 			
 $(document).ready(function() {
 	
-	// 수강정보 썸머노트 설정
-	$('#summernote').summernote({
-		height: 500,
-		minHeight: 500,
-		maxHeight: 500,
-		toolbar: []
-	});
-				
-	$('.note-editor').width($('.clContentView').width());
-	$('#summernote').css('resize', 'none');
-	$('#summernote').summernote('disable');
+//	// 수강정보 썸머노트 설정
+//	$('#summernote').summernote({
+//		height: 500,
+//		minHeight: 500,
+//		maxHeight: 500,
+//		toolbar: [],
+//		disableResize: true,
+//		disableResizeEditor: true,
+//		resize: false,
+//	});
+//				
+//	$('.note-editor').width($('.clContentView').width());
+//	$('#summernote').css('resize', 'none');
+//	$('#summernote').summernote('disable');
 				
 	// 신청종료일 카운트다운
 	var x = setInterval(function() {
@@ -95,7 +98,7 @@ $(document).ready(function() {
 			
 			var imageSrc = getContextPath() +'/img/class/cPlaceMarker.png', // 마커이미지의 주소입니다    
 			imageSize = new kakao.maps.Size(55, 45), // 마커이미지의 크기입니다
-			imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			imageOption = {offset: new kakao.maps.Point(26, 37)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 				    	
 			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
@@ -130,7 +133,7 @@ $(document).ready(function() {
 			});
 			
 			// 지도중심을 결과값으로 받은 위치 이동
-			map.setCenter(coords); 
+			map.setCenter(coords);
 			} 
 		});
 	/* 교육장소 map 부분 끝*/
@@ -148,7 +151,8 @@ function getCurrentUserCount() {
 		},
 		success:function(data) {
 			//console.log("현재 신청자수 : " +data);
-			var tag = '<b class="classCurrentPeople">' +data  +'</b>';
+			var tag = '<span class="classCurrentPeople">' +data+'</span>';
+			tag += '/' + $("#classTotalPeopleCount").val();
 			$('.classCurrentPeople').html(tag);
 		}	
 	});
