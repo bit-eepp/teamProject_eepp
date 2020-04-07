@@ -16,10 +16,10 @@ public interface EatingMapper {
 
 		// 맛집 리스트 + paging, 정렬 : 시간순
 		public abstract List<EatingVO> eatingList(Map<String, Object> map);
-
-		// 맛집 조회수
-		//public abstract void hitUp(@Param("bId") int bId);
-
+		
+		// 테마 리스트 + paging, 정렬 : 시간순
+		public abstract List<EatingVO> themaList(Map<String, Object> map);
+		
 		// 맛집 인포 게시글 확인
 		public abstract EatingVO selectOne(@Param("eId") int eId);
 
@@ -35,11 +35,6 @@ public interface EatingMapper {
 		// 맛집 수정
 		public abstract void modify(@Param("eatingVO") EatingVO eatingVO);
 		
-		// 공지사항
-		//public abstract List<EatingVO> noticeList();
 		
-		// 조회수 상위 글 3개 노출
-		//public abstract List<EatingVO> hotList();
-
 
 }

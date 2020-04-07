@@ -14,38 +14,35 @@ public class ReviewService {
 
 	@Autowired
 	private ReviewMapper reviewMapper;
-
-	public int reviewCount(int eId) {
-		return reviewMapper.reviewCount(eId);
+	
+	//가게 리뷰 개수 
+	public int reviewCount(int eating_id) {
+		return reviewMapper.reviewCount(eating_id);
 	}
 	
-//	public float reviewAVG(float rvScore) {
-//		return reviewMapper.reviewAVG(rvScore);
-//	}
-	
+	//가게 리뷰 평점
 	public float reviewAVG(ReviewVO reviewVO) {
 		return reviewMapper.reviewAVG(reviewVO);
 	}
-
-	public List<ReviewVO> reviewList(ReviewCriteria rvCriteria, int eId) {
-		return reviewMapper.reviewList(rvCriteria, eId);
+	
+	//리뷰 리스트
+	public List<ReviewVO> reviewList(ReviewCriteria rvCriteria, int eating_id) {
+		return reviewMapper.reviewList(rvCriteria, eating_id);
 	}
-
+	
+	//리뷰 작성
 	public void reviewWrite(ReviewVO reviewVO) {
 		reviewMapper.reviewWrite(reviewVO);
 	}
-
+	
+	//리뷰 수정
 	public void reviewModify(ReviewVO reviewVO) {
 		reviewMapper.reviewModify(reviewVO);
 	}
-
+	
+	//리뷰 삭제
 	public void reviewDelete(int rvId) {
 		reviewMapper.reviewDelete(rvId);
 	}
-	/*
-	public void reReplyWrite(ReviewVO reviewVO) {
-		replyMapper.replyShape(replyVO.getRpGroup(), replyVO.getRpStep());
-		replyMapper.reReplyWrite(replyVO);
-	}
-	*/
+	
 }
