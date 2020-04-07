@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -79,7 +78,7 @@
                 			</ul>
 							</div>
 							<!-- 유저 신고 modal -->	
-                			<div class="modal fade" id="userForm_user_${msg.user_id}${idx.index}" role="dialog">
+                			<div class="modal fade reportModalBox" id="userForm_user_${msg.user_id}${idx.index}" role="dialog">
                 				<div class="modal-dialog">
                 				<div class="modal-content">
                 						
@@ -89,7 +88,7 @@
                 					<span aria-hidden="true">&times;</span>
 			                    	<span class="sr-only">Close</span>
 			                		</button>
-			               			<h4 class="modal-title">${msg.uNickname}님 신고</h4>
+			               			<h4 class="modal-title">&#8988;${msg.uNickname}&#8991;님 신고</h4>
 			            		</div>
 			            		<!-- Header -->
 			            				
@@ -98,9 +97,9 @@
 			            			<div class="declaration">
 			            			<input type="hidden" name="reporter_id" value="${loginUser.user_id}">
 			            			<input type="hidden" name="reported_id" value="${msg.user_id}">
-			            				
+			            			
+			            			<p class="reportBoxIcon"><img src="${pageContext.request.contextPath}/img/reportBoxIcon.png"></p>
 			            			<div class="form-group">
-			            			<label for="inputMessage">신고사유</label><br>
 			            			<input type="radio" name="dReason" value="부적절한 홍보 게시글" onclick="this.form.etc_${msg.user_id}${idx.index}.disabled=true">  부적절한 홍보 게시글<br>
 			            			<input type="radio" name="dReason" value="음란성 또는 청소년에게 부적합한 내용" onclick="this.form.etc_${msg.user_id}${idx.index}.disabled=true">  음란성 또는 청소년에게 부적합한 내용<br>
 			            			<input type="radio" name="dReason" value="명예훼손/사생활 침해 및 저작권침해등" onclick="this.form.etc_${msg.user_id}${idx.index}.disabled=true">  명예훼손/사생활 침해 및 저작권침해등<br>
@@ -260,7 +259,7 @@
 				
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
 				<li class="page-item boardPaging">
-				<a id="boardPage_${idx}" class="page-link msgPaging" href="message${pageMaker.makeQuery(idx)}&messageType=${messageType}">${idx}</a></li>
+				<a id="msgPaging_${idx}" class="page-link msgPaging" href="message${pageMaker.makeQuery(idx)}&messageType=${messageType}">${idx}</a></li>
 				</c:forEach>
 				
 				<li class="page-item">
@@ -270,9 +269,11 @@
 				</li>
 			</ul>
 		</div>
+		<input type="hidden" id="pageMakerCriPage" value="${pageMaker.cri.page}">
 		<!-- paging -->
 </div>
 <!-- message_footer-->
 <script src="${pageContext.request.contextPath}/js/user/message/message.js"></script>
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
 </body>
 </html>
