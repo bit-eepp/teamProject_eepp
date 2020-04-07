@@ -76,17 +76,24 @@
 								</c:choose>
 							</div>
 							<div class="menuBtn-wrap">
-								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage?mpPoint=mpPoint'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+								<c:choose>
+									<c:when test ="${loginUser.uNickname eq'운영자' or loginUser.uNickname =='admin2'}">
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage?mpPoint=mpPoint'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="menuBtn-wrap">
-							<c:choose>
-									<c:when test ="${loginUser.uNickname =='운영자'}">
-										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/adminPage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
+								<c:choose>
+									<c:when test ="${loginUser.uNickname =='운영자' or loginUser.uNickname =='admin2'}">
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/adminPage'"><i class="fas fa-user-cog"></i><strong> Admin</strong></button>&nbsp;
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
 									</c:otherwise>
-							</c:choose>
+								</c:choose>
 							</div>
 							<div class="menuBtn-wrap">
 								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/logout.do'"><i class="fas fa-power-off"></i><strong> Logout</strong></button>
