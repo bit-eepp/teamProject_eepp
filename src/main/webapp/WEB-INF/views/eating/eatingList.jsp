@@ -19,6 +19,7 @@
 	<input type="hidden" id="eatingTotalCount" value="${eatingPageMaker.totalCount}" />
 	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page}" />
 	<input type="hidden" id="sortType" value="${sortType}" />
+	<input type="hidden" id="eThema" value="${eThema}" />
 	
 	<input type="hidden" id="eatingSearchType" value="${escri.searchType}" />
 
