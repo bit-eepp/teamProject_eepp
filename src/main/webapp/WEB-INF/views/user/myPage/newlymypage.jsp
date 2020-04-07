@@ -8,8 +8,9 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>MyPage</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 <body>
 		<!-- header -->
@@ -464,7 +465,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>
+								<div class="delbtn"> <button type="button" id="selectDeleteBtn2" class="btn btn-submit">삭제</button> </div>
 									<div class="scrapClassPage">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">

@@ -5,6 +5,13 @@
  */
 
 // 프로필 업로드 사진 미리보기
+// ContextPath
+function getContextPath() {
+	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+	return location.href.substring(hostIndex, location.href.indexOf('/',
+			hostIndex + 1));
+};
+
 $("#showImg").change(function() {
 	if (this.files && this.files[0]) {
 		var reader = new FileReader;
@@ -15,12 +22,6 @@ $("#showImg").change(function() {
 	}
 });
 
-// ContextPath
-function getContextPath() {
-	var hostIndex = location.href.indexOf(location.host) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf('/',
-			hostIndex + 1));
-};
 
 /* 닉네임 중복확인 */
 var ncCheck = 0;
@@ -279,6 +280,122 @@ function deleteScrap() {
 		}
 	}
 }
+
+//체크박스 선택 삭제
+function deleteScrap() {
+	var checkRow = "";
+	$("input[name='pickCheck']:checked").each(function() {
+		checkRow = checkRow + $(this).val() + ",";
+	});
+	
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
+
+	if (checkRow == '') {
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	} else {
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+			$.ajax({
+						url : getContextPath() + "/deleteScrap",
+						type : "post",
+						data : {
+							"checkRow" : checkRow
+						},
+						success : function(data) {
+							alert("스크랩이 삭제되었습니다.");
+							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
+						},
+						error : function(request, status, error) {
+							alert("에러가 발생했습니다.");
+							console.log(request.responseText);
+							console.log(error);
+						}
+					})
+		} else {
+			return false;
+		}
+	}
+}
+
+function deleteScrap2() {
+	var checkRow = "";
+	$("input[name='pickCheck1']:checked").each(function() {
+		checkRow = checkRow + $(this).val() + ",";
+	});
+	
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
+
+	if (checkRow == '') {
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	} else {
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+			$.ajax({
+						url : getContextPath() + "/deleteScrap",
+						type : "post",
+						data : {
+							"checkRow" : checkRow
+						},
+						success : function(data) {
+							alert("스크랩이 삭제되었습니다.");
+							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
+						},
+						error : function(request, status, error) {
+							alert("에러가 발생했습니다.");
+							console.log(request.responseText);
+							console.log(error);
+						}
+					})
+		} else {
+			return false;
+		}
+	}
+}
+$(document).ready(function() {
+	$("#selectDeleteBtn2").click(function() {
+		deleteScrap2();
+	});
+});
+
+function deleteScrap3() {
+	var checkRow = "";
+	$("input[name='pickCheck1']:checked").each(function() {
+		checkRow = checkRow + $(this).val() + ",";
+	});
+	
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
+
+	if (checkRow == '') {
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	} else {
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+			$.ajax({
+						url : getContextPath() + "/deleteScrap",
+						type : "post",
+						data : {
+							"checkRow" : checkRow
+						},
+						success : function(data) {
+							alert("스크랩이 삭제되었습니다.");
+							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
+						},
+						error : function(request, status, error) {
+							alert("에러가 발생했습니다.");
+							console.log(request.responseText);
+							console.log(error);
+						}
+					})
+		} else {
+			return false;
+		}
+	}
+}
+$(document).ready(function() {
+	$("#selectDeleteBtn3").click(function() {
+		deleteScrap2();
+	});
+});
 
 // 클래스 구입자 보기
 function classjoin_list(cId) {

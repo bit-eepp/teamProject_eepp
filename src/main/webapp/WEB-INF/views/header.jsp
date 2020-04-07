@@ -81,7 +81,7 @@
 							<div class="menuBtn-wrap">
 							<c:choose>
 									<c:when test ="${loginUser.uNickname =='운영자'}">
-										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/adminPage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/adminPage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;

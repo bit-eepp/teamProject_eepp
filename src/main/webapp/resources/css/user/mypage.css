@@ -78,7 +78,7 @@ p {
 	border-color: gray;
 }
 
-#mypagenickNameCheck, #charge, #pointBtn, #selectDeleteBtn1 {
+#mypagenickNameCheck, #charge, #pointBtn, #selectDeleteBtn1,#selectDeleteBtn2,#selectDeleteBtn3 {
 	font-size: 0.8rem;
 	border-radius: 7px;
 	padding: 5px 10px;
@@ -159,19 +159,16 @@ span.checkInfo {
 	background-color: #59bfbf;
 }
 
-#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn, #myclassbtn, #mpRVBtn {
+#myinfobtn, #mycontentbtn, #myscrapbtn, #mypointbtn, #myclassbtn,
+	#mpRVBtn {
 	margin-right: 20px;
 	width: 10%;
 	background-color: #59bfbf;
-	border:none;
+	border: none;
 }
 
 .btn-info {
 	border: none;
-}
-
-tr.bordered {
-	border-bottom: 1px solid #BDBDBD;
 }
 
 tr.bordered td {
@@ -179,23 +176,8 @@ tr.bordered td {
 }
 
 tr.bordered td a {
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 }
-
-/* 페이징 CSS */
-.page-link {
-	border: none!important;
-	margin-left: 20px!important;
-	color: #26274c!important;
-	background: #ffffff!important;
-	font-weight: 700!important;
-}
-
-.page-link:hover {
-	background: #59bfbf!important;
-	color: #ffffff!important;
-}
-/* 페이징 CSS */
 
 .text-wrap {
 	width: 80%;
@@ -289,7 +271,7 @@ td {
 	color: #59bfbf;
 }
 
-.Title a{
+.Title a {
 	color: #000;
 }
 
@@ -326,20 +308,12 @@ td {
 	white-space: nowrap;
 }
 
-.selectSearchType {
-	height: calc(1.75rem) !important;
-	padding: 0 1.75rem 0 .75rem !important;
-	font-size: 12px;
-	background-color: #fff;
-	margin-right: 5px;
-}
-
 .search {
 	display: flex;
 	align-items: center;
 }
 
-.selectSearchType {
+.selectSearchType, .selectgrade {
 	height: calc(1.75rem) !important;
 	padding: 0 1.75rem 0 .75rem !important;
 	font-size: 12px;
@@ -360,8 +334,60 @@ td {
 	max-width: 100%;
 	white-space: nowrap;
 }
-.boardList_tr td, .scrapList_tr td, .scrapCList_tr td, .scrapEList_tr td, .classJList_tr td, .classOList_tr td {
-	color:#6d6d6d;
+
+.boardList_tr td, .scrapList_tr td, .scrapCList_tr td, .scrapEList_tr td,
+	.classJList_tr td, .classOList_tr td {
+	color: #6d6d6d;
+}
+
+/*
+
+관리자 페이지 css
+
+*/
+.chanagebtn {
+	display: inline-block;
+}
+
+.container {
+	padding-top: 100px;
+	font-size: 0.8rem;
+}
+
+.scrapList_tr .RTitle, .scrapCList_tr .RTitie, .scrapEList_tr .RTitle {
+	color: #000;
+}
+
+#mpReBtn, #mpNoBtn, #nav-reply-tab, #nav-user-tab {
+	color: #59bfbf;
+}
+
+#mynoticebtn {
+	background-color: #59bfbf;
+	color: #fff;
+	border: none;
+	font-size: 14px;
+}
+
+#nav-reply-tab:hover, #nav-user-tab:hover, #nav-board-tab:hover {
+	color: #000;
+}
+
+#adchbtn {
+	margin-left: 5%;
+	font-size: 0.8rem;
+	border-radius: 7px;
+	color: #fff;
+	boarder: none;
+	background: #59bfbf;
+}
+
+.a_size {
+	font-size: 13px;
+}
+
+.report_count, .content_count, .content_all {
+	margin-bottom: 10px;
 }
 
 /*
@@ -392,10 +418,11 @@ td {
 .drop_form {
 	text-align: center;
 }
-#drop{
-	color:inherit;
-	text-decoration:underline;
-	margin-left:80%;
+
+#drop {
+	color: inherit;
+	text-decoration: underline;
+	margin-left: 80%;
 }
 /*
 	

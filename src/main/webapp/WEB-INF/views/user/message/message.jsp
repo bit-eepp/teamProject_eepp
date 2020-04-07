@@ -73,7 +73,7 @@
 							<div class="dropdown">
 							<a href="#" class="userBtn" id="user_${msg.uNickname}${idx.index}" data-toggle="dropdown">${msg.uNickname}</a>
            					<ul class="dropdown-menu" role="menu" aria-labelledby="user_${msg.uNickname}${idx.index}">
-                				<li><a href="#">회원정보</a></li>
+                				<li><a onclick="memberInfo('${msg.uNickname}',${msg.user_id});">회원정보</a></li>
                 				<li><a onclick="sendMessage('${msg.uNickname}',${msg.user_id},'mySendMsg');">쪽지 보내기</a></li>
                 				<li><a data-toggle="modal" data-target="#userForm_user_${msg.user_id}${idx.index}" data-backdrop="static" data-keyboard="false">신고하기</a></li>
                 			</ul>

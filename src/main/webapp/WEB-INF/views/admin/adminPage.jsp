@@ -8,18 +8,11 @@
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>관리자 페이지</title>
+<%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
-<%@ include file="/WEB-INF/include/forImport.jspf"%>
 <style>
 	
-	*{
-		font-size:14px;
-		Padding-top : 160px;
-	}
-	.chanagebtn{
-		display: inline-block;
-	}
 </style>
 </head>
 <body>
@@ -31,6 +24,12 @@
 	<input type="hidden" id="MemberMakerTotalCount" value="${MemberPageMaker.totalCount}">
 	<input type="hidden" id="MemberCriPage" value="${MemberPageMaker.cri.page}">
 	<input type="hidden" id="MemberMakeQuery" value="${MemberPageMaker.makeQuery(1)}">
+	 
+	 <input type="hidden" id="NoticeCriPage" value="${NoticePageMaker.cri.page}">
+	 <input type="hidden" id="UserReportCriPage" value="${UserReportPageMaker.cri.page}">
+	 <input type="hidden" id="BoardReportCriPage" value="${BoardReportPageMaker.cri.page}">
+	 <input type="hidden" id="ReplyReportCriPage" value="${ReplyReportPageMaker.cri.page}">
+	 
 	 
 	<c:choose>
 		<c:when test="${loginUser.uNickname != null}">
@@ -46,7 +45,7 @@
 							<td class="text_bold"><span class="required">• </span>회원 현황</td>
 						</tr>
 						<tr class="bordered">
-							<td><a href="#mpPoBtn">${map.MemberListCount} 명</a></td>
+							<td><a href="#mpMemBtn">${map.MemberListCount} 명</a></td>
 							</tr>
 							
 							<tr>
@@ -54,7 +53,7 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td>
+							<td><div class="content_all">
 								<a href="${pageContext.request.contextPath}/board/boardList" target="_blank" class= "b_all"><b>전체 - ${map.BListALL} 개</b></a><br>
 								<a href="${pageContext.request.contextPath}/board/boardList?&bCategory=it_dev" target="_blank">IT / 개발 - ${map.BListIT} 개 </a><br>
 								<a href="${pageContext.request.contextPath}/board/boardList?&bCategory=service" target="_blank">서비스 - ${map.BListService} 개</a><br>
@@ -62,6 +61,7 @@
 								<a href="${pageContext.request.contextPath}/board/boardList?&bCategory=design" target="_blank">디자인 - ${map.BListDesign} 개</a><br>
 								<a href="${pageContext.request.contextPath}/board/boardList?&bCategory=official" target="_blank">공무원 - ${map.BListOfficer} 개</a><br>
 								<a href="${pageContext.request.contextPath}/board/boardList?&bCategory=etc" target="_blank">기타 - ${map.BListEtc} 개</a><br>
+								</div>
 							</td>
 							</tr>
 							
@@ -87,7 +87,7 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="scrap_count"><a href="#mpScBtn">유저 - &nbsp;${map.UserReportListCount}건 <br> 
+							<td><div class="report_count"><a href="#mpReBtn">유저 - &nbsp;${map.UserReportListCount}건 <br> 
 																			게시글 - &nbsp;${map.UserReportListCount}건 <br>
 																			댓글 - &nbsp;${map.ReplyReportCount}건</a></div></td>
 							</tr>
@@ -162,7 +162,7 @@
 								</table>
 								<br>
 									<!-- 페이징 시작 -->
-								<div class="boardpaging">
+								<div class="vopaging">
 										<ul class="pagination justify-content-center">
 											<li class="page-item">
 													<a class="page-link" href="adminPage${NoticePageMaker.makeQuery(NoticePageMaker.startPage - 1)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
@@ -171,7 +171,7 @@
 												</li>
 											<c:forEach begin="${NoticePageMaker.startPage}" end="${NoticePageMaker.endPage}" var="idx">
 												<li class="page-item">
-												<a id ="boardpaging_${idx}" class="page-link" href="adminPage${NoticePageMaker.makeQuery(idx)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">${idx}</a></li>
+												<a id ="vo_${idx}" class="page-link" href="adminPage${NoticePageMaker.makeQuery(idx)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">${idx}</a></li>
 											</c:forEach>
 											<li class="page-item">
 													<a class="page-link" href="adminPage${NoticePageMaker.makeQuery(NoticePageMaker.endPage + 1)}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
@@ -187,9 +187,9 @@
 						<div class="myReport-wrap">
 							<h3 id="mpReBtn">신고 목록</h3>
 							<hr>
-							<div align="right">
+							<!-- <div align="right">
 								<button type="button" class="btn btn-info" id="myReportbtn">확인</button>
-							</div>
+							</div> -->
 							<p>'EE'에서 신고 리스트를 확인 할 수 있습니다.</p>
 							<br>
 							<br>
@@ -297,7 +297,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>
+								<!-- <div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div> -->
 									<div class="BRLP">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
@@ -353,7 +353,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-						<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>
+					<!-- 	<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div> -->
 								
 									<div class="RRLP">
 										   <ul class="pagination justify-content-center">
@@ -384,9 +384,9 @@
 			<div class="myinfo-wrap">
 					<h3 id="mpMemBtn">회원 목록</h3>
 						<hr>
-							<div align="right">
+							<!-- <div align="right">
 								<button type="button" class="btn btn-info" id="mycontentbtn">확인</button>
-							</div>
+							</div> -->
 							<p>'EE'에 가입하신 회원들을 확인 할 수 있습니다.</p>
 							<br>
 							<br>
@@ -434,7 +434,7 @@
 												<tr class="boardList_tr">
 													<td><input type="checkbox" name="pickCheck3" class="pickCheck3" value="${ML.user_id}" /></td>
 													<td>${ML.user_id}</td>
-													<td style="color:#000; cursor: pointer;"><a onclick="memberInfo('${ML.uNickname}','${ML.user_id}');">${ML.uNickname}</a></td>
+													<td style="color:#000; cursor: pointer;"><a onclick="memberInfo('${ML.uNickname}','${ML.user_id}');" class="a_size">${ML.uNickname}</a></td>
 													<td>
 													<c:choose>
 													  	<c:when test = "${ML.grade_Id == 2}">정회원</c:when>
@@ -464,11 +464,11 @@
 									  <option value="4">탈퇴회원</option>
 									  <option value="1">운영자</option>
 									</select>
-								<div class="chanagebtn"> <button type="button"class="btn btn-submit" onclick="changeGrade();">변경</button> </div>	
+								<div class="chanagebtn"> <button type="button" class="btn btn-submit" id="adchbtn" onclick="changeGrade();">변경</button> </div>	
 								<br>
 									<!-- 페이징 시작 -->
 									
-								<div class="boardpaging">
+								<div class="ML">
 										<ul class="pagination justify-content-center">
 											<li class="page-item">
 													<a class="page-link" href="adminPage${MemberPageMaker.makeSearch(MemberPageMaker.startPage - 1)}&board=yes">
@@ -477,7 +477,7 @@
 												</li>
 											<c:forEach begin="${MemberPageMaker.startPage}" end="${MemberPageMaker.endPage}" var="idx">
 												<li class="page-item">
-												<a id ="boardpaging_${idx}" class="page-link" href="adminPage${MemberPageMaker.makeSearch(idx)}&board=yes">${idx}</a></li>
+												<a id ="ML_${idx}" class="page-link" href="adminPage${MemberPageMaker.makeSearch(idx)}&board=yes">${idx}</a></li>
 											</c:forEach>
 											<li class="page-item">
 													<a class="page-link" href="adminPage${MemberPageMaker.makeSearch(MemberPageMaker.endPage + 1)}&board=yes">
@@ -490,8 +490,6 @@
 								</div><!-- paging -->
 							</div>
 						</div>			
-						
-						
 					</div><!-- col-sm-8 -->
 				</div><!-- row -->
 			</div><!-- container -->
@@ -511,84 +509,9 @@
 				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 		}
 	</script>
-	<script>
-	function changeGrade(){
-		
-		 var checkRow = "";
-		$("input[name='pickCheck3']:checked").each(function() {
-			checkRow = checkRow + $(this).val() + ",";
-		});
-		checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
-		if (checkRow == '') {
-			alert("변경할 대상을 선택하세요.");
-			return false;
-		}else{
-			$.ajax({
-				url : getContextPath() + "/changeGrade",
-				type : "post",
-				data : {
-					"checkRow" : checkRow,
-					"selectgrade" : $(".selectgrade").val()
-				},
-				success : function(data) {
-					alert("등급이 변경되었습니다.");
-					location.href="/eepp/adminPage";
-					
-				},
-				error : function(request, status, error) {
-					alert("에러가 발생했습니다.");
-					console.log(request.responseText);
-					console.log(error);
-				}
-			})
-		}
-	} 
-</script>
-<script>
-$(function() {
-	// 전체선택 체크박스 클릭
-	$(".allCheck3").click(function() {
-		if ($(".allCheck3").prop("checked")) {
-			$("input:checkbox[name='pickCheck3']").prop("checked", true);
-		} else {
-			$("input:checkbox[name='pickCheck3']").prop("checked", false);
-		}
-	})
-})
-	</script>
-	<script>
-	// 게시물 검색
-	$('#searchBtn1').click(
-			function() {
-				if ($('select[name=searchType]').val() == 'n') {
-					alert('검색조건을 지정해주세요');
-					return;
-				} else {
-					self.location = "adminPage" + $("#MemberMakeQuery").val()
-							+ "&searchType=" + $("select[name=searchType]").val()
-							+ "&keyword="
-							+ encodeURIComponent($('#keywordInput1').val())
-							+ "&board=yes"
-				}
-		});
-
-	// 엔터키로 검색
-	$('#keywordInput1').keydown(function(event){
-		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if(keycode == 13) {
-	    	 if($('select[name=searchType]').val() == 'n') {
-	 			alert('검색조건을 지정해주세요');
-	 			return;
-	 		} else {
-	 			self.location = "adminPage" + $("#MemberMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() 
-	 			+ "&keyword=" + encodeURIComponent($('#keywordInput1').val()) + "&board=yes";
-	 		}
-	     }
-	});
-	</script>
-	
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 <%@ include file="/WEB-INF/views/footer.jsp"%>
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/js/user/mypage/adminMypage.js"></script>
 </body>
 </html>
