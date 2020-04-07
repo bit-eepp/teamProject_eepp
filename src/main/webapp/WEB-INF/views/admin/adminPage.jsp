@@ -74,10 +74,10 @@
 								<div class="content_count">
 								<a href="${pageContext.request.contextPath}/class/classList" target="_blank" class="c_all"><b>전체 - ${map.CListALL} 개</b><br></a>
 								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=it_dev" target="_blank">IT/개발 - ${map.CListIt_dev} 개<br></a>
-								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=workSkill" target="_blank">업무스킬 - ${map.CListEtc} 개<br></a>
-								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=financialTechnology" target="_blank">재테크 - ${map.CListWorkSkill} 개</a><br>
-								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=daily" target="_blank">일상 - ${map.CListFinacialTech} 개</a><br>
-								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=etc" target="_blank">기타 - ${map.CListDaily} 개<br></a>
+								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=workSkill" target="_blank">업무스킬 - ${map.CListWorkSkill} 개<br></a>
+								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=financialTechnology" target="_blank">재테크 - ${map.CListFinacialTech} 개</a><br>
+								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=daily" target="_blank">일상 - ${map.CListDaily} 개</a><br>
+								<a href="${pageContext.request.contextPath}/class/classList?&cCategory=etc" target="_blank">기타 - ${map.CListEtc} 개<br></a>
 								</div>
 							</td>
 							</tr>
@@ -110,7 +110,7 @@
 							<h3 id="mpNoBtn">공지사항</h3>
 							<hr>
 							<div align="right">
-								<button type="button" class="btn btn-info" id="mynoticebtn" onclick = "location.href = '/eepp/board/writeView'; ">공지 작성</button>
+								<button type="button" class="btn btn-info" id="mynoticebtn" onclick = "location.href = '/eepp/board/writeView?&sortType=&bCategory='; ">공지 작성</button>
 							</div>
 							<p>'EE'에서 작성하신 공지사항을 확인 할 수 있습니다.</p>
 							<br>
