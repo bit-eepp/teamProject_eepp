@@ -56,7 +56,7 @@ public class MemberPageMaker {
 	}
 
 	private void calcData() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage_member() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
@@ -67,13 +67,13 @@ public class MemberPageMaker {
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 
-	public String makeQuery(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("perPageNum", cri.getPerPageNum()).build();
+	public String makeQuery(int page_member) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page_member", page_member).queryParam("perPageNum", cri.getPerPageNum()).build();
 		return uriComponents.toUriString();
 	}
 
-	public String makeSearch(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+	public String makeSearch(int page_member) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page_member", page_member)
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.queryParam("searchType", ((MemberSearchCriteria) cri).getSearchType())
 				.queryParam("keyword", encoding(((MemberSearchCriteria) cri).getKeyword())).build();

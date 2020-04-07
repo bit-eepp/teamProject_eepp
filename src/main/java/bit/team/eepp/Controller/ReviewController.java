@@ -40,7 +40,7 @@ public class ReviewController {
 
 		System.out.println("criteria : " + rvCriteria);
 		System.out.println("criteria.getPerPageNum() : " + rvCriteria.getPerPageNum());
-		System.out.println("criteria.getPage() : " + rvCriteria.getPage());
+		System.out.println("criteria.getPage() : " + rvCriteria.getPage_review());
 
 		int rvCount = reviewCount(reviewVO.getEating_id());
 		System.out.println("댓글수 : " + rvCount);

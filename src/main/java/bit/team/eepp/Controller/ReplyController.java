@@ -36,7 +36,7 @@ public class ReplyController {
 
 		System.out.println("criteria : " + rpCriteria);
 		System.out.println("criteria.getPerPageNum() : " + rpCriteria.getPerPageNum());
-		System.out.println("criteria.getPage() : " + rpCriteria.getPage());
+		System.out.println("criteria.getPage() : " + rpCriteria.getPage_rp());
 
 		int rpCount = replyCount(replyVO.getBoard_id());
 		System.out.println("댓글수 : " + rpCount);

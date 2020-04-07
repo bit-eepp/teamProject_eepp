@@ -2,22 +2,22 @@ package bit.team.eepp.Page;
 
 // 한페이지에 담아내야할 것들을 모음
 public class ScrapboardCriteria {
-	private int page;
+	private int page_scb;
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
 
 	public ScrapboardCriteria() {
-		this.page = 1;
+		this.page_scb = 1;
 		this.perPageNum = 10;
 	}
 
-	public void setPage(int page) {
-		if (page <= 0) {
-			this.page = 1;
+	public void setPage_scb(int page_scb) {
+		if (page_scb <= 0) {
+			this.page_scb = 1;
 			return;
 		}
-		this.page = page;
+		this.page_scb = page_scb;
 	}
 
 	public void setPerPageNum(int perPageNum) {
@@ -28,12 +28,12 @@ public class ScrapboardCriteria {
 		this.perPageNum = perPageNum;
 	}
 
-	public int getPage() {
-		return page;
+	public int getPage_scb() {
+		return page_scb;
 	}
 
 	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+		return (this.page_scb - 1) * perPageNum;
 	}
 
 	public int getPerPageNum() {
@@ -41,7 +41,7 @@ public class ScrapboardCriteria {
 	}
 
 	public int getRowStart() {
-		rowStart = ((page - 1) * perPageNum) + 1;
+		rowStart = ((page_scb - 1) * perPageNum) + 1;
 		return rowStart;
 	}
 
@@ -52,6 +52,6 @@ public class ScrapboardCriteria {
 
 	@Override
 	public String toString() {
-		return "ScrapboardCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
+		return "ScrapboardCriteria [page_scb=" + page_scb + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
 	}
 }

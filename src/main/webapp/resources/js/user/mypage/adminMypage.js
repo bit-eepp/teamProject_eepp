@@ -78,41 +78,41 @@ $('#keywordInput1').keydown(
 			}
 		});
 $(document).ready(function() {
-	var pageNum = $('#MemberCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#UserReportCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#BoardReportCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#ReplyReportCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#NoticeCriPage').val();
-		pageColor(pageNum);
-	});
-
+	
+	var pageNum1 = $('#NoticeCriPage').val();
+	pageColor1(pageNum1);
+	
+	var pageNum2 = $('#UserReportCriPage').val();
+	pageColor2(pageNum2);
+	
+	var pageNum3 = $('#BoardReportCriPage').val();
+	pageColor3(pageNum3);
+	
+	var pageNum4 = $('#ReplyReportCriPage').val();
+	pageColor4(pageNum4);
+	
+	var pageNum5 = $('#MemberCriPage').val();
+	pageColor5(pageNum5);
+});
 
 // 페이징
-function pageColor(pageNum) {
-	$('#URLP_' + pageNum).css("background-color", "#59bfbf");
-	$('#URLP_' + pageNum).css("color", "#ffffff");
-
-	$('#BRLP_' + pageNum).css("background-color", "#59bfbf");
-	$('#BRLP_' + pageNum).css("color", "#ffffff");
-
-	$('#RRLP_' + pageNum).css("background-color", "#59bfbf");
-	$('#RRLP_' + pageNum).css("color", "#ffffff");
-
-	$('#ML_' + pageNum).css("background-color", "#59bfbf");
-	$('#ML_' + pageNum).css("color", "#ffffff");
-
-	$('#vo_' + pageNum).css("background-color", "#59bfbf");
-	$('#vo_' + pageNum).css("color", "#ffffff");
+function pageColor1(pageNum1) {
+	$('#vo_' + pageNum1).css("background-color", "#59bfbf");
+	$('#vo_' + pageNum1).css("color", "#ffffff");
+}
+function pageColor2(pageNum2) {
+	$('#URLP_' + pageNum2).css("background-color", "#59bfbf");
+	$('#URLP_' + pageNum2).css("color", "#ffffff");
+}
+function pageColor3(pageNum3) {
+	$('#BRLP_' + pageNum3).css("background-color", "#59bfbf");
+	$('#BRLP_' + pageNum3).css("color", "#ffffff");
+}
+function pageColor4(pageNum4) {
+	$('#RRLP_' + pageNum4).css("background-color", "#59bfbf");
+	$('#RRLP_' + pageNum4).css("color", "#ffffff");
+}
+function pageColor5(pageNum5) {
+	$('#ML_' + pageNum5).css("background-color", "#59bfbf");
+	$('#ML_' + pageNum5).css("color", "#ffffff");
 }
