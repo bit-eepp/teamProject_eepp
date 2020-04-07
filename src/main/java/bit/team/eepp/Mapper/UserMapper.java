@@ -108,8 +108,7 @@ public interface UserMapper {
 	public int pointCount(Map<String, Object> map);
 
 	// 구매한 클래스
-	@Select("select cj.class_id, c.ccategory,c.cTitle,c.cprice, cjJoinDate from classjoin cj, class c where c.cId = cj.class_id and cj.user_id = #{user_id}")
-	public List<ClassJoinVO> joinClass(Map<String, Object> map);
+	public abstract List<ClassJoinVO> joinClass(Map<String, Object> map);
 
 	// 구매한 클래스 개수
 	@Select("select count(*) from classjoin where user_id = #{user_id}")
@@ -191,47 +190,47 @@ public interface UserMapper {
 	// 컨텐츠 현황
 	
 	// All
-	@Select ("select count(bId) from board")
+	@Select ("select count(bId) from board where bDeleted != 'yes'")
 	public int BListALL (Map<String, Object>map);
 	// IT/개발
-	@Select ("select count(bId) from board where bcategory ='IT/개발'")
+	@Select ("select count(bId) from board where bcategory ='IT/개발' AND bDeleted != 'yes'")
 	public int BListIT (Map<String, Object>map);
 	// 서비스
-	@Select ("select count(bId) from board where bcategory ='서비스'")
+	@Select ("select count(bId) from board where bcategory ='서비스' AND bDeleted != 'yes'")
 	public int BListService (Map<String, Object>map);
 	// 금융
-	@Select ("select count(bId) from board where bcategory ='금융'")
+	@Select ("select count(bId) from board where bcategory ='금융' AND bDeleted != 'yes'")
 	public int BListFinancial (Map<String, Object>map);
 	// 디자인
-	@Select ("select count(bId) from board where bcategory ='디자인'")
+	@Select ("select count(bId) from board where bcategory ='디자인' AND bDeleted != 'yes'")
 	public int BListDesign (Map<String, Object>map);
 	// 공무원
-	@Select ("select count(bId) from board where bcategory ='공무원'")
+	@Select ("select count(bId) from board where bcategory ='공무원' AND bDeleted != 'yes'")
 	public int BListOfficer (Map<String, Object>map);
 	// 기타
-	@Select ("select count(bId) from board where bcategory ='기타'")
+	@Select ("select count(bId) from board where bcategory ='기타' AND bDeleted != 'yes'")
 	public int BListEtc (Map<String, Object>map);
 	
 	
 	// 클래스 현황
 	
 	// All
-	@Select ("select count(cId) from class")
+	@Select ("select count(cId) from class where cDeleted != 'yes'")
 	public int CListALL (Map<String, Object>map);
 	// it_dev
-	@Select ("select count(cId) from class where ccategory = 'it_dev'")
+	@Select ("select count(cId) from class where ccategory = 'it_dev' AND cDeleted != 'yes'")
 	public int CListIt_dev (Map<String, Object>map);
 	// etc
-	@Select ("select count(cId) from class where ccategory = 'etc'")
+	@Select ("select count(cId) from class where ccategory = 'etc' AND cDeleted != 'yes'")
 	public int CListEtc (Map<String, Object>map);
 	// workSkill
-	@Select ("select count(cId) from class where ccategory = 'workSkill'")
+	@Select ("select count(cId) from class where ccategory = 'workSkill' AND cDeleted != 'yes'")
 	public int CListWorkSkill (Map<String, Object>map);
 	// financialTechnology
-	@Select ("select count(cId) from class where ccategory = 'financialTechnology'")
+	@Select ("select count(cId) from class where ccategory = 'financialTechnology' AND cDeleted != 'yes'")
 	public int CListFinacialTech (Map<String, Object>map);
 	// daily
-	@Select ("select count(cId) from class where ccategory = 'daily'")
+	@Select ("select count(cId) from class where ccategory = 'daily' AND cDeleted != 'yes'")
 	public int CListDaily (Map<String, Object>map);
 
 	// 회원 목록
@@ -245,7 +244,7 @@ public interface UserMapper {
 	public abstract List<BoardVO> noticeList(Map<String, Object> map);
 
 	// 공지사항 개수 카운트
-	@Select("SELECT COUNT(*) FROM BOARD WHERE BCATEGORY='공지'")
+	@Select("SELECT COUNT(*) FROM BOARD WHERE BCATEGORY='공지' AND bDeleted != 'yes'")
 	public int noticeListCount(Map<String, Object> map);
 
 	// 유저신고 목록

@@ -56,9 +56,8 @@ where not reply_id is null and r.rpId = d.reply_id and d.reporter_id = u.user_id
 <!-- 공지사항 리스트 -->
 	<select id = "noticeList" parameterType="map" resultType="bit.team.eepp.VO.BoardVO">
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
-			from(SELECT * FROM BOARD WHERE BCATEGORY='공지' and user_id = 1 ORDER BY bWrittendate DESC) A)
-			WHERE RNUM BETWEEN #{Ncri.rowStart}
-			AND #{Ncri.rowEnd}
+			from(SELECT * FROM BOARD WHERE BCATEGORY='공지' and user_id = 1 and bDeleted != 'yes' ORDER BY bWrittendate DESC) A)
+			WHERE RNUM BETWEEN #{Ncri.rowStart} AND #{Ncri.rowEnd}
 		
 	</select>
 
@@ -88,7 +87,7 @@ where d.reply_id = r.rpid and d.reporter_id = u.user_id
 	<![CDATA[
 	select d.did, d.reporter_id, d.reported_id, d.dreason, d.ddate,
 	d.board_id, b.btitle, d.reply_id from board b,declaration d, users u
-	where d.board_id = b.bid and d.reporter_id = u.user_id
+	where d.board_id = b.bid and d.reporter_id = u.user_id and bDeleted != 'yes'
 	]]>
 	</select>
 
@@ -111,7 +110,7 @@ where d.reply_id = r.rpid and d.reporter_id = u.user_id
 		
 		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 from(select s.sId, s.sDate, s.user_id, s.class_id, c.cTitle, u.uNickname as tester FROM SCRAP s, CLASS c, USERS u
-			WHERE c.cId = s.class_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
+			WHERE c.cId = s.class_id AND s.user_id = u.user_id AND cDeleted != 'yes' and s.user_id= #{user_id}
 		ORDER BY s.sDate DESC) A)
 		WHERE RNUM BETWEEN #{scrapcri.rowStart}
 		AND #{scrapcri.rowEnd}
@@ -130,7 +129,7 @@ from(select s.sId, s.sDate, s.user_id, s.class_id, c.cTitle, u.uNickname as test
 		
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as tester FROM SCRAP s, BOARD b, USERS u
-			WHERE b.bId = s.board_id AND s.user_id = u.user_id AND s.user_id= #{user_id}
+			WHERE b.bId = s.board_id AND s.user_id = u.user_id AND bDeleted != 'yes' and s.user_id= #{user_id}
 			<!-- ORDER BY s.sDate DESC -->
 			<if test="bCategory != null">
 			<choose>
@@ -162,6 +161,15 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 		WHERE RNUM BETWEEN #{scrapcri.rowStart}
 		AND #{scrapcri.rowEnd}
 		
+	</select>
+	
+	<!-- 게시판 스크랩 개수 -->
+	<select id="joinClass" parameterType="int" resultType="bit.team.eepp.VO.ClassJoinVO">
+		<![CDATA[
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+		from(select cj.class_id, c.ccategory,c.cTitle,c.cprice, cjJoinDate from classjoin cj, class c where cDeleted != 'yes' and c.cId = cj.class_id and cj.user_id = #{user_id}
+		ORDER BY cj.cjJoindate DESC) A) WHERE RNUM BETWEEN #{joclcri.rowStart} AND #{joclcri.rowEnd}
+		]]>
 	</select>
 
 	<!-- 회원 탈퇴 -->
@@ -247,7 +255,7 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 		FROM
 		(SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent,
-		u.uNickname, b.bWrittenDate, b.bModifyDate, b.bHit, b.bLike,
+		u.uNickname, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, b.bModifyDate, b.bHit, b.bLike,
 		b.bUnlike,
 		(SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS
 		rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS

@@ -43,7 +43,7 @@
 				<br>
 				<br>
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<table class="text-wrap">
 						<tr>
 							<td class="text_bold"><span class="required">• </span>내 포인트</td>
@@ -58,7 +58,7 @@
 							
 							<tr class="bordered">
 							<td class="liwrap" value="open_message" style="cursor:pointer" onclick="openMsg();">받은
-								쪽지 ${messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${messageSen}</td>
+								쪽지 ${mypage.messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${mypage.messageSen}</td>
 							</tr>
 							
 							<tr>
@@ -66,7 +66,7 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td><a href="#mpClBtn">개설 ${openClassCount}&nbsp;&nbsp;&nbsp;&nbsp;참여 ${joinClassCount}</a></td>
+							<td><a href="#mpClBtn">개설 ${mypage.openClassCount}&nbsp;&nbsp;&nbsp;&nbsp;참여 ${mypage.joinClassCount}</a></td>
 							</tr>
 							
 							<tr>
@@ -75,7 +75,7 @@
 							
 							<tr class="bordered">
 							<td><div class="content_count">
-							<a href="#mpBoBtn">게시물 ${listCount}&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${replyCount}</a></div></td>
+							<a href="#mpBoBtn">게시물 ${mypage.listCount}&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${mypage.replyCount}</a></div></td>
 							<!-- <a style="cursor:pointer" onclick="location.href='mypage?board=board'"> -->
 							</tr>
 							
@@ -84,14 +84,14 @@
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="scrap_count"><a href="#mpScBtn">${scrapCount}건</a></div></td>
+							<td><div class="scrap_count"><a href="#mpScBtn">${mypage.scrapCount}건</a></div></td>
 							</tr>
 							<tr>
 							<td class="text_bold"><span class="required">• </span>리뷰</td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="review_count"><a href="#mpReviewBtn">${reviewListCount}건</a></div></td>
+							<td><div class="review_count"><a href="#mpReviewBtn">${mypage.reviewListCount}건</a></div></td>
 							</tr>
 							<tr>
 							<td class="drop"><a href="withdrawal" id=drop onclick="drop();">회원탈퇴</a></td>
@@ -101,7 +101,7 @@
 
 					</div><!-- col-sm-4 -->
 
-					<div class="col-sm-8">
+					<div class="col-sm-9">
 
 						<!-- <br><br><br><br> -->
 						<div class="myinfo-wrap">
@@ -203,7 +203,7 @@
 								</div>
 								<!-- 검색 부분 끝  -->
 								<br>
-								<table class="table table-bordered">
+								<table class="table table-bordered" id="mpconttable">
 									<thead class="thead-color">
 										<tr class="content_tr">
 											<th>글 번호</th>
@@ -216,8 +216,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(myBoardList) > 0 }">
-											<c:forEach items="${myBoardList}" var="vo">
+										<c:when test="${fn:length(mypage.myBoardList) > 0 }">
+											<c:forEach items="${mypage.myBoardList}" var="vo">
 												<tr class="boardList_tr">
 													<td>${vo.bId}</td>
 													<td>${vo.bCategory}</td>
@@ -308,8 +308,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(pointList) > 0 }">
-											<c:forEach items="${pointList}" var="pointList">
+										<c:when test="${fn:length(mypage.pointList) > 0 }">
+											<c:forEach items="${mypage.pointList}" var="pointList">
 												<tr>
 													<td><fmt:formatNumber value="${pointList.totalPoint}" pattern="###,###,###" /> P</td>
 													<c:choose>
@@ -335,8 +335,6 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								
-
 								<!-- 페이징 -->
 								<div class = "pointpage">
 									<ul class="pagination justify-content-center">
@@ -392,8 +390,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(scrapList) > 0 }">
-											<c:forEach items="${scrapList}" var="scrapList">
+										<c:when test="${fn:length(mypage.scrapList) > 0 }">
+											<c:forEach items="${mypage.scrapList}" var="scrapList">
 												<tr class="scrapList_tr">
 													<!--  스크랩 목록 선택 -->
 													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
@@ -445,8 +443,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(ClassscrapList) > 0 }">
-											<c:forEach items="${ClassscrapList}" var="ClassscrapList">
+										<c:when test="${fn:length(mypage.ClassscrapList) > 0 }">
+											<c:forEach items="${mypage.ClassscrapList}" var="ClassscrapList">
 												<tr class="scrapCList_tr">
 												<td><input type="checkbox" name="pickCheck1" class="pickCheck1" value="${ClassscrapList.sId}" /></td>
 													<td>${ClassscrapList.class_id}</td>
@@ -499,8 +497,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(scrapList) > 0 }">
-											<c:forEach items="${scrapList}" var="scrapList">
+										<c:when test="${fn:length(mypage.scrapList) > 0 }">
+											<c:forEach items="${mypage.scrapList}" var="scrapList">
 												<tr class="scrapEList_tr">
 													<td><input type="checkbox" name="pickCheck2" class="pickCheck2" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
@@ -577,8 +575,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(joinClass) > 0 }">
-											<c:forEach items="${joinClass}" var="joinClass">
+										<c:when test="${fn:length(mypage.joinClass) > 0 }">
+											<c:forEach items="${mypage.joinClass}" var="joinClass">
 												<tr class="classJList_tr">
 													<td>${joinClass.class_id}</td>
 													<td>
@@ -619,25 +617,26 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								<div class="clJoinPage">
-									   <ul class="pagination justify-content-center">
-									      <li class="page-item">
-													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.startPage - 1)}&cCategory=${cCategory}&mpclass=yes">
+								<!-- 페이징 -->
+								<div class = "clJoinPage">
+									<ul class="pagination justify-content-center">
+      									<li class="page-item">
+													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.startPage - 1)}&mpclass=yes">
 														<i class="fas fa-angle-left"></i>
 													</a>
-										</li>
+												</li>
 											<c:forEach begin="${JoinClassPageMaker.startPage}" end="${JoinClassPageMaker.endPage}" var="idx">
 												<li class="page-item">
-													<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&mpclass=yes">${idx}</a></li>
+												<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&mpclass=yes">${idx}</a>
+												</li>
 											</c:forEach>
 											<li class="page-item">
-													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes">
+													<a class="page-link"href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.endPage + 1)}&mpclass=yes">
 														<i class="fas fa-angle-right"></i>
 													</a>
 												</li>
 										</ul>
-									<br>
-								</div><!-- paging -->
+								</div>
   						</div><!-- class="tab-pane fade show active" -->
 			<!--  class 스크랩 -->
 			  	<div class="tab-pane fade" id="class_open" role="tabpanel" aria-labelledby="nav-class-open-tab">
@@ -652,8 +651,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(openClass) > 0 }">
-											<c:forEach items="${openClass}" var="openClass">
+										<c:when test="${fn:length(mypage.openClass) > 0 }">
+											<c:forEach items="${mypage.openClass}" var="openClass">
 												<input type="hidden" id="classId" value="${openClass.cId}" />
 												<tr class="classOList_tr">
 													<td>${openClass.cId}</td>
@@ -718,8 +717,8 @@
 										</tr>
 									</thead>
 									<c:choose>
-										<c:when test="${fn:length(reviewList) > 0 }">
-											<c:forEach items="${reviewList}" var="reviewList">
+										<c:when test="${fn:length(mypage.reviewList) > 0 }">
+											<c:forEach items="${mypage.reviewList}" var="reviewList">
 												<tr>
 													<td>${reviewList.rvId}</td>
 													<td>${reviewList.ename}</td>

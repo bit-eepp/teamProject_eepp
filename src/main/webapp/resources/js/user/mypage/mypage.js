@@ -67,8 +67,6 @@ $('#submit').click(function(event) {
 // 게시물 검색
 $('#searchBtn').click(
 		function() {
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if(keycode == 13) {
 			if ($('select[name=searchType]').val() == 'n') {
 				alert('검색조건을 지정해주세요');
 				return;
@@ -78,9 +76,26 @@ $('#searchBtn').click(
 						+ "&keyword="
 						+ encodeURIComponent($('#keywordInput').val())
 						+ "&board=yes"
-			}
 		}
 	});
+
+// 엔터키로 검색
+$('#keywordInput').keydown(
+		function(event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == 13) {
+				if ($('select[name=searchType]').val() == 'n') {
+					alert('검색조건을 지정해주세요');
+					return;
+				} else {
+					self.location = "mypage" + $("#mypageMakeQuery").val()
+							+ "&searchType="
+							+ $("select[name=searchType]").val() + "&keyword="
+							+ encodeURIComponent($('#keywordInput').val())
+							+ "&board=yes";
+				}
+			}
+		});
 
 // 회원탈퇴 알림
 function drop() {
@@ -181,6 +196,35 @@ $("#mpRVBtn").click(function() {
 	$(".info").hide();
 });
 
+$(document).ready(function() {
+	var pageNum = $('#mypageMakerCriPage').val();
+		pageColor(pageNum);
+	});
+$(document).ready(function() {
+	var pageNum = $('#OpenClassCriPage').val();
+		pageColor(pageNum);
+	});
+$(document).ready(function() {
+	var pageNum = $('#JoinClassCriPage').val();
+		pageColor(pageNum);
+	});
+$(document).ready(function() {
+	var pageNum = $('#PointCriPage').val();
+		pageColor(pageNum);
+	});
+$(document).ready(function() {
+	var pageNum = $('#ScrapboardCriPage').val();
+		pageColor(pageNum);
+	});
+$(document).ready(function() {
+	var pageNum = $('#ScrapClassCriPage').val();
+		pageColor(pageNum);
+	});
+$(document).ready(function() {
+	var pageNum = $('#MyReviewCriPage').val();
+		pageColor(pageNum);
+	});
+
 // 페이징
 function pageColor(pageNum) {
 	$('#boardpaging_' + pageNum).css("background-color", "#59bfbf");
@@ -195,14 +239,14 @@ function pageColor(pageNum) {
 	$('#scrapClassPage_' + pageNum).css("background-color", "#59bfbf");
 	$('#scrapClassPage_' + pageNum).css("color", "#ffffff");
 
-	$('#scrapBoardPage_' + pageNum).css("background-color", "#59bfbf");
-	$('#scrapBoardPage_' + pageNum).css("color", "#ffffff");
-
 	$('#clJoinPage_' + pageNum).css("background-color", "#59bfbf");
 	$('#clJoinPage_' + pageNum).css("color", "#ffffff");
 
 	$('#clOpenPage_' + pageNum).css("background-color", "#59bfbf");
 	$('#clOpenPage_' + pageNum).css("color", "#ffffff");
+	
+	$('#rv_' + pageNum).css("background-color", "#59bfbf");
+	$('#rv_' + pageNum).css("color", "#ffffff");
 }
 
 $(document).ready(function() {

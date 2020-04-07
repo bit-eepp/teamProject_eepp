@@ -3,6 +3,10 @@ package bit.team.eepp.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -142,7 +146,6 @@ public class UserController {
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory,
 			@RequestParam(value = "board", required = false, defaultValue = "") String board,
 			@RequestParam(value = "mpPoint", required = false, defaultValue = "") String mpPoint,
-//			@RequestParam(value = "mpInfo", required = false, defaultValue = "") String mpInfo,
 			@RequestParam(value = "scrap", required = false, defaultValue = "") String scrap,
 			@RequestParam(value = "mpclass", required = false, defaultValue = "") String mpclass,
 			@RequestParam(value = "rv", required = false, defaultValue = "") String rv) throws IOException {
@@ -152,7 +155,7 @@ public class UserController {
 		Object loginSession = session.getAttribute("loginUser");
 		UserVO user = (UserVO) loginSession;
 		System.out.println("loginsession : " + loginSession);
-
+		
 		if (loginSession == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -173,16 +176,33 @@ public class UserController {
 			map.put("opclcri", opclcri);
 			map.put("sortType", sortType);
 			map.put("bCategory", bCategory);
-
+			//유저 아이디
 			map.put("user_id", userVO.getUser_id());
-
+			// 게시글
+			map.put("myBoardList", us.myBoardList(map));
 			map.put("listCount", us.listCount(map));
+			// 댓글 개수
 			map.put("replyCount", us.replyCount(map));
+			// 메세지
 			map.put("messageRes", us.receiveCount(map));
 			map.put("messageSen", us.sendCount(map));
+			// 포인트 
 			map.put("pointList", us.pointList(map));
+			map.put("pointCount", us.pointCount(map));
+			//내가 쓴 리뷰
 			map.put("reviewList", us.reviewList(map));
 			map.put("reviewListCount", us.reviewListCount(map));
+			// 가입한 클래스
+			map.put("joinClass", us.joinClass(map));
+			map.put("joinClassCount", us.joinClassCount(map));
+			// 개설한 클래스
+			map.put("openClass", us.openClass(map));
+			map.put("openClassCount", us.openClassCount(map));
+			// 스크랩 - 클래스
+			map.put("ClassscrapList", us.ClassscrapList(map));
+			// 스크랩 - 게시글
+			map.put("scrapList", us.scrapList(map));
+			map.put("scrapCount", us.scrapBoardCount(map));
 
 			// 내가 쓴 리뷰 목록
 			MyReviewPageMaker MyReviewPageMaker = new MyReviewPageMaker();
@@ -234,35 +254,23 @@ public class UserController {
 			if (rv != null) {
 				model.addAttribute("rv", rv);
 			}
-//			if (mpInfo != null) {
-//				model.addAttribute("mpInfo", mpInfo);
-//			}
+			
 			model.addAttribute("sortType", sortType);
 			model.addAttribute("bCategory", bCategory);
-
-			model.addAttribute("joinClass", us.joinClass(map));
-			model.addAttribute("openClass", us.openClass(map));
-			model.addAttribute("joinClassCount", us.joinClassCount(map));
-			model.addAttribute("openClassCount", us.openClassCount(map));
-			model.addAttribute("ClassscrapList", us.ClassscrapList(map));
-			model.addAttribute("pointList", us.pointList(map));
-			model.addAttribute("pointCount", us.pointCount(map));
-			model.addAttribute("messageRes", us.receiveCount(map));
-			model.addAttribute("messageSen", us.sendCount(map));
-			model.addAttribute("scrapList", us.scrapList(map));
-			model.addAttribute("scrapCount", us.scrapBoardCount(map));
-			model.addAttribute("replyCount", us.replyCount(map));
-			model.addAttribute("listCount", us.listCount(map));
-			model.addAttribute("myBoardList", us.myBoardList(map));
-			model.addAttribute("reviewList", us.reviewList(map));
-			model.addAttribute("reviewListCount", us.reviewListCount(map));
-
+			model.addAttribute("mypage", map);
+			// 게시글 페이징
 			model.addAttribute("myPagePageMaker", myPagePageMaker);
+			//스크랩 - 게시글 페이징
 			model.addAttribute("ScrapboardPageMaker", ScrapboardPageMaker);
+			//스크랩 - 클래스 페이징
 			model.addAttribute("ScrapClassPageMaker", ScrapClassPageMaker);
+			// 포인트 페이징
 			model.addAttribute("PointPageMaker", PointPageMaker);
+			// 가입한 클래스 페이징
 			model.addAttribute("JoinClassPageMaker", JoinClassPageMaker);
+			// 개설한 클래스 페이징
 			model.addAttribute("OpenClassPageMaker", OpenClassPageMaker);
+			// 내가 쓴 리뷰 페이징
 			model.addAttribute("MyReviewPageMaker", MyReviewPageMaker);
 		}
 		return "user/myPage/newlymypage";
