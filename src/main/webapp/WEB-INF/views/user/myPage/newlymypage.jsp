@@ -184,8 +184,6 @@
 									<select name="searchType" class="selectSearchType">
 										<option value="n"
 											<c:out value="${mscri.searchType == null ? 'selected' : ''}"/>>검색조건</option>
-										<option value="w"
-											<c:out value="${mscri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
 										<option value="t"
 											<c:out value="${mscri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
 										<option value="c"

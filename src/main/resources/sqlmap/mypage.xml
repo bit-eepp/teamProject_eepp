@@ -290,9 +290,6 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 
 		<if test="mscri != null">
 			<choose>
-				<when test='mscri.searchType == "w"'>
-					AND uNickname LIKE '%' || #{mscri.keyword} || '%'
-				</when>
 				<when test='mscri.searchType == "t"'>
 					AND bTitle LIKE '%' || #{mscri.keyword} || '%'
 				</when>
