@@ -69,7 +69,7 @@
 									<div class="input-group-prepend">
 										<button class="btn btn-default" type="button">포 인 트</button>
 									</div>
-									<input class="form-control" type="number" name="cPrice" placeholder="100Point = 100&#92;" step="100" value="${modifyClass.cPrice}"/>
+									<input class="form-control" type="number" name="cPrice" placeholder="100Point = 100&#92;" step="100" value="${modifyClass.cPrice}"  min="0"/>
 								</div>
 								<br>
 
