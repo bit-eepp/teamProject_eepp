@@ -107,7 +107,7 @@
 								</li>
 	
 								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1" href="https://github.com/bit-eepp/teamProject_eepp" target="_balnk">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1">
 										<i class="fab fa-github fa-2x"></i>
 									</a>
 								</li>
