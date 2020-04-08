@@ -9,21 +9,6 @@ var userId = $('#userId').val();
 var cId = $('#classId').val();
 			
 $(document).ready(function() {
-	
-//	// 수강정보 썸머노트 설정
-//	$('#summernote').summernote({
-//		height: 500,
-//		minHeight: 500,
-//		maxHeight: 500,
-//		toolbar: [],
-//		disableResize: true,
-//		disableResizeEditor: true,
-//		resize: false,
-//	});
-//				
-//	$('.note-editor').width($('.clContentView').width());
-//	$('#summernote').css('resize', 'none');
-//	$('#summernote').summernote('disable');
 				
 	// 신청종료일 카운트다운
 	var x = setInterval(function() {

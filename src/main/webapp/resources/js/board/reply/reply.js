@@ -44,13 +44,13 @@ var isAdmin = '운영자';
 					paging += '<ul class="pagination">';
 					
 					
-					if(tempEndPage != 0) {
+//					if(tempEndPage != 0) {
 						paging += '<li class="page-item">';
 						paging += '<a class="page-link" href="javascript:replyList('+(startPage - 1) +')">';
 						paging += '<i class="fas fa-angle-left"></i>';
 						paging += '</a>';
 						paging += '</li>';
-					}
+					//}
 				
 					for(var i = startPage; i <= endPage; i++){
 						paging += '<li class="page-item pageNum">';
@@ -58,13 +58,13 @@ var isAdmin = '운영자';
 						paging += '</li>';
 					}
 					
-					if(page < tempEndPage){
+					//if(page < tempEndPage){
 						paging += '<li class="page-item">';
 						paging += '<a class="page-link" href="javascript:replyList('+(endPage + 1) +')">';
 						paging += '<i class="fas fa-angle-right"></i>';
 						paging += '</a>';
 						paging += '</li>';
-					}
+					//}
 					
 				
 				paging += '</ul>';

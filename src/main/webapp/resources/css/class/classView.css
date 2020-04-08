@@ -71,75 +71,6 @@
 .clContent .clContentRight {
 	padding-top: 20px;
 }
-/*
-.clContent .clContentRight .clContentDetailHaed button {
-	background-color: #59bfbf;
-	color: #ffffff;
-	border-radius: 0;
-	cursor: default;
-}
-
-.clContent .clContentRight .clContentDetailBody {
-	border: 2px solid #59bfbf;
-	width: 100%;
-	height: auto;
-	font-weight: 1000;
-}
-
-.clContent .clContentRight .clContentDetailBody .list-group {
-	width: 100%;
-}
-
-.clContent .clContentRight .clContentDetailBody .list-group .list-group-item {
-	border: none;
-}
-
-.clContent .clContentRight .clContentDetailBody .list-group .applyMenu .classJoinForm .applyBtn {
-	width: 85%;
-    background-color: #59bfbf;
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    font-size: 20px;
-    padding: 8px;
-    display: block;
-    margin: 0 auto;
-}
-
-.clContent .clContentRight .clContentDetailBody .list-group .applyMenu .classJoinForm .applyBtn:hover {
-	background-color: #e7438b;
-	border: none;
-	outline: 0;
-}
-
-.clContent .clContentRight .clContentDetailBody .diff .clDiffGroup button
-	{
-	display: inline;
-	color: #ffffff;
-	background-color: #26274c;
-	border: none;
-	font-size: 100%;
-	border-radius: 50%;
-	width: 80px;
-	height: 80px;
-	cursor: default;
-	outline: 0;
-	font-weight: 800;
-}
-
-.clContent .clContentRight .clContentDetailBody .diff .clDiffGroup .clDiffBtnSelect
-	{
-	color: #ffffff;
-	background-color: #e7438b;
-	border: none;
-	outline: 0;
-}
-
-.clContent .clContentRight .clContentDetailBody .diff .clDiffGroup .clDiffBtnE,
-	.clDiffBtnN {
-	margin-right: 10px;
-} */
-
 
 
 	/*
@@ -401,4 +332,108 @@
 	background-color: #59bfbf;
 	border: none;
 	color: #ffffff;
+}
+
+
+	/*
+	*	클래스 문의
+	*/
+.classQuestionA .card-body .card-inner {
+	margin-left: 4rem;
+	border:none;
+}
+
+.classQuestionA .card-body .card-inner .card-body {
+	background-color:#dae0e547;
+}
+
+.classQuestionA .card-body .card-inner .card-body .row .col-md-2 .qprofile {
+	border-radius:50%;
+	width:65px;
+	height:65px;
+	margin-bottom:10px;
+}
+
+.classQuestionA .card-body .card-inner .card-body .row .col-md-2 .text-secondary {
+	font-size:80%;
+}
+
+.classQuestionA .card-body .card-inner .card-body .row .col-md-10 .clQcontent {
+	height:100px;
+	width:100%;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.classQuestionA .card-body .card-inner .card-body .row .col-md-10 .cqMenuBtn a {
+	color:#ffffff; 
+	cursor: pointer;
+}
+
+.classQuestionB .card-body .row .col-md-2 .qprofile {
+	border-radius:50%;
+	width:65px; 
+	height:65px;
+	margin-bottom:10px;
+}
+
+.classQuestionB .card-body .row .col-md-2 .text-secondary {
+	font-size:80%;
+}
+
+.classQuestionB .card-body .row .col-md-10 .clQcontent {
+	height:100px;
+	width:100%;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.classQuestionB .card-body .row .col-md-10 .cqMenuBtn a {
+	color:#ffffff;
+	cursor: pointer;
+}
+
+.comment .card-inner {
+	margin-left: 4rem;
+}
+
+.comment .card-inner .card-body .row .col-md-2 img {
+	border-radius:50%;
+	width:65px;
+	height:65px;
+	margin-bottom:10px;	
+}
+
+.comment .card-inner .card-body .row .col-md-2 .commentUser b {
+	color:#59bfbf;
+	font-size:100%;
+}
+
+.comment .card-inner .card-body .row .col-md-2 .text-secondary {
+	font-size:80%;
+}
+
+.comment .card-inner .card-body .row .col-md-10 p button {
+	width:40px; 
+	border:none; 
+	background-color:#e7438b; 
+	color:#ffffff; 
+	cursor: pointer;" 
+}
+
+.commentModify textarea {
+	border:none; 
+	width:650px;
+}
+
+.commentModify p button {
+	width:40px; 
+	border:none; 
+	background-color:#e7438b; 
+	color:#ffffff; 
+	cursor: pointer;" 	
+}
+.clQuestionPage .page-link{
+	padding: .5rem!important;
+    margin-left: 0!important;
 }
