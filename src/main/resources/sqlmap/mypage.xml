@@ -161,8 +161,17 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 		AND #{scrapcri.rowEnd}
 		
 	</select>
+	<!-- 개설한 클래스  -->
+	<select id="openClass" parameterType="int" resultType="bit.team.eepp.VO.ClassVO">
+		<![CDATA[
+		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
+			from(select cId, cTitle, cCategory, cTotalPeopleCount, cOpenDate, cTerm ,
+(SELECT COUNT(user_id) FROM CLASSJOIN WHERE class_id = class.cId)as totalcount from class where user_id = #{user_id} ORDER BY cOpenDate DESC) A)
+			WHERE RNUM BETWEEN #{opclcri.rowStart} AND #{opclcri.rowEnd}
+		]]>
+	</select>
 	
-	<!-- 게시판 스크랩 개수 -->
+	<!-- 가입한 클래스 -->
 	<select id="joinClass" parameterType="int" resultType="bit.team.eepp.VO.ClassJoinVO">
 		<![CDATA[
 		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
@@ -256,11 +265,11 @@ from(select s.sId, s.sDate, s.user_id, s.board_id, b.bTitle, u.uNickname as test
 		(SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent,
 		u.uNickname, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, b.bModifyDate, b.bHit, b.bLike,
 		b.bUnlike,
-		(SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId) AS
+		(SELECT COUNT(*)FROM REPLY WHERE board_id = b.bId and rDeleted = 'no') AS
 		rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS
 		dCount
 		FROM USERS u, BOARD b WHERE u.USER_ID = #{user_id} and b.USER_ID
-		= #{user_id}
+		= #{user_id} and bDeleted = 'no'
 
 		<if test="bCategory != null">
 			<choose>

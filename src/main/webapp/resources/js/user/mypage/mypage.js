@@ -11,7 +11,7 @@ function getContextPath() {
 	return location.href.substring(hostIndex, location.href.indexOf('/',
 			hostIndex + 1));
 };
-
+// 프로필 이미지 미리 보기
 $("#showImg").change(function() {
 	if (this.files && this.files[0]) {
 		var reader = new FileReader;
@@ -19,6 +19,17 @@ $("#showImg").change(function() {
 			$(".img-circle").attr("src", data.target.result);
 		}
 		reader.readAsDataURL(this.files[0]);
+	}
+});
+
+//프로필 사진 있는지 확인 - 있으면 변경
+$('#register_Btn').click(function() {
+	var fileCheck = document.getElementById("showImg").value;
+	if (!fileCheck) {
+		alert("프로필 사진 첨부해 주세요");
+		return false;
+	} else {
+		alert("프로필 변경 완료");
 	}
 });
 
@@ -100,7 +111,7 @@ $('#keywordInput').keydown(
 function drop() {
 	alert("회원탈퇴 페이지로 이동합니다.");
 }
-
+// 회원탈퇴 - 숫자만 가능
 function onlyNumber(e) {
 	var keyValue = event.keyCode;
 	if (((keyValue >= 48) && (keyValue <= 57)))
@@ -109,16 +120,7 @@ function onlyNumber(e) {
 		return false;
 }
 
-// 프로필 사진 있는지 확인 - 있으면 변경
-$('#register_Btn').click(function() {
-	var fileCheck = document.getElementById("showImg").value;
-	if (!fileCheck) {
-		alert("프로필 사진 첨부해 주세요");
-		return false;
-	} else {
-		alert("프로필 변경 완료");
-	}
-});
+
 ;
 // 기본 이미지로 변경 alert
 $('#changeImg').click(function() {
@@ -195,6 +197,7 @@ $("#mpRVBtn").click(function() {
 	$(".info").hide();
 });
 
+// 페이징
 $(document).ready(function() {
 	var pageNum1 = $('#mypageMakerCriPage').val();//myPagePageMaker
 	pageColor1(pageNum1);
@@ -248,11 +251,6 @@ function pageColor2(pageNum2) {
 	$('#rv_' + pageNum7).css("color", "#ffffff");
 }
 
-$(document).ready(function() {
-	$("#selectDeleteBtn1").click(function() {
-		deleteScrap();
-	});
-});
 
 // 전체 선택 or 해제 (게시판 스크랩)
 $(function() {
@@ -287,9 +285,15 @@ $(function() {
 		}
 	})
 })
+// 스크랩 삭제
+$(document).ready(function() {
+	$("#selectDeleteBtn_Sboard").click(function() {
+		deleteScrap_Sboard();
+	});
+});
 
 // 체크박스 선택 삭제
-function deleteScrap() {
+function deleteScrap_Sboard() {
 	var checkRow = "";
 	$("input[name='pickCheck']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
@@ -324,45 +328,14 @@ function deleteScrap() {
 		}
 	}
 }
-
-// 체크박스 선택 삭제
-function deleteScrap() {
-	var checkRow = "";
-	$("input[name='pickCheck']:checked").each(function() {
-		checkRow = checkRow + $(this).val() + ",";
+//클래스 스크랩 삭제
+$(document).ready(function() {
+	$("#selectDeleteBtn_SClass").click(function() {
+		deleteScrap_SClass();
 	});
+});
 
-	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
-
-	if (checkRow == '') {
-		alert("삭제할 대상을 선택하세요.");
-		return false;
-	} else {
-		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$
-					.ajax({
-						url : getContextPath() + "/deleteScrap",
-						type : "post",
-						data : {
-							"checkRow" : checkRow
-						},
-						success : function(data) {
-							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
-						},
-						error : function(request, status, error) {
-							alert("에러가 발생했습니다.");
-							console.log(request.responseText);
-							console.log(error);
-						}
-					})
-		} else {
-			return false;
-		}
-	}
-}
-
-function deleteScrap2() {
+function deleteScrap_SClass() {
 	var checkRow = "";
 	$("input[name='pickCheck1']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
@@ -397,15 +370,16 @@ function deleteScrap2() {
 		}
 	}
 }
+
 $(document).ready(function() {
-	$("#selectDeleteBtn2").click(function() {
-		deleteScrap2();
+	$("#selectDeleteBtn_SEating").click(function() {
+		deleteScrap_SEating();
 	});
 });
 
-function deleteScrap3() {
+function deleteScrap_SEating() {
 	var checkRow = "";
-	$("input[name='pickCheck1']:checked").each(function() {
+	$("input[name='pickCheck2']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
 	});
 
@@ -416,8 +390,7 @@ function deleteScrap3() {
 		return false;
 	} else {
 		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$
-					.ajax({
+			$.ajax({
 						url : getContextPath() + "/deleteScrap",
 						type : "post",
 						data : {
@@ -438,11 +411,6 @@ function deleteScrap3() {
 		}
 	}
 }
-$(document).ready(function() {
-	$("#selectDeleteBtn3").click(function() {
-		deleteScrap2();
-	});
-});
 
 // 클래스 구입자 보기
 function classjoin_list(cId) {

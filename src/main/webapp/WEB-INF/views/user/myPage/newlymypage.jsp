@@ -75,7 +75,7 @@
 							
 							<tr class="bordered">
 							<td><div class="content_count">
-							<a href="#mpBoBtn">게시물 ${mypage.listCount}&nbsp;&nbsp;&nbsp;&nbsp;댓글 ${mypage.replyCount}</a></div></td>
+							<a href="#mpBoBtn">게시물 ${mypage.listCount}</a></div></td>
 							<!-- <a style="cursor:pointer" onclick="location.href='mypage?board=board'"> -->
 							</tr>
 							
@@ -407,7 +407,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>		
+								<div class="delbtn"> <button type="button" id="selectDeleteBtn_Sboard" class="btn btn-submit">삭제</button> </div>		
 								<div class="scrapBoardPage">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
@@ -461,7 +461,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-								<div class="delbtn"> <button type="button" id="selectDeleteBtn2" class="btn btn-submit">삭제</button> </div>
+								<div class="delbtn"> <button type="button" id="selectDeleteBtn_SClass" class="btn btn-submit">삭제</button> </div>
 									<div class="scrapClassPage">
 										   <ul class="pagination justify-content-center">
 										      <li class="page-item">
@@ -514,7 +514,7 @@
 										</c:otherwise>
 									</c:choose>
 								</table>
-						<div class="delbtn"> <button type="button" id="selectDeleteBtn1" class="btn btn-submit">삭제</button> </div>
+						<div class="delbtn"> <button type="button" id="selectDeleteBtn_SEating" class="btn btn-submit">삭제</button> </div>
 								
 									<div class="scrapBoardPage">
 										   <ul class="pagination justify-content-center">
@@ -721,7 +721,7 @@
 													<td>${reviewList.rvId}</td>
 													<td>${reviewList.ename}</td>
 													<td>${reviewList.rvComment}</td>
-													<td>${reviewList.rvWrittenDate}</td>
+													<td><fmt:formatDate value="${reviewList.rvWrittenDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 													<td>${reviewList.rvScore}</td>
 												</tr>
 											</c:forEach>
