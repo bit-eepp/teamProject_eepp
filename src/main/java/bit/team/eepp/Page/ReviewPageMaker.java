@@ -25,7 +25,7 @@ public class ReviewPageMaker {
 	}
 
 	private void calcData() { // 전체 필드 변수 값들을 계산하는 메서드
-		endPage = (int) (Math.ceil(rvCri.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(rvCri.getPage_review() / (double) displayPageNum) * displayPageNum);
 		// 현재페이지 정보로부터 끝페이지에 대한 연산
 		// ex) 현재 페이지(pageInfo.getPage()) = 3
 		// 하단 페이징 바에 보여줄 페이징바 개수 = displayPageNum = 10개
@@ -134,8 +134,8 @@ public class ReviewPageMaker {
 		this.displayPageNum = displayPageNum;
 	}
 
-	public String makeQuery(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+	public String makeQuery(int page_review) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page_review", page_review)
 				.queryParam("perPageNum", rvCri.getPerPageNum()).build(); // ?page=3&perPageNum=10
 		return uriComponents.toUriString(); // ?page=3&perPageNum=10의 값을 리턴
 	}

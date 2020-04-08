@@ -56,7 +56,7 @@ public class myPagePageMaker {
 	}
 
 	private void calcData() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage_my() / (double) displayPageNum) * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
@@ -67,13 +67,13 @@ public class myPagePageMaker {
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
 
-	public String makeQuery(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).queryParam("perPageNum", cri.getPerPageNum()).build();
+	public String makeQuery(int page_my) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page_my", page_my).queryParam("perPageNum", cri.getPerPageNum()).build();
 		return uriComponents.toUriString();
 	}
 
-	public String makeSearch(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
+	public String makeSearch(int page_my) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page_my", page_my)
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.queryParam("searchType", ((MypageSearchCriteria) cri).getSearchType())
 				.queryParam("keyword", encoding(((MypageSearchCriteria) cri).getKeyword())).build();

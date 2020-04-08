@@ -21,13 +21,13 @@
 	<input type="hidden" id="mypageMakerTotalCount" value="${myPagePageMaker.totalCount}">
 	<input type="hidden" id="mypageMakeQuery" value="${myPagePageMaker.makeQuery(1)}">
 	
-	<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page}">
-	<input type="hidden" id="OpenClassCriPage" value="${OpenClassPageMaker.cri.page}">
-	<input type="hidden" id="JoinClassCriPage" value="${JoinClassPageMaker.cri.page}">
-	<input type="hidden" id="PointCriPage" value="${PointPageMaker.cri.page}">
-	<input type="hidden" id="ScrapboardCriPage" value="${ScrapboardPageMaker.cri.page}">
-	<input type="hidden" id="ScrapClassCriPage" value="${ScrapClassPageMaker.cri.page}">
-	<input type="hidden" id="MyReviewCriPage" value="${MyReviewPageMaker.cri.page}">
+	<input type="hidden" id="mypageMakerCriPage" value="${myPagePageMaker.cri.page_my}">
+	<input type="hidden" id="OpenClassCriPage" value="${OpenClassPageMaker.cri.page_oc}">
+	<input type="hidden" id="JoinClassCriPage" value="${JoinClassPageMaker.cri.page_join}">
+	<input type="hidden" id="PointCriPage" value="${PointPageMaker.cri.page_po}">
+	<input type="hidden" id="ScrapboardCriPage" value="${ScrapboardPageMaker.cri.page_scb}">
+	<input type="hidden" id="ScrapClassCriPage" value="${ScrapClassPageMaker.cri.page_scc}">
+	<input type="hidden" id="MyReviewCriPage" value="${MyReviewPageMaker.cri.page_rv}">
 		
 	 <input type="hidden" id="board" value="${board}">
 	 <input type="hidden" id="scrap" value="${scrap}">

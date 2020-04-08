@@ -25,14 +25,14 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	@RequestMapping("/reviewCount")
-	public int reviewCount(int eId) {
-		System.out.println(eId + "reviewCount");
+	public int reviewCount(int eating_id) {
+		System.out.println(eating_id + "reviewCount");
 		
-		return reviewService.reviewCount(eId);
+		return reviewService.reviewCount(eating_id);
 	}
 	
 	@RequestMapping("/reviewList")
-	public Map<String, Object> reviewList(Model model,ReviewVO reviewVO, ReviewCriteria rvCriteria) {
+	public Map<String, Object> reviewList(ReviewVO reviewVO, ReviewCriteria rvCriteria) {
 		System.out.println("store review list print");
 		
 		ReviewPageMaker rvPageMaker = new ReviewPageMaker();
@@ -40,7 +40,7 @@ public class ReviewController {
 
 		System.out.println("criteria : " + rvCriteria);
 		System.out.println("criteria.getPerPageNum() : " + rvCriteria.getPerPageNum());
-		System.out.println("criteria.getPage() : " + rvCriteria.getPage());
+		System.out.println("criteria.getPage() : " + rvCriteria.getPage_review());
 
 		int rvCount = reviewCount(reviewVO.getEating_id());
 		System.out.println("댓글수 : " + rvCount);
@@ -52,11 +52,11 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rvPageMaker", rvPageMaker);
 		map.put("reviewList", reviewList);
-		map.put("reviewAVG", reviewService.reviewAVG(reviewVO));
+//		map.put("reviewAVG", reviewService.reviewAVG(reviewVO));
 		
 //		model.addAttribute("reviewAVG", reviewService.reviewAVG(reviewVO));
 //		System.out.println(reviewService.reviewAVG(reviewVO));
-		
+
 		return map;
 	}
 	

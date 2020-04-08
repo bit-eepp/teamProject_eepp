@@ -22,7 +22,6 @@ $("#showImg").change(function() {
 	}
 });
 
-
 /* 닉네임 중복확인 */
 var ncCheck = 0;
 function nickCheck() {
@@ -76,8 +75,8 @@ $('#searchBtn').click(
 						+ "&keyword="
 						+ encodeURIComponent($('#keywordInput').val())
 						+ "&board=yes"
-		}
-	});
+			}
+		});
 
 // 엔터키로 검색
 $('#keywordInput').keydown(
@@ -102,11 +101,11 @@ function drop() {
 	alert("회원탈퇴 페이지로 이동합니다.");
 }
 
-function onlyNumber(e){
-	var keyValue = event.keyCode; 
-	if( ((keyValue >= 48) && (keyValue <= 57)) ) 
-		return true; 
-	else 
+function onlyNumber(e) {
+	var keyValue = event.keyCode;
+	if (((keyValue >= 48) && (keyValue <= 57)))
+		return true;
+	else
 		return false;
 }
 
@@ -183,7 +182,7 @@ $("#myclassbtn").click(function() {
 	$(".info").hide();
 });
 
-//리뷰 보여주고 닫기
+// 리뷰 보여주고 닫기
 $(document).ready(function() {
 	if (!$('#rv').val()) {
 		$(".review_list").hide("slow");
@@ -197,56 +196,56 @@ $("#mpRVBtn").click(function() {
 });
 
 $(document).ready(function() {
-	var pageNum = $('#mypageMakerCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#OpenClassCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#JoinClassCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#PointCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#ScrapboardCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#ScrapClassCriPage').val();
-		pageColor(pageNum);
-	});
-$(document).ready(function() {
-	var pageNum = $('#MyReviewCriPage').val();
-		pageColor(pageNum);
-	});
+	var pageNum1 = $('#mypageMakerCriPage').val();//myPagePageMaker
+	pageColor1(pageNum1);
+
+	var pageNum2 = $('#PointCriPage').val();//PointPageMaker
+	pageColor2(pageNum2);
+	
+	var pageNum3 = $('#ScrapboardCriPage').val();//ScrapboardPageMaker
+	pageColor3(pageNum3);
+	
+	var pageNum4 = $('#ScrapClassCriPage').val();//ScrapClassPageMaker
+	pageColor4(pageNum4);
+	
+	var pageNum5 = $('#JoinClassCriPage').val();//JoinClassPageMaker
+	pageColor5(pageNum5);
+	
+	var pageNum6 = $('#OpenClassCriPage').val();//OpenClassPageMaker
+	pageColor6(pageNum6);
+
+	var pageNum7 = $('#MyReviewCriPage').val();//MyReviewPageMaker
+	pageColor7(pageNum7);
+});
 
 // 페이징
-function pageColor(pageNum) {
-	$('#boardpaging_' + pageNum).css("background-color", "#59bfbf");
-	$('#boardpaging_' + pageNum).css("color", "#ffffff");
-
-	$('#pointpage_' + pageNum).css("background-color", "#59bfbf");
-	$('#pointpage_' + pageNum).css("color", "#ffffff");
-
-	$('#scrapBoardPage_' + pageNum).css("background-color", "#59bfbf");
-	$('#scrapBoardPage_' + pageNum).css("color", "#ffffff");
-
-	$('#scrapClassPage_' + pageNum).css("background-color", "#59bfbf");
-	$('#scrapClassPage_' + pageNum).css("color", "#ffffff");
-
-	$('#clJoinPage_' + pageNum).css("background-color", "#59bfbf");
-	$('#clJoinPage_' + pageNum).css("color", "#ffffff");
-
-	$('#clOpenPage_' + pageNum).css("background-color", "#59bfbf");
-	$('#clOpenPage_' + pageNum).css("color", "#ffffff");
-	
-	$('#rv_' + pageNum).css("background-color", "#59bfbf");
-	$('#rv_' + pageNum).css("color", "#ffffff");
+function pageColor1(pageNum1) {
+	$('#boardpaging_' + pageNum1).css("background-color", "#59bfbf");
+	$('#boardpaging_' + pageNum1).css("color", "#ffffff");
+}
+function pageColor2(pageNum2) {
+	$('#pointpage_' + pageNum2).css("background-color", "#59bfbf");
+	$('#pointpage_' + pageNum2).css("color", "#ffffff");
+}
+	function pageColor3(pageNum3) {
+	$('#scrapBoardPage_' + pageNum3).css("background-color", "#59bfbf");
+	$('#scrapBoardPage_' + pageNum3).css("color", "#ffffff");
+}
+	function pageColor4(pageNum4) {
+	$('#scrapClassPage_' + pageNum4).css("background-color", "#59bfbf");
+	$('#scrapClassPage_' + pageNum4).css("color", "#ffffff");
+}
+	function pageColor5(pageNum5) {
+	$('#clJoinPage_' + pageNum5).css("background-color", "#59bfbf");
+	$('#clJoinPage_' + pageNum5).css("color", "#ffffff");
+}
+	function pageColor6(pageNum6) {
+	$('#clOpenPage_' + pageNum6).css("background-color", "#59bfbf");
+	$('#clOpenPage_' + pageNum6).css("color", "#ffffff");
+}
+	function pageColor7(pageNum7) {
+	$('#rv_' + pageNum7).css("background-color", "#59bfbf");
+	$('#rv_' + pageNum7).css("color", "#ffffff");
 }
 
 $(document).ready(function() {
@@ -255,7 +254,7 @@ $(document).ready(function() {
 	});
 });
 
-//전체 선택 or 해제 (게시판 스크랩)
+// 전체 선택 or 해제 (게시판 스크랩)
 $(function() {
 	// 전체선택 체크박스 클릭
 	$(".allCheck").click(function() {
@@ -302,7 +301,8 @@ function deleteScrap() {
 		return false;
 	} else {
 		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$.ajax({
+			$
+					.ajax({
 						url : getContextPath() + "/deleteScrap",
 						type : "post",
 						data : {
@@ -325,13 +325,13 @@ function deleteScrap() {
 	}
 }
 
-//체크박스 선택 삭제
+// 체크박스 선택 삭제
 function deleteScrap() {
 	var checkRow = "";
 	$("input[name='pickCheck']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
 	});
-	
+
 	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
 
 	if (checkRow == '') {
@@ -339,7 +339,8 @@ function deleteScrap() {
 		return false;
 	} else {
 		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$.ajax({
+			$
+					.ajax({
 						url : getContextPath() + "/deleteScrap",
 						type : "post",
 						data : {
@@ -366,7 +367,7 @@ function deleteScrap2() {
 	$("input[name='pickCheck1']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
 	});
-	
+
 	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
 
 	if (checkRow == '') {
@@ -374,7 +375,8 @@ function deleteScrap2() {
 		return false;
 	} else {
 		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$.ajax({
+			$
+					.ajax({
 						url : getContextPath() + "/deleteScrap",
 						type : "post",
 						data : {
@@ -406,7 +408,7 @@ function deleteScrap3() {
 	$("input[name='pickCheck1']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
 	});
-	
+
 	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
 
 	if (checkRow == '') {
@@ -414,7 +416,8 @@ function deleteScrap3() {
 		return false;
 	} else {
 		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$.ajax({
+			$
+					.ajax({
 						url : getContextPath() + "/deleteScrap",
 						type : "post",
 						data : {

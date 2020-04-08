@@ -30,8 +30,7 @@
 	<select id = "UserReportList" parameterType="map" resultType="bit.team.eepp.VO.DeclarationVO">
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 			from(select d.did, d.reporter_id, d.reported_id,
-			(select uNickname from users where user_id = d.reported_id) as reported_nick, 
-			(select uNickname from users where user_id = d.reporter_id) as reporter_nick, d.dreason, d.ddate from declaration d, users u 
+			(select uNickname from users where user_id = d.reported_id) as reported_nick, (select uNickname from users where user_id = d.reporter_id) as reporter_nick, d.dreason, d.ddate from declaration d, users u 
 			where reported_id is not null AND d.reporter_id = u.user_id ORDER BY dDate DESC) A)
 			WHERE RNUM BETWEEN #{ureportcri.rowStart}
 			AND #{ureportcri.rowEnd}

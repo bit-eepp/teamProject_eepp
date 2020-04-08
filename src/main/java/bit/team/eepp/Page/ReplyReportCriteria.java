@@ -2,22 +2,22 @@ package bit.team.eepp.Page;
 
 // 한페이지에 담아내야할 것들을 모음
 public class ReplyReportCriteria {
-	private int page;
+	private int page_rpr;
 	private int perPageNum;
 	private int rowStart;
 	private int rowEnd;
 
 	public ReplyReportCriteria() {
-		this.page = 1;
+		this.page_rpr = 1;
 		this.perPageNum = 10;
 	}
 
-	public void setPage(int page) {
-		if (page <= 0) {
-			this.page = 1;
+	public void setPage_rpr(int page_rpr) {
+		if (page_rpr <= 0) {
+			this.page_rpr = 1;
 			return;
 		}
-		this.page = page;
+		this.page_rpr = page_rpr;
 	}
 
 	public void setPerPageNum(int perPageNum) {
@@ -28,12 +28,12 @@ public class ReplyReportCriteria {
 		this.perPageNum = perPageNum;
 	}
 
-	public int getPage() {
-		return page;
+	public int getPage_rpr() {
+		return page_rpr;
 	}
 
 	public int getPageStart() {
-		return (this.page - 1) * perPageNum;
+		return (this.page_rpr - 1) * perPageNum;
 	}
 
 	public int getPerPageNum() {
@@ -41,7 +41,7 @@ public class ReplyReportCriteria {
 	}
 
 	public int getRowStart() {
-		rowStart = ((page - 1) * perPageNum) + 1;
+		rowStart = ((page_rpr - 1) * perPageNum) + 1;
 		return rowStart;
 	}
 
@@ -52,6 +52,6 @@ public class ReplyReportCriteria {
 
 	@Override
 	public String toString() {
-		return "ReplyReportCriteria [page=" + page + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
+		return "ReplyReportCriteria [page_rpr=" + page_rpr + ", perPageNum=" + perPageNum + ", rowStart=" + rowStart + ", rowEnd=" + rowEnd +"]";
 	}
 }
