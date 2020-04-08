@@ -87,7 +87,7 @@ p {
 	border: none;
 }
 
-#selectDeleteBtn1 {
+#selectDeleteBtn_Sboard, #selectDeleteBtn_SClass,#selectDeleteBtn_SEating {
 	font-size: 0.8rem;
 	border-radius: 7px;
 	background: #59bfbf;

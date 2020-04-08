@@ -115,9 +115,7 @@ public interface UserMapper {
 	public int joinClassCount(Map<String, Object> map);
 
 	// 개설한 클래스
-	@Select("select cId, cTitle, cCategory, cTotalPeopleCount, cOpenDate, cTerm\n"
-			+ ",(SELECT COUNT(user_id) FROM CLASSJOIN WHERE class_id = class.cId)as totalcount from class where user_id = #{user_id}")
-	public List<ClassVO> openClass(Map<String, Object> map);
+	public abstract List<ClassVO> openClass(Map<String, Object> map);
 
 	// 개설한 클래스 개수
 	@Select("select count(*) from class where user_id = #{user_id}")
