@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Eating : Store Information view</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
-
 <style>
     .customoverlay {
 				position:relative;
@@ -55,144 +54,7 @@
 				background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
 			}
 </style>
-<script type="text/javascript">
-function getContextPath() {
-	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
-};
 
-/* ***************** */
-/*	 content View 	 */
-/* **************** */
-
-$(document).ready(function(){
-
-var rvCount;				// 해당 게시글의 댓글 수 
-var uNickname = $("#userNickname").val();
-var userId = $('#userId').val();
-var eating_id = $('#eId').val();
-
-	reviewCount(eating_id);
-	reviewList();
-		
-	var formObj = $('form[role="form"]');
-		
-	$('.list').on('click', function(){
-		formObj.attr('method','get');
-		formObj.attr('action','eatingList');
-		formObj.submit();
-	});
-		
-	$('.modify').on('click', function(){
-		formObj.attr('method','get');
-		formObj.attr('action','modifyView');
-		formObj.submit();
-	});
-		
-	$('.delete').on('click', function(){
-		deleteConfirm();
-	});
-		
-	//가게 정보는 삭제, 신고 불가. 스크랩 가능.
-	
-	if(!uNickname){
-		$('.reviewBtn').remove();
-	}
-
-window.onload = showClock;
-function showClock(){
-    var currentDate = new Date();
-    var divClock = document.getElementById("divClock");
-     
-    var nowMassage = ""+currentDate.getMonth()+"월"
-   		nowMassage += currentDate.getDate()+"일";
-    	nowMassage += currentDate.getHours()+"시";
-    	nowMassage += currentDate.getMinutes()+"분";
-     
-    divClock.innerText = nowMassage;
-    setTimeout(showClock,1000);
-}
-
-function rpResetForm(rpId) {
-	$('#rpModalForm_' +rpId).on('hidden.bs.modal', function (e) {
-		$(this).find('form')[0].reset()
-	});
-}
-	
-// 해당 게시글 삭제 후 글목록으로 전환
-function reset() {
-	location.href='eatingList?page='+$("#scriPage").val()+'&perPageNum='+$("#scriPageNum").val()+'&searchType='+$("#scriSearchType").val()
-	+'&keyword='+$("#scriKeyword").val()+'&sortType='+$("#boardSortType").val()+'&bCategory='+$("#bCategory").val();
-}
-				
-/* 교육장소 map 부분 */
-var ad_new = $('#ad_new').val();
-var eatingAddress = ad_new;
-var mapContainer = document.getElementById('map'), // 지도 표시할 div 
-mapOption = { 
-    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
-    level: 3 // 지도 확대레벨
-};
-
-
-// 지도 생성
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 주소-좌표 변환 객체 생성
-var geocoder = new kakao.maps.services.Geocoder();
-
-// 주소로 좌표를 검색
-geocoder.addressSearch(eatingAddress, function(result, status) {
-	// 정상적으로 검색이 완료됐으면 
-	if (status === kakao.maps.services.Status.OK) {
-
-		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		
-		var imageSrc = getContextPath() +'/img/eating/base/ePlaceMarker.png', // 마커이미지의 주소입니다    
-	    	imageSize = new kakao.maps.Size(55, 45), // 마커이미지의 크기입니다
-	    	imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-    	
-		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
-		// 결과값으로 받은 위치를 마커로 표시
-		var marker = new kakao.maps.Marker({
-		    map: map,
-		    position: coords,
-		    image: markerImage
-		});
-		
-		console.log('eatingAddress : ' +eatingAddress);
-		console.log('coords : ' +coords);
-		console.log(result[0].y);
-		console.log(result[0].x);
-
-		// 마커가 지도 위에 표시
-		marker.setMap(map);
-		
-		// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		var content = '<div class="customoverlay">';
-			content += '<a href="https://map.kakao.com/link/map/' +eatingAddress +',' +result[0].y +',' +result[0].x +'" target="_blank">';
-			content += '<span class="title"><i class="fab fa-leanpub" style="color:#e7438b;"></i> ${eContentView.eTitle} 위치 </span>';
-			content += '</a>';
-			content += '</div>';
-
-		// 커스텀 오버레이를 생성합니다
-		var customOverlay = new kakao.maps.CustomOverlay({
-		    map: map,
-		    position: coords,
-		    content: content,
-		    yAnchor: 1 
-		});
-
-		// 지도중심을 결과값으로 받은 위치 이동
-		map.setCenter(coords); 
-
-	} 
-}); 
-/* 교육장소 map 부분 끝*/
-			});
-
-</script>
 </head>
 
 <body>
@@ -258,55 +120,62 @@ geocoder.addressSearch(eatingAddress, function(result, status) {
 	<hr>
 	
 	<!-- 댓글처리 -->
-		<div>
-			<h2>리뷰1(<b class="reviewCount"></b>) </h2>
-			<h2>리뷰2(${eContentView.rvCount}) </h2>
-	<!-- 		 <h2>평점 : (<b class="reviewAVG"></b>) </h2> -->
+	<div class="reviewWrapper">
+		<h2>
+			현재 리뷰 수(<b class="reviewCount"></b>)
+		</h2>
+			<div>
+						<div class="reviewPaging"></div>
+						<div class="reviewList"></div>
+					</div>	
+		<!-- 		 <h2>평점 : (<b class="reviewAVG"></b>) </h2> -->
 			<form name="rvform">
-			<input type="hidden" name="eating_id" value="${eContentView.eId}" /> <input type="hidden" name="user_id" value="${loginUser.user_id}">
-				<table border="1">
-					<tr>
-						<td>
+			<input type="hidden" name="eating_id" value="${eContentView.eId}" />
+			<input type="hidden" name="user_id" value="${loginUser.user_id}">
+			<table class="reviewTable" border="1">
+				<tr>
+					<td class="reviewWriter">
 						<c:choose>
-						<c:when test="${not empty loginUser.uNickname}">
-						${loginUser.uNickname}
-							<button type="button" name="reviewBtn">리뷰</button>
+							<c:when test="${not empty loginUser.uNickname}">
+							${loginUser.uNickname}
 						</c:when>
-						<c:otherwise>
-							<input type="text" name="user_id" value="GUEST" disabled>
-							<button type="button" name="reviewBtn">리뷰</button>
-						</c:otherwise>
-					</c:choose>
+							<c:otherwise></c:otherwise>
+						</c:choose></td>
+				</tr>
+				<tr>
+					<td>
+					<c:choose>
+							<c:when test="${not empty loginUser.uNickname}">
+								<select id="rvScore" type="number" name="rvScore" class="rvScore">
+									<option value="" selected="selected">평점</option>
+									<option value="0.5">0.5</option>
+									<option value="1.0">1.0</option>
+									<option value="1.5">1.5</option>
+									<option value="2.0">2.0</option>
+									<option value="2.5">2.5</option>
+									<option value="3.0">3.0</option>
+									<option value="3.5">3.5</option>
+									<option value="4.0">4.0</option>
+									<option value="4.5">4.5</option>
+									<option value="5.0">5.0</option>
+								</select>
+								<textarea id="rvComment" type="text" name="rvComment" placeholder="내용을 입력하세요." rows="5" cols="100"></textarea>
+								</c:when>
+								<c:otherwise>
+								<textarea id="rvComment" style="resize:none;height:80px;width:100%;" placeholder="로그인 후 리뷰를 작성하실 수 있습니다."></textarea>
+								</c:otherwise>
+						</c:choose>
 						</td>
-							</tr>
-					<tr>
-						<td>
-					<div class="reviewPaging"></div>
-					<div class="reviewList"></div>	
-					<select id="rvScore" type="number" name="rvScore">
-							<option value = "avg" selected="selected">평점</option>
-							<option value = "0.5" >0.5</option>
-							<option value = "1.0" >1.0</option>
-							<option value = "1.5" >1.5</option>
-							<option value = "2.0" >2.0</option>
-							<option value = "2.5" >2.5</option>
-							<option value = "3.0" >3.0</option>
-							<option value = "3.5" >3.5</option>
-							<option value = "4.0" >4.0</option>
-							<option value = "4.5" >4.5</option>
-							<option value = "5.0" >5.0</option>
-						</select>	
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea id="rvComment" type="text" name="rvComment" placeholder="내용을 입력하세요." rows="5" cols="100"></textarea>
-						</td>
-					</tr>
-					</table>	
+
+				<td><div class="reviewBrnWrap"><a id="reviewBtn" style="color : blue">리뷰</a></div></td>
+			</tr>
+				
+				</table>
 			</form>
-		</div>
-		<hr>
+					
+					<!-- 여기 리뷰 수정/삭제 js 삽입 -->
+	</div>
+	<hr>
 
 	<div>
 		<table>
@@ -321,7 +190,7 @@ geocoder.addressSearch(eatingAddress, function(result, status) {
 
 	<form name="form1" role="form" method="post">
 		<input type="hidden" name="eId" id="eId" value="${eContentView.eId}"> 
-		<input type="hidden" name="page" id="escriPage" value="${escri.page}" /> 
+		<input type="hidden" name="page" id="escriPage" value="${escri.page_eating}" /> 
 		<input type="hidden" name="perPageNum" id="escriPageNum" value="${escri.perPageNum}" />
 		<input type="hidden" name="searchType" id="escriSearchType" value="${escri.searchType}" />
 		<input type="hidden" name="keyword" id="escriKeyword" value="${escri.keyword}" /> 
@@ -330,6 +199,124 @@ geocoder.addressSearch(eatingAddress, function(result, status) {
 	<hr>
 
 	<%@ include file="/WEB-INF/views/eating/reviewList.jsp"%>
-	<%-- <script src="${pageContext.request.contextPath}/js/eating/eatingContent.js"></script> --%>
+	<!-- <script src="${pageContext.request.contextPath}/js/eating/eatingContent.js"></script> -->
+	<script type="text/javascript">
+function getContextPath() {
+	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+
+/* ***************** */
+/*	 content View 	 */
+/* **************** */
+
+$(document).ready(function(){
+
+var rvCount;				// 해당 게시글의 댓글 수 
+var uNickname = $("#userNickname").val();
+var userId = $('#userId').val();
+var eating_id = $('#eId').val();
+
+	reviewCount(eating_id);
+	reviewList();
+		
+	var formObj = $('form[role="form"]');
+		
+	$('.list').on('click', function(){
+		formObj.attr('method','get');
+		formObj.attr('action','eatingList');
+		formObj.submit();
+	});
+		
+	$('.modify').on('click', function(){
+		formObj.attr('method','get');
+		formObj.attr('action','modifyView');
+		formObj.submit();
+	});
+		
+	$('.delete').on('click', function(){
+		deleteConfirm();
+	});
+		
+	//가게 정보는 삭제, 신고 불가. 스크랩 가능.
+	
+	if(!uNickname){
+		$('.reviewBtn').remove();
+	}
+
+	
+// 해당 게시글 삭제 후 글목록으로 전환
+function reset() {
+	location.href='eatingList?page='+$("#scriPage").val()+'&perPageNum='+$("#scriPageNum").val()+'&searchType='+$("#scriSearchType").val()
+	+'&keyword='+$("#scriKeyword").val()+'&sortType='+$("#boardSortType").val()+'&bCategory='+$("#bCategory").val();
+}
+				
+/* 교육장소 map 부분 */
+var ad_new = $('#ad_new').val();
+var eatingAddress = ad_new;
+var mapContainer = document.getElementById('map'), // 지도 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도 중심좌표
+    level: 3 // 지도 확대레벨
+};
+
+
+// 지도 생성
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 주소-좌표 변환 객체 생성
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색
+geocoder.addressSearch(eatingAddress, function(result, status) {
+	// 정상적으로 검색이 완료됐으면 
+	if (status === kakao.maps.services.Status.OK) {
+
+		var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
+		var imageSrc = getContextPath() +'/img/eating/base/ePlaceMarker.png', // 마커이미지의 주소입니다    
+	    	imageSize = new kakao.maps.Size(55, 45), // 마커이미지의 크기입니다
+	    	imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    	
+		var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+		// 결과값으로 받은 위치를 마커로 표시
+		var marker = new kakao.maps.Marker({
+		    map: map,
+		    position: coords,
+		    image: markerImage
+		});
+		
+		console.log('eatingAddress : ' +eatingAddress);
+		console.log('coords : ' +coords);
+		console.log(result[0].y);
+		console.log(result[0].x);
+
+		// 마커가 지도 위에 표시
+		marker.setMap(map);
+		
+		// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		var content = '<div class="customoverlay">';
+			content += '<a href="https://map.kakao.com/link/map/' +eatingAddress +',' +result[0].y +',' +result[0].x +'" target="_blank">';
+			content += '<span class="title"><i class="fab fa-leanpub" style="color:#e7438b;"></i> ${eContentView.eTitle} 위치 </span>';
+			content += '</a>';
+			content += '</div>';
+
+		// 커스텀 오버레이를 생성합니다
+		var customOverlay = new kakao.maps.CustomOverlay({
+		    map: map,
+		    position: coords,
+		    content: content,
+		    yAnchor: 1 
+		});
+		// 지도중심을 결과값으로 받은 위치 이동
+		map.setCenter(coords); 
+	}
+}); 
+/* 교육장소 map 부분 끝*/
+});
+
+</script>
 </body>
+
 </html>

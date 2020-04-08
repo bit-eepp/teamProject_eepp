@@ -3,16 +3,16 @@
 
 <mapper namespace="bit.team.eepp.Mapper.ReviewMapper">
 	<select id="reviewCount" resultType="int">
-		SELECT COUNT(*) AS reviewCount FROM REVIEW WHERE eating_id = #{eating_id}
+		SELECT COUNT(*) AS reviewCount FROM REVIEW WHERE rvDeleted != 'yes' AND eating_id = #{eating_id}
 	</select>
 	
 	<select id="reviewList" resultType="bit.team.eepp.VO.ReviewVO" parameterType="bit.team.eepp.Page.ReviewCriteria">
 		<![CDATA[
 			SELECT * FROM 
 			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
-			(SELECT rv.rvId, rv.eating_id, rv.user_id, rv.rvComment, rv.rvScore, rv.rvWrittenDate, rv.rvModifyDate, u.uNickname 
+			(SELECT rv.rvId, rv.eating_id, rv.user_id, rv.rvComment, rv.rvScore, rv.rvWrittenDate, rv.rvModifyDate, u.uNickname, rv.rvDeleted 
 			FROM REVIEW rv, USERS u  
-			WHERE rv.user_id = u.user_id AND rv.eating_id = #{eating_id}
+			WHERE rv.user_id = u.user_id AND rv.rvDeleted != 'yes' AND rv.eating_id = #{eating_id}
 			ORDER BY rv.rvmodifydate DESC) A)
             WHERE RNUM >= #{rvCriteria.startNum} AND RNUM <= #{rvCriteria.endNum}
 		]]>
@@ -27,12 +27,12 @@
 	 -->
 	 
 	<insert id="reviewWrite" parameterType="bit.team.eepp.VO.ReviewVO">
-		INSERT INTO REVIEW(rvId, rvComment, rvScore, rvWrittenDate, rvModifyDate, eating_id, user_id) 
-		VALUES(REVIEW_SEQ.nextval, #{reviewVO.rvComment}, #{reviewVO.rvScore}, SYSDATE, SYSDATE, #{reviewVO.eating_id}, #{reviewVO.user_id})
+		INSERT INTO REVIEW(rvId, rvComment, rvScore, rvWrittenDate, rvModifyDate, eating_id, user_id, rvDeleted) 
+		VALUES(REVIEW_SEQ.nextval, #{reviewVO.rvComment}, #{reviewVO.rvScore}, SYSDATE, SYSDATE, #{reviewVO.eating_id}, #{reviewVO.user_id}, 'no')
 	</insert>
 	
 	<delete id="reviewDelete" parameterType="bit.team.eepp.VO.ReviewVO">
-		DELETE FROM REPLY WHERE rvId = #{rvId}
+		UPDATE REVIEW SET rvDeleted = 'yes', rvScore = 0 WHERE rvId = #{rvId}
 	</delete>
 
 	<update id="reviewModify" parameterType="bit.team.eepp.VO.ReviewVO">

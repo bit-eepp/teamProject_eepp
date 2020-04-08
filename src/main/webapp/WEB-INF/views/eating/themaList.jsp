@@ -26,9 +26,8 @@
 	<input type="hidden" id="eCategory" value="${eCategory}" />
 	<input type="hidden" id="eThema" value="${eThema}" />
 	<input type="hidden" id="eatingTotalCount" value="${eatingPageMaker.totalCount}" />
-	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page}" />
+	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page_eating}" />
 	<input type="hidden" id="eatingSearchType" value="${escri.searchType}" />
-	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page}" />
 
 
 	<br>
@@ -66,7 +65,7 @@
 								<td>${tl.eAddress_new}</td>
 							</tr>
 							<tr>
-								<td colspan="2"><button type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page)}&eId=${tl.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&eCategory=${eCategory}&eThema=${eThema}'">더
+								<td colspan="2"><button type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${tl.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&eCategory=${eCategory}&eThema=${eThema}'">더
 										보기!</button></td>
 							</tr>
 						</table>

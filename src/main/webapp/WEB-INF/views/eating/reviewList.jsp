@@ -12,14 +12,13 @@
 		/* var eId = ${eContentView.eId}; */
 		//var eating_id = $("#eContentViewEid").val();
 		var eating_id = $('#eId').val();
-
 		
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function reviewCount(eId) {
 				$.ajax({
 					url: 'http://localhost:8282/eepp/review/reviewCount',
 					type: 'get',
-					data: {'eating_id' : eating_id},
+					data: {'eating_id' : eId},
 					success: function(data){
 						console.log("리뷰 수 : " +data)
 						rvCount = data;
@@ -130,11 +129,17 @@
 									b += '<h4>' + value.uNickname +'</h4>';
 									b += '<h6>' +value.rvWrittenDate +'</h6>';
 									b += '</td>';
-	
+									b += '<td width="100">';
+									if(uNickname == value.uNickname){
+									b += '<a onclick="reviewModify(' +value.rvId +',' +value.rvScore+',\''+value.rvComment+'\');" style="color : blue">[수정] </a>';
+									b += '<br>';
+									b += '<a onclick="reviewDelete(' +value.rvId +');" style="color : blue">[삭제] </a>';
+									}
+									b += '</td>';
 									b += '</tr>';
 									b += '</table>';
 									b += '</div>'
-								
+									
 								$(".reviewList").append(b);	
 							
 				        });
@@ -148,26 +153,29 @@
 			
 			
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
-			$('[name=reviewBtn]').click(function(){
-				
+			$('#reviewBtn').click(function(){
 				if(!uNickname){
 					alert("로그인 해주세요.");
 					return false;
 				}
-				
-				var insertData = $('[name=rvform]').serialize();				
-				reviewWrite(insertData);
+				reviewWrite();
 			});
 			
 			// 해당 게시물에 대해 댓글을 작성하는 JS메서드(Ajax-Json) 
-			function reviewWrite(insertData) {
-				var rvComment = document.rvform.rvComment;
-				
-				if(rvComment.value == '') {
+			function reviewWrite() {
+				var rvComment = $("#rvComment").val();
+				var rvScore = $(".rvScore").val();
+				var insertData = $('[name=rvform]').serialize();
+				console.log(rvComment)
+				console.log(rvScore)
+				if(rvComment == '') {
 					alert("내용을 작성해주세요");
 					document.rvform.rvComment.focus();
+					return false;	
+				}else if(rvScore == ''){
+					alert("평점을 선택해주세요.");
+					document.rvform.rvScore.focus();
 					return false;
-					
 				} else {
 					$.ajax({
 						url: 'http://localhost:8282/eepp/review/reviewWrite',
@@ -177,6 +185,7 @@
 							alert("::리뷰 등록::")
 							reviewCount(eating_id);
 							reviewList();
+							$("#rvComment").val("");
 						},
 						error : function(request, status, error) {
 							console.log(request.responseText);
@@ -187,19 +196,21 @@
 			}
 			
 			// 댓글 수정 view JS메서드(Ajax-Json)
-			function reveiwModify(rvId, rvComment){
-			    var a ='';
-				    a += '<div>';
-				    a += '<input type="text" name="rvComment_' +rvId +'" value="' +rvComment +'"/>';
-				    a += '<button type="button" onclick="reviewModifyPrc(' +rvId +');">수정</button>';
-					a += '<button type="button" onclick="reviewList();">취소</button>';
-				    a += '</div>';
-			    $('.rvComment_'+rvId).html(a);	    
+			function reviewModify(rvId, rvScore, rvComment){
+				var a ='';
+			    a += '<div class="modifyCommentBox">';
+			    a += '<input type="text" name="rvComment_' +rvId +'" value="' +rvComment +'"/>';
+			    a += '<input type="text" name="rvScore_'+rvId+'" value="' +rvScore +'"/>';
+			    a += '<a class="modifyConfirm" onclick="reviewModifyPrc(' +rvId +');">수정</a>';
+				a += '<a class="modifyCancle" onclick="reviewList();">취소</a>';
+			    a += '</div>';
+		    $('.rvComment_'+rvId).html(a);	  	    
 			}
 			
 			// 댓글 수정 JS메서드(Ajax-Json)
 			function reviewModifyPrc(rvId) {
 				var rvComment = $('[name=rvComment_' +rvId +']').val();
+				var rvScore = $('[name=rvScore_'+rvId+']').val();
 				if(rvComment == '') {
 					alert("내용이 비어있습니다.");
 					$('[name=rvComment_' +rvId +']').focus();
@@ -209,7 +220,11 @@
 					$.ajax({
 						url: 'http://localhost:8282/eepp/review/reviewModify',
 						type: 'post',
-						data: {'rvComment' : modify_rvComment, 'rvId' : rvId},
+						data: {
+							'rvComment' : rvComment,
+							'rvId' : rvId,
+							'rvScore' : rvScore
+							},
 						success: function(data){
 							reviewList();
 						},
