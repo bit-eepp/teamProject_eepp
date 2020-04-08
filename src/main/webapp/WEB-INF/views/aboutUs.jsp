@@ -33,9 +33,9 @@
 		<!-- header -->
 		
 		<!-- 배경음악테스트 시작 -->
-		<iframe src="${pageContext.request.contextPath}/img/aboutUs/방방프로젝트 - 슈퍼스타(Super Star).mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+		<iframe src="${pageContext.request.contextPath}/img/aboutUs/trackNo2.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
 		<audio autoplay loop id="playAudio">
-			<source src="${pageContext.request.contextPath}/img/aboutUs/방방프로젝트 - 슈퍼스타(Super Star).mp3">
+			<source src="${pageContext.request.contextPath}/img/aboutUs/trackNo2.mp3">
 		</audio>
 		<!-- 배경음악테스트 끝 -->
 
