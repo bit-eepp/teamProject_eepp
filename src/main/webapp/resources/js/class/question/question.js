@@ -36,11 +36,11 @@ function questionPagePrint(rpPageMaker) {
 	var paging = '';
 	paging += '<ul class="pagination justify-content-center">';
 					
-	if(tempEndPage != 0) {
+	//if(tempEndPage != 0) {
 		paging += '<li class="page-item">';
 		paging += '<a class="page-link" href="javascript:questionList(1)"><i class="fas fa-angle-left"></i></a>';
 		paging += '</li>';
-	}
+	//}
 					
 	for(var i = startPage; i <= endPage; i++){
 		paging += '<li class="page-item">';
@@ -48,11 +48,11 @@ function questionPagePrint(rpPageMaker) {
 		paging += '</li>';
 	}
 					
-	if(page < tempEndPage){
+	//if(page < tempEndPage){
 		paging += '<li class="page-item">';
 		paging += '<a class="page-link" href="javascript:questionList(' +tempEndPage +')"><i class="fas fa-angle-right"></i></a>';
 		paging += '</li>';
-	}
+	//}
 	
 	$('.clQuestionPage').html(paging);
 }
