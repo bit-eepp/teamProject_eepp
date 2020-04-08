@@ -110,7 +110,7 @@
 							<h3 id="mpNoBtn">공지사항</h3>
 							<hr>
 							<div align="right">
-								<button type="button" class="btn btn-info" id="mynoticebtn" onclick = "location.href = '/eepp/board/writeView?&sortType=&bCategory='; ">공지 작성</button>
+								<button type="button" class="btn btn-info" id="mynoticebtn" onclick = "window.open('/eepp/board/writeView?&sortType=&bCategory=');">공지 작성</button>
 							</div>
 							<p>'EE'에서 작성하신 공지사항을 확인 할 수 있습니다.</p>
 							<br>
@@ -139,7 +139,7 @@
 													<td class="Title"><c:choose>
 															<c:when test="${vo.dCount > 10}">${vo.bTitle}</c:when>
 															<c:otherwise>
-																<a style="text-decoration: none"
+																<a style="text-decoration: none" target="blank"
 																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
 																	${vo.bTitle} [${vo.rpCount}]</a>
 															</c:otherwise>
@@ -281,7 +281,7 @@
 													<%-- <td><input type="checkbox" name="pickCheck1" class="pickCheck1" value="${BRL.dId}" /></td> --%>
 													<td>${BRL.dId}</td>
 													<td class="Title">${BRL.reporter_nick}</td>
-													<td class="Title"><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none" target="blank"
 														href="/eepp/board/contentView?bId=${BRL.board_id}&searchType=&keyword=&sortType=&bCategory=">${BRL.board_id}</a></td>
 													<td class="RTitle">${BRL.dReason}</td>
 													<td><fmt:formatDate value="${BRL.dDate}" pattern="yyyy/MM/dd HH:mm"/></td>

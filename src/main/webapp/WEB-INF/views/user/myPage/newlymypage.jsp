@@ -112,6 +112,7 @@
 							<div align="right">
 								<button type="button" class="btn btn-info" id="myinfobtn">수정</button>
 							</div><br>
+							<div class="table-wrapping">
 							<table class="info">
 								<tr>
 									<th class="input-title"><span class="required">•</span>프로필</th>
@@ -165,6 +166,7 @@
 									
 								</tr>
 							</table>
+							</div>
 						</div>
 						<br><br>
 						<div class="myinfo-wrap">
@@ -223,7 +225,7 @@
 													<td class="Title"><c:choose>
 															<c:when test="${vo.dCount > 10}">${vo.bTitle}</c:when>
 															<c:otherwise>
-																<a style="text-decoration: none"
+																<a style="text-decoration: none" target="blank"
 																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
 																	${vo.bTitle} [${vo.rpCount}]</a>
 															</c:otherwise>
@@ -394,7 +396,7 @@
 													<!--  스크랩 목록 선택 -->
 													<td><input type="checkbox" name="pickCheck" class="pickCheck" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
-													<td class="Title"><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none" target="blank"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
 													<td><fmt:formatDate value="${scrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 											</c:forEach>
@@ -446,7 +448,7 @@
 												<tr class="scrapCList_tr">
 												<td><input type="checkbox" name="pickCheck1" class="pickCheck1" value="${ClassscrapList.sId}" /></td>
 													<td>${ClassscrapList.class_id}</td>
-													<td class="Title"><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none" target="blank"
 														href="/eepp/class/classView?cId=${ClassscrapList.class_id}&cCategory=${cCategory}">${ClassscrapList.cTitle}</a></td>
 													<td><fmt:formatDate value="${ClassscrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 													
@@ -500,7 +502,7 @@
 												<tr class="scrapEList_tr">
 													<td><input type="checkbox" name="pickCheck2" class="pickCheck2" value="${scrapList.sId}" /></td>
 													<td>${scrapList.board_id}</td>
-													<td class="Title"><a style="text-decoration: none"
+													<td class="Title"><a style="text-decoration: none" target="blank"
 														href="/eepp/board/contentView?bId=${scrapList.board_id}&searchType=&keyword=&sortType=&bCategory=">${scrapList.bTitle}</a></td>
 													<td><fmt:formatDate value="${scrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
@@ -549,7 +551,7 @@
 							<div align="right">
 								<button type="button" class="btn btn-info" id="myclassbtn">확인</button>
 							</div>
-							<p>'EE'에서 구매 / 개설 하신 클래스를 확인 할 수 있습니다.</p>
+							<p>'EE class'에서 구매 / 개설 하신 클래스를 확인 할 수 있습니다.</p>
 							<br>
 							<br>
 							<div class="myclass_list">
@@ -619,17 +621,17 @@
 								<div class = "clJoinPage">
 									<ul class="pagination justify-content-center">
       									<li class="page-item">
-													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.startPage - 1)}&mpclass=yes">
+													<a class="page-link" href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.startPage - 1)}&mpclass=yes&#class_join">
 														<i class="fas fa-angle-left"></i>
 													</a>
 												</li>
 											<c:forEach begin="${JoinClassPageMaker.startPage}" end="${JoinClassPageMaker.endPage}" var="idx">
 												<li class="page-item">
-												<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&mpclass=yes">${idx}</a>
+												<a id="clJoinPage_${idx}" class="page-link" href="mypage${JoinClassPageMaker.makeQuery(idx)}&mpclass=yes&#class_join">${idx}</a>
 												</li>
 											</c:forEach>
 											<li class="page-item">
-													<a class="page-link"href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.endPage + 1)}&mpclass=yes">
+													<a class="page-link"href="mypage${JoinClassPageMaker.makeQuery(JoinClassPageMaker.endPage + 1)}&mpclass=yes&#class_join">
 														<i class="fas fa-angle-right"></i>
 													</a>
 												</li>
@@ -674,16 +676,16 @@
 									<div class="clOpenPage">
 									   <ul class="pagination justify-content-center">
 									      <li class="page-item">
-													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.startPage - 1)}&cCategory=${cCategory}&mpclass=yes">
+													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.startPage - 1)}&cCategory=${cCategory}&mpclass=yes&#class_open">
 														<i class="fas fa-angle-left"></i>
 													</a>
 										</li>
 											<c:forEach begin="${OpenClassPageMaker.startPage}" end="${OpenClassPageMaker.endPage}" var="idx">
 												<li class="page-item">
-													<a id="clOpenPage_${idx}" class="page-link" href="mypage${OpenClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&mpclass=yes">${idx}</a></li>
+													<a id="clOpenPage_${idx}" class="page-link" href="mypage${OpenClassPageMaker.makeQuery(idx)}&cCategory=${cCategory}&mpclass=yes&#class_open">${idx}</a></li>
 											</c:forEach>
 											<li class="page-item">
-													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes">
+													<a class="page-link" href="mypage${OpenClassPageMaker.makeQuery(OpenClassPageMaker.endPage + 1)}&cCategory=${cCategory}&mpclass=yes&#class_open">
 														<i class="fas fa-angle-right"></i>
 													</a>
 												</li>
@@ -699,7 +701,7 @@
 							<div align="right">
 								<button type="button" class="btn btn-info" id="mpRVBtn">확인</button>
 							</div>
-							<p>'EE'에서 작성하신 음식점 후기를 확인 할 수 있습니다.</p>
+							<p>'오늘 뭐 먹지?'에서 작성하신 음식점 후기를 확인 할 수 있습니다.</p>
 							<br>
 							<br>
 							<div class="review_list">
@@ -780,6 +782,8 @@
 		 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
 				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 		}
+	
+
 	</script>
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 <%@ include file="/WEB-INF/views/footer.jsp"%>
