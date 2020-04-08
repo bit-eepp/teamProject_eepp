@@ -9,33 +9,8 @@
 <meta charset="UTF-8">
 <title>회원 정보</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
-<!-- <style>
-*{
-	font-size:14px;
-}
-.class_img{
-	width: 80%;
-}
-.cj_info{
-	text-align:center;
-	font-size:0.9rem;
-}
-.cName{
-	font-weight:bold;
-	color: #e7438b;
-}
-.thead-color1{
-	color : #59bfbf;
-}
-th, .cj_info , .container{
-	text-align:center;
-}
-#logo {
-	width: 20%;
-}
-</style> -->
-</head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/memberInfo.css">
+</head>
 <body>
 	<section id="memberInfo" class="memberInfoView">
 	<br>
