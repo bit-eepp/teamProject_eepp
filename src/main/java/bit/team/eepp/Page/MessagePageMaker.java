@@ -12,7 +12,7 @@ public class MessagePageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private int displayPageNum = 5;
+	private int displayPageNum = 8;
 	private int tempEndPage;
 
 	// 전체 필드 변수들 세팅 : 전체 게시글 수의 setter가 호출될 때 전체 세팅되도록 함

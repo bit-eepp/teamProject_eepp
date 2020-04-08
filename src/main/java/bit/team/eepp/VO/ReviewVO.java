@@ -15,18 +15,10 @@ public class ReviewVO {
 	private String rvComment;
 	private float rvScore;
 	private float reviewAVG;
-	private String ename;
-	
-	public float getReviewAVG() {
-		return reviewAVG;
-	}
-
-	public void setReviewAVG(float reviewAVG) {
-		this.reviewAVG = reviewAVG;
-	}
-
 	private String uNickname;
-
+	private String ename;
+	//리뷰 아이디, 맛집 아이디, 유저(작성자) 아이디, 리뷰 작성일, 리뷰 수정일(수정 시 반영), 리뷰 내용, 리뷰 점수, 각 가게 당 리뷰 평균, 닉네임
+	
 	public ReviewVO() {
 	}
 
@@ -43,6 +35,7 @@ public class ReviewVO {
 		this.uNickname = uNickname;
 		this.ename = ename;
 	}
+	
 	public String getEname() {
 		return ename;
 	}
@@ -51,6 +44,14 @@ public class ReviewVO {
 		this.ename = ename;
 	}
 
+	public float getReviewAVG() {
+		return reviewAVG;
+	}
+
+	public void setReviewAVG(float reviewAVG) {
+		this.reviewAVG = reviewAVG;
+	}
+	
 	public int getEating_id() {
 		return eating_id;
 	}

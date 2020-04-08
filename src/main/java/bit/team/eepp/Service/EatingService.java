@@ -23,6 +23,10 @@ public class EatingService {
 		public List<EatingVO> eatingList(Map<String, Object> map) {
 			return eatingMapper.eatingList(map);
 		}
+		//테마 리스트 정렬
+		public List<EatingVO> themaList(Map<String, Object> map) {
+			return eatingMapper.themaList(map);
+		}
 
 		// 선택한 게시글 확인
 		public EatingVO selectOne(EatingVO eatingVO) {

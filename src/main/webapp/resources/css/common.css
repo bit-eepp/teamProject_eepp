@@ -13,16 +13,6 @@ section{padding:40px 0;}
 .userBtn:hover{
 	color:#59bfbf!important;
 }
-
-
-.clUser {
-	display: inline!important;
-}
-
-.clUserE {
-	display: inline!important;
-}
-
 .dropdown-menu{
 	height: 115px!important;
 	padding: 10px!important;

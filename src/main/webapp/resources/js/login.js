@@ -24,7 +24,7 @@ $(document).ready(function() {
 		return true;
 	}
 	else if($(".loginFailInfo").val() == 'grade3'){
-		alert("신고 10회가 누적되어 차단된 계정입니다.");
+		alert("신고 10회가 누적되어 정지된 계정입니다.");
 		return true;
 	}
 	else if($(".loginFailInfo").val() == 'grade4'){

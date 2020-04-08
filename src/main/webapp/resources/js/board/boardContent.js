@@ -35,6 +35,10 @@ var uNickname = $("#userNickname").val();
 	$('.delete').on('click', function(){
 		deleteConfirm();
 	});
+	
+	$('.share').on('click', function(){
+		shareLink();
+	});
 		
 	// 해당 게시글이 공지사항이면 게시물 신고 버튼 안보이게 하기
 	var bSubject = $("#content_bSubject").val();
@@ -81,6 +85,20 @@ function boardTitle(title) {
 		$(".ct-etc").addClass("onCategory");
 	} 
 }
+
+//카카오 링크 공유
+Kakao.init('55d4b3987a46162ad1d899676af601c4');
+function shareLink() {
+    Kakao.Link.sendCustom({
+      templateId: 22997,
+      templateArgs: {
+        title: '#'+$("#bCategory").val()+'게시판 \n'+$("#contentBtitle").val(),
+        description: 'Community EE에서 확인하세요!',
+        pathLink : 
+        	'eepp/board/contentView?bId='+$("#contentBid").val()+'&bCategory=&sortType=',
+      },
+    })
+  }
 
 // 해당 댓글 신고 메서드
 function submitRpDeclarationForm(rpId) {
@@ -139,14 +157,20 @@ function resetForm() {
 
 // 해당 게시글 삭제 확인 JS메서드(댓글이 있는 게시글의 경우 삭제 불가)
 function deleteConfirm() {
-	if(rpCount > 0){
+	
+	if(confirm("정말 삭제 하시겠습니까?")){
+		deleteContent(bId);
+	}
+	
+	
+	/*if(rpCount > 0){
 		alert("댓글이 달린 게시물은 삭제 할 수 없습니다.");	
 		return;
 	} else {
 		if(confirm("정말 삭제 하시겠습니까?")){
 			deleteContent(bId);
 		}
-	}
+	}*/
 }
 	
 // 해당 게시글 삭제하는  JS메서드(Ajax-Json)

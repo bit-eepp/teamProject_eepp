@@ -124,5 +124,10 @@ public class MainController {
 
 		return mv;
 	}
-
+	
+	@RequestMapping("/aboutUs")
+	public String aboutUs() {
+		System.out.println("aboutUs() method");
+		return "/aboutUs";
+	}
 }

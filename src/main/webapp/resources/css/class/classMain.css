@@ -66,6 +66,24 @@
 	color: #26274c;
 }
 
+/*
+* 모집기간 마감된 클래스
+*/
+#isEndedClass .classWrapper{
+	background: #f5f5f5!important;
+    opacity: 0.6!important;
+    border: 1px solid #f5f5f5!important;
+}
+
+#isEndedClass .classWrapper .clBtn button{
+	cursor: initial!important;
+}
+
+.row .card-body .clBtn button:hover {
+	background-color: #59bfbf!important;
+	color: #fff!important;
+}
+
 .classCategory button {
 	background-color: #ddd;
 	font-size:80%;

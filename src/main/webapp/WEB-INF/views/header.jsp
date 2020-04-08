@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -76,17 +75,24 @@
 								</c:choose>
 							</div>
 							<div class="menuBtn-wrap">
-								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage?mpPoint=mpPoint'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+								<c:choose>
+									<c:when test ="${loginUser.uNickname eq'운영자' or loginUser.uNickname =='admin2'}">
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage?mpPoint=mpPoint'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="menuBtn-wrap">
-							<c:choose>
-									<c:when test ="${loginUser.uNickname =='운영자'}">
-										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/adminPage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
+								<c:choose>
+									<c:when test ="${loginUser.uNickname =='운영자' or loginUser.uNickname =='admin2'}">
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/admin/adminPage'"><i class="fas fa-user-cog"></i><strong> Admin</strong></button>&nbsp;
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
 									</c:otherwise>
-							</c:choose>
+								</c:choose>
 							</div>
 							<div class="menuBtn-wrap">
 								<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/logout.do'"><i class="fas fa-power-off"></i><strong> Logout</strong></button>
@@ -126,7 +132,7 @@
 								<a title="EE CLASS" href="${pageContext.request.contextPath}/class/classList"><strong>EE CLASS</strong></a>
 							</div>
 							<div id="menu11">
-								<a title="ABOUT US" href="${pageContext.request.contextPath}"><strong>ABOUT US</strong></a>
+								<a title="ABOUT US" href="${pageContext.request.contextPath}/aboutUs"><strong>ABOUT US</strong></a>
 							</div>		
 						</div>
 					</div>
@@ -206,7 +212,7 @@
 								<a title="EE CLASS" href="${pageContext.request.contextPath}/class/classList"><strong>EE CLASS</strong></a>
 							</div>
 							<div id="menu11">
-								<a title="ABOUT US" href="${pageContext.request.contextPath}"><strong>ABOUT US</strong></a>
+								<a title="ABOUT US" href="${pageContext.request.contextPath}/aboutUs"><strong>ABOUT US</strong></a>
 							</div>		
 						</div>
 					</div>

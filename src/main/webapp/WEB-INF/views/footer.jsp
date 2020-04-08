@@ -84,7 +84,7 @@
 					<!-- Grid column -->
 	
 					<!-- Grid column -->
-					<div class="col-md-5 col-lg-4 ml-lg-0">
+					<div class="col-md-5 col-lg-4 ml-lg-0 sc-social">
 						<!-- Social buttons -->
 						<div class="text-center text-md-right">
 							<ul class="list-unstyled list-inline">

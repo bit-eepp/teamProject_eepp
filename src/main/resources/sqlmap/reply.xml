@@ -3,29 +3,29 @@
 
 <mapper namespace="bit.team.eepp.Mapper.ReplyMapper">
 	<select id="replyCount" resultType="int">
-		SELECT COUNT(*) AS replyCount FROM REPLY WHERE board_id = #{board_id}	
+		SELECT COUNT(*) AS replyCount FROM REPLY WHERE rDeleted != 'yes' AND board_id = #{board_id}	
 	</select>
 	
 	<select id="replyList" resultType="bit.team.eepp.VO.ReplyVO" parameterType="bit.team.eepp.Page.ReplyCriteria">
 		<![CDATA[
 			SELECT * FROM
 			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
-			(SELECT r1.rpId, r1.board_id, r1.user_id, r1.rpContent, r1.rpWrittenDate, r1.rpModifyDate, r1.rpLike, r1.rpUnlike, r1.rpGroup, r1.rpStep, r1.rpIndent, u.uNickname, 
+			(SELECT r1.rpId, r1.board_id, r1.user_id, r1.rpContent, r1.rpWrittenDate, r1.rpModifyDate, r1.rpLike, r1.rpUnlike, r1.rpGroup, r1.rpStep, r1.rpIndent, u.uNickname, r1.rDeleted,
 			(SELECT COUNT(rpGroup) FROM REPLY WHERE rpGroup = r1.rpGroup) AS gCount, (SELECT COUNT(*) FROM DECLARATION WHERE reply_id = r1.rpId) AS rpDcount
 			FROM REPLY r1, USERS u, REPLY r2 
-			WHERE r1.user_id = u.user_id AND r1.rpId = r2.rpId AND r1.board_id = #{board_id}
+			WHERE r1.user_id = u.user_id AND r1.rpId = r2.rpId AND r1.rDeleted != 'yes' AND r1.board_id = #{board_id}
 			ORDER BY rpGroup DESC, rpStep ASC) A)
 			WHERE RNUM >= #{rpCriteria.startNum} AND RNUM <= #{rpCriteria.endNum}
 		]]>
 	</select>
 	
 	<insert id="replyWrite" parameterType="bit.team.eepp.VO.ReplyVO">
-		INSERT INTO REPLY(rpId, rpContent, rpWrittenDate, rpModifyDate, rpLike, rpUnlike, rpGroup, rpStep, rpIndent, board_id, user_id) 
-		VALUES(REPLY_SEQ.nextval, #{replyVO.rpContent}, SYSDATE, SYSDATE, 0, 0, REPLY_SEQ.currval, 0, 0, #{replyVO.board_id}, #{replyVO.user_id})
+		INSERT INTO REPLY(rpId, rpContent, rpWrittenDate, rpModifyDate, rpLike, rpUnlike, rpGroup, rpStep, rpIndent, board_id, user_id, rDeleted) 
+		VALUES(REPLY_SEQ.nextval, #{replyVO.rpContent}, SYSDATE, SYSDATE, 0, 0, REPLY_SEQ.currval, 0, 0, #{replyVO.board_id}, #{replyVO.user_id}, 'no')
 	</insert>
 	
 	<delete id="replyDelete" parameterType="bit.team.eepp.VO.ReplyVO">
-		DELETE FROM REPLY WHERE rpId = #{rpId}
+		UPDATE REPLY SET rDeleted = 'yes' WHERE rpId = #{rpId}
 	</delete>
 
 	<update id="replyModify" parameterType="bit.team.eepp.VO.ReplyVO">
@@ -37,7 +37,7 @@
 	</update>
 	
 	<insert id="reReplyWrite" parameterType="bit.team.eepp.VO.ReplyVO">
-		INSERT INTO REPLY (rpId, rpContent, rpWrittenDate, rpModifyDate, rpLike, rpUnlike, rpGroup, rpStep, rpIndent, board_id, user_id) 
-		VALUES (REPLY_SEQ.nextval, #{replyVO.rpContent}, SYSDATE, SYSDATE, 0, 0, #{replyVO.rpGroup}, #{replyVO.rpStep}+1, #{replyVO.rpIndent}+1, #{replyVO.board_id}, #{replyVO.user_id})
+		INSERT INTO REPLY (rpId, rpContent, rpWrittenDate, rpModifyDate, rpLike, rpUnlike, rpGroup, rpStep, rpIndent, board_id, user_id, rDeleted) 
+		VALUES (REPLY_SEQ.nextval, #{replyVO.rpContent}, SYSDATE, SYSDATE, 0, 0, #{replyVO.rpGroup}, #{replyVO.rpStep}+1, #{replyVO.rpIndent}+1, #{replyVO.board_id}, #{replyVO.user_id}, 'no')
 	</insert>
 </mapper>

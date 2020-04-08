@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,7 +9,9 @@
 		<script>
 		var uNickname = $("#userNickname").val();
 		var userId = $("#userId").val();
-		var eId = ${eContentView.eId};
+		/* var eId = ${eContentView.eId}; */
+		//var eating_id = $("#eContentViewEid").val();
+		var eating_id = $('#eId').val();
 
 		
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
@@ -18,7 +19,7 @@
 				$.ajax({
 					url: 'http://localhost:8282/eepp/review/reviewCount',
 					type: 'get',
-					data: {'eId' : eId},
+					data: {'eating_id' : eating_id},
 					success: function(data){
 						console.log("리뷰 수 : " +data)
 						rvCount = data;
@@ -91,14 +92,14 @@
 					url: 'http://localhost:8282/eepp/review/reviewList',
 					type: 'GET',
 					dataType:'json',
-					data: {'eId' : eId,
+					data: {'eating_id' : eating_id,
 							'page' : page < 1 ? 1 : page
 							},
 					success: function(data){
 						console.log(data);
 						console.log(data.reviewAVG);
 						
-						$('.reviewAVG').append(data.reviewAVG);
+						$('.reviewAVG').html(data.reviewAVG);
 						// 댓글 페이징
 						var rvPageMaker = Object.values(data["rvPageMaker"]);
 						reviewPagePrint(rvPageMaker);
@@ -148,12 +149,12 @@
 			
 			// 댓글 작성 버튼눌렀을때 이벤트 메서드
 			$('[name=reviewBtn]').click(function(){
-				/*
+				
 				if(!uNickname){
 					alert("로그인 해주세요.");
 					return false;
 				}
-				*/
+				
 				var insertData = $('[name=rvform]').serialize();				
 				reviewWrite(insertData);
 			});
@@ -174,7 +175,7 @@
 						data: insertData,	
 						success: function(insertData){
 							alert("::리뷰 등록::")
-							reviewCount(eId);
+							reviewCount(eating_id);
 							reviewList();
 						},
 						error : function(request, status, error) {
@@ -189,17 +190,17 @@
 			function reveiwModify(rvId, rvComment){
 			    var a ='';
 				    a += '<div>';
-				    a += '<input type="text" name="rvContent_' +rvId +'" value="' +rvComment +'"/>';
+				    a += '<input type="text" name="rvComment_' +rvId +'" value="' +rvComment +'"/>';
 				    a += '<button type="button" onclick="reviewModifyPrc(' +rvId +');">수정</button>';
 					a += '<button type="button" onclick="reviewList();">취소</button>';
 				    a += '</div>';
-			    $('.rvContent_'+rvId).html(a);	    
+			    $('.rvComment_'+rvId).html(a);	    
 			}
 			
 			// 댓글 수정 JS메서드(Ajax-Json)
 			function reviewModifyPrc(rvId) {
 				var rvComment = $('[name=rvComment_' +rvId +']').val();
-				if(rvContent == '') {
+				if(rvComment == '') {
 					alert("내용이 비어있습니다.");
 					$('[name=rvComment_' +rvId +']').focus();
 					return false;
@@ -228,7 +229,7 @@
 							type: 'post',
 							data: {'rvId' : rvId},
 							success: function(data){
-								reviewCount(eId);
+								reviewCount(eating_id);
 								reviewList();
 							},
 							error : function(request, status, error) {
@@ -242,8 +243,9 @@
 		</script>
 	</head>
 	<body>
-	<input type="hidden" id="eId" name="eId" value="${eContentView.eId}"> 
+	
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 	<input type="hidden" id="userId" name="user_id" value="${loginUser.user_id}">
+
 	</body>
 </html>

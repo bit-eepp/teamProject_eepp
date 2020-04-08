@@ -5,13 +5,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -138,11 +142,24 @@ public class ClassController {
 
 	@RequestMapping("/classView")
 	public String classView(ClassVO classVO, Model model, @ModelAttribute("cscri") ClassSearchCriteria cscri,
-			@RequestParam(value = "cCategory") String cCategory) {
+			@RequestParam(value = "cCategory") String cCategory, HttpServletResponse response) throws IOException {
 		System.out.println("classView() method");
-		model.addAttribute("clView", classService.classView(classVO));
-		model.addAttribute("cscri", cscri);
-		model.addAttribute("cCategory", cCategory);
+		
+		ClassVO classView = classService.classView(classVO);
+		String flag = classView.getcDeleted();
+		
+		if(flag.equals("yes")) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('삭제된 게시글입니다.');location.href='/eepp/class/classList';</script>");
+			out.close();
+			return "";
+		}else {
+			model.addAttribute("clView", classView);
+			model.addAttribute("cscri", cscri);
+			model.addAttribute("cCategory", cCategory);
+		}
+		
 		return "/class/class_view";
 	}
 

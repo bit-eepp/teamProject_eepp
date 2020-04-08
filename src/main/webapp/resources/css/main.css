@@ -1,12 +1,28 @@
 @charset "UTF-8";
 
 #sc-mainPage {
-	padding-top: 100px;
+	padding-top: 90px;
 }
 
 #carousel-example-generic {
 	height: auto;;
 	width: 100%;
+}
+
+.writeBtn {
+	max-width:100px;
+	display: block; 
+	background: #59bfbf;
+	color: #fff!important; 
+	text-align: center;
+	padding: 10px 0;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size:14px;"
+}
+
+.writeBtn:hover {
+	background: #41a0a0!important;
 }
 
 .carouselTitle {
@@ -22,7 +38,6 @@
 .carousel-item img {
 	width: 100%;
 	height: auto;
-	"
 }
 
 .carousel-item p b {
@@ -222,7 +237,7 @@
 	margin-bottom: 10px;
 }
 
-.mainClassList ..mainClassList {
+.mainClassList .row{
 	margin-bottom: 25px;
 }
 

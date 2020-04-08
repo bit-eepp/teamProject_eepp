@@ -36,7 +36,7 @@
 									<div class="input-group-prepend">
 										<button class="btn btn-default" type="button">개 설 자</button>
 									</div>
-									<input class="form-control" type="text" value="${loginUser.uNickname}">
+									<input class="form-control" type="text" value="${loginUser.uNickname}" disabled="disabled">
 									<input type="hidden" name="user_id" value="${loginUser.user_id}" />
 								</div>
 								<br>
@@ -69,7 +69,7 @@
 									<div class="input-group-prepend">
 										<button class="btn btn-default" type="button">포 인 트</button>
 									</div>
-									<input class="form-control" type="number" name="cPrice" placeholder="100Point = 100&#92;" step="100"/>
+									<input class="form-control" type="number" name="cPrice" placeholder="100Point = 100&#92;" step="100" min="0"/>
 								</div>
 								<br>
 				

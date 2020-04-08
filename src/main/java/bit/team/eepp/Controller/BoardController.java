@@ -1,5 +1,7 @@
 package bit.team.eepp.Controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -7,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,14 +111,25 @@ public class BoardController {
 	}
 
 	@RequestMapping("/contentView")
-	public String contentView(BoardVO boardVO, Model model,HttpSession session, @ModelAttribute("scri") SearchCriteria scri,
-			@RequestParam(value = "sortType") String sortType, @RequestParam(value = "bCategory") String bCategory) {
+	public String contentView(HttpServletResponse response, BoardVO boardVO, Model model,HttpSession session, @ModelAttribute("scri") SearchCriteria scri,
+			@RequestParam(value = "sortType") String sortType, @RequestParam(value = "bCategory") String bCategory) throws IOException {
 		System.out.println("contentView() method");
-		model.addAttribute("content", boardService.selectOne(boardVO));
-		model.addAttribute("scri", scri);
-		model.addAttribute("sortType", sortType);
-		model.addAttribute("bCategory", bCategory);
-		return "/board/content_view";
+		
+		String flag = boardService.getDeleteInfo(boardVO.getbId());
+		
+		if(flag.equals("yes")) {	
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('삭제된 게시물입니다.'); location.href='/eepp/board/boardList';</script>");
+			out.close();
+			return "";
+		} else {
+			model.addAttribute("content", boardService.selectOne(boardVO));
+			model.addAttribute("scri", scri);
+			model.addAttribute("sortType", sortType);
+			model.addAttribute("bCategory", bCategory);
+			return "/board/content_view";
+		}
 	}
 
 	@RequestMapping("/deleteContent")
@@ -126,14 +140,25 @@ public class BoardController {
 	}
 
 	@RequestMapping("/modifyView")
-	public String modifyView(BoardVO boardVO, Model model, @ModelAttribute("scri") SearchCriteria scri,
-			@RequestParam(value = "sortType") String sortType, @RequestParam(value = "bCategory") String bCategory) {
+	public String modifyView(HttpServletResponse response, BoardVO boardVO, Model model, @ModelAttribute("scri") SearchCriteria scri,
+			@RequestParam(value = "sortType") String sortType, @RequestParam(value = "bCategory") String bCategory) throws IOException {
 		System.out.println("/modifyView() method");
-		model.addAttribute("modify", boardService.modifyView(boardVO));
-		model.addAttribute("scri", scri);
-		model.addAttribute("sortType", sortType);
-		model.addAttribute("bCategory", bCategory);
-		return "/board/modify_view";
+		
+		String flag = boardService.getDeleteInfo(boardVO.getbId());
+		
+		if(flag.equals("yes")) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('삭제된 게시물입니다.'); location.href='/eepp/board/boardList';</script>");
+			out.close();
+			return "";
+		} else {
+			model.addAttribute("modify", boardService.modifyView(boardVO));
+			model.addAttribute("scri", scri);
+			model.addAttribute("sortType", sortType);
+			model.addAttribute("bCategory", bCategory);
+			return "/board/modify_view";
+		}
 	}
 
 	@RequestMapping("/modifyContent")

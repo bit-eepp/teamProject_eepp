@@ -41,4 +41,6 @@ public interface BoardMapper {
 	// 인기글 노출 : 24시간동안 등록된 글중 조회수가 가장 높은 글 3개
 	public abstract List<BoardVO> hotList();
 
+	public abstract String getDeleteInfo(@Param("bId") int bId);
+
 }

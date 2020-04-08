@@ -13,6 +13,9 @@ $(document).ready(function() {
 		deleteMsg();
 	});
 	
+	var pageNum = $('#pageMakerCriPage').val();
+	pageColor(pageNum);
+	
 });
 
 // 전체 선택 or 해제
@@ -202,4 +205,10 @@ function sendMessage(uNickname, receiver_id, msgType) {
 function memberInfo(uNickname, user_id){
 	var member = window.open("http://localhost:8282/eepp/memInfo?memberWho="+uNickname+"&user_id="+user_id,"memberInfo","left="+(screen.availWidth-700)/2
 				 +",top="+(screen.availHeight-560)/2+",width=425,height=560");
+}
+
+//페이징 css
+function pageColor(pageNum) {
+	   $('#msgPaging_'+pageNum).css("background-color", "#59bfbf");
+	   $('#msgPaging_'+pageNum).css("color", "#ffffff");
 }
