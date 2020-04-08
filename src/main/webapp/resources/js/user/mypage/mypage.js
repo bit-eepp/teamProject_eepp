@@ -120,16 +120,16 @@ function onlyNumber(e) {
 		return false;
 }
 
-
-;
 // 기본 이미지로 변경 alert
 $('#changeImg').click(function() {
 	alert("기본 이미지로 변경됩니다.")
 });
 
-// 회원정보 수정 보여주고 닫기
-$("#myinfobtn").click(function() {
-	$(".info").slideToggle(500);
+//회원정보 수정 보여주고 닫기
+$(document).ready(function(){
+	$("#myinfobtn").click(function() {
+		$(".table-wrapping").slideToggle();
+  });
 });
 
 // 게시글 보여주고 닫기
