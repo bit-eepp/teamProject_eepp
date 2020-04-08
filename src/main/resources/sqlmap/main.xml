@@ -105,8 +105,8 @@
 	<select id="getEatStoreList" resultType="bit.team.eepp.VO.EatingVO">
 		<![CDATA[
 			SELECT * FROM(
-			SELECT eId, eDate, eTitle, eThema, eCategory, eTel, eContent, eAddress_new, eAddress_old, eKeyword_food,(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId) AS rvAVG FROM Eating)
-			WHERE NOT rvAVG IS null AND ROWNUM <= 4 ORDER BY rvAVG DESC
+			SELECT eId, eDate, eTitle, eThema, eCategory, eTel, eContent, eAddress_new, eAddress_old, eKeyword_food,(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId) AS rvAVG FROM Eating
+			ORDER BY rvAVG DESC) WHERE NOT rvAVG IS null AND ROWNUM <= 4 
 		]]>
 	</select>
 	

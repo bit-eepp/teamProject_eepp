@@ -1244,25 +1244,25 @@
 									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}">${el.eTitle}&nbsp;&nbsp;<b style="color: #e7438b;">${el.rvAVG}</b></a>
 								</p>
 								
-								<p>
+								<p class="eThema">
 									<c:choose>
 										<c:when test="${el.eThema == 'thema_1'}">
-											신촌/홍대 - ${el.eKeyword_food}
+											<p style="color:#868e96; font-size: 85%;">신촌/홍대 - ${el.eKeyword_food}</p>
 										</c:when>
 										<c:when test="${el.eThema == 'thema_2'}">
-											여의도 - ${el.eKeyword_food}
+											<p style="color:#868e96; font-size: 85%;">여의도 - ${el.eKeyword_food}</p>
 										</c:when>
 										<c:when test="${el.eThema == 'thema_3'}">
-											용산/이태원 - ${el.eKeyword_food}
+											<p style="color:#868e96; font-size: 85%;">용산/이태원 - ${el.eKeyword_food}</p>
 										</c:when>
 										<c:when test="${el.eThema == 'thema_4'}">
-											강남/논현 - ${el.eKeyword_food}
+											<p style="color:#868e96; font-size: 85%;">강남/논현 - ${el.eKeyword_food}</p>
 										</c:when>
 										<c:when test="${el.eThema == 'thema_5'}">
-											건대입구 - ${el.eKeyword_food}
+											<p style="color:#868e96; font-size: 85%;">건대입구 - ${el.eKeyword_food}</p>
 										</c:when>
 										<c:when test="${el.eThema == 'thema_6'}">
-											합정/망원 - ${el.eKeyword_food}
+											<p style="color:#868e96; font-size: 85%;">합정/망원 - ${el.eKeyword_food}</p>
 										</c:when>
 									</c:choose>
 								</p>
