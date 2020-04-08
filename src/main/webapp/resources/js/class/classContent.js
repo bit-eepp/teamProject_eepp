@@ -72,6 +72,10 @@ $(document).ready(function() {
 	$('.classDelete').on('click', function(){
 		deleteConfirm();
 	});
+	
+	$('.share').on('click', function(){
+		shareLink();
+	});
 				
 	
 	/* 교육장소 map 부분 */
@@ -260,6 +264,20 @@ function resetForm() {
 		$(this).find('form')[0].reset()
 	});
 }
+
+//카카오 링크 공유
+Kakao.init('55d4b3987a46162ad1d899676af601c4');
+function shareLink() {
+    Kakao.Link.sendCustom({
+      templateId: 22997,
+      templateArgs: {
+        title: '#Comminuty EE Class강좌 \n'+'"'+$("#classTitle").val()+'"',
+        description: 'Community EE에서 확인하세요!',
+        pathLink : 
+        	'eepp/class/classView?cId='+$("#classId").val()+'&cCategory=',
+      },
+    })
+  }
 
 // 해당 class 강좌 삭제 확인 JS메서드(문의가 있는 강좌의 경우 삭제 불가)
 function deleteConfirm() {

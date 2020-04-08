@@ -65,20 +65,6 @@ var uNickname = $("#userNickname").val();
 		
 });
 
-// 카카오 링크 공유
-Kakao.init('55d4b3987a46162ad1d899676af601c4');
-function shareLink() {
-    Kakao.Link.sendCustom({
-      templateId: 22997,
-      templateArgs: {
-        title: '#'+$("#bCategory").val()+'게시판 \n'+$("#contentBtitle").val(),
-        description: 'Community EE에서 확인하세요!',
-        pathLink : 
-        	'eepp/board/contentView?bId='+$("#contentBid").val()+'&bCategory=&sortType=',
-      },
-    })
-  }
-
 //게시판 카테고리
 function boardTitle(title) {	
 	if(title == '') {
@@ -99,6 +85,20 @@ function boardTitle(title) {
 		$(".ct-etc").addClass("onCategory");
 	} 
 }
+
+//카카오 링크 공유
+Kakao.init('55d4b3987a46162ad1d899676af601c4');
+function shareLink() {
+    Kakao.Link.sendCustom({
+      templateId: 22997,
+      templateArgs: {
+        title: '#'+$("#bCategory").val()+'게시판 \n'+$("#contentBtitle").val(),
+        description: 'Community EE에서 확인하세요!',
+        pathLink : 
+        	'eepp/board/contentView?bId='+$("#contentBid").val()+'&bCategory=&sortType=',
+      },
+    })
+  }
 
 // 해당 댓글 신고 메서드
 function submitRpDeclarationForm(rpId) {
