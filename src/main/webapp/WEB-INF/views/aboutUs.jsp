@@ -170,7 +170,7 @@
 								<ul class="social mb-0 list-inline mt-3">
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-github"></i></a></li>
+									<li class="list-inline-item"><a href="https://github.com/java-hyein" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
 								</ul>
 								
@@ -187,7 +187,7 @@
 								<ul class="social mb-0 list-inline mt-3">
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-github"></i></a></li>
+									<li class="list-inline-item"><a href="https://github.com/doeez" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
 								</ul>
 							</div>
@@ -203,7 +203,7 @@
 								<ul class="social mb-0 list-inline mt-3">
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-github"></i></a></li>
+									<li class="list-inline-item"><a href="https://github.com/rtnbrnch" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
 								</ul>
 							</div>
@@ -219,7 +219,7 @@
 								<ul class="social mb-0 list-inline mt-3">
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-github"></i></a></li>
+									<li class="list-inline-item"><a href="https://github.com/mykim8710" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
 									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
 								</ul>
 							</div>
