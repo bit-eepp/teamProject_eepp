@@ -17,7 +17,7 @@
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
 	<input type="hidden" id="eatingMakeQuery" value="${eatingPageMaker.makeQuery(1)}" />
 	<input type="hidden" id="eatingTotalCount" value="${eatingPageMaker.totalCount}" />
-	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page}" />
+	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page_eating}" />
 	<input type="hidden" id="sortType" value="${sortType}" />
 	<input type="hidden" id="eThema" value="${eThema}" />
 	
@@ -39,7 +39,7 @@
 			<option value="tc" <c:out value="${escri.searchType eq 'tc' ? 'selected' : ''}"/>>상호/메뉴</option>
 		</select> 
 		<input type="text" name="keyword" id="keywordInput" value="${escri.keyword}" />
-		<button id="eatingSearchBtn" type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page)}&eId=${el.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&sortType=${sortType}&eCategory=${eCategory}'">검색</button>
+		<button id="eatingSearchBtn" type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${el.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&sortType=${sortType}&eCategory=${eCategory}'">검색</button>
 	</div>
 	<hr>
 	<!-- 테마 리스트 -->
@@ -85,7 +85,7 @@
 							</tr>
 							<tr>
 								<td colspan="2">
-								<button type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page)}&eId=${el.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&sortType=${sortType}&eCategory=${eCategory}'">더 보기!</button></td>
+								<button type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${el.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&sortType=${sortType}&eCategory=${eCategory}'">더 보기!</button></td>
 							</tr>
 						</table>
 					</span>

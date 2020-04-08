@@ -43,7 +43,7 @@ public class ReviewController {
 		System.out.println("criteria.getPage() : " + rvCriteria.getPage_review());
 
 		int rvCount = reviewCount(reviewVO.getEating_id());
-		System.out.println("댓글수 : " + rvCount);
+		System.out.println("리뷰 수 : " + rvCount);
 
 		rvPageMaker.setTotalCount(rvCount);
 		
@@ -52,7 +52,10 @@ public class ReviewController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rvPageMaker", rvPageMaker);
 		map.put("reviewList", reviewList);
-//		map.put("reviewAVG", reviewService.reviewAVG(reviewVO));
+		
+		if(rvCount != 0) {
+			map.put("reviewAVG", reviewService.reviewAVG(reviewVO));
+		}
 		
 //		model.addAttribute("reviewAVG", reviewService.reviewAVG(reviewVO));
 //		System.out.println(reviewService.reviewAVG(reviewVO));
