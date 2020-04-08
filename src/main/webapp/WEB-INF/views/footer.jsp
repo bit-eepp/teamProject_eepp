@@ -84,7 +84,7 @@
 					<!-- Grid column -->
 	
 					<!-- Grid column -->
-					<div class="col-md-5 col-lg-4 ml-lg-0">
+					<div class="col-md-5 col-lg-4 ml-lg-0 sc-social">
 						<!-- Social buttons -->
 						<div class="text-center text-md-right">
 							<ul class="list-unstyled list-inline">
@@ -107,7 +107,7 @@
 								</li>
 	
 								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1" href="https://github.com/bit-eepp/teamProject_eepp" target="_balnk">
 										<i class="fab fa-github fa-2x"></i>
 									</a>
 								</li>
