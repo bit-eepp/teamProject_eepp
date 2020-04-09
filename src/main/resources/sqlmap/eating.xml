@@ -57,7 +57,7 @@
 			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
 			(SELECT eId, eTitle, eThema, eCategory, eDate, eAddress_new, eAddress_old, eTel, eCONTENT, eKeyword_food,
 			(SELECT COUNT(*) from review where eating_id = eId) as rvCount,
-			(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id) as rvAVG
+			NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id), 0) as rvAVG
 			FROM Eating where eId = eId
 		
 		<if test="eThema != null">
@@ -98,13 +98,21 @@
 					AND (eAddress_new LIKE '%' || #{escri.keyword} || '%' OR eAddress_old LIKE '%' || #{escri.keyword} || '%')
 				</when>
 				<when test='escri.searchType == "tc"'>
-					AND (eTitle LIKE '%' || #{escri.keyword} || '%' OR eContent LIKE '%' || #{escri.keyword} || '%' OR eKeyword_food LIKE '%' || #{escri.keyword} || '%')
+					AND (eTitle LIKE '%' || #{escri.keyword} || '%' OR eContent LIKE '%' || #{escri.keyword} || '%' OR eKeyword_food LIKE '%' || #{escri.keyword} || '%') 
 				</when>
-			</choose>
+			</choose> 
 		</if>
-
-		ORDER BY eDate DESC) A)
-		WHERE RNUM BETWEEN #{escri.rowStart} AND #{escri.rowEnd}
+		
+		ORDER BY
+		<if test="eThema != null">
+		eDate
+		</if>
+		
+		<if test="escri != null">
+		NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id), 0)
+		</if>
+		
+		DESC) A) WHERE RNUM BETWEEN #{escri.rowStart} AND #{escri.rowEnd}
 	
 	</select>
 	

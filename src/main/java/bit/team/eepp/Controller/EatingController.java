@@ -32,12 +32,11 @@ public class EatingController {
 		System.out.println("all store list print");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("escri", escri);
-		map.put("eThema", eThema);
-
-		EatingPageMaker eatingPageMaker = new EatingPageMaker();
-		eatingPageMaker.setCri(escri);
-		eatingPageMaker.setTotalCount(eatingService.eatingListCount(map));
+		if(!(escri.getKeyword().equals(""))) {
+			map.put("escri", escri);
+		}else {
+			map.put("eThema", eThema);
+		}
 		
 		if(!(escri.getKeyword().equals(""))) {
 			logger.info("eatingList를 보냅니다.");
@@ -49,11 +48,13 @@ public class EatingController {
 				logger.info("Search Result");
 				model.addAttribute("eatingList", eatingService.eatingList(map));
 			}
-			
 		}
 		
+		EatingPageMaker eatingPageMaker = new EatingPageMaker();
+		eatingPageMaker.setCri(escri);
+		eatingPageMaker.setTotalCount(eatingService.eatingListCount(map));
 		model.addAttribute("eatingPageMaker", eatingPageMaker);
-		model.addAttribute("eThema", eThema);
+		model.addAttribute("ethema", eThema);
 		
 		return "/eating/eatingList";
 	}
