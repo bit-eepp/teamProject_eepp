@@ -129,6 +129,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    text-decoration: none;
 }
 .themaList ul li a span{
 	background-color: rgba(0,0,0,0.2);
@@ -139,7 +140,7 @@
 	* searchList
 	*/
 .searchResult{
-	    margin: 30px auto 0;
+	margin: 30px auto 0;
 	padding: 0;
 }
 .searchResult .searchTitle{
@@ -150,7 +151,6 @@
 }
 .searchResult .et-listWrap{
 	    display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 .et-listWrap .et-listBox{
@@ -159,7 +159,7 @@
 }
 .et-listBox a{
 	display:block;
-	color:#000;
+	text-decoration: none;
 }
 .et-listBox a ul{
 	list-style:none;
