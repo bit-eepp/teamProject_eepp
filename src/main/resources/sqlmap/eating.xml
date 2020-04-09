@@ -6,32 +6,6 @@
 		<![CDATA[
 			SELECT COUNT(eId) FROM EATING where eId > 0
 		]]>
-
-		<!-- <if test="eCategory != null">
-			<choose>
-				<when test="eCategory == 'asian_food'">
-					AND eCategory = 'asian_food'
-				</when>
-				<when test="eCategory == 'japanese_food'">
-					AND eCategory = 'japanese_food'
-				</when>
-				<when test="eCategory == 'chinese_food'">
-					AND eCategory = 'chinese_food'
-				</when>
-				<when test="eCategory == 'western_food'">
-					AND eCategory = 'western_food'
-				</when>
-				<when test="eCategory == 'korean_food'">
-					AND eCategory = 'korean_food'
-				</when>
-				<when test="eCategory == 'fusion_food'">
-					AND eCategory = 'fusion_food'
-				</when>
-				<when test="eCategory == 'etc_food'">
-					AND eCategory = 'etc_food'
-				</when>
-			</choose>
-		</if> -->
 		
 		<if test="eThema != null">
 			<choose>
@@ -111,32 +85,7 @@
 				</when>
 			</choose>
 		</if>
-		<!-- <if test="eCategory != null">
-			<choose>
-				<when test="eCategory == 'asian_food'">
-					AND eCategory = 'asian_food'
-				</when>
-				<when test="eCategory == 'japanese_food'">
-					AND eCategory = 'japanese_food'
-				</when>
-				<when test="eCategory == 'chinese_food'">
-					AND eCategory = 'chinese_food'
-				</when>
-				<when test="eCategory == 'western_food'">
-					AND eCategory = 'western_food'
-				</when>
-				<when test="eCategory == 'korean_food'">
-					AND eCategory = 'korean_food'
-				</when>
-				<when test="eCategory == 'fusion_food'">
-					AND eCategory = 'fusion_food'
-				</when>
-				<when test="eCategory == 'etc_food'">
-					AND eCategory = 'etc_food'
-				</when>
-			</choose>
-		</if> -->
-
+	
 		<if test="escri != null">
 			<choose>
 				<when test='escri.searchType == "t"'>
@@ -153,18 +102,8 @@
 				</when>
 			</choose>
 		</if>
-		
-		
 
-		ORDER BY
-		
-		<choose>
-			<when test="sortType == 'eDate'">
-				 eDate
-			</when>
-		</choose>
-
-		DESC) A)
+		ORDER BY eDate DESC) A)
 		WHERE RNUM BETWEEN #{escri.rowStart} AND #{escri.rowEnd}
 	
 	</select>
@@ -205,13 +144,8 @@
 			</choose>
 		</if>
 		
-		ORDER BY 
-		
-		eDate 
-		
-		DESC)
-
-	</select>
+		ORDER BY eDate DESC)
+</select>
 	
 	<!-- !!!! 차후 해당 쿼리 수정 필!!!!! 1차 수정(04/06)-->
 	<select id="selectOne" resultType="bit.team.eepp.VO.EatingVO">
@@ -220,8 +154,6 @@
 		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id) as rvAVG
 		FROM EATING WHERE eId = #{eId}
 	</select>
-	
-	
 		
 	<insert id="write" parameterType="bit.team.eepp.VO.EatingVO">
 		<selectKey keyProperty="eatingVO.eId" resultType="int"

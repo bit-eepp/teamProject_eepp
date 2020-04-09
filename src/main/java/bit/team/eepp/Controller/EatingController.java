@@ -3,6 +3,8 @@ package bit.team.eepp.Controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,58 +20,52 @@ import bit.team.eepp.Page.EatingPageMaker;
 @RequestMapping("/eating")
 @Controller
 public class EatingController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(EatingController.class);
+	
 	@Autowired
 	private EatingService eatingService;
 	
 	@RequestMapping("/eatingList")
-	public String eatingList(Model model, @ModelAttribute("escri") EatingSearchCriteria escri, @RequestParam(value = "sortType", required = false, defaultValue = "eDate") String sortType, @RequestParam(value = "eCategory", required = false, defaultValue = "") String eCategory,
-			@RequestParam(value = "eThema", required = false, defaultValue = "") String eThema) {
+	public String eatingList(Model model, @ModelAttribute("escri") EatingSearchCriteria escri, @RequestParam(value = "eThema", required = false, defaultValue = "") String eThema) {
+		logger.info("eatingList method Active(");
 		System.out.println("all store list print");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("escri", escri);
-		map.put("sortType", sortType);
-		map.put("eCategory", eCategory);
 		map.put("eThema", eThema);
 
 		EatingPageMaker eatingPageMaker = new EatingPageMaker();
 		eatingPageMaker.setCri(escri);
 		eatingPageMaker.setTotalCount(eatingService.eatingListCount(map));
-
-		model.addAttribute("eatingList", eatingService.eatingList(map));
+		
+		if(!(escri.getKeyword().equals(""))) {
+			model.addAttribute("eatingList", eatingService.eatingList(map));
+		}
 		model.addAttribute("eatingPageMaker", eatingPageMaker);
-		model.addAttribute("sortType", sortType);
-		model.addAttribute("eCategory", eCategory);
 		model.addAttribute("eThema", eThema);
 		
 		return "/eating/eatingList";
 	}
 	
 	@RequestMapping("/eatingView")
-	public String eatingView(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "sortType", required = false, defaultValue = "eDate") String sortType, @RequestParam(value = "eCategory", required = false, defaultValue = "") String eCategory) {
+	public String eatingView(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri) {
 		
 		System.out.println("store information print");
 		
 		model.addAttribute("eContentView", eatingService.selectOne(eatingVO));
 		model.addAttribute("escri", escri);
-		model.addAttribute("sortType", sortType);
-		model.addAttribute("eCategory", eCategory);
 		
 		return "/eating/eatingView";
 	}
 	
 	@RequestMapping("/themaList")
-	public String themaList(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "sortType", required = false, defaultValue = "eDate") String sortType, @RequestParam(value = "eCategory", required = false, defaultValue = "") String eCategory,
-			@RequestParam(value = "eThema", required = false, defaultValue = "") String eThema) {
+	public String themaList(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,@RequestParam(value = "eThema", required = false, defaultValue = "") String eThema) {
 		
 		System.out.println("thema list print");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("escri", escri);
-		map.put("sortType", sortType);
-		map.put("eCategory", eCategory);
 		map.put("eThema", eThema);
 
 		EatingPageMaker eatingPageMaker = new EatingPageMaker();
@@ -78,8 +74,6 @@ public class EatingController {
 
 		model.addAttribute("themaList", eatingService.themaList(map));
 		model.addAttribute("eatingPageMaker", eatingPageMaker);
-		model.addAttribute("sortType", sortType);
-		model.addAttribute("eCategory", eCategory);
 		model.addAttribute("eThema", eThema);
 		
 		return "/eating/themaList";
