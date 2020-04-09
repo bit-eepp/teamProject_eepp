@@ -3,14 +3,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <title>Eating Main</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 </head>
 
 <body>
 	<!-- header -->
+	<%@ include file="/WEB-INF/views/header.jsp"%>
 	<!-- header -->
 
 	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
@@ -124,10 +127,14 @@
 
 
 		<!-- chat -->
+		<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 		<!-- chat -->
+		
+		<!-- footer -->
+		<%@ include file="/WEB-INF/views/footer.jsp"%>
+		<!-- footer -->
 
-		<!-- footer -->
-		<!-- footer -->
+		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 		<script src="${pageContext.request.contextPath}/js/eating/eatingMain.js"></script>
 </body>
 </html>
