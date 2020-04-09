@@ -194,7 +194,6 @@
 		<input type="hidden" name="perPageNum" id="escriPageNum" value="${escri.perPageNum}" />
 		<input type="hidden" name="searchType" id="escriSearchType" value="${escri.searchType}" />
 		<input type="hidden" name="keyword" id="escriKeyword" value="${escri.keyword}" /> 
-		<input type="hidden" name="eCategory" id="eCategory" value="${eCategory}" />
 	</form>
 	<hr>
 
