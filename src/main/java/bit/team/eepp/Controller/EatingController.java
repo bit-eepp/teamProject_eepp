@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import bit.team.eepp.Page.EatingPageMaker;
+import bit.team.eepp.Search.EatingSearchCriteria;
 import bit.team.eepp.Service.EatingService;
 import bit.team.eepp.VO.EatingVO;
-import bit.team.eepp.Search.EatingSearchCriteria;
-import bit.team.eepp.Page.EatingPageMaker;
 
 @RequestMapping("/eating")
 @Controller
@@ -40,8 +40,18 @@ public class EatingController {
 		eatingPageMaker.setTotalCount(eatingService.eatingListCount(map));
 		
 		if(!(escri.getKeyword().equals(""))) {
-			model.addAttribute("eatingList", eatingService.eatingList(map));
+			logger.info("eatingList를 보냅니다.");
+			
+			if(eatingService.eatingList(map).size() == 0) {
+				logger.info("empty Search Result");
+				model.addAttribute("emptyResult", "emptyResult");
+			}else {
+				logger.info("Search Result");
+				model.addAttribute("eatingList", eatingService.eatingList(map));
+			}
+			
 		}
+		
 		model.addAttribute("eatingPageMaker", eatingPageMaker);
 		model.addAttribute("eThema", eThema);
 		
