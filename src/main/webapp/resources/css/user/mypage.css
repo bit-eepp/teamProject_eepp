@@ -345,7 +345,7 @@ td {
 }
 
 .boardList_tr td, .scrapList_tr td, .scrapCList_tr td, .scrapEList_tr td,
-	.classJList_tr td, .classOList_tr td {
+	.classJList_tr td, .classOList_tr td,  .gray{
 	color: #6d6d6d;
 }
 

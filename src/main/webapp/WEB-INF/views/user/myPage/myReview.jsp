@@ -106,19 +106,19 @@
 											<th>리뷰 번호</th>
 											<th>음식점</th>
 											<th>후기</th>
-											<th>작성일</th>
 											<th>평점</th>
+											<th>작성일</th>
 										</tr>
 									</thead>
 									<c:choose>
 										<c:when test="${fn:length(mypage.reviewList) > 0 }">
 											<c:forEach items="${mypage.reviewList}" var="reviewList">
 												<tr>
-													<td>${reviewList.rvId}</td>
+													<td class="gray">${reviewList.rvId}</td>
 													<td>${reviewList.ename}</td>
-													<td>${reviewList.rvComment}</td>
-													<td><fmt:formatDate value="${reviewList.rvWrittenDate}" pattern="yyyy/MM/dd HH:mm"/></td>
+													<td><a href="eating/eatingView?eId=${reviewList.eID}">${reviewList.rvComment}</a></td>
 													<td>${reviewList.rvScore}</td>
+													<td class="gray"><fmt:formatDate value="${reviewList.rvWrittenDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 												</tr>
 											</c:forEach>
 										</c:when>
@@ -171,27 +171,6 @@
 		 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
 				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 		}
-	
-	$(document).ready(function() {
-		
-		var title = $(".tabType").val();
-		tabTypeTitle(title);
-	});
-	
-	function tabTypeTitle(title) {
-
-		if (title == 'myScrapBoard') {
-			$(".linkToBo").addClass("active");
-		} else if (title == 'myScrapClass') {
-			$(".linkToCL").addClass("active");
-		}else if (title == 'myScrapEating') {
-			$(".linkToEA").addClass("active");
-		}/* else if (title == 'myClassOpen') {
-			$(".linkToOP").addClass("active");
-		}else if (title == 'myClassJoin') {
-			$(".linkToCJ").addClass("active");
-		} */
-	}
 	</script>
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
 <%@ include file="/WEB-INF/views/footer.jsp"%>

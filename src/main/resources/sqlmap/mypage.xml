@@ -118,7 +118,7 @@
 	<select id="reviewList" parameterType="int" resultType="bit.team.eepp.VO.ReviewVO">
 		<![CDATA[
 		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
-			from(select rv.rvId, e.eid,e.etitle as ename, rv.rvwrittendate, rv.rvcomment, rv.rvscore from eating e, review rv where e.eid = rv.eating_id and rv.user_id = #{user_id} and rv.rvdeleted = 'no'
+			from(select rv.rvId, e.eid as eID,e.etitle as ename, rv.rvwrittendate, rv.rvcomment, rv.rvscore from eating e, review rv where e.eid = rv.eating_id and rv.user_id = #{user_id} and rv.rvdeleted = 'no'
             ORDER BY rvWrittendate DESC) A)
 			WHERE RNUM BETWEEN #{mscri.rowStart} AND #{mscri.rowEnd}
 		]]>
