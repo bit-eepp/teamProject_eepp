@@ -1,0 +1,175 @@
+@charset "UTF-8";
+
+.eatingViewWrap {
+	padding-top: 100px;
+}
+
+.container-fluid {
+	margin-bottom: 50px;
+}
+
+.container-fluid .slideImg {
+	display: none;
+}
+
+.container-fluid .eatViewImg .gallery .evImg {
+	height: 400px;
+	width: 280px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.container-fluid .eatViewImg .gallery .evImg img {
+	height: 400px;
+	width: auto;
+}
+
+.container .eatingContent .eContentLeft .eContentHead table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0 15px;
+}
+
+.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1
+	{
+	width: 70%;
+	font-size: 200%;
+}
+
+.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1 b
+	{
+	color: #e7438b;
+}
+
+.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdRight1 a
+	{
+	color: #e7438b;
+	cursor: pointer;
+}
+
+.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdLeft2
+	{
+	color: #46505ab5;
+	font-size: 90%;
+}
+
+.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdRight2 a
+	{
+	color: #e7438b;
+	cursor: pointer;
+}
+
+.container .eatingContent .eContentRight #map {
+	width: auto;
+	height: 560px;
+	border-radius: 10px;
+}
+
+.customoverlay {
+	position: relative;
+	bottom: 85px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+}
+
+.customoverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.customoverlay a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: bold;
+	overflow: hidden;
+	background: #ff9007;
+	background: #ff9007
+		url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+		no-repeat right 14px center;
+}
+
+.customoverlay .title {
+	display: block;
+	text-align: center;
+	background: #fff;
+	margin-right: 35px;
+	padding: 10px 15px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.customoverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: -12px;
+	width: 22px;
+	height: 12px;
+	background:
+		url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
+}
+
+.gallery img {
+	cursor: pointer;
+}
+
+/* 리뷰부분 */
+.eReviewList .card-body .row .section1 .rProfile {
+	width: 50%;
+	border-radius: 50%;
+	margin-bottom: 10px;
+}
+
+.eReviewList .card-body .row .section1 .text-secondary {
+	font-size: 80%;
+}
+
+.eReviewList .card-body .row .section2 .rv {
+	height: 100px;
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.eReviewList .card-body .row .section3 .rvMenu {
+	height: 100px;
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.eReviewList .card-body .row .section3 .rvMenu .menuBtn a {
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.eReviewList .card-body .row .section3 .rvMenu b {
+	color: #e7438b;
+	font-size: 180%;
+}
+
+.modifyCommentBox textarea {
+	width: 650px;
+	resize: none;
+}
+
+.modifyScoreBox select {
+	width: 100px;
+}
+
+.modifyScoreBox p button {
+	width: 40px;
+	border: none;
+	background-color: #e7438b;
+	color: #ffffff;
+	cursor: pointer;
+}

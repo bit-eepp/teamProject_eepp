@@ -10,21 +10,13 @@
 		<![CDATA[
 			SELECT * FROM 
 			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
-			(SELECT rv.rvId, rv.eating_id, rv.user_id, rv.rvComment, rv.rvScore, rv.rvWrittenDate, rv.rvModifyDate, u.uNickname, rv.rvDeleted 
+			(SELECT rv.rvId, rv.eating_id, rv.user_id, rv.rvComment, rv.rvScore, rv.rvWrittenDate, rv.rvModifyDate, u.uNickname, u.uProfile, rv.rvDeleted 
 			FROM REVIEW rv, USERS u  
 			WHERE rv.user_id = u.user_id AND rv.rvDeleted != 'yes' AND rv.eating_id = #{eating_id}
 			ORDER BY rv.rvmodifydate DESC) A)
             WHERE RNUM >= #{rvCriteria.startNum} AND RNUM <= #{rvCriteria.endNum}
 		]]>
 	</select>
-	
-	<!-- 리뷰 평점 mapper에 직접 작성되어 있음
-	<select id="reviewAVG" resultType="_float">
-		<![CDATA[
-			SELECT rv.eId, TRUNC(AVG(rv.rvScore), 1) FROM REVIEW rv, EATING e where e.eId = rv.eId GROUP BY rv.eId
-		]]>
-	</select>
-	 -->
 	 
 	<insert id="reviewWrite" parameterType="bit.team.eepp.VO.ReviewVO">
 		INSERT INTO REVIEW(rvId, rvComment, rvScore, rvWrittenDate, rvModifyDate, eating_id, user_id, rvDeleted) 
@@ -32,7 +24,7 @@
 	</insert>
 	
 	<delete id="reviewDelete" parameterType="bit.team.eepp.VO.ReviewVO">
-		UPDATE REVIEW SET rvDeleted = 'yes', rvScore = 0 WHERE rvId = #{rvId}
+		UPDATE REVIEW SET rvDeleted = 'yes' WHERE rvId = #{rvId}
 	</delete>
 
 	<update id="reviewModify" parameterType="bit.team.eepp.VO.ReviewVO">

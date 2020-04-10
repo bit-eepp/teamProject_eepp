@@ -44,13 +44,13 @@ var isAdmin = '운영자';
 					paging += '<ul class="pagination">';
 					
 					
-//					if(tempEndPage != 0) {
+					if(tempEndPage != 0) {
 						paging += '<li class="page-item">';
 						paging += '<a class="page-link" href="javascript:replyList('+(startPage - 1) +')">';
 						paging += '<i class="fas fa-angle-left"></i>';
 						paging += '</a>';
 						paging += '</li>';
-					//}
+					}
 				
 					for(var i = startPage; i <= endPage; i++){
 						paging += '<li class="page-item pageNum">';
@@ -58,13 +58,13 @@ var isAdmin = '운영자';
 						paging += '</li>';
 					}
 					
-					//if(page < tempEndPage){
+					if(page < tempEndPage){
 						paging += '<li class="page-item">';
 						paging += '<a class="page-link" href="javascript:replyList('+(endPage + 1) +')">';
 						paging += '<i class="fas fa-angle-right"></i>';
 						paging += '</a>';
 						paging += '</li>';
-					//}
+					}
 					
 				
 				paging += '</ul>';
@@ -118,12 +118,13 @@ var isAdmin = '운영자';
 									}
 									re += '</p>';
 									b += re;
-								}else{
+								} else{
 									b += '<div class="rp_'+value.rpId +' replyBoxWrapper">';
 									b += '<div class="rpContent_'+value.rpId +' rpMain">';
 								}
 									b += '<div class="wrapper">';
 									b += '<div class="replyWriter">';
+									
 									if(value.uNickname == uNickname || value.uNickname == '운영자' || value.uNickname == 'admin2' || uNickname == ''){
 										b += '<a class="userBtn myUserBtn">'+value.uNickname+'</a>';
 									} else{
@@ -206,18 +207,22 @@ var isAdmin = '운영자';
 										
 										b += '</div>';
 										b += '<div class="modal-footer">';
-										if(!$("#userNickname").val()){
-											b += '<button type="button" class="btn reportBtn" data-dismiss="modal" onclick="resetForm()">취소</button>';
-										}else{
-											b += '<button type="button" class="btn RereportBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
-										}
-										b += '</div></div></div></div>';
-										}
+										
+											if(!$("#userNickname").val()){
+												b += '<button type="button" class="btn reportBtn" data-dismiss="modal" onclick="resetForm()">취소</button>';
+											} else{
+												b += '<button type="button" class="btn RereportBtn" onclick="submitRpDeclarationForm(' +value.rpId +')">신고</button>';
+											}
+											b += '</div></div></div></div>';
+											}
 										// 댓글 신고 부분 끝
-										}else{
-										b += '<p class="reReplyBtn"><a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');">답댓글</a></p>'
-										b += '<p class="reModifyBtn"><a onclick="replyModify('+value.rpId +',\''+value.rpContent +'\');">수정</a></p>';
-										b += '<p class="reDeleteBtn"><a onclick="replyDelete(' +value.rpId +',' +value.gCount +',' +value.rpStep +',' +value.rpIndent +');">삭제</a></p>';
+										} else{
+											var enter = /\r\n/g;
+											var tempComment = value.rpContent.replace(enter, " ");
+											
+											b += '<p class="reReplyBtn"><a onclick="reReplyView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');">답댓글</a></p>'
+											b += '<p class="reModifyBtn"><a onclick="replyModify('+value.rpId +',\''+tempComment +'\');">수정</a></p>';
+											b += '<p class="reDeleteBtn"><a onclick="replyDelete(' +value.rpId +',' +value.gCount +',' +value.rpStep +',' +value.rpIndent +');">삭제</a></p>';
 										}
 									b += '</div>';
 									// replyActive
@@ -228,7 +233,7 @@ var isAdmin = '운영자';
 									if(uNickname == value.uNickname || value.uNickname == isAdmin){
 										//자기가 쓴 댓글일 경우 추천, 비추천 불가능
 										b += '<i class="far fa-thumbs-up"></i> '+value.rpLike
-									}else{
+									} else{
 										b += '<a onclick="rpLike(' +value.rpId +');">';
 										b += '<i class="far fa-thumbs-up"></i> '+value.rpLike;
 										b += '</a>';
@@ -473,7 +478,7 @@ var isAdmin = '운영자';
 				var cn = $('#currentPageNum').val();
 			    var a ='';
 				    a += '<div class="modifyContentBox">';
-				    a += '<input type="text" name="rpContent_' +rpId +'" value="' +rpContent +'"/>';
+				    a += '<textarea style="width:650px; height:100px; resize:none;" rows="4" type="text" name="rpContent_' +rpId +'">' +rpContent +'</textarea><br>';
 				    a += '<a class="modifyConfirm" onclick="replyModifyPrc(' +rpId +');">수정</a>';
 					a += '<a class="modifyCancle" onclick="replyList(' +cn +');">취소</a>';
 				    a += '</div>';

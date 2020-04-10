@@ -36,11 +36,11 @@ function questionPagePrint(rpPageMaker) {
 	var paging = '';
 	paging += '<ul class="pagination justify-content-center">';
 					
-	//if(tempEndPage != 0) {
+	if(tempEndPage != 0) {
 		paging += '<li class="page-item">';
 		paging += '<a class="page-link" href="javascript:questionList(1)"><i class="fas fa-angle-left"></i></a>';
 		paging += '</li>';
-	//}
+	}
 					
 	for(var i = startPage; i <= endPage; i++){
 		paging += '<li class="page-item">';
@@ -48,11 +48,11 @@ function questionPagePrint(rpPageMaker) {
 		paging += '</li>';
 	}
 					
-	//if(page < tempEndPage){
+	if(page < tempEndPage){
 		paging += '<li class="page-item">';
 		paging += '<a class="page-link" href="javascript:questionList(' +tempEndPage +')"><i class="fas fa-angle-right"></i></a>';
 		paging += '</li>';
-	//}
+	}
 	
 	$('.clQuestionPage').html(paging);
 }
@@ -143,22 +143,25 @@ function questionList(page) {
 										tag += '<a title="답변" class="float-right btn btn btn-info ml-2 reBtn" onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');"><i class="fas fa-reply"></i></a><br>';
 									}
 								} else {
+									var enter = /\r\n/g;
+									var tempContent = value.rpContent.replace(enter, " ");
+									
 									tag += '<a title="삭제" class="float-right btn btn btn-info ml-2 delBtn" onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');"><i class="fas fa-eraser"></i></a>';
-									tag += '<a title="수정" class="float-right btn btn btn-info ml-2 editBtn" onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');"><i class="far fa-edit"></i></a>';
+									tag += '<a title="수정" class="float-right btn btn btn-info ml-2 editBtn" onclick="questionModify('+value.rpId +',\'' +tempContent +'\');"><i class="far fa-edit"></i></a>';
 								}
 							tag += '</div>';
 							tag += '</div>';
 							tag += '</div>';	//row
-							tag += '</div>';		//card-body
-							tag += '</div>';			//card-inner
-							tag += '</div>';				//card-body
+							tag += '</div>';	//card-body
+							tag += '</div>';	//card-inner
+							tag += '</div>';	//card-body
 							tag += '</div>';
 							
 							} else {
 								var re = '';
 								tag += '<div class="classQuestionB q_'+value.rpId +'">';
 								tag += '<div class="card-body">';	// card-body
-								tag += '<div class="row">';		//row
+								tag += '<div class="row">';			//row
 								tag += '<div class="col-md-2" align="center">';
 								tag += '<img class="qprofile" src="' +value.uProfile +'" alt="userProfile"/>';
 
@@ -205,13 +208,16 @@ function questionList(page) {
 											tag += '<a title="답변" class="float-right btn btn btn-info ml-2 reBtn" onclick="reQuestionView(' +value.rpId +','+value.rpGroup+','+value.rpStep+','+value.rpIndent +');"><i class="fas fa-reply"></i></a><br>';
 										}
 									} else {
+										var enter = /\r\n/g;
+										var tempContent = value.rpContent.replace(enter, " ");
+										
 										tag += '<a title="삭제" class="float-right btn btn btn-info ml-2 delBtn" onclick="questionDelete(' +value.rpId +','+value.gCount+',' +value.rpStep +',' +value.rpIndent +');"><i class="fas fa-eraser"></i></a>';
-										tag += '<a title="수정" class="float-right btn btn btn-info ml-2 editBtn" onclick="questionModify('+value.rpId +',\''+value.rpContent+'\');"><i class="far fa-edit"></i></a>';
+										tag += '<a title="수정" class="float-right btn btn btn-info ml-2 editBtn" onclick="questionModify('+value.rpId +',\'' +tempContent +'\');"><i class="far fa-edit"></i></a>';
 									}
 								tag += '</div>';
 								tag += '</div>';	//col-md-10
-								tag += '</div>';		//row
-								tag += '</div>';			//card-body
+								tag += '</div>';	//row
+								tag += '</div>';	//card-body
 								tag += '</div>';
 							}
 						
@@ -370,6 +376,9 @@ function questionWrite(insertData) {
 // class 강좌문의 수정 view JS메서드(Ajax-Json)
 function questionModify(rpId, rpContent){
 	var cn = $('#currentPageNum').val();
+	
+	$('.delBtn').remove();
+	$('.editBtn').remove();
 
 	var a ='';
 	a += '<div class="commentModify">';

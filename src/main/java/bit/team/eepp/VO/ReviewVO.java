@@ -19,13 +19,16 @@ public class ReviewVO {
 	private String ename;
 	private String rvDeleted;
 	private String eID;
-	//리뷰 아이디, 맛집 아이디, 유저(작성자) 아이디, 리뷰 작성일, 리뷰 수정일(수정 시 반영), 리뷰 내용, 리뷰 점수, 각 가게 당 리뷰 평균, 닉네임
-	
+	private String uProfile;
+	// 리뷰 아이디, 맛집 아이디, 유저(작성자) 아이디, 리뷰 작성일, 리뷰 수정일(수정 시 반영), 리뷰 내용, 리뷰 점수, 각 가게 당 리뷰
+	// 평균, 닉네임
+
 	public ReviewVO() {
 	}
 
-	public ReviewVO(float reviewAVG,int rvId, int eating_id, int user_id, Timestamp rvWrittenDate, Timestamp rvModifyDate, String rvComment,
-			float rvScore, String uNickname,String ename, String rvDeleted,String eID) {
+	public ReviewVO(float reviewAVG, int rvId, int eating_id, int user_id, Timestamp rvWrittenDate,
+			Timestamp rvModifyDate, String rvComment, float rvScore, String uNickname, String ename, String rvDeleted,
+			String eID, String uProfile) {
 		this.rvId = rvId;
 		this.reviewAVG = reviewAVG;
 		this.eating_id = eating_id;
@@ -38,8 +41,17 @@ public class ReviewVO {
 		this.ename = ename;
 		this.rvDeleted = rvDeleted;
 		this.eID = eID;
+		this.uProfile = uProfile;
 	}
-	
+
+	public String getuProfile() {
+		return uProfile;
+	}
+
+	public void setuProfile(String uProfile) {
+		this.uProfile = uProfile;
+	}
+
 	public String geteID() {
 		return eID;
 	}
@@ -71,7 +83,7 @@ public class ReviewVO {
 	public void setReviewAVG(float reviewAVG) {
 		this.reviewAVG = reviewAVG;
 	}
-	
+
 	public int getEating_id() {
 		return eating_id;
 	}
@@ -135,6 +147,5 @@ public class ReviewVO {
 	public void setuNickname(String uNickname) {
 		this.uNickname = uNickname;
 	}
-	
-	
+
 }

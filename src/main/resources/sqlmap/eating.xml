@@ -56,8 +56,8 @@
 			SELECT * FROM
 			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
 			(SELECT eId, eTitle, eThema, eCategory, eDate, eAddress_new, eAddress_old, eTel, eCONTENT, eKeyword_food,
-			(SELECT COUNT(*) from review where eating_id = eId) as rvCount,
-			NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id), 0) as rvAVG
+			(SELECT COUNT(*) from review where rvDeleted = 'no' AND eating_id = eId) as rvCount,
+			NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id), 0) as rvAVG
 			FROM Eating where eId = eId
 		
 		<if test="eThema != null">
@@ -109,7 +109,7 @@
 		</if>
 		
 		<if test="escri != null">
-		NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id), 0)
+		NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id), 0)
 		</if>
 		
 		DESC) A) WHERE RNUM BETWEEN #{escri.rowStart} AND #{escri.rowEnd}
@@ -120,8 +120,8 @@
 		<![CDATA[
 		SELECT * FROM 
 		(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food,
-		(SELECT COUNT(*) FROM REVIEW WHERE eating_id = eId) AS rvCount,
-		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id) as rvAVG
+		(SELECT COUNT(*) FROM REVIEW WHERE rvDeleted = 'no' AND eating_id = eId) AS rvCount,
+		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id) as rvAVG
 		FROM Eating
 		WHERE eId = eId
 		]]>
@@ -159,7 +159,7 @@
 	<select id="selectOne" resultType="bit.team.eepp.VO.EatingVO">
 		SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food, eHit,
 		(SELECT COUNT(*) FROM REVIEW WHERE rvDeleted = 'no' AND eating_id = eId) AS rvCount, 
-		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where eating_id = eId GROUP BY eating_id) as rvAVG,
+		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id) as rvAVG,
 		(SELECT COUNT(eating_id) FROM SCRAP WHERE eating_id = #{eId}) as sCount
 		FROM EATING WHERE eId = #{eId}
 	</select>
@@ -168,37 +168,4 @@
 		UPDATE EATING SET eHit = eHit + 1 WHERE eId = #{eId}
 	</update>
 	<!-- 민영 수정 부분-->
-		
-	<insert id="write" parameterType="bit.team.eepp.VO.EatingVO">
-		<selectKey keyProperty="eatingVO.eId" resultType="int"
-			order="BEFORE">
-			SELECT EATING_SEQ.nextval FROM DUAL
-		</selectKey>
-
-		INSERT INTO EATING (e.eID, e.eTITLE, e.eCATEGORY, e.eDATE, e.eCONTENT,
-		e.eTEL, e.eADDRESS_new, e.eADDRESS_old, e.eGRADE,e.eMAP_1, e.eMAP_2,
-		e.eSEARCH_1, e.eSEARCH_2, e.eSEARCH_3)
-		VALUES(#{eatingVO.eId},
-		#{eatingVO.user_id}, #{eatingVO.eTitle}, #{eatingVO.eCATEGORY},
-		SYSDATE, #{eatingVO.eCONTENT}, #{eatingVO.eTEL},
-		#{eatingVO.eADDRESS_new}, #{eatingVO.eADDRESS_old}, '', '', '')
-	</insert>
-
-	<delete id="delete" parameterType="bit.team.eepp.VO.EatingVO">
-		DELETE FROM EATING WHERE eId = #{eId}
-	</delete>
-
-	<select id="modifyView" resultType="bit.team.eepp.VO.EatingVO">
-		SELECT e.eId, e.eTitle,
-		e.eCategory, e.eDate, e.eContent, e.eTel, e.eAddress_new,
-		e.eAddress_old, e.eGrade, e.eMap_1, e.eMap_2, e.eSearch_1,
-		e.eSearch_2, e.eSearch_3, e.eReview FROM USERS u, EATING e WHERE
-		u.USER_ID = e.USER_ID AND eId = #{eId}
-	</select>
-
-	<update id="modify" parameterType="bit.team.eepp.VO.EatingVO">
-		UPDATE EATING SET eTitle =
-		#{eatingVO.eTitle}, eContent = #{eatingVO.eContent}, eDate = SYSDATE
-		WHERE eId = #{eatingVO.eId}
-	</update>
 </mapper>

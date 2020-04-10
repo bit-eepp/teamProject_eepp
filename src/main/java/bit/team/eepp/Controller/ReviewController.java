@@ -26,8 +26,7 @@ public class ReviewController {
 	
 	@RequestMapping("/reviewCount")
 	public int reviewCount(int eating_id) {
-		System.out.println(eating_id + "reviewCount");
-		
+		System.out.println("eating_id : " +eating_id);
 		return reviewService.reviewCount(eating_id);
 	}
 	
