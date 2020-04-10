@@ -15,12 +15,14 @@ public class ScrapVO {
 	private String bTitle;
 	private String cTitle;
 	private String uNickname;
+	private String eTitle;
+	private String ecategory;
 
 	public ScrapVO() {
 	}
 
 	public ScrapVO(int sId, int board_id, int class_id, int user_id, int eating_id, Timestamp sDate, String bTitle,
-			String cTitle, String uNickname) {
+			String cTitle, String uNickname,String eTitle,String ecategory) {
 		this.sId = sId;
 		this.board_id = board_id;
 		this.class_id = class_id;
@@ -30,6 +32,25 @@ public class ScrapVO {
 		this.bTitle = bTitle;
 		this.cTitle = cTitle;
 		this.uNickname = uNickname;
+		this.eTitle = eTitle;
+		this.ecategory = ecategory;
+	}
+	
+
+	public String getEcategory() {
+		return ecategory;
+	}
+
+	public void setEcategory(String ecategory) {
+		this.ecategory = ecategory;
+	}
+
+	public String geteTitle() {
+		return eTitle;
+	}
+
+	public void seteTitle(String eTitle) {
+		this.eTitle = eTitle;
 	}
 
 	public String getcTitle() {
