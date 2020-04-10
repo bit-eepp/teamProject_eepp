@@ -110,8 +110,8 @@ public class UserService {
 	}
 
 	// (마이페이지)내 댓글 갯수
-	public int scrapBoardCount(Map<String, Object> map) {
-		return userMapper.scrapBoardCount(map);
+	public int ScrapCount(Map<String, Object> map) {
+		return userMapper.ScrapCount(map);
 	}
 
 	// (마이페이지)내 게시글 리스트
@@ -223,6 +223,16 @@ public class UserService {
 	public int reviewListCount(Map<String, Object> map) {
 		return userMapper.reviewListCount(map);
 
+	}
+
+	// 맛집 스크랩 개수
+	public int scrapEatingCount(Map<String, Object> map) {
+		return userMapper.scrapEatingCount(map);
+	}
+
+	// 맛집 스크랩 리스트
+	public List<ScrapVO> EatingScrapList(Map<String, Object> map){
+		return userMapper.EatingScrapList(map);
 	}
 
 	/* 운영자 마이페이지 */

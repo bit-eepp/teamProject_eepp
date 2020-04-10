@@ -1,10 +1,10 @@
 /*
  * 
- * mypage javascript
+ * MYPAGE JAVASCRIPT
  *
  */
 
-// 프로필 업로드 사진 미리보기
+
 // ContextPath
 function getContextPath() {
 	var hostIndex = location.href.indexOf(location.host) + location.host.length;
@@ -81,7 +81,7 @@ $('#searchBtn').click(
 				alert('검색조건을 지정해주세요');
 				return;
 			} else {
-				self.location = "mypage" + $("#mypageMakeQuery").val()
+				self.location = "myContent" + $("#mypageMakeQuery").val()
 						+ "&searchType=" + $("select[name=searchType]").val()
 						+ "&keyword="
 						+ encodeURIComponent($('#keywordInput').val())
@@ -98,7 +98,7 @@ $('#keywordInput').keydown(
 					alert('검색조건을 지정해주세요');
 					return;
 				} else {
-					self.location = "mypage" + $("#mypageMakeQuery").val()
+					self.location = "myContent" + $("#mypageMakeQuery").val()
 							+ "&searchType="
 							+ $("select[name=searchType]").val() + "&keyword="
 							+ encodeURIComponent($('#keywordInput').val())
@@ -111,6 +111,7 @@ $('#keywordInput').keydown(
 function drop() {
 	alert("회원탈퇴 페이지로 이동합니다.");
 }
+
 // 회원탈퇴 - 숫자만 가능
 function onlyNumber(e) {
 	var keyValue = event.keyCode;
@@ -125,136 +126,19 @@ $('#changeImg').click(function() {
 	alert("기본 이미지로 변경됩니다.")
 });
 
-//회원정보 수정 보여주고 닫기
-$(document).ready(function(){
-	$("#myinfobtn").click(function() {
-		$(".table-wrapping").slideToggle();
-  });
-});
-
-// 게시글 보여주고 닫기
-$(document).ready(function() {
-	if (!$('#board').val()) {
-		$(".content_list").hide("slow");
-	} else {
-		$(".content_list").show("slow");
-	}
-})
-$("#mycontentbtn").click(function() {
-	$(".content_list").slideToggle(500);
-	$(".info").hide();
-});
-
-// 스크랩 보여주고 닫기
-$(document).ready(function() {
-	if (!$('#scrap').val()) {
-		$(".scrap_list").hide("slow");
-	} else {
-		$(".scrap_list").show("slow");
-	}
-})
-$("#myscrapbtn").click(function() {
-	$(".scrap_list").slideToggle(500);
-	$(".info").hide();
-});
-
-// 포인트 사용내역 보여주고 닫기
-$(document).ready(function() {
-	if (!$('#mpPoint').val()) {
-		$("#point_list").hide("slow");
-	} else {
-		$("#point_list").show("slow");
-	}
-})
-$("#mypointbtn").click(function() {
-	$("#point_list").slideToggle(500);
-	$(".info").hide();
-});
-
-// 클래스 내역 보여주고 닫기
-$(document).ready(function() {
-	if (!$('#mpclass').val()) {
-		$(".myclass_list").hide("slow");
-	} else {
-		$(".myclass_list").show("slow");
-	}
-})
-$("#myclassbtn").click(function() {
-	$(".myclass_list").slideToggle(500);
-	$(".info").hide();
-});
-
-// 리뷰 보여주고 닫기
-$(document).ready(function() {
-	if (!$('#rv').val()) {
-		$(".review_list").hide("slow");
-	} else {
-		$(".review_list").show("slow");
-	}
-})
-$("#mpRVBtn").click(function() {
-	$(".review_list").slideToggle(500);
-	$(".info").hide();
-});
-
 // 페이징
 $(document).ready(function() {
 	var pageNum1 = $('#mypageMakerCriPage').val();//myPagePageMaker
 	pageColor1(pageNum1);
-
-	var pageNum2 = $('#PointCriPage').val();//PointPageMaker
-	pageColor2(pageNum2);
-	
-	var pageNum3 = $('#ScrapboardCriPage').val();//ScrapboardPageMaker
-	pageColor3(pageNum3);
-	
-	var pageNum4 = $('#ScrapClassCriPage').val();//ScrapClassPageMaker
-	pageColor4(pageNum4);
-	
-	var pageNum5 = $('#JoinClassCriPage').val();//JoinClassPageMaker
-	pageColor5(pageNum5);
-	
-	var pageNum6 = $('#OpenClassCriPage').val();//OpenClassPageMaker
-	pageColor6(pageNum6);
-
-	var pageNum7 = $('#MyReviewCriPage').val();//MyReviewPageMaker
-	pageColor7(pageNum7);
 });
 
-// 페이징
 function pageColor1(pageNum1) {
 	$('#boardpaging_' + pageNum1).css("background-color", "#59bfbf");
 	$('#boardpaging_' + pageNum1).css("color", "#ffffff");
 }
-function pageColor2(pageNum2) {
-	$('#pointpage_' + pageNum2).css("background-color", "#59bfbf");
-	$('#pointpage_' + pageNum2).css("color", "#ffffff");
-}
-	function pageColor3(pageNum3) {
-	$('#scrapBoardPage_' + pageNum3).css("background-color", "#59bfbf");
-	$('#scrapBoardPage_' + pageNum3).css("color", "#ffffff");
-}
-	function pageColor4(pageNum4) {
-	$('#scrapClassPage_' + pageNum4).css("background-color", "#59bfbf");
-	$('#scrapClassPage_' + pageNum4).css("color", "#ffffff");
-}
-	function pageColor5(pageNum5) {
-	$('#clJoinPage_' + pageNum5).css("background-color", "#59bfbf");
-	$('#clJoinPage_' + pageNum5).css("color", "#ffffff");
-}
-	function pageColor6(pageNum6) {
-	$('#clOpenPage_' + pageNum6).css("background-color", "#59bfbf");
-	$('#clOpenPage_' + pageNum6).css("color", "#ffffff");
-}
-	function pageColor7(pageNum7) {
-	$('#rv_' + pageNum7).css("background-color", "#59bfbf");
-	$('#rv_' + pageNum7).css("color", "#ffffff");
-}
-
 
 // 전체 선택 or 해제 (게시판 스크랩)
 $(function() {
-	// 전체선택 체크박스 클릭
 	$(".allCheck").click(function() {
 		if ($(".allCheck").prop("checked")) {
 			$("input:checkbox[name='pickCheck']").prop("checked", true);
@@ -263,86 +147,19 @@ $(function() {
 		}
 	})
 })
-// 전체 선택 or 해제(클래스 스크랩)
-$(function() {
-	// 전체선택 체크박스 클릭
-	$(".allCheck1").click(function() {
-		if ($(".allCheck1").prop("checked")) {
-			$("input:checkbox[name='pickCheck1']").prop("checked", true);
-		} else {
-			$("input:checkbox[name='pickCheck1']").prop("checked", false);
-		}
-	})
-})
-// 전체 선택 or 해제(맛집 스크랩)
-$(function() {
-	// 전체선택 체크박스 클릭
-	$(".allCheck2").click(function() {
-		if ($(".allCheck2").prop("checked")) {
-			$("input:checkbox[name='pickCheck2']").prop("checked", true);
-		} else {
-			$("input:checkbox[name='pickCheck2']").prop("checked", false);
-		}
-	})
-})
-// 스크랩 삭제
+// 게시글 스크랩 삭제
 $(document).ready(function() {
 	$("#selectDeleteBtn_Sboard").click(function() {
 		deleteScrap_Sboard();
 	});
 });
 
-// 체크박스 선택 삭제
 function deleteScrap_Sboard() {
 	var checkRow = "";
 	$("input[name='pickCheck']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
 	});
 	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
-
-	if (checkRow == '') {
-		alert("삭제할 대상을 선택하세요.");
-		return false;
-	} else {
-		if (confirm("정말 삭제하시겠습니까?") == true) {
-			$
-					.ajax({
-						url : getContextPath() + "/deleteScrap",
-						type : "post",
-						data : {
-							"checkRow" : checkRow,
-							"scrap1" : $(".scrap1").val()
-						},
-						success : function(data) {
-							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
-						},
-						error : function(request, status, error) {
-							alert("에러가 발생했습니다.");
-							console.log(request.responseText);
-							console.log(error);
-						}
-					})
-		} else {
-			return false;
-		}
-	}
-}
-//클래스 스크랩 삭제
-$(document).ready(function() {
-	$("#selectDeleteBtn_SClass").click(function() {
-		deleteScrap_SClass();
-	});
-});
-
-function deleteScrap_SClass() {
-	var checkRow = "";
-	$("input[name='pickCheck1']:checked").each(function() {
-		checkRow = checkRow + $(this).val() + ",";
-	});
-
-	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
-
 	if (checkRow == '') {
 		alert("삭제할 대상을 선택하세요.");
 		return false;
@@ -357,7 +174,7 @@ function deleteScrap_SClass() {
 						},
 						success : function(data) {
 							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
+							location.href = "http://localhost:8282/eepp/myScrap?tabType=myScrapBoard"
 						},
 						error : function(request, status, error) {
 							alert("에러가 발생했습니다.");
@@ -371,6 +188,70 @@ function deleteScrap_SClass() {
 	}
 }
 
+//전체 선택 or 해제(클래스 스크랩)
+$(function() {
+	$(".allCheck1").click(function() {
+		if ($(".allCheck1").prop("checked")) {
+			$("input:checkbox[name='pickCheck1']").prop("checked", true);
+		} else {
+			$("input:checkbox[name='pickCheck1']").prop("checked", false);
+		}
+	})
+})
+
+//클래스 스크랩 삭제
+$(document).ready(function() {
+	$("#selectDeleteBtn_SClass").click(function() {
+		deleteScrap_SClass();
+	});
+});
+
+function deleteScrap_SClass() {
+	var checkRow = "";
+	$("input[name='pickCheck1']:checked").each(function() {
+		checkRow = checkRow + $(this).val() + ",";
+	});
+	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
+	if (checkRow == '') {
+		alert("삭제할 대상을 선택하세요.");
+		return false;
+	} else {
+		if (confirm("정말 삭제하시겠습니까?") == true) {
+			$
+					.ajax({
+						url : getContextPath() + "/deleteScrap",
+						type : "post",
+						data : {
+							"checkRow" : checkRow
+						},
+						success : function(data) {
+							alert("스크랩이 삭제되었습니다.");
+							location.href = "http://localhost:8282/eepp/myScrap?tabType=myScrapClass";
+						},
+						error : function(request, status, error) {
+							alert("에러가 발생했습니다.");
+							console.log(request.responseText);
+							console.log(error);
+						}
+					})
+		} else {
+			return false;
+		}
+	}
+}
+
+//전체 선택 or 해제(맛집 스크랩)
+$(function() {
+	$(".allCheck2").click(function() {
+		if ($(".allCheck2").prop("checked")) {
+			$("input:checkbox[name='pickCheck2']").prop("checked", true);
+		} else {
+			$("input:checkbox[name='pickCheck2']").prop("checked", false);
+		}
+	})
+})
+
+// 맛집 스크랩 삭제
 $(document).ready(function() {
 	$("#selectDeleteBtn_SEating").click(function() {
 		deleteScrap_SEating();
@@ -382,9 +263,7 @@ function deleteScrap_SEating() {
 	$("input[name='pickCheck2']:checked").each(function() {
 		checkRow = checkRow + $(this).val() + ",";
 	});
-
 	checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); // 맨끝 콤마 지우기
-
 	if (checkRow == '') {
 		alert("삭제할 대상을 선택하세요.");
 		return false;
@@ -398,7 +277,7 @@ function deleteScrap_SEating() {
 						},
 						success : function(data) {
 							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/mypage?&scrap=yes";
+							location.href = "http://localhost:8282/eepp/myScrap?tabType=myScrapEating";
 						},
 						error : function(request, status, error) {
 							alert("에러가 발생했습니다.");
@@ -412,10 +291,33 @@ function deleteScrap_SEating() {
 	}
 }
 
+
 // 클래스 구입자 보기
 function classjoin_list(cId) {
 	var member = window.open("http://localhost:8282/eepp/classjoin_list?cId="
 			+ cId, "classjoin_list", "left=" + (screen.availWidth - 530) / 2
 			+ ",top=" + (screen.availHeight - 620) / 2
 			+ ",width=530,height=620");
+}
+
+
+// 스크랩, 클래스 탭 유지
+$(document).ready(function() {
+	var title = $(".tabType").val();
+	tabTypeTitle(title);
+	console.log(title);
+});
+
+function tabTypeTitle(title) {
+	if (title == 'myScrapBoard') { // 게시글 스크랩
+		$(".linkToBo").addClass("active");
+	}else if (title == 'myScrapClass') { // 클래스 스크랩
+		$(".linkToCL").addClass("active");
+	}else if (title == 'myScrapEating') { // 맛집 스크랩
+		$(".linkToEA").addClass("active");
+	}else if (title == 'myClassJoin') { // 가입한 클래스
+		$(".linkToCJ").addClass("active");
+	}else if (title == 'myClassOpen') { // 개설한 클래스
+		$(".linkToOP").addClass("active");
+	}
 }

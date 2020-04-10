@@ -10,9 +10,20 @@
 .bordered a {
 	color: inherit;
 }
+a {
+	color: inherit;
+}
 
 a:hover {
 	text-decoration: underline;
+	color: inherit;
+}
+.classForm .nav-item a.active{
+	color: #59bfbf;
+	border-color:#59bfbf #59bfbf #fff!important;
+}
+a{
+	color:inherit;
 }
 
 /* .info {
@@ -65,6 +76,8 @@ p {
 
 .img-circle {
 	width: 150px;
+	height:150px;
+	object-fit:cover;
 	margin-left: 25%;
 	overflow: hidden;
 	border-radius: 75px;
@@ -151,7 +164,7 @@ span.checkInfo {
 	height: 50px;
 }
 
-.myinfo-wrap h3, .myclass-wrap h3 {
+.myinfo-wrap h3, .myclass-wrap h3, #mpScBtn {
 	color: #59bfbf;
 }
 
@@ -275,12 +288,8 @@ td {
 	color: #000;
 }
 
-.Title a:hover, .bordered a:hover {
+.Title a:hover, .bordered a:hover, #mpRVBtn1 {
 	color: #59bfbf;
-}
-
-.liwrap {
-	font-size: 0.9rem;
 }
 
 .input-group-text {
@@ -350,8 +359,11 @@ td {
 }
 
 .container {
-	padding-top: 100px;
+	
 	font-size: 0.8rem;
+}
+#MPwrap{
+	padding-top: 100px;
 }
 
 .scrapList_tr .RTitle, .scrapCList_tr .RTitie, .scrapEList_tr .RTitle {
