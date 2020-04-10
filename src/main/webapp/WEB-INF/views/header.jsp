@@ -80,7 +80,7 @@
 										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage'"><i class="fas fa-id-badge"></i><strong> MyPage</strong></button>&nbsp;
 									</c:when>
 									<c:otherwise>
-										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/mypage?mpPoint=mpPoint'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
+										<button type="button" class="btn btn-light" onclick="location.href='${pageContext.request.contextPath}/myPoint'"><i class="fas fa-coins"></i><strong> Point</strong></button>&nbsp;
 									</c:otherwise>
 								</c:choose>
 							</div>
