@@ -23,7 +23,8 @@
 						console.log("리뷰 수 : " +data)
 						rvCount = data;
 						var a = data;
-						$('.reviewCount').html(a)
+						$('.reviewCount').html(a);
+						$('.eReview').html(a);
 					},
 					error : function(request, status, error) {
 						console.log(request.responseText);
@@ -33,7 +34,7 @@
 			}
 			
 			function reviewPagePrint(rvPageMaker) {
-				console.log(rvPageMaker);
+				/* console.log(rvPageMaker);
 				console.log('totalCount : ' +rvPageMaker[0]);
 				console.log('startPage : ' +rvPageMaker[1]);
 				console.log('endPage : ' +rvPageMaker[2]);
@@ -45,7 +46,7 @@
 				console.log('perPageNum : ' +rvPageMaker[7].perPageNum);
 				console.log('startNum : ' +rvPageMaker[7].startNum);
 				console.log('endNum : ' +rvPageMaker[7].endNum);
-				console.log('pageStart : ' +rvPageMaker[7].pageStart);
+				console.log('pageStart : ' +rvPageMaker[7].pageStart); */
 				
 				// 댓글 페이징 처리를 위한 변수
 				var startPage = rvPageMaker[1];
@@ -96,9 +97,15 @@
 							},
 					success: function(data){
 						console.log(data);
-						console.log(data.reviewAVG);
 						
-						$('.reviewAVG').html(data.reviewAVG);
+						if(data.reviewAVG == null) {
+							data.reviewAVG = 0;
+						}
+
+						console.log(data.reviewAVG.toFixed(1));
+						
+						$('.reviewAVG').html(data.reviewAVG.toFixed(1));
+						
 						// 댓글 페이징
 						var rvPageMaker = Object.values(data["rvPageMaker"]);
 						reviewPagePrint(rvPageMaker);

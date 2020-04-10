@@ -28,9 +28,9 @@ public class EatingService {
 			return eatingMapper.themaList(map);
 		}
 
-		// 선택한 게시글 확인
+		// 선택한 게시글 확인 : 수정부분
 		public EatingVO selectOne(EatingVO eatingVO) {
-			//조회수 eatingMapper.hitUp(boardVO.getbId());
+			eatingMapper.hitUp(eatingVO.geteId());
 			return eatingMapper.selectOne(eatingVO.geteId());
 		}
 

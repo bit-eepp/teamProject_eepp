@@ -3,28 +3,30 @@ package bit.team.eepp.VO;
 import java.sql.Timestamp;
 
 public class EatingVO {
-	
-	private int eId; 
+
+	private int eId;
 	private int User_id;
 	private String eTitle;
 	private String eCategory;
-	private Timestamp eDate; 
+	private Timestamp eDate;
 	private String eContent;
 	private String eTel;
 	private String eAddress_new;
-	private String eAddress_old; 
+	private String eAddress_old;
 	private String eThema;
 	private String eKeyword_food;
 	private int rvCount;
 	private float rvAVG;
-	
-	public EatingVO(){
-		
+	private int sCount;
+	private int eHit;
+
+	public EatingVO() {
+
 	}
 
 	public EatingVO(int eId, int user_id, String eTitle, String eCategory, Timestamp eDate, String eContent,
 			String eTel, String eAddress_new, String eAddress_old, String eThema, String eKeyword_food, int rvCount,
-			float rvAVG) {
+			float rvAVG, int sCount, int eHit) {
 		this.eId = eId;
 		User_id = user_id;
 		this.eTitle = eTitle;
@@ -38,6 +40,24 @@ public class EatingVO {
 		this.eKeyword_food = eKeyword_food;
 		this.rvCount = rvCount;
 		this.rvAVG = rvAVG;
+		this.sCount = sCount;
+		this.eHit = eHit;
+	}
+
+	public int geteHit() {
+		return eHit;
+	}
+
+	public void seteHit(int eHit) {
+		this.eHit = eHit;
+	}
+
+	public int getsCount() {
+		return sCount;
+	}
+
+	public void setsCount(int sCount) {
+		this.sCount = sCount;
 	}
 
 	public int geteId() {
@@ -143,5 +163,5 @@ public class EatingVO {
 	public void setRvAVG(float rvAVG) {
 		this.rvAVG = rvAVG;
 	}
-	
+
 }

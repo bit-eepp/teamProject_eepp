@@ -35,6 +35,7 @@ public interface EatingMapper {
 		// 맛집 수정
 		public abstract void modify(@Param("eatingVO") EatingVO eatingVO);
 		
-		
+		// 조회수 : 수정부분
+		public abstract void hitUp(@Param("eId") int eId);
 
 }
