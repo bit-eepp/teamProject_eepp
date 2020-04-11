@@ -63,13 +63,13 @@
 	vertical-align: middle;	
 }
 
-.container .eatingContent .eContentLeft .eContentBody table .tr1b .tdLeftb1, .tdLeftb2, .tdLeftb3, .tdLeftb4 {
+.container .eatingContent .eContentLeft .eContentBody table .tr1b .tdLeftb1, .tdLeftb2, .tdLeftb3, .tdLeftb4, .tdLeftb5, .tdLeftb6 {
 	width: 25%; 
 	text-align: center; 
 	color:#e7438b;
 }
 
-.container .eatingContent .eContentLeft .eContentBody table .tr1b .tdRightb1, .tdRightb2, .tdRightb3 {
+.container .eatingContent .eContentLeft .eContentBody table .tr1b .tdRightb1, .tdRightb2, .tdRightb3, .tdRightb5, .tdRightb6 {
 	color:#464a4e;
 }
 
@@ -86,7 +86,7 @@
 
 .container .eatingContent .eContentRight #map {
 	width: auto;
-	height: 560px;
+	height: 650px;
 	border-radius: 10px;
 }
 

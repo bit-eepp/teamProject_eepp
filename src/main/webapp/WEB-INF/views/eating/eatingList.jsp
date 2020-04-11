@@ -130,8 +130,12 @@
 					</c:when>
 					
 					<c:when test="${emptyResult eq 'emptyResult'}">
-						<div class="searchResult col-sm-8" align="center">
-							<h5>조회된 결과가 없습니다.</h5>
+						<div class="searchResult col-sm-8">
+							<h2 class="searchTitle" id="isSearchTitle">${escri.keyword} 맛집 인기 검색순위</h2>
+							<br>
+							<div align="center">
+								<h5>조회된 결과가 없습니다.</h5>
+							</div>
 						</div>
 					</c:when>
 					

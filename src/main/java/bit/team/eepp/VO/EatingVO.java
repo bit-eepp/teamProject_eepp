@@ -19,6 +19,8 @@ public class EatingVO {
 	private float rvAVG;
 	private int sCount;
 	private int eHit;
+	private String eParkInfo;
+	private String eOpeningHour;
 
 	public EatingVO() {
 
@@ -26,7 +28,7 @@ public class EatingVO {
 
 	public EatingVO(int eId, int user_id, String eTitle, String eCategory, Timestamp eDate, String eContent,
 			String eTel, String eAddress_new, String eAddress_old, String eThema, String eKeyword_food, int rvCount,
-			float rvAVG, int sCount, int eHit) {
+			float rvAVG, int sCount, int eHit, String eParkInfo, String eOpeningHour) {
 		this.eId = eId;
 		User_id = user_id;
 		this.eTitle = eTitle;
@@ -42,6 +44,24 @@ public class EatingVO {
 		this.rvAVG = rvAVG;
 		this.sCount = sCount;
 		this.eHit = eHit;
+		this.eParkInfo = eParkInfo;
+		this.eOpeningHour = eOpeningHour;
+	}
+
+	public String geteParkInfo() {
+		return eParkInfo;
+	}
+
+	public void seteParkInfo(String eParkInfo) {
+		this.eParkInfo = eParkInfo;
+	}
+
+	public String geteOpeningHour() {
+		return eOpeningHour;
+	}
+
+	public void seteOpeningHour(String eOpeningHour) {
+		this.eOpeningHour = eOpeningHour;
 	}
 
 	public int geteHit() {

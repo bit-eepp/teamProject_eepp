@@ -164,7 +164,7 @@
 									</td>
 									
 									<td class="tdRight2" align="right">
-										<a class="eMainBtn eList"><i class="fas fa-list-ul fa-2x"></i></a>
+										<a class="eMainBtn eList"><i title="메인" class="fas fa-list-ul fa-2x"></i></a>
 									</td>
 								</tr>
 							</table>
@@ -217,8 +217,14 @@
 									<td class="tdRightb4"><pre>${eContentView.eContent}</pre></td>
 								</tr>
 								
-								<tr class="tr5" align="right">
-									<td colspan="2">DB등록일 : <fmt:formatDate value="${eContentView.eDate}" pattern="yyyy.MM.dd HH:mm"/></td>									
+								<tr class="tr5b">
+									<td class="tdLeftb5"><i title="주차정보" class="fas fa-parking fa-2x"></i></td>
+									<td class="tdRightb5">${eContentView.eParkInfo}</td>
+								</tr>
+								
+								<tr class="tr6b">
+									<td class="tdLeftb6"><i title="영업시간" class="far fa-clock fa-2x"></i></td>
+									<td class="tdRightb6">${eContentView.eOpeningHour}</td>
 								</tr>
 							</table>			
 						</div>
@@ -233,7 +239,7 @@
 					<div class="col eatingReview">
 						<br><hr><br>
 						<div class="reviewForm">
-							<h4><i class="fas fa-registered"></i>&nbsp;리뷰(<b class="reviewCount"></b>)</h4>
+							<h4>리뷰(<b class="reviewCount"></b>)</h4>
 						</div>
 						<br>
 
