@@ -52,14 +52,14 @@
 		</if>
 	</select>
 
-		<select id="eatingList" resultType="bit.team.eepp.VO.EatingVO" parameterType="map">
-			SELECT * FROM
-			(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
-			(SELECT eId, eTitle, eThema, eCategory, eDate, eAddress_new, eAddress_old, eTel, eCONTENT, eKeyword_food,
-			(SELECT COUNT(*) from review where rvDeleted = 'no' AND eating_id = eId) as rvCount,
-			NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id), 0) as rvAVG
-			FROM Eating where eId = eId
-		
+	<select id="eatingList" resultType="bit.team.eepp.VO.EatingVO" parameterType="map">
+		SELECT * FROM
+		(SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT FROM
+		(SELECT eId, eTitle, eThema, eCategory, eDate, eAddress_new, eAddress_old, eTel, eCONTENT, eKeyword_food,
+		(SELECT COUNT(*) from review where rvDeleted = 'no' AND eating_id = eId) as rvCount,
+		NVL((SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id), 0) as rvAVG
+		FROM Eating where eId = eId
+	
 		<if test="eThema != null">
 			<choose>
 				<when test="eThema == 'eThema_1'">
@@ -116,7 +116,7 @@
 	
 	</select>
 	
-		<select id="themaList" resultType="bit.team.eepp.VO.EatingVO">
+	<select id="themaList" resultType="bit.team.eepp.VO.EatingVO">
 		<![CDATA[
 		SELECT * FROM 
 		(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food,
@@ -153,7 +153,7 @@
 		</if>
 		
 		ORDER BY eDate DESC)
-</select>
+	</select>
 	
 	<!-- 민영 수정 부분-->
 	<select id="selectOne" resultType="bit.team.eepp.VO.EatingVO">

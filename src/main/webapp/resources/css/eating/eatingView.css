@@ -32,33 +32,56 @@
 	border-spacing: 0 15px;
 }
 
-.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1
-	{
+.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1 {
 	width: 70%;
 	font-size: 200%;
 }
 
-.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1 b
-	{
+.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1 b {
 	color: #e7438b;
 }
 
-.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdRight1 a
-	{
+.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdRight1 a {
 	color: #e7438b;
 	cursor: pointer;
 }
 
-.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdLeft2
-	{
+.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdLeft2 {
 	color: #46505ab5;
 	font-size: 90%;
 }
 
-.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdRight2 a
-	{
+.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdRight2 a {
 	color: #e7438b;
 	cursor: pointer;
+}
+
+.container .eatingContent .eContentLeft .eContentBody table {
+	width: 100%; 
+	border-collapse: separate; 
+	border-spacing: 0 30px; 
+	vertical-align: middle;	
+}
+
+.container .eatingContent .eContentLeft .eContentBody table .tr1b .tdLeftb1, .tdLeftb2, .tdLeftb3, .tdLeftb4 {
+	width: 25%; 
+	text-align: center; 
+	color:#e7438b;
+}
+
+.container .eatingContent .eContentLeft .eContentBody table .tr1b .tdRightb1, .tdRightb2, .tdRightb3 {
+	color:#464a4e;
+}
+
+.container .eatingContent .eContentLeft .eContentBody table .tr3b .tdRightb3 b {
+	color:#e7438b;
+}
+
+.container .eatingContent .eContentLeft .eContentBody table .tr4b .tdRightb4 pre {
+	font-family: 윤고딕540;
+	font-size: 100%;
+	margin-bottom: 0px;
+	color:#464a4e;
 }
 
 .container .eatingContent .eContentRight #map {

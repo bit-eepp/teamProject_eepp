@@ -12,6 +12,15 @@ $(document).ready(function() {
 	
 	reviewCount(eating_id);
 	reviewList();
+	
+	var formObj = $('form[role="form"]');
+	
+	$('.eList').on('click', function(){
+		formObj.attr('method','post');
+		formObj.attr('action','eatingList');
+		formObj.submit();
+	});
+
 
 	/* 음식점 map 부분 */
 	var eatingAddress = $('#ad_new').val();

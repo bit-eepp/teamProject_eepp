@@ -34,4 +34,12 @@ $(document).ready(function() {
 		elmnt.scrollIntoView();
 	}
 	
+	var page_eating = $('#eatingCriPage').val();
+	pageColor(page_eating);
+	
 });
+
+function pageColor(page_eating) {
+	$('#etPage_'+page_eating).css("background-color", "#59bfbf");
+	$('#etPage_'+page_eating).css("color", "#ffffff");
+}

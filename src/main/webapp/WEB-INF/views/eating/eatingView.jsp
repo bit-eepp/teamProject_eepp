@@ -164,7 +164,7 @@
 									</td>
 									
 									<td class="tdRight2" align="right">
-										<a href="${pageContext.request.contextPath}/eating/eatingList"><i class="fas fa-list-ul fa-2x"></i></a>
+										<a class="eMainBtn eList"><i class="fas fa-list-ul fa-2x"></i></a>
 									</td>
 								</tr>
 							</table>
@@ -172,52 +172,52 @@
 						<hr>
 
 						<div class="eContentBody">
-							<table style="width: 100%; border-collapse: separate; border-spacing: 0 30px; vertical-align: middle;">
-								<tr>
-									<td style="width: 25%; text-align: center; color:#e7438b;"><i title="위치" class="fas fa-map-marker-alt fa-2x"></i></td>
-									<td style="color:#464a4e;">
+							<table>
+								<tr class="tr1b">
+									<td class="tdLeftb1"><i title="위치" class="fas fa-map-marker-alt fa-2x"></i></td>
+									<td class="tdRightb1">
 										${eContentView.eAddress_new}<br>
 										[지번] ${eContentView.eAddress_old}
 									</td>
 								</tr>
-								<tr>
-									<td style="width: 25%; text-align: center; color:#e7438b;"><i title="전화번호" class="fas fa-phone fa-2x"></i></td>
-									<td style="color:#464a4e;">${eContentView.eTel}</td>
+								<tr class="tr2b">
+									<td class="tdLeftb2"><i title="전화번호" class="fas fa-phone fa-2x"></i></td>
+									<td class="tdRightb2">${eContentView.eTel}</td>
 								</tr>
-								<tr>
-									<td style="width: 25%; text-align: center; color:#e7438b;"><i title="음식종류" class="fab fa-delicious fa-2x"></i></td>
-									<td style="color:#464a4e;">
+								<tr class="tr3b">
+									<td class="tdLeftb3"><i title="음식종류" class="fab fa-delicious fa-2x"></i></td>
+									<td class="tdRightb3">
 										<c:choose>
 											<c:when test="${eContentView.eCategory == 'korean_food'}">
-												<b style="color:#e7438b;">한식</b> / ${eContentView.eKeyword_food}
+												<b>한식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'japanese_food'}">
-												<b style="color:#e7438b;">일식</b> / ${eContentView.eKeyword_food}
+												<b>일식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'western_food'}">
-												<b style="color:#e7438b;">양식</b> / ${eContentView.eKeyword_food}
+												<b>양식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'chinese_food'}">
-												<b style="color:#e7438b;">중식</b> / ${eContentView.eKeyword_food}
+												<b>중식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'asian_food'}">
-												<b style="color:#e7438b;">아시안 음식</b> / ${eContentView.eKeyword_food}
+												<b>아시안 음식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'etc_food'}">
-												<b style="color:#e7438b;">기타 음식</b> / ${eContentView.eKeyword_food}
+												<b>기타 음식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'fusion_food'}">
-												<b style="color:#e7438b;">퓨전 음식</b> / ${eContentView.eKeyword_food}
+												<b>퓨전 음식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 										</c:choose>
 									</td>
 								</tr>
-								<tr>
-									<td style="width: 25%; text-align: center; color:#e7438b;"><i title="주요메뉴" class="fas fa-utensils fa-2x"></i></td>
-									<td><pre style="font-family: 윤고딕540; font-size: 100%; margin-bottom: 0px; color:#464a4e;">${eContentView.eContent}</pre></td>
+								<tr class="tr4b">
+									<td class="tdLeftb4"><i title="주요메뉴" class="fas fa-utensils fa-2x"></i></td>
+									<td class="tdRightb4"><pre>${eContentView.eContent}</pre></td>
 								</tr>
 								
-								<tr align="right">
+								<tr class="tr5" align="right">
 									<td colspan="2">DB등록일 : <fmt:formatDate value="${eContentView.eDate}" pattern="yyyy.MM.dd HH:mm"/></td>									
 								</tr>
 							</table>			
@@ -246,6 +246,15 @@
 					</div>
 				</div>
 			</div>
+			
+			<form name="form1" role="form" method="post">
+				<input type="hidden" name="page_eating" id="escriPage" value="${escri.page_eating}" />
+				<input type="hidden" name="perPageNum" id="escriPageNum" value="${escri.perPageNum}" />
+				<input type="hidden" name="searchType" id="escriSearchType" value="${escri.searchType}" />
+				<input type="hidden" name="keyword" id="escriKeyword" value="${escri.keyword}" />
+				<input type="hidden" name="eThema" id="eThema" value="${eThema}" />
+			</form>
+			
 		</section>
 		
 		<div id="eCurrentPageNum"></div>
