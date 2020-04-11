@@ -130,4 +130,11 @@ public class MainController {
 		System.out.println("aboutUs() method");
 		return "/aboutUs";
 	}
+	
+	@RequestMapping("/popUp")
+	public String popUp() {
+		System.out.println("popUp() method");
+		return "/popUp";
+	}
+	
 }

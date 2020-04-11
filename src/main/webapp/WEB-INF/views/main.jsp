@@ -11,9 +11,38 @@
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
+		
+		<script type="text/javascript">
+			function getCookie(name) { 
+				var cookie = document.cookie; 
+				
+				if (document.cookie != "") { 
+					var cookie_array = cookie.split("; "); 
+					for ( var index in cookie_array) { 
+						var cookie_name = cookie_array[index].split("=");
+						
+						if (cookie_name[0] == "popupYN") { 
+							return cookie_name[1]; 
+						} 
+					} 
+				} 
+				
+				return ; 
+			} 
+			
+			function openPopup(url) { 
+				var cookieCheck = getCookie("popupYN");
+				
+				if (cookieCheck != "N") 
+					window.open(url, '', 'width=500,height=430,left=0,top=0') 
+			}
+		</script>
+		
+		
+		
 	</head>
 
-	<body>
+	<body onload="javascript:openPopup('${pageContext.request.contextPath}/popUp')">
 		<!-- header -->
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
