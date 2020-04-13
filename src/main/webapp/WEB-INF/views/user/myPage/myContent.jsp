@@ -46,7 +46,7 @@
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myContent">내 컨텐츠</a></td>
+							<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/myContent">내 컨텐츠</a></td>
 							</tr>
 							
 							<tr class="bordered">
@@ -98,7 +98,7 @@
 					</div><!-- col-sm-4 -->
 					<div class="col-sm-9"><br>
 						<div class="myinfo-wrap">
-							<h3 id="mpBoBtn">내 컨텐츠</h3>
+							<h3 id="mpBoBtn" style="color:#e74386">내 컨텐츠</h3>
 							<hr>
 							<p>'EE'에서 작성하신 게시글을 확인 할 수 있습니다.</p>
 							<br>
@@ -132,8 +132,6 @@
 									<thead class="thead-color">
 										<tr class="content_tr">
 											<th>글 번호</th>
-											<th>카테고리</th>
-											<th>말머리</th>
 											<th>글 제목</th>
 											<th>작성자 / 작성일</th>
 											<th>조회수</th>
@@ -145,13 +143,11 @@
 											<c:forEach items="${mypage.myBoardList}" var="vo">
 												<tr class="boardList_tr">
 													<td>${vo.bId}</td>
-													<td>${vo.bCategory}</td>
-													<td>${vo.bSubject}</td>
 													<td class="Title"><c:choose>
 															<c:when test="${vo.dCount > 10}">${vo.bTitle}</c:when>
 															<c:otherwise>
 																<a style="text-decoration: none" target="blank"
-																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}">
+																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${vo.bCategory}">
 																	${vo.bTitle} [${vo.rpCount}]</a>
 															</c:otherwise>
 														</c:choose></td>

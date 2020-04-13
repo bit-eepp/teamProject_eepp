@@ -61,7 +61,7 @@
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myReview">내 리뷰</a></td>
+							<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/myReview">내 리뷰</a></td>
 							</tr>
 							
 							<tr class="bordered">

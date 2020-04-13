@@ -31,7 +31,7 @@
 					<div class="col-sm-3">
 						<table class="text-wrap">
 							<tr>
-								<td class="text_bold"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
+								<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
 							</tr>
 							<tr class="bordered">
 								<td><a href="/eepp/mypage">${loginUser.uNickname}</a></td>
