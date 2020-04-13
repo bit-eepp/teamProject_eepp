@@ -12,9 +12,9 @@
 	</head>
 	
 	<body>
-<!-- header -->
-<%@ include file="/WEB-INF/views/header.jsp"%>
-<!-- header -->
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/header.jsp"%>
+	<!-- header -->
 
 		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 		<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
@@ -164,7 +164,7 @@
 							<c:when test="${hot.bCategory eq 'design'}">
 								디자인
 							</c:when>
-							<c:when test="${hot.bCategory eq 'offcial'}">
+							<c:when test="${hot.bCategory eq 'official'}">
 								공무원
 							</c:when>
 							<c:when test="${hot.bCategory eq 'etc'}">
@@ -293,7 +293,7 @@
 									<c:when test="${vo.bCategory eq 'design'}">
 										디자인
 									</c:when>
-									<c:when test="${vo.bCategory eq 'offcial'}">
+									<c:when test="${vo.bCategory eq 'official'}">
 										공무원
 									</c:when>
 									<c:when test="${vo.bCategory eq 'etc'}">
@@ -434,13 +434,13 @@
 		<!-- boardWrapper -->
 		
 		
-<!-- chat -->
-<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
-<!-- chat -->
-
-<!-- footer -->
-<%@ include file="/WEB-INF/views/footer.jsp"%>
-<!-- footer -->
+	<!-- chat -->
+	<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+	<!-- chat -->
+	
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/footer.jsp"%>
+	<!-- footer -->
 
 		<script src="${pageContext.request.contextPath}/js/board/boardMain.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>

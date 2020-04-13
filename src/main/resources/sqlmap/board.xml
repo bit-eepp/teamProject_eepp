@@ -27,8 +27,8 @@
 	            <when test="bCategory == 'design'">
 	               AND b.bCategory = 'design'
 	            </when>
-	            <when test="bCategory == 'offcial'">
-	               AND b.bCategory = 'offcial'
+	            <when test="bCategory == 'official'">
+	               AND b.bCategory = 'official'
 	            </when>
 	            <when test="bCategory == 'etc'">
 	               AND b.bCategory = 'etc'
@@ -81,8 +81,8 @@
 	            <when test="bCategory == 'design'">
 	               AND b.bCategory = 'design'
 	            </when>
-	            <when test="bCategory == 'offcial'">
-	               AND b.bCategory = 'offcial'
+	            <when test="bCategory == 'official'">
+	               AND b.bCategory = 'official'
 	            </when>
 	            <when test="bCategory == 'etc'">
 	               AND b.bCategory = 'etc'
