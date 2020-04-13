@@ -112,7 +112,8 @@ public class MypageController {
 	}
 
 	@RequestMapping("/myPoint")
-	public String myPoint(Model model, UserVO userVO, HttpSession session, @ModelAttribute("mscri") MypageSearchCriteria mscri) throws Exception {
+	public String myPoint(Model model, UserVO userVO, HttpSession session,
+			@ModelAttribute("mscri") MypageSearchCriteria mscri) throws Exception {
 		logger.info("page to myContent");
 
 		// 유저 세션 받아오기
@@ -152,7 +153,8 @@ public class MypageController {
 	}
 
 	@RequestMapping("/myClass")
-	public String class1(Model model, UserVO userVO, HttpSession session, @ModelAttribute("mscri") MypageSearchCriteria mscri,
+	public String class1(Model model, UserVO userVO, HttpSession session,
+			@ModelAttribute("mscri") MypageSearchCriteria mscri,
 			@RequestParam(value = "tabType", required = false, defaultValue = "") String tabType) throws Exception {
 		logger.info("page to class");
 
@@ -235,7 +237,7 @@ public class MypageController {
 		if (tabType.equals("myScrapBoard")) {
 			map.put("scrapCount", us.ScrapCount(map));
 			map.put("scrapList", us.scrapList(map));
-			
+
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
 			myPagePageMaker.setCri(mscri);
 			myPagePageMaker.setTotalCount(us.ScrapCount(map));
@@ -245,17 +247,17 @@ public class MypageController {
 		} else if (tabType.equals("myScrapClass")) {
 			map.put("scrapClassCount", us.scrapClassCount(map));
 			map.put("ClassscrapList", us.ClassscrapList(map));
-			
+
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
 			myPagePageMaker.setCri(mscri);
 			myPagePageMaker.setTotalCount(us.scrapClassCount(map));
 			model.addAttribute("myPagePageMaker", myPagePageMaker);
-			
+
 			// 맛집 스크랩
 		} else if (tabType.equals("myScrapEating")) {
 			map.put("EatingScrapList", us.EatingScrapList(map));
 			map.put("scrapEatingCount", us.scrapEatingCount(map));
-			
+
 			myPagePageMaker myPagePageMaker = new myPagePageMaker();
 			myPagePageMaker.setCri(mscri);
 			myPagePageMaker.setTotalCount(us.scrapEatingCount(map));
@@ -270,8 +272,8 @@ public class MypageController {
 	}
 
 	@RequestMapping("/myReview")
-	public String myReview(Model model, UserVO userVO, HttpSession session, @ModelAttribute("mscri") MypageSearchCriteria mscri)
-			throws Exception {
+	public String myReview(Model model, UserVO userVO, HttpSession session,
+			@ModelAttribute("mscri") MypageSearchCriteria mscri) throws Exception {
 		logger.info("page to myReview");
 
 		// 유저 세션 받아오기
@@ -298,15 +300,14 @@ public class MypageController {
 		map.put("reviewList", us.reviewList(map));
 		map.put("reviewListCount", us.reviewListCount(map));
 
-		// 리부 페이징
+		// 리뷰 페이징
 		myPagePageMaker myPagePageMaker = new myPagePageMaker();
 		myPagePageMaker.setCri(mscri);
 		myPagePageMaker.setTotalCount(us.reviewListCount(map));
-		
-		model.addAttribute("myPagePageMaker", myPagePageMaker);
-		model.addAttribute("mypage", map);
-		model.addAttribute("mscri", mscri);
 
+		model.addAttribute("myPagePageMaker", myPagePageMaker);
+		model.addAttribute("mscri", mscri);
+		model.addAttribute("mypage", map);
 
 		return "user/myPage/myReview";
 	}
@@ -359,12 +360,15 @@ public class MypageController {
 
 	}
 
-	//관리자 페이지
-	@RequestMapping("/admin/adminPage")
+	// 관리자 페이지
+	@RequestMapping(value = "/admin/adminPage")
 	public String adminPage(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			UserVO userVO, Model model, @ModelAttribute("memcri") MemberSearchCriteria memcri, NoticeCriteria Ncri,
 			UserReportCriteria ureportcri, BoardReportCriteria breportcri, ReplyReportCriteria rreportcri,
-			ClassVO classVO,
+			ClassVO classVO, @ModelAttribute("mscri") MypageSearchCriteria mscri,
+			@RequestParam(value = "tabType", required = false, defaultValue = "") String tabType,
+			@RequestParam(value = "success", required = false, defaultValue = "") String success,
+			
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory)
 			throws IOException {
@@ -387,10 +391,10 @@ public class MypageController {
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("memcri", memcri);
+			map.put("tabType", tabType);
+			map.put("success", success);
 			map.put("Ncri", Ncri);
-			map.put("ureportcri", ureportcri);
-			map.put("breportcri", breportcri);
-			map.put("rreportcri", rreportcri);
+			map.put("mscri", mscri);
 			map.put("sortType", sortType);
 			map.put("bCategory", bCategory);
 			map.put("user_id", userVO.getUser_id());
@@ -405,23 +409,22 @@ public class MypageController {
 			map.put("BListDesign", us.BListDesign(map));
 			map.put("BListOfficer", us.BListOfficer(map));
 			map.put("BListEtc", us.BListEtc(map));
-
 			map.put("CListALL", us.CListALL(map));
 			map.put("CListIt_dev", us.CListIt_dev(map));
 			map.put("CListEtc", us.CListEtc(map));
 			map.put("CListWorkSkill", us.CListWorkSkill(map));
 			map.put("CListFinacialTech", us.CListFinacialTech(map));
 			map.put("CListDaily", us.CListDaily(map));
-
-			// 오른쪽
-			map.put("noticeList", us.noticeList(map));
-			map.put("noticeListCount", us.noticeListCount(map));
 			map.put("UserReportList", us.UserReportList(map));
 			map.put("UserReportListCount", us.UserReportListCount(map));
 			map.put("BoardReportList", us.BoardReportList(map));
 			map.put("BoardReportListCount", us.BoardReportListCount(map));
 			map.put("ReplyReportList", us.ReplyReportList(map));
 			map.put("ReplyReportCount", us.ReplyReportListCount(map));
+
+			// 오른쪽
+			map.put("noticeList", us.noticeList(map));
+			map.put("noticeListCount", us.noticeListCount(map));
 			map.put("MemberList", us.MemberList(map));
 			map.put("MemberListCount", us.MemberListCount(map));
 
@@ -435,30 +438,48 @@ public class MypageController {
 			NoticePageMaker.setCri(Ncri);
 			NoticePageMaker.setTotalCount(us.noticeListCount(map));
 
-			// 유저신고
-			UserReportPageMaker UserReportPageMaker = new UserReportPageMaker();
-			UserReportPageMaker.setCri(ureportcri);
-			UserReportPageMaker.setTotalCount(us.UserReportListCount(map));
+			if (tabType.equals("ReportUser") || tabType.equals("")) {
+				
+				map.put("UserReportList", us.UserReportList(map));
+				map.put("UserReportListCount", us.UserReportListCount(map));
 
-			// 게시글 신고
-			BoardReportPageMaker BoardReportPageMaker = new BoardReportPageMaker();
-			BoardReportPageMaker.setCri(breportcri);
-			BoardReportPageMaker.setTotalCount(us.BoardReportListCount(map));
+				// 유저신고
+				myPagePageMaker myPagePageMaker = new myPagePageMaker();
+				myPagePageMaker.setCri(mscri);
+				myPagePageMaker.setTotalCount(us.UserReportListCount(map));
+				model.addAttribute("myPagePageMaker", myPagePageMaker);
 
-			// 댓글 신고
-			ReplyReportPageMaker ReplyReportPageMaker = new ReplyReportPageMaker();
-			ReplyReportPageMaker.setCri(rreportcri);
-			ReplyReportPageMaker.setTotalCount(us.ReplyReportListCount(map));
+			} else if (tabType.equals("ReportContent")) {
+				
+				map.put("BoardReportList", us.BoardReportList(map));
+				map.put("BoardReportListCount", us.BoardReportListCount(map));
+				
+				// 게시글 신고
+				myPagePageMaker myPagePageMaker = new myPagePageMaker();
+				myPagePageMaker.setCri(mscri);
+				myPagePageMaker.setTotalCount(us.BoardReportListCount(map));
+				model.addAttribute("myPagePageMaker", myPagePageMaker);
 
+			} else if (tabType.equals("ReportReply")) {
+
+				map.put("ReplyReportList", us.ReplyReportList(map));
+				map.put("ReplyReportCount", us.ReplyReportListCount(map));
+				
+				// 댓글 신고
+				myPagePageMaker myPagePageMaker = new myPagePageMaker();
+				myPagePageMaker.setCri(mscri);
+				myPagePageMaker.setTotalCount(us.ReplyReportListCount(map));
+				model.addAttribute("myPagePageMaker", myPagePageMaker);
+			}
+
+			model.addAttribute("mscri", mscri);
 			model.addAttribute("map", map);
 			model.addAttribute("sortType", sortType);
 			model.addAttribute("bCategory", bCategory);
-
+			model.addAttribute("tabType", tabType);
 			model.addAttribute("NoticePageMaker", NoticePageMaker);
-			model.addAttribute("UserReportPageMaker", UserReportPageMaker);
-			model.addAttribute("BoardReportPageMaker", BoardReportPageMaker);
-			model.addAttribute("ReplyReportPageMaker", ReplyReportPageMaker);
 			model.addAttribute("MemberPageMaker", MemberPageMaker);
+			model.addAttribute("success", success);
 
 		}
 		return "admin/adminPage";

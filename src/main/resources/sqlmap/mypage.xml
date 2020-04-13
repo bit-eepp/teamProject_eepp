@@ -33,8 +33,8 @@
 			from(select d.did, d.reporter_id, d.reported_id,
 			(select uNickname from users where user_id = d.reported_id) as reported_nick, (select uNickname from users where user_id = d.reporter_id) as reporter_nick, d.dreason, d.ddate from declaration d, users u 
 			where reported_id is not null AND d.reporter_id = u.user_id ORDER BY dDate DESC) A)
-			WHERE RNUM BETWEEN #{ureportcri.rowStart}
-			AND #{ureportcri.rowEnd}
+			WHERE RNUM BETWEEN #{mscri.rowStart}
+			AND #{mscri.rowEnd}
 		]]>
 	</select>
 	
@@ -43,8 +43,8 @@
 	<![CDATA[
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 			from(select d.did, d.board_id, d.ddate, d.dreason, u.unickname as reporter_nick from declaration d, board b,users u where not board_id is null and b.bId = d.board_id and d.reporter_id = u.user_id ORDER BY ddate DESC) A)
-			WHERE RNUM BETWEEN #{breportcri.rowStart}
-			AND #{breportcri.rowEnd}
+			WHERE RNUM BETWEEN #{mscri.rowStart}
+			AND #{mscri.rowEnd}
 			]]>
 	</select>
 
@@ -54,7 +54,7 @@
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
 			from(select d.did, d.reporter_id, d.dreason,d.ddate,u.unickname as reporter_nick, r.rpContent as rpContent from declaration d,reply r,users u 
 			where not reply_id is null and r.rpId = d.reply_id and d.reporter_id = u.user_id ORDER BY ddate DESC) A)
-			WHERE RNUM BETWEEN #{rreportcri.rowStart} AND #{rreportcri.rowEnd}
+			WHERE RNUM BETWEEN #{mscri.rowStart} AND #{mscri.rowEnd}
 			]]>
 	</select>
 
@@ -62,7 +62,7 @@
 	<select id = "noticeList" parameterType="map" resultType="bit.team.eepp.VO.BoardVO">
 	<![CDATA[
 			SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
-			from(SELECT * FROM BOARD WHERE BCATEGORY='공지' and user_id = 1 and bDeleted != 'yes' ORDER BY bWrittendate DESC) A)
+			from(SELECT * FROM BOARD WHERE BCATEGORY='notice' and user_id = 1 and bDeleted != 'yes' ORDER BY bWrittendate DESC) A)
 			WHERE RNUM BETWEEN #{Ncri.rowStart} AND #{Ncri.rowEnd}
 			
 		]]>
@@ -118,7 +118,7 @@
 	<select id="reviewList" parameterType="int" resultType="bit.team.eepp.VO.ReviewVO">
 		<![CDATA[
 		SELECT * FROM (SELECT A.*, ROWNUM AS RNUM, COUNT(*) OVER() AS TOTCNT
-			from(select rv.rvId, e.eid as eID,e.etitle as ename, rv.rvwrittendate, rv.rvcomment, rv.rvscore from eating e, review rv where e.eid = rv.eating_id and rv.user_id = #{user_id} and rv.rvdeleted = 'no'
+			from(select rv.rvId, e.eid as eID,e.etitle as ename, e.eThema as eThema, rv.rvwrittendate, rv.rvcomment, rv.rvscore from eating e, review rv where e.eid = rv.eating_id and rv.user_id = #{user_id} and rv.rvdeleted = 'no'
             ORDER BY rvWrittendate DESC) A)
 			WHERE RNUM BETWEEN #{mscri.rowStart} AND #{mscri.rowEnd}
 		]]>

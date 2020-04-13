@@ -20,6 +20,7 @@ public class ReviewVO {
 	private String rvDeleted;
 	private String eID;
 	private String uProfile;
+	private String eThema;
 	// 리뷰 아이디, 맛집 아이디, 유저(작성자) 아이디, 리뷰 작성일, 리뷰 수정일(수정 시 반영), 리뷰 내용, 리뷰 점수, 각 가게 당 리뷰
 	// 평균, 닉네임
 
@@ -28,7 +29,7 @@ public class ReviewVO {
 
 	public ReviewVO(float reviewAVG, int rvId, int eating_id, int user_id, Timestamp rvWrittenDate,
 			Timestamp rvModifyDate, String rvComment, float rvScore, String uNickname, String ename, String rvDeleted,
-			String eID, String uProfile) {
+			String eID, String uProfile, String eThema) {
 		this.rvId = rvId;
 		this.reviewAVG = reviewAVG;
 		this.eating_id = eating_id;
@@ -42,6 +43,15 @@ public class ReviewVO {
 		this.rvDeleted = rvDeleted;
 		this.eID = eID;
 		this.uProfile = uProfile;
+		this.eThema = eThema;
+	}
+
+	public String geteThema() {
+		return eThema;
+	}
+
+	public void seteThema(String eThema) {
+		this.eThema = eThema;
 	}
 
 	public String getuProfile() {
