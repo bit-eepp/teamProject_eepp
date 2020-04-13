@@ -213,7 +213,7 @@ public interface UserMapper {
 	public int BListDesign(Map<String, Object> map);
 
 	// 공무원
-	@Select("select count(bId) from board where bcategory ='official' AND bDeleted != 'yes'")
+	@Select("select count(bId) from board where bcategory ='offcial' AND bDeleted != 'yes'")
 	public int BListOfficer(Map<String, Object> map);
 
 	// 기타
