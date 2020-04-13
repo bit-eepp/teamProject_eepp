@@ -345,7 +345,7 @@
 							<c:otherwise>
 								<div class="questionForm">
 									<h5>
-										<b><i class="fas fa-comment-alt"></i>&nbsp;문 의 작 성</b>
+										<b>문 의 작 성<i class="fas fa-comment-alt"></i></b>
 									</h5>
 									
 									<table>
@@ -357,15 +357,12 @@
 													<textarea id="cqInputform" class="form-control" rows="4" name="rpContent" placeholder="강좌에 문의할 점이 있으면 작성해주세요." style="width: 100%; resize: none;"></textarea>
 												</form>
 								            </td>
-								            
-								            <td align=center>
-								            	<b>${loginUser.uNickname}</b>
-								            </td>
 								        </tr>
 								        
 								        <tr>
-								            <td align=center>
-								            	<button class="btn btn-lg questionBtn" type="button" name="qBtn"><b>문 의</b></button>
+								            <td>
+								            	<p class="qUser">${loginUser.uNickname}</p>
+								            	<button class="btn questionBtn" type="button" name="qBtn"><p>등록</p></button>
 								            </td>
 								        </tr>
 									</table>
