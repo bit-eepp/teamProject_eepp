@@ -3,32 +3,32 @@
 /*
 * 마이페이지 css 부
 */
-.mypageWrap {
+.mypageWrap, #adminWrap {
 	padding-top: 100px;
 }
 
-.bordered a {
-	color: inherit;
-}
-a {
+a, a:hover, .bordered a  {
 	color: inherit;
 }
 
-a:hover {
-	text-decoration: underline;
-	color: inherit;
+.text_bold:hover,.liwrap:hover{
+	color: #e74386;
 }
-.classForm .nav-item a.active{
+
+.bordered a:hover {
+	color: #e74386 !important;
+	text-decoration:none !important;
+}
+
+.text_bold a {
+	text-decoration: none;
+}
+
+.classForm .nav-item a.active {
 	color: #59bfbf;
-	border-color:#59bfbf #59bfbf #fff!important;
-}
-a{
-	color:inherit;
+	border-color: #59bfbf #59bfbf #fff !important;
 }
 
-/* .info {
-	margin: 0 auto;
-} */
 #table {
 	text-align: center;
 	height: 337px;
@@ -69,15 +69,10 @@ a{
 	margin-left: 30px;
 }
 
-p {
-	margin: 0;
-	padding: 0;
-}
-
 .img-circle {
 	width: 150px;
-	height:150px;
-	object-fit:cover;
+	height: 150px;
+	object-fit: cover;
 	margin-left: 25%;
 	overflow: hidden;
 	border-radius: 75px;
@@ -91,7 +86,8 @@ p {
 	border-color: gray;
 }
 
-#mypagenickNameCheck, #charge, #pointBtn, #selectDeleteBtn1,#selectDeleteBtn2,#selectDeleteBtn3 {
+#mypagenickNameCheck, #charge, #pointBtn, #selectDeleteBtn1,
+	#selectDeleteBtn2, #selectDeleteBtn3 {
 	font-size: 0.8rem;
 	border-radius: 7px;
 	padding: 5px 10px;
@@ -100,7 +96,8 @@ p {
 	border: none;
 }
 
-#selectDeleteBtn_Sboard, #selectDeleteBtn_SClass,#selectDeleteBtn_SEating {
+#selectDeleteBtn_Sboard, #selectDeleteBtn_SClass,
+	#selectDeleteBtn_SEating {
 	font-size: 0.8rem;
 	border-radius: 7px;
 	background: #59bfbf;
@@ -345,7 +342,7 @@ td {
 }
 
 .boardList_tr td, .scrapList_tr td, .scrapCList_tr td, .scrapEList_tr td,
-	.classJList_tr td, .classOList_tr td,  .gray{
+	.classJList_tr td, .classOList_tr td, .gray {
 	color: #6d6d6d;
 }
 
@@ -359,11 +356,7 @@ td {
 }
 
 .container {
-	
 	font-size: 0.8rem;
-}
-#MPwrap{
-	padding-top: 100px;
 }
 
 .scrapList_tr .RTitle, .scrapCList_tr .RTitie, .scrapEList_tr .RTitle {

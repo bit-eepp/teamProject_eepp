@@ -32,33 +32,17 @@
 					<div class="col-sm-3">
 						<table class="text-wrap">
 							<tr>
-									<td class="text_bold"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
-								</tr>
-								<tr class="bordered">
-									<td><a href="/eepp/mypage">${loginUser.uNickname}</a></td>
-								</tr>
+								<td class="text_bold"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
+							</tr>
+							<tr class="bordered">
+								<td><a href="/eepp/mypage">${loginUser.uNickname}</a></td>
+							</tr>
+							
 							<tr>
 								<td class="text_bold"><span class="required">• </span><a href="/eepp/myPoint">내 포인트</a></td>
 							</tr>
 							<tr class="bordered">
 							<td><a href="/eepp/myPoint"><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P</a></td>
-							</tr>
-							
-							<tr>
-							<td class="text_bold" style="cursor:pointer" onclick="openMsg();"><span class="required">• </span>내 쪽지</td>
-							</tr>
-							
-							<tr class="bordered">
-							<td class="liwrap" value="open_message" style="cursor:pointer" onclick="openMsg();">받은
-								쪽지 ${mypage.messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${mypage.messageSen}</td>
-							</tr>
-							
-							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myClass?tabType=myClassJoin">내 클래스</a></td>
-							</tr>
-							
-							<tr class="bordered">
-							<td><a href="/eepp/myClass?tabType=myClassJoin">개설 ${mypage.openClassCount}&nbsp;&nbsp;&nbsp;&nbsp;가입 ${mypage.joinClassCount}</a></td>
 							</tr>
 							
 							<tr>
@@ -72,29 +56,49 @@
 							</tr>
 							
 							<tr>
+							<td class="text_bold"><span class="required">• </span><a href="/eepp/myClass?tabType=myClassJoin">내 클래스</a></td>
+							</tr>
+							
+							<tr class="bordered">
+							<td><a href="/eepp/myClass?tabType=myClassJoin">개설 ${mypage.openClassCount}&nbsp;&nbsp;&nbsp;&nbsp;가입 ${mypage.joinClassCount}</a></td>
+							</tr>
+							
+							<tr>
+							<td class="text_bold"><span class="required">• </span><a href="/eepp/myReview">내 리뷰</a></td>
+							</tr>
+							
+							<tr class="bordered">
+							<td><div class="review_count"><a href="/eepp/myReview">${mypage.reviewListCount}건</a></div></td>
+							</tr>
+							
+							<tr>
 							<td class="text_bold"><span class="required">• </span><a href="myScrap?tabType=myScrapBoard">스크랩</a></td>
 							</tr>
 							
 							<tr class="bordered">
 							<td><div class="scrap_count"><a href="myScrap?tabType=myScrapBoard">게시글 ${mypage.scrapCount} &nbsp;&nbsp;클래스 ${mypage.scrapClassCount}&nbsp;&nbsp;&nbsp;맛집 ${mypage.scrapEatingCount}</a></div></td>
 							</tr>
+							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myReview">리뷰</a></td>
+							<td class="text_bold" style="cursor:pointer" onclick="openMsg();"><span class="required">• </span>내 쪽지</td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="review_count"><a href="/eepp/myReview">${mypage.reviewListCount}건</a></div></td>
+							<td class="liwrap" value="open_message" style="cursor:pointer" onclick="openMsg();" >받은
+								쪽지 ${mypage.messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${mypage.messageSen}</td>
 							</tr>
+							
 							<tr>
 							<td class="drop"><a href="withdrawal" id=drop onclick="drop();">회원탈퇴</a></td>
 							</tr>
 							
 						</table>
 
+
 					</div><!-- col-sm-4 -->
 					<div class="col-sm-9"><br>
 						<div class="myinfo-wrap">
-							<h3 id="mpBoBtn">게시글 목록</h3>
+							<h3 id="mpBoBtn">내 컨텐츠</h3>
 							<hr>
 							<p>'EE'에서 작성하신 게시글을 확인 할 수 있습니다.</p>
 							<br>

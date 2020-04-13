@@ -11,6 +11,9 @@
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
+<style>
+
+</style>
 </head>
 <body>
 		<!-- header -->
@@ -42,12 +45,13 @@
 							</tr>
 							
 							<tr>
-							<td class="text_bold" style="cursor:pointer" onclick="openMsg();"><span class="required">• </span>내 쪽지</td>
+							<td class="text_bold"><span class="required">• </span><a href="/eepp/myContent">내 컨텐츠</a></td>
 							</tr>
 							
 							<tr class="bordered">
-							<td class="liwrap" value="open_message" style="cursor:pointer" onclick="openMsg();">받은
-								쪽지 ${mypage.messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${mypage.messageSen}</td>
+							<td><div class="content_count">
+							<a href="/eepp/myContent">게시물 ${mypage.listCount}</a></div></td>
+							<!-- <a style="cursor:pointer" onclick="location.href='mypage?board=board'"> -->
 							</tr>
 							
 							<tr>
@@ -59,13 +63,11 @@
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myContent">내 컨텐츠</a></td>
+							<td class="text_bold"><span class="required">• </span><a href="/eepp/myReview">내 리뷰</a></td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="content_count">
-							<a href="/eepp/myContent">게시물 ${mypage.listCount}</a></div></td>
-							<!-- <a style="cursor:pointer" onclick="location.href='mypage?board=board'"> -->
+							<td><div class="review_count"><a href="/eepp/myReview">${mypage.reviewListCount}건</a></div></td>
 							</tr>
 							
 							<tr>
@@ -75,13 +77,16 @@
 							<tr class="bordered">
 							<td><div class="scrap_count"><a href="myScrap?tabType=myScrapBoard">게시글 ${mypage.scrapCount} &nbsp;&nbsp;클래스 ${mypage.scrapClassCount}&nbsp;&nbsp;&nbsp;맛집 ${mypage.scrapEatingCount}</a></div></td>
 							</tr>
+							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myReview">리뷰</a></td>
+							<td class="text_bold" style="cursor:pointer" onclick="openMsg();"><span class="required">• </span>내 쪽지</td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="review_count"><a href="/eepp/myReview">${mypage.reviewListCount}건</a></div></td>
+							<td class="liwrap" value="open_message" style="cursor:pointer" onclick="openMsg();" >받은
+								쪽지 ${mypage.messageRes}&nbsp;&nbsp;&nbsp;&nbsp;보낸 쪽지 ${mypage.messageSen}</td>
 							</tr>
+							
 							<tr>
 							<td class="drop"><a href="withdrawal" id=drop onclick="drop();">회원탈퇴</a></td>
 							</tr>
