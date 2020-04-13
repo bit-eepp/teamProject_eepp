@@ -89,7 +89,7 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "login/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView login(HttpSession session, HttpServletResponse response) {
+	public ModelAndView login(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		
 		/* 구글code 발행 */
@@ -98,6 +98,11 @@ public class LoginController {
 	  	String GoogleUrl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 		String naverUrl = naverLogin.getAuthorizationUrl(session);
 		String kakaoUrl = KakaoController.getAuthorizationUri(session);
+		
+		/* 메인이외의 페이지에서 로그인했을시 해당 페이지로 return시켜주기위한 url */
+		session.setAttribute("loginPage", request.getRequestURL().toString());
+		// 넘어온 페이지
+		session.setAttribute("returnUrl", (String)request.getHeader("REFERER"));
 		
 		/* 생성한 url 전달 */
 		mav.setViewName("login/login");
@@ -111,25 +116,27 @@ public class LoginController {
 	// 일반 로그인
 	@RequestMapping(value = "nomal_login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String nomal_login(HttpSession session, HttpServletResponse response, UserVO userVO, RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
-
+		
+		String returnUrl = (String)session.getAttribute("returnUrl");
+		logger.info("로그인 시도 페이지 : " + returnUrl);
+		
 		// DB에 등록된 이메일인지 확인
 		int checkEmail = js.checkDuplicate(userVO.getuEmail());
 		
 		if(checkEmail == 0) {
 			redirectAttributes.addFlashAttribute("failedLogin", "failed");
 			return "redirect:/login/login.do";
-		
 		}else {
 			UserVO login = ls.normalLogin(userVO.getuEmail());
 			logger.info("로그인 정보 조회 uEmail, uPassword");
 			boolean checkPW = pwEncoder.matches(userVO.getuPassword(), login.getuPassword());
 			logger.info("비밀번호 체크");
 			
-			// 차단된 회원일시
+			// 차단된 회원
 			if(login.getGrade_Id() == 3) {
 				redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
 				return "redirect:/login/login.do";
-			// 탈퇴한 회원일시
+			// 탈퇴한 회원
 			}else if(login.getGrade_Id() == 4) {
 				redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
 				return "redirect:/login/login.do";
@@ -150,8 +157,8 @@ public class LoginController {
 					user.setSession_limit(sessionLimit);
 					ls.keepLogin(user);
 					
-					logger.info("rememberMe Cookie 생성");
 					// 쿠키 생성
+					logger.info("rememberMe Cookie 생성");
 					Cookie loginCookie = new Cookie("loginCookie", session.getId());
 					loginCookie.setMaxAge(60*60*24*7);
 					loginCookie.setPath("/");
@@ -160,9 +167,17 @@ public class LoginController {
 					
 					logger.info("자동 로그인 정보 저장 완료");
 				}
-
-					return "redirect:/";
 				
+				// 로그인 후 redirect와 관련된 session 삭제
+				session.removeAttribute("returnUrl");
+				if(returnUrl.equals((String)session.getAttribute("loginPage"))) {
+					logger.info("로그인페이지에서의 접근");
+					session.removeAttribute("loginPage");
+					returnUrl = "/";
+				}
+				return "redirect:"+returnUrl;
+				
+				// 로그인 아이디 또는 비밀번호가 틀렸을시
 				}else {
 					redirectAttributes.addFlashAttribute("failedLogin", "failed");
 					return "redirect:/login/login.do";
@@ -172,7 +187,7 @@ public class LoginController {
 	}
 	
 	
-	/* 카카오 로그인 성공시 */
+	/* 카카오 로그인 */
 	@RequestMapping(value="sns/kakaoLogin", produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
 	public String kakaoLogin(@RequestParam("code") String code, 
 	HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model,RedirectAttributes redirectAttributes) throws Exception {
@@ -186,24 +201,25 @@ public class LoginController {
 		//DB에 맞게 받을 정보이름 수정
 		String uEmail = null;
 		String uNickname = null;
-		//String image = null;
+		System.out.println();
 		
 		//유저정보 카카오에서 가져오기
 		JsonNode properties = KaKaouserInfo.path("properties");
 		JsonNode kakao_account = KaKaouserInfo.path("kakao_account");
 		uEmail = kakao_account.path("email").asText();
 		uNickname = properties.path("nickname").asText();
-		//image = properties.path("profile_image").asText();
 		System.out.println(uEmail+"/"+uNickname);
+		
+		/* 메인이외의 페이지에서 로그인했을시 해당 페이지로 return시켜주기위한 url */
+		String returnUrl = (String)session.getAttribute("returnUrl");
+		logger.info("로그인한 페이지 : " + returnUrl);
 		
 		//DB에 등록된 이메일인지 확인
 		int check;
-		try {
-			check = js.checkDuplicate(uEmail);
+		check = js.checkDuplicate(uEmail);
 			
 			if(check == 0) {
 				logger.info("DB에 등록되지 않은 이메일");
-
 				logger.info("kakao회원가입으로 이동");
 				
 				Map<String, Object> userInfo = new HashMap<String,Object>();
@@ -211,7 +227,6 @@ public class LoginController {
 				userInfo.put("uNickname", uNickname);
 				userInfo.put("snsType", "kakao");
 				redirectAttributes.addFlashAttribute("user", userInfo);
-				
 				return "redirect:/join/joinForm";
 				
 			} else if(check != 0) {
@@ -239,28 +254,35 @@ public class LoginController {
 					else if(login.getSnsType().equals("kakao")) {
 						session.setAttribute("loginUser", login);
 					
-					}// 다른 sns로 가입한 이메일일 경우
+					}
+					// 다른 sns로 가입한 이메일일 경우
 					else{
 						redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
 						return "redirect:/login/login.do";
 					}
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		
+		// 로그인 후 redirect와 관련된 session 삭제
+		session.removeAttribute("returnUrl");
+		
+		if(returnUrl.equals((String)session.getAttribute("loginPage"))) {
+			logger.info("로그인페이지에서의 접근");
+			session.removeAttribute("loginPage");
+			returnUrl = "/";
 		}
 		
-		return "redirect:/";
+		return "redirect:"+returnUrl;
 	}
 	
-	/* 네이버 로그인 성공시 callback호출 메소드 */
+	/* 네이버 로그인 */
 	@RequestMapping(value = "sns/naverLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam(required=false, defaultValue="0") String code, @RequestParam String state, HttpSession session, 
 	HttpServletRequest request, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException, ParseException {	
 		
 		//정보동의 취소시 이전페이지로 이동
 		if(code.equals("0")) {
-			return "redirect:/";
+			response.sendRedirect("/");
 		}
 		
 		OAuth2AccessToken oauthToken;
@@ -282,63 +304,73 @@ public class LoginController {
 		String uImg = (String)response_obj.get("profile_image");
 		System.out.println(uEmail+"/"+uNickname+"/"+uImg);
 		
+		/* 메인이외의 페이지에서 로그인했을시 해당 페이지로 return시켜주기위한 url */
+		String returnUrl = (String)session.getAttribute("returnUrl");
+		logger.info("로그인한 페이지 : " + returnUrl);
+		
 		//DB에 등록된 이메일인지 확인
-				int check;
-				try {
-					check = js.checkDuplicate(uEmail);
-					
-					if(check == 0) {
-						logger.info("DB에 등록되지 않은 이메일");
-
-						logger.info("naver회원가입으로 이동");
+		int check;
+		check = js.checkDuplicate(uEmail);
+		
+		if(check == 0) {
+			logger.info("DB에 등록되지 않은 이메일");
+			logger.info("naver회원가입으로 이동");
 						
-						Map<String, Object> userInfo = new HashMap<String,Object>();
-						userInfo.put("uEmail", uEmail);
-						userInfo.put("uNickname", uNickname);
-						userInfo.put("snsType", "naver");
-						redirectAttributes.addFlashAttribute("user", userInfo);
-						return "redirect:/join/joinForm";
+			Map<String, Object> userInfo = new HashMap<String,Object>();
+			userInfo.put("uEmail", uEmail);
+			userInfo.put("uNickname", uNickname);
+			userInfo.put("snsType", "naver");
+			redirectAttributes.addFlashAttribute("user", userInfo);
+			return "redirect:/join/joinForm";
 						
-					} else if(check != 0) {
-						System.out.println(check+"이 null이 아닙니다.");
+		} else if(check != 0) {
+			System.out.println(check+"이 null이 아닙니다.");
 						
-						UserVO login = new UserVO();
-						login = ls.snsLogin(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
-						System.out.println(login.getSnsType());
-						
-						// 차단된 회원일시
-						if(login.getGrade_Id() == 3) {
-							redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
-							return "redirect:/login/login.do";
-						// 탈퇴한 회원일시
-						}else if(login.getGrade_Id() == 4) {
-							redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
-							return "redirect:/login/login.do";
-						}else {
-							// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
-							if(login.getSnsType() == null) {
-								redirectAttributes.addFlashAttribute("loginFailInfo", "notSns");
-								return "redirect:/login/login.do";
-							}
-							// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
-							else if(login.getSnsType().equals("naver")) {
-								session.setAttribute("loginUser", login);
-							}// 다른 sns로 가입한 이메일일 경우
-							else{
-								redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
-								return "redirect:/login/login.do";
-							}
-						}
-						
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
+			UserVO login = new UserVO();
+			login = ls.snsLogin(uEmail); // 이미 등록된 이메일이면 DB에서 정보 가져오기
+			System.out.println(login.getSnsType());
+			
+			// 차단된 회원일시
+			if(login.getGrade_Id() == 3) {
+				redirectAttributes.addFlashAttribute("loginFailInfo", "grade3");
+				return "redirect:/login/login.do";
+			// 탈퇴한 회원일시
+			}else if(login.getGrade_Id() == 4) {
+				redirectAttributes.addFlashAttribute("loginFailInfo", "grade4");
+				return "redirect:/login/login.do";
+			}else {
+				// sns가 아닌 일반회원가입으로 가입한 이메일일 경우
+				if(login.getSnsType() == null) {
+					redirectAttributes.addFlashAttribute("loginFailInfo", "notSns");
+					return "redirect:/login/login.do";
 				}
-				return "redirect:/";
-				
+				// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
+				else if(login.getSnsType().equals("naver")) {
+					session.setAttribute("loginUser", login);
+				}
+				// 다른 sns로 가입한 이메일일 경우
+				else{
+					redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
+					return "redirect:/login/login.do";
+				}
 			}
+						
+		}
+		
+		//넘어온 주소와 관련된 session 삭제
+		session.removeAttribute("returnUrl");
+		logger.info("로그인 후 return Url:"+returnUrl);
+		
+		if(returnUrl.equals((String)session.getAttribute("loginPage"))) {
+			System.out.println("로그인페이지에서의 접근");
+			session.removeAttribute("loginPage");
+			returnUrl = "/";
+		}
+		
+		return "redirect:"+returnUrl;
+	}
 	
-	
+	/* google 로그인 */
 	@RequestMapping("sns/googleLogin")
 	public String googleLogin(Model model, @RequestParam(required=false, defaultValue="0") String code, HttpSession session, 
 	HttpServletRequest request, RedirectAttributes redirectAttributes, HttpServletResponse response) throws IOException, ParseException {	
@@ -385,25 +417,27 @@ public class LoginController {
         String uEmail = googleUserInfo.get("email");
         String uNickname = googleUserInfo.get("name");
         
-      //DB에 등록된 이메일인지 확인
-      		int check;
-      		try {
-      			check = js.checkDuplicate(uEmail);
+        /* 메인이외의 페이지에서 로그인했을시 해당 페이지로 return시켜주기위한 url */
+		String returnUrl = (String)session.getAttribute("returnUrl");
+		logger.info("로그인한 페이지 : " + returnUrl);
+        
+		//DB에 등록된 이메일인지 확인
+      	int check;
+      	check = js.checkDuplicate(uEmail);
       			
-      			if(check == 0) {
-      				logger.info("DB에 등록되지 않은 이메일");
+      		if(check == 0) {
+      			logger.info("DB에 등록되지 않은 이메일");
+      			logger.info("google회원가입으로 이동");
+      				
+      			Map<String, Object> userInfo = new HashMap<String,Object>();
+      			userInfo.put("uEmail", uEmail);
+      			userInfo.put("uNickname", uNickname);
+      			userInfo.put("snsType", "google");
+      			redirectAttributes.addFlashAttribute("user", userInfo);
 
-      				logger.info("google회원가입으로 이동");
-      				
-      				Map<String, Object> userInfo = new HashMap<String,Object>();
-      				userInfo.put("uEmail", uEmail);
-      				userInfo.put("uNickname", uNickname);
-      				userInfo.put("snsType", "google");
-      				redirectAttributes.addFlashAttribute("user", userInfo);
-					
-					return "redirect:/join/joinForm";
-      				
-      			} else if(check != 0) {
+      			return "redirect:/join/joinForm";
+      			
+      		} else if(check != 0) {
       				System.out.println(check+"이 null이 아닙니다.");
       				
       				UserVO login = new UserVO();
@@ -427,49 +461,27 @@ public class LoginController {
 						// sns로 가입한 계정일 경우 가입 sns로 접근했는지 검사
 						else if(login.getSnsType().equals("google")) {
 							session.setAttribute("loginUser", login);
-						}// 다른 sns로 가입한 이메일일 경우
+						}
+						// 다른 sns로 가입한 이메일일 경우
 						else{
 							redirectAttributes.addFlashAttribute("loginFailInfo", "otherSNS");
 							return "redirect:/login/login.do";
 						}
 					}
-      			}
-      		} catch (Exception e) {
-      			e.printStackTrace();
       		}
       		
-      		return "redirect:/";
-      	}
-	
-	/* 로그아웃 */
-	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
-		public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws IOException {
-		
-		Object loginSession = session.getAttribute("loginUser");
-		UserVO user = (UserVO)loginSession;
-		
-		if(session.getAttribute("loginUser") != null) {
-			session.removeAttribute("loginUser");
-			session.invalidate();
+      	//넘어온 주소와 관련된 session 삭제
+		session.removeAttribute("returnUrl");
+		logger.info("로그인 후 return Url:"+returnUrl);
 			
-			// 자동 로그인 정보가 있을시 삭제
-			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-			if(loginCookie != null) {
-				loginCookie.setMaxAge(0);
-				loginCookie.setPath("/");
-				response.addCookie(loginCookie);
-				user.setSession_key("none");
-				SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				String today = null;
-				today = formatter.format(cal.getTime());
-				user.setSession_limit(Timestamp.valueOf(today));
-				ls.keepLogin(user);
-				logger.info("자동 로그인 정보 삭제");
-			}
+		if(returnUrl.equals((String)session.getAttribute("loginPage"))) {
+			System.out.println("로그인페이지에서의 접근");
+			session.removeAttribute("loginPage");
+			returnUrl = "/";
 		}
-		return "redirect:/";
-	}
+		
+		return "redirect:"+returnUrl;
+    }
 	
 	/* 아이디 비밀번호 찾기 */
 	@RequestMapping(value = "login/forgotMyInfo", method = { RequestMethod.GET, RequestMethod.POST })
@@ -590,5 +602,38 @@ public class LoginController {
 			out.println("<script>alert('비밀번호가 재설정되었습니다. 로그인해주세요.'); location.href='/eepp/login/login.do';</script>");
 			out.close();
 		}
+	}
+	
+	/* 로그아웃 */
+	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public void logout(HttpSession session, HttpServletRequest request, HttpServletResponse response)throws IOException {
+		
+		Object loginSession = session.getAttribute("loginUser");
+		UserVO user = (UserVO)loginSession;
+		
+		String returnUrl = (String)request.getHeader("REFERER");
+		logger.info("로그아웃한 페이지 : " + returnUrl);
+		
+		if(session.getAttribute("loginUser") != null) {
+			session.removeAttribute("loginUser");
+			session.invalidate();
+			
+			// 자동 로그인 정보가 있을시 삭제
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			if(loginCookie != null) {
+				loginCookie.setMaxAge(0);
+				loginCookie.setPath("/");
+				response.addCookie(loginCookie);
+				user.setSession_key("none");
+				SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String today = null;
+				today = formatter.format(cal.getTime());
+				user.setSession_limit(Timestamp.valueOf(today));
+				ls.keepLogin(user);
+				logger.info("자동 로그인 정보 삭제");
+			}
+		}
+		response.sendRedirect(returnUrl);
 	}
 }
