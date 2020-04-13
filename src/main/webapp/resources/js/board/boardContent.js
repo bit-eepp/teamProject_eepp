@@ -43,7 +43,7 @@ var uNickname = $("#userNickname").val();
 	// 해당 게시글이 공지사항이면 게시물 신고 버튼 안보이게 하기
 	var bSubject = $("#content_bSubject").val();
 
-	if(bSubject == '공지') {
+	if(bSubject == 'notice') {
 		$('.declarationForm').remove();
 	}
 	//로그인 하지않은 경우, 새글쓰기 버튼 삭제 및 게시글신고버튼삭제
@@ -67,21 +67,21 @@ var uNickname = $("#userNickname").val();
 
 //게시판 카테고리
 function boardTitle(title) {	
-	if(title == '') {
+	if(title == 'all') {
 		$(".ct-all").addClass("onCategory");
-	} else if(title == 'notice' || title == '공지') {
+	} else if(title == 'notice') {
 		$(".ct-notice").addClass("onCategory");
-	} else if(title == 'it_dev' || title == 'IT/개발') {
+	} else if(title == 'it_dev') {
 		$(".ct-it").addClass("onCategory");
-	} else if(title == 'service' || title == '서비스') {
+	} else if(title == 'service') {
 		$(".ct-service").addClass("onCategory");
-	} else if(title == 'finance' || title == '금융') {
+	} else if(title == 'finance') {
 		$(".ct-finance").addClass("onCategory");
-	} else if(title == 'design' || title == '디자인') {
+	} else if(title == 'design') {
 		$(".ct-design").addClass("onCategory");
-	} else if(title == 'official' || title == '공무원') {
+	} else if(title == 'official') {
 		$(".ct-offi").addClass("onCategory");
-	} else if(title == 'etc' || title == '기타') {
+	} else if(title == 'etc') {
 		$(".ct-etc").addClass("onCategory");
 	} 
 }
@@ -89,10 +89,26 @@ function boardTitle(title) {
 //카카오 링크 공유
 Kakao.init('55d4b3987a46162ad1d899676af601c4');
 function shareLink() {
+	var category = $("#bCategory").val();
+	if(category == 'all')
+		category == '전체글';
+	else if(category == 'it_dev')
+		category = 'IT & 개발';
+	else if(category == 'service')
+		category = '서비스';
+	else if(category == 'finance')
+		category = '금융';
+	else if(category == 'design')
+		category = '디자인';
+	else if(category == 'offcial')
+		category = '공무원';
+	else if(category == 'etc')
+		category = '기타';
+	
     Kakao.Link.sendCustom({
       templateId: 22997,
       templateArgs: {
-        title: '#'+$("#bCategory").val()+'게시판 \n'+$("#contentBtitle").val(),
+        title: '#'+category+'게시판 \n'+'"'+$(".bContentTitle").text()+'"',
         description: 'Community EE에서 확인하세요!',
         pathLink : 
         	'eepp/board/contentView?bId='+$("#contentBid").val()+'&bCategory=&sortType=',
@@ -157,20 +173,9 @@ function resetForm() {
 
 // 해당 게시글 삭제 확인 JS메서드(댓글이 있는 게시글의 경우 삭제 불가)
 function deleteConfirm() {
-	
 	if(confirm("정말 삭제 하시겠습니까?")){
 		deleteContent(bId);
 	}
-	
-	
-	/*if(rpCount > 0){
-		alert("댓글이 달린 게시물은 삭제 할 수 없습니다.");	
-		return;
-	} else {
-		if(confirm("정말 삭제 하시겠습니까?")){
-			deleteContent(bId);
-		}
-	}*/
 }
 	
 // 해당 게시글 삭제하는  JS메서드(Ajax-Json)
@@ -212,7 +217,7 @@ function likeCount(bId) {
 	});
 }
 		
-// 해당 게시글의 추천수를 올려주는  JS메서드(Ajax-Json)
+// 해당 게시글의 추천수를 올려주는 JS메서드(Ajax-Json)
 function like(bId) {
 	if(!uNickname){
 		alert("로그인 해주세요.");

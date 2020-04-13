@@ -31,29 +31,66 @@
 	border-collapse: separate;
 	border-spacing: 0 15px;
 }
-
-.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1 {
-	width: 70%;
-	font-size: 200%;
+.eContentMainInfo{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-
-.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdLeft1 b {
+.eContentHead .eContentMainInfo .eContentTitle{
+	display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.eContentHead .eContentMainInfo .eContentTitle p{
+	font-size: 32px;
+    margin-bottom: 0;
+}
+.eContentHead .eContentMainInfo .eContentTitle span.reviewAVG{
 	color: #e7438b;
+    font-weight: bold;
+    font-size: 28px;
+    margin-left: 15px;
 }
-
-.container .eatingContent .eContentLeft .eContentHead table .tr1 .tdRight1 a {
+.eContentHead .eContentMainInfo .eContentInfo{
+	display: flex;
+    align-items: center;
+}
+.eContentHead .eContentMainInfo .eContentInfo p{
+    margin-bottom: 0;
+    font-size: 14px;
+    margin-right: 10px;
+    color: #828282;
+}
+.eContentHead .eContentMainInfo .btnWrap{
+	display: flex;
+}
+.eContentHead .eContentMainInfo .btnWrap p{
+	margin-bottom:0;
+}
+.eContentHead .eContentMainInfo .btnWrap:first-child{
+	margin-bottom: 5px;
+}
+.eContentHead .eContentMainInfo .btnWrap a{
 	color: #e7438b;
-	cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
-
-.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdLeft2 {
-	color: #46505ab5;
-	font-size: 90%;
+.eContentHead .eContentMainInfo .btnWrap p:first-child{
+	margin-right:10px;
 }
-
-.container .eatingContent .eContentLeft .eContentHead table .tr2 .tdRight2 a {
-	color: #e7438b;
-	cursor: pointer;
+.eContentHead .eContentMainInfo .btnWrap a i{
+	font-size:22px;
+}
+.eContentHead .eContentMainInfo .btnWrap .shareBtn .share{
+	display: block;
+    cursor: pointer;
+}
+.eContentHead .eContentMainInfo .btnWrap .shareBtn .share img{
+	max-width:100%;
 }
 
 .container .eatingContent .eContentLeft .eContentBody table {

@@ -8,7 +8,7 @@
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, b.bHit, b.bLike, b.bUnlike, b.bDeleted,
 			(SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount 
 			FROM USERS u, BOARD b
-			WHERE u.USER_ID = b.USER_ID AND b.bCategory = '공지' AND bDeleted != 'yes' ORDER BY bWrittenDate DESC)
+			WHERE u.USER_ID = b.USER_ID AND b.bCategory = 'notice' AND bDeleted != 'yes' ORDER BY bWrittenDate DESC)
 			WHERE ROWNUM <= 2
 		]]>
 	</select>
@@ -18,7 +18,7 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, b.bHit, b.bLike, b.bUnlike, b.bDeleted,
 			(SELECT COUNT(*) FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' AND TO_CHAR(b.bWrittenDate,'YYYYMMDD') >= TO_CHAR(SYSDATE-7,'YYYYMMDD') ORDER BY rpCount DESC)
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' AND TO_CHAR(b.bWrittenDate,'YYYYMMDD') >= TO_CHAR(SYSDATE-7,'YYYYMMDD') ORDER BY rpCount DESC)
 			WHERE dCount <= 10 AND ROWNUM <= 3
 		]]>
 	</select>
@@ -28,7 +28,7 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
 			WHERE dCount <= 10 AND ROWNUM <= 5 
 		]]>
 	</select>
@@ -38,8 +38,8 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
-			WHERE bCategory='IT/개발' AND dCount <= 10 AND ROWNUM <= 8 
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			WHERE bCategory='it_dev' AND dCount <= 10 AND ROWNUM <= 8 
 		]]>
 	</select>
 	
@@ -48,8 +48,8 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
-			WHERE bCategory='서비스' AND dCount <= 10 AND ROWNUM <= 8 
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			WHERE bCategory='service' AND dCount <= 10 AND ROWNUM <= 8 
 		]]>
 	</select>
 	
@@ -58,8 +58,8 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
-			WHERE bCategory='금융' AND dCount <= 10 AND ROWNUM <= 8 
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			WHERE bCategory='finance' AND dCount <= 10 AND ROWNUM <= 8 
 		]]>
 	</select>
 	
@@ -68,8 +68,8 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
-			WHERE bCategory='디자인' AND dCount <= 10 AND ROWNUM <= 8 
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			WHERE bCategory='design' AND dCount <= 10 AND ROWNUM <= 8 
 		]]>
 	</select>
 	
@@ -78,8 +78,8 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
-			WHERE bCategory='공무원' AND dCount <= 10 AND ROWNUM <= 8 
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			WHERE bCategory='official' AND dCount <= 10 AND ROWNUM <= 8 
 		]]>
 	</select>
 	
@@ -88,8 +88,8 @@
 			SELECT * FROM (
 			SELECT b.bId, b.bCategory, b.bSubject, b.bTitle, bContent, u.uNickname, u.user_id, to_char(b.bWrittenDate, 'YY/MM/DD HH24:MI') as bWrittenDate, to_char(b.bModifyDate, 'YY/MM/DD HH24:MI') as bModifyDate, b.bWrittenDate as isNew, b.bHit, b.bLike, b.bUnlike,
 			b.bDeleted, (SELECT COUNT(*)FROM REPLY WHERE rDeleted != 'yes' AND board_id = b.bId) AS rpCount, (SELECT COUNT(*) FROM DECLARATION WHERE board_id = b.bId) AS dCount
-			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
-			WHERE bCategory='기타' AND dCount <= 10 AND ROWNUM <= 8 
+			FROM USERS u, BOARD b WHERE u.USER_ID = b.USER_ID AND b.bCategory != 'notice' AND bDeleted != 'yes' ORDER BY bModifyDate DESC)
+			WHERE bCategory='etc' AND dCount <= 10 AND ROWNUM <= 8 
 		]]>
 	</select>
 	
@@ -98,7 +98,7 @@
 			SELECT * FROM (
 			SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, u.uNickname, u.uProfile,
 			c.cDeleted, (SELECT COUNT(*) FROM REPLY WHERE rDeleted != 'yes' AND class_id = c.cId) AS questionCount, (TO_CHAR(cEndDate,'YYYYMMDD') - TO_CHAR(SYSDATE,'YYYYMMDD')) AS endDay
-			FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cDeleted != 'yes' ORDER BY endDay ASC) WHERE endDay >= 0 AND ROWNUM <= 4
+			FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cDeleted != 'yes' ORDER BY endDay ASC) WHERE endDay > 0 AND ROWNUM <= 4
 		]]>
 	</select>
 	

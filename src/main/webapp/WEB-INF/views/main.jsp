@@ -37,9 +37,6 @@
 					window.open(url, '', 'width=500,height=430,left=0,top=0') 
 			}
 		</script>
-		
-		
-		
 	</head>
 
 	<body onload="javascript:openPopup('${pageContext.request.contextPath}/popUp')">
@@ -135,8 +132,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject == 'notice'}">
+																공지
+															</c:when>
+														</c:choose>
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory == 'notice'}">
+																공지
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -165,10 +174,43 @@
 												<tr class="listTable-list listWidth isHotList">
 													<td class="isHotContent"><i class="fab fa-hotjar"></i></td>
 													<td class="bId">${bh.bId}</td>
-													<td class="bSubject">${bh.bSubject}</td>
-													<td class="bCategory">${bh.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bh.bSubject == 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${bh.bSubject == 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${bh.bSubject == 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bh.bCategory eq 'it_dev'}">
+																IT/개발
+															</c:when>
+															<c:when test="${bh.bCategory eq 'service'}">
+																서비스
+															</c:when>
+															<c:when test="${bh.bCategory eq 'finance'}">
+																금융
+															</c:when>
+															<c:when test="${bh.bCategory eq 'design'}">
+																디자인
+															</c:when>
+															<c:when test="${bh.bCategory eq 'official'}">
+																공무원
+															</c:when>
+															<c:when test="${bh.bCategory eq 'etc'}">
+																기타
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
-														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bh.bId}&searchType=&keyword=&sortType=&bCategory=${bh.bCategory}">
+														<a style="text-decoration: none;" href="${pageContext.request.contextPath}/board/contentView?bId=${bh.bId}&searchType=&keyword=&sortType=&bCategory=${bh.bCategory}">
 														<c:choose>
 															<c:when test="${fn:length(bh.bTitle) > 33}">
 																${fn:substring(bh.bTitle, 0, 33)}... [${bh.rpCount}]
@@ -266,8 +308,41 @@
 													</c:choose>
 													
 													<td class="bId">${bl.bId}</td>
-													<td class="bSubject">${bl.bSubject}</td>
-													<td class="bCategory">${bl.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bl.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${bl.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${bl.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bl.bCategory eq 'it_dev'}">
+																IT/개발
+															</c:when>
+															<c:when test="${bl.bCategory eq 'service'}">
+																서비스
+															</c:when>
+															<c:when test="${bl.bCategory eq 'finance'}">
+																금융
+															</c:when>
+															<c:when test="${bl.bCategory eq 'design'}">
+																디자인
+															</c:when>
+															<c:when test="${bl.bCategory eq 'official'}">
+																공무원
+															</c:when>
+															<c:when test="${bl.bCategory eq 'etc'}">
+																기타
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bl.bId}&searchType=&keyword=&sortType=&bCategory=${bl.bCategory}">
 														<c:choose>
@@ -376,8 +451,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject eq 'notice'}">
+																공지
+															</c:when>
+														</c:choose>				
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory eq 'notice'}">
+																공지
+															</c:when>										
+														</c:choose>						
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -414,8 +501,27 @@
 													</c:choose>
 													
 													<td class="bId">${blIT.bId}</td>
-													<td class="bSubject">${blIT.bSubject}</td>
-													<td class="bCategory">${blIT.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${blIT.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${blIT.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${blIT.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+														</td>
+														
+														<td class="bCategory">
+														<c:choose>
+															<c:when test="${blIT.bCategory eq 'it_dev'}">
+																IT/개발
+															</c:when>
+														</c:choose>
+														</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${blIT.bId}&searchType=&keyword=&sortType=&bCategory=${blIT.bCategory}">
 														<c:choose>
@@ -524,8 +630,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject eq 'notice'}">
+																공지
+															</c:when>
+														</c:choose>				
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory eq 'notice'}">
+																공지
+															</c:when>										
+														</c:choose>						
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -562,8 +680,27 @@
 													</c:choose>
 													
 													<td class="bId">${blService.bId}</td>
-													<td class="bSubject">${blService.bSubject}</td>
-													<td class="bCategory">${blService.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${blService.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${blService.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${blService.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+														
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${blService.bCategory eq 'service'}">
+																서비스
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${blService.bId}&searchType=&keyword=&sortType=&bCategory=${blService.bCategory}">
 														<c:choose>
@@ -672,8 +809,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject eq 'notice'}">
+																공지
+															</c:when>
+														</c:choose>				
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory eq 'notice'}">
+																공지
+															</c:when>										
+														</c:choose>						
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -710,8 +859,27 @@
 													</c:choose>
 													
 													<td class="bId">${blFinance.bId}</td>
-													<td class="bSubject">${blFinance.bSubject}</td>
-													<td class="bCategory">${blFinance.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${blFinance.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${blFinance.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${blFinance.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+														
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${blFinance.bCategory eq 'finance'}">
+																금융
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${blFinance.bId}&searchType=&keyword=&sortType=&bCategory=${blFinance.bCategory}">
 														<c:choose>
@@ -820,8 +988,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject eq 'notice'}">
+																공지
+															</c:when>
+														</c:choose>				
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory eq 'notice'}">
+																공지
+															</c:when>										
+														</c:choose>						
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -858,8 +1038,27 @@
 													</c:choose>
 													
 													<td class="bId">${blDesign.bId}</td>
-													<td class="bSubject">${blDesign.bSubject}</td>
-													<td class="bCategory">${blDesign.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${blDesign.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${blDesign.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${blDesign.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+														
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${blDesign.bCategory eq 'design'}">
+																디자인
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${blDesign.bId}&searchType=&keyword=&sortType=&bCategory=${blDesign.bCategory}">
 														<c:choose>
@@ -968,8 +1167,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject eq 'notice'}">
+																공지
+															</c:when>
+														</c:choose>				
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory eq 'notice'}">
+																공지
+															</c:when>										
+														</c:choose>						
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -1006,8 +1217,27 @@
 													</c:choose>
 													
 													<td class="bId">${blOfficial.bId}</td>
-													<td class="bSubject">${blOfficial.bSubject}</td>
-													<td class="bCategory">${blOfficial.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${blOfficial.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${blOfficial.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${blOfficial.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+														
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${blOfficial.bCategory eq 'official'}">
+																공무원
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${blOfficial.bId}&searchType=&keyword=&sortType=&bCategory=${blOfficial.bCategory}">
 														<c:choose>
@@ -1116,8 +1346,20 @@
 												<tr class="listTable-list listWidth isNoticeList">
 													<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 													<td class="bId">${bn.bId}</td>
-													<td class="bSubject">${bn.bSubject}</td>
-													<td class="bCategory">${bn.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${bn.bSubject eq 'notice'}">
+																공지
+															</c:when>
+														</c:choose>				
+													</td>
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${bn.bCategory eq 'notice'}">
+																공지
+															</c:when>										
+														</c:choose>						
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${bn.bId}&searchType=&keyword=&sortType=&bCategory=${bn.bCategory}">
 														<c:choose>
@@ -1154,8 +1396,27 @@
 													</c:choose>
 													
 													<td class="bId">${blEtc.bId}</td>
-													<td class="bSubject">${blEtc.bSubject}</td>
-													<td class="bCategory">${blEtc.bCategory}</td>
+													<td class="bSubject">
+														<c:choose>
+															<c:when test="${blEtc.bSubject eq 'daily'}">
+																일상
+															</c:when>
+															<c:when test="${blEtc.bSubject eq 'qna'}">
+																QnA
+															</c:when>
+															<c:when test="${blEtc.bSubject eq 'info'}">
+																정보
+															</c:when>
+														</c:choose>
+													</td>
+													
+													<td class="bCategory">
+														<c:choose>
+															<c:when test="${blEtc.bCategory eq 'etc'}">
+																기타
+															</c:when>
+														</c:choose>
+													</td>
 													<td class="bTitle">
 														<a style="text-decoration: none" href="${pageContext.request.contextPath}/board/contentView?bId=${blEtc.bId}&searchType=&keyword=&sortType=&bCategory=${blEtc.bCategory}">
 														<c:choose>
@@ -1261,7 +1522,7 @@
 						<c:forEach items="${eatStoreList}" var="el">
 							<div class="col-md-3">
 								<div class="imgThumnail">
-									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema="><img class="img-thumbnail" alt="eatImg" src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${el.eId}.jpg" style="width: 100%; height: auto; margin-bottom: 10px;"></a>
+									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema=${el.eThema}"><img class="img-thumbnail" alt="eatImg" src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${el.eId}.jpg" style="width: 100%; height: auto; margin-bottom: 10px;"></a>
 									<div class="imgText">
 										<p>
 											<img alt="good" src="${pageContext.request.contextPath}/img/main/eat_good.png" style="max-width: 15%;">
@@ -1270,7 +1531,7 @@
 								</div>
 							
 								<p class="eTitle">
-									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema=">${el.eTitle}&nbsp;&nbsp;<b style="color: #e7438b;">${el.rvAVG}</b></a>
+									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema=${el.eThema}">${el.eTitle}&nbsp;&nbsp;<b style="color: #e7438b;">${el.rvAVG}</b></a>
 								</p>
 								
 								<p class="eThema">

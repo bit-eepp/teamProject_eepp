@@ -53,7 +53,7 @@
 
 .clContent .clContentLeft .clContentTitle p {
 	color: #59bfbf;
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
     margin-bottom: 0;
 }
@@ -114,7 +114,7 @@
 	font-weight:bold;
 }
 .clContentRight .clContentDetailBody .detailBody-li .classCurrentPeople{
-	letter-spacing: 1rem;
+	letter-spacing: 0.3rem;
 }
 .clContentRight .clContentDetailBody .detailBody-li .classCurrentPeople span{
 	color: #e7438b;
@@ -313,6 +313,10 @@
 	color: #ffffff;
 }
 
+	/*
+	*	클래스 문의
+	*/
+	
 .clContent .clQuestion {
 	width: 100%;
 	margin-top: 60px;
@@ -322,22 +326,31 @@
 	width: 100%;
 	font-weight: 800;
 }
-
+.clContent .clQuestion .questionForm h5{
+	font-size: 16px;
+}
+.clContent .clQuestion .questionForm h5 i{
+	margin-left:8px;
+}
 .clContent .clQuestion .questionForm table {
 	width: 100%;
 }
 
-.questionBtn {
-	width: 80%;
-	background-color: #59bfbf;
-	border: none;
-	color: #ffffff;
+.clContent .clQuestion .questionForm .questionBtn {
+	width: 80px;
+    font-size: 14px;
+    margin-left: 20px;
+    background-color: #59bfbf;
+    border: none;
+    color: #ffffff;
 }
-
-
-	/*
-	*	클래스 문의
-	*/
+.clContent .clQuestion .questionForm .questionBtn p{
+	margin:0;
+}
+.clContent .clQuestion .questionForm p.qUser{
+	margin-bottom: 10px;
+    margin-left: 25px;
+}
 .classQuestionA .card-body .card-inner {
 	margin-left: 4rem;
 	border:none;

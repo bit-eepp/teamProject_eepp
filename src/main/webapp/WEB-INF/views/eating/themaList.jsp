@@ -6,107 +6,284 @@
 <html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>Eating Thema List</title>
+<title>오늘 뭐 먹지? 장소 테마로 보기!</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/common.css">
+<style>
+.themaList-totalWrap {
+	padding-top: 100px;
+	paddint-bottom: 20px;
+}
 
-<script type="text/javascript">
-	function getContextPath() {
-		var hostIndex = location.href.indexOf(location.host)
-				+ location.host.length;
-		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
-	};
-</script>
+/* 테마 타이틀 영역 */
+.thema-title-info {
+	padding: 200px 60px 140px;
+	background-color: #59bfbf;
+	position: relative;
+	background-size: cover;
+	backgroung-potion: bottom;
+}
 
+.thema-title-info .title-comment h1, h5 {
+	z-index: 1;
+	position: relative;
+	text-align: center;
+	color: #fff;
+	line-height: 62px;
+}
+
+.thema-title-info .title-comment h1 {
+	font-size: 4.0rem;
+	font-weight: 700;
+}
+
+/* 테마 리스트 영역 */
+.thema-list-wrap {
+	position: relative;
+	margin: 0 auto;
+}
+
+.thema-list-wrap h3 {
+	z-index: 1;
+	position: relative;
+	text-align: center;
+	line-height: 62px;
+}
+
+.thema-list-wrap .thema-list-box {
+	position: relative;
+	overflow: hidden;
+	margin: 40px 0;
+}
+
+.thema-list-box a ul {
+	list-style: none;
+	display: flex;
+	margin-bottom: 0;
+}
+
+.thema-list-box a {
+	display: block;
+	text-decoration: none;
+	margin: 40px 0;
+}
+
+.thema-list-box a:hover {
+	border: 3px solid #ccc;
+}
+
+.thema-list-box a ul .thema-list-thumb img {
+	width: 150%;
+}
+
+table{
+	color : black;
+}
+
+.thema-list-box table p {
+	text-align : center;
+} 
+
+.thema-list-wrap .thema-list-box a ul .thema-list-info {
+	position: relative;
+	text-decoration: none;
+	color: black;
+	padding-top: 40px;
+	margin-left: 10%;
+}
+
+.thema-list-box a ul .thema-list-info .storeName {
+	font-size: 40px;
+	font-weight: 800;
+	display: inline-block;
+	color: black;
+}
+
+.thema-list-box a ul .thema-list-info .storeAVG {
+	font-size: 30px;
+	font-weight: 600;
+	margin: 5px 15px;
+	color: #59bfbf;
+	display: inline-block;
+}
+
+.thema-list-box a ul .thema-list-info .storeMore {
+	font-size: 12px;
+}
+</style>
 </head>
 
-
 <body>
-	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
-	<input type="hidden" id="eatingPageMaker" value="${eatingPageMaker.makeQuery(1)}" />
+	<input type="hidden" id="userNickname" name="loginUser"
+		value="${loginUser.uNickname}" />
+	<input type="hidden" id="eatingPageMaker"
+		value="${eatingPageMaker.makeQuery(1)}" />
 	<input type="hidden" id="eThema" value="${eThema}" />
-	<input type="hidden" id="eatingTotalCount" value="${eatingPageMaker.totalCount}" />
-	<input type="hidden" id="eatingCriPage" value="${eatingPageMaker.cri.page_eating}" />
+	<input type="hidden" id="eatingTotalCount"
+		value="${eatingPageMaker.totalCount}" />
+	<input type="hidden" id="eatingCriPage"
+		value="${eatingPageMaker.cri.page_eating}" />
 	<input type="hidden" id="eatingSearchType" value="${escri.searchType}" />
 
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/header.jsp"%>
+	<!-- header -->
 
-	<br>
-	<h1 type="text" class="eatingTitle" onclick="location.href='eatingList'">메인으로 가시오</h1>
+	<section id="themaList-totalWrap">
 
-	<br>
-	<h1 type="text" class="themaTitle">${eThema} 보기</h1>
-	<br>
-
-
-	<hr>
-	<!-- 해당 테마 리스트 -->
-	<div class="themaList">
-		<c:choose>
-			<c:when test="${fn:length(themaList) > 0}">
-				<c:forEach items="${themaList}" var="tl">
-					<span>
-						<table width="300" align="center"
-							style="width: 33%; float: left; padding: 10px; font-size: 1.0rem; text-align: center;"
-							cellspacing="2" cellpadding="1" border="1">
-							<tr>
-								<td colspan="2"><img style="width: 33%;" src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${tl.eId}.jpg">
-								</td>
-							</tr>
-							<tr>
-								<td>상호명</td>
-								<td>${tl.eTitle}</td>
-							</tr>
-							<tr>
-								<td>평점</td>
-								<td>${tl.rvAVG}</td>
-							</tr>
-							<tr>
-								<td>주소</td>
-								<td>${tl.eAddress_new}</td>
-							</tr>
-							<tr>
-								<td colspan="2"><button type="button" onclick="location.href='eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${tl.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&eThema=${eThema}'">더
-										보기!</button></td>
-							</tr>
-						</table>
-					</span>
-				</c:forEach>
-			</c:when>
-
-			<c:otherwise>
-				<tr>
-					<td colspan="9">조회된 결과가 없습니다.</td>
-				</tr>
-			</c:otherwise>
-		</c:choose>
-	</div>
-
-	<p />
-	<!-- 페이징 -->
-	<div class="storePaging" align="center"
-		style="float: left; padding: 20px; font-size: 2.0rem;">
-		<div>
-			<c:if test="${eatingPageMaker.prev}">
-				<a style="text-decoration: none"
-					href="eatingList${eatingPageMaker.makeSearch(eatingPageMaker.startPage - 1)}&eThema=${eThema}">
-					« </a>
-			</c:if>
-
-			[
-			<c:forEach begin="${eatingPageMaker.startPage}"
-				end="${eatingPageMaker.endPage}" var="idx">
-				<a style="text-decoration: none"
-					href="eatingList${eatingPageMaker.makeSearch(idx)}&eThema=${eThema}">${idx}</a>
-			</c:forEach>
-			]
-
-			<c:if test="${eatingPageMaker.next && eatingPageMaker.endPage > 0}">
-				<a style="text-decoration: none"
-					href="eatingList${eatingPageMaker.makeSearch(eatingPageMaker.endPage + 1)}&eThema=${eThema}">
-					» </a>&nbsp;&nbsp;
-			</c:if>
+		<!-- thema list header -->
+		<div class="thema-title-info">
+			<div class="title-comment">
+				<c:choose>
+					<c:when test="${eThema == 'thema_1'}">
+						<h5>캠퍼스 낭만이 가득한 카페와 예술의 거리</h5>
+						<h1>신촌 / 홍대 베스트 맛집</h1>
+					</c:when>
+					<c:when test="${eThema == 'thema_2'}">
+						<h5>한강과 함께 누리는 도심 속 섬</h5>
+						<h1>여의도</h1>
+					</c:when>
+					<c:when test="${eThema == 'thema_3'}">
+						<h5>인종과 문화가 공존하는 서울 속 작은 지구촌</h5>
+						<h1>용산 / 이태원 베스트 맛집</h1>
+					</c:when>
+					<c:when test="${eThema == 'thema_4'}">
+						<h5>국제 금융과 무역의 중심지</h5>
+						<h1>강남 / 논현 베스트 맛집</h1>
+					</c:when>
+					<c:when test="${eThema == 'thema_5'}">
+						<h5>먹거리와 놀거리로 가득한 놀라움의 거리</h5>
+						<h1>건대입구 베스트 맛집</h1>
+					</c:when>
+					<c:when test="${eThema == 'thema_6'}">
+						<h5>트렌드와 소박함을 동시에 잡는 동네</h5>
+						<h1>합정 / 망원 베스트 맛집</h1>
+					</c:when>
+				</c:choose>
+			</div>
 		</div>
-	</div>
+		<!-- thema list header end -->
 
+		<!-- thema list body -->
+
+		<div class="themaList-side-left"></div>
+
+		<div id="themaList" class="themaList">
+			<c:choose>
+				<c:when test="${fn:length(themaList) > 0}">
+					<div class="thema-list-wrap col-sm-8">
+						<c:forEach items="${themaList}" var="tl">
+							<div class="thema-list-box">
+								<a
+									href="eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${tl.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&eThema=${eThema}">
+									<%-- <ul>
+								<li class="thema-list-thumb">
+									<img src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${tl.eId}.jpg">
+								</li>
+								<li class="thema-list-info">
+									<div>
+									<p class="storeName">${tl.eTitle}</p>
+									<p class="storeAVG"> ★ ${tl.rvAVG}</p>
+									</div>
+									<div>
+									 
+									 <p class="storeCate">
+									 <i title="음식종류" class="fab fa-delicious fa-2x"></i>
+									 	<c:choose>
+											<c:when test="${tl.eCategory == 'korean_food'}">
+												<b>한식</b> 
+											</c:when>
+											<c:when test="${tl.eCategory == 'japanese_food'}">
+												<b>일식</b> 
+											</c:when>
+											<c:when test="${tl.eCategory == 'western_food'}">
+												<b>양식</b> 
+											</c:when>
+											<c:when test="${tl.eCategory == 'chinese_food'}">
+												<b>중식</b> 
+											</c:when>
+											<c:when test="${tl.eCategory == 'asian_food'}">
+												<b>아시안 음식</b> 
+											</c:when>
+											<c:when test="${tl.eCategory == 'etc_food'}">
+												<b>베이커리</b> 
+											</c:when>
+											<c:when test="${tl.eCategory == 'fusion_food'}">
+												<b>퓨전 음식</b>
+											</c:when>
+										</c:choose>
+									 </p>
+									 <p class="storeAddnew">${tl.eAddress_new}</p>
+									 <p class="storeMore">　　　　　　　　　　　　　${tl.eTitle} 더 보기 >> </p>
+									 </div>
+								</li>
+							</ul> --%>
+									<table>
+										<tr>
+											<td rowspan="3"><img src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${tl.eId}.jpg"></td>
+											<td><p class="storeName">${tl.eTitle}</p></td>
+										</tr>
+										<tr>
+											<td>
+
+													<p class="storeAVG">★ ${tl.rvAVG}</p>
+													<p class="storeCate">
+														<i title="음식종류" class="fab fa-delicious fa-2x"></i>
+														<c:choose>
+															<c:when test="${tl.eCategory == 'korean_food'}">
+																<b>한식</b>
+															</c:when>
+															<c:when test="${tl.eCategory == 'japanese_food'}">
+																<b>일식</b>
+															</c:when>
+															<c:when test="${tl.eCategory == 'western_food'}">
+																<b>양식</b>
+															</c:when>
+															<c:when test="${tl.eCategory == 'chinese_food'}">
+																<b>중식</b>
+															</c:when>
+															<c:when test="${tl.eCategory == 'asian_food'}">
+																<b>아시안 음식</b>
+															</c:when>
+															<c:when test="${tl.eCategory == 'etc_food'}">
+																<b>베이커리</b>
+															</c:when>
+															<c:when test="${tl.eCategory == 'fusion_food'}">
+																<b>퓨전 음식</b>
+															</c:when>
+														</c:choose>
+													</p>
+													<p class="storeAddnew">${tl.eAddress_new}</p>
+													</td>
+										</tr>
+										<tr>
+											<td><p class="storeMore">${tl.eTitle} 더 보기 >></p></td>
+										</tr>
+									</table>
+								</a>
+							</div>
+							<!-- thema-list-box end -->
+						</c:forEach>
+					</div>
+					<!-- thema-list-wrap end -->
+				</c:when>
+			</c:choose>
+		</div>
+
+		<div class="themaList-side-right"></div>
+
+	</section>
+
+	<!-- chat -->
+	<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+	<!-- chat -->
+
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/footer.jsp"%>
+	<!-- footer -->
+
+	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/eating/eatingMain.js"></script>
 </body>

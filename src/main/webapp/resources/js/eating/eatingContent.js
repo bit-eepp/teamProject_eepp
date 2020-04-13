@@ -20,6 +20,10 @@ $(document).ready(function() {
 		formObj.attr('action','eatingList');
 		formObj.submit();
 	});
+	
+	$('.share').on('click', function(){
+		shareLink();
+	});
 
 
 	/* 음식점 map 부분 */
@@ -134,10 +138,24 @@ function eScrap(eId, userId) {
 	}
 }
 
+//카카오 링크 공유
+Kakao.init('55d4b3987a46162ad1d899676af601c4');
+function shareLink() {
+    Kakao.Link.sendCustom({
+      templateId: 22997,
+      templateArgs: {
+        title: '#Comminuty EE 오늘 뭐 먹지? \n'+$(".cCategoryFood").text()+'맛집 '+'"'+$("#eTitle").val()+'" 공유하기',
+        description: 'Community EE에서 확인하세요!',
+        pathLink : 
+        	'eepp/eating/eatingView?eId='+$("#eId").val()+'&eThema='+$("#eThema").val(),
+      },
+    })
+  }
+
 // 리뷰쪽
 function reviewCount(eating_id) {
 	$.ajax({
-		url: 'http://localhost:8282/eepp/review/reviewCount',
+		url:  getContextPath() + '/review/reviewCount',
 		type: 'post',
 		data: {'eating_id' : eating_id},
 		success: function(data){
@@ -197,7 +215,7 @@ function reviewList(page) {
 	}
 	
 	$.ajax({
-		url: 'http://localhost:8282/eepp/review/reviewList',
+		url:  getContextPath() + '/review/reviewList',
 		type: 'post',
 		dataType:'json',
 		data: {'eating_id' : eating_id,
@@ -328,7 +346,7 @@ function eReviewWrite() {
 		return false;
 	} else {
 		$.ajax({
-			url: 'http://localhost:8282/eepp/review/reviewWrite',
+			url:  getContextPath() + '/review/reviewWrite',
 			type: 'POST',
 			data: insertData,	
 			success: function(insertData){
@@ -413,7 +431,7 @@ function reviewModifyPrc(rvId) {
 	} else {
 		var modify_rvContent = $('[name=rvComment_'+rvId +']').val();
 		$.ajax({
-			url: 'http://localhost:8282/eepp/review/reviewModify',
+			url:  getContextPath() + '/review/reviewModify',
 			type: 'post',
 			data: {
 				'rvComment' : rvComment,
@@ -438,7 +456,7 @@ function reviewDelete(rvId) {
 	
 	if(confirm("해당 리뷰를 삭제 하시겠습니까?")){
 		$.ajax({
-			url: 'http://localhost:8282/eepp/review/reviewDelete',
+			url:  getContextPath() + '/review/reviewDelete',
 			type: 'post',
 			data: {'rvId' : rvId},
 			success: function(data){

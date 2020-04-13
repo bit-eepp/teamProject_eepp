@@ -12,9 +12,9 @@
 	</head>
 	
 	<body>
-<!-- header -->
-<%@ include file="/WEB-INF/views/header.jsp"%>
-<!-- header -->
+	<!-- header -->
+	<%@ include file="/WEB-INF/views/header.jsp"%>
+	<!-- header -->
 
 		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}">
 		<input type="hidden" id="pageMakerTotalCount" value="${pageMaker.totalCount}">
@@ -115,8 +115,8 @@
 					<tr class="listTable-list listWidth isNoticeList">
 						<td class="isNoticeContent"><i class="fas fa-flag"></i></td>
 						<td class="bId">${notice.bId}</td>
-						<td class="bSubject">${notice.bSubject}</td>
-						<td class="bCategory">${notice.bCategory}</td>
+						<td class="bSubject">공지</td>
+						<td class="bCategory">공지</td>
 						<td class="bTitle">
 							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${notice.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${notice.bCategory}">${notice.bTitle}  [${notice.rpCount}]</a>
 						</td>
@@ -136,8 +136,42 @@
 					<tr class="listTable-list listWidth isHotList">
 						<td class="isHotContent"><i class="fab fa-hotjar"></i></td>
 						<td class="bId">${hot.bId}</td>
-						<td class="bSubject">${hot.bSubject}</td>
-						<td class="bCategory">${hot.bCategory}</td>
+						<td class="bSubject">
+						<c:choose>
+							<c:when test="${hot.bSubject eq 'daily'}">
+								일상
+							</c:when>
+							<c:when test="${hot.bSubject eq 'qna'}">
+								QnA
+							</c:when>
+							<c:when test="${hot.bSubject eq 'info'}">
+								정보
+							</c:when>
+						</c:choose>
+						</td>
+						
+						<td class="bCategory">
+						<c:choose>
+							<c:when test="${hot.bCategory eq 'it_dev'}">
+								IT/개발
+							</c:when>
+							<c:when test="${hot.bCategory eq 'service'}">
+								서비스
+							</c:when>
+							<c:when test="${hot.bCategory eq 'finance'}">
+								금융
+							</c:when>
+							<c:when test="${hot.bCategory eq 'design'}">
+								디자인
+							</c:when>
+							<c:when test="${hot.bCategory eq 'official'}">
+								공무원
+							</c:when>
+							<c:when test="${hot.bCategory eq 'etc'}">
+								기타
+							</c:when>
+						</c:choose>
+						</td>
 						<td class="bTitle">
 							<a style="text-decoration: none" href="contentView${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${hot.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${hot.bCategory}">${hot.bTitle}  [${hot.rpCount}]</a>
 						</td>
@@ -232,8 +266,42 @@
 							<c:otherwise><td></td></c:otherwise>
 						</c:choose>
 								<td class="bId">${vo.bId}</td>
-								<td class="bSubject">${vo.bSubject}</td>
-								<td class="bCategory">${vo.bCategory}</td>
+								<td class="bSubject">
+								<c:choose>
+									<c:when test="${vo.bSubject eq 'daily'}">
+										일상
+									</c:when>
+									<c:when test="${vo.bSubject eq 'qna'}">
+										QnA
+									</c:when>
+									<c:when test="${vo.bSubject eq 'info'}">
+										정보
+									</c:when>
+								</c:choose>
+								</td>
+								<td class="bCategory">
+								<c:choose>
+									<c:when test="${vo.bCategory eq 'it_dev'}">
+										IT/개발
+									</c:when>
+									<c:when test="${vo.bCategory eq 'service'}">
+										서비스
+									</c:when>
+									<c:when test="${vo.bCategory eq 'finance'}">
+										금융
+									</c:when>
+									<c:when test="${vo.bCategory eq 'design'}">
+										디자인
+									</c:when>
+									<c:when test="${vo.bCategory eq 'official'}">
+										공무원
+									</c:when>
+									<c:when test="${vo.bCategory eq 'etc'}">
+										기타
+									</c:when>
+								</c:choose>
+								</td>
+								
 									<c:choose>
 										<c:when test="${vo.dCount > 10}">
 											<td class="bTitle isBlind">
@@ -366,13 +434,13 @@
 		<!-- boardWrapper -->
 		
 		
-<!-- chat -->
-<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
-<!-- chat -->
-
-<!-- footer -->
-<%@ include file="/WEB-INF/views/footer.jsp"%>
-<!-- footer -->
+	<!-- chat -->
+	<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
+	<!-- chat -->
+	
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/footer.jsp"%>
+	<!-- footer -->
 
 		<script src="${pageContext.request.contextPath}/js/board/boardMain.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>

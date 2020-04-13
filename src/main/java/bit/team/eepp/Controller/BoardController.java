@@ -33,6 +33,10 @@ public class BoardController {
 
 	@RequestMapping("/boardList")
 	public String boardList(Model model, @ModelAttribute("scri") SearchCriteria scri, @RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType, @RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory) {
+		
+		if(bCategory.equals("")) {
+			bCategory = "all";
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("scri", scri);
 		map.put("sortType", sortType);
@@ -75,34 +79,6 @@ public class BoardController {
 	public String writeContent(BoardVO boardVO, Model model, @ModelAttribute("scri") SearchCriteria scri,
 			@RequestParam(value = "sortType") String sortType, @RequestParam(value = "bCategory") String bCategory) {
 		System.out.println("writeContent() method");
-		
-		// 카테고리 한글로 변경
-		if(boardVO.getbCategory().equals("notice")) {
-			boardVO.setbCategory("공지");
-		} else if(boardVO.getbCategory().equals("it_dev")) {
-			boardVO.setbCategory("IT/개발");
-		} else if(boardVO.getbCategory().equals("service")) {
-			boardVO.setbCategory("서비스");
-		} else if(boardVO.getbCategory().equals("finance")) {
-			boardVO.setbCategory("금융");
-		} else if(boardVO.getbCategory().equals("design")) {
-			boardVO.setbCategory("디자인");
-		} else if(boardVO.getbCategory().equals("official")) {
-			boardVO.setbCategory("공무원");
-		} else if(boardVO.getbCategory().equals("etc")) {
-			boardVO.setbCategory("기타");
-		}
-		
-		// 말머리 한글로 변경
-		if(boardVO.getbSubject().equals("notice")) {
-			boardVO.setbSubject("공지");
-		} else if(boardVO.getbSubject().equals("qna")) {
-			boardVO.setbSubject("QnA");
-		} else if(boardVO.getbSubject().equals("info")) {
-			boardVO.setbSubject("정보");
-		} else if(boardVO.getbSubject().equals("daily")) {
-			boardVO.setbSubject("일상");
-		}
 		
 		int result = boardService.write(boardVO);
 		System.out.println("result : " + result);

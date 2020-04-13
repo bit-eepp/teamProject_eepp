@@ -84,7 +84,7 @@ public interface UserMapper {
 	public DeclarationVO reportMessageInfo(DeclarationVO declarationVO);
 
 	// 쪽지 보내기
-	@Insert("insert into message (mid, sender_id, receiver_id, mcontent, mdate) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate)")
+	@Insert("insert into message (mid, sender_id, receiver_id, mcontent, mdate, mdeleted) values (message_seq.nextval, #{sender_id}, #{receiver_id}, #{mcontent}, sysdate, 'no')")
 	public void replyMessage(MessageVO messageVO);
 
 	/*

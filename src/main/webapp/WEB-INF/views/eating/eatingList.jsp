@@ -6,23 +6,19 @@
 
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>오늘 뭐먹지? - Main</title>
+		<title>오늘 뭐 먹지?</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/eating/eatingMain.css">
 	</head>
 
 	<body>
-		<%
-			double random = Math.random();
-			int ranImg = (int)(random * 4) + 1;
-		%>
 		
 		<!-- header -->
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
 		
-		<section class="sc-eatingBanner">
+		<section class="sc-eatingBanner" id="eatingBanner">
 			<p class="sc-title">오늘 뭐먹지?<br>고민 말고 검색!</p>
 			
 			<div class="search form-control">
@@ -51,27 +47,27 @@
 			<div class="themaList col-sm-8">
 				<ul>
 					<li class="thema1">
-						<img src="${pageContext.request.contextPath}/img/eating/1/1.jpg">
+						<img src="${pageContext.request.contextPath}/img/eating/t1.jpg">
 						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_1"><span>신촌 / 홍대</span></a>
 					</li>
 					<li class="thema2">
-						<img src="${pageContext.request.contextPath}/img/eating/2/1.jpg">
+						<img src="${pageContext.request.contextPath}/img/eating/t2.jpg">
 						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_2"><span>여의도</span></a>
 					</li>
 					<li class="thema3">
-						<img src="${pageContext.request.contextPath}/img/eating/3/1.jpg">
+						<img src="${pageContext.request.contextPath}/img/eating/t3.jpg">
 						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_3"><span>용산 / 이태원</span></a>
 					</li>
 					<li class="thema4">
-						<img src="${pageContext.request.contextPath}/img/eating/4/1.jpg">
+						<img src="${pageContext.request.contextPath}/img/eating/t4.jpg">
 						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_4"><span>강남 / 논현</span></a>
 					</li>
 					<li class="thema5">
-						<img src="${pageContext.request.contextPath}/img/eating/5/1.jpg">
+						<img src="${pageContext.request.contextPath}/img/eating/t5.jpg">
 						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_5"><span>건대입구</span></a>
 					</li>
 					<li class="thema6">
-						<img src="${pageContext.request.contextPath}/img/eating/6/1.jpg">
+						<img src="${pageContext.request.contextPath}/img/eating/t6.jpg">
 						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_6"><span>합정 / 망원</span></a>
 					</li>
 				</ul>
@@ -141,8 +137,6 @@
 					
 					<c:otherwise></c:otherwise>
 				</c:choose>
-				<br>
-				
 				
 			</div>
 			<!-- searchList -->

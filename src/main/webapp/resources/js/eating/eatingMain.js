@@ -7,6 +7,11 @@ function getContextPath() {
 var uNickname = $("#userNickname").val();
 	
 $(document).ready(function() {
+	
+	// 배너사진 랜덤 표시
+	var ranNum = Math.floor(Math.random() * 3) + 1;
+	$('#eatingBanner').css('background', 'bottom / cover no-repeat url(/eepp/img/eating/eatingBanner'+ranNum+'.jpg)');
+	
 	// 가게 검색
 	$('#eatingSearchBtn').click(function() {
 		if($('select[name=searchType]').val() == 'n') {
