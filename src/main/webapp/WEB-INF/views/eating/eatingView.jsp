@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>맛집 상세페이지 : ${eContentView.eTitle}</title>
+		<title>맛집 : ${eContentView.eTitle}</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/eating/eatingView.css">
@@ -15,12 +15,6 @@
 	    <script src="${pageContext.request.contextPath}/js/eating/star-rating.js"></script>
 
 	<body>
-		<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}"/>
-		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}"/>
-		<input type="hidden" id="eId" value="${eContentView.eId}"/>
-		<input type="hidden" id="eTitle" value="${eContentView.eTitle}"/>
-		<input type="hidden" id="ad_new" value="${eContentView.eAddress_new}"/>
-		<input type="hidden" id="ad_old" value="${eContentView.eAddress_old}"/>
 				
 		<!-- header -->
 		<%@ include file="/WEB-INF/views/header.jsp"%>
@@ -79,13 +73,41 @@
 					<div class="col-6 eContentLeft">
 						<div class="eContentHead">
 							<table>
-								<tr class="tr1">
+								<tr class="tr1 eContentMainInfo">
 									<td class="tdLeft1">
-										${eContentView.eTitle}&nbsp;<b class="reviewAVG" id="reviewAVGScore"></b>
+										<div class="eContentTitle">
+											<p>${eContentView.eTitle}</p>
+											<span class="reviewAVG" id="reviewAVGScore"></span>
+										</div>
+										<div class="eContentInfo">
+											<p class="eHit"><i title="조회수" class="far fa-eye"></i> ${eContentView.eHit}</p>
+											<p class="eReviewCount"><i title="리뷰수" class="fas fa-pen"></i> <span class="eReview"></span></p>
+											<p class="eBookmarkCount"><i title="맛집등록수" class="fas fa-bookmark"></i> ${eContentView.sCount}</p>
+										</div>
 									</td>
 									
 									<td class="tdRight1" align="right">
-										<a id="eReviewMk" data-toggle="modal" data-target="#eReviewModalForm" data-backdrop="static" data-keyboard="false"><i title="리뷰작성" class="fas fa-pen fa-2x"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<div class="btnWrap">
+											<p class="reviewBtn">
+												<a id="eReviewMk" class="reviewBtn" data-toggle="modal" data-target="#eReviewModalForm" data-backdrop="static" data-keyboard="false">
+												<i title="리뷰작성" class="fas fa-pen fa-2x"></i>
+												</a>
+											</p>
+											<p class="scrapBtn">
+												<a onclick="eScrap(${eContentView.eId}, ${loginUser.user_id})">
+												<i title="내맛집등록" class="fas fa-bookmark fa-2x"></i>
+												</a>
+											</p>
+										</div>
+										<div class="btnWrap">
+											<!-- 카카오링크 공유 -->
+											<p class="shareBtn">
+												<a class="share" id="kakaoShareBtn">
+												<img src="${pageContext.request.contextPath}/img/kakaolink_btn_medium.png"/>
+												</a>
+											</p>
+											<p class="backToList"><a class="eMainBtn eList"><i title="메인" class="fas fa-list-ul fa-2x"></i></a></p>
+										</div>
 										
 										<div class="modal fade" id="eReviewModalForm" role="dialog">
 											<div class="modal-dialog">
@@ -151,20 +173,6 @@
 											<!-- modal-dialog -->
 										</div>
 										<!-- modal -->
-
-										<a onclick="eScrap(${eContentView.eId}, ${loginUser.user_id})"><i title="내맛집등록" class="fas fa-bookmark fa-2x"></i></a>
-									</td>
-								</tr>
-								
-								<tr class="tr2">
-									<td class="tdLeft2">
-										<i title="조회수" class="far fa-eye"></i> <b>${eContentView.eHit}</b>&nbsp;&nbsp;
-										<i title="리뷰수" class="fas fa-pen"></i> <b class="eReview"></b>&nbsp;&nbsp;
-										<i title="맛집등록수" class="fas fa-bookmark"></i> <b>${eContentView.sCount}</b>
-									</td>
-									
-									<td class="tdRight2" align="right">
-										<a class="eMainBtn eList"><i title="메인" class="fas fa-list-ul fa-2x"></i></a>
 									</td>
 								</tr>
 							</table>
@@ -189,25 +197,25 @@
 									<td class="tdRightb3">
 										<c:choose>
 											<c:when test="${eContentView.eCategory == 'korean_food'}">
-												<b>한식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">한식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'japanese_food'}">
-												<b>일식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">일식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'western_food'}">
-												<b>양식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">양식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'chinese_food'}">
-												<b>중식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">중식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'asian_food'}">
-												<b>아시안 음식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">아시안 음식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'etc_food'}">
-												<b>기타 음식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">기타 음식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 											<c:when test="${eContentView.eCategory == 'fusion_food'}">
-												<b>퓨전 음식</b> / ${eContentView.eKeyword_food}
+												<b class="cCategoryFood">퓨전 음식</b> / ${eContentView.eKeyword_food}
 											</c:when>
 										</c:choose>
 									</td>
@@ -252,13 +260,19 @@
 					</div>
 				</div>
 			</div>
-			
+			${eContentView.eKeyword_food}
 			<form name="form1" role="form" method="post">
 				<input type="hidden" name="page_eating" id="escriPage" value="${escri.page_eating}" />
 				<input type="hidden" name="perPageNum" id="escriPageNum" value="${escri.perPageNum}" />
 				<input type="hidden" name="searchType" id="escriSearchType" value="${escri.searchType}" />
 				<input type="hidden" name="keyword" id="escriKeyword" value="${escri.keyword}" />
 				<input type="hidden" name="eThema" id="eThema" value="${eThema}" />
+				<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}"/>
+		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}"/>
+		<input type="hidden" id="eId" value="${eContentView.eId}"/>
+		<input type="hidden" id="eTitle" value="${eContentView.eTitle}"/>
+		<input type="hidden" id="ad_new" value="${eContentView.eAddress_new}"/>
+		<input type="hidden" id="ad_old" value="${eContentView.eAddress_old}"/>
 			</form>
 			
 		</section>

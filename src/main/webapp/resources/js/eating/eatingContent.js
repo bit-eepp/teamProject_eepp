@@ -20,6 +20,10 @@ $(document).ready(function() {
 		formObj.attr('action','eatingList');
 		formObj.submit();
 	});
+	
+	$('.share').on('click', function(){
+		shareLink();
+	});
 
 
 	/* 음식점 map 부분 */
@@ -133,6 +137,20 @@ function eScrap(eId, userId) {
 		});
 	}
 }
+
+//카카오 링크 공유
+Kakao.init('55d4b3987a46162ad1d899676af601c4');
+function shareLink() {
+    Kakao.Link.sendCustom({
+      templateId: 22997,
+      templateArgs: {
+        title: '#Comminuty EE 오늘 뭐 먹지? \n'+$(".cCategoryFood").text()+'맛집 '+'"'+$("#eTitle").val()+'" 공유하기"',
+        description: 'Community EE에서 확인하세요!',
+        pathLink : 
+        	'eepp/eatingView?eId='+$("#eId").val()+'&eThema='+$("#eThema").val(),
+      },
+    })
+  }
 
 // 리뷰쪽
 function reviewCount(eating_id) {
