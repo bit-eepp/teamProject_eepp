@@ -36,7 +36,7 @@
 							</tr>
 							
 							<tr>
-								<td class="text_bold"><span class="required">• </span><a href="/eepp/myPoint">내 포인트</a></td>
+								<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/myPoint">내 포인트</a></td>
 							</tr>
 							<tr class="bordered">
 							<td><a href="/eepp/myPoint"><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P</a></td>

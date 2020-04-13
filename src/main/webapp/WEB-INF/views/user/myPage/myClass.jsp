@@ -53,7 +53,7 @@
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myClass?tabType=myClassJoin">내 클래스</a></td>
+							<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/myClass?tabType=myClassJoin">내 클래스</a></td>
 							</tr>
 							
 							<tr class="bordered">
