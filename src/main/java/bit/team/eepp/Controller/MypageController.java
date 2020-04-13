@@ -26,15 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import bit.team.eepp.Page.BoardReportCriteria;
-import bit.team.eepp.Page.BoardReportPageMaker;
 import bit.team.eepp.Page.MemberPageMaker;
 import bit.team.eepp.Page.NoticeCriteria;
 import bit.team.eepp.Page.NoticePageMaker;
-import bit.team.eepp.Page.ReplyReportCriteria;
-import bit.team.eepp.Page.ReplyReportPageMaker;
-import bit.team.eepp.Page.UserReportCriteria;
-import bit.team.eepp.Page.UserReportPageMaker;
 import bit.team.eepp.Page.myPagePageMaker;
 import bit.team.eepp.Search.MemberSearchCriteria;
 import bit.team.eepp.Search.MypageSearchCriteria;
@@ -364,7 +358,6 @@ public class MypageController {
 	@RequestMapping(value = "/admin/adminPage")
 	public String adminPage(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			UserVO userVO, Model model, @ModelAttribute("memcri") MemberSearchCriteria memcri, NoticeCriteria Ncri,
-			UserReportCriteria ureportcri, BoardReportCriteria breportcri, ReplyReportCriteria rreportcri,
 			ClassVO classVO, @ModelAttribute("mscri") MypageSearchCriteria mscri,
 			@RequestParam(value = "tabType", required = false, defaultValue = "") String tabType,
 			@RequestParam(value = "success", required = false, defaultValue = "") String success,
