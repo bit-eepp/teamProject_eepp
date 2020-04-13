@@ -18,7 +18,7 @@
 		<%@ include file="/WEB-INF/views/header.jsp"%>
 		<!-- header -->
 		
-		<section class="sc-eatingBanner">
+		<section class="sc-eatingBanner" id="eatingBanner">
 			<p class="sc-title">오늘 뭐먹지?<br>고민 말고 검색!</p>
 			
 			<div class="search form-control">
