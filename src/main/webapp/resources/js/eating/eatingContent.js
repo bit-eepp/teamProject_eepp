@@ -144,10 +144,10 @@ function shareLink() {
     Kakao.Link.sendCustom({
       templateId: 22997,
       templateArgs: {
-        title: '#Comminuty EE 오늘 뭐 먹지? \n'+$(".cCategoryFood").text()+'맛집 '+'"'+$("#eTitle").val()+'" 공유하기"',
+        title: '#Comminuty EE 오늘 뭐 먹지? \n'+$(".cCategoryFood").text()+'맛집 '+'"'+$("#eTitle").val()+'" 공유하기',
         description: 'Community EE에서 확인하세요!',
         pathLink : 
-        	'eepp/eatingView?eId='+$("#eId").val()+'&eThema='+$("#eThema").val(),
+        	'eepp/eating/eatingView?eId='+$("#eId").val()+'&eThema='+$("#eThema").val(),
       },
     })
   }
