@@ -13,7 +13,7 @@ var isAdmin = '운영자';
 			// 해당 게시물의 댓글수를 불러오는 JS메서드(Ajax-Json)
 			function replyCount(bId) {
 				$.ajax({
-					url: 'http://localhost:8282/eepp/reply/replyCount',
+					url: getContextPath() +'/reply/replyCount',
 					type: 'get',
 					data: {'board_id' : bId},
 					success: function(data){
@@ -81,7 +81,7 @@ var isAdmin = '운영자';
 				}
 				
 				$.ajax({
-					url: 'http://localhost:8282/eepp/reply/replyList',
+					url:  getContextPath() +'/reply/replyList',
 					type: 'GET',
 					dataType:'json',
 					data: {'board_id' : bId,
@@ -278,7 +278,7 @@ var isAdmin = '운영자';
 			// 해당 댓글의 추천개수 불러오는 JS메서드(Ajax-Json)
 			function rplikeCount(rpId) {
 				$.ajax({
-					url: 'http://localhost:8282/eepp/recommend/rplikeCount',
+					url:  getContextPath() + '/recommend/rplikeCount',
 					type: 'get',
 					data: {'rpId' : rpId},
 					success: function(data){
@@ -298,7 +298,7 @@ var isAdmin = '운영자';
 					alert("로그인 해주세요.");
 				}else{
 				$.ajax({
-					url: 'http://localhost:8282/eepp/recommend/rplikeUp',
+					url: getContextPath() +'/recommend/rplikeUp',
 					type: 'get',
 					data: {'rpId' : rpId,
 						'user_id' : $("#userId").val()
@@ -322,7 +322,7 @@ var isAdmin = '운영자';
 			// 해당 댓글의 비추천수 불러오는 JS메서드(Ajax-Json)
 			function rpUnlikeCount(rpId) {
 				$.ajax({
-					url: 'http://localhost:8282/eepp/recommend/rpUnlikeCount',
+					url:  getContextPath() +'/recommend/rpUnlikeCount',
 					type: 'get',
 					data: {'rpId' : rpId},
 					success: function(data){
@@ -342,7 +342,7 @@ var isAdmin = '운영자';
 					alert("로그인 해주세요.");
 				}else{
 				$.ajax({
-					url: 'http://localhost:8282/eepp/recommend/rpUnlikeUp',
+					url:  getContextPath() +'/recommend/rpUnlikeUp',
 					type: 'get',
 					data: {'rpId' : rpId,
 						'user_id' : $("#userId").val()
@@ -400,7 +400,7 @@ var isAdmin = '운영자';
 					var rpContent = $('[name=rRpContent]').val();
 					
 					$.ajax({
-						url: 'http://localhost:8282/eepp/reply/reReplyWrite',
+						url:  getContextPath() + '/reply/reReplyWrite',
 						type: 'POST',
 						data: {'rpContent' : rpContent,
 								'rpGroup' : rpGroup,
@@ -456,7 +456,7 @@ var isAdmin = '운영자';
 					return false;
 				} else {
 					$.ajax({
-						url: 'http://localhost:8282/eepp/reply/replyWrite',
+						url:  getContextPath() + '/reply/replyWrite',
 						type: 'POST',
 						data: insertData,	
 						success: function(insertData){
@@ -496,7 +496,7 @@ var isAdmin = '운영자';
 				} else {
 					var modify_rpContent = $('[name=rpContent_'+rpId +']').val();
 					$.ajax({
-						url: 'http://localhost:8282/eepp/reply/replyModify',
+						url:  getContextPath() + '/reply/replyModify',
 						type: 'post',
 						data: {'rpContent' : modify_rpContent, 'rpId' : rpId},
 						success: function(data){
@@ -520,7 +520,7 @@ var isAdmin = '운영자';
 				} else {
 					if(confirm("정말 삭제 하시겠습니까?")){
 						$.ajax({
-							url: 'http://localhost:8282/eepp/reply/replyDelete',
+							url:  getContextPath() +'/reply/replyDelete',
 							type: 'post',
 							data: {'rpId' : rpId},
 							success: function(data){
