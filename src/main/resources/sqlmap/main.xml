@@ -98,7 +98,7 @@
 			SELECT * FROM (
 			SELECT c.cId, c.user_id, c.cTitle, c.cContent, c.cOpenDate, cEndDate, c.cTerm, c.cPrice, c.cCategory, c.cTotalPeopleCount, c.cDifficulty, c.cSummary, c.cThumnail, u.uNickname, u.uProfile,
 			c.cDeleted, (SELECT COUNT(*) FROM REPLY WHERE rDeleted != 'yes' AND class_id = c.cId) AS questionCount, (TO_CHAR(cEndDate,'YYYYMMDD') - TO_CHAR(SYSDATE,'YYYYMMDD')) AS endDay
-			FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cDeleted != 'yes' ORDER BY endDay ASC) WHERE endDay >= 0 AND ROWNUM <= 4
+			FROM USERS u, CLASS c WHERE c.user_id = u.user_id AND cDeleted != 'yes' ORDER BY endDay ASC) WHERE endDay > 0 AND ROWNUM <= 4
 		]]>
 	</select>
 	
