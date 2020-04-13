@@ -1522,7 +1522,7 @@
 						<c:forEach items="${eatStoreList}" var="el">
 							<div class="col-md-3">
 								<div class="imgThumnail">
-									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema="><img class="img-thumbnail" alt="eatImg" src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${el.eId}.jpg" style="width: 100%; height: auto; margin-bottom: 10px;"></a>
+									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema=${el.eThema}"><img class="img-thumbnail" alt="eatImg" src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${el.eId}.jpg" style="width: 100%; height: auto; margin-bottom: 10px;"></a>
 									<div class="imgText">
 										<p>
 											<img alt="good" src="${pageContext.request.contextPath}/img/main/eat_good.png" style="max-width: 15%;">
@@ -1531,7 +1531,7 @@
 								</div>
 							
 								<p class="eTitle">
-									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema=">${el.eTitle}&nbsp;&nbsp;<b style="color: #e7438b;">${el.rvAVG}</b></a>
+									<a href="${pageContext.request.contextPath}/eating/eatingView?eId=${el.eId}&eThema=${el.eThema}">${el.eTitle}&nbsp;&nbsp;<b style="color: #e7438b;">${el.rvAVG}</b></a>
 								</p>
 								
 								<p class="eThema">
