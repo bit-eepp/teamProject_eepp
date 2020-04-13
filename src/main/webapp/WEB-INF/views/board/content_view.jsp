@@ -16,7 +16,6 @@
 <!-- header -->
 
 <div id="boardContentWrapper">
-<input type="hidden" value="${content.bTitle}" id="contentBtitle" />
 	<div class="contentSideWrap col-sm-2">
 	<!-- 직무 게시판 카테고리 -->
 		<a class="category ct-all" href="boardList">All</a>

@@ -92,7 +92,7 @@ function shareLink() {
     Kakao.Link.sendCustom({
       templateId: 22997,
       templateArgs: {
-        title: '#'+$("#bCategory").val()+'게시판 \n'+$("#contentBtitle").val(),
+        title: '#'+$("#bCategory").val()+'게시판 \n'+$(".bContentTitle").text(),
         description: 'Community EE에서 확인하세요!',
         pathLink : 
         	'eepp/board/contentView?bId='+$("#contentBid").val()+'&bCategory=&sortType=',
@@ -157,20 +157,9 @@ function resetForm() {
 
 // 해당 게시글 삭제 확인 JS메서드(댓글이 있는 게시글의 경우 삭제 불가)
 function deleteConfirm() {
-	
 	if(confirm("정말 삭제 하시겠습니까?")){
 		deleteContent(bId);
 	}
-	
-	
-	/*if(rpCount > 0){
-		alert("댓글이 달린 게시물은 삭제 할 수 없습니다.");	
-		return;
-	} else {
-		if(confirm("정말 삭제 하시겠습니까?")){
-			deleteContent(bId);
-		}
-	}*/
 }
 	
 // 해당 게시글 삭제하는  JS메서드(Ajax-Json)
@@ -212,7 +201,7 @@ function likeCount(bId) {
 	});
 }
 		
-// 해당 게시글의 추천수를 올려주는  JS메서드(Ajax-Json)
+// 해당 게시글의 추천수를 올려주는 JS메서드(Ajax-Json)
 function like(bId) {
 	if(!uNickname){
 		alert("로그인 해주세요.");
