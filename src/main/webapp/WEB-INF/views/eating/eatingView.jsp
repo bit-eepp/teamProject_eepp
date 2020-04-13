@@ -260,7 +260,7 @@
 					</div>
 				</div>
 			</div>
-			${eContentView.eKeyword_food}
+			
 			<form name="form1" role="form" method="post">
 				<input type="hidden" name="page_eating" id="escriPage" value="${escri.page_eating}" />
 				<input type="hidden" name="perPageNum" id="escriPageNum" value="${escri.perPageNum}" />

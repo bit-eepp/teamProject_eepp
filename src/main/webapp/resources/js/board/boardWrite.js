@@ -1,8 +1,3 @@
-/* ***************** */
-/*	 write View 	 */
-/* **************** */
-
-
 $(document).ready(function(){
 	// 게시판 리스트로 다시 돌아가기
 	var formObj = $('form[role="form"]');
