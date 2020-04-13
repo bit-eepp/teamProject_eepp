@@ -3,7 +3,7 @@
 /*
 * 마이페이지 css 부
 */
-.mypageWrap, #adminWrap {
+.mypageWrap, #adminWrap,#MPwrap {
 	padding-top: 100px;
 }
 
