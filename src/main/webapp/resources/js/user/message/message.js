@@ -174,28 +174,28 @@ function messageTypeTitle(title) {
 
 function openReceiveMsg(mid, sender_id) {
 	var msgvw = window.open(
-			getContextPath()+"/eepp/message/messageView?messageType="
+			getContextPath()+"/message/messageView?messageType="
 					+ $(".messageType").val() + "&mid=" + mid + "&sender_id="+ sender_id, "message_view", 
 					"left="+ (screen.availWidth - 370) / 2 
 					+ ",top=" + (screen.availHeight - 425) / 2 + ",width=370,height=425");
 }
 function openSendMsg(mid, receiver_id) {
 	var msgvw2 = window.open(
-			getContextPath()+"/eepp/message/messageView?messageType="
+			getContextPath()+"/message/messageView?messageType="
 					+ $(".messageType").val() + "&mid=" + mid + "&receiver_id=" + receiver_id, "message_view2",
 					"left=" + (screen.availWidth - 370) / 2 
 					+ ",top=" + (screen.availHeight - 425) / 2 + ",width=370,height=425");
 }
 
 function reset(msgType) {
-	var tw = window.open(getContextPath()+"/eepp/message?messageType="
+	var tw = window.open(getContextPath()+"/message?messageType="
 			+ msgType, "message", "left=" + (screen.availWidth - 700) / 2
 			+ ",top=" + (screen.availHeight - 440) / 2 + ",width=700,height=440");
 }
 
 function sendMessage(uNickname, receiver_id, msgType) {
 	var tw = window.open(
-			getContextPath()+"/eepp/message/sendMessage?receiver="
+			getContextPath()+"/message/sendMessage?receiver="
 					+ uNickname + "&receiver_id=" + receiver_id
 					+ "&messageType=" + msgType + "&from=in", "sendmessage",
 			"left=" + (screen.availWidth - 370) / 2 + ",top="
@@ -203,7 +203,7 @@ function sendMessage(uNickname, receiver_id, msgType) {
 }
 //회원정보 - 회원정보 보기
 function memberInfo(uNickname, user_id){
-	var member = window.open(getContextPath()+"/eepp/memInfo?memberWho="+uNickname+"&user_id="+user_id,"memberInfo","left="+(screen.availWidth-700)/2
+	var member = window.open(getContextPath()+"/memInfo?memberWho="+uNickname+"&user_id="+user_id,"memberInfo","left="+(screen.availWidth-700)/2
 				 +",top="+(screen.availHeight-560)/2+",width=425,height=560");
 }
 
