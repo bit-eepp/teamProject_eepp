@@ -73,6 +73,6 @@ function reset(msgType){
 }
 
 function openMsg(msgType){
-	 var tw = window.open(getContextPath()+"/eepp/message?messageType="+msgType,"message","left="+(screen.availWidth-700)/2
+	 var tw = window.open(getContextPath()+"/message?messageType="+msgType,"message","left="+(screen.availWidth-700)/2
 			 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 }
