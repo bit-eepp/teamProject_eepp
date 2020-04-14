@@ -164,14 +164,16 @@
 						<!-- Team item-->
 						<div class="col-xl-3 col-sm-6 mb-5 people">
 							<div class="bg-white rounded shadow-sm py-5 px-4">
-								<img src="${pageContext.request.contextPath}/img/headerLogin.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
+								<img src="${pageContext.request.contextPath}/img/lee.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
 								<h5 class="mb-0">LEE HYEIN</h5>
 								<span class="small text-uppercase text-muted">DEVELOPER</span><br><br>
+								
+								<h6 style="color: #59bfbf;"><b>"일어나, 코딩해야지.."</b></h6>
+								
 								<ul class="social mb-0 list-inline mt-3">
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="https://github.com/java-hyein" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
+									
+									<li class="list-inline-item"><a href="https://github.com/java-hyein" target="_blank" class="social-link"><i class="fab fa-github fa-2x"></i></a></li>
+									
 								</ul>
 								
 							</div>
@@ -181,14 +183,15 @@
 						<!-- Team item-->
 						<div class="col-xl-3 col-sm-6 mb-5">
 							<div class="bg-white rounded shadow-sm py-5 px-4">
-								<img src="${pageContext.request.contextPath}/img/headerLogin.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
+								<img src="${pageContext.request.contextPath}/img/do.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
 								<h5 class="mb-0">DO HEEJUNG</h5>
 								<span class="small text-uppercase text-muted">DEVELOPER</span><br><br>
+								
+								<h6 style="color: #59bfbf;"><b>"GIT PUSH AND RUN"</b></h6>
 								<ul class="social mb-0 list-inline mt-3">
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="https://github.com/doeez" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
+									
+									<li class="list-inline-item"><a href="https://github.com/doeez" target="_blank" class="social-link"><i class="fab fa-github fa-2x"></i></a></li>
+									
 								</ul>
 							</div>
 						</div>
@@ -197,14 +200,13 @@
 						<!-- Team item-->
 						<div class="col-xl-3 col-sm-6 mb-5">
 							<div class="bg-white rounded shadow-sm py-5 px-4">
-								<img src="${pageContext.request.contextPath}/img/headerLogin.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
+								<img src="${pageContext.request.contextPath}/img/park.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
 								<h5 class="mb-0">PARK CHANGYEONG</h5>
 								<span class="small text-uppercase text-muted">DEVELOPER</span><br><br>
+								<h6 style="color: #59bfbf;"><b>"스택오버플로우는 내 친구"</b></h6>
+								
 								<ul class="social mb-0 list-inline mt-3">
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="https://github.com/rtnbrnch" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
+									<li class="list-inline-item"><a href="https://github.com/rtnbrnch" target="_blank" class="social-link"><i class="fab fa-github fa-2x"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -213,14 +215,16 @@
 						<!-- Team item-->
 						<div class="col-xl-3 col-sm-6 mb-5">
 							<div class="bg-white rounded shadow-sm py-5 px-4">
-								<img src="${pageContext.request.contextPath}/img/headerLogin.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
+								<img src="${pageContext.request.contextPath}/img/kim.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm"><br><br>
 								<h5 class="mb-0">KIM MINYOUNG</h5>
 								<span class="small text-uppercase text-muted">DEVELOPER</span><br><br>
+								
+								<h6 style="color: #59bfbf;"><b>"3년뒤, 카카오에서 만나요!"</b></h6>
+								
 								<ul class="social mb-0 list-inline mt-3">
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-google"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a></li>
-									<li class="list-inline-item"><a href="https://github.com/mykim8710" target="_blank" class="social-link"><i class="fab fa-github"></i></a></li>
-									<li class="list-inline-item"><a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a></li>
+									
+									<li class="list-inline-item"><a href="https://github.com/mykim8710" target="_blank" class="social-link"><i class="fab fa-github fa-2x"></i></a></li>
+									
 								</ul>
 							</div>
 						</div>
