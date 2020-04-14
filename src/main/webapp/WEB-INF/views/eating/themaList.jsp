@@ -115,11 +115,11 @@ table{
 </head>
 
 <body>
-	<input type="hidden" id="userNickname" name="loginUser"
-		value="${loginUser.uNickname}" />
+	<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}" />
 	<input type="hidden" id="eatingPageMaker"
 		value="${eatingPageMaker.makeQuery(1)}" />
 	<input type="hidden" id="eThema" value="${eThema}" />
+		<input type="hidden" id="eKeyword_food" value="${eKeyword_food}" />
 	<input type="hidden" id="eatingTotalCount"
 		value="${eatingPageMaker.totalCount}" />
 	<input type="hidden" id="eatingCriPage"
@@ -174,10 +174,12 @@ table{
 				<c:when test="${fn:length(themaList) > 0}">
 					<div class="thema-list-wrap col-sm-8">
 						<c:forEach items="${themaList}" var="tl">
+						<input id="keyword_${tl.eId}" type="hidden" value="${tl.eKeyword_food}">
+						<input id="eId" type="hidden" value="${tl.eId}">
+						
 							<div class="thema-list-box">
-								<a
-									href="eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${tl.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&eThema=${eThema}">
-									<%-- <ul>
+								<a href="eatingView${eatingPageMaker.makeQuery(eatingPageMaker.cri.page_eating)}&eId=${tl.eId}&searchType=${escri.searchType}&keyword=${escri.keyword}&eThema=${eThema}">
+								<%--  <ul>
 								<li class="thema-list-thumb">
 									<img src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${tl.eId}.jpg">
 								</li>
@@ -192,7 +194,7 @@ table{
 									 <i title="음식종류" class="fab fa-delicious fa-2x"></i>
 									 	<c:choose>
 											<c:when test="${tl.eCategory == 'korean_food'}">
-												<b>한식</b> 
+												<b>한식</b> <p class="tagText"></p>
 											</c:when>
 											<c:when test="${tl.eCategory == 'japanese_food'}">
 												<b>일식</b> 
@@ -218,7 +220,8 @@ table{
 									 <p class="storeMore">　　　　　　　　　　　　　${tl.eTitle} 더 보기 >> </p>
 									 </div>
 								</li>
-							</ul> --%>
+							</ul>  --%>
+							
 									<table>
 										<tr>
 											<td rowspan="3"><img src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${tl.eId}.jpg"></td>
@@ -228,29 +231,31 @@ table{
 											<td>
 
 													<p class="storeAVG">★ ${tl.rvAVG}</p>
+													<p class="storeHit"><i title="조회수" class="far fa-eye"></i> ${tl.eHit}</p>
+													<div class="baseText"></div>
 													<p class="storeCate">
 														<i title="음식종류" class="fab fa-delicious fa-2x"></i>
 														<c:choose>
 															<c:when test="${tl.eCategory == 'korean_food'}">
-																<b>한식</b>
+																<b>한식</b> 
 															</c:when>
 															<c:when test="${tl.eCategory == 'japanese_food'}">
-																<b>일식</b>
+																<b>일식</b> / ${tl.eKeyword_food}
 															</c:when>
 															<c:when test="${tl.eCategory == 'western_food'}">
-																<b>양식</b>
+																<b>양식</b> / ${tl.eKeyword_food} 
 															</c:when>
 															<c:when test="${tl.eCategory == 'chinese_food'}">
-																<b>중식</b>
+																<b>중식</b> / ${tl.eKeyword_food}
 															</c:when>
 															<c:when test="${tl.eCategory == 'asian_food'}">
-																<b>아시안 음식</b>
+																<b>아시안 음식</b> / ${tl.eKeyword_food}
 															</c:when>
 															<c:when test="${tl.eCategory == 'etc_food'}">
-																<b>베이커리</b>
+																<b>베이커리</b> / ${tl.eKeyword_food}
 															</c:when>
 															<c:when test="${tl.eCategory == 'fusion_food'}">
-																<b>퓨전 음식</b>
+																<b>퓨전 음식</b> / ${tl.eKeyword_food}
 															</c:when>
 														</c:choose>
 													</p>
@@ -285,6 +290,6 @@ table{
 
 	<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/js/eating/eatingMain.js"></script>
+		src="${pageContext.request.contextPath}/js/eating/eatingThema.js"></script>
 </body>
 </html>
