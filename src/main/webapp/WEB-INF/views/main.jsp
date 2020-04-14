@@ -33,8 +33,14 @@
 			function openPopup(url) { 
 				var cookieCheck = getCookie("popupYN");
 				
+				var popupWidth = 500;
+				var popupHeight = 430;
+				
+				var popupX = (window.screen.width / 2) - (popupWidth / 2);
+				var popupY= (window.screen.height / 2) - (popupHeight / 2);
+				
 				if (cookieCheck != "N") 
-					window.open(url, '', 'width=500,height=430,left=0,top=0') 
+					window.open(url, '', 'width=' +popupWidth +', height=' +popupHeight +', left=' +popupX +', top=' +popupY); 
 			}
 		</script>
 	</head>

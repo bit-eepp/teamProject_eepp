@@ -37,7 +37,14 @@
 									<img id="headerLogin" class="afterLoginProfile" src="${loginUser.uprofile}">
 								</a>
            						 <ul class="dropdown-menu" role="menu" aria-labelledby="header_user_btn">
-                					<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+                					<c:choose>
+                						<c:when test="${loginUser.uNickname eq '운영자' or loginUser.uNickname eq 'admin2' }">
+                							<li><a href="${pageContext.request.contextPath}/admin/adminPage">관리자페이지</a></li>
+                						</c:when>
+                						<c:otherwise>
+                							<li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+                						</c:otherwise>
+                					</c:choose>
                 					<%-- <li><a onclick="sendMessage('${hot.uNickname}',${hot.user_id});">쪽지 보내기</a></li> --%>
                 					<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
                 				</ul>
