@@ -22,7 +22,7 @@
 				<div class="row clContent">
 					<div class="col-8 clContentLeft">
 						<div class="clContentTitle">
-							<p>${clView.cTitle}</p>
+							<p id="classTitle">${clView.cTitle}</p>
 						</div>
 						
 						<div class="clContentSummary">
@@ -389,7 +389,6 @@
 			<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}" />
 			<input type="hidden" id="uProfile" name="loginUserId" value="${loginUser.uprofile}">
 			<input type="hidden" id="classId" value="${clView.cId}" />
-			<input type="hidden" id="classTitle" value="${clView.cTitle}" />
 			<input type="hidden" id="classOpenner" value="${clView.uNickname}" />
 			<input type="hidden" id="classTotalPeopleCount" value="${clView.cTotalPeopleCount}">
 			<input type="hidden" id="classPrice" value="${clView.cPrice}" />
