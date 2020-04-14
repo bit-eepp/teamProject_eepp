@@ -256,7 +256,7 @@ function shareLink() {
     Kakao.Link.sendCustom({
       templateId: 22997,
       templateArgs: {
-        title: '#Comminuty EE Class강좌 \n'+'"'+$("#classTitle").val()+'"',
+        title: '#Comminuty EE Class강좌 \n'+'"'+$("#classTitle").text()+'"',
         description: 'Community EE에서 확인하세요!',
         pathLink : 
         	'eepp/class/classView?cId='+$("#classId").val()+'&cCategory=',
@@ -314,7 +314,7 @@ function cScrap(cId) {
 				if(data == 1){
 					alert("이미 스크랩한 강좌입니다.");
 				}else{
-					alert(cId +"번 강좌가 스크랩 되었습니다.");
+					alert('"'+$("#classTitle").text() +'" 강좌가 스크랩 되었습니다.');
 				}
 			},
 			error : function(request, status, error) {
