@@ -354,11 +354,6 @@ td {
 .chanagebtn {
 	display: inline-block;
 }
-
-.container {
-	font-size: 0.8rem;
-}
-
 .scrapList_tr .RTitle, .scrapCList_tr .RTitie, .scrapEList_tr .RTitle {
 	color: #000;
 }

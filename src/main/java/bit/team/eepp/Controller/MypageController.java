@@ -361,7 +361,7 @@ public class MypageController {
 			ClassVO classVO, @ModelAttribute("mscri") MypageSearchCriteria mscri,
 			@RequestParam(value = "tabType", required = false, defaultValue = "") String tabType,
 			@RequestParam(value = "success", required = false, defaultValue = "") String success,
-			
+
 			@RequestParam(value = "sortType", required = false, defaultValue = "bWrittenDate") String sortType,
 			@RequestParam(value = "bCategory", required = false, defaultValue = "") String bCategory)
 			throws IOException {
@@ -432,7 +432,7 @@ public class MypageController {
 			NoticePageMaker.setTotalCount(us.noticeListCount(map));
 
 			if (tabType.equals("ReportUser") || tabType.equals("")) {
-				
+
 				map.put("UserReportList", us.UserReportList(map));
 				map.put("UserReportListCount", us.UserReportListCount(map));
 
@@ -443,10 +443,10 @@ public class MypageController {
 				model.addAttribute("myPagePageMaker", myPagePageMaker);
 
 			} else if (tabType.equals("ReportContent")) {
-				
+
 				map.put("BoardReportList", us.BoardReportList(map));
 				map.put("BoardReportListCount", us.BoardReportListCount(map));
-				
+
 				// 게시글 신고
 				myPagePageMaker myPagePageMaker = new myPagePageMaker();
 				myPagePageMaker.setCri(mscri);
@@ -457,7 +457,7 @@ public class MypageController {
 
 				map.put("ReplyReportList", us.ReplyReportList(map));
 				map.put("ReplyReportCount", us.ReplyReportListCount(map));
-				
+
 				// 댓글 신고
 				myPagePageMaker myPagePageMaker = new myPagePageMaker();
 				myPagePageMaker.setCri(mscri);
