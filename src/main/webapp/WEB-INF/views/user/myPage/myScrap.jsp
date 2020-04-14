@@ -224,7 +224,7 @@
 													
 													</td>
 													<td class="Title"><a style="text-decoration: none" target="blank"
-														href="/eepp/eating/eatingView?eId=${EatingScrapList.eating_id}">${EatingScrapList.eTitle}</a></td>
+														href="/eepp/eating/eatingView?eId=${EatingScrapList.eating_id}&eThema=${EatingScrapList.eThema}">${EatingScrapList.eTitle}</a></td>
 													<td><fmt:formatDate value="${EatingScrapList.sDate}" pattern="yyyy/MM/dd HH:mm"/></td>
 													
 												</tr>
