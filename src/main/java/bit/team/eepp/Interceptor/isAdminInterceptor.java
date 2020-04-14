@@ -37,7 +37,7 @@ public class isAdminInterceptor extends HandlerInterceptorAdapter{
 			if(isAdmin.getGrade_Id() != 1) {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('잘못된 접근입니다.'); history.go(-1);</script>");
+				out.println("<script>alert('접근 권한이 없습니다.'); history.go(-1);</script>");
 				out.close();
 				return false;
 			}
