@@ -634,6 +634,7 @@ public class LoginController {
 				logger.info("자동 로그인 정보 삭제");
 			}
 		}
+		
 		response.sendRedirect(returnUrl);
 	}
 }
