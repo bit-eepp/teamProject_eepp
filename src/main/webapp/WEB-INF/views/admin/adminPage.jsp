@@ -169,7 +169,7 @@ html {
 															<c:when test="${vo.dCount > 10}">${vo.bTitle}</c:when>
 															<c:otherwise>
 																<a style="text-decoration: none" target="blank"
-																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&searchType=${scri.searchType}&keyword=${scri.keyword}&sortType=${sortType}&bCategory=${bCategory}&board=yes">
+																	href="/eepp/board/contentView?${pageMaker.makeQuery(pageMaker.cri.page)}&bId=${vo.bId}&sortType=&bCategory=notice">
 																	${vo.bTitle} [${vo.rpCount}]</a>
 															</c:otherwise>
 														</c:choose></td>

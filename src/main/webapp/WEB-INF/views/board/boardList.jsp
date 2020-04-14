@@ -277,6 +277,9 @@
 									<c:when test="${vo.bSubject eq 'info'}">
 										정보
 									</c:when>
+									<c:when test="${vo.bSubject eq 'notice'}">
+										공지
+									</c:when>
 								</c:choose>
 								</td>
 								<td class="bCategory">
@@ -298,6 +301,9 @@
 									</c:when>
 									<c:when test="${vo.bCategory eq 'etc'}">
 										기타
+									</c:when>
+									<c:when test="${vo.bCategory eq 'notice'}">
+										공지
 									</c:when>
 								</c:choose>
 								</td>
