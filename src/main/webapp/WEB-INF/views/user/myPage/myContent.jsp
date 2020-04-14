@@ -98,7 +98,7 @@
 					</div><!-- col-sm-4 -->
 					<div class="col-sm-9"><br>
 						<div class="myinfo-wrap">
-							<h3 id="mpBoBtn" style="color:#e74386">내 컨텐츠</h3>
+							<h3 id="mpBoBtn">내 컨텐츠</h3>
 							<hr>
 							<p>'EE'에서 작성하신 게시글을 확인 할 수 있습니다.</p>
 							<br>

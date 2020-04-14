@@ -17,12 +17,13 @@ public class ScrapVO {
 	private String uNickname;
 	private String eTitle;
 	private String ecategory;
+	private String eThema;
 
 	public ScrapVO() {
 	}
 
 	public ScrapVO(int sId, int board_id, int class_id, int user_id, int eating_id, Timestamp sDate, String bTitle,
-			String cTitle, String uNickname,String eTitle,String ecategory) {
+			String cTitle, String uNickname,String eTitle,String ecategory, String eThema) {
 		this.sId = sId;
 		this.board_id = board_id;
 		this.class_id = class_id;
@@ -34,8 +35,17 @@ public class ScrapVO {
 		this.uNickname = uNickname;
 		this.eTitle = eTitle;
 		this.ecategory = ecategory;
+		this.eThema = eThema;
 	}
 	
+
+	public String geteThema() {
+		return eThema;
+	}
+
+	public void seteThema(String eThema) {
+		this.eThema = eThema;
+	}
 
 	public String getEcategory() {
 		return ecategory;
