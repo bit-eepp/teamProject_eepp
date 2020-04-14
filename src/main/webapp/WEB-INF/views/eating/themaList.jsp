@@ -232,6 +232,10 @@ table{
 
 													<p class="storeAVG">★ ${tl.rvAVG}</p>
 													<p class="storeHit"><i title="조회수" class="far fa-eye"></i> ${tl.eHit}</p>
+													<c:forEach items="${fn:split(tl.eKeyword_food, ' ')}" var="tlKeyWord">
+														#${tlKeyWord} 
+													</c:forEach>
+													
 													<div class="baseText"></div>
 													<p class="storeCate">
 														<i title="음식종류" class="fab fa-delicious fa-2x"></i>

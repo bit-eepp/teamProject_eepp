@@ -9,19 +9,6 @@ var uNickname = $("#userNickname").val();
 $(document).ready(function() {
 	
 	var eId = $("#eId").val();
-	var baseText = $("#keyword_" +eId).val();
-
-	console.log(baseText);
-	
-	var tagText = baseText.split(' ');
-
-	for(var i in tagText){
-		//document.html('<p> # ' + tagText[i] + ' </p>');
-		//document.getElementById('eId').append('<p> # ' + tagText[i] + ' </p>');
-		$(".baseText").append('<p> # ' + tagText[i] + ' </p>');
-
-	}
-	
 	
 	// 가게 검색
 	$('#eatingSearchBtn').click(function() {
