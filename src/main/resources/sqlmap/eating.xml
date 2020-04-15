@@ -119,7 +119,7 @@
 	<select id="themaList" resultType="bit.team.eepp.VO.EatingVO">
 		<![CDATA[
 		SELECT * FROM 
-		(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food,
+		(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food, eHit, 
 		(SELECT COUNT(*) FROM REVIEW WHERE rvDeleted = 'no' AND eating_id = eId) AS rvCount,
 		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id) as rvAVG
 		FROM Eating
@@ -152,7 +152,7 @@
 			</choose>
 		</if>
 		
-		ORDER BY eDate DESC)
+		ORDER BY rvAVG DESC nulls last)
 	</select>
 	
 	<!-- 민영 수정 부분-->
