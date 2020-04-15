@@ -183,7 +183,7 @@ function classJoinForm(myPoint, totalPeopleCount, joinUserId) {
 	
 	if(cPrice > myPoint) {
 		if(confirm("포인트 잔액이 부족합니다.\n\n현재 보유포인트 : " +myPoint +"P\n결제 포인트 금액 : " +cPrice +"P\n포인트를 충전하시겠습니까?") == true) {
-			location.href = "/eepp/mypage";
+			location.href = "/eepp/myPoint";
 			return false;
 		} else {
 			return false;

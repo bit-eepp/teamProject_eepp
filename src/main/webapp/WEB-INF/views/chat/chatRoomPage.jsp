@@ -13,7 +13,12 @@
 			var chatMasterId = ${chatRoomSelect.user_id};
 			var chatMemberId = ${user_id};
 			var currentUserNickname = '${loginUser.uNickname}';
-	
+			
+			function getContextPath() {
+		    	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+		    	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+		    };
+		    
 			$(document).ready(function() {
 				connect();
 				
@@ -21,7 +26,7 @@
 					$('#deleteBtn').remove();
 				}
 				
-				/* setInterval('getMemberList(chId)', 1000); */ // 10초간격으로 채팅방 인원변경 확인, Ajax통신
+				/* setInterval('getMemberList(chId)', 1000); */ // 1초간격으로 채팅방 인원변경 확인, Ajax통신
 				
 				$('#message').keypress(function(event) {	// 채팅메세지를 엔터를 쳐서 보낼수 있게해주는 것
 					var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -157,7 +162,7 @@
 				
 				$.ajax({
 					type:'POST',
-					url:'/eepp/chat/getMemberList',
+					url: getContextPath() + '/chat/getMemberList',
 					async: false,
 					data:{'chatting_id' : chId},
 					success:function(data){
@@ -182,7 +187,7 @@
 				if(confirm("EE Chat을 정말 삭제하시겠습니까? 삭제하면 다시 참여가 불가합니다.") == true) {
 					$.ajax({
 						type:'POST',
-						url:'/eepp/chat/chatRoomDelete',
+						url: getContextPath() + '/chat/chatRoomDelete',
 						data:{'chId' : chId, 'user_id' : user_id},
 						success:function(data){
 							alert("EE Chat이 삭제되었습니다.");
@@ -209,7 +214,7 @@
 				if(confirm("EE Chat에서 나가시겠습니까?") == true) {					
 					$.ajax({
 						type:'POST',
-						url:'/eepp/chat/chatRoomExit',
+						url: getContextPath() + '/chat/chatRoomExit',
 						data:{'chId' : chId, 'user_id' : user_id},
 						success:function(data){
 							var a = currentUserNickname;

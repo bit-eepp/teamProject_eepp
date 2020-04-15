@@ -13,6 +13,11 @@
 	    <script type="text/javascript">
 		    var uNickname = $("#userNickname").val();
 		    var user_id = $("#userId").val();
+		    
+		    function getContextPath() {
+		    	var hostIndex = location.href.indexOf(location.host) + location.host.length;
+		    	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+		    };
 
 		    $(document).ready(function(){
 		    	//로그인 하지않은 경우, 채팅방 개설 버튼 삭제
@@ -54,7 +59,7 @@
 		    	var totalCount = 0;
 		    	$.ajax({
 		    		type:'POST',
-		    		url:'/eepp/chat/getTotalChatCount',
+		    		url: getContextPath() + '/chat/getTotalChatCount',
 		    		async: false,
 		    		success:function(data) {
 		    			totalCount = data;
@@ -66,7 +71,7 @@
 		    function getChatRoomList() {
 		    	$.ajax({
 		    		type:'POST',
-		    		url:'/eepp/chat/getChatRoomList',
+		    		url: getContextPath() + '/chat/getChatRoomList',
 		    		success:function(data) {
 		    			console.log(data);
 		    			$('#endNum').val(data.length);
@@ -124,7 +129,7 @@
 		    		
 		    		$.ajax({
 		    			type:'POST',
-		    			url:'/eepp/chat/getMoreChatList',
+		    			url: getContextPath() + '/chat/getMoreChatList',
 		    			data:$('#moreListFrom').serialize(),
 		    			success:function(data){
 		    				console.log(data);
@@ -190,7 +195,7 @@
 		    	} else {
 		    		$.ajax({
 		    			type:'POST',
-		    			url:'/eepp/chat/chatRoomMake',
+		    			url: getContextPath() + '/chat/chatRoomMake',
 		    			data:$("form[name=chForm]").serialize(),
 		    			success:function(data) {	
 		    				chatRoomSelect(data, chTotalPeopleCount);
@@ -220,12 +225,11 @@
 		    	
 		    	if(!$("#userNickname").val()) {
 		    		alert("로그인 하신 후에 EE Chat에 참가하실 수 있습니다.");
-		    		location.href = "/eepp/login/login.do";
 		    		return false;
 		    	} else {
 		    		$.ajax({
 		    			type:'POST',
-		    			url:'/eepp/chat/getUserIdList',
+		    			url: getContextPath() + '/chat/getUserIdList',
 		    			data:{'chatting_id' : chId},
 		    			success:function(data) {
 		    				if(data.length == 0) {
@@ -289,7 +293,7 @@
 		    function getCurrentPeopleCount(chId) {
 		    	$.ajax({
 		    		type:'POST',
-		    		url:'/eepp/chat/getPeopleCount',
+		    		url: getContextPath() + '/chat/getPeopleCount',
 		    		data:{'chatting_id' : chId},
 		    		success:function(data){
 		    			$('.count_' +chId).html(data);

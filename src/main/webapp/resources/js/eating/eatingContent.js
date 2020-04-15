@@ -350,7 +350,7 @@ function eReviewWrite() {
 			type: 'POST',
 			data: insertData,	
 			success: function(insertData){
-				alert("::리뷰 등록::")
+				alert("리뷰가 등록되었습니다.")
 				reviewCount(eating_id);
 				reviewList();
 				$("#rvComment").val("");
