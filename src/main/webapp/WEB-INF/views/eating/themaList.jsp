@@ -19,7 +19,7 @@
 /* 테마 타이틀 영역 */
 .thema-title-info {
 	padding: 200px 60px 140px;
-	background-color: #59bfbf;
+	background-color: #F2F2F2;
 	position: relative;
 	background-size: cover;
 	background-potion: bottom;
@@ -29,7 +29,7 @@
 	z-index: 1;
 	position: relative;
 	text-align: center;
-	color: #fff;
+	color: #e7438b;
 	line-height: 62px;
 }
 
@@ -67,7 +67,6 @@
 }
 
 .thema-list-box table{
-
 	color : black;
 	width : 100%;
 }
@@ -289,8 +288,9 @@
 										<tr>
 											<td colspan="2"></td>
 											<td class="storeMore" align = "left">${tl.eTitle} 더 보기 >></td>
+											
 									</table>
-
+									<hr>
 								</a>
 							</div>
 							<!-- thema-list-box end -->
