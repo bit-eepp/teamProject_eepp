@@ -514,13 +514,14 @@ html {
 		</c:otherwise>
 	</c:choose>
 	<script type="text/javascript">
-		function openMsg() {
-			var tw = window
-					.open(
-							"http://localhost:8282/eepp/message?messageType=myReceiveMsg",
-							"message", "left=" + (screen.availWidth - 700) / 2
-									+ ",top=" + (screen.availHeight - 440) / 2
-									+ ",width=700,height=440");
+		function getContextPath() {
+			var hostIndex = location.href.indexOf(location.host) + location.host.length;
+			return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+		};
+		
+		function openMsg(){
+		 var tw = window.open(getContextPath() +"/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
+				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 		}
 	</script>
 	<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>

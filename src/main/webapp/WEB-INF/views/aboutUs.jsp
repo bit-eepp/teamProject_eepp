@@ -87,7 +87,7 @@
 								직무별 커뮤니티 게시판에서 모여 서로 소통 할 수 있습니다.
 							</p>
 								
-							<a href="${pageContext.request.contextPath}/board/boardList" class="btn btn-light px-5 rounded-pill shadow-sm"><b>상 세 보 기</b></a>
+							<a href="${pageContext.request.contextPath}/board/boardList" target="_blank" class="btn btn-light px-5 rounded-pill shadow-sm"><b>상 세 보 기</b></a>
 						</div>
 						
 						<div class="col-lg-5 px-5 mx-auto order-1 order-lg-2">
@@ -108,7 +108,7 @@
 								항상 메뉴를 고민하는 직장인들을 위해 다양한 맛집정보를 제공합니다.
 							</p>
 								
-							<a href="${pageContext.request.contextPath}/eating/eatingList" class="btn btn-light px-5 rounded-pill shadow-sm"><b>상 세 보 기</b></a>
+							<a href="${pageContext.request.contextPath}/eating/eatingList" target="_blank" class="btn btn-light px-5 rounded-pill shadow-sm"><b>상 세 보 기</b></a>
 						</div>
 					</div>
 					
@@ -122,7 +122,7 @@
 								직장인들의 자기개발을 위한 배움의 장을 제공합니다.
 							</p>
 							
-							<a href="${pageContext.request.contextPath}/class/classList" class="btn btn-light px-5 rounded-pill shadow-sm"><b>상 세 보 기</b></a>
+							<a href="${pageContext.request.contextPath}/class/classList" target="_blank" class="btn btn-light px-5 rounded-pill shadow-sm"><b>상 세 보 기</b></a>
 						</div>
 						
 						<div class="col-lg-5 px-5 mx-auto order-1 order-lg-2">
@@ -219,7 +219,7 @@
 								<h5 class="mb-0">KIM MINYOUNG</h5>
 								<span class="small text-uppercase text-muted">DEVELOPER</span><br><br>
 								
-								<h6 style="color: #59bfbf;"><b>"3년뒤, 카카오에서 만나요!"</b></h6>
+								<h6 style="color: #59bfbf;"><b>"ONE DAY ONE COMMIT!"</b></h6>
 								
 								<ul class="social mb-0 list-inline mt-3">
 									

@@ -174,7 +174,7 @@ function deleteScrap_Sboard() {
 						},
 						success : function(data) {
 							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/myScrap?tabType=myScrapBoard"
+							location.href = getContextPath() +"/myScrap?tabType=myScrapBoard"
 						},
 						error : function(request, status, error) {
 							alert("에러가 발생했습니다.");
@@ -226,7 +226,7 @@ function deleteScrap_SClass() {
 						},
 						success : function(data) {
 							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/myScrap?tabType=myScrapClass";
+							location.href = getContextPath() +"/myScrap?tabType=myScrapClass";
 						},
 						error : function(request, status, error) {
 							alert("에러가 발생했습니다.");
@@ -277,7 +277,7 @@ function deleteScrap_SEating() {
 						},
 						success : function(data) {
 							alert("스크랩이 삭제되었습니다.");
-							location.href = "http://localhost:8282/eepp/myScrap?tabType=myScrapEating";
+							location.href = getContextPath() +"/myScrap?tabType=myScrapEating";
 						},
 						error : function(request, status, error) {
 							alert("에러가 발생했습니다.");
@@ -294,7 +294,7 @@ function deleteScrap_SEating() {
 
 // 클래스 구입자 보기
 function classjoin_list(cId) {
-	var member = window.open("http://localhost:8282/eepp/classjoin_list?cId="
+	var member = window.open(getContextPath() +"/classjoin_list?cId="
 			+ cId, "classjoin_list", "left=" + (screen.availWidth - 530) / 2
 			+ ",top=" + (screen.availHeight - 620) / 2
 			+ ",width=530,height=620");

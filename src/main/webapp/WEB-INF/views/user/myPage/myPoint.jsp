@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>MyPage</title>
+<title>마이페이지 - 내 포인트</title>
 <%@ include file="/WEB-INF/include/forImport.jspf"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/user/mypage.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
@@ -29,17 +29,17 @@
 					<div class="col-sm-3">
 						<table class="text-wrap">
 							<tr>
-								<td class="text_bold"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
+								<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}/mypage">회원정보</a></td>
 							</tr>
 							<tr class="bordered">
-								<td><a href="/eepp/mypage">${loginUser.uNickname}</a></td>
+								<td><a href="${pageContext.request.contextPath}/mypage">${loginUser.uNickname}</a></td>
 							</tr>
 							
 							<tr>
-								<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/myPoint">내 포인트</a></td>
+								<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="${pageContext.request.contextPath}/myPoint">내 포인트</a></td>
 							</tr>
 							<tr class="bordered">
-							<td><a href="/eepp/myPoint"><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P</a></td>
+							<td><a href="${pageContext.request.contextPath}/myPoint"><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P</a></td>
 							</tr>
 							
 							<tr>
@@ -48,32 +48,32 @@
 							
 							<tr class="bordered">
 							<td><div class="content_count">
-							<a href="/eepp/myContent">게시물 ${mypage.listCount}</a></div></td>
+							<a href="${pageContext.request.contextPath}/myContent">게시물 ${mypage.listCount}</a></div></td>
 							<!-- <a style="cursor:pointer" onclick="location.href='mypage?board=board'"> -->
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myClass?tabType=myClassJoin">내 클래스</a></td>
+							<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}/myClass?tabType=myClassJoin">내 클래스</a></td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><a href="/eepp/myClass?tabType=myClassJoin">개설 ${mypage.openClassCount}&nbsp;&nbsp;&nbsp;&nbsp;가입 ${mypage.joinClassCount}</a></td>
+							<td><a href="${pageContext.request.contextPath}/myClass?tabType=myClassJoin">가입 ${mypage.joinClassCount}&nbsp;&nbsp;&nbsp;&nbsp;개설 ${mypage.openClassCount}</a></td>
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myReview">내 리뷰</a></td>
+							<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}/myReview">내 리뷰</a></td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="review_count"><a href="/eepp/myReview">${mypage.reviewListCount}건</a></div></td>
+							<td><div class="review_count"><a href="${pageContext.request.contextPath}/myReview">${mypage.reviewListCount}건</a></div></td>
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="myScrap?tabType=myScrapBoard">스크랩</a></td>
+							<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}/myScrap?tabType=myScrapBoard">내 스크랩</a></td>
 							</tr>
 							
 							<tr class="bordered">
-							<td><div class="scrap_count"><a href="myScrap?tabType=myScrapBoard">게시글 ${mypage.scrapCount} &nbsp;&nbsp;클래스 ${mypage.scrapClassCount}&nbsp;&nbsp;&nbsp;맛집 ${mypage.scrapEatingCount}</a></div></td>
+							<td><div class="scrap_count"><a href="${pageContext.request.contextPath}/myScrap?tabType=myScrapBoard">게시글 ${mypage.scrapCount} &nbsp;&nbsp;클래스 ${mypage.scrapClassCount}&nbsp;&nbsp;&nbsp;맛집 ${mypage.scrapEatingCount}</a></div></td>
 							</tr>
 							
 							<tr>
@@ -191,9 +191,14 @@
 	</c:choose>
 	<script src="${pageContext.request.contextPath}/js/user/mypage/mypage.js"></script>
 	<script type="text/javascript">
-	function openMsg(){
-		 var tw = window.open("http://localhost:8282/eepp/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
-				 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
+		function getContextPath() {
+			var hostIndex = location.href.indexOf(location.host) + location.host.length;
+			return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
+		};
+		
+		function openMsg(){
+			 var tw = window.open(getContextPath() +"/message?messageType=myReceiveMsg","message","left="+(screen.availWidth-700)/2
+					 +",top="+(screen.availHeight-440)/2+",width=700,height=440");
 		}
 	</script>
 <%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>
