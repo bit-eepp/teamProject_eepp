@@ -1,45 +1,48 @@
-//contextPath
-function getContextPath() {
-	var hostIndex = location.href.indexOf( location.host ) + location.host.length;
-	return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1) );
-};
-
-var uNickname = $("#userNickname").val();
-	
 $(document).ready(function() {
-	
-	var eId = $("#eId").val();
-	
-	// 가게 검색
-	$('#eatingSearchBtn').click(function() {
-		if($('select[name=searchType]').val() == 'n') {
-			alert('검색조건을 지정해주세요');
-			return false;
-		} else {
-			self.location ="eatingList" + $("#eatingMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-			}
-	});
-	
-	$('#keywordInput').keydown(function(event) {
-		var keycode = (event.keyCode ? event.keyCode : event.which);
-		if(keycode == 13) {
-	    	 if($('select[name=searchType]').val() == 'n') {
-	 			alert('검색조건을 지정해주세요');
-	 			return false;
-	 		} else {
-	 			self.location = "eatingList" + $("#eatingMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
-	 		}
-	     }
-	});
-	
+	var thema = $('#eThema').val();
 
-	
-	var page_eating = $('#eatingCriPage').val();
-	pageColor(page_eating);
-	
+	if (thema == 'thema_1') {
+		$('#themaBanner').css('padding', '230px 0 140px');
+		$('#themaBanner').css('background', 'url(/eepp/img/eating/t1.jpg)');
+		$('#themaBanner').css('position', 'relative');
+		$('#themaBanner').css('background-size', 'cover');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('margin-bottom', '30px');
+	} else if (thema == 'thema_2') {
+		$('#themaBanner').css('padding', '230px 0 140px');
+		$('#themaBanner').css('background', 'url(/eepp/img/eating/t2.jpg)');
+		$('#themaBanner').css('position', 'relative');
+		$('#themaBanner').css('background-size', 'cover');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('margin-bottom', '30px');
+	} else if (thema == 'thema_3') {
+		$('#themaBanner').css('padding', '230px 0 140px');
+		$('#themaBanner').css('background', 'url(/eepp/img/eating/t3.jpg)');
+		$('#themaBanner').css('position', 'relative');
+		$('#themaBanner').css('background-size', 'cover');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('margin-bottom', '30px');
+	} else if (thema == 'thema_4') {
+		$('#themaBanner').css('padding', '230px 0 140px');
+		$('#themaBanner').css('background', 'url(/eepp/img/eating/t4.jpg)');
+		$('#themaBanner').css('position', 'relative');
+		$('#themaBanner').css('background-size', 'cover');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('margin-bottom', '30px');
+	} else if (thema == 'thema_5') {
+		$('#themaBanner').css('padding', '230px 0 140px');
+		$('#themaBanner').css('background', 'url(/eepp/img/eating/t5.jpg)');
+		$('#themaBanner').css('position', 'relative');
+		$('#themaBanner').css('background-size', 'cover');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('margin-bottom', '30px');
+	} else if (thema == 'thema_6') {
+		$('#themaBanner').css('padding', '230px 0 140px');
+		$('#themaBanner').css('background', 'url(/eepp/img/eating/t6.jpg)');
+		$('#themaBanner').css('position', 'relative');
+		$('#themaBanner').css('background-size', 'cover');
+		$('#themaBanner').css('background-position', 'bottom');
+		$('#themaBanner').css('margin-bottom', '30px');
+	}
 });
-
-function pageColor(page_eating) {
-	$('#etPage_'+page_eating).css("background-color", "#59bfbf");
-	$('#etPage_'+page_eating).css("color", "#ffffff");
-}

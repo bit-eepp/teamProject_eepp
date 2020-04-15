@@ -27,8 +27,7 @@ public class EatingController {
 	private EatingService eatingService;
 
 	@RequestMapping("/eatingList")
-	public String eatingList(Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "eThema", required = false, defaultValue = "") String eThema) {
+	public String eatingList(Model model, @ModelAttribute("escri") EatingSearchCriteria escri, @RequestParam(value = "eThema", required = false, defaultValue = "") String eThema) {
 		logger.info("eatingList method Active(");
 		System.out.println("all store list print");
 
@@ -61,8 +60,7 @@ public class EatingController {
 	}
 
 	@RequestMapping("/eatingView")
-	public String eatingView(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "eThema") String eThema) {
+	public String eatingView(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri, @RequestParam(value = "eThema") String eThema) {
 
 		System.out.println("store information print");
 
@@ -74,8 +72,7 @@ public class EatingController {
 	}
 
 	@RequestMapping("/themaList")
-	public String themaList(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri,
-			@RequestParam(value = "eThema") String eThema) {
+	public String themaList(EatingVO eatingVO, Model model, @ModelAttribute("escri") EatingSearchCriteria escri, @RequestParam(value = "eThema") String eThema) {
 
 		System.out.println("thema list print");
 

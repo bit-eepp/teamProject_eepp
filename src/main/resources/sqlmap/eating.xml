@@ -118,36 +118,36 @@
 	
 	<select id="themaList" resultType="bit.team.eepp.VO.EatingVO">
 		<![CDATA[
-		SELECT * FROM 
-		(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food, eHit, 
-		(SELECT COUNT(*) FROM REVIEW WHERE rvDeleted = 'no' AND eating_id = eId) AS rvCount,
-		(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id) as rvAVG
-		FROM Eating
-		WHERE eId = eId
+			SELECT * FROM 
+			(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food, eHit, 
+			(SELECT COUNT(*) FROM REVIEW WHERE rvDeleted = 'no' AND eating_id = eId) AS rvCount,
+			(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id) as rvAVG
+			FROM Eating
+			WHERE
 		]]>
 		
 		<if test="eThema != null">
 			<choose>
 				<when test="eThema == 'thema_1'">
-				AND	eThema = 'thema_1'
+					eThema = 'thema_1'
 				</when>
 				<when test="eThema == 'thema_2'">
-				AND	eThema = 'thema_2'
+					eThema = 'thema_2'
 				</when>
 				<when test="eThema == 'thema_3'">
-				AND	eThema = 'thema_3'
+					eThema = 'thema_3'
 				</when>
 				<when test="eThema == 'thema_4'">
-				AND	eThema = 'thema_4'
+					eThema = 'thema_4'
 				</when>
 				<when test="eThema == 'thema_5'">
-				AND	eThema = 'thema_5'
+					eThema = 'thema_5'
 				</when>
 				<when test="eThema == 'thema_6'">
-				AND	eThema = 'thema_6'
+					eThema = 'thema_6'
 				</when>
 				<when test="eThema == 'thema_etc'">
-				AND	eThema = 'thema_etc'
+					eThema = 'thema_etc'
 				</when>
 			</choose>
 		</if>

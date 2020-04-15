@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Class 수정 페이지</title>
+		<title>${modifyClass.cId}번 클래스 강좌 수정 페이지</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classModify.css">

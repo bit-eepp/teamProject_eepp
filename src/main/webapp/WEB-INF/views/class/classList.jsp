@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>오프라인 클래스 강좌 플랫폼</title>
+		<title>오프라인 클래스 강좌 플랫폼 - EE Class</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/class/classMain.css">

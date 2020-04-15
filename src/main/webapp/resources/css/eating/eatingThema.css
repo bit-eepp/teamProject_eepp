@@ -1,0 +1,81 @@
+@charset "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+			
+#themaList-totalWrap {
+	padding-top: 90px;
+}
+
+.sc-themaBanner:after{
+	content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.sc-themaBanner .thema-title {
+	font-family: 'Jeju Gothic', serif;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 42px;
+    line-height: 62px;
+}
+
+.eatingThema .col-sm-12 .eatList {
+	width:100%;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr {
+	width:100%;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td1 {
+	width:30%;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td1 img {
+	border-radius: 5px; 
+	width: 90%; 
+	height: auto;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatTitle{
+	font-size: 160%; 
+	font-weight: 600;
+	margin-left: 20px; 
+	display: inline;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatInfo{
+	margin-left: 20px; 
+	color:#868e96; 
+	display: inline;"
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .eatAddress, .eatCateInfo {
+	margin-left: 20px;
+}
+
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .eatCateInfo .eatCategory {
+	color:#59bfbf;
+	font-size: 110%;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .eatCateInfo .eatTag {
+	color:#59bfbf;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .eatMoreBtn button {
+	background-color:#e7438b;
+	color:#ffffff;
+	border: none;
+}

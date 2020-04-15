@@ -268,11 +268,11 @@
 				<input type="hidden" name="keyword" id="escriKeyword" value="${escri.keyword}" />
 				<input type="hidden" name="eThema" id="eThema" value="${eThema}" />
 				<input type="hidden" id="userNickname" name="loginUser" value="${loginUser.uNickname}"/>
-		<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}"/>
-		<input type="hidden" id="eId" value="${eContentView.eId}"/>
-		<input type="hidden" id="eTitle" value="${eContentView.eTitle}"/>
-		<input type="hidden" id="ad_new" value="${eContentView.eAddress_new}"/>
-		<input type="hidden" id="ad_old" value="${eContentView.eAddress_old}"/>
+				<input type="hidden" id="userId" name="loginUserId" value="${loginUser.user_id}"/>
+				<input type="hidden" id="eId" value="${eContentView.eId}"/>
+				<input type="hidden" id="eTitle" value="${eContentView.eTitle}"/>
+				<input type="hidden" id="ad_new" value="${eContentView.eAddress_new}"/>
+				<input type="hidden" id="ad_old" value="${eContentView.eAddress_old}"/>
 			</form>
 			
 		</section>

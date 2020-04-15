@@ -6,7 +6,7 @@
 
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<title>오늘 뭐 먹지?</title>
+		<title>오늘 뭐 먹지? - 맛집정보</title>
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/eating/eatingMain.css">

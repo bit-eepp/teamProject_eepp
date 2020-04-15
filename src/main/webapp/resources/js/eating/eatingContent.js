@@ -74,7 +74,7 @@ $(document).ready(function() {
 			// 커스텀 오버레이에 표출될 내용
 			var content = '<div class="customoverlay">';
 				content += '<a href="https://map.kakao.com/link/map/' +eatingAddress +',' +result[0].y +',' +result[0].x +'" target="_blank">';
-				content += '<span class="title"><i class="fas fa-store" style="color:#ff9007;"></i>' +eTitle +'</span>';
+				content += '<span class="title"><i class="fas fa-store" style="color:#ff9007;"></i> ' +eTitle +'</span>';
 				content += '</a>';
 				content += '</div>';
 
