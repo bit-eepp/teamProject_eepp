@@ -213,9 +213,9 @@ public class UserController {
 	
 	/* 읽지않은 쪽지 알람 띄우기 */
 	@ResponseBody
-	@RequestMapping(value = "/loadNotReaeMessage", method = { RequestMethod.POST, RequestMethod.GET })
-	public String loadNotReaeMessage(HttpSession session) {
-		logger.info("messageSuccess Method Active");
+	@RequestMapping(value = "/loadNotReadMessage", method = { RequestMethod.POST, RequestMethod.GET })
+	public String loadNotReadMessage(HttpSession session) {
+		logger.info("loadNotReadMessage Method Active");
 
 		Object loginSession = session.getAttribute("loginUser");
 		if (loginSession != null) {
@@ -227,14 +227,16 @@ public class UserController {
 
 			int notReadMessage = us.messageListCount(map);
 			if (notReadMessage != 0) {
+				System.out.println("안읽은 메세지는 있음" + notReadMessage);
 				JSONObject data = new JSONObject();
 			    data.put("notReadMessage", notReadMessage);
 	            return data.toString();
 			}else {
-				return "";
+				System.out.println("안읽은 메세지는 없음" + notReadMessage);
+				return "0";
 			}
 		}else {
-			return "";
+			return "0";
 		}
 	}
 
