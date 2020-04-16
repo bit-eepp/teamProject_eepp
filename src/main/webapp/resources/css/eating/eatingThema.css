@@ -31,6 +31,7 @@
 
 .eatingThema .col-sm-12 .eatList {
 	width:100%;
+	/* margin-bottom: 100px; */
 }
 
 .eatingThema .col-sm-12 .eatList .eatList_tr {
@@ -47,11 +48,16 @@
 	height: auto;
 }
 
-.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatTitle{
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatTitle {
 	font-size: 160%; 
 	font-weight: 600;
 	margin-left: 20px; 
 	display: inline;
+}
+
+.eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatTitle a {
+	text-decoration: none;
+	color: #000;
 }
 
 .eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatInfo{

@@ -63,8 +63,10 @@
 			<!-- thema list body -->
 			<div class="container eatingThema">
 				<div class="col-sm-12">
+					
 					<c:forEach items="${themaList}" var="tl">
 						<table class="eatList">
+						
 							<tr class="eatList_tr" >
 								<td class="eatList_td1">
 									<img src="${pageContext.request.contextPath}/img/eating/thumnail/eat_Thumnail${tl.eId}.jpg">
@@ -72,7 +74,7 @@
 								
 								<td class="eatList_td2">
 									<div class="e1">
-										<p class="eatTitle">${tl.eTitle}&nbsp;&nbsp;<b style="color:#59bfbf;">${tl.rvAVG}</b></p>
+										<p class="eatTitle"><a href="${pageContext.request.contextPath}/eating/eatingView?eId=${tl.eId}&eThema=${eThema}" target="_blank">${tl.eTitle}</a>&nbsp;&nbsp;<b style="color:#59bfbf;">${tl.rvAVG}</b></p>
 										<p class="eatInfo"><i title="조회수" class="far fa-eye"></i> ${tl.eHit}&nbsp;&nbsp;<i title="리뷰수" class="fas fa-pen"></i> ${tl.rvCount}</p>
 									</div>
 									<br>
@@ -146,9 +148,11 @@
 						<hr>
 					
 					</c:forEach>
+					
 				</div>
 			</div>
 		</section>
+		<br>
 
 		<!-- chat -->
 		<%@ include file="/WEB-INF/views/chat/chatRoomList.jsp"%>

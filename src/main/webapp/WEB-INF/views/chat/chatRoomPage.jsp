@@ -52,7 +52,8 @@
 	
 			// 채팅방 접속할때 실행되는 메세지
 			function onOpen(evt) {
-				var a = currentUserNickname;
+				var a = currentUserNickname;			
+				
 				var text = '님이 참여하셨습니다.';
 				var msg = 
 				{
@@ -68,12 +69,15 @@
 			//채팅 메세지를 보내는 메서드
 			function send() {				 
 				var a = currentUserNickname;
+				var profile = $('#userProfile').val();
 				var text = $("#message").val();
+				
 				var msg = 
 				{
 					"type" : "msg",
 			    	"text": text,
 					"uNickname" : a,
+					"uProfile": profile,
 					"date" : Date.now()
 				};
 				
@@ -131,7 +135,7 @@
 			    		tag += '<li class="in">';
 			    		tag += '<div class="chat-body">';
 			    		tag += '<div class="chat-img">';
-			    		tag += '<img alt="Avtar" src="'+$("#userProfile").val()+'">';
+			    		tag += '<img alt="Avtar" src="'+msg.uProfile +'">';
 			    		tag += '</div>';
 			    		tag += '<div class="chat-message">';
 			    		tag += '<div class="chat-message-info"><p>'+msg.uNickname+'</p></div>';
@@ -251,7 +255,7 @@
 	</head>
 	
 	<body oncontextmenu="return false">
-	<input type="hidden" id="userProfile" value="${loginUser.uprofile}">
+		<input type="hidden" id="userProfile" value="${loginUser.uprofile}">
 				<div class="chatRoomWrapper">
 					<div class="card">
 						<div class="card-header">
