@@ -48,27 +48,27 @@
 				<ul>
 					<li class="thema1">
 						<img src="${pageContext.request.contextPath}/img/eating/t1.jpg">
-						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_1"><span>신촌 / 홍대</span></a>
+						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_1" target="_blank"><span>신촌 / 홍대</span></a>
 					</li>
 					<li class="thema2">
 						<img src="${pageContext.request.contextPath}/img/eating/t2.jpg">
-						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_2"><span>여의도</span></a>
+						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_2" target="_blank"><span>여의도</span></a>
 					</li>
 					<li class="thema3">
 						<img src="${pageContext.request.contextPath}/img/eating/t3.jpg">
-						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_3"><span>용산 / 이태원</span></a>
+						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_3" target="_blank"><span>용산 / 이태원</span></a>
 					</li>
 					<li class="thema4">
 						<img src="${pageContext.request.contextPath}/img/eating/t4.jpg">
-						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_4"><span>강남 / 논현</span></a>
+						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_4" target="_blank"><span>강남 / 논현</span></a>
 					</li>
 					<li class="thema5">
 						<img src="${pageContext.request.contextPath}/img/eating/t5.jpg">
-						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_5"><span>건대입구</span></a>
+						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_5" target="_blank"><span>건대입구</span></a>
 					</li>
 					<li class="thema6">
 						<img src="${pageContext.request.contextPath}/img/eating/t6.jpg">
-						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_6"><span>합정 / 망원</span></a>
+						<a href="${pageContext.request.contextPath}/eating/themaList?&eThema=thema_6" target="_blank"><span>합정 / 망원</span></a>
 					</li>
 				</ul>
 			</div>
