@@ -73,13 +73,9 @@
 							<div id="myMenu" class="btn-group btn-group-sm">
 							<div class="menuBtn-wrap">
 								<button type="button" class="btn btn-light" onclick="openMsg();"><i class="fas fa-envelope-square"></i><strong> Message</strong></button>&nbsp;
-								<c:choose>
-									<c:when test="${not empty notReadMessage}">
-										<div class="msgAlert">
-										<p>${notReadMessage}</p>
-										</div>
-									</c:when>
-								</c:choose>
+									<div class="msgAlert">
+										<p id="msgAlertNum"></p>									
+									</div>
 							</div>
 							<div class="menuBtn-wrap">
 								<c:choose>

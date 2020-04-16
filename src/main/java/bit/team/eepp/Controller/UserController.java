@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -208,6 +209,33 @@ public class UserController {
 		System.out.println("messageType is : " + request.getParameter("messageType"));
 		rttr.addAttribute("messageType", request.getParameter("messageType"));
 		return "redirect:/message";
+	}
+	
+	/* 읽지않은 쪽지 알람 띄우기 */
+	@ResponseBody
+	@RequestMapping(value = "/loadNotReaeMessage", method = { RequestMethod.POST, RequestMethod.GET })
+	public String loadNotReaeMessage(HttpSession session) {
+		logger.info("messageSuccess Method Active");
+
+		Object loginSession = session.getAttribute("loginUser");
+		if (loginSession != null) {
+			UserVO user = (UserVO) loginSession;
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("fromMain", "fromMain");
+			map.put("user_id", user.getUser_id());
+
+			int notReadMessage = us.messageListCount(map);
+			if (notReadMessage != 0) {
+				JSONObject data = new JSONObject();
+			    data.put("notReadMessage", notReadMessage);
+	            return data.toString();
+			}else {
+				return "";
+			}
+		}else {
+			return "";
+		}
 	}
 
 }

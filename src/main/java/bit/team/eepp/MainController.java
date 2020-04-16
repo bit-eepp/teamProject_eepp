@@ -4,10 +4,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -26,7 +24,6 @@ import bit.team.eepp.Service.UserService;
 import bit.team.eepp.VO.BoardVO;
 import bit.team.eepp.VO.ClassVO;
 import bit.team.eepp.VO.EatingVO;
-import bit.team.eepp.VO.UserVO;
 
 /**
  * Handles requests for the application home page.
@@ -47,22 +44,6 @@ public class MainController {
 		logger.info("Access Main Page");
 
 		ModelAndView mv = new ModelAndView();
-
-		/* 읽지않은 쪽지 알람 띄우기 */
-		Object loginSession = session.getAttribute("loginUser");
-		if (loginSession != null) {
-			UserVO user = (UserVO) loginSession;
-
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("fromMain", "fromMain");
-			map.put("user_id", user.getUser_id());
-
-			int notReadMessage = us.messageListCount(map);
-			if (notReadMessage != 0) {
-				mv.addObject("notReadMessage", notReadMessage);
-			}
-		}
-		/* 읽지않은 쪽지 알람 띄우기 */
 
 		// 직무게시판 베스트 - 공지사항 2개
 		List<BoardVO> boardNotice = mainService.getBoardNotice();
