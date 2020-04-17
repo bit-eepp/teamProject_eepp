@@ -29,21 +29,21 @@
 					<div class="col-sm-3">
 						<table class="text-wrap">
 							<tr>
-								<td class="text_bold"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
+								<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}/mypage">회원정보</a></td>
 							</tr>
 							<tr class="bordered">
-								<td><a href="${pageContext.request.contextPath}/eepp/mypage">${loginUser.uNickname}</a></td>
+								<td><a href="${pageContext.request.contextPath}/mypage">${loginUser.uNickname}</a></td>
 							</tr>
 							
 							<tr>
-								<td class="text_bold"><span class="required">• </span><a href="/eepp/myPoint">내 포인트</a></td>
+								<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}/myPoint">내 포인트</a></td>
 							</tr>
 							<tr class="bordered">
 							<td><a href="${pageContext.request.contextPath}/myPoint"><fmt:formatNumber value="${loginUser.point}" pattern="###,###,###" /> P</a></td>
 							</tr>
 							
 							<tr>
-							<td class="text_bold"><span class="required">• </span><a href="/eepp/myContent">내 컨텐츠</a></td>
+							<td class="text_bold"><span class="required">• </span><a href="${pageContext.request.contextPath}\/myContent">내 컨텐츠</a></td>
 							</tr>
 							
 							<tr class="bordered">
@@ -97,7 +97,7 @@
 					<div class="myclass-wrap">
 		<h3 id="mpClBtn">내 클래스</h3>
 		<hr>
-		<p>'EE class'에서 구매 / 개설 하신 클래스를 확인 할 수 있습니다.</p>
+		<p>'EE class'에서 가입 / 개설 하신 클래스를 확인 할 수 있습니다.</p>
 		<br><br>
 			<!-- 리스트 테이블 -->		
 			<div class="classForm">
