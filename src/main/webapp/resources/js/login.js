@@ -63,8 +63,7 @@ function phoneCheck() {
 	  type : "post",
 	  dataType : "json",
       data : {
-    	  "uPhone" : $(".uPhone_1").val() + "-" + $(".uPhone_2").val() + "-"
-			+ $(".uPhone_3").val()
+    	  "uPhone" : $(".uPhone_1").val() + "-" + $(".uPhone_2").val() + "-" + $(".uPhone_3").val()
       },
       success : function(data) {
          if(data != 0){
@@ -82,8 +81,7 @@ function sendSms() {
 	$.ajax({ 
 		url: getContextPath()+"/sendSms",
 		data: { 
-			receiver:$(".uPhone_1").val() + + $(".uPhone_2").val() +
-			+ $(".uPhone_3").val()
+			receiver:$(".uPhone_1").val() + $(".uPhone_2").val() + $(".uPhone_3").val()
 		}, 
 		type: "post", 
 		success: function(result) {
