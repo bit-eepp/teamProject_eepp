@@ -31,10 +31,16 @@ $('#submit').click(function(event) {
 	}
 
 	if (emCheck == 0) {
+		if($(".snsEmail").text() != ""){
+			return;
+		}
 		alert("아이디를 입력해주세요.");
 		$("#email_01").focus();
 		return false;
 	}else if (emCheck == 2) {
+		if($(".snsEmail").text() != ""){
+			return;
+		}
 		alert("사용중인 아이디입니다.");
 		$("#email_01").focus();
 		return false;
