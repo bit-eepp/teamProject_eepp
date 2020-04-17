@@ -3,11 +3,15 @@ package bit.team.eepp.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import bit.team.eepp.Page.MemberPageMaker;
 import bit.team.eepp.Page.NoticeCriteria;
@@ -34,6 +39,7 @@ import bit.team.eepp.Search.MemberSearchCriteria;
 import bit.team.eepp.Search.MypageSearchCriteria;
 import bit.team.eepp.Service.ClassService;
 import bit.team.eepp.Service.FileService;
+import bit.team.eepp.Service.LoginService;
 import bit.team.eepp.Service.ScrapService;
 import bit.team.eepp.Service.UserService;
 import bit.team.eepp.Utils.UploadFileUtils;
@@ -58,6 +64,8 @@ public class MypageController {
 	ScrapService sc;
 	@Autowired
 	ClassService classservice;
+	@Autowired
+	LoginService ls;
 
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 
@@ -575,51 +583,84 @@ public class MypageController {
 	}
 
 	// 회원 탈퇴 post
-	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
-	public String postWithdrawal(HttpSession session, UserVO userVO, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
-		logger.info("post withdrawal");
+		@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
+		public String postWithdrawal(HttpSession session, UserVO userVO, RedirectAttributes rttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			logger.info("post withdrawal");
+			logger.info("회원탈퇴 페이지");
 
-		// 유저 세션 받아오기
-		Object loginSession = session.getAttribute("loginUser");
-		UserVO user = (UserVO) loginSession;
-		userVO.setUser_id(user.getUser_id());
-		userVO.setSnsType(user.getSnsType());
+			// 유저 세션 받아오기
+			Object loginSession = session.getAttribute("loginUser");
+			UserVO user = (UserVO) loginSession;
 
-		if (user.getSnsType() == null) {
 			// 일반 로그인 회원 탈퇴 방법
-			String oldPass = user.getuPassword();
-			String newPass = userVO.getuPassword();
+			if (user.getSnsType() == null) {
+				String orgPass = user.getuPassword();
+				String newPass = userVO.getuPassword();
 
-			boolean checkPW = pwEncoder.matches(newPass, oldPass);
+				boolean checkPW = pwEncoder.matches(newPass, orgPass);
 
-			if (checkPW == true) {
+				if (checkPW == true) {
+					us.withdrawal(user);
+					
+						// 자동 로그인 정보가 있을시 삭제
+						Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+						if(loginCookie != null) {
+							loginCookie.setMaxAge(0);
+							loginCookie.setPath("/");
+							response.addCookie(loginCookie);
+							user.setSession_key("none");
+							SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+							Calendar cal = Calendar.getInstance();
+							String today = null;
+							today = formatter.format(cal.getTime());
+							user.setSession_limit(Timestamp.valueOf(today));
+							ls.keepLogin(user);
+							logger.info("자동 로그인 정보 삭제");
+						}
+						
+					System.out.println("회원탈퇴완료");
+					session.removeAttribute("loginUser");
+					session.invalidate();
+					return "redirect:/";
 
-				us.withdrawal(userVO);
-				System.out.println("회원탈퇴완료");
-				session.invalidate();
-				return "redirect:/";
-
+				} else {
+					rttr.addFlashAttribute("msg", false);
+					return "redirect:/withdrawal";
+				}
 			} else {
-				rttr.addFlashAttribute("msg", false);
-				return "redirect:/withdrawal";
+				// SNS 로그인 회원 탈퇴 방법
+				String orguPhone = user.getuPhone();
+				String checkuPhone = request.getParameter("uPhone_1") + "-" + request.getParameter("uPhone_2") + "-" + request.getParameter("uPhone_3");
+
+				if (!orguPhone.equals(checkuPhone)) {
+					rttr.addFlashAttribute("msg", false);
+					return "redirect:/withdrawal";
+				} else {
+					us.withdrawal(user);
+					
+					// 자동 로그인 정보가 있을시 삭제
+					Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+					if(loginCookie != null) {
+						loginCookie.setMaxAge(0);
+						loginCookie.setPath("/");
+						response.addCookie(loginCookie);
+						user.setSession_key("none");
+						SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+						Calendar cal = Calendar.getInstance();
+						String today = null;
+						today = formatter.format(cal.getTime());
+						user.setSession_limit(Timestamp.valueOf(today));
+						ls.keepLogin(user);
+						logger.info("자동 로그인 정보 삭제");
+					}
+					System.out.println("회원탈퇴완료");
+					session.removeAttribute("loginUser");
+					session.invalidate();
+				}
+
+				return "redirect:/";
 			}
-		} else {
-			// SNS 로그인 회원 탈퇴 방법
-			String newPhone = request.getParameter("uPhone_1") + "-" + request.getParameter("uPhone_2") + "-" + request.getParameter("uPhone_3");
-			String oldPhone = user.getuPhone();
-
-			if ((!(newPhone.equals(oldPhone)))) {
-				rttr.addFlashAttribute("msg", false);
-
-				return "redirect:/withdrawal";
-			}
-
-			us.withdrawal(userVO);
-			session.invalidate();
-
-			return "redirect:/";
 		}
-	}
 
 	/* 회원정보 보기 */
 	@RequestMapping(value = "/memInfo", method = { RequestMethod.GET, RequestMethod.POST })
