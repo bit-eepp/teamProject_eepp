@@ -594,6 +594,7 @@ public class MypageController {
 
 			// 일반 로그인 회원 탈퇴 방법
 			if (user.getSnsType() == null) {
+				logger.info("일반계계정탈퇴하기");
 				String orgPass = user.getuPassword();
 				String newPass = userVO.getuPassword();
 
@@ -629,9 +630,10 @@ public class MypageController {
 				}
 			} else {
 				// SNS 로그인 회원 탈퇴 방법
+				logger.info("sns계정탈퇴하기");
 				String orguPhone = user.getuPhone();
 				String checkuPhone = request.getParameter("uPhone_1") + "-" + request.getParameter("uPhone_2") + "-" + request.getParameter("uPhone_3");
-
+				
 				if (!orguPhone.equals(checkuPhone)) {
 					rttr.addFlashAttribute("msg", false);
 					return "redirect:/withdrawal";

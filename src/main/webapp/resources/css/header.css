@@ -271,3 +271,6 @@
     line-height: 10px;
     font-weight: bold;
 }
+.msgAlert.msgAlertIsEmpty{
+	display:none!important;
+}

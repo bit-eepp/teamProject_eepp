@@ -72,8 +72,6 @@ public class UserController {
 
 		int totalPoint = us.getTotalPoint(userVO.getUser_id());
 		paymentVO.setTotalPoint(totalPoint);
-
-		us.addPointPayment(paymentVO);
 		
 		// session에 포인트 총액 업데이트
 		Object user = (Object)session.getAttribute("loginUser");
@@ -81,7 +79,8 @@ public class UserController {
 		
 		userRefresh.setPoint(userRefresh.getPoint()+userVO.getPoint());
 		session.setAttribute("loginUser", userRefresh);
-		
+				
+		us.addPointPayment(paymentVO);
 		System.out.println("포인트 충전 + 충전 내역 추가 완료");
 	}
 
