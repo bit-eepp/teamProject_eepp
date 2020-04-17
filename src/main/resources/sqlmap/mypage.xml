@@ -179,11 +179,11 @@
 	</select>
 
 	<!-- 회원 탈퇴 -->
-	<delete id="withdrawal">
+	<update id="withdrawal" parameterType="bit.team.eepp.VO.UserVO">
 	<![CDATA[
-		delete from users where USER_ID = #{user_id}
+		update users set grade_id = 4 where user_id = #{user_id}
 		]]>
-	</delete>
+	</update>
 	<!-- 게시판 스크랩 개수 -->
 	<select id="ScrapCount" resultType="int" parameterType="map">
 		<![CDATA[
