@@ -51,7 +51,9 @@ td{
 .cj_info, .container{
 	text-align:center;
 }
-
+.cj_info a{
+	cursor: pointer;
+}
 
 /* classJoin_list.jsp  */
 

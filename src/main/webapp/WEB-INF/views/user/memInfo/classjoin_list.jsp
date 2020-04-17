@@ -33,7 +33,7 @@
 					<c:when test="${fn:length(classjoinlist) > 0 }">
 						<c:forEach items="${classjoinlist}" var="classjoinlist">
 							<tr>
-								<td class="cj_info"><a style="cursor: pointer;" onclick="memberInfo('${classjoinlist.usernick}',${classjoinlist.user_id});">${classjoinlist.usernick}</a></td>
+								<td class="cj_info"><a onclick="memberInfo('${classjoinlist.usernick}',${classjoinlist.user_id});">${classjoinlist.usernick}</a></td>
 								<td class="cj_info"><fmt:formatDate value="${classjoinlist.cjJoinDate}" pattern="yyyy년 MM월 dd일"/></td>
 								<td class="cj_info">${classjoinlist.uPhone}</td>
 							</tr>
@@ -49,6 +49,6 @@
 			</div>
 	</section>
 	
-	<script src="${pageContext.request.contextPath}/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/js/common.js"></script>	
 </body>
 </html>
