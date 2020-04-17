@@ -204,8 +204,8 @@
 									신고된 쪽지입니다.
 								</c:when>
 								
-								<c:when test="${fn:length(msg.mcontent) >= 22}">
-									${fn:substring(msg.mcontent, 0, 22)}...
+								<c:when test="${fn:length(msg.mcontent) >= 18}">
+									${fn:substring(msg.mcontent, 0, 18)}...
 								</c:when>
 								
 								<c:otherwise>
