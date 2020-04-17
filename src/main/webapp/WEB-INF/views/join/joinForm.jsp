@@ -149,8 +149,8 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select> 
-					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
-					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
+					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" oninput="phoneCheck()" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" oninput="phoneCheck()" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 					<span class="checkInfo" id="checkPhoneInfo"></span>
 					<button type="button" class="sendSmsBtn joinBtn" id="phoneNumCheck" value="N">인증번호 전송</button>
 					</td>
@@ -246,8 +246,8 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select> 
-					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
-					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" oninput="phoneCheck()" onkeypress="return onlyNumber(event);">
+					- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" oninput="phoneCheck()" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+					- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" oninput="phoneCheck()" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
 					<span class="checkInfo" id="checkPhoneInfo"></span>
 					<button type="button" class="sendSmsBtn joinBtn" id="phoneNumCheck" value="N">인증번호 전송</button>
 					</td>

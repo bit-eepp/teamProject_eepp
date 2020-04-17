@@ -44,8 +44,8 @@
 						<option value="019">019</option>
 						<option value="080">080</option>
 					</select>
-					- <input type="text" name="uPhone_2" class="uPhone_2 custom-select" maxlength="4" size="6">
-					- <input type="text" name="uPhone_3" class="uPhone_3 custom-select" maxlength="4" size="6">
+					- <input type="text" name="uPhone_2" class="uPhone_2 custom-select" maxlength="4" size="6"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+					- <input type="text" name="uPhone_3" class="uPhone_3 custom-select" maxlength="4" size="6"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
 				
 				<div class="sendAuthBtnWrap">
 				<a class="sendAuthBtn" id="registerInfoID">인증번호 전송</a>

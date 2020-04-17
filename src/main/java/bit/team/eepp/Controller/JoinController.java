@@ -127,7 +127,7 @@ public class JoinController {
 		String uEmail = request.getParameter("email_01") + "@" + request.getParameter("email_02");
 		userVO.setuEmail(uEmail);
 		userVO.setuPhone(uPhone1 + "-" + uPhone2 + "-" + uPhone3);
-		
+		System.out.println("핸드폰번호 맞게 출력하는지 확인" + uPhone1 + "-" + uPhone2 + "-" + uPhone3);
 		//프로필 업로드
 		String imgUploadPath = uploadPath;
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);

@@ -190,13 +190,6 @@ function nickCheck() {
     });
 }
 
-function onlyNumber(e){
-	var keyValue = event.keyCode; 
-	if( ((keyValue >= 48) && (keyValue <= 57)) ) 
-		return true; 
-	else 
-		return false;
-}
 
 /* 휴대폰 중복확인 */
 var phCheck = 0;
@@ -206,8 +199,7 @@ function phoneCheck() {
 	  type : "post",
 	  dataType : "json",
       data : {
-    	  "uPhone" : $("#uPhone").val() + "-" + $(".uPhone_2").val() + "-"
-			+ $(".uPhone_3").val()
+    	  "uPhone" : $("#uPhone").val()+"-"+$(".uPhone_2").val()+"-"+ $(".uPhone_3").val()
       },
       success : function(data) {
           if($(".uPhone_2").val() == "" && $(".uPhone_3").val() == "" && data==0) {
@@ -244,8 +236,7 @@ function sendSms() {
 	$.ajax({ 
 		url: getContextPath()+"/sendSms",
 		data: { 
-			receiver:$("#uPhone").val() + + $(".uPhone_2").val() +
-			+ $(".uPhone_3").val()
+			receiver:$("#uPhone").val()+$(".uPhone_2").val()+$(".uPhone_3").val()
 		}, 
 		type: "post", 
 		success: function(result) {
