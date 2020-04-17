@@ -16,7 +16,7 @@ public interface ReviewMapper {
 
 	public abstract List<ReviewVO> reviewList(@Param("rvCriteria") ReviewCriteria rvCriteria, @Param("eating_id") int eating_id);
 	
-	@Select("SELECT TRUNC(AVG(rv.rvScore), 1) FROM REVIEW rv, eating e where rv.eating_id = #{eating_id} GROUP BY rv.eating_id")
+	@Select("SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = #{eating_id} GROUP BY eating_id")
 	public float reviewAVG(ReviewVO reviewVO);
 
 	public abstract void reviewWrite(@Param("reviewVO") ReviewVO reviewVO);
