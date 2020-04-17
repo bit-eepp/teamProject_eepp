@@ -30,9 +30,9 @@
 							<option value="019">019</option>
 						<option value="080">080</option>
 						</select> 
-						- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" onkeypress="return onlyNumber(event);">
-						- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6" onkeypress="return onlyNumber(event);">
-						
+						- <input type="text" class="uPhone_2" name="uPhone_2" maxlength="4" size="6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+						- <input type="text" class="uPhone_3"  name="uPhone_3" maxlength="4" size="6"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
+						<br>
 						<c:if test="${msg == false}">
 							<p>입력하신 정보가 잘못되었습니다.</p>
 						</c:if>

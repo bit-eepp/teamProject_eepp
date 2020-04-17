@@ -576,7 +576,7 @@ public class MypageController {
 
 	// 회원 탈퇴 post
 	@RequestMapping(value = "/withdrawal", method = RequestMethod.POST)
-	public String postWithdrawal(HttpSession session, UserVO userVO, RedirectAttributes rttr) throws Exception {
+	public String postWithdrawal(HttpSession session, UserVO userVO, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		logger.info("post withdrawal");
 
 		// 유저 세션 받아오기
@@ -605,13 +605,10 @@ public class MypageController {
 			}
 		} else {
 			// SNS 로그인 회원 탈퇴 방법
-			String oldEmail = user.getuEmail();
-			String newEmail = userVO.getuEmail();
+			String newPhone = request.getParameter("uPhone_1") + "-" + request.getParameter("uPhone_2") + "-" + request.getParameter("uPhone_3");
+			String oldPhone = user.getuPhone();
 
-			String oldNickname = user.getuNickname();
-			String newNickname = userVO.getuNickname();
-
-			if ((!(oldEmail.equals(newEmail)) && (!(oldNickname.equals(newNickname))))) {
+			if ((!(newPhone.equals(oldPhone)))) {
 				rttr.addFlashAttribute("msg", false);
 
 				return "redirect:/withdrawal";
