@@ -4,6 +4,8 @@
 
 > 💁🏻‍♀️ Community EE는 직장생활에 대한 애환들을 서로 소통하며, 직무별 정보를 공유할 수있는 커뮤니티 사이트입니다!
 
+<br/>
+
 [Community EE 웹사이트 바로가기](<http://ec2-13-124-180-143.ap-northeast-2.compute.amazonaws.com:8282/eepp/>)
 
     * 직무별 게시판
@@ -12,6 +14,8 @@
     * 채팅
 
 
+<br/>
+
 **Since** : 2020.01.28 ~ 2020.04.20
 
 **Collaborator**
@@ -19,5 +23,7 @@
 | [이혜인](<https://github.com/java-hyein>) | [도희정](<https://github.com/doeez>) | [박찬경](<https://github.com/rtnbrnch>) | [김민영](<https://github.com/mykim8710>) |
 | :-----------------------------------: | :---------------------------------------: | :-------------------------------------: | :-----------------------------------: | :-----------------------------------: |
 
+| [gyoogle](https://github.com/gyoogle) | [GimunLee](<https://github.com/GimunLee>) | [b2narae](<https://github.com/b2narae>) |
+| :-----------------------------------: | :---------------------------------------: | :-------------------------------------: |
 
 ### ***Created by Team PP***
