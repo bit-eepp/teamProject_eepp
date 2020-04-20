@@ -1,6 +1,6 @@
 <br />
 
-<h1 align="center" style="color:#59bfbf">👩🏼‍🍳 🧑🏼‍🏭 👩🏽‍💻  👩🏼‍🎨 Community EE 🧑🏼‍🔧 👩🏼‍🚀 🧑🏼‍🔬 👩🏼‍⚕️</h1>
+<h1 align="center" style="color:#59bfbf!important;">👩🏼‍🍳 🧑🏼‍🏭 👩🏽‍💻  👩🏼‍🎨 Community EE 🧑🏼‍🔧 👩🏼‍🚀 🧑🏼‍🔬 👩🏼‍⚕️</h1>
 
 <br/>
 
@@ -23,7 +23,7 @@
 
 <br />
 
-<h1 align="center" style="color:#e7438b;">👩🏻‍💻 👩🏽‍💻 Team PP 👩🏼‍💻 🧑🏻‍💻</h1>
+<h1 align="center" style="color:#e7438b!important;">👩🏻‍💻 👩🏽‍💻 Team PP 👩🏼‍💻 🧑🏻‍💻</h1>
 
 <br/>
 
