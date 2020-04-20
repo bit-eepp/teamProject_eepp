@@ -31,6 +31,7 @@
 
 **Since** : 2020.01.28 ~ 2020.04.20
 
+<br/>
 👍🏽 **Collaborator**
 
 | [이혜인](<https://github.com/java-hyein>) | [도희정](<https://github.com/doeez>) | [박찬경](<https://github.com/rtnbrnch>) | [김민영](<https://github.com/mykim8710>) |
