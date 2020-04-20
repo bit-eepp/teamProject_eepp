@@ -41,8 +41,7 @@
 
 <p align="center" style="display:inline!important"><img src="https://user-images.githubusercontent.com/53379734/79709802-1bec5a80-82fe-11ea-9587-d7f3013b8df9.png" width="40%" /><img src="https://user-images.githubusercontent.com/53379734/79709810-1f7fe180-82fe-11ea-8459-b1becabf5eaa.png" width="40%" /></p>
 
-<p align="center" style="display:inline!important"><img src="https://user-images.githubusercontent.com/53379734/79708325-14c34d80-82fa-11ea-9274-012d1b1736e1.png" width="40%" />
-<img src="https://user-images.githubusercontent.com/53379734/79708328-15f47a80-82fa-11ea-8dbe-9e021e5630a4.png" width="40%" /></p>
+<p align="center" style="display:inline!important"><img src="https://user-images.githubusercontent.com/53379734/79708328-15f47a80-82fa-11ea-8dbe-9e021e5630a4.png" width="40%" /><img src="https://user-images.githubusercontent.com/53379734/79708325-14c34d80-82fa-11ea-9274-012d1b1736e1.png" width="40%" /></p>
 
 
 <h6 align="right">Created by Team PP</h6>
