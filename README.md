@@ -1,4 +1,4 @@
-                                          👩🏽‍💻  👩🏼‍🎨 Community EE 🧑🏼‍🔧 👩🏼‍🚀
+👩🏽‍💻  👩🏼‍🎨 Community EE 🧑🏼‍🔧 👩🏼‍🚀
 ====================================
 <img src="https://user-images.githubusercontent.com/53379734/79706065-dc6c4100-82f2-11ea-9ba6-38d5803cc731.jpg" width="60%" style="text-align:center;"></img>
 
