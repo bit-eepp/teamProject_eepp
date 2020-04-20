@@ -13,7 +13,7 @@
 				alert('검색조건을 지정해주세요');
 				return;
 			} else {
-				self.location = "boardList" + $("#pageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) 
+				self.location = "boardList" + $("#pageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#bKeywordInput').val()) 
 				+ "&sortType=" + $("#sortType").val() + "&bCategory=" + $("#bCategory").val();
 			}
 		});
@@ -25,7 +25,7 @@
 		 			alert('검색조건을 지정해주세요');
 		 			return;
 		 		} else {
-		 			self.location = "boardList" + $("#pageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val()) 
+		 			self.location = "boardList" + $("#pageMakeQuery").val() + "&searchType=" + $("select[name=searchType]").val() + "&keyword=" + encodeURIComponent($('#bKeywordInput').val()) 
 					+ "&sortType=" + $("#sortType").val() + "&bCategory=" + $("#bCategory").val();
 		 		}
 		     }
