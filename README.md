@@ -23,7 +23,7 @@
 | [이혜인](<https://github.com/java-hyein>) | [도희정](<https://github.com/doeez>) | [박찬경](<https://github.com/rtnbrnch>) | [김민영](<https://github.com/mykim8710>) |
 | :-----------------------------------: | :---------------------------------------: | :-------------------------------------: | :-----------------------------------: | :-----------------------------------: |
 
-| [gyoogle](https://github.com/gyoogle) | [GimunLee](<https://github.com/GimunLee>) | [b2narae](<https://github.com/b2narae>) |
+| [이혜인](<https://github.com/java-hyein>) | [도희정](<https://github.com/doeez>) | [박찬경](<https://github.com/rtnbrnch>) |
 | :-----------------------------------: | :---------------------------------------: | :-------------------------------------: |
 
 ### ***Created by Team PP***
