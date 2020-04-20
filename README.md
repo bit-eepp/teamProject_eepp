@@ -38,6 +38,6 @@
 | [이혜인](<https://github.com/java-hyein>) | [도희정](<https://github.com/doeez>) | [박찬경](<https://github.com/rtnbrnch>) | [김민영](<https://github.com/mykim8710>) |
 | :-----------------------------------: | :---------------------------------------: | :-------------------------------------: | :-------------------------------------: |
 
- <p align="center"><img src="https://user-images.githubusercontent.com/53379734/79708055-543d6a00-82f9-11ea-9ca0-fe8c73d7d2e8.png"></img></p>
+    <p align="center"><img src="https://user-images.githubusercontent.com/53379734/79708055-543d6a00-82f9-11ea-9ca0-fe8c73d7d2e8.png" width="85%"></img></p>
 
 ### ***Created by Team PP***
