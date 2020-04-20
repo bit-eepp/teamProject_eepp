@@ -44,4 +44,4 @@
 <img src="https://user-images.githubusercontent.com/53379734/79708328-15f47a80-82fa-11ea-8dbe-9e021e5630a4.png" width="40%" /></p>
 
 
-<h3 align="right">Created by Team PP*** </h3>
+<h6 align="right">Created by Team PP</h6>
