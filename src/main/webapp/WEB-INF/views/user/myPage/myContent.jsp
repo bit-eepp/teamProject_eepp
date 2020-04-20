@@ -119,7 +119,7 @@
 											<c:out value="${mscri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
 									</select>
 									
-									<div class="input-group md-form form-sm form-2 pl-0">
+									<div class="input-group md-form form-sm form-2 pl-0 newGroup">
 									<input class="form-control my-0 py-1 amber-border" type="text"placeholder="검색어" aria-label="Search" name="keyword" id="keywordInput" value="${mscri.keyword}">
 										<a id="searchBtn">
 										<span class="input-group-text lighten-3" id="basic-text1"><i class="fas fa-search" aria-hidden="true"></i></span>
