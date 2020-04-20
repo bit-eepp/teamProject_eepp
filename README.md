@@ -1,4 +1,4 @@
-<h2 align="center">👩🏽‍💻  👩🏼‍🎨 Community EE 🧑🏼‍🔧 👩🏼‍🚀</h2>
+<h1 align="center">👩🏽‍💻  👩🏼‍🎨 Community EE 🧑🏼‍🔧 👩🏼‍🚀</h1>
 
 <br/>
 
