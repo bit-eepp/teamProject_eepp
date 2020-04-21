@@ -18,6 +18,12 @@
 				 } else {
 					$('#playAudio').remove();
 				}
+				
+				// footer를 통한 contact Us
+				if($("#contactFromFt").val() != ""){
+					var elmnt = document.getElementById("cu")
+					elmnt.scrollIntoView();
+				}
 			});
 			
 			function move(){

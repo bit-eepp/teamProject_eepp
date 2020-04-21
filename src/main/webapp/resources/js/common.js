@@ -2,16 +2,6 @@
 		var hostIndex = location.href.indexOf( location.host ) + location.host.length;
 		return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 	};
-
-	$(document).ready(function() {
-		
-		// footer를 통한 contact Us
-		if($("#contactFromFt").val() != ""){
-			var elmnt = document.getElementById("cu")
-			elmnt.scrollIntoView();
-		}
-		
-	});
 	
 //회원정보 - 메세지 보내기
 function sendMessage(uNickname, receiver_id){
