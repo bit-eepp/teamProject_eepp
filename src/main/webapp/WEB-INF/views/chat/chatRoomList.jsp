@@ -73,7 +73,6 @@
 		    		type:'POST',
 		    		url: getContextPath() + '/chat/getChatRoomList',
 		    		success:function(data) {
-		    			console.log(data);
 		    			$('#endNum').val(data.length);
 		    			
 		    			$.each(data, function(key, value) {
