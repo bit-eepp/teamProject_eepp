@@ -195,6 +195,9 @@
 	margin: 0;
     line-height: 32px;
 }
+.contentMain img{
+	max-width:100%;	
+}
 .contentWrap .btnWrap{
 	display: flex;
     justify-content: center;

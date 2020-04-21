@@ -50,6 +50,9 @@
 	margin: 0;
     line-height: 32px;
 }
+.clContent .clContentLeft .clContentView img{
+	max-width:100%;
+}
 
 .clContent .clContentLeft .clContentTitle p {
 	color: #59bfbf;
