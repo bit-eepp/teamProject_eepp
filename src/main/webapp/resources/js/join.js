@@ -13,6 +13,65 @@ $(document).ready(function() {
 			$(".checkInfo").html("")
 		}
 	});
+	
+	$('#smsAuth').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+	    	 if($("#smsAuth").val() == "") {
+	 			alert('인증번호를 입력해주세요.');
+	 			return false;
+	 		} else {
+	 			checkPhoneAuth();
+	 		}
+	     }
+	});
+	
+	$('#email_01').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+			return false;
+	     }
+	});
+	$('#email_02').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+			return false;
+	     }
+	});
+	$('#uPassword').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+			return false;
+	     }
+	});
+	$('#uPasswordCheck').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+			return false;
+	     }
+	});
+	$('#joinNickname').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+			return false;
+	     }
+	});
+	$('.uPhone_2').keydown(function(event) {
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode == 13) {
+			return false;
+	     }
+	});
+	$('.uPhone_3').keydown(function(event) {
+		if(keycode == 13) {
+	    	 if($('.uPhone_2').val() == '' || $('.uPhone_3').val() == '') {
+	 			alert('핸드폰번호를 입력해주세요.');
+	 			return false;
+	 		} else {
+	 			sendSms();
+	 		}
+	     }
+	});
 		
 });
 
@@ -87,7 +146,8 @@ $('#submit').click(function(event) {
 		alert("휴대폰 인증번호를 확인해주세요.");
 		return false;
 	}
-
+	
+	alert("회원가입이 완료되었습니다.");
 	return true;
 });
 
