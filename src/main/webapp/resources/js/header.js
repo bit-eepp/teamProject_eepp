@@ -18,7 +18,6 @@ function loadReadMessage(){
 	      type : "post",
 	      url : getContextPath() + "/loadNotReadMessage",
 	      success : function(data) {
-	    	  console.log("안읽은메세지"+data);
 	    	  if(data != ""){
 	    		  var notReadMessage = JSON.stringify(data.notReadMessage);
 	    		  $("#msgAlertNum").html(notReadMessage);

@@ -26,7 +26,7 @@
 					$('#deleteBtn').remove();
 				}
 				
-				/* setInterval('getMemberList(chId)', 1000); */ // 1초간격으로 채팅방 인원변경 확인, Ajax통신
+				setInterval('getMemberList(chId)', 1000); // 1초간격으로 채팅방 인원변경 확인, Ajax통신
 				
 				$('#message').keypress(function(event) {	// 채팅메세지를 엔터를 쳐서 보낼수 있게해주는 것
 					var keycode = (event.keyCode ? event.keyCode : event.which);

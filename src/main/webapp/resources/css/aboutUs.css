@@ -61,12 +61,12 @@ ul li a i {
 	font-weight: 500;
 }
 
-.menu4 .container .caMain .col-md-8 .gform textarea {
+.menu4 .container .caMain .col-md-8 #contact-form textarea {
 	height: 150px;
 	resize: none;
 }
 
-.menu4 .container .caMain .col-md-8 .gform #qnaBtn {
+.menu4 .container .caMain .col-md-8 #contact-form #qnaBtn {
 	background-color: #59bfbf;
 	color: #ffffff;
 	border: none;

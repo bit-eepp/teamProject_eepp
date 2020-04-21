@@ -81,7 +81,6 @@
 											<i title="맛집등록수" class="fas fa-bookmark"></i> ${tl.sCount}
 										</p>
 									</div>
-									<br>
 									
 									<p class="eatAddress">
 										${tl.eAddress_new}
