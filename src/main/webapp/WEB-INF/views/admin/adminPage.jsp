@@ -407,7 +407,7 @@ html {
 												<c:out value="${memcri.searchType eq 'in' ? 'selected' : ''}"/>>유저번호+닉네임</option>
 										</select>
 
-										<div class="input-group md-form form-sm form-2 pl-0">
+										<div class="input-group md-form form-sm form-2 pl-0 newGroup">
 											<input class="form-control my-0 py-1 amber-border"
 												type="text" placeholder="검색어" aria-label="Search"
 												name="keyword1" id="keywordInput1" value="${memcri.keyword}">
