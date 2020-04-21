@@ -51,8 +51,8 @@
 .eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatTitle {
 	font-size: 160%; 
 	font-weight: 600;
-	margin-left: 20px; 
-	display: inline;
+	margin-left: 20px;
+	margin-bottom: 10px;
 }
 
 .eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatTitle a {
