@@ -121,6 +121,7 @@
 			SELECT * FROM 
 			(SELECT eId, eTitle, eCategory, eDate, eContent, eTel, eAddress_new, eAddress_old, eThema, eKeyword_food, eHit, 
 			(SELECT COUNT(*) FROM REVIEW WHERE rvDeleted = 'no' AND eating_id = eId) AS rvCount,
+			(SELECT COUNT(*) FROM scrap WHERE eating_id = eId) AS sCount,
 			(SELECT TRUNC(AVG(rvScore), 1) FROM REVIEW where rvDeleted = 'no' AND eating_id = eId GROUP BY eating_id) as rvAVG
 			FROM Eating
 			WHERE

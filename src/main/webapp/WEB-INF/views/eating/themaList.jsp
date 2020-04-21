@@ -75,7 +75,11 @@
 								<td class="eatList_td2">
 									<div class="e1">
 										<p class="eatTitle"><a href="${pageContext.request.contextPath}/eating/eatingView?eId=${tl.eId}&eThema=${eThema}" target="_blank">${tl.eTitle}</a>&nbsp;&nbsp;<b style="color:#59bfbf;">${tl.rvAVG}</b></p>
-										<p class="eatInfo"><i title="조회수" class="far fa-eye"></i> ${tl.eHit}&nbsp;&nbsp;<i title="리뷰수" class="fas fa-pen"></i> ${tl.rvCount}</p>
+										<p class="eatInfo">
+											<i title="조회수" class="far fa-eye"></i> ${tl.eHit}&nbsp;&nbsp;
+											<i title="리뷰수" class="fas fa-pen"></i> ${tl.rvCount}&nbsp;&nbsp;
+											<i title="맛집등록수" class="fas fa-bookmark"></i> ${tl.sCount}
+										</p>
 									</div>
 									<br>
 									
