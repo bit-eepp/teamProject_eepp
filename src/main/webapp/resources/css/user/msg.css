@@ -51,7 +51,9 @@
 	color:#59bfbf;
 	border:1px solid #59bfbf;
 	margin:0;
-	padding: 5px 15px;}
+	padding: 5px 15px;
+	cursor: pointer;
+}
 .message_footer{
 	padding: 10px 20px;
     display: flex;
@@ -78,5 +80,5 @@
 .sc-messageView form .form-group table .form-title {border-bottom: 1px solid #a3e1e1;}
 .sc-messageView form .form-group table tr th.input-title{color: #59bfbf;width:20%;}
 .sc-messageView form .form-group table tr td{padding: 10px 0 10px 5px;width:80%;}
-.sc-messageView form .btn{font-size: 14px;margin-right: 8px;color:#59bfbf;}
+.sc-messageView form .btn{font-size: 14px;margin-right: 8px;color:#59bfbf;cursor: pointer;}
 /* messageView 여기까지 */

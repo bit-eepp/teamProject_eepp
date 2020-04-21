@@ -44,7 +44,7 @@
 
 .eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td1 img {
 	border-radius: 5px; 
-	width: 90%; 
+	max-width: 100%; 
 	height: auto;
 }
 
@@ -63,7 +63,8 @@
 .eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .e1 .eatInfo{
 	margin-left: 20px; 
 	color:#868e96; 
-	display: inline;"
+	font-size: 14px;
+    margin-bottom: 20px;
 }
 
 .eatingThema .col-sm-12 .eatList .eatList_tr .eatList_td2 .eatAddress, .eatCateInfo {
