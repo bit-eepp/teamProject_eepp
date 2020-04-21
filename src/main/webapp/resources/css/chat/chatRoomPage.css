@@ -80,6 +80,17 @@ body {
 .card-header .meetInfo p:first-child{
 	margin-bottom: 10px;
 }
+.card-header .count{
+	font-size: 12px;
+    margin-top: 10px;
+}
+.card-header .count .inMember{
+	color: #e7438b;
+}
+.card-header .chatMemberList{
+	font-size: 12px;
+	color: #e7438b;
+}
 	/*
 	* chat Message Area
 	*/
