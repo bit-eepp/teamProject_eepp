@@ -34,7 +34,7 @@
 								<td class="text_bold" style="color:#e74386"><span class="required">• </span><a href="/eepp/mypage">회원정보</a></td>
 							</tr>
 							<tr class="bordered">
-								<td><a href="${pageContext.request.contextPath}/eepp/mypage">${loginUser.uNickname}</a></td>
+								<td><a href="${pageContext.request.contextPath}/mypage">${loginUser.uNickname}</a></td>
 							</tr>
 							
 							<tr>
