@@ -55,7 +55,11 @@ ul li a i {
 	color: #59bfbf;
 	font-size: 120%;
 }
-
+.menu3 .teamGit{
+	 display: inline-block;
+    font-size: 20px;
+    color: #59bfbf;
+}
 .menu4 .container .mb-4 .col-lg-5 h3 {
 	color: #59bfbf;
 	font-weight: 500;
