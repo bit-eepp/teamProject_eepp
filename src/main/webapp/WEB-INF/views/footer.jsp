@@ -88,7 +88,7 @@
 						<!-- Social buttons -->
 						<div class="text-center text-md-right">
 							<ul class="list-unstyled list-inline">
-								<li class="list-inline-item">
+								<!-- <li class="list-inline-item">
 									<a class="btn-floating btn-sm rgba-white-slight mx-1"> 
 										<i class="fab fa-facebook fa-2x"></i>
 									</a>
@@ -98,16 +98,16 @@
 									<a class="btn-floating btn-sm rgba-white-slight mx-1"> 
 										<i class="fab fa-twitter-square fa-2x"></i>
 									</a>
-								</li>
+								</li> -->
 	
 								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1" href="${pageContext.request.contextPath}/aboutUs?contactUs=gmail">
 										<i class="fab fa-google-plus-g fa-2x"></i>
 									</a>
 								</li>
 	
 								<li class="list-inline-item">
-									<a class="btn-floating btn-sm rgba-white-slight mx-1">
+									<a class="btn-floating btn-sm rgba-white-slight mx-1" href="https://github.com/bit-eepp/teamProject_eepp" target="_blank">
 										<i class="fab fa-github fa-2x"></i>
 									</a>
 								</li>

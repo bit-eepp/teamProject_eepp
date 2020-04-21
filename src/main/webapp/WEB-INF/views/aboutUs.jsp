@@ -284,6 +284,7 @@
 		<%@ include file="/WEB-INF/views/footer.jsp"%>
 		<!-- footer -->
 		
+		<input type="hidden" id="contactFromFt" value="${param.contactUs}">
 		<script data-cfasync="false" type="text/javascript" src="https://cdn.rawgit.com/dwyl/html-form-send-email-via-google-script-without-server/master/form-submission-handler.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
