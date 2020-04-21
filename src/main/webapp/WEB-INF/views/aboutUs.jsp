@@ -8,6 +8,45 @@
 		<%@ include file="/WEB-INF/include/forImport.jspf"%>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/aboutUs.css">
+		
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.3.2/dist/email.min.js"></script>
+		<script type="text/javascript">
+			(function(){
+				emailjs.init("user_aqkJKbSRv3FKcFqWeF7Vv");
+			})();
+		</script>
+	    
+		<script type="text/javascript">
+       		window.onload = function() {
+        		document.getElementById('contact-form').addEventListener('submit', function(event) {
+            		
+        			var from_name = $('input[name=from_name]').val();
+    	        	var from_email = $('input[name=from_email]').val();
+    	        	var message_html = $('textarea[name=message_html]').val();
+    	        	
+    	        	if(from_name == "") {
+    	        		alert("본인 이름을 입력해주세요.");
+    	        		event.preventDefault();
+    	        		return false;
+    	        	} else if(from_email == "") {
+    	        		alert("회신받을 이메일주소를 입력해주세요.");
+    	        		event.preventDefault();
+    	        		return false;
+    	        	} else if(message_html == "") {
+    	        		alert("문의사항을 입력해주세요.");
+    	        		event.preventDefault();
+    	        		return false;
+    	        	} else {
+    	        		event.preventDefault();
+    	        		 // generate the contact number value
+		                this.contact_number.value = Math.random() * 100000 | 0;
+		                emailjs.sendForm('eepp', 'template_fAcKW4vw', this);
+		                alert("문의하신 내용이 운영자에게 전송되었습니다.");
+		                $("#contact-form")[0].reset();
+    	        	}
+	            });
+       		}
+	    </script>
 
 		<script>		
 			$(document).ready(function() {
@@ -253,11 +292,12 @@
 						
 					<div class="row caMain">
 						<div class="col-md-8">
-							<form class="gform" name="formQna" action="https://script.google.com/macros/s/AKfycbxe7wfW0c7kH6TvOWXu6CGUgPh2kZkUo9wzFMRIW_o0I2C_Mp3D/exec" method="post">
-								<input class="form-control" type="text" name="nickname" placeholder="이름" value="${loginUser.uNickname}"/><br>
-								<input class="form-control" type="text" name="phone" placeholder="연락처" value="${loginUser.uPhone}"/><br>
-								<input class="form-control" type="text" name="email" placeholder="e-mail"/><br>
-								<textarea class="form-control" name="message" placeholder="문의사항을 입력해주세요."></textarea><br>
+							<form id="contact-form">
+								<input class="form-control" type="hidden" name="to_name" value="COMMUNITY EE"/>
+								<input class="form-control" type="hidden" name="contact_number"/>
+								<input class="form-control" type="text" name="from_name" placeholder="보낸이" value="${loginUser.uNickname}"/><br>
+								<input class="form-control" type="text" name="from_email" placeholder="e-mail"/><br>
+								<textarea class="form-control" name="message_html" placeholder="문의사항을 입력해주세요."></textarea><br>
 								<input id="qnaBtn" class="btn btn-primary" type="submit" value="보 내 기" /><br><br>
 							</form>
 						</div>
@@ -291,7 +331,7 @@
 		<!-- footer -->
 		
 		<input type="hidden" id="contactFromFt" value="${param.contactUs}">
-		<script data-cfasync="false" type="text/javascript" src="https://cdn.rawgit.com/dwyl/html-form-send-email-via-google-script-without-server/master/form-submission-handler.js"></script>
+		<!-- <script data-cfasync="false" type="text/javascript" src="https://cdn.rawgit.com/dwyl/html-form-send-email-via-google-script-without-server/master/form-submission-handler.js"></script> -->
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</body>
 </html>
