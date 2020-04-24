@@ -21,7 +21,13 @@
     * 채팅
 
 
-<br />
+<br/>
+
+<img src="https://user-images.githubusercontent.com/55972630/80184067-e79dd480-8644-11ea-98b7-d21672436006.jpg" width="50%"></img>
+
+<br/>
+<br/>
+<br/>
 
 <h1 align="center">👩🏻‍💻 👩🏽‍💻 Team PP 👩🏼‍💻 🧑🏻‍💻</h1>
 
