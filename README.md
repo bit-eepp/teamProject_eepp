@@ -10,7 +10,6 @@
 <br/>
 
 📌[Community EE 웹사이트 바로가기](<http://ec2-13-124-180-143.ap-northeast-2.compute.amazonaws.com:8282/eepp/>)
-📌[팀 Git](<https://github.com/bit-eepp/teamProject_eepp>)
 
 <br/>
 
