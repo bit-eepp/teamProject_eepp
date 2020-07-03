@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class KakaoController {
 
-	private final static String K_CLIENT_ID = "6bcf1529d39cd9dfe7f53ade8f42b1b2";
-	private final static String K_REDIRECT_URI = "http://localhost:8282/eepp/sns/kakaoLogin"; //이런식으로 uri작성
+	private final static String K_CLIENT_ID = "";
+	private final static String K_REDIRECT_URI = "";
 	
 	public static String getAuthorizationUri(HttpSession session) {
 		String kakaoUri = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + 
@@ -35,8 +35,8 @@ public class KakaoController {
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
-		postParams.add(new BasicNameValuePair("client_id", "6bcf1529d39cd9dfe7f53ade8f42b1b2"));
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8282/eepp/sns/kakaoLogin"));
+		postParams.add(new BasicNameValuePair("client_id", ""));
+		postParams.add(new BasicNameValuePair("redirect_uri", ""));
 		postParams.add(new BasicNameValuePair("code", autorize_code)); //로그인과정중 얻은 코드값
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
