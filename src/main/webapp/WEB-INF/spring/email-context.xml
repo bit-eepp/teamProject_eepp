@@ -6,10 +6,6 @@
 	
 	<!-- 이메일 인증 -->
 	<beans:bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<beans:property name="host" value="smtp.gmail.com" />
-		<beans:property name="port" value="587" />
-		<beans:property name="username" value="bit.eepp@gmail.com" />
-		<beans:property name="password" value="gelhjjnidkurkpoq" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
 				<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
