@@ -8,7 +8,7 @@ function getContextPath() {
 function pointBtn() {
 	
 	var IMP = window.IMP; // 생략가능
-	IMP.init('imp85104859'); // "가맹점 식별코드"
+	IMP.init(''); // "가맹점 식별코드"
 
 	/* 충전 포인트가 30000포인트 이하일시 결제금액 10퍼센트 추가시킴 */
 	var selValue = $('input:radio[name="chPoint"]:checked').val();
