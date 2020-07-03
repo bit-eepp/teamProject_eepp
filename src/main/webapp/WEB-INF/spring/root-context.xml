@@ -9,10 +9,6 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean name="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@oracle.cl9jcgsv9ncw.ap-northeast-2.rds.amazonaws.com:1521:ORCL" />
-		<property name="username" value="eepp_db" />
-		<property name="password" value="eepp1234" />
 	</bean>
 	
 	<!-- [Spring] log4jdbc-remix 를 이용한 쿼리로그 출력 -->
