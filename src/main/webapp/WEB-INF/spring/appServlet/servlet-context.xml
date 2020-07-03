@@ -27,19 +27,19 @@
 	<!-- google Bean -->
 	<beans:bean class="org.springframework.social.google.connect.GoogleConnectionFactory"
 		id="googleConnectionFactory">
-		<beans:constructor-arg value="823913639609-dkmgg136teigjfaism7k5u9prdl0rs2m.apps.googleusercontent.com" />
-		<beans:constructor-arg value="E7N7aiiEaVngRdPgbrP5_OZy" />
+		<beans:constructor-arg value="" />
+		<beans:constructor-arg value="" />
 	</beans:bean>
 
 	<!-- 승인된 리디렉션 URI -->
 	<beans:bean class="org.springframework.social.oauth2.OAuth2Parameters" id="googleOAuth2Parameters">
 		<beans:property name="scope" value="email profile" />
-		<beans:property value="http://localhost:8282/eepp/sns/googleLogin" name="redirectUri"/>
+		<beans:property value="" name="redirectUri"/>
 	</beans:bean>
 	
 	<beans:bean id="authInfo" class="bit.team.eepp.API.GoogleOAuthInfo">
-        <beans:constructor-arg value="823913639609-dkmgg136teigjfaism7k5u9prdl0rs2m.apps.googleusercontent.com" />
-        <beans:constructor-arg value="E7N7aiiEaVngRdPgbrP5_OZy" />
+        <beans:constructor-arg value="" />
+        <beans:constructor-arg value="" />
     </beans:bean>
 	
 	<!-- NaverLogin Controller Beans-->
@@ -95,7 +95,7 @@
 	<!-- 파일 업로드 설정 -->
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="/Users/dohxxzun/Documents/apache-tomcat-9.0.30/webapps/ROOT" />
+		<beans:constructor-arg value="" />
 	</beans:bean>
 
 
