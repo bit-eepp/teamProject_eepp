@@ -27,8 +27,8 @@
 	<!-- google Bean -->
 	<beans:bean class="org.springframework.social.google.connect.GoogleConnectionFactory"
 		id="googleConnectionFactory">
-		<beans:constructor-arg value="" />
-		<beans:constructor-arg value="" />
+		<beans:constructor-arg value="google cloud development id" />
+		<beans:constructor-arg value="google cloud development pw" />
 	</beans:bean>
 
 	<!-- 승인된 리디렉션 URI -->
@@ -38,8 +38,8 @@
 	</beans:bean>
 	
 	<beans:bean id="authInfo" class="bit.team.eepp.API.GoogleOAuthInfo">
-        <beans:constructor-arg value="" />
-        <beans:constructor-arg value="" />
+        <beans:constructor-arg value="google cloud development id" />
+        <beans:constructor-arg value="google cloud development pw" />
     </beans:bean>
 	
 	<!-- NaverLogin Controller Beans-->
@@ -95,7 +95,7 @@
 	<!-- 파일 업로드 설정 -->
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
-		<beans:constructor-arg value="" />
+		<beans:constructor-arg value="upload Path" />
 	</beans:bean>
 
 
